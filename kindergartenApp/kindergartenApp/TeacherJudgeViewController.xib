@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeacherJudgeViewController">
+            <connections>
+                <outlet property="contentView" destination="Xyp-IG-zQl" id="5Es-04-Unt"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O04-zo-mvU">
+                    <rect key="frame" x="0.0" y="64" width="320" height="45"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每月评价一次，评价结果送达校长，老师无法知晓，请客观评价。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGr-dN-u8Z">
+                            <rect key="frame" x="16" y="0.0" width="288" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="Wky-fG-GIt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.28627450980392155" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="gGr-dN-u8Z" firstAttribute="top" secondItem="O04-zo-mvU" secondAttribute="top" id="DZE-5h-PSJ"/>
+                        <constraint firstAttribute="trailing" secondItem="gGr-dN-u8Z" secondAttribute="trailing" constant="16" id="Iyc-gM-yIB"/>
+                        <constraint firstItem="gGr-dN-u8Z" firstAttribute="leading" secondItem="O04-zo-mvU" secondAttribute="leading" constant="16" id="fEe-pi-dba"/>
+                        <constraint firstAttribute="height" constant="45" id="qoc-Ys-rh4"/>
+                        <constraint firstAttribute="bottom" secondItem="gGr-dN-u8Z" secondAttribute="bottom" id="sz2-UG-z1L"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyp-IG-zQl">
+                    <rect key="frame" x="0.0" y="109" width="320" height="459"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Xyp-IG-zQl" firstAttribute="top" secondItem="O04-zo-mvU" secondAttribute="bottom" id="3ii-v9-jdc"/>
+                <constraint firstAttribute="trailing" secondItem="Xyp-IG-zQl" secondAttribute="trailing" id="PTj-oy-t34"/>
+                <constraint firstItem="O04-zo-mvU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qdp-Hg-V6A"/>
+                <constraint firstAttribute="trailing" secondItem="O04-zo-mvU" secondAttribute="trailing" id="SLv-sA-Zb4"/>
+                <constraint firstItem="Xyp-IG-zQl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wew-t5-crc"/>
+                <constraint firstItem="O04-zo-mvU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="XnK-79-f4h"/>
+                <constraint firstAttribute="bottom" secondItem="Xyp-IG-zQl" secondAttribute="bottom" id="zwV-L3-V1t"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>
