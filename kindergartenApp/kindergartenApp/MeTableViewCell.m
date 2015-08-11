@@ -7,6 +7,9 @@
 //
 
 #import "MeTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "UIColor+Extension.h"
+#import "UIView+Extension.h"
 
 @implementation MeTableViewCell
 
@@ -23,6 +26,10 @@
     
     _nameLabel.text = user.name;
     
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:user.headimg] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:self.headImageView.width / Number_Two];
+    }];
+
     NSString * otherInfoStr = [NSString stringWithFormat:@"昵称:%@   %@   %@", user.nickname, user.sex==Number_Zero ? @"女" : @"男", user.birthday];
     _otherInfoLabel.text = otherInfoStr;
 }

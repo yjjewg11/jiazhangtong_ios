@@ -13,6 +13,7 @@
 #import "KGHUD.h"
 #import "PageInfoDomain.h"
 #import "UIColor+Extension.h"
+#import "TeacherJudgeTableViewCell.h"
 
 @interface TeacherJudgeViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
@@ -30,6 +31,9 @@
     
     [self initPageInfo];
     [self initReFreshView];
+    
+    //注册点赞回复通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teacherJudgeClickedNotification:) name:Key_Notification_TeacherJudge object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +44,15 @@
     if(!pageInfo) {
         pageInfo = [[PageInfoDomain alloc] init];
     }
+}
+
+//cell点击监听通知
+- (void)teacherJudgeClickedNotification:(NSNotification *)notification {
+    NSDictionary * dic = [notification userInfo];
+    TeacherVO * teacherObj = [dic objectForKey:@"tearchVO"];
+    TeacherJudgeTableViewCell * cell = [dic objectForKey:@"tableViewCell"];
+    
+    [self saveTeacherJudge:teacherObj cell:cell];
 }
 
 //获取数据加载表格
@@ -57,6 +70,18 @@
     }];
 }
 
+//保存老师评价
+- (void)saveTeacherJudge:(TeacherVO *)teacherVO cell:(TeacherJudgeTableViewCell *)cell{
+    
+    [[KGHUD sharedHud] show:self.contentView];
+    [[KGHttpService sharedService] saveTeacherJudge:teacherVO success:^(NSString *msgStr) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        [cell judgedHandler];
+    } faild:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
+}
+
 
 //初始化列表
 - (void)initReFreshView{
@@ -71,9 +96,14 @@
 
 #pragma reFreshView Delegate
 
-
-//选中cell
-- (void)didSelectRowCallBack:(id)baseDomain to:(NSString *)toClassName{
+/**
+ *  选中cell
+ *
+ *  @param baseDomain  选中cell绑定的数据对象
+ *  @param tableView   tableView
+ *  @param indexPath   indexPath
+ */
+- (void)didSelectRowCallBack:(id)baseDomain tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     
 }
 

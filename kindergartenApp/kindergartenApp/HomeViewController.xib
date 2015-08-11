@@ -47,7 +47,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jyR-kJ-sEQ" userLabel="View1">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="Knf-JA-9CX">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hudong" translatesAutoresizingMaskIntoConstraints="NO" id="Knf-JA-9CX">
                                                                     <rect key="frame" x="17" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="45" id="e1W-SC-jeP"/>
@@ -85,7 +85,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="55y-3E-OnQ" userLabel="View2">
                                                             <rect key="frame" x="80" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-Sd-wLH">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiaoyuan" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-Sd-wLH">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="EZc-sf-s1v"/>
@@ -126,7 +126,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="is3-Xz-hvy" userLabel="View3">
                                                             <rect key="frame" x="160" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="0bd-EA-aMl">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gonggao" translatesAutoresizingMaskIntoConstraints="NO" id="0bd-EA-aMl">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="45" id="HIC-xr-OEO"/>
@@ -167,7 +167,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6qQ-Xs-su5" userLabel="View4">
                                                             <rect key="frame" x="240" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-6a-BCc">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qiandaojilu" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-6a-BCc">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="R4F-4L-3e1"/>
@@ -238,7 +238,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9l-pr-1Dw" userLabel="View5">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="hWN-vt-DlG">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kechengbiao" translatesAutoresizingMaskIntoConstraints="NO" id="hWN-vt-DlG">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="QSh-bZ-E1o"/>
@@ -276,7 +276,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ET-ff-4YF" userLabel="View6">
                                                             <rect key="frame" x="80" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="EAF-mt-05f">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meirishipu" translatesAutoresizingMaskIntoConstraints="NO" id="EAF-mt-05f">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="dGZ-jS-wjY"/>
@@ -317,7 +317,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKv-tx-Ssx" userLabel="View7">
                                                             <rect key="frame" x="160" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="FPD-xq-8E8">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jingpinwenz" translatesAutoresizingMaskIntoConstraints="NO" id="FPD-xq-8E8">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="45" id="0sn-Nb-3tf"/>
@@ -358,7 +358,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Trn-44-Whw" userLabel="View8">
                                                             <rect key="frame" x="240" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="pas-je-UtD">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="techangkecheng" translatesAutoresizingMaskIntoConstraints="NO" id="pas-je-UtD">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="45" id="Dj3-W5-N3h"/>
@@ -428,7 +428,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DOc-Bc-Ye5">
                                                             <rect key="frame" x="0.0" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-hJ-EFQ">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pingjialaoshi" translatesAutoresizingMaskIntoConstraints="NO" id="dEE-hJ-EFQ">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="ZuB-4l-hTy"/>
@@ -471,7 +471,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="50F-EP-7vl">
                                                             <rect key="frame" x="80" y="0.0" width="80" height="77"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yuan" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-87-z1f">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gengduo" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-87-z1f">
                                                                     <rect key="frame" x="18" y="15" width="45" height="45"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="45" id="28r-9z-ElV"/>
@@ -580,6 +580,15 @@
         </view>
     </objects>
     <resources>
-        <image name="yuan" width="45" height="45"/>
+        <image name="gengduo" width="45" height="45"/>
+        <image name="gonggao" width="45" height="45"/>
+        <image name="hudong" width="45" height="45"/>
+        <image name="jingpinwenz" width="45" height="45"/>
+        <image name="kechengbiao" width="45" height="45"/>
+        <image name="meirishipu" width="45" height="45"/>
+        <image name="pingjialaoshi" width="45" height="45"/>
+        <image name="qiandaojilu" width="45" height="45"/>
+        <image name="techangkecheng" width="45" height="45"/>
+        <image name="xiaoyuan" width="45" height="45"/>
     </resources>
 </document>

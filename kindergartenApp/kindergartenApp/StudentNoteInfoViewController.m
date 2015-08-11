@@ -11,10 +11,11 @@
 #import "KGNSStringUtil.h"
 #import "KGHttpService.h"
 #import "KGHUD.h"
+#import "KGTextView.h"
 
 @interface StudentNoteInfoViewController () {
     
-    IBOutlet UITextView * noteTextView;
+    IBOutlet KGTextView * noteTextView;
 }
 
 @end
@@ -31,6 +32,7 @@
     
     [noteTextView setBorderWithWidth:Number_One color:[UIColor grayColor] radian:5.0];
     noteTextView.text = _studentInfo.note;
+    noteTextView.placeholder = @"说点什么吧...";
 }
 
 - (void)didReceiveMemoryWarning {

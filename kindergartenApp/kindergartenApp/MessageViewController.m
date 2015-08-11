@@ -71,8 +71,14 @@
 
 #pragma reFreshView Delegate
 
-//选中cell
-- (void)didSelectRowCallBack:(id)baseDomain to:(NSString *)toClassName{
+/**
+ *  选中cell
+ *
+ *  @param baseDomain  选中cell绑定的数据对象
+ *  @param tableView   tableView
+ *  @param indexPath   indexPath
+ */
+- (void)didSelectRowCallBack:(id)baseDomain tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     
 }
 

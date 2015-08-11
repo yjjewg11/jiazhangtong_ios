@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AddressbookTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_def" translatesAutoresizingMaskIntoConstraints="NO" id="Zwm-Lu-UnT">
+                        <rect key="frame" x="16" y="7" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="45" id="6ZX-Pe-ALS"/>
+                            <constraint firstAttribute="height" constant="45" id="cVj-ho-ftS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZe-1U-F3V">
+                        <rect key="frame" x="71" y="22" width="139" height="16"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="4Xd-vG-gzJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRp-QN-7Vq">
+                        <rect key="frame" x="210" y="0.0" width="55" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="NRg-If-1sa"/>
+                            <constraint firstAttribute="height" constant="60" id="qLK-aE-lIF"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dianhua">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="addressbookFunBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="f1Q-R5-WIa"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5z-yA-sL4">
+                        <rect key="frame" x="265" y="0.0" width="55" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="hPW-kl-qAI"/>
+                            <constraint firstAttribute="width" constant="55" id="u11-HB-ZO7"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="faxiaoxi">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="addressbookFunBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CfM-CT-toZ"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="lZe-1U-F3V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="14" id="89Q-vC-kQw"/>
+                    <constraint firstItem="XRp-QN-7Vq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="TOz-uY-2lF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="k5z-yA-sL4" secondAttribute="trailing" constant="-8" id="aFy-Cf-0Nq"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="k5z-yA-sL4" secondAttribute="bottom" constant="-9" id="cC0-0D-Qpf"/>
+                    <constraint firstItem="lZe-1U-F3V" firstAttribute="leading" secondItem="Zwm-Lu-UnT" secondAttribute="trailing" constant="10" id="ech-b0-ouI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="lZe-1U-F3V" secondAttribute="bottom" constant="13" id="fZA-YI-D8H"/>
+                    <constraint firstItem="Zwm-Lu-UnT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="fbu-pT-9Zs"/>
+                    <constraint firstItem="Zwm-Lu-UnT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-1" id="hYD-kX-fJg"/>
+                    <constraint firstItem="XRp-QN-7Vq" firstAttribute="leading" secondItem="lZe-1U-F3V" secondAttribute="trailing" id="lXH-tk-A2I"/>
+                    <constraint firstItem="k5z-yA-sL4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="lvH-wL-aTb"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Zwm-Lu-UnT" secondAttribute="bottom" constant="-1" id="rAW-R9-ouA"/>
+                    <constraint firstItem="k5z-yA-sL4" firstAttribute="leading" secondItem="XRp-QN-7Vq" secondAttribute="trailing" id="wex-vR-AT9"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="XRp-QN-7Vq" secondAttribute="bottom" constant="-9" id="yhu-fk-1Sl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headImageView" destination="Zwm-Lu-UnT" id="8bH-ab-9lf"/>
+                <outlet property="nameLabel" destination="lZe-1U-F3V" id="Y6O-W6-rKr"/>
+                <outlet property="telBtn" destination="XRp-QN-7Vq" id="sH9-PD-kLH"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="dianhua" width="55" height="60"/>
+        <image name="faxiaoxi" width="55" height="60"/>
+        <image name="head_def" width="45" height="45"/>
+    </resources>
+</document>

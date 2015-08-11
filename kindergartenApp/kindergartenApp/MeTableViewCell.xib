@@ -15,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wodetoux" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-yL-L38">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_def" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-yL-L38">
                         <rect key="frame" x="18" y="9" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="IQu-FU-8PS"/>
@@ -63,7 +63,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="wodetoux" width="45" height="45"/>
+        <image name="head_def" width="45" height="45"/>
         <image name="youjiantou" width="7" height="12"/>
     </resources>
 </document>

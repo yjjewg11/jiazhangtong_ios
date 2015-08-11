@@ -7,6 +7,10 @@
 //
 
 #import "TeacherJudgeTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "UIView+Extension.h"
+#import "UIColor+Extension.h"
+#import "KGNSStringUtil.h"
 
 #define judgeTeacherDefText  @"说点什么吧..."
 
@@ -15,6 +19,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+    _judgeTextView.placeholder = judgeTeacherDefText;
     [_judgeTextView setBorderWithWidth:1 color:[UIColor blackColor] radian:10.0];
 }
 
@@ -32,32 +37,35 @@
 - (void)resetValue:(id)baseDomain parame:(NSMutableDictionary *)parameterDic {
     _teachVO = (TeacherVO *)baseDomain;
     _nameLabel.text = _teachVO.name;
+    
+    [_headImageView sd_setImageWithURL:[NSURL URLWithString:_teachVO.img] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:self.headImageView.width / Number_Two];
+    }];
+
+    
     if(_teachVO.teacheruuid) {
         //已经评价
         _judgeTextView.text = _teachVO.content;
-        _submitBtn.enabled = YES;
-        _submitBtn.userInteractionEnabled = NO;
-        
-        UIImageView * imageView = (UIImageView *)[self viewWithTag:_teachVO.type * 100];
-        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_yes_%ld", (long)_teachVO.type]];
-        
-        
-    } else {
-        _judgeTextView.text = judgeTeacherDefText;
+        [self judgedHandler];
     }
+//    else {
+//        _judgeTextView.text = judgeTeacherDefText;
+//    }
     
 }
 
 - (IBAction)judgeBtnClicked:(UIButton *)sender {
     
     if(!_teachVO.teacheruuid) {
-        if(lastSelTag > Number_Zero) {
-            UIImageView * imageView = (UIImageView *)[self viewWithTag:lastSelTag * 10];
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_no_%ld", (long)lastSelTag]];
+        if(lastSelTag > Number_Zero && lastSelTag!=sender.tag) {
+            UIImageView * imageView = (UIImageView *)[self viewWithTag:lastSelTag * Number_Ten];
+            NSString * imgName = [NSString stringWithFormat:@"judge_no_%ld", (long)lastSelTag];
+            imageView.image = [UIImage imageNamed:imgName];
         }
         
-        UIImageView * imageView = (UIImageView *)[self viewWithTag:sender.tag * 10];
-        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_yes_%ld", (long)sender.tag]];
+        UIImageView * imageView = (UIImageView *)[self viewWithTag:sender.tag * Number_Ten];
+        NSString * imgName = [NSString stringWithFormat:@"judge_yes_%ld", (long)sender.tag];
+        imageView.image = [UIImage imageNamed:imgName];
         
         lastSelTag = sender.tag;
     }
@@ -65,7 +73,21 @@
 }
 
 - (IBAction)submitBtnClicked:(UIButton *)sender {
+    _teachVO.content = [KGNSStringUtil trimString:_judgeTextView.text];
+    _teachVO.type = lastSelTag / Number_Ten;
+    _teachVO.teacheruuid = _teachVO.teacher_uuid;
+    NSDictionary *dic = @{@"tearchVO" : _teachVO, @"tableViewCell" : self};
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TeacherJudge object:self userInfo:dic];
+}
+
+
+- (void)judgedHandler {
+    _judgeTextView.editable = NO;
+    _submitBtn.enabled = YES;
+    _submitBtn.userInteractionEnabled = NO;
     
+    UIImageView * imageView = (UIImageView *)[self viewWithTag:_teachVO.type * 100];
+    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_yes_%ld", (long)_teachVO.type]];
 }
 
 @end

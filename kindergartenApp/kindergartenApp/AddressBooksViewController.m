@@ -8,16 +8,17 @@
 
 #import "AddressBooksViewController.h"
 #import "ChatViewController.h"
-#import "ReFreshTableViewController.h"
 #import "KGHttpService.h"
 #import "AnnouncementDomain.h"
 #import "KGHUD.h"
-#import "PageInfoDomain.h"
 #import "UIColor+Extension.h"
+#import "AddressBookDomain.h"
+#import "AddressbookTableViewCell.h"
 
-@interface AddressBooksViewController () <KGReFreshViewDelegate> {
-    ReFreshTableViewController * reFreshView;
-    PageInfoDomain * pageInfo;
+@interface AddressBooksViewController () <UITableViewDelegate, UITableViewDataSource> {
+    
+    IBOutlet UITableView * addressbookTableView;
+    AddressBookResp * addressBookList;
 }
 
 
@@ -28,60 +29,87 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initPageInfo];
-    [self initReFreshView];
+    addressbookTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    addressbookTableView.separatorColor = [UIColor clearColor];
+    addressbookTableView.delegate   = self;
+    addressbookTableView.dataSource = self;
+    
+    [self getTableData];
+    
+    //注册cell功能按钮点击通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addressbookCellFunBtnNotification:) name:Key_Notification_AddressbookCellFun object:nil];
+}
+
+//帖子高度改变通知
+- (void)addressbookCellFunBtnNotification:(NSNotification *)notification {
+    NSDictionary * dic = notification.userInfo;
+    AddressBookDomain * domain = [dic objectForKey:@"addressBookDomain"];
+    NSInteger type = [[dic objectForKey:@"type"] integerValue];
+    
+    if(type == Number_Ten) {
+        //打电话
+    } else {
+        //发消息
+        ChatViewController * chatVC = [[ChatViewController alloc] init];
+        chatVC.addressbookDomain = domain;
+        [self.navigationController pushViewController:chatVC animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)initPageInfo {
-    if(!pageInfo) {
-        pageInfo = [[PageInfoDomain alloc] init];
-    }
-}
-
 
 //获取数据加载表格
 - (void)getTableData{
-    pageInfo.pageNo = reFreshView.page;
-    pageInfo.pageSize = reFreshView.pageSize;
+    [[KGHUD sharedHud] show:self.contentView];
     
-    [[KGHttpService sharedService] getAnnouncementList:pageInfo success:^(NSArray *announcementArray) {
-        reFreshView.tableParam.dataSourceMArray = announcementArray;
-        [reFreshView reloadRefreshTable];
+    [[KGHttpService sharedService] getAddressBookList:^(AddressBookResp *addressBookResp) {
+        
+        addressBookList = addressBookResp;
+        [addressbookTableView reloadData];
+        [[KGHUD sharedHud] hide:self.contentView];
+        
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-        [reFreshView endRefreshing];
     }];
 }
 
 
-//初始化列表
-- (void)initReFreshView{
-    reFreshView = [[ReFreshTableViewController alloc] initRefreshView];
-    reFreshView._delegate = self;
-    reFreshView.tableParam.cellHeight       = 78;
-    reFreshView.tableParam.cellClassNameStr = @"AnnouncementTableViewCell";
-    reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
-    [reFreshView appendToView:self.contentView];
-    [reFreshView beginRefreshing];
+#pragma UITableView delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return Number_Two;
 }
 
-#pragma reFreshView Delegate
 
-//- (UITableViewCell *)createTableViewCell:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
-//    // 获得cell
-//    TopicTableViewCell * cell = [TopicTableViewCell cellWithTableView:tableView];
-//    cell.topicFrame = reFreshView.dataSource[indexPath.row];
-//    return cell;
-//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(section==Number_Zero) {
+        return [addressBookList.listKD count];
+    }
+    return [addressBookList.list count];
+}
 
-//选中cell
-- (void)didSelectRowCallBack:(id)baseDomain to:(NSString *)toClassName{
-    ChatViewController * chatVC = [[ChatViewController alloc] init];
-    [self.navigationController pushViewController:chatVC animated:YES];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AddressbookTableViewCell * cell = [AddressbookTableViewCell cellWithTableView:tableView];
+    if(indexPath.section == Number_Zero) {
+        [cell resetValue:[addressBookList.listKD objectAtIndex:indexPath.row] parame:nil];
+    } else {
+        AddressBookDomain * domain = [addressBookList.listKD objectAtIndex:indexPath.row];
+        domain.isTeacher = YES;
+        [cell resetValue:domain parame:nil];
+    }
+    
+    return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 

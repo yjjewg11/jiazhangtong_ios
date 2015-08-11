@@ -28,5 +28,6 @@ typedef enum {
     Topic_Interact = 0, //：互动
     Topic_Announcement = 1, //：公告
     Topic_Course = 2,  //：课程表
-    Topic_Recipes =3   //：食谱
+    Topic_Recipes =3,  //：食谱
+    Topic_Articles = 4   //：文章
 } KGTopicType;

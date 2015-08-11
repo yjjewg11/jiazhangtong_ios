@@ -1,7 +1,7 @@
 //
 //  MFAccountTool.h
 //  maifangbao
-//
+//  账号处理
 //  Created by whb on 15/5/23.
 //  Copyright (c) 2015年 whb. All rights reserved.
 //

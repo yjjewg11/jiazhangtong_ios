@@ -28,7 +28,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKj-sQ-67x">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="genggaitouxiang" translatesAutoresizingMaskIntoConstraints="NO" id="XM4-QK-2U2">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_def" translatesAutoresizingMaskIntoConstraints="NO" id="XM4-QK-2U2">
                                     <rect key="frame" x="130" y="15" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="LKp-cp-41t"/>
@@ -235,7 +235,7 @@
         </view>
     </objects>
     <resources>
-        <image name="genggaitouxiang" width="60" height="60"/>
+        <image name="head_def" width="45" height="45"/>
         <image name="hongtiao" width="5" height="13"/>
         <image name="wodekuang" width="288" height="30"/>
     </resources>

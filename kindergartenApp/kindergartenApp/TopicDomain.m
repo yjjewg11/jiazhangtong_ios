@@ -7,7 +7,18 @@
 //
 
 #import "TopicDomain.h"
+#import "MJExtension.h"
 
 @implementation TopicDomain
+
+//属性名映射
++(void)initialize{
+    [super initialize];
+    
+    [self setupObjectClassInArray:^NSDictionary *{
+        return @{@"imgsList"   : @"NSSring"};
+    }];
+}
+
 
 @end

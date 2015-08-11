@@ -17,6 +17,15 @@
 #define regURL               @"rest/userinfo/reg.json"               //注册
 //#define updatepasswordURL    @"rest/userinfo/updatepassword.json"    //修改密码
 #define updatepasswordURL    @"rest/userinfo/updatepasswordBySms.json"  //修改密码
+
+#define teacherPhoneBookURL  @"rest/userinfo/getTeacherPhoneBook.json" //老师和园长通讯录
+#define saveToTeacherURL     @"rest/message/saveToTeacher.json"  //给老师写信
+#define queryByTeacherURL    @"rest/message/queryByTeacher.json" //查询和老师的信件
+#define saveToLeaderURL      @"rest/message/saveToLeader.json"   //给园长写信
+#define queryByLeaderURL     @"rest/message/queryByLeader.json"  //查询和园长的信件
+#define readMsgURL           @"rest/message/read.json"  //阅读信件
+
+
 #define phoneCodeURL         @"rest/sms/sendCode.json"               //短信验证码
 #define classNewsMyURL           @"rest/classnews/getClassNewsByMy.json"   //我的孩子班级互动列表
 #define classNewsByClassIdURL  @"rest/classnews/getClassNewsByClassuuid.json"   //班级互动列表
@@ -27,6 +36,7 @@
 
 
 #define announcementListURL   @"rest/announcements/queryMy.json"               //公告列表
+
 #define myChildrenURL         @"rest/student/listByMyChildren.json"               //我的孩子列表
 #define saveChildrenURL       @"rest/student/save.json"                           //保存孩子信息
 #define saveDZURL             @"rest/dianzan/save.json"             //点赞
@@ -40,10 +50,21 @@
 
 #define messageListURL        @"rest/pushMessage/queryMy.json" //消息列表
 
-#define teacherAndJudgesURL   @"rest/userinfo/getTeachersAndJudges.json" //评价老师列表
+#define teacherAndJudgesURL   @"rest/teachingjudge/getTeachersAndJudges.json" //评价老师列表
 #define saveTeacherJudgesURL  @"rest/teachingjudge/save.json" //评价老师
 
-#define saveTeacherJudgesURL  @"rest/teachingjudge/save.json" //通讯录
+//#define saveTeacherJudgesURL  @"rest/teachingjudge/save.json" //通讯录
+#define specialtyCoursesURL   @"px/index.html"  //特长课程
+#define articleListURL        @"rest/share/articleList.json"  //精品文章
+#define studentSignRecordURL  @"rest/studentSignRecord/queryMy.json"  //签到记录
+
+
+#define recipesListURL        @"rest/cookbookplan/list.json"  //食谱列表
+#define pushDeviceURL         @"rest/pushMsgDevice/save.json"  //推送token提交
+#define emojiURL              @"rest/share/getEmot.json"      //表情
+#define teachingPLanURL       @"rest/teachingplan/list.json"      //课程表
+
+
 
 @implementation KGHttpUrl
 
@@ -194,6 +215,77 @@
 //评价老师
 + (NSString *)getSaveTeacherJudgeUrl {
     return URL(baseServiceURL, saveTeacherJudgesURL);
+}
+
+
+//特长课程
++ (NSString *)getSpecialtyCoursesUrl {
+    return URL(baseServiceURL, specialtyCoursesURL);
+}
+
+//精品文章
++ (NSString *)getArticleListUrl {
+    return URL(baseServiceURL, articleListURL);
+}
+
+
+//精品文章详情
++ (NSString *)getArticleInfoListUrl:(NSString *)uuid {
+    return [NSString stringWithFormat:@"%@rest/share/getArticleJSON.json?uuid=%@", baseServiceURL, uuid];
+}
+
+//签到记录
++ (NSString *)getStudentSignRecordUrl {
+    return URL(baseServiceURL, studentSignRecordURL);
+}
+
+//食谱列表
++ (NSString *)getRecipesListUrl {
+    return URL(baseServiceURL, recipesListURL);
+}
+
+//推送token
++ (NSString *)getPushTokenUrl {
+    return URL(baseServiceURL, pushDeviceURL);
+}
+
+//表情
++ (NSString *)getEmojiUrl {
+    return URL(baseServiceURL, emojiURL);
+}
+
+//老师和园长通讯录
++ (NSString *)getTeacherPhoneBookUrl {
+    return URL(baseServiceURL, teacherPhoneBookURL);
+}
+
+//给老师发消息
++ (NSString *)getSaveTeacherUrl {
+    return URL(baseServiceURL, saveToTeacherURL);
+}
+//获取和老师的消息列表
++ (NSString *)getQueryByTeacherUrl {
+    return URL(baseServiceURL, queryByTeacherURL);
+}
+
+//给园长发消息
++ (NSString *)getSaveLeaderUrl {
+    return URL(baseServiceURL, saveToLeaderURL);
+}
+
+//获取园长消息列表
++ (NSString *)getQueryLeaderUrl {
+    return URL(baseServiceURL, queryByLeaderURL);
+}
+
+//阅读消息
++ (NSString *)getReadMsgUrl {
+    return URL(baseServiceURL, readMsgURL);
+}
+
+//课程表
++ (NSString *)getTeachingPlanUrl {
+    return URL(baseServiceURL, teachingPLanURL);
 }
 
 

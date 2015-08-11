@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#define webUrl                  @"http://www.funi.com"
+#define shareSDKKey             @"1f2984542c5e"
+#define uMengAppKey             @"532f9d2656240bc06b1bc31f"
 #define ShareKey_TencentWB      @"801524237"
 #define ShareKey_TencentSecret  @"7a06f33c7727b96071964a6c02634b7e"
 #define ShareKey_SinaWB         @"392054516"

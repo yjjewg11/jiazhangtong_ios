@@ -7,19 +7,18 @@
 //
 
 #import "LoginRespDomain.h"
+#import "MJExtension.h"
 
 @implementation LoginRespDomain
 
-//- (id)init {
-//    if (self = [super init]) {
-//        self.list = [[NSMutableArray alloc] init];
-//    }
-//    return self;
-//}
-
-- (NSDictionary *)objectClassInArray
-{
-    return @{@"list" : [KGUser class]};
+//属性名映射
++(void)initialize{
+    [super initialize];
+    
+    [self setupObjectClassInArray:^NSDictionary *{
+        return @{@"list"   : @"KGUser"};
+    }];
 }
+
 
 @end

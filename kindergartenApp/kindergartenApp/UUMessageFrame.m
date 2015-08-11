@@ -8,6 +8,7 @@
 
 #import "UUMessageFrame.h"
 #import "UUMessage.h"
+#import "TQRichTextView.h"
 
 @implementation UUMessageFrame
 
@@ -46,8 +47,9 @@
     CGSize contentSize;
     switch (_message.type) {
         case UUMessageTypeText:
-            contentSize = [_message.strContent sizeWithFont:ChatContentFont  constrainedToSize:CGSizeMake(ChatContentW, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
- 
+//            contentSize = [_message.strContent sizeWithFont:ChatContentFont  constrainedToSize:CGSizeMake(ChatContentW, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+        
+            contentSize = [TQRichTextView boundingRectWithSize:CGSizeMake(ChatContentW, CGFLOAT_MAX) font:ChatContentFont string:_message.strContent lineSpace:1.0f].size;
             break;
         case UUMessageTypePicture:
             contentSize = CGSizeMake(ChatPicWH, ChatPicWH);
@@ -58,10 +60,18 @@
         default:
             break;
     }
+    
+    CGFloat contentTextViewX = contentX + 20;
     if (_message.from == UUMessageFromMe) {
         contentX = iconX - contentSize.width - ChatContentLeft - ChatContentRight - ChatMargin;
+        contentTextViewX = contentX + 5;
     }
-    _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft + ChatContentRight, contentSize.height + ChatContentTop + ChatContentBottom);
+    
+//    _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft + ChatContentRight, contentSize.height + ChatContentTop + ChatContentBottom);
+    
+    _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft, contentSize.height + 20);
+    
+    _contentTextViewF = CGRectMake(contentTextViewX, contentY+ChatMargin, contentSize.width, contentSize.height);
     
     _cellHeight = MAX(CGRectGetMaxY(_contentF), CGRectGetMaxY(_nameF))  + ChatMargin;
     

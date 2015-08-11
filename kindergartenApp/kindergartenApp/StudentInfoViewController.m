@@ -15,6 +15,7 @@
 #import "StudentBaseInfoViewController.h"
 #import "StudentOtherInfoViewController.h"
 #import "StudentNoteInfoViewController.h"
+#import "KGHttpService.h"
 
 #define StudentInfoCellIdentifier @"StudentInfoCellIdentifier"
 #define StudentOtherInfoCellIdentifier @"StudentOtherInfoCellIdentifier"
@@ -104,7 +105,7 @@
     StudentInfoItemVO * item8 = [[StudentInfoItemVO alloc] init];
     item8.head = @"";
     item8.contentMArray = [[NSMutableArray alloc] initWithObjects:
-                           [NSString stringWithFormat:@"关联学校:%@", _studentInfo.ma_name],
+                           [NSString stringWithFormat:@"关联学校:%@", [[KGHttpService sharedService] getGroupNameByUUID:_studentInfo.groupuuid]],
                            [NSString stringWithFormat:@"关联班级:%@", _studentInfo.ma_tel], nil];
     [tableDataSource addObject:item8];
     

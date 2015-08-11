@@ -59,3 +59,17 @@
 #define Number_ViewAlpha_Three    0.3f
 #define Number_ViewAlpha_Zero     0.0f
 #define Number_ViewAlpha_Eight    0.8f
+
+
+// 昵称字体
+#define TopicCellTitleFont   [UIFont boldSystemFontOfSize:16]
+#define TopicCellNameFont    [UIFont systemFontOfSize:14]
+#define TopicCellContentFont [UIFont systemFontOfSize:15]
+#define TopicCellDateFont    [UIFont systemFontOfSize:10]
+// cell的边框宽度
+#define TopicCellBorderW 10
+// cell内编剧
+#define CELLPADDING      16
+//cell内容宽度
+#define CELLCONTENTWIDTH     [UIScreen mainScreen].bounds.size.width - 32
+

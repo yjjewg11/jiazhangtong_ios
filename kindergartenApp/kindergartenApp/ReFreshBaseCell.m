@@ -8,6 +8,7 @@
 
 #import "ReFreshBaseCell.h"
 #import "Masonry.h"
+#import "UIColor+Extension.h"
 
 #define tableViewCellDelBtn               @"UITableViewCellDeleteConfirmationControl"
 
@@ -30,7 +31,7 @@
 - (void)initSpliteLineLabel{
     if(!spliteLabel){
         spliteLabel = [[UILabel alloc] init];
-        spliteLabel.backgroundColor = CELL_SPLITE_COLOR;
+        spliteLabel.backgroundColor = KGColorFrom16(0xCCCCCC);
         spliteLabel.opaque          = YES;
         spliteLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:spliteLabel];
@@ -60,6 +61,7 @@
 - (void)initCellStyle {
     self.selectionStyle              = UITableViewCellSelectionStyleNone;
     self.autoresizingMask            = UIViewAutoresizingFlexibleRightMargin;
+    [self.contentView setBackgroundColor:KGColorFrom16(0xE7E7EE)];
 }
 
 

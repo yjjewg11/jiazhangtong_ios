@@ -26,6 +26,35 @@
 }
 
 
+//获取过去几天日期  默认当天
++ (NSString *)getDate:(NSInteger)date {
+    NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
+    [formatter setDateFormat:dateFormatStr1];
+    
+    NSDate * yesterday = [NSDate dateWithTimeIntervalSinceNow:-(date * 24*60*60)];
+    NSString * tempDate =  [formatter stringFromDate:yesterday];
+    
+    NSString *timeLocal = [[NSString alloc] initWithFormat:@"%@", tempDate];
+    return timeLocal;
+}
+
+//获取上一天或者下一天日期
++ (NSString *)nextOrPreyDay:(NSString *)currentDateStr date:(NSInteger)date {
+    NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    [format setDateFormat:dateFormatStr1];
+    
+    NSDate * currentDate = [format dateFromString:currentDateStr];
+    NSDate * newDate = nil;
+//    if(isNext) {
+//        newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([date timeIntervalSinceReferenceDate] + 24*3600)];
+//    } else {
+    long temp = date * 24 * 3600;
+        newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([currentDate timeIntervalSinceReferenceDate] - temp)];
+//    }
+    return [format stringFromDate:newDate];
+}
+
+
 //毫秒时间
 + (NSString *)millisecond
 {

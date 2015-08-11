@@ -18,10 +18,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhK-A6-yUq">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <subviews>
-                        <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBa-8A-tfQ">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <webView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBa-8A-tfQ">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </webView>
                     </subviews>
@@ -39,7 +39,7 @@
                 <constraint firstAttribute="trailing" secondItem="JhK-A6-yUq" secondAttribute="trailing" id="EKH-jZ-niw"/>
                 <constraint firstAttribute="bottom" secondItem="JhK-A6-yUq" secondAttribute="bottom" id="Kxi-1d-4u4"/>
                 <constraint firstItem="JhK-A6-yUq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="cPI-qb-NZd"/>
-                <constraint firstItem="JhK-A6-yUq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vlm-nq-PxZ"/>
+                <constraint firstItem="JhK-A6-yUq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="vlm-nq-PxZ"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

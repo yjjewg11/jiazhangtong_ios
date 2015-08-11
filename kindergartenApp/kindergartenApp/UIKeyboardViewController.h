@@ -20,12 +20,10 @@
 
 @property (nonatomic, assign) id <UIKeyboardViewControllerDelegate> boardDelegate;
 
-@end
-
-@interface UIKeyboardViewController (UIKeyboardViewControllerCreation)
-
 
 - (id)initWithControllerDelegate:(id <UIKeyboardViewControllerDelegate>)delegateObject;
+
+- (void)buildDelegate;
 
 @end
 

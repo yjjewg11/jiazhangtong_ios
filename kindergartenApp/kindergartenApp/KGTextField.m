@@ -17,21 +17,64 @@
 {
     [super awakeFromNib];
     
+    [self setTextFielParam];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if(self) {
+        [self setTextFielParam];
+    }
+    return self;
+}
+
+
+- (void)setTextFielParam {
     [self setBorderStyle:UITextBorderStyleNone];
     [self setTintColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0]];
-//    [self setBackgroundColor:[UIColor whiteColor]];
-//    self.returnKeyType            = UIReturnKeyNext;
+    //    [self setBackgroundColor:[UIColor whiteColor]];
+    //    self.returnKeyType            = UIReturnKeyNext;
     self.autocapitalizationType   = UITextAutocapitalizationTypeNone;
     self.textAlignment            = NSTextAlignmentLeft;
     self.borderStyle              = UITextBorderStyleNone;
     self.clearButtonMode          = UITextFieldViewModeWhileEditing;
     self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+//    self.textColor                = [UIColor whiteColor];
 }
 
 
 - (void) drawPlaceholderInRect:(CGRect)rect {
     rect.origin.y += 7;
     [self.placeholder drawInRect:rect withAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:179.0/255.0 green:179.0/255.0 blue:179.0/255.0 alpha:1.0],NSFontAttributeName:[UIFont systemFontOfSize:14]}];
+}
+
+
+//控制placeHolder的位置，左右缩20
+-(CGRect)placeholderRectForBounds:(CGRect)bounds
+{
+    
+    //return CGRectInset(bounds, 20, 0);
+    CGRect inset = CGRectMake(bounds.origin.x+5, bounds.origin.y, bounds.size.width -10, bounds.size.height);//更好理解些
+    return inset;
+}
+
+//控制显示文本的位置
+-(CGRect)textRectForBounds:(CGRect)bounds
+{
+    //return CGRectInset(bounds, 50, 0);
+    CGRect inset = CGRectMake(bounds.origin.x+5, bounds.origin.y, bounds.size.width -10, bounds.size.height);//更好理解些
+    
+    return inset;
+    
+}
+
+//控制编辑文本的位置
+-(CGRect)editingRectForBounds:(CGRect)bounds
+{
+    //return CGRectInset( bounds, 10 , 0 );
+    
+    CGRect inset = CGRectMake(bounds.origin.x +5, bounds.origin.y, bounds.size.width -10, bounds.size.height);
+    return inset;
 }
 
 

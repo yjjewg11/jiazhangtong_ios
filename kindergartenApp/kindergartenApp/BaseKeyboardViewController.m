@@ -20,7 +20,7 @@ typedef enum : NSInteger {
     kCameraMoveDirectionLeft
 } CameraMoveDirection;
 
-@interface BaseKeyboardViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate> {
+@interface BaseKeyboardViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>  {
     CameraMoveDirection direction;
 }
 
@@ -39,9 +39,16 @@ typedef enum : NSInteger {
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     [_keyBoardController removeKeyBoardNotification];
+}
+
+//滑动手势
+- (void)addSwipeGesture {
+    UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    [[self view] addGestureRecognizer:recognizer];
 }
 
 
@@ -135,22 +142,22 @@ typedef enum : NSInteger {
         direction = kCameraMoveDirectionNone;
     } else if(gesture.state == UIGestureRecognizerStateChanged && direction == kCameraMoveDirectionNone) {
         
-        direction = [self determineCameraDirectionIfNeeded:translation];
+        [self determineCameraDirectionIfNeeded:translation gesture:gesture];
         
         // ok, now initiate movement in the direction indicated by the user's gesture
-        switch (direction) {
-            case kCameraMoveDirectionDown:
-                [self singleTap];
-                break;
-            case kCameraMoveDirectionUp:
-                break;
-            case kCameraMoveDirectionRight:
-                break;
-            case kCameraMoveDirectionLeft:
-                break;
-            default:
-                break;
-        }
+//        switch (direction) {
+//            case kCameraMoveDirectionDown:
+//                [self singleTap];
+//                break;
+//            case kCameraMoveDirectionUp:
+//                break;
+//            case kCameraMoveDirectionRight:
+//                break;
+//            case kCameraMoveDirectionLeft:
+//                break;
+//            default:
+//                break;
+//        }
     } else if(gesture.state == UIGestureRecognizerStateEnded) {
         // now tell the camera to stop
         
@@ -159,10 +166,10 @@ typedef enum : NSInteger {
 
 
 // This method will determine whether the direction of the user's swipe
-- (CameraMoveDirection)determineCameraDirectionIfNeeded:(CGPoint)translation {
+- (void)determineCameraDirectionIfNeeded:(CGPoint)translation gesture:(UIPanGestureRecognizer*)gesture {
     
     if(direction != kCameraMoveDirectionNone) {
-        return direction;
+//        return direction;
     }
     
     // determine if horizontal swipe only if you meet some minimum velocity
@@ -178,10 +185,12 @@ typedef enum : NSInteger {
         
         if (gestureHorizontal) {
             
+            [self didChangeViewX:translation.x gesture:gesture];
+            
             if (translation.x > 0.0) {
-                return kCameraMoveDirectionRight;
+//                return kCameraMoveDirectionRight;
             } else {
-                return kCameraMoveDirectionLeft;
+//                return kCameraMoveDirectionLeft;
             }
         }
     }
@@ -200,17 +209,22 @@ typedef enum : NSInteger {
         
         if(gestureVertical) {
             
-            if (translation.y > 0.0)
-                
-                return kCameraMoveDirectionDown;
+//            if (translation.y > 0.0)
             
-            else
+//                return kCameraMoveDirectionDown;
+            
+//            else
                 
-                return kCameraMoveDirectionUp;
+//                return kCameraMoveDirectionUp;
         }
     }
     
-    return direction;
+//    return direction;
+}
+
+//水平手势x值发生改变
+- (void)didChangeViewX:(CGFloat)x gesture:(UIPanGestureRecognizer*)gesture {
+    
 }
 
 

@@ -1,7 +1,7 @@
 //
 //  MessageTableViewCell.h
 //  kindergartenApp
-//
+//  消息列表Cell
 //  Created by yangyangxun on 15/7/28.
 //  Copyright (c) 2015年 funi. All rights reserved.
 //

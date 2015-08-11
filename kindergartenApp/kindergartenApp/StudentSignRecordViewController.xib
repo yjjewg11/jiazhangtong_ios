@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StudentSignRecordViewController">
+            <connections>
+                <outlet property="contentView" destination="KBN-Kc-Wmw" id="wfd-HD-3cS"/>
+                <outlet property="signRecordTableView" destination="Wcn-Yq-6Hz" id="rEh-gd-XzH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBN-Kc-Wmw">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Wcn-Yq-6Hz">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Wcn-Yq-6Hz" secondAttribute="bottom" id="Vnz-gs-BN8"/>
+                        <constraint firstItem="Wcn-Yq-6Hz" firstAttribute="leading" secondItem="KBN-Kc-Wmw" secondAttribute="leading" id="YKS-gO-hI2"/>
+                        <constraint firstAttribute="trailing" secondItem="Wcn-Yq-6Hz" secondAttribute="trailing" id="aFo-Ed-CRZ"/>
+                        <constraint firstItem="Wcn-Yq-6Hz" firstAttribute="top" secondItem="KBN-Kc-Wmw" secondAttribute="top" id="t6F-pc-V79"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KBN-Kc-Wmw" secondAttribute="trailing" id="DgZ-m6-E5A"/>
+                <constraint firstAttribute="bottom" secondItem="KBN-Kc-Wmw" secondAttribute="bottom" id="QGh-jE-Sgc"/>
+                <constraint firstItem="KBN-Kc-Wmw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ayV-1s-yWe"/>
+                <constraint firstItem="KBN-Kc-Wmw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ghC-9N-rce"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

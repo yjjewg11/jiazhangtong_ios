@@ -30,5 +30,5 @@
 //隐藏拖动webview时黑色背景
 - (void)hideGradientBackground:(UIView*)theView;
 //view动画
-- (void)viewAnimate:(void(^)())animate time:(float)time;
++ (void)viewAnimate:(void(^)())animate time:(float)time;
 @end

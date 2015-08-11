@@ -10,6 +10,7 @@
 #import "SystemResource.h"
 #import "AppDelegate.h"
 #import "KGTextField.h"
+#import "KGTextView.h"
 
 //static CGFloat kboardHeight = 254.0f;
 //static CGFloat spacerY = 10.0f;
@@ -32,6 +33,45 @@ static CGFloat viewFrameY = 10;
 
 @synthesize boardDelegate = _boardDelegate;
 
+- (id)initWithControllerDelegate:(id <UIKeyboardViewControllerDelegate>)delegateObject {
+    if (self = [super init]) {
+        self.boardDelegate = delegateObject;
+        if ([self.boardDelegate isKindOfClass:[UIViewController class]]) {
+            objectView = [(UIViewController *)[self boardDelegate] view];
+        }
+        else if ([self.boardDelegate isKindOfClass:[UIView class]]) {
+            objectView = (UIView *)[self boardDelegate];
+        }
+        viewFrameY = objectView.frame.origin.y;
+        [self addKeyBoardNotification];
+        [self buildDelegate];
+    }
+    return self;
+}
+
+- (void)buildDelegate{
+    if(!allInputFields){
+        allInputFields =[[NSMutableArray alloc] init];
+    }
+    for (id aview in [self allSubviews:objectView]) {
+        
+        if ((([aview isKindOfClass:[UITextField class]] ||
+             [aview isKindOfClass:[KGTextField class]]) && ((UITextField*)aview).userInteractionEnabled && ((UITextField*)aview).enabled)) {
+            ((UITextField *)aview).delegate = self;
+            [allInputFields addObject:(UITextField *)aview];
+        }
+        else if ((([aview isKindOfClass:[UITextView class]] ||
+                  [aview isKindOfClass:[KGTextField class]]) && ((UITextView*)aview).userInteractionEnabled && ((UITextView*)aview).editable)) {
+            ((UITextView *)aview).delegate = self;
+            [allInputFields addObject:(UITextView *)aview];
+            
+            if([aview isKindOfClass:[KGTextField class]]) {
+                [((KGTextView *)aview) addObserver];
+            }
+        }
+    }
+}
+
 //监听键盘隐藏和显示事件
 - (void)addKeyBoardNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowOrHide:) name:UIKeyboardWillShowNotification object:nil];
@@ -40,8 +80,9 @@ static CGFloat viewFrameY = 10;
 
 //注销监听事件
 - (void)removeKeyBoardNotification {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 //计算当前键盘的高度
@@ -214,42 +255,3 @@ static CGFloat viewFrameY = 10;
 
 @end
 
-@implementation UIKeyboardViewController (UIKeyboardViewControllerCreation)
-
-- (id)initWithControllerDelegate:(id <UIKeyboardViewControllerDelegate>)delegateObject {
-	if (self = [super init]) {
-		self.boardDelegate = delegateObject;
-        if ([self.boardDelegate isKindOfClass:[UIViewController class]]) {
-			objectView = [(UIViewController *)[self boardDelegate] view];
-		}
-		else if ([self.boardDelegate isKindOfClass:[UIView class]]) {
-			objectView = (UIView *)[self boardDelegate];
-		}
-        viewFrameY = objectView.frame.origin.y;
-		[self addKeyBoardNotification];
-        [self buildDelegate];
-	}
-	return self;
-}
-
-- (void)buildDelegate{
-    if(!allInputFields){
-        allInputFields =[[NSMutableArray alloc] init];
-    }
-    for (id aview in [self allSubviews:objectView]) {
-        
-//        NSLog(@"class:%@", [aview class]);
-        
-		if (([aview isKindOfClass:[UITextField class]] && ((UITextField*)aview).userInteractionEnabled && ((UITextField*)aview).enabled) ||
-            [aview isKindOfClass:[KGTextField class]]) {
-			((UITextField *)aview).delegate = self;
-            [allInputFields addObject:(UITextField *)aview];
-		}
-		else if ([aview isKindOfClass:[UITextView class]] && ((UITextView*)aview).userInteractionEnabled && ((UITextView*)aview).editable) {
-			((UITextView *)aview).delegate = self;
-            [allInputFields addObject:(UITextView *)aview];
-		}
-	}
-}
-
-@end

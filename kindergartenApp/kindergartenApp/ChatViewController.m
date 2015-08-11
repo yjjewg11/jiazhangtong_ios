@@ -13,6 +13,13 @@
 #import "ChatModel.h"
 #import "UUMessageFrame.h"
 #import "UUMessage.h"
+#import "KGEmojiManage.h"
+#import "KGHttpService.h"
+#import "KGEmojiManage.h"
+#import "WriteVO.h"
+#import "QueryChatsVO.h"
+#import "ChatInfoDomain.h"
+#import "KGHUD.h"
 
 @interface ChatViewController () <UUInputFunctionViewDelegate,UUMessageCellDelegate,UITableViewDataSource,UITableViewDelegate> {
     UUInputFunctionView *IFView;
@@ -33,8 +40,12 @@
     _chatTableView.delegate = self;
     _chatTableView.dataSource = self;
     
+    [KGEmojiManage sharedManage].isChatEmoji = YES;
+    
+    [self getChatInfoList];
     [self addRefreshViews];
     [self loadBaseViewsAndData];
+    [self loadInputFuniView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -51,16 +62,9 @@
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [KGEmojiManage sharedManage].isChatEmoji = NO;
 }
 
-
-- (void)segmentChanged:(UISegmentedControl *)segment
-{
-    self.chatModel.isGroupChat = segment.selectedSegmentIndex;
-    [self.chatModel.dataSource removeAllObjects];
-    [self.chatModel populateRandomDataSource];
-    [self.chatTableView reloadData];
-}
 
 - (void)addRefreshViews
 {
@@ -87,18 +91,26 @@
     };
 }
 
+//加载底部输入功能View
+- (void)loadInputFuniView {
+    IFView = [[UUInputFunctionView alloc]initWithSuperVC:self];
+    IFView.delegate = self;
+    [self.view addSubview:IFView];
+}
+
+- (void)loadChatListData:(NSArray *)chatsArray {
+    
+    [self.chatModel addChatInfosToDataSource:chatsArray];
+    [self.chatTableView reloadData];
+    [self tableViewScrollToBottom];
+}
+
 - (void)loadBaseViewsAndData
 {
     self.chatModel = [[ChatModel alloc]init];
     self.chatModel.isGroupChat = NO;
-    [self.chatModel populateRandomDataSource];
-    
-    IFView = [[UUInputFunctionView alloc]initWithSuperVC:self];
-    IFView.delegate = self;
-    [self.view addSubview:IFView];
-    
-    [self.chatTableView reloadData];
-    [self tableViewScrollToBottom];
+//    [self.chatModel populateRandomDataSource];
+   
 }
 
 -(void)keyboardChange:(NSNotification *)notification
@@ -153,6 +165,8 @@
     funcView.TextViewInput.text = @"";
     [funcView changeSendBtnWithPhoto:YES];
     [self dealTheFunctionData:dic];
+    
+    [self sendTextInfo:[KGEmojiManage sharedManage].chatHTMLInfo];
 }
 
 - (void)UUInputFunctionView:(UUInputFunctionView *)funcView sendPicture:(UIImage *)image
@@ -160,6 +174,8 @@
     NSDictionary *dic = @{@"picture": image,
                           @"type": @(UUMessageTypePicture)};
     [self dealTheFunctionData:dic];
+    
+    [self sendImgInfo:image];
 }
 
 - (void)UUInputFunctionView:(UUInputFunctionView *)funcView sendVoice:(NSData *)voice time:(NSInteger)second
@@ -209,6 +225,48 @@
     // headIamgeIcon is clicked
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:cell.messageFrame.message.strName message:@"headImage clicked" delegate:nil cancelButtonTitle:@"sure" otherButtonTitles:nil];
     [alert show];
+}
+
+//提交发送文本
+- (void)sendTextInfo:(NSString *)message {
+    WriteVO * writeVO = [[WriteVO alloc] init];
+    writeVO.isTeacher = _addressbookDomain.isTeacher;
+    writeVO.revice_useruuid = _addressbookDomain.teacher_uuid;
+    writeVO.message = message;
+    
+    [[KGHttpService sharedService] saveAddressBookInfo:writeVO success:^(NSString *msgStr) {
+        
+        [KGEmojiManage sharedManage].chatHTMLInfo = nil;
+    } faild:^(NSString *errorMsg) {
+        
+    }];
+}
+
+//发送图片
+- (void)sendImgInfo:(UIImage *)image {
+    
+    [[KGHttpService sharedService] uploadImg:image withName:@"file" type:0 success:^(NSString *msgStr) {
+        
+        [self sendTextInfo:msgStr];
+        
+    } faild:^(NSString *errorMsg) {
+        
+    }];
+}
+
+- (void)getChatInfoList {
+    QueryChatsVO * queryVO = [[QueryChatsVO alloc] init];
+    queryVO.isTeacher = _addressbookDomain.isTeacher;
+    queryVO.uuid = _addressbookDomain.teacher_uuid;
+    queryVO.pageNo = 1;
+    
+    [[KGHttpService sharedService] getTeacherOrLeaderMsgList:queryVO success:^(NSArray *msgArray) {
+        
+        [self loadChatListData:msgArray];
+        
+    } faild:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
 }
 
 

@@ -19,13 +19,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="5SD-nV-Mds">
-                    <rect key="frame" x="297" y="16" width="7" height="12"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="7" id="ODy-2E-zUQ"/>
-                        <constraint firstAttribute="height" constant="12" id="qTB-ns-nw6"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdO-Fh-Ypn">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <state key="normal">
@@ -35,12 +28,9 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="5SD-nV-Mds" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="BeD-1j-yGU"/>
-                <constraint firstAttribute="bottom" secondItem="5SD-nV-Mds" secondAttribute="bottom" constant="16" id="TNc-yf-SFe"/>
                 <constraint firstItem="kdO-Fh-Ypn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VbI-bp-xce"/>
                 <constraint firstAttribute="trailing" secondItem="kdO-Fh-Ypn" secondAttribute="trailing" id="dTH-Th-D2g"/>
                 <constraint firstAttribute="bottom" secondItem="kdO-Fh-Ypn" secondAttribute="bottom" id="dio-Xt-1ev"/>
-                <constraint firstAttribute="trailing" secondItem="5SD-nV-Mds" secondAttribute="trailing" constant="16" id="hLd-AS-ra4"/>
                 <constraint firstItem="kdO-Fh-Ypn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lDN-LT-uah"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -53,6 +43,5 @@
     </objects>
     <resources>
         <image name="hongtiao" width="5" height="13"/>
-        <image name="youjiantou" width="7" height="12"/>
     </resources>
 </document>

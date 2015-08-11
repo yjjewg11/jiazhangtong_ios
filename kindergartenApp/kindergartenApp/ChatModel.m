@@ -7,15 +7,64 @@
 //
 
 #import "ChatModel.h"
-
+#import "ChatInfoDomain.h"
 #import "UUMessage.h"
 #import "UUMessageFrame.h"
+#import "KGHttpService.h"
 
 @implementation ChatModel
+
+- (NSMutableArray *)dataSource {
+    if(!_dataSource) {
+        _dataSource = [[NSMutableArray alloc] init];
+    }
+    
+    return _dataSource;
+}
 
 - (void)populateRandomDataSource {
     self.dataSource = [NSMutableArray array];
     [self.dataSource addObjectsFromArray:[self additems:5]];
+}
+
+
+- (void)addChatInfosToDataSource:(NSArray *)chatsArray {
+   
+    for (int i=0; i<[chatsArray count]; i++) {
+        
+        NSDictionary * dataDic = [self getChatDic:[chatsArray objectAtIndex:i]];
+        UUMessageFrame * messageFrame = [[UUMessageFrame alloc]init];
+        UUMessage *message = [[UUMessage alloc] init];
+        [message setWithDict:dataDic];
+        [message minuteOffSetStart:previousTime end:dataDic[@"strTime"]];
+        messageFrame.showTime = message.showDateLabel;
+        [messageFrame setMessage:message];
+        
+        if (message.showDateLabel) {
+            previousTime = dataDic[@"strTime"];
+        }
+        [self.dataSource addObject:messageFrame];
+    }
+}
+
+
+- (NSMutableDictionary *)getChatDic:(ChatInfoDomain *)domain {
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:domain.content forKey:@"strContent"];
+    
+    if([domain.send_useruuid isEqualToString:[KGHttpService sharedService].loginRespDomain.userinfo.uuid]) {
+        //判断发送者id是否=login的用户id  相等者发送为自己
+        [dictionary setObject:@(UUMessageFromMe) forKey:@"from"];
+    } else {
+        //别人发送
+        [dictionary setObject:@(UUMessageFromOther) forKey:@"from"];
+    }
+    [dictionary setObject:@(UUMessageTypeText) forKey:@"type"];
+    [dictionary setObject:[domain.create_time description] forKey:@"strTime"];
+    
+    [dictionary setObject:domain.send_user forKey:@"strName"];
+    [dictionary setObject:[KGHttpService sharedService].loginRespDomain.userinfo.headimg forKey:@"strIcon"];
+    return dictionary;
 }
 
 - (void)addRandomItemsToDataSource:(NSInteger)number{
@@ -80,7 +129,8 @@ static int dateNum = 10;
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
     int randomNum = arc4random()%5;
     if (randomNum == UUMessageTypePicture) {
-        [dictionary setObject:[UIImage imageNamed:[NSString stringWithFormat:@"%zd.jpeg",arc4random()%2]] forKey:@"picture"];
+        NSString * imgName = [NSString stringWithFormat:@"chat_cell_%zd.jpeg",arc4random()%2];
+        [dictionary setObject:[UIImage imageNamed:imgName] forKey:@"picture"];
     }else{
         // 文字出现概率4倍于图片（暂不出现Voice类型）
         randomNum = UUMessageTypeText;

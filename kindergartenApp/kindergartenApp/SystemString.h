@@ -8,14 +8,8 @@
 
 #import "AppDelegate.h"
 
-
-// TabBar Item begin
-#define String_TabBarItem_NewHouse               @"新房"
-#define String_TabBarItem_OldHouse               @"二手房"
-#define String_TabBarItem_Gov                    @"政务服务"
-#define String_TabBarItem_Information            @"资讯"
-#define String_TabBarItem_Me                     @"我的"
-// TabBar Item end
+#define BaiduMobStatAppId                       @"e633eaf16d"
+#define BaiduPushAppId                          @"6482358"
 
 //request code begin
 #define String_RequestSuccess_1000               1000

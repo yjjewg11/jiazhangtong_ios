@@ -68,21 +68,21 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        CGPoint center = self.imageView.center;
-        center.x = self.width/2;
-        center.y = self.imageView.height/2;
-        self.imageView.center = center;
-        
-        CGRect newFrame = [self titleLabel].frame;
-        newFrame.origin.x =0;
-        newFrame.origin.y = self.imageView.height + 5;
-        newFrame.size.width = self.frame.size.width;
-        
-        self.titleLabel.frame = newFrame;
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        CGPoint center = self.imageView.center;
+//        center.x = self.width/2;
+//        center.y = self.imageView.height/2;
+//        self.imageView.center = center;
+//        
+//        CGRect newFrame = [self titleLabel].frame;
+//        newFrame.origin.x =0;
+//        newFrame.origin.y = self.imageView.height + 5;
+//        newFrame.size.width = self.frame.size.width;
+//        
+//        self.titleLabel.frame = newFrame;
+//        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    });
     
 }
 

@@ -28,16 +28,16 @@
     
     // 1.初始化子控制器
     HomeViewController * home = [[HomeViewController alloc] init];
-    [self addChildVc:home title:@"首页" image:@"home-1-icon" selectedImage:@"home-2icon"];
+    [self addChildVc:home title:@"首页" image:@"zhuye2" selectedImage:@"zhuye1"];
     
     AddressBooksViewController * addressBooksVC = [[AddressBooksViewController alloc] init];
-    [self addChildVc:addressBooksVC title:@"通讯录" image:@"home-1-icon" selectedImage:@"home-2icon"];
+    [self addChildVc:addressBooksVC title:@"通讯录" image:@"tongxunlu2" selectedImage:@"tongxunlu1"];
 
     MessageViewController * messageController = [[MessageViewController alloc] init];
-    [self addChildVc:messageController title:@"消息" image:@"我的-1icon" selectedImage:@"我的-2icon"];
+    [self addChildVc:messageController title:@"消息" image:@"xiaoxi2" selectedImage:@"xiaoxi1"];
     
     MeViewController * meController = [[MeViewController alloc] init];
-    [self addChildVc:meController title:@"我的" image:@"我的-1icon" selectedImage:@"我的-2icon"];
+    [self addChildVc:meController title:@"我的" image:@"wode1" selectedImage:@"wode2"];
     
     // 2.更换系统自带的tabbar
     [KGHttpService sharedService].tabBarViewController = self;

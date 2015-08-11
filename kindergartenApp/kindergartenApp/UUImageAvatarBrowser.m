@@ -7,11 +7,12 @@
 //
 
 #import "UUImageAvatarBrowser.h"
+#import "UIImageView+WebCache.h"
 
 static UIImageView *orginImageView;
 @implementation UUImageAvatarBrowser
 
-+(void)showImage:(UIImageView *)avatarImageView{
++(void)showImage:(UIImageView *)avatarImageView url:(NSString *)imgUrl{
     UIImage *image=avatarImageView.image;
     orginImageView = avatarImageView;
     orginImageView.alpha = 0;
@@ -21,12 +22,26 @@ static UIImageView *orginImageView;
     backgroundView.backgroundColor=[[UIColor blackColor] colorWithAlphaComponent:0.7];
     backgroundView.alpha=1;
     UIImageView *imageView=[[UIImageView alloc]initWithFrame:oldframe];
-    imageView.image=image;
     imageView.tag=1;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds = YES;
     [backgroundView addSubview:imageView];
     [window addSubview:backgroundView];
+    
+    
+    if(imgUrl && ![imgUrl isEqualToString:String_DefValue_Empty]) {
+        
+        NSArray * array = [imgUrl componentsSeparatedByString:@"@"];
+        if(array && [array count]>Number_Zero) {
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[array objectAtIndex:Number_Zero]] placeholderImage:image options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+            }];
+        }
+        
+    } else {
+        imageView.image=image;
+    }
+    
     
     UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideImage:)];
     [backgroundView addGestureRecognizer: tap];
@@ -44,10 +59,11 @@ static UIImageView *orginImageView;
     UIImageView *imageView=(UIImageView*)[tap.view viewWithTag:1];
     [UIView animateWithDuration:0.3 animations:^{
         imageView.frame=[orginImageView convertRect:orginImageView.bounds toView:[UIApplication sharedApplication].keyWindow];
+        backgroundView.alpha=0;
     } completion:^(BOOL finished) {
         [backgroundView removeFromSuperview];
         orginImageView.alpha = 1;
-        backgroundView.alpha=0;
+//        backgroundView.alpha=0;
     }];
 }
 @end

@@ -172,7 +172,7 @@
     }
 }
 
-- (void)viewAnimate:(void(^)())animate time:(float)time{
++ (void)viewAnimate:(void(^)())animate time:(float)time{
     [UIView animateWithDuration:time
                      animations:^{
                          animate();

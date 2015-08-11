@@ -73,6 +73,13 @@
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(UUAVAudioPlayerDidFinishPlay) name:@"VoicePlayHasInterrupt" object:nil];
         
+        self.contentTextView = [[TQRichTextView alloc] init];
+        self.contentTextView.lineSpace = 1.0f;
+        self.contentTextView.userInteractionEnabled = NO;
+        self.contentTextView.font = [UIFont systemFontOfSize:14.0f];
+        self.contentTextView.backgroundColor = [UIColor clearColor];
+        [self addSubview:self.contentTextView];
+        
         //红外线感应监听
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(sensorStateChange:)
@@ -110,7 +117,7 @@
     else if (self.messageFrame.message.type == UUMessageTypePicture)
     {
         if (self.btnContent.backImageView) {
-            [UUImageAvatarBrowser showImage:self.btnContent.backImageView];
+            [UUImageAvatarBrowser showImage:self.btnContent.backImageView url:nil];
         }
         if ([self.delegate isKindOfClass:[UIViewController class]]) {
             [[(UIViewController *)self.delegate view] endEditing:YES];
@@ -181,6 +188,7 @@
     self.btnContent.backImageView.hidden = YES;
 
     self.btnContent.frame = messageFrame.contentF;
+    self.contentTextView.frame = messageFrame.contentTextViewF;
     
     if (message.from == UUMessageFromMe) {
         self.btnContent.isMyMessage = YES;
@@ -207,7 +215,9 @@
 
     switch (message.type) {
         case UUMessageTypeText:
-            [self.btnContent setTitle:message.strContent forState:UIControlStateNormal];
+//            [self.btnContent setTitle:message.strContent forState:UIControlStateNormal];
+//            [self.contentTextView setText:message.strContent];
+            self.contentTextView.text = message.strContent;
             break;
         case UUMessageTypePicture:
         {
@@ -215,6 +225,7 @@
             self.btnContent.backImageView.image = message.picture;
             self.btnContent.backImageView.frame = CGRectMake(0, 0, self.btnContent.frame.size.width, self.btnContent.frame.size.height);
             [self makeMaskView:self.btnContent.backImageView withImage:normal];
+            self.contentTextView.hidden = YES;
         }
             break;
         case UUMessageTypeVoice:

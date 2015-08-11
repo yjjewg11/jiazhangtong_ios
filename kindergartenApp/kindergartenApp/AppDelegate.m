@@ -10,6 +10,12 @@
 #import "UIWindow+Extension.h"
 #import "BaiduMobStat.h"
 #import "BPush.h"
+#import "KGHttpService.h"
+#import "KeychainItemWrapper.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "UMSocialSinaHandler.h"
+#import "SystemShareKey.h"
 
 @interface AppDelegate ()
 
@@ -40,6 +46,8 @@
     [self buildBaiduMobStat];
     [self buildBaiduPush:application didFinishLaunchingWithOptions:launchOptions];
     
+    //消除icon badge
+    [self clearBadge];
     
     // 启动tag页面
     [self.window switchRootViewController];
@@ -47,6 +55,17 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 //    [self.window makeKeyAndVisible];
     return YES;
+}
+
+//清除Badge
+- (void)clearBadge{
+    if(bIsIos8){
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [UIApplication sharedApplication].applicationIconBadgeNumber = Number_Zero;
+    }else{
+        [UIApplication sharedApplication].applicationIconBadgeNumber = Number_Zero;
+    }
 }
 
 - (void)testLocalNotifi
@@ -74,11 +93,38 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     NSLog(@"test:%@",deviceToken);
+    
+    NSString * token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:String_DefValue_Arrows]];
+    
+    NSArray * strAry = [token componentsSeparatedByString:String_DefValue_EmptyStr];
+    NSMutableString * key = [NSMutableString stringWithString:String_DefValue_Empty];
+    for(NSString * str in strAry){
+        [key appendString:str];
+    }
+    
+    if(![key isEqualToString:String_DefValue_Empty]){
+        [self savePushToken:key];
+    }
+    
     [BPush registerDeviceToken:deviceToken];
-    //    [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
-    //        [self.viewController addLogString:[NSString stringWithFormat:@"Method: %@\n%@",BPushRequestMethodBind,result]];
-    //    }];
 }
+
+//save token
+- (void)savePushToken:(NSString *)key{
+    KeychainItemWrapper * wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:Key_KeyChain accessGroup:nil];
+    NSString * wrapperToken = [wrapper objectForKey:(__bridge id)kSecAttrAccount];
+    
+    if(![key isEqualToString:wrapperToken] || [key isEqualToString:String_DefValue_Empty]){
+        
+        [KGHttpService sharedService].pushToken = wrapperToken;
+        
+        [[KGHttpService sharedService] submitPushToken:^(NSString *msgStr) {
+            [wrapper setObject:key forKey:(__bridge id)kSecAttrAccount];
+        } faild:^(NSString *errorMsg) {
+        }];
+    }
+}
+
 
 // 当 DeviceToken 获取失败时，系统会回调此方法
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -100,6 +146,8 @@
     [BPush showLocalNotificationAtFront:notification identifierKey:nil];
 }
 
+
+
 //绑定百度推送
 - (void)buildBaiduPush:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // iOS8 下需要使用新的 API
@@ -116,7 +164,7 @@
 #warning 测试 开发环境 时需要修改BPushMode为BPushModeDevelopment 需要修改Apikey为自己的Apikey
     
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
-    [BPush registerChannel:launchOptions apiKey:@"你自己官网上申请得到的Apikey" pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES];
+    [BPush registerChannel:launchOptions apiKey:BaiduPushAppId pushMode:BPushModeDevelopment withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES];
     
 //    [BPush registerChannel:launchOptions apiKey:<#在百度云推送官网上注册后得到的apikey#> pushMode:BPushModeProduction withFirstAction:nil withSecondAction:nil withCategory:nil isDebug:YES];
     // App 是用户点击推送消息启动
@@ -160,7 +208,46 @@
      */
     
     //    AppKey:e633eaf16d
-    [statTracker startWithAppId:@"e633eaf16d"];//设置您在mtj网站上添加的app的appkey,此处AppId即为应用的appKey
+    [statTracker startWithAppId:BaiduMobStatAppId];//设置您在mtj网站上添加的app的appkey,此处AppId即为应用的appKey
+}
+
+
+//share config
+- (void)umengShareConfig{
+    [UMSocialData setAppKey:uMengAppKey];
+    [UMSocialData openLog:NO];
+    //设置微信AppId、appSecret，分享url
+    [UMSocialWechatHandler setWXAppId:ShareKey_WeChat appSecret:ShareKey_WeChatSecret url:webUrl];
+    
+    //打开新浪微博的SSO开关
+    [UMSocialSinaHandler openSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    
+    //打开腾讯微博SSO开关，设置回调地址  因腾讯微博sdk暂未提供64位SDK 所以友盟也没法增加针对腾讯微博的64位处理
+    //    [UMSocialTencentWeiboHandler openSSOWithRedirectUrl:@"http://sns.whalecloud.com/tencent2/callback"];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    BOOL judge = [UMSocialSnsService handleOpenURL:url];
+    return judge;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    BOOL judge = [UMSocialSnsService handleOpenURL:url];
+    
+    return  judge;
+}
+
+/**
+ 这里处理新浪微博SSO授权进入新浪微博客户端后进入后台，再返回原来应用
+ */
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [UMSocialSnsService  applicationDidBecomeActive];
 }
 
 

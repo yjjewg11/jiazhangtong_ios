@@ -14,6 +14,13 @@
 #import "DynamicMenuDomain.h"
 #import "GroupDomain.h"
 #import "MessageDomain.h"
+#import "StudentSignRecordDomain.h"
+#import "RecipesDomain.h"
+#import "EmojiDomain.h"
+#import "AddressBookDomain.h"
+#import "chatInfoDomain.h"
+#import "KGEmojiManage.h"
+#import "TimetableDomain.h"
 
 @implementation KGHttpService
 
@@ -58,6 +65,17 @@
     }
     
     return str;
+}
+
+
+//获取学生信息
+- (KGUser *)getUserByUUID:(NSString *)uuid {
+    for(KGUser * user in _loginRespDomain.list) {
+        if([uuid isEqualToString:user.uuid]) {
+            return user;
+        }
+    }
+    return nil;
 }
 
 
@@ -164,6 +182,44 @@
     }];
 }
 
+//提交推送token
+- (void)submitPushToken:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSDictionary * dic = @{@"device_id" : _pushToken,
+                           @"device_type": @"ios"};
+    
+    [self getServerJson:[KGHttpUrl getPushTokenUrl] params:dic success:^(KGBaseDomain *baseDomain) {
+        
+    } faild:^(NSString *errorMessage) {
+        
+    }];
+}
+
+//获取表情
+- (void)getEmojiList:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getEmojiUrl]
+                                  parameters:nil
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             NSArray * emojiArrayResp = [EmojiDomain objectArrayWithKeyValuesArray:((NSDictionary *)responseObject)[@"list"]];
+                                             
+                                             [[KGEmojiManage sharedManage] downloadEmoji:emojiArrayResp];
+                                             
+                                             success(baseDomain.ResMsg.message);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
 
 //获取首页动态菜单
 - (void)getDynamicMenu:(void (^)(NSArray * menuArray))success faild:(void (^)(NSString * errorMsg))faild {
@@ -203,6 +259,11 @@
                                              NSArray * groupArrayResp = [GroupDomain objectArrayWithKeyValuesArray:(NSDictionary *)responseObject[@"list"]];
                                              
                                              _groupArray = groupArrayResp;
+                                             
+                                             if(groupArrayResp && [groupArrayResp count]>Number_Zero) {
+                                                 _groupDomain = [groupArrayResp objectAtIndex:Number_Zero];
+                                             }
+                                             
                                              success(groupArrayResp);
                                          } else {
                                              faild(baseDomain.ResMsg.message);
@@ -231,8 +292,6 @@
 //                                              [self userCookie:cookies];
                                               
                                               
-                                              _loginRespDomain.list = [KGUser objectArrayWithKeyValuesArray:_loginRespDomain.list];
-                                              
                                               //获取首页动态菜单
                                               [self getDynamicMenu:^(NSArray *menuArray) {
                                                   
@@ -241,6 +300,12 @@
                                               }];
                                               
                                               [self getGroupList:^(NSArray *groupArray) {
+                                                  
+                                              } faild:^(NSString *errorMsg) {
+                                                  
+                                              }];
+                                              
+                                              [self getEmojiList:^(NSString *msgStr) {
                                                   
                                               } faild:^(NSString *errorMsg) {
                                                   
@@ -575,6 +640,8 @@
     NSArray * teacherArray2 = [TeacherVO objectArrayWithKeyValuesArray:responseObject[@"list_judge"]];
     
     for(TeacherVO * teacherVO in teacherArray1) {
+//        teacherVO.teacheruuid = teacherVO.uuid;
+        
         for(TeacherVO * teacherVO2 in teacherArray2) {
             if([teacherVO.teacher_uuid isEqualToString:teacherVO2.teacheruuid]) {
                 teacherVO.content = teacherVO2.content;
@@ -606,6 +673,239 @@
 
 
 // 评价老师 end
+
+
+
+#pragma 精品文章 begin
+
+//获取单个文章详情
+- (void)getArticlesInfo:(NSString *)uuid success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getArticleInfoListUrl:uuid]
+                                  parameters:nil
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             AnnouncementDomain * announcement = [AnnouncementDomain objectWithKeyValues:baseDomain.data];
+                                             
+                                             success(announcement);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//分页获取文章列表
+- (void)getArticlesList:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getArticleListUrl]
+                                  parameters:pageInfo.keyValues
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             baseDomain.list.data = [AnnouncementDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+                                             
+                                             success(baseDomain.list.data);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//精品文章 end
+
+
+#pragma 签到记录 begin
+
+//签到记录列表
+- (void)getStudentSignRecordList:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getStudentSignRecordUrl]
+                                  parameters:nil
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             NSArray * tempRecordArray = [StudentSignRecordDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+                                             
+                                             success(tempRecordArray);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+    
+}
+
+//签到记录 end
+
+
+#pragma 食谱 begin
+
+//食谱列表
+- (void)getRecipesList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSDictionary * dic = @{@"begDateStr" : beginDate,
+                           @"endDateStr" : endDate ? endDate : beginDate,
+                           @"groupuuid"  : _groupDomain.uuid};
+    
+//    NSDictionary * dic = @{@"begDateStr" : @"2015-07-01",
+//                           @"endDateStr" : @"2015-08-01",
+//                           @"groupuuid"  : _groupDomain.uuid};
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getRecipesListUrl]
+                                  parameters:dic
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             NSArray * arrayResp = [responseObject objectForKey:@"list"];
+                                             
+                                             NSArray * tempRecipesArray = [RecipesDomain objectArrayWithKeyValuesArray:arrayResp];
+                                             
+                                             success(tempRecipesArray);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//食谱 end
+
+
+
+#pragma 通讯录 begin
+
+//通讯录列表
+- (void)getAddressBookList:(void (^)(AddressBookResp * addressBookResp))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getTeacherPhoneBookUrl]
+                                  parameters:nil
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         AddressBookResp * baseDomain = [AddressBookResp objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             success(baseDomain);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//查询和老师或者园长的信息列表
+- (void)getTeacherOrLeaderMsgList:(QueryChatsVO *)queryChatsVO success:(void (^)(NSArray * msgArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSString * url = [KGHttpUrl getSaveLeaderUrl];
+    if(queryChatsVO.isTeacher) {
+        url = [KGHttpUrl getSaveTeacherUrl];
+    }
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:url
+                                  parameters:queryChatsVO.keyValues
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             NSArray * tempResp = [ChatInfoDomain objectArrayWithKeyValuesArray:baseDomain.data];
+                                             
+                                             success(tempResp);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//给老师或者园长写信
+- (void)saveAddressBookInfo:(WriteVO *)writeVO success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSString * url = [KGHttpUrl getSaveLeaderUrl];
+    if(writeVO.isTeacher) {
+        url = [KGHttpUrl getSaveTeacherUrl];
+    }
+    
+    [self getServerJson:url params:writeVO.keyValues success:^(KGBaseDomain *baseDomain) {
+        if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+            
+            success(baseDomain.ResMsg.message);
+        } else {
+            faild(baseDomain.ResMsg.message);
+        }
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+//通讯录 end
+
+
+
+#pragma 课程表 begin
+
+//课程表列表
+- (void)getTeachingPlanList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * teachPlanArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSString * classuuid = @"";
+    
+    for(KGUser * user in _loginRespDomain.list) {
+        classuuid = user.classuuid;
+        break;
+    }
+    
+    NSDictionary * dic = @{@"begDateStr" : beginDate,
+                           @"endDateStr" : endDate ? endDate : beginDate,
+                           @"classuuid" : classuuid};
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getTeachingPlanUrl]
+                                  parameters:dic
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             NSArray * tempResp = [TimetableDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
+                                             
+                                             success(tempResp);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//课程表 end
 
 
 @end

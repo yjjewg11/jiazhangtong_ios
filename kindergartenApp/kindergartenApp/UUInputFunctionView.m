@@ -17,8 +17,6 @@
 //    Mp3Recorder *MP3;
     NSInteger playTime;
     NSTimer *playTimer;
-    
-    UILabel *placeHold;
 }
 @end
 
@@ -37,8 +35,9 @@
         self.btnSendMessage = [UIButton buttonWithType:UIButtonTypeCustom];
         self.btnSendMessage.frame = CGRectMake(Main_Screen_Width-40, 5, 30, 30);
         self.isAbleToSendTextMessage = NO;
-        [self.btnSendMessage setTitle:@"" forState:UIControlStateNormal];
-        [self.btnSendMessage setBackgroundImage:[UIImage imageNamed:@"Chat_take_picture"] forState:UIControlStateNormal];
+        [self.btnSendMessage setTitle:@"send" forState:UIControlStateNormal];
+//        [self.btnSendMessage setBackgroundImage:[UIImage imageNamed:@"Chat_take_picture"] forState:UIControlStateNormal];
+        [self.btnSendMessage setBackgroundImage:[UIImage imageNamed:@"chat_send_message"] forState:UIControlStateNormal];
         self.btnSendMessage.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.btnSendMessage addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.btnSendMessage];
@@ -51,7 +50,7 @@
         [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_ipunt_message"] forState:UIControlStateSelected];
         self.btnChangeVoiceState.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.btnChangeVoiceState addTarget:self action:@selector(voiceRecord:) forControlEvents:UIControlEventTouchUpInside];
-//        [self addSubview:self.btnChangeVoiceState];
+        [self addSubview:self.btnChangeVoiceState];
 
         //语音录入键
         self.btnVoiceRecord = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -70,19 +69,15 @@
         [self addSubview:self.btnVoiceRecord];
         
         //输入框
-        self.TextViewInput = [[UITextView alloc]initWithFrame:CGRectMake(45, 5, Main_Screen_Width-2*45, 30)];
+        self.TextViewInput = [[KGTextView alloc]initWithFrame:CGRectMake(45, 5, Main_Screen_Width-2*45, 30)];
+        self.TextViewInput.textColor = [UIColor blackColor];
+        self.TextViewInput.placeholder = @"Input the contents here";
         self.TextViewInput.layer.cornerRadius = 4;
         self.TextViewInput.layer.masksToBounds = YES;
         self.TextViewInput.delegate = self;
         self.TextViewInput.layer.borderWidth = 1;
         self.TextViewInput.layer.borderColor = [[[UIColor lightGrayColor] colorWithAlphaComponent:0.4] CGColor];
         [self addSubview:self.TextViewInput];
-        
-        //输入框的提示语
-        placeHold = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 200, 30)];
-        placeHold.text = @"Input the contents here";
-        placeHold.textColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.8];
-        [self.TextViewInput addSubview:placeHold];
         
         //分割线
         self.layer.borderWidth = 1;
@@ -170,49 +165,52 @@
 //改变输入与录音状态
 - (void)voiceRecord:(UIButton *)sender
 {
-    self.btnVoiceRecord.hidden = !self.btnVoiceRecord.hidden;
-    self.TextViewInput.hidden  = !self.TextViewInput.hidden;
-    isbeginVoiceRecord = !isbeginVoiceRecord;
-    if (isbeginVoiceRecord) {
-        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_ipunt_message"] forState:UIControlStateNormal];
-        [self.TextViewInput resignFirstResponder];
-    }else{
-        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_voice_record"] forState:UIControlStateNormal];
-        [self.TextViewInput becomeFirstResponder];
+//    self.btnVoiceRecord.hidden = !self.btnVoiceRecord.hidden;
+//    self.TextViewInput.hidden  = !self.TextViewInput.hidden;
+//    isbeginVoiceRecord = !isbeginVoiceRecord;
+//    if (isbeginVoiceRecord) {
+//        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_ipunt_message"] forState:UIControlStateNormal];
+//        [self.TextViewInput resignFirstResponder];
+//    }else{
+//        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_voice_record"] forState:UIControlStateNormal];
+//        [self.TextViewInput becomeFirstResponder];
+//    }
+    
+    sender.selected = !sender.selected;
+    
+    [self.TextViewInput resignFirstResponder];
+    
+    if (!_faceBoard) {
+        _faceBoard = [[FaceBoard alloc] init];
+        _faceBoard.inputTextView = self.TextViewInput;
+        
+        __weak UUInputFunctionView * __self = self;
+        _faceBoard.FaceBoardInputedBlock = ^(NSString * emojiStr){
+            [__self changeSendBtnWithPhoto:emojiStr.length>0?NO:YES];
+        };
     }
     
-//    sender.selected = !sender.selected;
-//    
-//    [self.TextViewInput resignFirstResponder];
-//    
-//    if (!_faceBoard) {
-//        
-//        _faceBoard = [[FaceBoard alloc] init];
-//        _faceBoard.delegate = self;
-//        _faceBoard.inputTextView = self.TextViewInput;
-//    }
-//    
-//    if(sender.selected) {
-//        self.TextViewInput.inputView = _faceBoard;
-//    } else {
-//        self.TextViewInput.inputView = nil;
-//    }
-//    
-//    [self.TextViewInput becomeFirstResponder];
+    if(sender.selected) {
+        self.TextViewInput.inputView = _faceBoard;
+    } else {
+        self.TextViewInput.inputView = nil;
+    }
+    
+    [self.TextViewInput becomeFirstResponder];
 }
 
 //发送消息（文字图片）
 - (void)sendMessage:(UIButton *)sender
 {
-    if (self.isAbleToSendTextMessage) {
+//    if (self.isAbleToSendTextMessage) {
         NSString *resultStr = [self.TextViewInput.text stringByReplacingOccurrencesOfString:@"   " withString:@""];
         [self.delegate UUInputFunctionView:self sendMessage:resultStr];
-    }
-    else{
-        [self.TextViewInput resignFirstResponder];
-        UIActionSheet *actionSheet= [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera",@"Images",nil];
-        [actionSheet showInView:self.window];
-    }
+//    }
+//    else{
+//        [self.TextViewInput resignFirstResponder];
+//        UIActionSheet *actionSheet= [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Camera",@"Images",nil];
+//        [actionSheet showInView:self.window];
+//    }
 }
 
 
@@ -220,27 +218,27 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    placeHold.hidden = self.TextViewInput.text.length > 0;
+
 }
 
 - (void)textViewDidChange:(UITextView *)textView
 {
     [self changeSendBtnWithPhoto:textView.text.length>0?NO:YES];
-    placeHold.hidden = textView.text.length>0;
 }
 
 - (void)changeSendBtnWithPhoto:(BOOL)isPhoto
 {
-    self.isAbleToSendTextMessage = !isPhoto;
-    [self.btnSendMessage setTitle:isPhoto?@"":@"send" forState:UIControlStateNormal];
-    self.btnSendMessage.frame = RECT_CHANGE_width(self.btnSendMessage, isPhoto?30:35);
-    UIImage *image = [UIImage imageNamed:isPhoto?@"Chat_take_picture":@"chat_send_message"];
-    [self.btnSendMessage setBackgroundImage:image forState:UIControlStateNormal];
+    self.isAbleToSendTextMessage = YES;
+//    self.isAbleToSendTextMessage = !isPhoto;
+//    [self.btnSendMessage setTitle:isPhoto?@"":@"send" forState:UIControlStateNormal];
+//    self.btnSendMessage.frame = RECT_CHANGE_width(self.btnSendMessage, isPhoto?30:35);
+//    UIImage *image = [UIImage imageNamed:isPhoto?@"Chat_take_picture":@"chat_send_message"];
+//    [self.btnSendMessage setBackgroundImage:image forState:UIControlStateNormal];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    placeHold.hidden = self.TextViewInput.text.length > 0;
+
 }
 
 

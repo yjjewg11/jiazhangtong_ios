@@ -16,8 +16,7 @@
 }
 
 
-@property (nonatomic, strong) UIKeyboardViewController * keyBoardController;
-
+@property (strong, nonatomic) UIKeyboardViewController * keyBoardController;
 
 
 /**
@@ -25,6 +24,11 @@
  */
 //- (void)removeCurrentMessageView;
 
+//滑动手势
+- (void)addSwipeGesture;
+
+//水平手势x值发生改变
+- (void)didChangeViewX:(CGFloat)x gesture:(UIPanGestureRecognizer*)gesture;
 
 /**
  *  添加输入框到array统一管理验证

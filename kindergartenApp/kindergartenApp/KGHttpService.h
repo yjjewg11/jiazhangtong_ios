@@ -16,14 +16,19 @@
 #import "DianZanDomain.h"
 #import "AnnouncementDomain.h"
 #import "TeacherVO.h"
+#import "GroupDomain.h"
+#import "WriteVO.h"
+#import "QueryChatsVO.h"
+#import "AddressBookResp.h"
 
 @interface KGHttpService : NSObject
 
-
+@property (strong, nonatomic) NSString * pushToken;
 @property (strong, nonatomic) KGTabBarViewController * tabBarViewController;//首页控制器
 @property (strong, nonatomic) LoginRespDomain * loginRespDomain;
 @property (strong, nonatomic) NSArray         * dynamicMenuArray; //首页动态菜单数据
 @property (strong, nonatomic) NSArray         * groupArray; //机构列表数据
+@property (strong, nonatomic) GroupDomain     * groupDomain; //选择的机构 默认为机构列表第一条数据 首页切换机构后需要重置
 
 
 + (KGHttpService *)sharedService;
@@ -32,8 +37,17 @@
 //根据组织id得到名称
 - (NSString *)getGroupNameByUUID:(NSString *)groupUUID;
 
+//获取学生信息
+- (KGUser *)getUserByUUID:(NSString *)uuid;
+
 //图片上传
 - (void)uploadImg:(UIImage *)img withName:(NSString *)imgName type:(NSInteger)imgType success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+//提交推送token
+- (void)submitPushToken:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+//获取表情
+- (void)getEmojiList:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 //获取首页动态菜单
 - (void)getDynamicMenu:(void (^)(NSArray * menuArray))success faild:(void (^)(NSString * errorMsg))faild;
@@ -136,5 +150,58 @@
 
 
 // 评价老师 end
+
+
+
+//精品文章 begin
+
+//获取单个文章详情
+- (void)getArticlesInfo:(NSString *)uuid success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild;
+
+//分页获取文章列表
+- (void)getArticlesList:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild;
+
+//精品文章 end
+
+
+//签到记录 begin
+
+//签到记录列表
+- (void)getStudentSignRecordList:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild;
+
+//签到记录 end
+
+
+
+//食谱 begin
+
+//食谱列表
+- (void)getRecipesList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild;
+
+//食谱 end
+
+
+
+
+//通讯录 begin
+
+//通讯录列表
+- (void)getAddressBookList:(void (^)(AddressBookResp * addressBookResp))success faild:(void (^)(NSString * errorMsg))faild;
+
+//查询和老师或者园长的信息列表
+- (void)getTeacherOrLeaderMsgList:(QueryChatsVO *)queryChatsVO success:(void (^)(NSArray * msgArray))success faild:(void (^)(NSString * errorMsg))faild;
+
+//给老师或者园长写信
+- (void)saveAddressBookInfo:(WriteVO *)writeVO success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+//通讯录 end
+
+
+//课程表 begin
+
+//课程表列表
+- (void)getTeachingPlanList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * teachPlanArray))success faild:(void (^)(NSString * errorMsg))faild;
+
+//课程表 end
 
 @end
