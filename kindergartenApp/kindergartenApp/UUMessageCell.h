@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UUMessageContentButton.h"
-#import "TQRichTextView.h"
+#import "MLEmojiLabel.h"
 
 @class UUMessageFrame;
 @class UUMessageCell;
@@ -27,7 +27,7 @@
 @property (nonatomic, retain)UIButton *btnHeadImage;
 
 @property (nonatomic, retain)UUMessageContentButton *btnContent;
-@property (nonatomic, strong) TQRichTextView * contentTextView;
+@property (nonatomic, strong) MLEmojiLabel * contentTextView;
 
 @property (nonatomic, retain)UUMessageFrame *messageFrame;
 

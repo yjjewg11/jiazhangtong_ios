@@ -13,8 +13,7 @@
 #import "KGHUD.h"
 #import "KGTextView.h"
 
-@interface StudentNoteInfoViewController () {
-    
+@interface StudentNoteInfoViewController () <UITextViewDelegate> {
     IBOutlet KGTextView * noteTextView;
 }
 
@@ -33,11 +32,13 @@
     [noteTextView setBorderWithWidth:Number_One color:[UIColor grayColor] radian:5.0];
     noteTextView.text = _studentInfo.note;
     noteTextView.placeholder = @"说点什么吧...";
+    noteTextView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 
 //保存按钮点击
@@ -62,5 +63,36 @@
     }
 }
 
+//验证输入框
+- (BOOL)validateInputInView {
+    BOOL judge = YES;
+    NSString * noteStr = [KGNSStringUtil trimString:noteTextView.text];
+    if(noteStr.length == Number_Zero) {
+        judge = NO;
+        NSDictionary * dic = [NSDictionary dictionaryWithObject:@"备注不能为空" forKey:Key_Notification_MessageText];
+        [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
+    }
+    
+    return judge;
+}
+
+#pragma UITextViewDelegate
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+#define MY_MAX 300
+    if ((textView.text.length - range.length + text.length) > MY_MAX)
+    {
+        NSString *substring = [text substringToIndex:MY_MAX - (textView.text.length - range.length)];
+        NSMutableString *lastString = [textView.text mutableCopy];
+        [lastString replaceCharactersInRange:range withString:substring];
+        textView.text = [lastString copy];
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
 
 @end

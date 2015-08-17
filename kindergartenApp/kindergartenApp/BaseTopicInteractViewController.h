@@ -7,10 +7,14 @@
 //
 
 #import "BaseKeyboardViewController.h"
+#import "ReplyDomain.h"
 
 @interface BaseTopicInteractViewController : BaseKeyboardViewController
 
+@property (strong, nonatomic) NSString        * topicUUID;  //帖子UUID
+@property (assign, nonatomic) KGTopicType       topicType; //帖子类型
+
 //重置回复内容
-- (void)resetTopicReplyContent;
+- (void)resetTopicReplyContent:(ReplyDomain *)domain;
 
 @end

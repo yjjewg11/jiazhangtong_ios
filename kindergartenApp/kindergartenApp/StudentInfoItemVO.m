@@ -10,5 +10,14 @@
 
 @implementation StudentInfoItemVO
 
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        _isArrow = YES;
+        _cellHeight = 35;
+        _headHeight = Cell_Height2;
+    }
+    return self;
+}
 
 @end

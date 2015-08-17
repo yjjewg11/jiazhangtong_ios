@@ -73,11 +73,12 @@
         
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(UUAVAudioPlayerDidFinishPlay) name:@"VoicePlayHasInterrupt" object:nil];
         
-        self.contentTextView = [[TQRichTextView alloc] init];
-        self.contentTextView.lineSpace = 1.0f;
-        self.contentTextView.userInteractionEnabled = NO;
+        self.contentTextView = [MLEmojiLabel new];
+        self.contentTextView.numberOfLines = 0;
         self.contentTextView.font = [UIFont systemFontOfSize:14.0f];
-        self.contentTextView.backgroundColor = [UIColor clearColor];
+        self.contentTextView.lineBreakMode = NSLineBreakByCharWrapping;
+        self.contentTextView.isNeedAtAndPoundSign = YES;
+        self.contentTextView.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
         [self addSubview:self.contentTextView];
         
         //红外线感应监听
@@ -168,7 +169,7 @@
     self.btnHeadImage.frame = CGRectMake(2, 2, ChatIconWH-4, ChatIconWH-4);
     [self.btnHeadImage setBackgroundImageForState:UIControlStateNormal
                                           withURL:[NSURL URLWithString:message.strIcon]
-                                 placeholderImage:[UIImage imageNamed:@"headImage.jpeg"]];
+                                 placeholderImage:[UIImage imageNamed:message.strIcon]];
     
     // 3、设置下标
     self.labelNum.text = message.strName;
@@ -203,11 +204,11 @@
     //背景气泡图
     UIImage *normal;
     if (message.from == UUMessageFromMe) {
-        normal = [UIImage imageNamed:@"chatto_bg_normal"];
+        normal = [UIImage imageNamed:@"massage_box"];
         normal = [normal resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 22)];
     }
     else{
-        normal = [UIImage imageNamed:@"chatfrom_bg_normal"];
+        normal = [UIImage imageNamed:@"massage2_box"];
         normal = [normal resizableImageWithCapInsets:UIEdgeInsetsMake(35, 22, 10, 10)];
     }
     [self.btnContent setBackgroundImage:normal forState:UIControlStateNormal];

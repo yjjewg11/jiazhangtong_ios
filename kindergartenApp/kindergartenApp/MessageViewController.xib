@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ga7-e9-iQX">
-                    <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="456"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -26,7 +26,7 @@
                 <constraint firstItem="Ga7-e9-iQX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="8DK-iN-pt9"/>
                 <constraint firstItem="Ga7-e9-iQX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="E7h-Nl-tXu"/>
                 <constraint firstAttribute="trailing" secondItem="Ga7-e9-iQX" secondAttribute="trailing" id="YAf-2I-rjC"/>
-                <constraint firstAttribute="bottom" secondItem="Ga7-e9-iQX" secondAttribute="bottom" constant="44" id="lss-g7-5gy"/>
+                <constraint firstAttribute="bottom" secondItem="Ga7-e9-iQX" secondAttribute="bottom" constant="48" id="lss-g7-5gy"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

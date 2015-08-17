@@ -11,7 +11,9 @@
 @interface EmojiDomain : KGBaseDomain
 
 
-@property (strong, nonatomic) NSString * datavalue;   //表情显示名
+@property (strong, nonatomic) NSString * datavalue;      //server表情显示名
 @property (strong, nonatomic) NSString * descriptionUrl; //表情url全地址.
+@property (strong, nonatomic) NSString * emojiName;      //表情显示名   [datavalue]
+@property (strong, nonatomic) NSString * emojiPath;     //表情笨蛋路径.
 
 @end

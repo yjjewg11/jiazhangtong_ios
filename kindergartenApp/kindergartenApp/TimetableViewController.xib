@@ -17,13 +17,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ec1-E5-55Y">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Ec1-E5-55Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3yx-8g-4gz"/>
+                <constraint firstItem="Ec1-E5-55Y" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="3yx-8g-4gz"/>
                 <constraint firstAttribute="bottom" secondItem="Ec1-E5-55Y" secondAttribute="bottom" id="BvB-oO-Qpx"/>
                 <constraint firstAttribute="trailing" secondItem="Ec1-E5-55Y" secondAttribute="trailing" id="hRY-TT-XB7"/>
                 <constraint firstItem="Ec1-E5-55Y" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mA3-SY-m9g"/>

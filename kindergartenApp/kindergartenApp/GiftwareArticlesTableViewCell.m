@@ -7,7 +7,7 @@
 //
 
 #import "GiftwareArticlesTableViewCell.h"
-#import "AnnouncementDomain.h"
+
 #import "KGNSStringUtil.h"
 #import "KGDateUtil.h"
 
@@ -17,8 +17,22 @@
     [super awakeFromNib];
 }
 
++ (instancetype)cellWithTableView:(UITableView *)tableView
+{
+    GiftwareArticlesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GiftwareArticlesTableViewCell"];
+    if (!cell) {
+        cell = [[GiftwareArticlesTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"GiftwareArticlesTableViewCell"];
+    }
+    return cell;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+- (void)setAnnouncementDomain:(AnnouncementDomain *)announcementDomain{
+    _announcementDomain = announcementDomain;
+    [self settingModel:announcementDomain];
 }
 
 /**
@@ -28,6 +42,10 @@
  *  @param parameterDic 扩展字典
  */
 - (void)resetValue:(id)baseDomain parame:(NSMutableDictionary *)parameterDic {
+    [self settingModel:baseDomain];
+}
+
+- (void)settingModel:(id)baseDomain{
     AnnouncementDomain * domain = (AnnouncementDomain *)baseDomain;
     
     teacherLabel.text = domain.create_user;
@@ -39,8 +57,8 @@
         timeLabel.text = [KGNSStringUtil compareCurrentTime:date];
     }
     
-    if(domain.count > Number_Zero) {
-        dzCountLabel.text = [NSString stringWithFormat:@"%ld", (long)domain.count];
+    if(domain.dianzan) {
+        dzCountLabel.text = [NSString stringWithFormat:@"%ld", (long)domain.dianzan.count];
     }
 }
 

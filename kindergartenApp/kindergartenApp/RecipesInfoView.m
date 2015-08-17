@@ -35,12 +35,14 @@
 }
 
 - (void)initTableView {
-    recipesTableView = [[UITableView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, self.width, self.height)];
+    recipesTableView = [[UITableView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, self.width, APPWINDOWHEIGHT-APPWINDOWTOPHEIGHTIOS7)];
     recipesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     recipesTableView.separatorColor = [UIColor clearColor];
     recipesTableView.delegate   = self;
     recipesTableView.dataSource = self;
     [self addSubview:recipesTableView];
+    
+    self.backgroundColor = [UIColor yellowColor];
 }
 
 
@@ -107,16 +109,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section==Number_Zero || section==[self.tableDataSource count]-Number_One) {
-        
-    }
     return Number_One;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if(section == Number_Zero) {
-        return 0;
+        return 15;
     } else {
         return 30;
     }
@@ -152,7 +151,7 @@
 
 - (UITableViewCell *)loadStudentInfoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RecipesStudentInfoTableViewCell * cell = [RecipesStudentInfoTableViewCell cellWithTableView:tableView];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = KGColorFrom16(0xff4966);
     [cell resetCellParam:_recipesDomain];
     return cell;
 }
@@ -204,6 +203,9 @@
     for(CookbookDomain * cookbook in recipesVO.cookbookArray) {
         
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CELLPADDING + index * w, row * h, w, h)];
+        imageView.backgroundColor = [UIColor clearColor];
+        [imageView setClipsToBounds:YES];
+        [imageView setContentMode:UIViewContentModeScaleToFill];
         [recipesImgsView addSubview:imageView];
         
         [imageView sd_setImageWithURL:[NSURL URLWithString:cookbook.img] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -247,15 +249,20 @@
         textView.editable = NO;
         [cell addSubview:textView];
         
+        TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
+        topicInteractionDomain.dianzan   = _recipesDomain.dianzan;
+        topicInteractionDomain.replyPage = _recipesDomain.replyPage;
+        topicInteractionDomain.topicType = Topic_Recipes;
+        topicInteractionDomain.topicUUID = _recipesDomain.uuid;
+        
+        TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
+        topicFrame.topicInteractionDomain  = topicInteractionDomain;
         
         CGFloat y = CGRectGetMaxY(textView.frame) + Number_Ten;
-        CGRect frame = CGRectMake(Number_Zero, y, KGSCREEN.size.width, 56);
+        CGRect frame = CGRectMake(Number_Zero, y, KGSCREEN.size.width, topicFrame.topicInteractHeight);
         TopicInteractionView * topicView = [[TopicInteractionView alloc] initWithFrame:frame];
-        [topicView loadFunView:_recipesDomain.dianzan reply:_recipesDomain.replyPage];
-        topicView.topicType = Topic_Recipes;
-        topicView.topicUUID = _recipesDomain.uuid;
         [cell addSubview:topicView];
-        [topicView loadFunView:_recipesDomain.dianzan reply:_recipesDomain.replyPage];
+        topicView.topicInteractionFrame = topicFrame;
     }
     
     return cell;

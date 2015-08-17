@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) UIView * popupContentView;
 
+//单击响应
+- (void)singleBtnTap;
 @end

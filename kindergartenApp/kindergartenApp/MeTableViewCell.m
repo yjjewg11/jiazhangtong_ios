@@ -30,7 +30,7 @@
         [self.headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:self.headImageView.width / Number_Two];
     }];
 
-    NSString * otherInfoStr = [NSString stringWithFormat:@"昵称:%@   %@   %@", user.nickname, user.sex==Number_Zero ? @"女" : @"男", user.birthday];
+    NSString * otherInfoStr = [NSString stringWithFormat:@"昵称:%@   %@   %@", user.nickname, user.sex==Number_One ? @"女" : @"男", user.birthday];
     _otherInfoLabel.text = otherInfoStr;
 }
 

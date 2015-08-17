@@ -68,16 +68,16 @@
     
     
     if ([lastDate hour]>=5 && [lastDate hour]<12) {
-        period = @"AM";
+        period = @"上午";
         hour = [NSString stringWithFormat:@"%02d",(int)[lastDate hour]];
     }else if ([lastDate hour]>=12 && [lastDate hour]<=18){
-        period = @"PM";
+        period = @"下午";
         hour = [NSString stringWithFormat:@"%02d",(int)[lastDate hour]-12];
     }else if ([lastDate hour]>18 && [lastDate hour]<=23){
-        period = @"Night";
+        period = @"晚上";
         hour = [NSString stringWithFormat:@"%02d",(int)[lastDate hour]-12];
     }else{
-        period = @"Dawn";
+        period = @"早上";
         hour = [NSString stringWithFormat:@"%02d",(int)[lastDate hour]];
     }
     return [NSString stringWithFormat:@"%@ %@ %@:%02d",dateStr,period,hour,(int)[lastDate minute]];

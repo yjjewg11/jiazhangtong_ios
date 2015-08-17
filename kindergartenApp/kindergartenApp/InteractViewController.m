@@ -21,6 +21,7 @@
 @interface InteractViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
     IBOutlet UIWebView * myWebView;
+    NSArray * interactArray;
 }
 
 @end
@@ -32,15 +33,31 @@
     
     self.title = @"互动";
     
-    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"xiangji"] style:UIBarButtonItemStyleDone target:self action:@selector(postTopic:)];
+    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"xiangji"] style:UIBarButtonItemStyleDone target:self action:@selector(postNewTopic)];
     [rightBarItem setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
     [self initReFreshView];
 }
 
+- (void)postNewTopic {
+    PostTopicViewController * postVC = [[PostTopicViewController alloc] init];
+    postVC.topicType = Topic_Interact;
+    [self.navigationController pushViewController:postVC animated:YES];
+}
+
 //重置回复内容
-- (void)resetTopicReplyContent {
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    
+    for (TopicDomain * topic in interactArray) {
+        if([topic.uuid isEqualToString:self.topicUUID]) {
+            if(!topic.replyPage.data) {
+                topic.replyPage.data = [[NSMutableArray alloc] init];
+            }
+            [topic.replyPage.data insertObject:domain atIndex:Number_Zero];
+        }
+    }
+    reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
     [reFreshView.tableView reloadData];
 }
 
@@ -54,7 +71,9 @@
     
     [[KGHttpService sharedService] getClassNews:[[PageInfoDomain alloc] initPageInfo:reFreshView.page size:reFreshView.pageSize] success:^(PageInfoDomain *pageInfo) {
         
-        reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics:pageInfo.data];;
+        interactArray = pageInfo.data;
+        
+        reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
         [reFreshView reloadRefreshTable];
         
     } faild:^(NSString *errorMsg) {
@@ -68,8 +87,6 @@
 - (void)initReFreshView{
     reFreshView = [[ReFreshTableViewController alloc] initRefreshView];
     reFreshView._delegate = self;
-    reFreshView.tableParam.cellHeight       = Number_Fifty;
-    reFreshView.tableParam.cellClassNameStr = @"TestTableViewCell";
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
     [reFreshView appendToView:self.contentView];
     [reFreshView beginRefreshing];
@@ -104,10 +121,10 @@
 
 
 //转换对象
-- (NSArray *)topicFramesWithtopics:(NSArray *)topics
+- (NSArray *)topicFramesWithtopics
 {
     NSMutableArray *frames = [NSMutableArray array];
-    for (TopicDomain * topic in topics) {
+    for (TopicDomain * topic in interactArray) {
         TopicFrame * f = [[TopicFrame alloc] init];
         f.topic = topic;
         [frames addObject:f];

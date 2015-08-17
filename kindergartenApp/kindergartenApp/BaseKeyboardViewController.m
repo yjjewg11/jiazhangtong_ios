@@ -9,6 +9,7 @@
 #import "BaseKeyboardViewController.h"
 #import "KGHUD.h"
 #import "KGTextField.h"
+#import "KGEmojiManage.h"
 
 CGFloat const gestureMinimumTranslation = 20.0;
 
@@ -63,13 +64,16 @@ typedef enum : NSInteger {
 
 //单击手势响应
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if ([touch.view isKindOfClass:[UITextField class]] || [touch.view.superview isKindOfClass:[UITextView class]])
+    if ([touch.view isKindOfClass:[UITextField class]] ||
+        [touch.view.superview isKindOfClass:[UITextView class]] ||
+        [touch.view isKindOfClass:[UIButton class]])
         return NO;
     return YES;
 }
 
 //单击响应
 - (void)singleTap{
+    [KGEmojiManage sharedManage].isSwitchEmoji = NO;
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 

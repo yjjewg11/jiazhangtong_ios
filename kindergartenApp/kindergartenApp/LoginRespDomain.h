@@ -11,7 +11,9 @@
 
 @interface LoginRespDomain : KGBaseDomain
 
-@property (strong, nonatomic) NSArray        * list;
+@property (strong, nonatomic) NSArray        * list;       //孩子列表
+@property (strong, nonatomic) NSArray        * group_list; //学校列表
+@property (strong, nonatomic) NSArray        * class_list; //班级列表
 @property (strong, nonatomic) NSString       * JSESSIONID;
 @property (strong, nonatomic) KGUser         * userinfo;
 

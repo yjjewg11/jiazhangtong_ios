@@ -10,13 +10,16 @@
 
 #define URL(baseURL, businessURL) [NSString stringWithFormat:@"%@%@", baseURL, businessURL];
 
-#define baseServiceURL       @"http://120.25.248.31/px-mobile/"      //正式
+#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单
 #define loginURL             @"rest/userinfo/login.json"             //登录
 #define logoutURL            @"rest/userinfo/logout.json"            //登出
 #define regURL               @"rest/userinfo/reg.json"               //注册
 //#define updatepasswordURL    @"rest/userinfo/updatepassword.json"    //修改密码
-#define updatepasswordURL    @"rest/userinfo/updatepasswordBySms.json"  //修改密码
+#define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"  //修改密码
+
+#define KDInfoURL            @"rest/share/getKDInfo.html" //校园相关
+#define ZSJHInfoURL          @"rest/share/getRecruitBygroupuuid.html" //招生计划
 
 #define teacherPhoneBookURL  @"rest/userinfo/getTeacherPhoneBook.json" //老师和园长通讯录
 #define saveToTeacherURL     @"rest/message/saveToTeacher.json"  //给老师写信
@@ -26,14 +29,13 @@
 #define readMsgURL           @"rest/message/read.json"  //阅读信件
 
 
-#define phoneCodeURL         @"rest/sms/sendCode.json"               //短信验证码
-#define classNewsMyURL           @"rest/classnews/getClassNewsByMy.json"   //我的孩子班级互动列表
+#define phoneCodeURL           @"rest/sms/sendCode.json"               //短信验证码
+#define classNewsMyURL         @"rest/classnews/getClassNewsByMy.json"   //我的孩子班级互动列表
 #define classNewsByClassIdURL  @"rest/classnews/getClassNewsByClassuuid.json"   //班级互动列表
-#define classNewsHTMLURL  @"kd/index.html?fn=phone_myclassNews"   //班级互动列表HTML
-
+#define classNewsHTMLURL       @"kd/index.html?fn=phone_myclassNews"   //班级互动列表HTML
+#define saveClassNewsHTMLURL   @"rest/classnews/save.json"   //新增班级互动
 
 #define groupListURL          @"rest/group/list.json" //获取机构列表
-
 
 #define announcementListURL   @"rest/announcements/queryMy.json"               //公告列表
 
@@ -64,6 +66,10 @@
 #define emojiURL              @"rest/share/getEmot.json"      //表情
 #define teachingPLanURL       @"rest/teachingplan/list.json"      //课程表
 
+#define saveFavoritesURL      @"rest/favorites/save.json"      //保存收藏
+#define favoritesListURL      @"rest/favorites/query.json"     //收藏列表
+#define modifyPWDURL          @"rest/userinfo/updatepassword.json" //修改密码
+#define delFavoritesURL       @"rest/favorites/delete.json"   //取消收藏
 
 
 @implementation KGHttpUrl
@@ -102,11 +108,28 @@
     return URL(baseServiceURL, updatepasswordURL);
 }
 
+//绑定的卡号列表
++ (NSString *)getBuildCardUrl:(NSString *)uuid {
+    return [NSString stringWithFormat:@"%@rest/studentbind/%@.json", baseServiceURL, uuid];
+}
+
 
 //phone code
 + (NSString *)getPhoneCodeUrl {
     return URL(baseServiceURL, phoneCodeURL);
 }
+
+//校园介绍
++ (NSString *)getYQJSByGroupuuid:(NSString *)groupuuid {
+    return [NSString stringWithFormat:@"%@%@?uuid=%@", baseServiceURL, KDInfoURL, groupuuid];
+}
+
+//招生计划
++ (NSString *)getZSJHURLByGroupuuid:(NSString *)groupuuid {
+    return [NSString stringWithFormat:@"%@%@?uuid=%@", baseServiceURL, ZSJHInfoURL, groupuuid];
+}
+
+
 
 
 //AnnouncementList
@@ -142,6 +165,11 @@
 //分页获取班级互动列表
 + (NSString *)getClassNewsByClassIdUrl {
     return URL(baseServiceURL, classNewsByClassIdURL);
+}
+
+//新增班级互动
++ (NSString *)getSaveClassNewsUrl {
+    return URL(baseServiceURL, saveClassNewsHTMLURL);
 }
 
 //班级互动HTML 地址
@@ -288,6 +316,25 @@
     return URL(baseServiceURL, teachingPLanURL);
 }
 
+//收藏列表
++ (NSString *)getFavoritesListUrl {
+    return URL(baseServiceURL, favoritesListURL);
+}
+
+//保存收藏
++ (NSString *)getsaveFavoritesUrl {
+    return URL(baseServiceURL, saveFavoritesURL);
+}
+
+//取消收藏
++ (NSString *)getDelFavoritesUrl{
+    return URL(baseServiceURL, delFavoritesURL);
+}
+
+//修改密码
++ (NSString *)getModidyPWDUrl{
+    return URL(baseServiceURL, modifyPWDURL);
+}
 
 
 @end

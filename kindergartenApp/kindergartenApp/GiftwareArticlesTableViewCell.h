@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ReFreshBaseCell.h"
+#import "AnnouncementDomain.h"
 
 @interface GiftwareArticlesTableViewCell : ReFreshBaseCell {
     
@@ -18,5 +19,10 @@
     IBOutlet UIImageView * dzImageView;
     IBOutlet UILabel * dzCountLabel;
 }
+
+@property (strong, nonatomic) AnnouncementDomain * announcementDomain;
+
+
++ (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @end

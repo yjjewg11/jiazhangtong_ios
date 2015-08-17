@@ -15,8 +15,6 @@
 @property(strong, nonatomic) IBOutlet KGTextField * userNameTextField;
 @property(strong, nonatomic) IBOutlet KGTextField * userPwdTextField;
 
-- (IBAction)testBtnClicked:(UIButton *)sender;
-
 - (IBAction)savePwdBtnClicked:(UIButton *)sender;
 
 - (IBAction)findPwdBtnClicked:(UIButton *)sender;

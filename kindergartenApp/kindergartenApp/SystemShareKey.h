@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 
-#define webUrl                  @"http://www.funi.com"
-#define shareSDKKey             @"1f2984542c5e"
-#define uMengAppKey             @"532f9d2656240bc06b1bc31f"
-#define ShareKey_TencentWB      @"801524237"
-#define ShareKey_TencentSecret  @"7a06f33c7727b96071964a6c02634b7e"
-#define ShareKey_SinaWB         @"392054516"
-#define ShareKey_SinaSecret     @"e9c9d3b09a74c706ba1402341ab53021"
-#define ShareKey_WeChat         @"wx0ddf69d3ba2cd570"
-#define ShareKey_WeChatSecret   @"423d8a3ae6d2a2cae88fc0b96c1ca68e"
+#define webUrl @"http://www.umeng.com/social"
+
+#define uMengAppKey             @"55be15a4e0f55a624c007b24"
+
+#define ShareKey_TencentWB      @"1104813270"
+#define ShareKey_TencentSecret  @"SumAAk7jtaUSnZqd"
+#define ShareKey_SinaWB         @"2868383197"
+#define ShareKey_SinaSecret     @"60248f289483fef5b6b3e15f26c7491a"
+#define ShareKey_WeChat         @"wx6699cf8b21e12618"
+#define ShareKey_WeChatSecret   @"639c78a45d012434370f4c1afc57acd1"
+

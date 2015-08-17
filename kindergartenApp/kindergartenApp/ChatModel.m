@@ -43,27 +43,32 @@
         if (message.showDateLabel) {
             previousTime = dataDic[@"strTime"];
         }
-        [self.dataSource addObject:messageFrame];
+//        [self.dataSource addObject:messageFrame];
+        [self.dataSource insertObject:messageFrame atIndex:0];
     }
 }
 
 
 - (NSMutableDictionary *)getChatDic:(ChatInfoDomain *)domain {
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
-    [dictionary setObject:domain.content forKey:@"strContent"];
+    [dictionary setObject:domain.message forKey:@"strContent"];
     
     if([domain.send_useruuid isEqualToString:[KGHttpService sharedService].loginRespDomain.userinfo.uuid]) {
         //判断发送者id是否=login的用户id  相等者发送为自己
         [dictionary setObject:@(UUMessageFromMe) forKey:@"from"];
+        [dictionary setObject:@"head_def" forKey:@"strIcon"];
     } else {
         //别人发送
         [dictionary setObject:@(UUMessageFromOther) forKey:@"from"];
+        [dictionary setObject:_isTeacher?@"head_def":@"group_head_def" forKey:@"strIcon"];
     }
     [dictionary setObject:@(UUMessageTypeText) forKey:@"type"];
     [dictionary setObject:[domain.create_time description] forKey:@"strTime"];
     
     [dictionary setObject:domain.send_user forKey:@"strName"];
-    [dictionary setObject:[KGHttpService sharedService].loginRespDomain.userinfo.headimg forKey:@"strIcon"];
+    if ([KGHttpService sharedService].loginRespDomain.userinfo.headimg) {
+        [dictionary setObject:[KGHttpService sharedService].loginRespDomain.userinfo.headimg forKey:@"strIcon"];
+    }
     return dictionary;
 }
 

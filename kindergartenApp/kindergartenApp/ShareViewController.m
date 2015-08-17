@@ -7,8 +7,13 @@
 //
 
 #import "ShareViewController.h"
+#import "PopupView.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "SystemShareKey.h"
+#import "KGHUD.h"
 
-@interface ShareViewController ()
+@interface ShareViewController () <UMSocialUIDelegate>
 
 @end
 
@@ -17,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.contentView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:Number_ViewAlpha_Five];
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,21 +35,83 @@
     switch (sender.tag) {
         case 10:
             //微信
+            [self handelShareWithShareType:UMShareToWechatSession];
             break;
         case 11:
             //QQ好友
+            [self handelShareWithShareType:UMShareToQQ];
             break;
         case 12:
+            [self handelShareWithShareType:UMShareToWechatTimeline];
             //朋友圈
             break;
         case 13:
+            [self handelShareWithShareType:UMShareToSina];
             //新浪
             break;
     }
 }
 
-- (IBAction)cancelShareBtnClicked:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//处理分享操作
+- (void)handelShareWithShareType:(NSString *)shareType{
+    
+    NSString * contentString = [NSString stringWithFormat:@"%@ %@",_announcementDomain.title,@"www.baidu.com"];
+    
+    [[KGHUD sharedHud] show:self.view.superview];
+    
+    //微信title设置方法：
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = _announcementDomain.title;
+    //朋友圈title设置方法：
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = _announcementDomain.title;
+    [UMSocialData defaultData].extConfig.qqData.title = _announcementDomain.title;
+    [UMSocialData defaultData].extConfig.qqData.url = webUrl;
+    
+    //设置分享内容，和回调对象
+    [[UMSocialControllerService defaultControllerService] setShareText:contentString shareImage:[UIImage imageNamed:@"mingzihetu"] socialUIDelegate:self];
+    UMSocialSnsPlatform * snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareType];
+    snsPlatform.snsClickHandler(self, [UMSocialControllerService defaultControllerService],YES);
+    
 }
+
+/**
+ 关闭当前页面之后
+ @param fromViewControllerType 关闭的页面类型
+ */
+-(void)didCloseUIViewController:(UMSViewControllerType)fromViewControllerType
+{
+    [[KGHUD sharedHud] hide:self.view.superview];
+}
+
+//下面得到分享完成的回调
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    [[KGHUD sharedHud] hide:self.view.superview];
+    //根据`responseCode`得到发送结果,如果分享成功
+    UIAlertView * alertView;
+    NSString * string;
+    if(response.responseCode == UMSResponseCodeSuccess){
+        string = @"分享成功";
+    }else if (response.responseCode == UMSResponseCodeCancel){
+    }else{
+        string = @"分享失败";
+    }
+    if (string && string.length) {
+        alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:string delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [alertView show];
+    }
+}
+
+-(void)didFinishShareInShakeView:(UMSocialResponseEntity *)response
+{
+    [[KGHUD sharedHud] hide:self.view.superview];
+}
+
+
+- (IBAction)cancelShareBtnClicked:(UIButton *)sender {
+    PopupView * view = (PopupView *)self.view.superview;
+    [view singleBtnTap];
+}
+
+
 
 @end

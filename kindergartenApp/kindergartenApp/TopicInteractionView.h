@@ -12,10 +12,13 @@
 #import "HBVLinkedTextView.h"
 #import "KGTextField.h"
 #import "ReplyDomain.h"
+#import "MLEmojiLabel.h"
+#import "TopicInteractionFrame.h"
 
 @interface TopicInteractionView : UIView <UITextFieldDelegate>
 
-@property (strong, nonatomic) DianZanDomain * dianzan;//点赞数据
+@property (strong, nonatomic) TopicInteractionFrame * topicInteractionFrame;
+@property (strong, nonatomic) DianZanDomain   * dianzan;//点赞数据
 @property (strong, nonatomic) ReplyPageDomain * replyPage; //帖子回复列表
 @property (strong, nonatomic) NSString        * topicUUID; //帖子UUID
 @property (assign, nonatomic) KGTopicType       topicType; //帖子类型
@@ -24,29 +27,27 @@
 @property (strong, nonatomic) UIView   * funView;
 /** 发帖时间 */
 @property (strong, nonatomic) UILabel  * dateLabel;
+/** 浏览次数icon */
+@property (strong, nonatomic) UIImageView  * browseCountImageView;
+/** 浏览次数 */
+@property (strong, nonatomic) UILabel  * browseCountLabel;
 /** 点赞按钮 */
 @property (strong, nonatomic) UIButton * dianzanBtn;
 /** 回复按钮 */
 @property (strong, nonatomic) UIButton * replyBtn;
-
 /** 点赞列表视图 */
 @property (strong, nonatomic) UIView   * dianzanView;
 /** 点赞列表ICON */
 @property (strong, nonatomic) UIImageView * dianzanIconImg;
-
 /** 点赞列表文本 */
-@property (strong, nonatomic) UILabel  * dianzanLabel;
-
+@property (strong, nonatomic) MLEmojiLabel  * dianzanLabel;
 /** 回复列表视图 */
-@property (strong, nonatomic) HBVLinkedTextView  * replyView;
-
+@property (strong, nonatomic) MLEmojiLabel  * replyView;
+/** 显示更多*/
+@property (strong, nonatomic) UIButton * moreBtn;
 /** 回复输入框 */
 @property (strong, nonatomic) KGTextField * replyTextField;
 
-@property (assign, nonatomic) CGFloat topicInteractHeight;
-
-
-- (void)loadFunView:(DianZanDomain *)dzDomain reply:(ReplyPageDomain *)replyPageDomain;
 
 //重置点赞列表
 - (void)resetDZName:(BOOL)isAdd name:(NSString *)name;

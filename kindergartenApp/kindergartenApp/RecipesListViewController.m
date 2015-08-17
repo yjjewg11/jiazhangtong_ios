@@ -32,6 +32,9 @@
     [super viewDidLoad];
     
     self.title = @"每日食谱";
+    self.view.layer.masksToBounds = YES;
+    self.view.clipsToBounds = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     totalCount = Number_Thirtyt;
     isFirstReq = YES;
@@ -46,30 +49,26 @@
 
 - (void)loadFlowScrollView {
     contentScrollView = [[UIScrollView alloc] init];
-    contentScrollView.backgroundColor = [UIColor brownColor];
     contentScrollView.delegate = self;
     contentScrollView.pagingEnabled = YES;
     contentScrollView.clipsToBounds = NO;
-    contentScrollView.showsHorizontalScrollIndicator = YES;
+    contentScrollView.showsHorizontalScrollIndicator = NO;
     contentScrollView.showsVerticalScrollIndicator = NO;
     [self.contentView addSubview:contentScrollView];
-    
-    [contentScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.contentView);
-    }];
+    contentScrollView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT- APPWINDOWTOPHEIGHTIOS7);
+    contentScrollView.origin = CGPointMake(0, APPWINDOWTOPHEIGHTIOS7);
+    contentScrollView.contentSize = CGSizeMake(APPWINDOWWIDTH * totalCount, contentScrollView.height);
 }
 
 - (void)loadRecipesInfoViewToScrollView {
     itemViewArray = [[NSMutableArray alloc] initWithCapacity:totalCount];
     
     for(NSInteger i=Number_Zero; i<totalCount; i++){
-        RecipesInfoView * itemView = [[RecipesInfoView alloc] initWithFrame:CGRectMake(i*KGSCREEN.size.width, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height - 64)];
+        RecipesInfoView * itemView = [[RecipesInfoView alloc] initWithFrame:CGRectMake(i*APPWINDOWWIDTH, 0, APPWINDOWWIDTH, contentScrollView.height)];
         [contentScrollView addSubview:itemView];
         [itemViewArray addObject:itemView];
     }
-    
-    contentScrollView.contentSize = CGSizeMake(KGSCREEN.size.width * totalCount, self.contentView.height);
-    [contentScrollView setContentOffset:CGPointMake(KGSCREEN.size.width * (totalCount-Number_One), Number_Zero) animated:NO];
+    [contentScrollView setContentOffset:CGPointMake(APPWINDOWWIDTH * (totalCount-Number_One), Number_Zero) animated:NO];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -116,7 +115,7 @@
 - (void)getQueryDate:(NSInteger)index {
     if(!isFirstReq) {
         if(index != lastIndex) {
-            lastDateStr = [KGDateUtil nextOrPreyDay:lastDateStr date:lastIndex-index];
+            lastDateStr = [KGDateUtil calculateDay:lastDateStr date:lastIndex-index];
         }
     } else {
         lastDateStr = [KGDateUtil getDate:Number_Zero];

@@ -10,6 +10,7 @@
 //#import "Mp3Recorder.h"
 #import "UUProgressHUD.h"
 #import "ACMacros.h"
+#import "KGEmojiManage.h"
 
 @interface UUInputFunctionView ()<UITextViewDelegate>
 {
@@ -22,10 +23,11 @@
 
 @implementation UUInputFunctionView
 
-- (id)initWithSuperVC:(UIViewController *)superVC
+- (id)initWithSuperVC:(UIViewController *)superVC isShow:(BOOL)isShow
 {
     self.superVC = superVC;
-    CGRect frame = CGRectMake(0, Main_Screen_Height-40, Main_Screen_Width, 40);
+    CGFloat y = isShow ? Main_Screen_Height-40 : Main_Screen_Height;
+    CGRect frame = CGRectMake(0, y, Main_Screen_Width, 40);
     
     self = [super initWithFrame:frame];
     if (self) {
@@ -49,29 +51,29 @@
         [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_voice_record"] forState:UIControlStateNormal];
         [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_ipunt_message"] forState:UIControlStateSelected];
         self.btnChangeVoiceState.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self.btnChangeVoiceState addTarget:self action:@selector(voiceRecord:) forControlEvents:UIControlEventTouchUpInside];
+        [self.btnChangeVoiceState addTarget:self action:@selector(textEmojiRecord:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.btnChangeVoiceState];
 
         //语音录入键
-        self.btnVoiceRecord = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.btnVoiceRecord.frame = CGRectMake(70, 5, Main_Screen_Width-70*2, 30);
-        self.btnVoiceRecord.hidden = YES;
-        [self.btnVoiceRecord setBackgroundImage:[UIImage imageNamed:@"chat_message_back"] forState:UIControlStateNormal];
-        [self.btnVoiceRecord setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-        [self.btnVoiceRecord setTitleColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
-        [self.btnVoiceRecord setTitle:@"Hold to Talk" forState:UIControlStateNormal];
-        [self.btnVoiceRecord setTitle:@"Release to Send" forState:UIControlStateHighlighted];
-        [self.btnVoiceRecord addTarget:self action:@selector(beginRecordVoice:) forControlEvents:UIControlEventTouchDown];
-        [self.btnVoiceRecord addTarget:self action:@selector(endRecordVoice:) forControlEvents:UIControlEventTouchUpInside];
-        [self.btnVoiceRecord addTarget:self action:@selector(cancelRecordVoice:) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
-        [self.btnVoiceRecord addTarget:self action:@selector(RemindDragExit:) forControlEvents:UIControlEventTouchDragExit];
-        [self.btnVoiceRecord addTarget:self action:@selector(RemindDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
-        [self addSubview:self.btnVoiceRecord];
+//        self.btnVoiceRecord = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.btnVoiceRecord.frame = CGRectMake(70, 5, Main_Screen_Width-70*2, 30);
+//        self.btnVoiceRecord.hidden = YES;
+//        [self.btnVoiceRecord setBackgroundImage:[UIImage imageNamed:@"chat_message_back"] forState:UIControlStateNormal];
+//        [self.btnVoiceRecord setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+//        [self.btnVoiceRecord setTitleColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+//        [self.btnVoiceRecord setTitle:@"Hold to Talk" forState:UIControlStateNormal];
+//        [self.btnVoiceRecord setTitle:@"Release to Send" forState:UIControlStateHighlighted];
+//        [self.btnVoiceRecord addTarget:self action:@selector(beginRecordVoice:) forControlEvents:UIControlEventTouchDown];
+//        [self.btnVoiceRecord addTarget:self action:@selector(endRecordVoice:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.btnVoiceRecord addTarget:self action:@selector(cancelRecordVoice:) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
+//        [self.btnVoiceRecord addTarget:self action:@selector(RemindDragExit:) forControlEvents:UIControlEventTouchDragExit];
+//        [self.btnVoiceRecord addTarget:self action:@selector(RemindDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+//        [self addSubview:self.btnVoiceRecord];
         
         //输入框
         self.TextViewInput = [[KGTextView alloc]initWithFrame:CGRectMake(45, 5, Main_Screen_Width-2*45, 30)];
         self.TextViewInput.textColor = [UIColor blackColor];
-        self.TextViewInput.placeholder = @"Input the contents here";
+        self.TextViewInput.placeholder = @"说点什么吧";
         self.TextViewInput.layer.cornerRadius = 4;
         self.TextViewInput.layer.masksToBounds = YES;
         self.TextViewInput.delegate = self;
@@ -84,7 +86,7 @@
         self.layer.borderColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.3].CGColor;
         
         //添加通知
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textViewDidEndEditing:) name:UIKeyboardWillHideNotification object:nil];
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textViewDidEndEditing:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -145,10 +147,10 @@
     [UUProgressHUD dismissWithSuccess:@"Success"];
    
     //缓冲消失时间 (最好有block回调消失完成)
-    self.btnVoiceRecord.enabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.btnVoiceRecord.enabled = YES;
-    });
+//    self.btnVoiceRecord.enabled = NO;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.btnVoiceRecord.enabled = YES;
+//    });
 }
 
 - (void)failRecord
@@ -156,14 +158,14 @@
     [UUProgressHUD dismissWithSuccess:@"Too short"];
     
     //缓冲消失时间 (最好有block回调消失完成)
-    self.btnVoiceRecord.enabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.btnVoiceRecord.enabled = YES;
-    });
+//    self.btnVoiceRecord.enabled = NO;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        self.btnVoiceRecord.enabled = YES;
+//    });
 }
 
-//改变输入与录音状态
-- (void)voiceRecord:(UIButton *)sender
+//改变文本和表情输入状态
+- (void)textEmojiRecord:(UIButton *)sender
 {
 //    self.btnVoiceRecord.hidden = !self.btnVoiceRecord.hidden;
 //    self.TextViewInput.hidden  = !self.TextViewInput.hidden;
@@ -175,9 +177,10 @@
 //        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_voice_record"] forState:UIControlStateNormal];
 //        [self.TextViewInput becomeFirstResponder];
 //    }
-    
+    [KGEmojiManage sharedManage].isChatEmoji = YES;
     sender.selected = !sender.selected;
     
+    [KGEmojiManage sharedManage].isSwitchEmoji = YES;
     [self.TextViewInput resignFirstResponder];
     
     if (!_faceBoard) {
@@ -236,10 +239,10 @@
 //    [self.btnSendMessage setBackgroundImage:image forState:UIControlStateNormal];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-
-}
+//- (void)textViewDidEndEditing:(UITextView *)textView
+//{
+//    NSLog(@"te");
+//}
 
 
 #pragma mark - Add Picture
@@ -291,6 +294,12 @@
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+//重置文本和表情输入状态
+- (void)resetTextEmojiInput {
+    self.btnChangeVoiceState.selected = YES;
+    [self textEmojiRecord:self.btnChangeVoiceState];
 }
 
 @end

@@ -13,23 +13,25 @@
 #import "ShareViewController.h"
 #import "UIView+Extension.h"
 #import "PopupView.h"
+#import "FavoritesDomain.h"
+#import "KGDateUtil.h"
 
-@interface GiftwareArticlesInfoViewController () {
+@interface GiftwareArticlesInfoViewController () <UIWebViewDelegate> {
     
+    IBOutlet UIScrollView *contentScrollView;
     IBOutlet UILabel * titleLabel;
-    
     IBOutlet UIWebView * myWebView;
-    
     IBOutlet UILabel * createUserLabel;
-    
     IBOutlet UILabel * timeLabel;
-    
     IBOutlet UIView * bottomFunView;
-    
     IBOutlet UIImageView * dzImageView;
     IBOutlet UIButton *dzBtn;
+    
+    IBOutlet UIImageView *favImageView;
+    IBOutlet UIButton *favBtn;
     PopupView * popupView;
     ShareViewController * shareVC;
+    AnnouncementDomain * announcementDomain;
 }
 
 @end
@@ -41,6 +43,9 @@
     
     self.title = @"文章详情";
     
+    myWebView.backgroundColor = [UIColor clearColor];
+    myWebView.opaque = NO;
+    myWebView.delegate = self;
     [self getArticlesInfo];
 }
 
@@ -50,9 +55,9 @@
 
 - (void)getArticlesInfo {
     
-    [[KGHttpService sharedService] getArticlesInfo:_announcementDomain.uuid success:^(AnnouncementDomain *announcementObj) {
+    [[KGHttpService sharedService] getArticlesInfo:_annuuid success:^(AnnouncementDomain *announcementObj) {
         
-        _announcementDomain = announcementObj;
+        announcementDomain = announcementObj;
         [self resetViewParam];
         
     } faild:^(NSString *errorMsg) {
@@ -61,10 +66,20 @@
 }
 
 - (void)resetViewParam {
-    titleLabel.text = _announcementDomain.title;
-    [myWebView loadHTMLString:_announcementDomain.message baseURL:nil];
-    timeLabel.text = _announcementDomain.create_time;
-    createUserLabel.text = _announcementDomain.create_user;
+    titleLabel.text = announcementDomain.title;
+    [myWebView loadHTMLString:announcementDomain.message baseURL:nil];
+    timeLabel.text = announcementDomain.create_time;
+    createUserLabel.text = announcementDomain.create_user;
+    
+    if(announcementDomain.dianzan && !announcementDomain.dianzan.canDianzan) {
+        dzImageView.image = [UIImage imageNamed:@"zan2"];
+        dzBtn.selected = YES;
+    }
+    
+    if(!announcementDomain.isFavor) {
+        favImageView.image = [UIImage imageNamed:@"shoucang2"];
+        favBtn.selected = YES;
+    }
 }
 
 
@@ -73,6 +88,11 @@
     switch (sender.tag) {
         case 10:
             //赞
+            if (sender.selected == YES) {
+                [self delDZ:sender];
+            }else{
+                [self savwDZ:sender];
+            }
             break;
         case 11: {
             //分享
@@ -81,30 +101,54 @@
         }
         case 12:
             //收藏
+            if (sender.selected == YES) {
+                [self delFavorites:sender];
+            }else{
+                [self saveFavorites:sender];
+            }
             break;
         case 13: {
             //评论
             ReplyListViewController * baseVC = [[ReplyListViewController alloc] init];
-            baseVC.topicUUID = _announcementDomain.uuid;
+            baseVC.topicUUID = announcementDomain.uuid;
             [self.navigationController pushViewController:baseVC animated:YES];
             break;
         }
     }
 }
 
-- (void)savwDZ {
+//保存点赞
+- (void)savwDZ:(UIButton *)sender {
     [[KGHUD sharedHud] show:self.contentView];
-    
-    [[KGHttpService sharedService] saveDZ:_announcementDomain.uuid type:Topic_Articles success:^(NSString *msgStr) {
+    sender.enabled = NO;
+    [[KGHttpService sharedService] saveDZ:announcementDomain.uuid type:Topic_Articles success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
         dzImageView.image = [UIImage imageNamed:@"zan2"];
-        dzBtn.userInteractionEnabled = NO;
+        sender.selected = !sender.selected;
+        sender.enabled = YES;
     } faild:^(NSString *errorMsg) {
+        sender.enabled = YES;
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
+}
+
+//取消点赞
+- (void)delDZ:(UIButton *)sender{
+    [[KGHUD sharedHud] show:self.contentView];
+    sender.enabled = NO;
+    [[KGHttpService sharedService] delDZ:announcementDomain.uuid success:^(NSString *msgStr) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        dzImageView.image = [UIImage imageNamed:@"zan1"];
+        sender.selected = !sender.selected;
+        sender.enabled = YES;
+    } faild:^(NSString *errorMsg) {
+        sender.enabled = YES;
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
     }];
 }
 
 
+//分享
 - (void)shareClicked {
     if(!popupView) {
         popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
@@ -115,12 +159,63 @@
         shareVC.view.frame = CGRectMake(Number_Zero,  KGSCREEN.size.height-height, KGSCREEN.size.width, height);
         [popupView addSubview:shareVC.view];
         [self.view addSubview:popupView];
+        [self addChildViewController:shareVC];
     }
-    
+    shareVC.announcementDomain = announcementDomain;
     [UIView viewAnimate:^{
         popupView.alpha = Number_One;
     } time:Number_AnimationTime_Five];
+}
+
+//保存收藏
+- (void)saveFavorites:(UIButton *)button {
+    [[KGHUD sharedHud] show:self.contentView];
     
+    FavoritesDomain * domain = [[FavoritesDomain alloc] init];
+    domain.title = announcementDomain.title;
+    domain.type  = Topic_Articles;
+    domain.reluuid = announcementDomain.uuid;
+    domain.createtime = [KGDateUtil presentTime];
+    button.enabled = NO;
+    [[KGHttpService sharedService] saveFavorites:domain success:^(NSString *msgStr) {
+        favImageView.image = [UIImage imageNamed:@"shoucang2"];
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        button.selected = !button.selected;
+        button.enabled = YES;
+    } faild:^(NSString *errorMsg) {
+        button.selected = !button.selected;
+        button.enabled = YES;
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
+}
+
+//取消收藏
+- (void)delFavorites:(UIButton *)button{
+    [[KGHUD sharedHud] show:self.contentView];
+    button.enabled = NO;
+    [[KGHttpService sharedService] delFavorites:announcementDomain.uuid success:^(NSString *msgStr) {
+        button.selected = !button.selected;
+        button.enabled = YES;
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        favImageView.image = [UIImage imageNamed:@"shoucang1"];
+    } failed:^(NSString *errorMsg) {
+        button.enabled = YES;
+        button.selected = !button.selected;
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    //webview 自适应高度
+    CGRect frame = webView.frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = CGRectMake(Number_Zero, CGRectGetMaxY(titleLabel.frame), KGSCREEN.size.width, fittingSize.height);
+    createUserLabel.y = CGRectGetMaxY(webView.frame) + Number_Ten;
+    createUserLabel.x = KGSCREEN.size.width - createUserLabel.width - CELLPADDING;
+    timeLabel.y = CGRectGetMaxY(createUserLabel.frame) + Number_Ten;
+    timeLabel.x = KGSCREEN.size.width - timeLabel.width - CELLPADDING;
+    contentScrollView.contentSize = CGSizeMake(KGSCREEN.size.width, timeLabel.height + timeLabel.y + CELLPADDING);
 }
 
 @end

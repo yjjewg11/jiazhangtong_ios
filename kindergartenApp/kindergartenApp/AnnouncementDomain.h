@@ -21,7 +21,9 @@
 @property (assign, nonatomic) NSInteger  count;	         //浏览总数
 @property (strong, nonatomic) NSString * share_url;      //用于分享的地址.全路径.
 @property (assign, nonatomic) BOOL       isimportant;
-@property (assign, nonatomic) NSInteger  type;
+@property (assign, nonatomic) BOOL       isFavor; //是否收藏
+@property (assign, nonatomic) NSInteger  type; //公告类型  0=校园公告  ！=0 老师公告
+@property (assign, nonatomic) KGTopicType  topicType;
 
 @property (strong, nonatomic) DianZanDomain * dianzan;//点赞数据
 @property (strong, nonatomic) ReplyPageDomain * replyPage; //帖子回复列表

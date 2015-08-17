@@ -11,6 +11,7 @@
 @interface ChatModel : NSObject
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+@property (assign, nonatomic) BOOL isTeacher;//是否石老师
 
 @property (nonatomic) BOOL isGroupChat;
 

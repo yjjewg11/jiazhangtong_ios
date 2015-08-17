@@ -7,6 +7,11 @@
 //
 
 #import "TimetableItemView.h"
+#import "StudentInfoHeaderView.h"
+#import "UIColor+Extension.h"
+#import "TimetableItemTableViewCell.h"
+
+#define TopicInteractionCellIdentifier  @"TopicInteractionCellIdentifier"
 
 @implementation TimetableItemView
 
@@ -37,106 +42,114 @@
 }
 
 
-//加载食谱数据
-- (void)loadRecipesData:(TimetableDomain *)timetable {
-    _timetableDomain = timetable;
+//加载课程表数据
+- (void)loadTimetableData:(NSMutableArray *)timetableMArray date:(NSString *)queryDate {
+    _tableDataSource = timetableMArray;
+    _queryDate = queryDate;
     
-//    [self packageTableData];
-    [timetableTableView reloadData];
-    
-    NSLog(@"table:%@", NSStringFromCGRect(timetableTableView.frame));
+    if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
+        [timetableTableView reloadData];
+    }
 }
+
 
 #pragma UITableView delegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.tableDataSource count];
+    return Number_One;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section==Number_Zero || section==[self.tableDataSource count]-Number_One) {
-        
-    }
-    return Number_One;
+    return [_tableDataSource count] + Number_One;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(section == Number_Zero) {
-        return 0;
-    } else {
-        return 30;
-    }
+    return Cell_Height2;
 }
 
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    if(section!=Number_Zero && _recipesDomain.isReqSuccessData) {
-//        RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:section];
-//        
-//        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"RecipesHeadTableViewCell" owner:nil options:nil];
-//        RecipesHeadTableViewCell * view = (RecipesHeadTableViewCell *)[nib objectAtIndex:Number_Zero];
-//        [view resetHead:itemVO.headStr];
-//        view.backgroundColor = KGColorFrom16(0xE7E7EE);
-//        return view;
-//    }
-//    
-//    return nil;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if(indexPath.section == Number_Zero) {
-//        //学生基本信息
-//        return [self loadStudentInfoCell:tableView cellForRowAtIndexPath:indexPath];
-//    } else if(indexPath.section == [self.tableDataSource count]-Number_One){
-//        return [self loadRecipesNote:tableView];
-//    } else {
-//        return [self loadRecipesCell:tableView cellForRowAtIndexPath:indexPath];
-//    }
-//}
-//
-//
-//- (UITableViewCell *)loadStudentInfoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    RecipesStudentInfoTableViewCell * cell = [RecipesStudentInfoTableViewCell cellWithTableView:tableView];
-//    cell.backgroundColor = [UIColor clearColor];
-//    [cell resetCellParam:_recipesDomain];
-//    return cell;
-//}
-//
-//
-//- (UITableViewCell *)loadRecipesCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RecipesInfoCellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecipesInfoCellIdentifier];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    }
-//    
-//    cell.backgroundColor = [UIColor clearColor];
-//    
-//    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
-//    [self loadRecipes:itemVO cell:cell];
-//    
-//    return cell;
-//}
-//
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if(indexPath.section == Number_Zero) {
-//        return 59;
-//    } else if (indexPath.section == [self.tableDataSource count]-Number_One) {
-//        return 380;
-//    } else {
-//        RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
-//        NSInteger total = [itemVO.cookbookArray count];
-//        NSInteger pageSize = Number_Three;
-//        NSInteger page = (total + pageSize - Number_One) / pageSize;
-//        return 70 * page;
-//    }
-//}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"StudentInfoHeaderView" owner:nil options:nil];
+    StudentInfoHeaderView * view = (StudentInfoHeaderView *)[nib objectAtIndex:Number_Zero];
+    view.titleLabel.text = _queryDate;
+    view.backgroundColor = KGColorFrom16(0xE7E7EE);
+    return view;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([_tableDataSource count]>Number_Zero && indexPath.row == [_tableDataSource count]) {
+        return [self loadTopicInteractView:tableView cellForRowAtIndexPath:indexPath];
+    }
+    
+    TimetableItemTableViewCell * cell = [TimetableItemTableViewCell cellWithTableView:tableView];
+    
+    if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
+        [cell resetTimetable:[_tableDataSource objectAtIndex:indexPath.row]];
+        cell.TimetableItemCellBlock = ^(TimetableDomain * domain){
+            [self loadDZReply:domain];
+        };
+    }
+    return cell;
+}
+
+//加载点赞回复
+- (UITableViewCell *)loadTopicInteractView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TopicInteractionCellIdentifier];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TopicInteractionCellIdentifier];
+        cell.selectionStyle = UITableViewRowActionStyleNormal;
+    }
+    
+    if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
+        TimetableItemVO   * timetableItemVO = [_tableDataSource objectAtIndex:Number_Zero];
+        
+        if(timetableItemVO.timetableMArray && [timetableItemVO.timetableMArray count]>Number_Zero) {
+            TimetableDomain * domain = [timetableItemVO.timetableMArray objectAtIndex:Number_Zero];
+            topicViewCell = cell;
+            
+            [self loadDZReply:domain];
+        }
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if([_tableDataSource count]>Number_Zero && indexPath.row == [_tableDataSource count]) {
+        return 160;
+    }
+    return 148;
+}
+
+//设置点赞回复数据
+- (void)loadDZReply:(TimetableDomain *)domain {
+    if(topicView) {
+        [topicView removeFromSuperview];
+    }
+    
+    if(domain) {
+        TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
+        topicInteractionDomain.dianzan   = domain.dianzan;
+        topicInteractionDomain.replyPage = domain.replyPage;
+        topicInteractionDomain.topicType = Topic_JPKC;
+        topicInteractionDomain.topicUUID = domain.uuid;
+        
+        TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
+        topicFrame.topicInteractionDomain  = topicInteractionDomain;
+        
+        CGRect frame = CGRectMake(Number_Zero, Number_Fifteen, KGSCREEN.size.width, topicFrame.topicInteractHeight);
+        topicView = [[TopicInteractionView alloc] initWithFrame:frame];
+        [topicViewCell addSubview:topicView];
+        topicView.topicInteractionFrame = topicFrame;
+        
+        //续约刷新cell的height
+    }
+}
 
 
 @end

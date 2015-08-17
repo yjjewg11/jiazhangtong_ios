@@ -16,6 +16,7 @@
 #import "KGHttpService.h"
 #import "KGHUD.h"
 #import "KGUser.h"
+#import "UIView+Extension.h"
 
 @interface RegViewController () {
     
@@ -25,9 +26,6 @@
     IBOutlet KGTextField * valCodeTextField;
     
     IBOutlet UILabel     * pwdLabel;
-    
-    
-    
     IBOutlet UIButton    * valCodeBtn;
     IBOutlet UIButton    * submitBtn;
     BOOL                   isCountDowning;           //是否倒计时中
@@ -53,7 +51,8 @@
     }
     
 //    [self setViewParame];
-//    [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
+    [valCodeBtn setBorderWithWidth:0 color:[UIColor clearColor] radian:5.0];
+    [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,18 +93,18 @@
 
 
 - (IBAction)valCodeBtnClicked:(UIButton *)sender {
-//    if(![self vaildPhoneAndPwd]){
-//        //request
-//        [self starDownTime];
-//        
-//        [[KGHttpService sharedService] getPhoneVlCode:phoneTextField.text success:^(NSString *msgStr) {
-//            [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
-//        } faild:^(NSString *errorMsg) {
-//            [self stopTime];
-//            [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
-//            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-//        }];
-//    }
+    if(![self vaildPhoneAndPwd]){
+        //request
+        [self starDownTime];
+        
+        [[KGHttpService sharedService] getPhoneVlCode:phoneTextField.text type:_type success:^(NSString *msgStr) {
+            [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
+        } faild:^(NSString *errorMsg) {
+            [self stopTime];
+            [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
+            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        }];
+    }
 }
 
 
@@ -130,7 +129,8 @@
         user.tel         = phone;
         user.oldpassowrd = pwd;
         [user setUserPassword:[KGNSStringUtil trimString:valPwd]];
-        user.type        = 2;
+        user.type        = _type;
+        user.smscode     = valCode;
         
         if(self.type == Number_One) {
             [self submitReg];

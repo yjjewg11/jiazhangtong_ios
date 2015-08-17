@@ -9,6 +9,7 @@
 
 @interface ReplyPageDomain : NSObject
 
+@property (assign, nonatomic) NSInteger totalCount; //总数.
 @property (assign, nonatomic) NSInteger pageSize; //每页显示限制.
 @property (assign, nonatomic) NSInteger pageNo;   //当前页数
 @property (strong, nonatomic) NSMutableArray * data;     //班级互动列表对象.下面内容说明

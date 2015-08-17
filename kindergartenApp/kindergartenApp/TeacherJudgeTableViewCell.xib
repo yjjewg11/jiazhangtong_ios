@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -31,7 +31,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="XeF-a4-GwO"/>
                                     <constraint firstAttribute="width" constant="50" id="tBM-qK-at3"/>
@@ -59,7 +59,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="7d4-SW-gJT"/>
                                     <constraint firstAttribute="height" constant="60" id="ok5-Iu-Pu9"/>
@@ -87,7 +87,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="f3o-wr-Cfw"/>
                                     <constraint firstAttribute="height" constant="60" id="z3a-wo-bfy"/>
@@ -115,14 +115,14 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="PSP-Wt-dtZ"/>
                                     <constraint firstAttribute="height" constant="60" id="f8B-LH-gDH"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eOn-11-Fyp" firstAttribute="top" secondItem="PO6-L7-XZM" secondAttribute="top" constant="22" id="5ag-NY-xoW"/>
                             <constraint firstItem="mSl-K2-cBQ" firstAttribute="top" secondItem="PO6-L7-XZM" secondAttribute="top" constant="22" id="Eka-WM-Zf5"/>
@@ -156,18 +156,18 @@
                                     <constraint firstAttribute="width" constant="50" id="ALu-1a-6O0"/>
                                     <constraint firstAttribute="height" constant="27" id="zxm-iq-7yh"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="tijiao1">
+                                <state key="normal" backgroundImage="teacherJudgetijiao1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled" backgroundImage="tijao2"/>
-                                <state key="selected" backgroundImage="tijao1"/>
-                                <state key="highlighted" backgroundImage="tijao1"/>
+                                <state key="disabled" backgroundImage="teacherJudgetijiao2"/>
+                                <state key="selected" backgroundImage="teacherJudgetijiao1"/>
+                                <state key="highlighted" backgroundImage="teacherJudgetijiao1"/>
                                 <connections>
                                     <action selector="submitBtnClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XlR-Cx-GUV"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="142" id="307-Wu-ixh"/>
                             <constraint firstItem="Ntx-8u-VIb" firstAttribute="leading" secondItem="g4I-Xy-xfM" secondAttribute="leading" constant="16" id="4L4-tm-XkN"/>
@@ -179,6 +179,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="g4I-Xy-xfM" secondAttribute="bottom" constant="-9" id="4vD-jo-d6C"/>
                     <constraint firstItem="PO6-L7-XZM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="5HS-VQ-bzG"/>
@@ -201,8 +202,7 @@
         <image name="judge_no_10" width="40" height="40"/>
         <image name="judge_no_20" width="40" height="40"/>
         <image name="judge_no_30" width="40" height="40"/>
-        <image name="tijao1" width="45" height="45"/>
-        <image name="tijao2" width="50" height="27"/>
-        <image name="tijiao1" width="288" height="35"/>
+        <image name="teacherJudgetijiao1" width="50" height="27"/>
+        <image name="teacherJudgetijiao2" width="50" height="27"/>
     </resources>
 </document>

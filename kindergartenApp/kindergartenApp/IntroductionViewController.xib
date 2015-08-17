@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroductionViewController">
+            <connections>
+                <outlet property="btn1" destination="smy-KL-ORN" id="XRR-RJ-3zv"/>
+                <outlet property="btn2" destination="rmm-zJ-Bnr" id="B4Y-8E-d5v"/>
+                <outlet property="contentView" destination="jb6-G7-6Hx" id="pig-jv-zlq"/>
+                <outlet property="introductionWebView" destination="azD-Tf-41S" id="TSz-6S-ZKW"/>
+                <outlet property="topFunView" destination="Yhg-hK-ia8" id="Vwn-sa-GRg"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jb6-G7-6Hx">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azD-Tf-41S">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </webView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhg-hK-ia8">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <subviews>
+                                <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="smy-KL-ORN">
+                                    <rect key="frame" x="37" y="8" width="100" height="27"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="27" id="2u9-8a-seV"/>
+                                        <constraint firstAttribute="width" constant="100" id="6Zh-DB-Sab"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" title="校园介绍">
+                                        <color key="titleColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" backgroundImage="topfunxuankuang">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="topFunBtnClicked:" destination="-1" eventType="touchUpInside" id="ESW-b0-HDQ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmm-zJ-Bnr">
+                                    <rect key="frame" x="183" y="8" width="100" height="27"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="27" id="RLH-q0-odO"/>
+                                        <constraint firstAttribute="width" constant="100" id="m7a-Ta-w1N"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <state key="normal" title="招生计划">
+                                        <color key="titleColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="selected" title="招生计划" backgroundImage="topfunxuankuang">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <state key="highlighted" title="招生计划">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="topFunBtnClicked:" destination="-1" eventType="touchUpInside" id="xg6-Fg-L8D"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.90196078431372551" green="0.27450980392156865" blue="0.3843137254901961" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="0Eh-g4-OEM"/>
+                                <constraint firstAttribute="bottom" secondItem="smy-KL-ORN" secondAttribute="bottom" constant="9" id="5P1-g7-hcs"/>
+                                <constraint firstItem="smy-KL-ORN" firstAttribute="leading" secondItem="Yhg-hK-ia8" secondAttribute="leading" constant="37" id="5yl-r3-2oP"/>
+                                <constraint firstItem="rmm-zJ-Bnr" firstAttribute="top" secondItem="Yhg-hK-ia8" secondAttribute="top" constant="8" id="R8s-jb-ugp"/>
+                                <constraint firstItem="smy-KL-ORN" firstAttribute="top" secondItem="Yhg-hK-ia8" secondAttribute="top" constant="8" id="eQE-GN-D0H"/>
+                                <constraint firstAttribute="trailing" secondItem="rmm-zJ-Bnr" secondAttribute="trailing" constant="37" id="kiC-8w-iaS"/>
+                                <constraint firstAttribute="bottom" secondItem="rmm-zJ-Bnr" secondAttribute="bottom" constant="9" id="stB-pP-RuA"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Yhg-hK-ia8" firstAttribute="top" secondItem="jb6-G7-6Hx" secondAttribute="top" id="3ae-Ui-zVI"/>
+                        <constraint firstItem="Yhg-hK-ia8" firstAttribute="leading" secondItem="jb6-G7-6Hx" secondAttribute="leading" id="46U-Y7-hkG"/>
+                        <constraint firstAttribute="trailing" secondItem="azD-Tf-41S" secondAttribute="trailing" id="9Rg-dB-UE5"/>
+                        <constraint firstItem="azD-Tf-41S" firstAttribute="leading" secondItem="jb6-G7-6Hx" secondAttribute="leading" id="J1B-gy-c2g"/>
+                        <constraint firstAttribute="trailing" secondItem="Yhg-hK-ia8" secondAttribute="trailing" id="J6u-0P-bZ2"/>
+                        <constraint firstAttribute="bottom" secondItem="azD-Tf-41S" secondAttribute="bottom" id="RPj-SO-X5I"/>
+                        <constraint firstItem="azD-Tf-41S" firstAttribute="top" secondItem="jb6-G7-6Hx" secondAttribute="top" id="XD2-fT-Bmc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jb6-G7-6Hx" secondAttribute="bottom" id="GK1-nq-7WK"/>
+                <constraint firstAttribute="trailing" secondItem="jb6-G7-6Hx" secondAttribute="trailing" id="PTC-CZ-WXS"/>
+                <constraint firstItem="jb6-G7-6Hx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QvG-9i-AM4"/>
+                <constraint firstItem="jb6-G7-6Hx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iUs-F9-DAx"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="topfunxuankuang" width="100" height="27"/>
+    </resources>
+</document>

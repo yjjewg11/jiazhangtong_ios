@@ -11,6 +11,7 @@
 @interface ReplyListViewController : BaseKeyboardViewController
 
 @property (strong, nonatomic) NSString * topicUUID;
+@property (assign, nonatomic) KGTopicType topicType;
 
 - (IBAction)sendBtnClicked:(UIButton *)sender;
 

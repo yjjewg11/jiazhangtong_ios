@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 
+#import "SettingViewController.h"
+#import "MyCollectionViewController.h"
+
 @interface MeViewController : BaseViewController
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -7,12 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StudentOtherInfoViewController">
             <connections>
-                <outlet property="contentView" destination="lCt-Qu-V5V" id="xD8-WR-fsd"/>
-                <outlet property="nameTextField" destination="eob-lv-OmF" id="OXz-zw-FYu"/>
-                <outlet property="telTextField" destination="3iQ-xH-ka6" id="zu2-pY-6Uc"/>
+                <outlet property="contentView" destination="JdB-4q-2op" id="FRB-sQ-gKf"/>
+                <outlet property="naiTextField" destination="8aE-jE-udd" id="xhJ-Xc-d5x"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="workTextField" destination="FDc-dK-f7A" id="DC6-2u-5mE"/>
-                <outlet property="workView" destination="izN-ox-agg" id="ofI-jB-Le4"/>
+                <outlet property="waigongTextField" destination="fTj-nA-fLz" id="3CB-a5-em8"/>
+                <outlet property="waipoTextField" destination="gdd-Qe-tbU" id="1HQ-n1-aa4"/>
+                <outlet property="yeyeTextField" destination="YBh-Bi-W0D" id="VhQ-53-Mnz"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,25 +20,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCt-Qu-V5V">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JdB-4q-2op">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zge-Ps-SxK">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmn-g9-mer">
                             <rect key="frame" x="16" y="15" width="288" height="70"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="YO3-td-eG0">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="6bI-h4-9Ly">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4C-Yo-fla">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="爷爷" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvD-ul-FHZ">
                                     <rect key="frame" x="29" y="15" width="60" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="6FK-vU-RGe">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="aPj-m2-FMx">
                                     <rect key="frame" x="0.0" y="40" width="288" height="30"/>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eob-lv-OmF" customClass="KGTextField">
+                                <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-Bi-W0D" customClass="KGTextField">
                                     <rect key="frame" x="10" y="40" width="278" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -46,26 +46,26 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="X3f-OW-OUJ"/>
-                                <constraint firstAttribute="width" constant="288" id="X8z-GD-jET"/>
+                                <constraint firstAttribute="width" constant="288" id="BVG-VW-lVl"/>
+                                <constraint firstAttribute="height" constant="70" id="FEf-UA-SOP"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyc-mc-9Wv">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMM-B1-01o">
                             <rect key="frame" x="16" y="85" width="288" height="70"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="Lqz-m3-QQy">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="otx-O1-FBi">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="电话" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gk1-vc-IeY">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="奶奶" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vfu-m9-4Xb">
                                     <rect key="frame" x="29" y="15" width="60" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="GwV-RA-CrY">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="gxm-e9-4pr">
                                     <rect key="frame" x="0.0" y="40" width="288" height="30"/>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3iQ-xH-ka6" customClass="KGTextField">
+                                <textField opaque="NO" clipsSubviews="YES" tag="11" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8aE-jE-udd" customClass="KGTextField">
                                     <rect key="frame" x="10" y="40" width="278" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -73,26 +73,26 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="bp7-YP-x0p"/>
-                                <constraint firstAttribute="width" constant="288" id="ctn-cs-aBp"/>
+                                <constraint firstAttribute="height" constant="70" id="bFh-hw-8Ii"/>
+                                <constraint firstAttribute="width" constant="288" id="nFv-Ch-KS1"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izN-ox-agg">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-gK-NGC">
                             <rect key="frame" x="16" y="155" width="288" height="70"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-V7-JPx">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="dO3-9U-Fb7">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="工作单位" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8p-8m-q6z">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="外公" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMm-Mp-Rx5">
                                     <rect key="frame" x="29" y="15" width="60" height="15"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="hTG-a8-ug4">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="Iel-CZ-tZW">
                                     <rect key="frame" x="0.0" y="40" width="288" height="30"/>
                                 </imageView>
-                                <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FDc-dK-f7A" customClass="KGTextField">
+                                <textField opaque="NO" clipsSubviews="YES" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fTj-nA-fLz" customClass="KGTextField">
                                     <rect key="frame" x="10" y="40" width="278" height="30"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -100,34 +100,63 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="288" id="I9z-Ao-AAg"/>
-                                <constraint firstAttribute="height" constant="70" id="bOu-Aq-QYD"/>
+                                <constraint firstAttribute="width" constant="288" id="SfS-Jt-TLs"/>
+                                <constraint firstAttribute="height" constant="70" id="TEJ-S3-aO0"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snB-bW-VUy">
+                            <rect key="frame" x="16" y="225" width="288" height="70"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="Dpk-9d-fnq">
+                                    <rect key="frame" x="16" y="15" width="5" height="13"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="外婆" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEu-Ol-yhf">
+                                    <rect key="frame" x="29" y="15" width="60" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="5vc-YI-HDd">
+                                    <rect key="frame" x="0.0" y="40" width="288" height="30"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" tag="13" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-Qe-tbU" customClass="KGTextField">
+                                    <rect key="frame" x="10" y="40" width="278" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="70" id="0ju-cV-sti"/>
+                                <constraint firstAttribute="width" constant="288" id="Su4-Xk-6Hz"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="izN-ox-agg" firstAttribute="top" secondItem="tyc-mc-9Wv" secondAttribute="bottom" id="9do-Tn-1R6"/>
-                        <constraint firstAttribute="centerX" secondItem="izN-ox-agg" secondAttribute="centerX" id="PJI-Ov-b4b"/>
-                        <constraint firstAttribute="centerX" secondItem="zge-Ps-SxK" secondAttribute="centerX" id="UGb-O8-tGH"/>
-                        <constraint firstItem="zge-Ps-SxK" firstAttribute="top" secondItem="lCt-Qu-V5V" secondAttribute="top" constant="15" id="V6N-zD-63e"/>
-                        <constraint firstAttribute="centerX" secondItem="tyc-mc-9Wv" secondAttribute="centerX" id="rIp-c6-XPK"/>
-                        <constraint firstItem="tyc-mc-9Wv" firstAttribute="top" secondItem="zge-Ps-SxK" secondAttribute="bottom" id="xsa-cs-0ld"/>
+                        <constraint firstItem="snB-bW-VUy" firstAttribute="top" secondItem="8uJ-gK-NGC" secondAttribute="bottom" id="9y4-cv-5td"/>
+                        <constraint firstItem="SMM-B1-01o" firstAttribute="top" secondItem="hmn-g9-mer" secondAttribute="bottom" id="C2R-Lx-BP8"/>
+                        <constraint firstAttribute="centerX" secondItem="SMM-B1-01o" secondAttribute="centerX" id="C2i-Ho-flh"/>
+                        <constraint firstItem="hmn-g9-mer" firstAttribute="top" secondItem="JdB-4q-2op" secondAttribute="top" constant="15" id="Ien-n3-jGD"/>
+                        <constraint firstAttribute="centerX" secondItem="snB-bW-VUy" secondAttribute="centerX" id="NAV-G2-lND"/>
+                        <constraint firstAttribute="centerX" secondItem="8uJ-gK-NGC" secondAttribute="centerX" id="OcK-Pj-Eo5"/>
+                        <constraint firstItem="8uJ-gK-NGC" firstAttribute="top" secondItem="SMM-B1-01o" secondAttribute="bottom" id="Uaw-8e-AZD"/>
+                        <constraint firstAttribute="centerX" secondItem="hmn-g9-mer" secondAttribute="centerX" id="a7d-mP-asj"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="lCt-Qu-V5V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="4zD-v2-nAN"/>
-                <constraint firstAttribute="trailing" secondItem="lCt-Qu-V5V" secondAttribute="trailing" id="TA2-Wr-1nO"/>
-                <constraint firstItem="lCt-Qu-V5V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nnU-od-Agb"/>
-                <constraint firstAttribute="bottom" secondItem="lCt-Qu-V5V" secondAttribute="bottom" id="tad-dW-ekK"/>
+                <constraint firstAttribute="bottom" secondItem="JdB-4q-2op" secondAttribute="bottom" id="3Tj-9h-1xz"/>
+                <constraint firstItem="JdB-4q-2op" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="PML-Wx-uuD"/>
+                <constraint firstItem="JdB-4q-2op" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c9E-bl-VBT"/>
+                <constraint firstAttribute="trailing" secondItem="JdB-4q-2op" secondAttribute="trailing" id="duT-Xt-tzq"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
         <image name="hongtiao" width="5" height="13"/>
-        <image name="wodekuang" width="60" height="60"/>
+        <image name="wodekuang" width="288" height="30"/>
     </resources>
 </document>

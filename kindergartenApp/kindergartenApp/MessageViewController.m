@@ -13,6 +13,14 @@
 #import "KGHUD.h"
 #import "PageInfoDomain.h"
 #import "UIColor+Extension.h"
+#import "BrowseURLViewController.h"
+#import "InteractViewController.h"
+#import "IntroductionViewController.h"
+#import "TimetableViewController.h"
+#import "RecipesViewController.h"
+#import "GiftwareArticlesInfoViewController.h"
+#import "AnnouncementInfoViewController.h"
+#import "MessageTableViewCell.h"
 
 @interface MessageViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
@@ -80,6 +88,63 @@
  */
 - (void)didSelectRowCallBack:(id)baseDomain tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     
+    MessageDomain * domain = (MessageDomain *)baseDomain;
+    
+    BaseViewController * vc = nil;
+    
+    switch (domain.type) {
+        case Topic_XYGG:
+        case Topic_Announcement:
+            vc = [[AnnouncementInfoViewController alloc] init];
+            ((AnnouncementInfoViewController *)vc).annuuid = domain.rel_uuid;
+            break;
+        case Topic_Articles:
+            vc = [[GiftwareArticlesInfoViewController alloc] init];
+            ((GiftwareArticlesInfoViewController *)vc).annuuid = domain.rel_uuid;
+            break;
+        case Topic_ZSJH:
+            vc = [[IntroductionViewController alloc] init];
+            ((IntroductionViewController *)vc).isNoXYXG = YES;
+            break;
+        case Topic_Recipes:
+            vc = [[RecipesViewController alloc] init];
+            break;
+        case Topic_JPKC:
+            vc = [[TimetableViewController alloc] init];
+            break;
+        case Topic_YEYJS:
+            vc = [[IntroductionViewController alloc] init];
+            break;
+        case Topic_Interact:
+            vc = [[InteractViewController alloc] init];
+            break;
+        case Topic_HTML:
+            vc = [[BrowseURLViewController alloc] init];
+            ((BrowseURLViewController *)vc).url = domain.url;
+            break;
+        default:
+            break;
+    }
+    
+    if(vc) {
+        MessageTableViewCell * cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+        [self readMessage:domain cell:cell];
+        
+        vc.title = domain.title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+//readMsg
+- (void)readMessage:(MessageDomain *)domain cell:(MessageTableViewCell *)cell {
+    [[KGHttpService sharedService] readMessage:domain.uuid success:^(NSString *msgStr) {
+        domain.isread = YES;
+        
+        cell.unReadIconImageView.hidden = YES;
+        
+    } faild:^(NSString *errorMsg) {
+        
+    }];
 }
 
 

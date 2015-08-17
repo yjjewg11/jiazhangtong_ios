@@ -22,6 +22,13 @@
                             <constraint firstAttribute="height" constant="45" id="iHk-KH-W34"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shoucang" translatesAutoresizingMaskIntoConstraints="NO" id="sae-1t-VGd">
+                        <rect key="frame" x="50" y="17" width="8" height="8"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="Ian-6d-tRY"/>
+                            <constraint firstAttribute="height" constant="8" id="SJb-63-k10"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O62-Tg-gyd">
                         <rect key="frame" x="65" y="15" width="245" height="14"/>
                         <constraints>
@@ -43,16 +50,16 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5B-TS-cpQ">
                         <rect key="frame" x="10" y="63" width="150" height="10"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="10" id="giE-MT-6r2"/>
+                            <constraint firstAttribute="height" constant="10" id="Rtd-xl-4aa"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J7-Mn-hTY">
-                        <rect key="frame" x="60" y="63" width="250" height="10"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7J7-Mn-hTY">
+                        <rect key="frame" x="160" y="63" width="144" height="10"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="10" id="ztt-gZ-VIE"/>
+                            <constraint firstAttribute="height" constant="10" id="QfP-Ms-MEG"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,20 +69,21 @@
                 <constraints>
                     <constraint firstItem="O62-Tg-gyd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="2sl-ye-ZnA"/>
                     <constraint firstAttribute="trailingMargin" secondItem="DOR-8B-IJZ" secondAttribute="trailing" constant="2" id="AYb-Oe-2Hf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="7J7-Mn-hTY" secondAttribute="trailing" constant="8" id="Ffc-ol-Maz"/>
                     <constraint firstAttribute="trailingMargin" secondItem="O62-Tg-gyd" secondAttribute="trailing" constant="2" id="Gdb-fR-VWg"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="7J7-Mn-hTY" secondAttribute="bottom" constant="-4" id="JWN-Mk-dcA"/>
+                    <constraint firstItem="sae-1t-VGd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="M8z-8D-U9Z"/>
                     <constraint firstItem="DOR-8B-IJZ" firstAttribute="top" secondItem="O62-Tg-gyd" secondAttribute="bottom" constant="8" id="NR7-Wx-p61"/>
-                    <constraint firstItem="A5B-TS-cpQ" firstAttribute="top" secondItem="PLc-Gx-5MM" secondAttribute="bottom" constant="8" id="OoJ-cp-cm9"/>
+                    <constraint firstItem="A5B-TS-cpQ" firstAttribute="top" secondItem="PLc-Gx-5MM" secondAttribute="bottom" constant="8" id="O4A-Wt-2z0"/>
                     <constraint firstItem="DOR-8B-IJZ" firstAttribute="leading" secondItem="PLc-Gx-5MM" secondAttribute="trailing" constant="10" id="PCe-qT-QJS"/>
-                    <constraint firstItem="7J7-Mn-hTY" firstAttribute="top" secondItem="DOR-8B-IJZ" secondAttribute="bottom" constant="14" id="SMT-8r-UNe"/>
-                    <constraint firstItem="A5B-TS-cpQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="T4x-wg-702"/>
+                    <constraint firstItem="sae-1t-VGd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="42" id="PUY-sZ-ywm"/>
                     <constraint firstItem="PLc-Gx-5MM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="TH8-2q-J06"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="A5B-TS-cpQ" secondAttribute="bottom" constant="-4" id="Wvz-Fh-MTV"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="7J7-Mn-hTY" secondAttribute="bottom" constant="-4" id="dL5-KJ-7xB"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="7J7-Mn-hTY" secondAttribute="trailing" constant="2" id="fxN-AG-7Qq"/>
+                    <constraint firstItem="7J7-Mn-hTY" firstAttribute="top" secondItem="DOR-8B-IJZ" secondAttribute="bottom" constant="14" id="VYh-l2-DSP"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="A5B-TS-cpQ" secondAttribute="bottom" constant="-4" id="ffZ-gu-gKv"/>
                     <constraint firstItem="O62-Tg-gyd" firstAttribute="leading" secondItem="PLc-Gx-5MM" secondAttribute="trailing" constant="10" id="hcd-qg-9IV"/>
-                    <constraint firstItem="7J7-Mn-hTY" firstAttribute="top" secondItem="DOR-8B-IJZ" secondAttribute="bottom" constant="14" id="lZg-UD-PW2"/>
                     <constraint firstItem="PLc-Gx-5MM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="lvm-IW-skp"/>
-                    <constraint firstItem="7J7-Mn-hTY" firstAttribute="leading" secondItem="A5B-TS-cpQ" secondAttribute="trailing" constant="50" id="xAd-v1-JJN"/>
+                    <constraint firstItem="7J7-Mn-hTY" firstAttribute="leading" secondItem="A5B-TS-cpQ" secondAttribute="trailing" id="mzd-Cp-HLV"/>
+                    <constraint firstItem="A5B-TS-cpQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="t45-U2-g2j"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -84,10 +92,12 @@
                 <outlet property="subTitleLabel" destination="DOR-8B-IJZ" id="qQt-p0-QfG"/>
                 <outlet property="timeLabel" destination="7J7-Mn-hTY" id="WH7-Hs-VJn"/>
                 <outlet property="titleLabel" destination="O62-Tg-gyd" id="s3W-XM-YOe"/>
+                <outlet property="unReadIconImageView" destination="sae-1t-VGd" id="tun-U0-cdQ"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="shoucang" width="17" height="17"/>
         <image name="youxiang1" width="45" height="45"/>
     </resources>
 </document>

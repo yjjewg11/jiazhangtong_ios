@@ -10,8 +10,10 @@
 
 @interface KGEmojiManage : NSObject
 
-@property (strong, nonatomic) NSArray         * emojiArray;     //表情对象集合
-@property (strong, nonatomic) NSMutableArray  * emojiNameArray; //所有的表情名称集合
+@property (strong, nonatomic) NSArray         * emojiArray;     //server表情对象集合
+@property (strong, nonatomic) NSMutableDictionary  * emojiMDict;//locat表情字典  key=[name], value=locatpath
+//@property (strong, nonatomic) NSMutableArray  * emojiNameArray; //所有的表情名称集合
+@property (assign, nonatomic) BOOL              isSwitchEmoji;  //是否是切换表情键盘
 @property (assign, nonatomic) BOOL              isChatEmoji;
 @property (strong, nonatomic) NSMutableString * chatHTMLInfo;   //聊天消息
 

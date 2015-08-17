@@ -14,6 +14,6 @@
 @property (strong, nonatomic) NSString * name; //老师名字
 @property (strong, nonatomic) NSString * img;  //老师头像
 @property (strong, nonatomic) NSString * tel;  //电话号码.  园长没有电话
-@property (assign, nonatomic) BOOL       isTeacher;  //是否是老师
+@property (assign, nonatomic) BOOL       type;  //是否是老师
 
 @end

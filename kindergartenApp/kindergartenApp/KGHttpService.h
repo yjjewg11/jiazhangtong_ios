@@ -20,6 +20,7 @@
 #import "WriteVO.h"
 #import "QueryChatsVO.h"
 #import "AddressBookResp.h"
+#import "FavoritesDomain.h"
 
 @interface KGHttpService : NSObject
 
@@ -33,12 +34,20 @@
 
 + (KGHttpService *)sharedService;
 
+//根据组织id得到图片
+- (NSString *)getGroupImgByUUID:(NSString *)groupUUID;
 
 //根据组织id得到名称
 - (NSString *)getGroupNameByUUID:(NSString *)groupUUID;
 
+//根据学生id得到班级
+- (NSString *)getClassNameByUUID:(NSString *)classUUID;
+
 //获取学生信息
 - (KGUser *)getUserByUUID:(NSString *)uuid;
+
+//根据班级获取学生信息
+- (KGUser *)getUserByClassUUID:(NSString *)uuid;
 
 //图片上传
 - (void)uploadImg:(UIImage *)img withName:(NSString *)imgName type:(NSInteger)imgType success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
@@ -66,8 +75,11 @@
 
 - (void)updatePwd:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
+//获取指定学生绑定的卡号信息
+- (void)getBuildCardList:(NSString *)useruuid success:(void (^)(NSArray * cardArray))success faild:(void (^)(NSString * errorMsg))faild;
 
-- (void)getPhoneVlCode:(NSString *)phone success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)getPhoneVlCode:(NSString *)phone type:(NSInteger)type success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 
 // 账号相关 end
@@ -78,6 +90,9 @@
 
 // 根据互动id获取互动详情
 - (void)getClassNewsByUUID:(NSString *)uuid success:(void (^)(TopicDomain * classNewInfo))success faild:(void (^)(NSString * errorMsg))faild;
+
+// 新增互动
+- (void)saveClassNews:(TopicDomain *)topicDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 
 // 分页获取班级互动列表
@@ -137,6 +152,8 @@
 //分页获取消息列表
 - (void)getMessageList:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * messageArray))success faild:(void (^)(NSString * errorMsg))faild;
 
+//读取消息
+- (void)readMessage:(NSString *)msguuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 
 // 评价老师 begin
@@ -200,8 +217,25 @@
 //课程表 begin
 
 //课程表列表
-- (void)getTeachingPlanList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * teachPlanArray))success faild:(void (^)(NSString * errorMsg))faild;
+- (void)getTeachingPlanList:(NSString *)beginDate endDate:(NSString *)endDate cuid:(NSString *)classuuid success:(void (^)(NSArray * teachPlanArray))success faild:(void (^)(NSString * errorMsg))faild;
 
 //课程表 end
+
+
+//收藏 begin
+
+//收藏列表
+- (void)getFavoritesList:(NSInteger)pageNo success:(void (^)(NSArray * favoritesArray))success faild:(void (^)(NSString * errorMsg))faild;
+
+//保存收藏
+- (void)saveFavorites:(FavoritesDomain *)favoritesDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+//取消收藏
+- (void)delFavorites:(NSString *)uuid success:(void(^)(NSString *msgStr))success failed:(void(^)(NSString *errorMsg))faild;
+
+//收藏 end
+
+#pragma mark - 修改密码
+- (void)modifyPassword:(KGUser *)user success:(void(^)(NSString * msg))success faild:(void(^)(NSString * errorMsg))faild;
 
 @end

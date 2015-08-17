@@ -21,6 +21,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"特长课程";
+    
+    myWebView.backgroundColor = [UIColor clearColor];
+    myWebView.opaque = NO;
     [myWebView loadRequest:[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[KGHttpUrl getSpecialtyCoursesUrl]]]];
 }
 

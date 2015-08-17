@@ -10,4 +10,14 @@
 
 @implementation AnnouncementDomain
 
+- (void)setType:(NSInteger)type {
+    _type = type;
+    
+    if(type == Number_Zero) {
+        self.topicType = Topic_XYGG;
+    } else {
+        self.topicType = Topic_Announcement;
+    }
+}
+
 @end

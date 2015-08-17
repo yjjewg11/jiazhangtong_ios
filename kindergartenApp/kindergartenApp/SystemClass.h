@@ -17,6 +17,7 @@
 #define Key_Notification_MessageText       @"messageText"
 #define Key_Notification_TopicFunClicked   @"topicCellFunClicked"
 #define Key_Notification_TopicHeight       @"topicCellHeightChange"
+#define Key_Notification_TopicLoadMore     @"topicCellLoadMore"
 #define Key_Notification_TeacherJudge      @"teacherJudgeClicked"
 #define Key_Notification_AddressbookCellFun @"AddressbookCellFun"
 

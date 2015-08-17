@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import "UIColor+Extension.h"
-#import "BaiduMobStat.h"
+#import "MobClick.h"
 
 @interface BaseViewController ()
 
@@ -20,14 +20,13 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
-    
+    [MobClick beginLogPageView:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+    [MobClick endLogPageView:cName];
 }
 
 - (void)viewDidLoad {

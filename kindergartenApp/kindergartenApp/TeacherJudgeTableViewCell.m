@@ -11,6 +11,7 @@
 #import "UIView+Extension.h"
 #import "UIColor+Extension.h"
 #import "KGNSStringUtil.h"
+#import "UIButton+Extension.h"
 
 #define judgeTeacherDefText  @"说点什么吧..."
 
@@ -85,9 +86,9 @@
     _judgeTextView.editable = NO;
     _submitBtn.enabled = YES;
     _submitBtn.userInteractionEnabled = NO;
-    
+    [_submitBtn setBackgroundImage:@"teacherJudgetijiao2" selImg:@"teacherJudgetijiao2"];
     UIImageView * imageView = (UIImageView *)[self viewWithTag:_teachVO.type * 100];
-    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_yes_%ld", (long)_teachVO.type]];
+    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_yes_%ld", (long)_teachVO.type * Number_Ten]];
 }
 
 @end

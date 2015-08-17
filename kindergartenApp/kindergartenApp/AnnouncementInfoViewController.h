@@ -13,6 +13,6 @@
 @interface AnnouncementInfoViewController : BaseTopicInteractViewController
 
 
-@property (strong, nonatomic) AnnouncementDomain * announcementDomain;
+@property (strong, nonatomic) NSString * annuuid;
 
 @end

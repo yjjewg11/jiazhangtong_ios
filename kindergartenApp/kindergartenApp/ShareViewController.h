@@ -7,9 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "AnnouncementDomain.h"
 
 @interface ShareViewController : BaseViewController
 
+@property (strong, nonatomic) AnnouncementDomain * announcementDomain;
 
 - (IBAction)shareBtnClicked:(UIButton *)sender;
 

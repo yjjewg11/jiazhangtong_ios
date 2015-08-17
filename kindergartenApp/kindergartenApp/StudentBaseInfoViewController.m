@@ -30,6 +30,7 @@
     
     PopupView * popupView;
     UIDatePicker * datePicker;
+    BOOL isSetHeadImg; //是否设置过头像
 }
 
 @end
@@ -75,8 +76,19 @@
     nameTextField.text = _studentInfo.name;
     nickTextField.text = _studentInfo.nickname;
     birthdayTextField.text = _studentInfo.birthday;
-    headImageView.image = [UIImage imageNamed:@"wodetoux"];
-//    [headImageView sd_setImageWithURL:[NSURL URLWithString:_studentInfo.headimg]];
+    
+    [self resetStudentSet];
+}
+
+//设置性别图
+- (void)resetStudentSet {
+    if(!_studentInfo.sex) {
+        boyImageView.image = [UIImage imageNamed:@"menan2"];
+        girlImageView.image = [UIImage imageNamed:@"menv1"];
+    } else {
+        boyImageView.image = [UIImage imageNamed:@"menan1"];
+        girlImageView.image = [UIImage imageNamed:@"menv2"];
+    }
 }
 
 
@@ -88,23 +100,25 @@
         _studentInfo.birthday = [KGNSStringUtil trimString:birthdayTextField.text];
         
         //提交数据
-        [[KGHUD sharedHud] show:self.contentView msg:@"上传头像中..."];
-//        [self saveStudentInfo];
-
-//        [self saveStudentInfo];
-        [self uploadImg:^(BOOL isSuccess, NSString *msgStr) {
+        if(isSetHeadImg) {
+            [[KGHUD sharedHud] show:self.contentView msg:@"上传头像中..."];
             
-            _studentInfo.headimg = msgStr;
-            [[KGHUD sharedHud] changeText:self.contentView text:@"上传成功"];
-            
-            if(isSuccess) {
-                [[KGHUD sharedHud] changeText:self.contentView text:@"提交信息中..."];
-                [self saveStudentInfo];
-
-            } else {
-                [[KGHUD sharedHud] hide:self.contentView];
-            }
-        }];
+            [self uploadImg:^(BOOL isSuccess, NSString *msgStr) {
+                
+                _studentInfo.headimg = msgStr;
+                [[KGHUD sharedHud] changeText:self.contentView text:@"上传成功"];
+                
+                if(isSuccess) {
+                    [self saveStudentInfo];
+                    
+                } else {
+                    [[KGHUD sharedHud] hide:self.contentView];
+                }
+            }];
+        } else {
+            [self saveStudentInfo];
+        }
+        
     }
 }
 
@@ -121,7 +135,7 @@
 
 //提交基本信息
 - (void)saveStudentInfo {
-    
+    [[KGHUD sharedHud] changeText:self.contentView text:@"提交信息中..."];
     [[KGHttpService sharedService] saveStudentInfo:_studentInfo success:^(NSString *msgStr) {
         
         [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
@@ -227,6 +241,8 @@
         [picker dismissViewControllerAnimated:YES completion:nil];
         
         headImageView.image = image;
+        
+        isSetHeadImg = YES;
     } 
     
 }
@@ -239,7 +255,7 @@
 
 - (IBAction)sexBtnClicked:(UIButton *)sender {
     _studentInfo.sex = sender.tag-Number_Ten;
-    
+    [self resetStudentSet];
 }
 
 

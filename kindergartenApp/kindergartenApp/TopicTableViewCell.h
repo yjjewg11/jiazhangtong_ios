@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "HBVLinkedTextView.h"
 #import "KGTextField.h"
-#import "TQRichTextView.h"
 #import "TopicInteractionView.h"
+#import "MLEmojiLabel.h"
 
 @class TopicFrame;
 
@@ -30,11 +30,8 @@
 /** 标题 */
 @property (nonatomic,weak) UILabel * titleLab;
 
-/** 内容 */
-@property (nonatomic, weak) UIView  * topicContentView;
-
 /** 内容 文本表情 */
-@property (nonatomic, weak) TQRichTextView  * topicTextView;
+@property (nonatomic, weak) MLEmojiLabel  * topicTextView;
 
 /** 内容 图片 */
 @property (nonatomic, weak) UIView  * topicImgsView;

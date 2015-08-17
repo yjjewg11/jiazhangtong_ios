@@ -7,16 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol MoreMenuViewDelegate <NSObject>
-
-- (void)cancelCallback;
-
-@end
+#import "DynamicMenuDomain.h"
 
 @interface MoreMenuView : UIView
 
-@property (strong, nonatomic) id<MoreMenuViewDelegate> delegate;
+@property (nonatomic, copy) void (^MoreMenuBlock)(DynamicMenuDomain * domain);
 
 - (void)loadMoreMenu:(NSArray *)menuArray;
 

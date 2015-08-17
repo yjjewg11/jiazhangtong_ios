@@ -19,6 +19,7 @@
     
     IBOutlet UITableView * addressbookTableView;
     AddressBookResp * addressBookList;
+    UIWebView * telWebView;
 }
 
 
@@ -33,6 +34,7 @@
     addressbookTableView.separatorColor = [UIColor clearColor];
     addressbookTableView.delegate   = self;
     addressbookTableView.dataSource = self;
+    [addressbookTableView registerNib:[UINib nibWithNibName:@"AddressbookTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"AddressbookTableViewCell"];
     
     [self getTableData];
     
@@ -48,6 +50,14 @@
     
     if(type == Number_Ten) {
         //打电话
+        if (!telWebView) {
+            telWebView = [[UIWebView alloc] init];
+        }
+        if (telWebView.superview) {
+            [telWebView removeFromSuperview];
+        }
+        [telWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",domain.tel]]]];
+        [self.view addSubview:telWebView];
     } else {
         //发消息
         ChatViewController * chatVC = [[ChatViewController alloc] init];
@@ -94,12 +104,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AddressbookTableViewCell * cell = [AddressbookTableViewCell cellWithTableView:tableView];
+//    AddressbookTableViewCell * cell = [AddressbookTableViewCell cellWithTableView:tableView];
+    AddressbookTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"AddressbookTableViewCell"];
     if(indexPath.section == Number_Zero) {
         [cell resetValue:[addressBookList.listKD objectAtIndex:indexPath.row] parame:nil];
     } else {
-        AddressBookDomain * domain = [addressBookList.listKD objectAtIndex:indexPath.row];
-        domain.isTeacher = YES;
+        AddressBookDomain * domain = [addressBookList.list objectAtIndex:indexPath.row];
         [cell resetValue:domain parame:nil];
     }
     

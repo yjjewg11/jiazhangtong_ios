@@ -16,7 +16,9 @@
     [super initialize];
     
     [self setupObjectClassInArray:^NSDictionary *{
-        return @{@"list"   : @"KGUser"};
+        return @{@"list"       : @"KGUser",
+                 @"group_list" : @"GroupDomain",
+                 @"class_list" : @"ClassDomain"};
     }];
 }
 

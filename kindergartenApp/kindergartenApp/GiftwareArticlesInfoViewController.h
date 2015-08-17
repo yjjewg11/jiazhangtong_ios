@@ -11,7 +11,7 @@
 
 @interface GiftwareArticlesInfoViewController : BaseViewController
 
-@property (strong, nonatomic) AnnouncementDomain * announcementDomain;
+@property (strong, nonatomic) NSString * annuuid;
 
 - (IBAction)articlesFunBtnClicked:(UIButton *)sender;
 

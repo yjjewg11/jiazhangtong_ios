@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) NSString * create_useruuid;  //创建人uuid
 
+@property (strong, nonatomic) NSString * create_img;  //创建人头像
+
 @property (strong, nonatomic) NSString * create_time;  //创建时间
 
 @property (strong, nonatomic) NSString * reply_time;   //最新回复时间

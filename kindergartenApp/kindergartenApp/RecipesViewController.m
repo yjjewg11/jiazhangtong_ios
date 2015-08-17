@@ -32,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"每日食谱";
     
     isFirstReq = YES;
@@ -103,7 +104,7 @@
 - (void)getQueryDate:(NSInteger)index {
     if(!isFirstReq) {
         if(index != lastRow) {
-            lastDateStr = [KGDateUtil nextOrPreyDay:lastDateStr date:lastRow-index];
+            lastDateStr = [KGDateUtil calculateDay:lastDateStr date:lastRow-index];
         }
     } else {
         lastDateStr = [KGDateUtil getDate:Number_Two];

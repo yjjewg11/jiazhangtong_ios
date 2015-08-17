@@ -10,8 +10,8 @@
 
 @interface DianZanDomain : KGBaseDomain
 
-@property (assign, nonatomic) NSInteger count; //点赞总数
-@property (strong, nonatomic) NSString * names;//显示点赞人姓名,多个逗号分割.
-@property (assign, nonatomic) BOOL canDianzan;//True表示可以点赞,false表示点赞过了.可以取消点赞.
+@property (assign, nonatomic) NSInteger count;  //点赞总数
+@property (strong, nonatomic) NSString * names; //显示点赞人姓名,多个逗号分割.
+@property (assign, nonatomic) BOOL canDianzan;  //True表示可以点赞,false表示点赞过了.可以取消点赞.
 
 @end

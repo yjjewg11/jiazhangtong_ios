@@ -19,4 +19,9 @@
     }];
 }
 
+- (void)setDatavalue:(NSString *)datavalue {
+    _datavalue = datavalue;
+    _emojiName = [NSString stringWithFormat:@"[%@]", datavalue];
+}
+
 @end

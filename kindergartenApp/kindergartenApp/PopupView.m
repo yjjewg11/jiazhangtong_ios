@@ -16,7 +16,7 @@
 - (id)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if(self){
-        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:Number_ViewAlpha_Five];
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
         [self addGestureBtn];
     }
     return self;

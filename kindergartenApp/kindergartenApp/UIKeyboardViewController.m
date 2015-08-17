@@ -12,7 +12,7 @@
 #import "KGTextField.h"
 #import "KGTextView.h"
 
-//static CGFloat kboardHeight = 254.0f;
+//static CGFloat self.kboardHeight = 254.0f;
 //static CGFloat spacerY = 10.0f;
 static CGFloat spacerY = 0.0f;
 static CGFloat viewFrameY = 10;
@@ -88,11 +88,11 @@ static CGFloat viewFrameY = 10;
 //计算当前键盘的高度
 -(void)keyboardWillShowOrHide:(NSNotification *)notification {
 	CGSize kbSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    kboardHeight = kbSize.height;
+    self.kboardHeight = kbSize.height;
 	BOOL isShow = [[notification name] isEqualToString:UIKeyboardWillShowNotification] ? YES : NO;
 	if ([self firstResponder:objectView]) {
 		[self animateView:isShow textField:[self firstResponder:objectView]
-		heightforkeyboard:kboardHeight];
+		heightforkeyboard:self.kboardHeight];
 	}
 }
 
@@ -102,6 +102,10 @@ static CGFloat viewFrameY = 10;
 	
     [UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.3];
+    
+    UIView * window = [UIApplication sharedApplication].keyWindow;
+    CGFloat  wH = window.height;
+    CGFloat  emojiY = wH - kheight - 40;
 	if (isShow) {
 		if ([textField isKindOfClass:[UITextField class]]) {
 			UITextField *newText = ((UITextField *)textField);
@@ -119,6 +123,7 @@ static CGFloat viewFrameY = 10;
                 }
                 
                 rect.origin.y = y;
+                emojiY = textPoint.y - 40;
             } else {
                 rect.origin.y = viewFrameY;
             }
@@ -127,15 +132,32 @@ static CGFloat viewFrameY = 10;
 		else {
 			UITextView *newView = ((UITextView *)textField);
 			CGPoint textPoint = [newView convertPoint:CGPointMake(0, newView.frame.size.height + spacerY) toView:objectView];
-			if (rect.size.height - textPoint.y < kheight) 
+            if (rect.size.height - textPoint.y < kheight) {
 				rect.origin.y = rect.size.height - textPoint.y - kheight + viewFrameY;
-			else rect.origin.y = viewFrameY;
+                emojiY = textPoint.y - 40;
+            } else rect.origin.y = viewFrameY;
 		}
     } else {
         rect.origin.y = viewFrameY;
     }
 	objectView.frame = rect;
+    
+    if(_isEmojiInput && _boardDelegate && [_boardDelegate respondsToSelector:@selector(keyboardWillShowOrHide:inputY:)]) {
+        [_boardDelegate keyboardWillShowOrHide:isShow inputY:emojiY];
+    }
+    
     [UIView commitAnimations];
+    
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        UIView * window = [UIApplication sharedApplication].keyWindow;
+//        UITextField *newText = ((UITextField *)textField);
+//        CGPoint textPoint = [newText convertPoint:CGPointMake(0, newText.frame.size.height + spacerY) toView:window];
+//        if(_isEmojiInput && _boardDelegate && [_boardDelegate respondsToSelector:@selector(keyboardWillShowOrHide:inputY:)]) {
+//            [_boardDelegate keyboardWillShowOrHide:isShow inputY:textPoint.y];
+//        }
+//        NSLog(@"");
+//    });
 }
 
 //输入框获得焦点
@@ -183,13 +205,13 @@ static CGFloat viewFrameY = 10;
 			if (type == 1) {
 				if (i > 0) {
 					[[allInputFields objectAtIndex:--i] becomeFirstResponder];
-					[self animateView:YES textField:[allInputFields objectAtIndex:i] heightforkeyboard:kboardHeight];
+					[self animateView:YES textField:[allInputFields objectAtIndex:i] heightforkeyboard:self.kboardHeight];
 				}
 			}
 			else if (type == 2) {
 				if (i < [allInputFields count] - 1) {
 					[[allInputFields objectAtIndex:++i] becomeFirstResponder];
-					[self animateView:YES textField:[allInputFields objectAtIndex:i] heightforkeyboard:kboardHeight];
+					[self animateView:YES textField:[allInputFields objectAtIndex:i] heightforkeyboard:self.kboardHeight];
 				}else if(i == [allInputFields count] - 1){
                     [self resignKeyboard:objectView];
                 }
@@ -208,6 +230,9 @@ static CGFloat viewFrameY = 10;
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 //	[textField resignFirstResponder];
     [self firstResponderMove:2];
+//    if([allInputFields count] == Number_One) {
+//        [self textFieldDidEndEditing:textField];
+//    }
 	return YES;
 }
 

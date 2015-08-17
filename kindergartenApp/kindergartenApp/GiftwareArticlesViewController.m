@@ -44,7 +44,6 @@
     }
 }
 
-
 //获取数据加载表格
 - (void)getTableData{
     pageInfo.pageNo = reFreshView.page;
@@ -81,8 +80,9 @@
  *  @param indexPath   indexPath
  */
 - (void)didSelectRowCallBack:(id)baseDomain tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+    AnnouncementDomain * annDomain = (AnnouncementDomain *)baseDomain;
     GiftwareArticlesInfoViewController * infoVC = [[GiftwareArticlesInfoViewController alloc] init];
-    infoVC.announcementDomain = baseDomain;
+    infoVC.annuuid = annDomain.uuid;
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 

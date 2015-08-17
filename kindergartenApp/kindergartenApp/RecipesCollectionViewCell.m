@@ -254,14 +254,14 @@
     [cell addSubview:textView];
     
     
-    CGFloat y = CGRectGetMaxY(textView.frame) + Number_Ten;
-    CGRect frame = CGRectMake(Number_Zero, y, KGSCREEN.size.width, 56);
-    TopicInteractionView * topicView = [[TopicInteractionView alloc] initWithFrame:frame];
-    [topicView loadFunView:recipes.dianzan reply:recipes.replyPage];
-    topicView.topicType = Topic_Recipes;
-    topicView.topicUUID = recipes.uuid;
-    [cell addSubview:topicView];
-    [topicView loadFunView:recipes.dianzan reply:recipes.replyPage];
+//    CGFloat y = CGRectGetMaxY(textView.frame) + Number_Ten;
+//    CGRect frame = CGRectMake(Number_Zero, y, KGSCREEN.size.width, 56);
+//    TopicInteractionView * topicView = [[TopicInteractionView alloc] initWithFrame:frame];
+//    [topicView loadFunView:recipes.dianzan reply:recipes.replyPage];
+//    topicView.topicType = Topic_Recipes;
+//    topicView.topicUUID = recipes.uuid;
+//    [cell addSubview:topicView];
+//    [topicView loadFunView:recipes.dianzan reply:recipes.replyPage];
     
     return cell;
 }

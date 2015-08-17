@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -23,9 +23,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTK-T9-X6v">
-                        <rect key="frame" x="16" y="67" width="45" height="11"/>
+                        <rect key="frame" x="5" y="67" width="67" height="11"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="8CG-le-Jn5"/>
+                            <constraint firstAttribute="width" constant="67" id="8CG-le-Jn5"/>
                             <constraint firstAttribute="height" constant="11" id="MR5-q3-Bf0"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -116,7 +116,7 @@
                     <constraint firstItem="yXJ-ej-Vre" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="8n9-Qb-zGE"/>
                     <constraint firstItem="Q8b-IN-IGy" firstAttribute="top" secondItem="TwJ-ne-DHY" secondAttribute="bottom" constant="8" id="8zE-Du-ohM"/>
                     <constraint firstItem="tQS-GF-s8d" firstAttribute="leading" secondItem="rPa-aO-ycY" secondAttribute="trailing" constant="15" id="9cG-O5-JPu"/>
-                    <constraint firstItem="nTK-T9-X6v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9up-oL-ozz"/>
+                    <constraint firstItem="nTK-T9-X6v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-3" id="9up-oL-ozz"/>
                     <constraint firstItem="M9b-Xp-Ys1" firstAttribute="leading" secondItem="Q8b-IN-IGy" secondAttribute="trailing" constant="15" id="BI0-aj-Wll"/>
                     <constraint firstItem="Ygm-kX-ExY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="DES-SK-zLF"/>
                     <constraint firstItem="Q8b-IN-IGy" firstAttribute="leading" secondItem="yXJ-ej-Vre" secondAttribute="trailing" constant="15" id="DEv-xe-ver"/>
@@ -124,7 +124,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="nTK-T9-X6v" secondAttribute="bottom" constant="10" id="ES8-1E-gzY"/>
                     <constraint firstItem="rPa-aO-ycY" firstAttribute="top" secondItem="Q8b-IN-IGy" secondAttribute="bottom" constant="8" id="Faa-U2-ekV"/>
                     <constraint firstItem="TwJ-ne-DHY" firstAttribute="leading" secondItem="yXJ-ej-Vre" secondAttribute="trailing" constant="15" id="IsR-lP-Eq9"/>
-                    <constraint firstItem="rPa-aO-ycY" firstAttribute="leading" secondItem="nTK-T9-X6v" secondAttribute="trailing" constant="15" id="Jfe-oV-P57"/>
+                    <constraint firstItem="rPa-aO-ycY" firstAttribute="leading" secondItem="nTK-T9-X6v" secondAttribute="trailing" constant="4" id="Jfe-oV-P57"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4QH-RZ-QNH" secondAttribute="trailing" constant="8" id="OEf-VH-Mz2"/>
                     <constraint firstItem="uQ9-Vg-jz9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="PLR-Wx-Vef"/>
                     <constraint firstItem="4QH-RZ-QNH" firstAttribute="top" secondItem="uQ9-Vg-jz9" secondAttribute="bottom" constant="8" id="Pef-3f-2TO"/>

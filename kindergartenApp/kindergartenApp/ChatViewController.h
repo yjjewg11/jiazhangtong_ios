@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "AddressBookDomain.h"
+#import "MJRefresh.h"
 
 @interface ChatViewController : BaseViewController
 

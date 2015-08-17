@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSString * type;
 @property (strong, nonatomic) NSString * map_point; //116.387884,39.888809
 @property (strong, nonatomic) NSString * link_tel;
+@property (strong, nonatomic) NSString * img;  //学校logo
 @property (strong, nonatomic) NSString * groupDescription;
 @property (strong, nonatomic) NSString * address;
 

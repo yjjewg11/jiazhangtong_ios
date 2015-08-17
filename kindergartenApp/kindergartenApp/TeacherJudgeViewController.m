@@ -61,7 +61,7 @@
     pageInfo.pageSize = reFreshView.pageSize;
     
     [[KGHttpService sharedService] getTeacherList:^(NSArray *teacherArray) {
-        
+        [reFreshView.dataSource removeAllObjects];
         reFreshView.tableParam.dataSourceMArray = teacherArray;
         [reFreshView reloadRefreshTable];
     } faild:^(NSString *errorMsg) {

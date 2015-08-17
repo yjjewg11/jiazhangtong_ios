@@ -20,6 +20,7 @@
 
 - (void)resetCellParam:(NSString *)funText img:(NSString *)funImg {
     _funTextLabel.text = funText;
+    _cellImageView.image = [UIImage imageNamed:funImg];
 }
 
 @end

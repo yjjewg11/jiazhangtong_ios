@@ -8,7 +8,7 @@
 
 #import "UUMessageFrame.h"
 #import "UUMessage.h"
-#import "TQRichTextView.h"
+#import "MLEmojiLabel.h"
 
 @implementation UUMessageFrame
 
@@ -49,7 +49,7 @@
         case UUMessageTypeText:
 //            contentSize = [_message.strContent sizeWithFont:ChatContentFont  constrainedToSize:CGSizeMake(ChatContentW, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
         
-            contentSize = [TQRichTextView boundingRectWithSize:CGSizeMake(ChatContentW, CGFLOAT_MAX) font:ChatContentFont string:_message.strContent lineSpace:1.0f].size;
+            contentSize = [MLEmojiLabel boundingRectWithSize:_message.strContent w:ChatContentW font:14];
             break;
         case UUMessageTypePicture:
             contentSize = CGSizeMake(ChatPicWH, ChatPicWH);

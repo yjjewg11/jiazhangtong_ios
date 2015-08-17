@@ -21,4 +21,9 @@
 }
 
 
+- (void)setContent:(NSString *)content {
+    _content = [[content stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+}
+
+
 @end

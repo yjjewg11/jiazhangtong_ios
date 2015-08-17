@@ -31,9 +31,18 @@
 //updatepassword
 + (NSString *)getUpdatepasswordUrl;
 
+//绑定的卡号列表
++ (NSString *)getBuildCardUrl:(NSString *)uuid;
+
 
 //phone code
 + (NSString *)getPhoneCodeUrl;
+
+//校园介绍
++ (NSString *)getYQJSByGroupuuid:(NSString *)groupuuid;
+
+//招生计划
++ (NSString *)getZSJHURLByGroupuuid:(NSString *)groupuuid;
 
 
 //AnnouncementList
@@ -58,6 +67,9 @@
 
 //分页获取班级互动列表
 + (NSString *)getClassNewsByClassIdUrl;
+
+//新增班级互动
++ (NSString *)getSaveClassNewsUrl;
 
 //班级互动HTML 地址
 + (NSString *)getClassNewsHTMLURL;
@@ -142,5 +154,17 @@
 
 //课程表
 + (NSString *)getTeachingPlanUrl;
+
+//收藏列表
++ (NSString *)getFavoritesListUrl;
+
+//保存收藏
++ (NSString *)getsaveFavoritesUrl;
+
+//修改密码
++ (NSString *)getModidyPWDUrl;
+
+//取消收藏
++ (NSString *)getDelFavoritesUrl;
 
 @end

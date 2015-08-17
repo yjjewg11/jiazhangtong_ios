@@ -387,23 +387,23 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         result = [NSString stringWithFormat:@"刚刚"];
     }
     else if((temp = timeInterval/60) <60){
-        result = [NSString stringWithFormat:@"%d分前",temp];
+        result = [NSString stringWithFormat:@"%ld分前", (long)temp];
     }
     
     else if((temp = temp/60) <24){
-        result = [NSString stringWithFormat:@"%d小前",temp];
+        result = [NSString stringWithFormat:@"%ld小前", (long)temp];
     }
     
     else if((temp = temp/24) <30){
-        result = [NSString stringWithFormat:@"%d天前",temp];
+        result = [NSString stringWithFormat:@"%ld天前", (long)temp];
     }
     
     else if((temp = temp/30) <12){
-        result = [NSString stringWithFormat:@"%d月前",temp];
+        result = [NSString stringWithFormat:@"%ld月前", (long)temp];
     }
     else{
         temp = temp/12;
-        result = [NSString stringWithFormat:@"%d年前",temp];
+        result = [NSString stringWithFormat:@"%ld年前", (long)temp];
     }
     
     return  result;

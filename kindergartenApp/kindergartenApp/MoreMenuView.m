@@ -10,6 +10,7 @@
 #import "DynamicMenuDomain.h"
 #import "UIImageView+WebCache.h"
 #import "UIButton+Extension.h"
+#import "UIColor+Extension.h"
 
 @interface MoreMenuView () {
     UIView * headView;
@@ -79,7 +80,7 @@
         [itemView addSubview:imageView];
         
         [imageView sd_setImageWithURL:[NSURL URLWithString:domain.iconUrl] placeholderImage:[UIImage imageNamed:@""] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
+            [imageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:imageView.width / Number_Two];
         }];
         
         
@@ -90,8 +91,9 @@
         [itemView addSubview:itemLabel];
         
         UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(itemView.x, itemView.y, itemView.width, itemView.height + itemLabelH)];
+        btn.targetObj = domain;
         btn.backgroundColor = [UIColor clearColor];
-        [btn addTarget:self action:@selector(cancelBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(didSelectedMenuItemBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [moreFunView addSubview:btn];
         
         col++;
@@ -113,8 +115,17 @@
 }
 
 - (void)cancelBtnClicked:(UIButton *)sender {
-    if(_delegate && [_delegate respondsToSelector:@selector(cancelCallback)]) {
-        [_delegate cancelCallback];
+    [self moreMenuCallBack:nil];
+}
+
+- (void)didSelectedMenuItemBtnClicked:(UIButton *)sender {
+    [self moreMenuCallBack:(DynamicMenuDomain *)sender.targetObj];
+}
+
+
+- (void)moreMenuCallBack:(DynamicMenuDomain *)domain {
+    if(_MoreMenuBlock) {
+        _MoreMenuBlock(domain);
     }
 }
 

@@ -43,6 +43,7 @@
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = KGColorFrom16(0xEBEBF2);
+//        self.backgroundColor = [UIColor purpleColor];
         //用户信息加载
         [self initUserView];
         
@@ -50,7 +51,7 @@
         [self initContentView];
         
         //加载帖子互动视图
-//        [self initTopicInteractionView];
+        [self initTopicInteractionView];
         
         //分割线
         [self initLeve];
@@ -64,7 +65,7 @@
 -(void)initUserView{
     UIView * userview = [[UIView alloc] init];
     userview.backgroundColor = CLEARCOLOR;
-//    userview.backgroundColor = [UIColor brownColor];
+//    userview.backgroundColor = [UIColor yellowColor];
     [self addSubview:userview];
     _userView = userview;
     
@@ -92,23 +93,20 @@
 
 //加载帖子内容
 - (void)initContentView {
-    UIView * topicContentView = [[UIView alloc] init];
-    topicContentView.backgroundColor = [UIColor clearColor];
-    [self addSubview:topicContentView];
     
-    _topicContentView = topicContentView;
-    
-    TQRichTextView  * topicTextView = [[TQRichTextView alloc] init];
-    topicTextView.lineSpace = 1.0f;
-    topicTextView.font = [UIFont systemFontOfSize:12.0f];
-    topicTextView.backgroundColor = [UIColor clearColor];
-    [topicContentView addSubview:topicTextView];
+    MLEmojiLabel  * topicTextView = [MLEmojiLabel new];
+    topicTextView.numberOfLines = Number_Zero;
+    topicTextView.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
+    topicTextView.lineBreakMode = NSLineBreakByCharWrapping;
+//    [topicTextView setBackgroundColor:[UIColor brownColor]];
+    topicTextView.customEmojiRegex = String_DefValue_EmojiRegex;
+    [self addSubview:topicTextView];
     
     _topicTextView = topicTextView;
     
     UIView  * topicImgsView = [[UIView alloc] init];
-    topicImgsView.backgroundColor = [UIColor greenColor];
-    [topicContentView addSubview:topicImgsView];
+//    topicImgsView.backgroundColor = [UIColor greenColor];
+    [self addSubview:topicImgsView];
     
     _topicImgsView = topicImgsView;
 }
@@ -121,7 +119,7 @@
     }
     TopicInteractionView  * topicInteractionView = [[TopicInteractionView alloc] init];
     [self addSubview:topicInteractionView];
-//    topicInteractionView.backgroundColor = [UIColor brownColor];
+//    topicInteractionView.backgroundColor = [UIColor blueColor];
     _topicInteractionView = topicInteractionView;
 }
 
@@ -130,6 +128,7 @@
 -(void)initLeve{
     UILabel * levelab = [[UILabel alloc] init];
     levelab.backgroundColor = KGColor(225, 225, 225, 1);
+//    levelab.backgroundColor = [UIColor redColor];
     [self addSubview:levelab];
     
     _levelab = levelab;
@@ -143,11 +142,10 @@
     self.userView.frame =self.topicFrame.userViewF;
     //头部图片
     self.headImageView.frame = self.topicFrame.headImageViewF;
-    self.headImageView.image = [UIImage imageNamed:@"head_def"];
     
-//    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.topicFrame.topic.imgs] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        [self.headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:self.headImageView.width / Number_Two];
-//    }];
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:self.topicFrame.topic.create_img] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [self.headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:self.headImageView.width / Number_Two];
+    }];
     
     //名称
     self.nameLab.frame = self.topicFrame.nameLabF;
@@ -157,27 +155,27 @@
     self.titleLab.frame = self.topicFrame.titleLabF;
     self.titleLab.text =  topic.title;
     
-    //内容
-    self.topicContentView.frame = self.topicFrame.topicContentViewF;
+    //内容表情文本混合
+    if(topic.content && [topic.content length]>Number_Zero) {
+        self.topicTextView.frame = self.topicFrame.topicTextViewF;
+//        self.topicTextView.text = topic.content;
+        [self.topicTextView setText:topic.content];
+    }
     
-    self.topicTextView.frame = self.topicFrame.topicTextViewF;
-    self.topicTextView.text = topic.content;
-    
-    self.topicImgsView.frame = self.topicFrame.topicImgsViewF;
-    [self loadTopicImgs];
+    if(topic.imgs && topic.imgs.length > Number_Zero) {
+        self.topicImgsView.hidden = NO;
+        self.topicImgsView.frame = self.topicFrame.topicImgsViewF;
+        [self loadTopicImgs];
+    } else {
+        self.topicImgsView.hidden = YES;
+    }
     
     //帖子互动视图
-    [self initTopicInteractionView];
-    [self.topicInteractionView loadFunView:self.topicFrame.topic.dianzan reply:self.topicFrame.topic.replyPage];
-    self.topicInteractionView.topicUUID = self.topicFrame.topic.uuid;
-    self.topicInteractionView.topicType = Topic_Interact;
     self.topicInteractionView.frame = self.topicFrame.topicInteractionViewF;
+    self.topicInteractionView.topicInteractionFrame = self.topicFrame.topicInteractionFrame;
     
     //分割线
-    CGRect levelabFrame = self.topicFrame.levelabF;
-    self.topicFrame.levelabF = CGRectMake(levelabFrame.origin.x, CGRectGetMaxY(self.topicInteractionView.frame), levelabFrame.size.width, 0.5);
     self.levelab.frame = self.topicFrame.levelabF;
-//    self.levelab.backgroundColor = [UIColor blackColor];
 }
 
 
@@ -207,7 +205,6 @@
     CGFloat wh = self.topicFrame.topicImgsViewF.size.width / Number_Three;
     CGFloat index = Number_Zero;
     
-    UIButton * btn = nil;
     for(NSString * imgUrl in imgUrlArray) {
         
         imageView = [[UIImageView alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
@@ -217,10 +214,11 @@
             
         }];
         
-        btn = [[UIButton alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
+        UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
         btn.targetObj = imageView;
         objc_setAssociatedObject(btn, "imgUrl", imgUrl, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [btn addTarget:self action:@selector(showImgClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(showTopicImgClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        btn.backgroundColor = [UIColor brownColor];
         [self.topicImgsView addSubview:btn];
         
         if(index == Number_Two) {
@@ -252,7 +250,7 @@
     }];
 }
 
-- (void)showImgClicked:(UIButton *)sender{
+- (void)showTopicImgClicked:(UIButton *)sender{
     UIImageView * imageView = (UIImageView *)sender.targetObj;
     NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
     [UUImageAvatarBrowser showImage:imageView url:imgUrl];

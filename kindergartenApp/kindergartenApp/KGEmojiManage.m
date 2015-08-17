@@ -34,12 +34,11 @@
     return _chatHTMLInfo;
 }
 
-
-- (NSMutableArray *)emojiNameArray {
-    if(!_emojiNameArray) {
-        _emojiNameArray = [[NSMutableArray alloc] init];
+- (NSMutableDictionary *)emojiMDict {
+    if(!_emojiMDict) {
+        _emojiMDict = [[NSMutableDictionary alloc] init];
     }
-    return _emojiNameArray;
+    return _emojiMDict;
 }
 
 
@@ -48,13 +47,8 @@
     
     _emojiArray = emojiArray;
     
-    NSInteger index = Number_One;
     for(EmojiDomain * domain in emojiArray) {
-        [self downloadFileURL:domain.descriptionUrl
-                     savePath:KGEmojiPath
-                     fileName:[NSString stringWithFormat:@"[%@]", domain.datavalue]
-                          tag:index];
-        index++;
+        [self downloadFileURL:domain];
     }
 }
 
@@ -62,29 +56,24 @@
 /**
  * 下载文件
  */
-- (void)downloadFileURL:(NSString *)aUrl savePath:(NSString *)aSavePath fileName:(NSString *)aFileName tag:(NSInteger)aTag
+- (void)downloadFileURL:(EmojiDomain *)emojiDomain
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     //检查本地文件是否已存在
-    NSString *fileName = [NSString stringWithFormat:@"%@/%@.png", aSavePath, aFileName];
-    
+    NSString *fileName = [NSString stringWithFormat:@"%@/%@.png", KGEmojiPath, emojiDomain.emojiName];
+    NSLog(@"fileName:%@", fileName);
     //检查附件是否存在
     if ([fileManager fileExistsAtPath:fileName]) {
-        NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
-        NSData *audioData = [NSData dataWithContentsOfFile:fileName];
-        [dic setObject:audioData forKey:key_Result];
-        [dic setObject:aFileName forKey:key_FileName];
-//        [self requestFinished:dic tag:aTag];
-        [self requestFinished:aUrl name:aFileName];
+        [self.emojiMDict setObject:fileName forKey:emojiDomain.emojiName];
     }else{
         //创建附件存储目录
-        if (![fileManager fileExistsAtPath:aSavePath]) {
-            [fileManager createDirectoryAtPath:aSavePath withIntermediateDirectories:YES attributes:nil error:nil];
+        if (![fileManager fileExistsAtPath:KGEmojiPath]) {
+            [fileManager createDirectoryAtPath:KGEmojiPath withIntermediateDirectories:YES attributes:nil error:nil];
         }
         
         //下载附件
-        NSURL *url = [[NSURL alloc] initWithString:aUrl];
+        NSURL *url = [[NSURL alloc] initWithString:emojiDomain.descriptionUrl];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
@@ -101,18 +90,13 @@
         //已完成下载
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            NSMutableDictionary * dic = [[NSMutableDictionary alloc] init];
-            NSData *audioData = [NSData dataWithContentsOfFile:fileName];
-            [dic setObject:audioData forKey:key_Result];
-            [dic setObject:aFileName forKey:key_FileName];
-//            [self requestFinished:dic tag:aTag];
-            [self requestFinished:aUrl name:aFileName];
+            [self.emojiMDict setObject:fileName forKey:emojiDomain.emojiName];
             NSLog(@"requestFinished:%@====%@", url, fileName);
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
             //下载失败
-            [self requestFailed:aUrl name:fileName];
+            [self requestFailed:emojiDomain];
         }];
         
         [operation start];
@@ -120,12 +104,8 @@
 }
 
 
-- (void)requestFinished:(NSString *)url name:(NSString *)name {
-    [self.emojiNameArray addObject:name];
-}
-
-- (void)requestFailed:(NSString *)url name:(NSString *)name {
-    NSLog(@"requestFailed:%@====%@", url, name);
+- (void)requestFailed:(EmojiDomain *)domain {
+    NSLog(@"emoji requestFailed:%@====%@", domain.emojiName, domain.descriptionUrl);
 }
 
 @end

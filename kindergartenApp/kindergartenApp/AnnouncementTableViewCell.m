@@ -11,6 +11,7 @@
 #import "KGDateUtil.h"
 #import "KGNSStringUtil.h"
 #import "KGHttpService.h"
+#import "UIImageView+WebCache.h"
 
 @implementation AnnouncementTableViewCell
 
@@ -34,12 +35,16 @@
     AnnouncementDomain * domain = (AnnouncementDomain *)baseDomain;
     
     titleLabel.text = domain.title;
-//    subTitleLabel.text = domain.
+    subTitleLabel.text = domain.message;
     groupLabel.text = [[KGHttpService sharedService] getGroupNameByUUID:domain.groupuuid];
     if(domain.create_time) {
         NSDate * date = [KGDateUtil getDateByDateStr:domain.create_time format:dateFormatStr2];
         timeLabel.text = [KGNSStringUtil compareCurrentTime:date];
     }
+    
+    [headImageView sd_setImageWithURL:[NSURL URLWithString:[KGHttpService sharedService].groupDomain.img] placeholderImage:[UIImage imageNamed:@"group_head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
+    }];
     
 }
 

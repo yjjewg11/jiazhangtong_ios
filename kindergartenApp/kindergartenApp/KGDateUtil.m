@@ -38,19 +38,17 @@
     return timeLocal;
 }
 
-//获取上一天或者下一天日期
-+ (NSString *)nextOrPreyDay:(NSString *)currentDateStr date:(NSInteger)date {
+//获取指定日期差
++ (NSString *)calculateDay:(NSString *)currentDateStr date:(NSInteger)date {
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
     [format setDateFormat:dateFormatStr1];
     
     NSDate * currentDate = [format dateFromString:currentDateStr];
     NSDate * newDate = nil;
-//    if(isNext) {
-//        newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([date timeIntervalSinceReferenceDate] + 24*3600)];
-//    } else {
+    
     long temp = date * 24 * 3600;
-        newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([currentDate timeIntervalSinceReferenceDate] - temp)];
-//    }
+    newDate = [[NSDate alloc] initWithTimeIntervalSinceReferenceDate:([currentDate timeIntervalSinceReferenceDate] - temp)];
+
     return [format stringFromDate:newDate];
 }
 
@@ -67,7 +65,7 @@
 + (NSString *)presentTime
 {
     NSDateFormatter * formatter = [[NSDateFormatter alloc ] init];
-    [formatter setDateFormat:@"YYYYMMddhhmmss"];
+    [formatter setDateFormat:dateFormatStr2];
     NSString *date =  [formatter stringFromDate:[NSDate date]];
     NSString *timeLocal = [[NSString alloc] initWithFormat:@"%@", date];
     return timeLocal;
@@ -91,6 +89,79 @@
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:formatStr];
     return [dateFormatter dateFromString:str];
+}
+
+//获取指定日期的周一
++ (NSString *)getBeginWeek:(NSString *)dateStr {
+    NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:dateFormatStr1];// you can use your format.
+    
+    NSDate * today = [dateFormat dateFromString:dateStr];
+    
+    //Week Start Date
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *components = [gregorian components:NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:today];
+    
+    NSInteger dayofweek = [[[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:today] weekday];// this will give you current day of week
+    
+    [components setDay:([components day] - ((dayofweek) - 2))];// for beginning of the week.
+    
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    
+    NSDateFormatter *dateFormat_first = [[NSDateFormatter alloc] init];
+    [dateFormat_first setDateFormat:dateFormatStr1];
+    NSString * dateString2Prev = [dateFormat stringFromDate:beginningOfWeek];
+    
+    NSLog(@"StartDate:%@",dateString2Prev);
+    
+    return dateString2Prev;
+}
+
+//获取指定日期的周五
++ (NSString *)getEndWeek:(NSString *)dateStr {
+    //Week End Date
+    NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:dateFormatStr1];
+    
+    NSDate * today = [dateFormat dateFromString:dateStr];
+    
+    NSCalendar *gregorianEnd = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSDateComponents *componentsEnd = [gregorianEnd components:NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit fromDate:today];
+    
+    NSInteger Enddayofweek = [[[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:today] weekday];// this will give you current day of week
+    
+    [componentsEnd setDay:([componentsEnd day]+(7-Enddayofweek) - 1)];// for end day of the week
+    
+    NSDate *EndOfWeek = [gregorianEnd dateFromComponents:componentsEnd];
+    NSDateFormatter *dateFormat_End = [[NSDateFormatter alloc] init];
+    [dateFormat_End setDateFormat:dateFormatStr1];
+    NSString * dateEndPrev = [dateFormat stringFromDate:EndOfWeek];
+    
+    NSLog(@"EndDate:%@",dateEndPrev);
+    return dateEndPrev;
+}
+
+//输入参数是日期字符串，输出结果是星期几的数字。
++ (NSInteger)weekdayStringFromDate:(NSString *)inputDateStr {
+    NSDate * inputDate = [KGDateUtil getDateByDateStr:inputDateStr format:dateFormatStr2];
+    
+//    NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"Sunday", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六", nil];
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    
+    [calendar setTimeZone: timeZone];
+    
+    NSCalendarUnit calendarUnit = NSWeekdayCalendarUnit;
+    
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+    
+//    return [weekdays objectAtIndex:theComponents.weekday];
+    return theComponents.weekday - 1;
 }
 
 

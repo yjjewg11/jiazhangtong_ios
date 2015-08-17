@@ -22,7 +22,7 @@ typedef enum {
 
 @property (strong, nonatomic) NSString         * placeholderStr;
 @property (strong, nonatomic) NSString         * messageStr;
-@property (assign, nonatomic) KGTextFielType textFielType;//有值则属于必填
+@property (assign, nonatomic) KGTextFielType   textFielType;//有值则属于必填
 @property (assign, nonatomic) NSInteger        minLength;
 @property (assign, nonatomic) NSInteger        maxLength;
 

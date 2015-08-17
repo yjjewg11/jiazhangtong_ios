@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -24,18 +23,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="ZI7-Ug-yBa">
-                        <rect key="frame" x="297" y="11" width="7" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="7" id="E30-c1-z5y"/>
-                            <constraint firstAttribute="height" constant="12" id="Q8E-FE-KOU"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
-                <constraints>
-                    <constraint firstItem="ZI7-Ug-yBa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="6el-Yd-Dg6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ZI7-Ug-yBa" secondAttribute="trailing" constant="8" id="nni-ZV-yaz"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cellImageView" destination="wfR-o4-UBO" id="xy9-5z-kmd"/>
@@ -46,7 +34,6 @@
     </objects>
     <resources>
         <image name="shoucang" width="17" height="17"/>
-        <image name="youjiantou" width="7" height="12"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

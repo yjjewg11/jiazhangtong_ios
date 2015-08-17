@@ -47,12 +47,6 @@
 }
 
 
-
-- (void)logoutBtnClicked {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确认退出" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [alert show];
-}
-
 #pragma UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -82,7 +76,7 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [studentMArray count] + Number_Three;
+    return [studentMArray count] + Number_Two;
 }
 
 
@@ -108,6 +102,7 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeTableViewCell" owner:nil options:nil];
         cell = [nib objectAtIndex:Number_Zero];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
     [cell resetCellParam:(KGUser *)[studentMArray objectAtIndex:indexPath.row]];
     return cell;
@@ -120,18 +115,16 @@
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeFunTableViewCell" owner:nil options:nil];
         cell = [nib objectAtIndex:Number_Zero];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
     
     
     switch (indexPath.section - [studentMArray count]) {
         case Number_Zero:
-            [cell resetCellParam:@"收藏" img:nil];
+            [cell resetCellParam:@"收藏" img:@"meshoucang"];
             break;
         case Number_One:
-            [cell resetCellParam:@"设置" img:nil];
-            break;
-        case Number_Two:
-            [cell resetCellParam:@"退出登录" img:nil];
+            [cell resetCellParam:@"设置" img:@"meshezhi"];
             break;
     }
     
@@ -167,12 +160,15 @@
     
 //    BaseViewController * vc = nil;
     switch (index) {
-        case Number_Zero:
+        case Number_Zero:{
+            MyCollectionViewController * vc = [[MyCollectionViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
-        case Number_One:
-            break;
-        case Number_Two:
-            [self logoutBtnClicked];
+        case Number_One:{
+            SettingViewController * vc = [[SettingViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
     }
 }

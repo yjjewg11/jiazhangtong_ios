@@ -12,5 +12,9 @@
 
 @property (strong, nonatomic) NSString * head;
 @property (strong, nonatomic) NSMutableArray * contentMArray;
+@property (assign, nonatomic) CGFloat cellHeight;
+@property (assign, nonatomic) CGFloat headHeight;
+@property (assign, nonatomic) BOOL isNote;
+@property (assign, nonatomic) BOOL isArrow;
 
 @end
