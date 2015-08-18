@@ -158,7 +158,6 @@
     //内容表情文本混合
     if(topic.content && [topic.content length]>Number_Zero) {
         self.topicTextView.frame = self.topicFrame.topicTextViewF;
-//        self.topicTextView.text = topic.content;
         [self.topicTextView setText:topic.content];
     }
     

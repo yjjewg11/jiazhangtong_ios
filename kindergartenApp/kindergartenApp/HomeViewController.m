@@ -103,9 +103,13 @@
     if(groupDataArray && [groupDataArray count]>Number_Zero) {
         
         groupViewHeight = [groupDataArray count] * Cell_Height2;
-        groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, 64-groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
-        groupListView.backgroundColor = KGColorFrom16(0xE64662);
-        [self.view addSubview:groupListView];
+        if (!groupListView) {
+            groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, 64-groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
+            groupListView.backgroundColor = KGColorFrom16(0xE64662);
+            [self.view addSubview:groupListView];
+        }else{
+            [groupListView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        }
         
         GroupDomain *         domain = nil;
         UILabel     * groupNameLabel = nil;

@@ -57,11 +57,11 @@
         [headImageBackView addSubview:self.btnHeadImage];
         
         // 3、创建头像下标
-        self.labelNum = [[UILabel alloc] init];
-        self.labelNum.textColor = [UIColor grayColor];
-        self.labelNum.textAlignment = NSTextAlignmentCenter;
-        self.labelNum.font = ChatTimeFont;
-        [self.contentView addSubview:self.labelNum];
+//        self.labelNum = [[UILabel alloc] init];
+//        self.labelNum.textColor = [UIColor grayColor];
+//        self.labelNum.textAlignment = NSTextAlignmentCenter;
+//        self.labelNum.font = ChatTimeFont;
+//        [self.contentView addSubview:self.labelNum];
         
         // 4、创建内容
         self.btnContent = [UUMessageContentButton buttonWithType:UIButtonTypeCustom];
@@ -71,21 +71,21 @@
         [self.btnContent addTarget:self action:@selector(btnContentClick)  forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.btnContent];
         
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(UUAVAudioPlayerDidFinishPlay) name:@"VoicePlayHasInterrupt" object:nil];
+//        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(UUAVAudioPlayerDidFinishPlay) name:@"VoicePlayHasInterrupt" object:nil];
         
         self.contentTextView = [MLEmojiLabel new];
         self.contentTextView.numberOfLines = 0;
-        self.contentTextView.font = [UIFont systemFontOfSize:14.0f];
+        self.contentTextView.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
         self.contentTextView.lineBreakMode = NSLineBreakByCharWrapping;
         self.contentTextView.isNeedAtAndPoundSign = YES;
-        self.contentTextView.customEmojiRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
+        self.contentTextView.customEmojiRegex = String_DefValue_EmojiRegex;
         [self addSubview:self.contentTextView];
         
         //红外线感应监听
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(sensorStateChange:)
-                                                     name:UIDeviceProximityStateDidChangeNotification
-                                                   object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self
+//                                                 selector:@selector(sensorStateChange:)
+//                                                     name:UIDeviceProximityStateDidChangeNotification
+//                                                   object:nil];
         contentVoiceIsPlaying = NO;
 
     }
@@ -102,30 +102,31 @@
 
 - (void)btnContentClick{
     //play audio
-    if (self.messageFrame.message.type == UUMessageTypeVoice) {
-        if(!contentVoiceIsPlaying){
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"VoicePlayHasInterrupt" object:nil];
-            contentVoiceIsPlaying = YES;
-            audio = [UUAVAudioPlayer sharedInstance];
-            audio.delegate = self;
-            //        [audio playSongWithUrl:voiceURL];
-            [audio playSongWithData:songData];
-        }else{
-            [self UUAVAudioPlayerDidFinishPlay];
-        }
-    }
-    //show the picture
-    else if (self.messageFrame.message.type == UUMessageTypePicture)
-    {
-        if (self.btnContent.backImageView) {
-            [UUImageAvatarBrowser showImage:self.btnContent.backImageView url:nil];
-        }
-        if ([self.delegate isKindOfClass:[UIViewController class]]) {
-            [[(UIViewController *)self.delegate view] endEditing:YES];
-        }
-    }
+//    if (self.messageFrame.message.type == UUMessageTypeVoice) {
+//        if(!contentVoiceIsPlaying){
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"VoicePlayHasInterrupt" object:nil];
+//            contentVoiceIsPlaying = YES;
+//            audio = [UUAVAudioPlayer sharedInstance];
+//            audio.delegate = self;
+//            //        [audio playSongWithUrl:voiceURL];
+//            [audio playSongWithData:songData];
+//        }else{
+//            [self UUAVAudioPlayerDidFinishPlay];
+//        }
+//    }
+//    //show the picture
+//    else if (self.messageFrame.message.type == UUMessageTypePicture)
+//    {
+//        if (self.btnContent.backImageView) {
+//            [UUImageAvatarBrowser showImage:self.btnContent.backImageView url:nil];
+//        }
+//        if ([self.delegate isKindOfClass:[UIViewController class]]) {
+//            [[(UIViewController *)self.delegate view] endEditing:YES];
+//        }
+//    }
     // show text and gonna copy that
-    else if (self.messageFrame.message.type == UUMessageTypeText)
+//    else
+    if (self.messageFrame.message.type == UUMessageTypeText)
     {
         [self.btnContent becomeFirstResponder];
         UIMenuController *menu = [UIMenuController sharedMenuController];
@@ -172,14 +173,14 @@
                                  placeholderImage:[UIImage imageNamed:message.strIcon]];
     
     // 3、设置下标
-    self.labelNum.text = message.strName;
-    if (messageFrame.nameF.origin.x > 160) {
-        self.labelNum.frame = CGRectMake(messageFrame.nameF.origin.x - 50, messageFrame.nameF.origin.y + 3, 100, messageFrame.nameF.size.height);
-        self.labelNum.textAlignment = NSTextAlignmentRight;
-    }else{
-        self.labelNum.frame = CGRectMake(messageFrame.nameF.origin.x, messageFrame.nameF.origin.y + 3, 80, messageFrame.nameF.size.height);
-        self.labelNum.textAlignment = NSTextAlignmentLeft;
-    }
+//    self.labelNum.text = message.strName;
+//    if (messageFrame.nameF.origin.x > 160) {
+//        self.labelNum.frame = CGRectMake(messageFrame.nameF.origin.x - 50, messageFrame.nameF.origin.y + 3, 100, messageFrame.nameF.size.height);
+//        self.labelNum.textAlignment = NSTextAlignmentRight;
+//    }else{
+//        self.labelNum.frame = CGRectMake(messageFrame.nameF.origin.x, messageFrame.nameF.origin.y + 3, 80, messageFrame.nameF.size.height);
+//        self.labelNum.textAlignment = NSTextAlignmentLeft;
+//    }
 
     // 4、设置内容
     

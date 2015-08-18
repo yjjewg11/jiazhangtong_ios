@@ -146,3 +146,5 @@
 #define String_Alert_Know                 @"知道了"
 //version end
 
+#define BackPressed_Notice   @"返回按钮点击通知"
+

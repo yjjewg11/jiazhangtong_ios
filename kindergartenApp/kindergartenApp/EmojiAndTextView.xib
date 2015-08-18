@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmojiAndTextView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JK-ks-oDs">
+                    <rect key="frame" x="16" y="34" width="264" height="1"/>
+                    <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="P86-Qx-M36"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBP-3I-SyI">
+                    <rect key="frame" x="287" y="9" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="1GI-u8-ARx"/>
+                        <constraint firstAttribute="height" constant="25" id="2en-Kr-QJ9"/>
+                    </constraints>
+                    <state key="normal" image="fasongfly">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="7qQ-E5-48g"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBO-fl-lJS">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="Cch-Rs-2ra"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-RZ-NkS">
+                    <rect key="frame" x="254" y="9" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="v6B-7b-ZGd"/>
+                        <constraint firstAttribute="width" constant="25" id="yBj-ux-sGh"/>
+                    </constraints>
+                    <state key="normal" image="biaoqing1">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="emojiBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ipi-js-w0z"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="hjveruiohfiuer" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
+                    <rect key="frame" x="16" y="13" width="230" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="0aq-QQ-Y39"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fBO-fl-lJS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0SW-Pa-kGQ"/>
+                <constraint firstItem="dEP-RZ-NkS" firstAttribute="leading" secondItem="Ihz-YZ-T1j" secondAttribute="trailing" constant="8" id="7zf-Z7-d5S"/>
+                <constraint firstAttribute="bottom" secondItem="3JK-ks-oDs" secondAttribute="bottom" constant="5" id="EGW-iC-Ir6"/>
+                <constraint firstAttribute="trailing" secondItem="IBP-3I-SyI" secondAttribute="trailing" constant="8" id="HLZ-GA-sBI"/>
+                <constraint firstItem="fBO-fl-lJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KI3-mK-VaS"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="P3O-1p-1i6"/>
+                <constraint firstAttribute="trailing" secondItem="fBO-fl-lJS" secondAttribute="trailing" id="U2q-9U-ipc"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="leading" secondItem="dEP-RZ-NkS" secondAttribute="trailing" constant="8" id="dDt-5x-6kR"/>
+                <constraint firstAttribute="trailing" secondItem="3JK-ks-oDs" secondAttribute="trailing" constant="40" id="i3x-0I-WPc"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="IBP-3I-SyI" secondAttribute="bottom" id="i85-52-ly4"/>
+                <constraint firstItem="Ihz-YZ-T1j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="lYz-1I-6zl"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="Ihz-YZ-T1j" secondAttribute="bottom" constant="1" id="luF-re-7qi"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" id="xdv-N7-PgT"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentTextView" destination="Ihz-YZ-T1j" id="NPH-Xj-NWj"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="biaoqing1" width="22" height="22"/>
+        <image name="fasongfly" width="22" height="22"/>
+    </resources>
+</document>

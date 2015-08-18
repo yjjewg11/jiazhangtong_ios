@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ButtonPressed)(UIButton *);
+
 @interface OnlyEmojiView : UIView
+
+@property (strong, nonatomic) ButtonPressed pressedBlock;
 
 @end

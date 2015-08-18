@@ -70,13 +70,8 @@
     
     topicView.topicInteractionFrame = topicFrame;
     
-    [topicView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(y));
-        make.left.equalTo(@(0));
-        make.right.equalTo(@(0));
-        make.width.equalTo(@(CELLCONTENTWIDTH));
-        make.height.equalTo(@(topicFrame.topicInteractHeight));
-    }];
+    topicView.size = CGSizeMake(CELLCONTENTWIDTH, topicFrame.topicInteractHeight);
+    topicView.origin = CGPointMake(0, CGRectGetMaxY(createTimeLabel.frame));
     
     CGFloat contentHeight = y + topicFrame.topicInteractHeight + 64;
     CGFloat contentWidth  = KGSCREEN.size.width;

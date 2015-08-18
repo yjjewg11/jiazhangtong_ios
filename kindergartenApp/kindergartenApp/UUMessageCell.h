@@ -23,7 +23,7 @@
 @interface UUMessageCell : UITableViewCell
 
 @property (nonatomic, retain)UILabel *labelTime;
-@property (nonatomic, retain)UILabel *labelNum;
+//@property (nonatomic, retain)UILabel *labelNum;
 @property (nonatomic, retain)UIButton *btnHeadImage;
 
 @property (nonatomic, retain)UUMessageContentButton *btnContent;

@@ -266,7 +266,6 @@
 }
 
 
-
 //键盘回车
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString * replyText = [KGNSStringUtil trimString:textField.text];

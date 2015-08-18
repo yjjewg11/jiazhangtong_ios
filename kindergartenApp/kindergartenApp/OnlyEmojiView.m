@@ -7,15 +7,22 @@
 //
 
 #import "OnlyEmojiView.h"
+#import "UIButton+Extension.h"
 
 @implementation OnlyEmojiView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+- (IBAction)emojiBtnPressed:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if(sender.selected) {
+        [sender setImage:@"chat_ipunt_message" selImg:@"chat_ipunt_message"];
+        
+    } else {
+        [sender setImage:@"biaoqing1" selImg:@"biaoqing1"];
+    }
+    if (_pressedBlock) {
+        _pressedBlock(sender);
+    }
 }
-*/
 
 @end

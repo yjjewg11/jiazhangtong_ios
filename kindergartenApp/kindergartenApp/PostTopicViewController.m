@@ -11,7 +11,6 @@
 #import "KGNSStringUtil.h"
 #import "KGHttpService.h"
 #import "KGHUD.h"
-#import "TopicDomain.h"
 #import "KGTextView.h"
 #import "KGHttpService.h"
 #import "ClassDomain.h"
@@ -37,6 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.weakTextView = contentTextView;
+    self.keyboardTopType = OnlyEmojiMode;
     
     [self.contentView bringSubviewToFront:contentTextView];
     for (UIView * view in _btnArray) {
@@ -194,6 +196,11 @@
     
     [[KGHttpService sharedService] saveClassNews:domain success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        
+        if(_PostTopicBlock) {
+            _PostTopicBlock(domain);
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
     }];

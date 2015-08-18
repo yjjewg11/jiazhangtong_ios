@@ -14,27 +14,30 @@
 #import "UUInputFunctionView.h"
 #import "Masonry.h"
 #import "KGEmojiManage.h"
-#import "OnlyEmojiView.h"
+
+
 
 @interface BaseTopicInteractViewController () <UUInputFunctionViewDelegate, UIGestureRecognizerDelegate> {
     TopicInteractionView * topicInteractionView; //点赞回复视图
     UUInputFunctionView  * IFView;
-    OnlyEmojiView * onlyEmojiView;//只存在表情视图
-    CGFloat emojiInputY;
 }
 
 @end
 
 @implementation BaseTopicInteractViewController
 
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [IFView removeFromSuperview];
+    [_onlyEmojiView removeFromSuperview];
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadInputFuniView];
+//    [self loadInputFuniView];
     
     self.keyBoardController.isEmojiInput = YES;
     
@@ -44,6 +47,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicRelpyMoreBtnClickedNotification:) name:Key_Notification_TopicLoadMore object:nil];
 }
 
+//设置键盘顶部悬浮类型
+- (void)setKeyboardTopType:(KeyBoardTopType)keyboardTopType{
+    _keyboardTopType = keyboardTopType;
+    switch (_keyboardTopType) {
+        case OnlyEmojiMode:
+            [self loadOnlyEnojiInputView];
+            break;
+        case EmojiAndTextMode:
+            [self loadEmojiAndText];
+            break;
+        case ChatMode:
+            [self loadInputFuniView];
+            break;
+    }
+}
 
 //topicFun点击监听通知
 - (void)topicFunClickedNotification:(NSNotification *)notification {
@@ -135,12 +153,34 @@
     CGFloat wH  = KGSCREEN.size.height;
     
     if(![KGEmojiManage sharedManage].isSwitchEmoji) {
+        if (_keyboardTopType == OnlyEmojiMode) {
+            if (isShow) {
+                _onlyEmojiView.y = y;
+                _emojiInputY = _onlyEmojiView.y;
+            }else{
+                _onlyEmojiView.y = wH;
+            }
+            return;
+        }
+        
+        if (_keyboardTopType == EmojiAndTextMode) {
+            if (isShow) {
+                _emojiAndTextView.y = y;
+                [_emojiAndTextView.contentTextView becomeFirstResponder];
+                _emojiInputY = _emojiAndTextView.y;
+            }else{
+                _emojiAndTextView.y = wH;
+                [_emojiAndTextView.contentTextView resignFirstResponder];
+            }
+            return;
+        }
+        
         if(isShow) {
             IFView.y = y;
             [IFView resetTextEmojiInput];
             [IFView.TextViewInput becomeFirstResponder];
             IFView.hidden = NO;
-            emojiInputY = IFView.y;
+            _emojiInputY = IFView.y;
         } else {
             IFView.y = wH;
             IFView.hidden = YES;
@@ -149,6 +189,25 @@
             [IFView.TextViewInput resignFirstResponder];
         }
     } else {
+        if (_keyboardTopType == OnlyEmojiMode) {
+            if (isShow) {
+                _onlyEmojiView.y = y;
+                _emojiInputY = _onlyEmojiView.y;
+            }else{
+                _onlyEmojiView.y = wH;
+            }
+            return;
+        }
+        if (_keyboardTopType == EmojiAndTextMode) {
+            if (isShow) {
+                _emojiAndTextView.y = y;
+                _emojiInputY = _emojiAndTextView.y;
+            }else{
+                _emojiAndTextView.y = wH;
+            }
+            return;
+        }
+        
         
         if(IFView.TextViewInput.inputView) {
             //表情键盘
@@ -166,10 +225,37 @@
     }
 }
 
+//加载底部有表情，发送，文本框的视图
+- (void)loadEmojiAndText{
+    _emojiAndTextView = [[[NSBundle mainBundle] loadNibNamed:@"EmojiAndTextView" owner:nil options:nil] lastObject];
+    _emojiAndTextView.width = APPWINDOWWIDTH;
+    _emojiAndTextView.y = KGSCREEN.size.height;;
+    [[UIApplication sharedApplication].keyWindow addSubview:_emojiAndTextView];
+}
+
 //加载底部只有表情的视图
 - (void)loadOnlyEnojiInputView{
-    onlyEmojiView = [[[NSBundle mainBundle] loadNibNamed:@"OnlyEmojiView" owner:nil options:nil] lastObject];
+    if (!_faceBoard) {
+        _faceBoard = [[FaceBoard alloc] init];
+        _faceBoard.inputTextView = self.weakTextView;
+    }
     
+    _onlyEmojiView = [[[NSBundle mainBundle] loadNibNamed:@"OnlyEmojiView" owner:nil options:nil] lastObject];
+    _onlyEmojiView.width = APPWINDOWWIDTH;
+    _onlyEmojiView.y = KGSCREEN.size.height;
+    [[UIApplication sharedApplication].keyWindow addSubview:_onlyEmojiView];
+    __weak typeof(self) weakSelf = self;
+    [_onlyEmojiView setPressedBlock:^(UIButton * button){
+        [KGEmojiManage sharedManage].isChatEmoji = YES;
+        [KGEmojiManage sharedManage].isSwitchEmoji = YES;
+        [weakSelf.weakTextView resignFirstResponder];
+        if (button.selected) {
+            weakSelf.weakTextView.inputView = weakSelf.faceBoard;
+        }else{
+            weakSelf.weakTextView.inputView = nil;
+        }
+        [weakSelf.weakTextView becomeFirstResponder];
+    }];
 }
 
 //加载底部输入功能View

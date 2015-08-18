@@ -21,6 +21,8 @@
 #import "GiftwareArticlesInfoViewController.h"
 #import "AnnouncementInfoViewController.h"
 #import "MessageTableViewCell.h"
+#import "AddressBookDomain.h"
+#import "ChatViewController.h"
 
 @interface MessageViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
@@ -118,6 +120,13 @@
         case Topic_Interact:
             vc = [[InteractViewController alloc] init];
             break;
+        case Topic_TeacherChat:
+        case Topic_LeaderChat:
+            [self chatMesagePush:domain];
+            break;
+        case Topic_SignRecord:
+            vc = [[InteractViewController alloc] init];
+            break;
         case Topic_HTML:
             vc = [[BrowseURLViewController alloc] init];
             ((BrowseURLViewController *)vc).url = domain.url;
@@ -127,12 +136,21 @@
     }
     
     if(vc) {
-        MessageTableViewCell * cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-        [self readMessage:domain cell:cell];
-        
         vc.title = domain.title;
         [self.navigationController pushViewController:vc animated:YES];
     }
+    
+    MessageTableViewCell * cell = (MessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [self readMessage:domain cell:cell];
+}
+
+- (void)chatMesagePush:(MessageDomain *)domain {
+    AddressBookDomain * addressbookDomain = [[AddressBookDomain alloc] init];
+    addressbookDomain.teacher_uuid = domain.rel_uuid;
+    addressbookDomain.type = (domain.type == Topic_TeacherChat) ? YES : NO;
+    ChatViewController * chatVC = [[ChatViewController alloc] init];
+    chatVC.addressbookDomain = addressbookDomain;
+    [self.navigationController pushViewController:chatVC animated:YES];
 }
 
 //readMsg

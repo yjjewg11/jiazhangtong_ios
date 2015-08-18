@@ -11,7 +11,6 @@
 #import "KGHttpService.h"
 #import "UIImageView+WebCache.h"
 #import "UIView+Extension.h"
-#import "KGHttpService.h"
 
 @implementation MessageTableViewCell
 
@@ -33,7 +32,6 @@
     MessageDomain * domain = (MessageDomain *)baseDomain;
     _titleLabel.text = domain.title;
     _subTitleLabel.text = domain.message;
-    _groupLabel.text = [[KGHttpService sharedService] getGroupNameByUUID:domain.group_uuid];
     _timeLabel.text = domain.create_time;
     
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[KGHttpService sharedService].groupDomain.img] placeholderImage:[UIImage imageNamed:@"group_head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

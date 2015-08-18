@@ -32,6 +32,8 @@
     [super viewDidLoad];
     
     self.title = @"互动";
+    self.keyBoardController.isShowKeyBoard = YES;
+    self.keyboardTopType = EmojiAndTextMode;
     
     UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"xiangji"] style:UIBarButtonItemStyleDone target:self action:@selector(postNewTopic)];
     [rightBarItem setTintColor:[UIColor whiteColor]];
@@ -43,6 +45,12 @@
 - (void)postNewTopic {
     PostTopicViewController * postVC = [[PostTopicViewController alloc] init];
     postVC.topicType = Topic_Interact;
+    
+    postVC.PostTopicBlock = ^(TopicDomain * domain) {
+        //发表互动成功
+        [reFreshView beginRefreshing];
+    };
+    
     [self.navigationController pushViewController:postVC animated:YES];
 }
 

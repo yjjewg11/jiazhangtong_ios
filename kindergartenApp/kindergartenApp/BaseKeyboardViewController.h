@@ -17,7 +17,7 @@
 
 
 @property (strong, nonatomic) UIKeyboardViewController * keyBoardController;
-
+@property (assign, nonatomic) BOOL flag;//判断是否是第一次进入
 
 /**
  *  移除messageView

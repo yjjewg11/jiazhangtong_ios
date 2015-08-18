@@ -39,9 +39,19 @@ typedef enum : NSInteger {
     [self registerMessageListen];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
+    if (_flag) {
+        [_keyBoardController addKeyBoardNotification];
+        NSLog(@"%@",self);
+    }
+    _flag = YES;
+}
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    NSLog(@"%@",self);
     [_keyBoardController removeKeyBoardNotification];
 }
 

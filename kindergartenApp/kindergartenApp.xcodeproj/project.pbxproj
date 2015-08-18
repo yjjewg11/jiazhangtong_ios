@@ -157,6 +157,8 @@
 		4D077B261B80A00300FFD5CB /* SelectClassCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D077B241B80A00300FFD5CB /* SelectClassCell.xib */; };
 		4D077B291B80B14800FFD5CB /* OnlyEmojiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D077B281B80B14800FFD5CB /* OnlyEmojiView.m */; };
 		4D077B2B1B80B16100FFD5CB /* OnlyEmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D077B2A1B80B16100FFD5CB /* OnlyEmojiView.xib */; };
+		4D0A91861B81088700373E5C /* EmojiAndTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0A91851B81088700373E5C /* EmojiAndTextView.m */; };
+		4D0A91881B81089000373E5C /* EmojiAndTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A91871B81089000373E5C /* EmojiAndTextView.xib */; };
 		4D5CE6C81B7E3F76002F1088 /* FavoritesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */; };
 		4D5CE6C91B7E3F76002F1088 /* FavoritesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */; };
 		4D5CE6F41B7E42CE002F1088 /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D5CE6CB1B7E42CE002F1088 /* UMFeedbackLocalizable.strings */; };
@@ -656,6 +658,9 @@
 		4D077B271B80B14800FFD5CB /* OnlyEmojiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnlyEmojiView.h; sourceTree = "<group>"; };
 		4D077B281B80B14800FFD5CB /* OnlyEmojiView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnlyEmojiView.m; sourceTree = "<group>"; };
 		4D077B2A1B80B16100FFD5CB /* OnlyEmojiView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OnlyEmojiView.xib; sourceTree = "<group>"; };
+		4D0A91841B81088700373E5C /* EmojiAndTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiAndTextView.h; sourceTree = "<group>"; };
+		4D0A91851B81088700373E5C /* EmojiAndTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiAndTextView.m; sourceTree = "<group>"; };
+		4D0A91871B81089000373E5C /* EmojiAndTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiAndTextView.xib; sourceTree = "<group>"; };
 		4D5CE6C51B7E3F76002F1088 /* FavoritesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListViewController.h; sourceTree = "<group>"; };
 		4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesListViewController.m; sourceTree = "<group>"; };
 		4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesListViewController.xib; sourceTree = "<group>"; };
@@ -1234,6 +1239,9 @@
 				4D077B271B80B14800FFD5CB /* OnlyEmojiView.h */,
 				4D077B281B80B14800FFD5CB /* OnlyEmojiView.m */,
 				4D077B2A1B80B16100FFD5CB /* OnlyEmojiView.xib */,
+				4D0A91841B81088700373E5C /* EmojiAndTextView.h */,
+				4D0A91851B81088700373E5C /* EmojiAndTextView.m */,
+				4D0A91871B81089000373E5C /* EmojiAndTextView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3108,6 +3116,7 @@
 				4D5CE7811B7E4368002F1088 /* PushNotificationTableViewCell.xib in Resources */,
 				F4E61BE31B734A0300E5851A /* UMSLoginViewController.xib in Resources */,
 				F47AFEAF1B5E22EA00D43F38 /* AnnouncementListViewController.xib in Resources */,
+				4D0A91881B81089000373E5C /* EmojiAndTextView.xib in Resources */,
 				4D077B261B80A00300FFD5CB /* SelectClassCell.xib in Resources */,
 				244F74931B62A4630078D30D /* PostTopicViewController.xib in Resources */,
 				4D5CE7001B7E42CE002F1088 /* umeng_fb_audio_dialog_content@2x.png in Resources */,
@@ -3444,6 +3453,7 @@
 				24C46B401B5A2B1100A58F92 /* MeViewController.m in Sources */,
 				248B6AC71B19B54500FCB98F /* KGTextField.m in Sources */,
 				F4885C661B7C508600AF97CF /* FavoritesDomain.m in Sources */,
+				4D0A91861B81088700373E5C /* EmojiAndTextView.m in Sources */,
 				24AA0B431B690F4300DAC03B /* UUInputFunctionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

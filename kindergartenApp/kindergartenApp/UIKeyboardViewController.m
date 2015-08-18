@@ -90,6 +90,11 @@ static CGFloat viewFrameY = 10;
 	CGSize kbSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     self.kboardHeight = kbSize.height;
 	BOOL isShow = [[notification name] isEqualToString:UIKeyboardWillShowNotification] ? YES : NO;
+    if (_isShowKeyBoard) {
+        [self animateView:isShow textField:[self firstResponder:objectView]
+        heightforkeyboard:self.kboardHeight];
+        return;
+    }
 	if ([self firstResponder:objectView]) {
 		[self animateView:isShow textField:[self firstResponder:objectView]
 		heightforkeyboard:self.kboardHeight];
@@ -148,16 +153,6 @@ static CGFloat viewFrameY = 10;
     
     [UIView commitAnimations];
     
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        UIView * window = [UIApplication sharedApplication].keyWindow;
-//        UITextField *newText = ((UITextField *)textField);
-//        CGPoint textPoint = [newText convertPoint:CGPointMake(0, newText.frame.size.height + spacerY) toView:window];
-//        if(_isEmojiInput && _boardDelegate && [_boardDelegate respondsToSelector:@selector(keyboardWillShowOrHide:inputY:)]) {
-//            [_boardDelegate keyboardWillShowOrHide:isShow inputY:textPoint.y];
-//        }
-//        NSLog(@"");
-//    });
 }
 
 //输入框获得焦点

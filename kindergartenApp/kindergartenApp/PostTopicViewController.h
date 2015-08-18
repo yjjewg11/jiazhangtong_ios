@@ -8,6 +8,7 @@
 
 #import "SelectClassCell.h"
 #import "BaseTopicInteractViewController.h"
+#import "TopicDomain.h"
 
 @interface PostTopicViewController :BaseTopicInteractViewController  <UITableViewDataSource,UITableViewDelegate>
 
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UIView *topBgVIew;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnArray;
 
+@property (nonatomic, copy) void (^PostTopicBlock)(TopicDomain * topicDomain);
 
 - (IBAction)addImgBtnClicked:(UIButton *)sender;
 
