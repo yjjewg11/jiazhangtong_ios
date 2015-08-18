@@ -16,6 +16,7 @@
     NSMutableArray * timetableDataSourceMArray;
     TopicInteractionView * topicView;
     UITableViewCell * topicViewCell;
+    TimetableDomain * timetableDomain;
 }
 
 @property (strong, nonatomic) NSMutableArray   * tableDataSource; //<TimetableItemVO>
@@ -23,5 +24,8 @@
 
 //加载课程表数据
 - (void)loadTimetableData:(NSMutableArray *)timetableMArray date:(NSString *)queryDate;
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain;
 
 @end

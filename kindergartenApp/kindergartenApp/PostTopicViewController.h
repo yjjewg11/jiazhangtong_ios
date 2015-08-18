@@ -12,8 +12,7 @@
 
 @interface PostTopicViewController :BaseTopicInteractViewController  <UITableViewDataSource,UITableViewDelegate>
 
-//@property (strong, nonatomic) NSString * topicUUID;
-//@property (assign, nonatomic) KGTopicType topicType;
+@property (assign, nonatomic) KGTopicType topicType;
 @property (strong, nonatomic) IBOutlet UIView *bgView;
 @property (strong, nonatomic) IBOutlet UIButton *selectBtn;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowImageView;

@@ -10,7 +10,7 @@
 #import "KGHttpService.h"
 #import "KGHUD.h"
 #import "TopicInteractionView.h"
-#import "Masonry.h"
+//#import "Masonry.h"
 #import "KGNSStringUtil.h"
 #import "TopicInteractionDomain.h"
 #import "TopicInteractionFrame.h"
@@ -34,6 +34,8 @@
     [super viewDidLoad];
     
     self.title = announcementDomain.title;
+    self.keyBoardController.isShowKeyBoard = YES;
+    self.keyboardTopType = EmojiAndTextMode;
     
     myWebView.backgroundColor = [UIColor clearColor];
     myWebView.opaque = NO;
@@ -51,15 +53,17 @@
 
 //加载帖子互动
 - (void)loadTopicInteractionView {
-   
-    self.topicType = announcementDomain.topicType;
-    
+    if(topicView) {
+        [topicView removeFromSuperview];
+    }
     TopicInteractionDomain * domain = [TopicInteractionDomain new];
     domain.dianzan = announcementDomain.dianzan;
     domain.replyPage = announcementDomain.replyPage;
     domain.topicType = announcementDomain.topicType;
     domain.topicUUID = announcementDomain.uuid;
     domain.borwseType = BrowseType_Count;
+    
+    self.topicInteractionDomain = domain;
     
     TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
     topicFrame.topicInteractionDomain  = domain;
@@ -118,14 +122,24 @@
 - (void)alttextFieldDidEndEditing:(UITextField *)textField {
     NSString * replyText = [KGNSStringUtil trimString:textField.text];
     if(replyText && ![replyText isEqualToString:String_DefValue_Empty]) {
-        NSDictionary *dic = @{Key_TopicTypeReplyText : [KGNSStringUtil trimString:textField.text],
-                              Key_TopicUUID : announcementDomain.uuid,
-                              Key_TopicType : [NSNumber numberWithInteger:self.topicType],
-                              Key_TopicInteractionView : topicView};
-        [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicFunClicked object:self userInfo:dic];
+        NSDictionary *dic = @{Key_TopicTypeReplyText : [KGNSStringUtil trimString:textField.text]};
+        [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicReply object:self userInfo:dic];
         
         [textField resignFirstResponder];
     }
+}
+
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    ReplyPageDomain * replyPageDomain = announcementDomain.replyPage;
+    if(!replyPageDomain) {
+        replyPageDomain = [[ReplyPageDomain alloc] init];
+    }
+    
+    [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
+    
+    [self loadTopicInteractionView];
 }
 
 

@@ -15,7 +15,9 @@
 // Key begin
 #define Key_Notification_Message           @"message"
 #define Key_Notification_MessageText       @"messageText"
-#define Key_Notification_TopicFunClicked   @"topicCellFunClicked"
+#define Key_Notification_TopicDZ           @"topicDZ"
+#define Key_Notification_TopicReply        @"TopicReply"
+#define Key_Notification_BeginReplyTopic   @"beginReplyTopic"
 #define Key_Notification_TopicHeight       @"topicCellHeightChange"
 #define Key_Notification_TopicLoadMore     @"topicCellLoadMore"
 #define Key_Notification_TeacherJudge      @"teacherJudgeClicked"
@@ -24,6 +26,7 @@
 
 #define Key_KeyChain                       @"KeyChain"
 #define Key_TopicCellFunType               @"topicCellFunType"
+#define Key_TopicInteractionDomain         @"TopicInteractionDomain"
 #define Key_TopicUUID                      @"topicUUID"
 #define Key_TopicFunRequestType            @"topicFunRequestType"
 #define Key_TopicType                      @"topicType"

@@ -60,8 +60,6 @@
     
     [self packageTableData];
     [recipesTableView reloadData];
-    
-    NSLog(@"table:%@", NSStringFromCGRect(recipesTableView.frame));
 }
 
 - (void)packageTableData {
@@ -249,29 +247,50 @@
         textView.editable = NO;
         [cell addSubview:textView];
         
-        TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
-        topicInteractionDomain.dianzan   = _recipesDomain.dianzan;
-        topicInteractionDomain.replyPage = _recipesDomain.replyPage;
-        topicInteractionDomain.topicType = Topic_Recipes;
-        topicInteractionDomain.topicUUID = _recipesDomain.uuid;
-        
-        TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
-        topicFrame.topicInteractionDomain  = topicInteractionDomain;
-        
-        CGFloat y = CGRectGetMaxY(textView.frame) + Number_Ten;
-        CGRect frame = CGRectMake(Number_Zero, y, KGSCREEN.size.width, topicFrame.topicInteractHeight);
-        TopicInteractionView * topicView = [[TopicInteractionView alloc] initWithFrame:frame];
-        [cell addSubview:topicView];
-        topicView.topicInteractionFrame = topicFrame;
+        topicViewCell = cell;
+        [self loadDZReplyView];
     }
     
     return cell;
+}
+
+//加载点赞回复
+- (void)loadDZReplyView {
+    if(topicView) {
+        [topicView removeFromSuperview];
+    }
+    TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
+    topicInteractionDomain.dianzan   = _recipesDomain.dianzan;
+    topicInteractionDomain.replyPage = _recipesDomain.replyPage;
+    topicInteractionDomain.topicType = Topic_Recipes;
+    topicInteractionDomain.topicUUID = _recipesDomain.uuid;
+    
+    TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
+    topicFrame.topicInteractionDomain  = topicInteractionDomain;
+    
+    CGRect frame = CGRectMake(Number_Zero, 160, KGSCREEN.size.width, topicFrame.topicInteractHeight);
+    topicView = [[TopicInteractionView alloc] initWithFrame:frame];
+    [topicViewCell addSubview:topicView];
+    topicView.topicInteractionFrame = topicFrame;
 }
 
 - (void)showRecipesImgClicked:(UIButton *)sender{
     UIImageView * imageView = (UIImageView *)sender.targetObj;
     CookbookDomain * cookbook = objc_getAssociatedObject(sender, "cookbook");
     [UUImageAvatarBrowser showImage:imageView url:cookbook.img];
+}
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    //1.对应食谱增加回复
+    ReplyPageDomain * replyPageDomain = _recipesDomain.replyPage;
+    if(!replyPageDomain) {
+        replyPageDomain = [[ReplyPageDomain alloc] init];
+    }
+    [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
+    
+    //2.重新加载点赞回复view
+    [self loadDZReplyView];
 }
 
 @end

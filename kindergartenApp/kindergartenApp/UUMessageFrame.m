@@ -67,6 +67,7 @@
         contentTextViewX = contentX + 5;
     }
     
+    
 //    _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft + ChatContentRight, contentSize.height + ChatContentTop + ChatContentBottom);
     
     _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft, contentSize.height + 20);

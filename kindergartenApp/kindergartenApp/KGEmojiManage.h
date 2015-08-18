@@ -23,4 +23,6 @@
 //在子线程中同步下载表情
 - (void)downloadEmoji:(NSArray *)emojiArray;
 
+- (void)resetChatHTML;
+
 @end

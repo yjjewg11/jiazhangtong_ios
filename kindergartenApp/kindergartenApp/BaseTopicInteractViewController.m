@@ -41,8 +41,15 @@
     
     self.keyBoardController.isEmojiInput = YES;
     
-    //注册点赞回复通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicFunClickedNotification:) name:Key_Notification_TopicFunClicked object:nil];
+    //注册点赞通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicDZNotification:) name:Key_Notification_TopicDZ object:nil];
+    
+    //注册回复通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicReplyNotification:) name:Key_Notification_TopicReply object:nil];
+    
+    //注册开始编辑回帖通知(在回帖的输入框获得焦点时候触发)
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginReplyTopicNotification:) name:Key_Notification_BeginReplyTopic object:nil];
+    
     //注册加载更多回复通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicRelpyMoreBtnClickedNotification:) name:Key_Notification_TopicLoadMore object:nil];
 }
@@ -63,33 +70,40 @@
     }
 }
 
-//topicFun点击监听通知
-- (void)topicFunClickedNotification:(NSNotification *)notification {
+
+//begin reply topic
+- (void)beginReplyTopicNotification:(NSNotification *)notification {
     NSDictionary  * dic = [notification userInfo];
-    NSInteger      type = [[dic objectForKey:Key_TopicCellFunType] integerValue];
+    _topicInteractionDomain = [dic objectForKey:Key_TopicInteractionDomain];
+    [_emojiAndTextView.contentTextView becomeFirstResponder];
+    
+}
+
+//topic DZ通知
+- (void)topicDZNotification:(NSNotification *)notification {
+    NSDictionary  * dic = [notification userInfo];
     BOOL     isSelected = [[dic objectForKey:Key_TopicFunRequestType] boolValue];
-    NSString * replyText = [dic objectForKey:Key_TopicTypeReplyText];
     topicInteractionView = [dic objectForKey:Key_TopicInteractionView];
+    _topicInteractionDomain = [dic objectForKey:Key_TopicInteractionDomain];
     
-    _topicUUID = [dic objectForKey:Key_TopicUUID];
-    _topicType = [[dic objectForKey:Key_TopicType] integerValue];
+    [self dzOperationHandler:isSelected];
+}
+
+//topic reply通知
+- (void)topicReplyNotification:(NSNotification *)notification {
+    NSDictionary  * dic = [notification userInfo];
+    NSString * replyText = [dic objectForKey:Key_TopicTypeReplyText];
     
-    [[KGHUD sharedHud] show:self.contentView];
-    if(type == Number_Ten) {
-        //点赞
-        [self dzOperationHandler:isSelected];
-    } else {
-        //回复
-        [self postTopic:replyText viewMessage:replyText];
-    }
+    //回复
+    [self postTopic:replyText];
 }
 
 
 - (void)dzOperationHandler:(BOOL)isSelected {
-    
+    [[KGHUD sharedHud] show:self.contentView];
     if(isSelected) {
         //点赞
-        [[KGHttpService sharedService] saveDZ:_topicUUID type:_topicType success:^(NSString *msgStr) {
+        [[KGHttpService sharedService] saveDZ:_topicInteractionDomain.topicUUID type:_topicInteractionDomain.topicType success:^(NSString *msgStr) {
             [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
             [topicInteractionView resetDZName:YES name:[KGHttpService sharedService].loginRespDomain.userinfo.name];
         } faild:^(NSString *errorMsg) {
@@ -97,7 +111,7 @@
         }];
     } else {
         //取消点赞
-        [[KGHttpService sharedService] delDZ:_topicUUID success:^(NSString *msgStr) {
+        [[KGHttpService sharedService] delDZ:_topicInteractionDomain.topicUUID success:^(NSString *msgStr) {
             [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
             [topicInteractionView resetDZName:NO name:[KGHttpService sharedService].loginRespDomain.userinfo.name];
         } faild:^(NSString *errorMsg) {
@@ -106,28 +120,42 @@
     }
 }
 
-- (void)postTopic:(NSString *)replyText viewMessage:(NSString *)message {
+//回帖。  提交需要的回帖数据从EmojiManage中获取   aaa<img alt="惊恐" src="htt//...png" />
+//replyText只是用来界面显示     aaa[惊恐]bbb[大笑]
+- (void)postTopic:(NSString *)replyText {
+    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
     ReplyDomain * replyObj = [[ReplyDomain alloc] init];
-    replyObj.content = replyText;
-    replyObj.newsuuid = _topicUUID;
-    replyObj.type = _topicType;
+    replyObj.content = requestReplyStr;
+    replyObj.newsuuid = _topicInteractionDomain.topicUUID;
+    replyObj.type = _topicInteractionDomain.topicType;
     
-    //    [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
-    //        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
-    //
-    //        ReplyDomain * domain = [[ReplyDomain alloc] init];
-    //        domain.content = message;
-    //        domain.newsuuid = _topicUUID;
-    //        domain.type = _topicType;
-    //        domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
-    //        domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
-    //
-    //        [topicInteractionView resetReplyList:domain];
-    //        [self resetTopicReplyContent:domain];
-    //
-    //    } faild:^(NSString *errorMsg) {
-    //        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-    //    }];
+    ReplyDomain * domain = [[ReplyDomain alloc] init];
+    domain.content = replyText;
+    domain.newsuuid = _topicInteractionDomain.topicUUID;
+    domain.type = _topicInteractionDomain.topicType;
+    domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
+    domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
+    
+    [self resetTopicReplyContent:domain];
+    [_emojiAndTextView.contentTextView resignFirstResponder];
+    
+    
+//    [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
+//        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+//        
+//        ReplyDomain * domain = [[ReplyDomain alloc] init];
+//        domain.content = replyText;
+//        domain.newsuuid = _topicInteractionDomain.topicUUID;
+//        domain.type = _topicInteractionDomain.topicType;
+//        domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
+//        domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
+//        
+////        [topicInteractionView resetReplyList:domain];
+//        [self resetTopicReplyContent:domain];
+//        
+//    } faild:^(NSString *errorMsg) {
+//        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+//    }];
 }
 
 //重置回复内容
@@ -138,12 +166,11 @@
 //回复加载更多按钮点击
 - (void)topicRelpyMoreBtnClickedNotification:(NSNotification *)notification {
     NSDictionary  * dic = [notification userInfo];
-    NSString * tUUID = [dic objectForKey:Key_TopicUUID];
-    _topicType = (KGTopicType)[dic objectForKey:Key_TopicType];
+    topicInteractionView = [dic objectForKey:Key_TopicInteractionView];
     
     ReplyListViewController * baseVC = [[ReplyListViewController alloc] init];
-    baseVC.topicUUID = tUUID;
-    baseVC.topicType = _topicType;
+    baseVC.topicUUID = _topicInteractionDomain.topicUUID;
+    baseVC.topicType = _topicInteractionDomain.topicType;
     [self.navigationController pushViewController:baseVC animated:YES];
 }
 
@@ -171,6 +198,9 @@
             }else{
                 _emojiAndTextView.y = wH;
                 [_emojiAndTextView.contentTextView resignFirstResponder];
+                _emojiAndTextView.contentTextView.inputView = nil;
+                [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
+                [[KGEmojiManage sharedManage] resetChatHTML];
             }
             return;
         }
@@ -206,21 +236,6 @@
                 _emojiAndTextView.y = wH;
             }
             return;
-        }
-        
-        
-        if(IFView.TextViewInput.inputView) {
-            //表情键盘
-//            CGFloat inputH = 216;
-//            CGFloat inputY = wH - inputH - 40;
-//            IFView.y = inputY;
-//            CGFloat tempY = emojiInputY;
-//            IFView.y = tempY + 45;
-        } else {
-//            CGFloat inputH = self.keyBoardController.kboardHeight;
-//            CGFloat inputY = wH - inputH - 40;
-//            IFView.y = inputY;
-//            IFView.y = emojiInputY;
         }
     }
 }
@@ -268,8 +283,8 @@
 #pragma UUIput Delegate
 // text
 - (void)UUInputFunctionView:(UUInputFunctionView *)funcView sendMessage:(NSString *)message {
-    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
-    [self postTopic:requestReplyStr viewMessage:message];
+    
+    [self postTopic:message];
     [KGEmojiManage sharedManage].isSwitchEmoji = NO;
     [self keyboardWillShowOrHide:NO inputY:8];
 }

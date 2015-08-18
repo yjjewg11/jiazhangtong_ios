@@ -11,6 +11,15 @@
 
 @implementation ReplyPageDomain
 
+
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        _data = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 //属性名映射
 +(void)initialize{
     [super initialize];

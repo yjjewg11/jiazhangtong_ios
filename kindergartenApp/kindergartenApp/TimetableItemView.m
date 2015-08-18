@@ -90,7 +90,8 @@
     if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
         [cell resetTimetable:[_tableDataSource objectAtIndex:indexPath.row]];
         cell.TimetableItemCellBlock = ^(TimetableDomain * domain){
-            [self loadDZReply:domain];
+            timetableDomain = domain;
+            [self loadDZReply];
         };
     }
     return cell;
@@ -109,10 +110,10 @@
         TimetableItemVO   * timetableItemVO = [_tableDataSource objectAtIndex:Number_Zero];
         
         if(timetableItemVO.timetableMArray && [timetableItemVO.timetableMArray count]>Number_Zero) {
-            TimetableDomain * domain = [timetableItemVO.timetableMArray objectAtIndex:Number_Zero];
+            timetableDomain = [timetableItemVO.timetableMArray objectAtIndex:Number_Zero];
             topicViewCell = cell;
             
-            [self loadDZReply:domain];
+            [self loadDZReply];
         }
     }
     
@@ -127,17 +128,17 @@
 }
 
 //设置点赞回复数据
-- (void)loadDZReply:(TimetableDomain *)domain {
+- (void)loadDZReply {
     if(topicView) {
         [topicView removeFromSuperview];
     }
     
-    if(domain) {
+    if(timetableDomain) {
         TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
-        topicInteractionDomain.dianzan   = domain.dianzan;
-        topicInteractionDomain.replyPage = domain.replyPage;
+        topicInteractionDomain.dianzan   = timetableDomain.dianzan;
+        topicInteractionDomain.replyPage = timetableDomain.replyPage;
         topicInteractionDomain.topicType = Topic_JPKC;
-        topicInteractionDomain.topicUUID = domain.uuid;
+        topicInteractionDomain.topicUUID = timetableDomain.uuid;
         
         TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
         topicFrame.topicInteractionDomain  = topicInteractionDomain;
@@ -149,6 +150,20 @@
         
         //续约刷新cell的height
     }
+}
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    
+    //1.对应课程增加回复
+    ReplyPageDomain * replyPageDomain = timetableDomain.replyPage;
+    if(!replyPageDomain) {
+        replyPageDomain = [[ReplyPageDomain alloc] init];
+    }
+    [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
+    
+    //2.重新加载点赞回复view
+    [self loadDZReply];
 }
 
 

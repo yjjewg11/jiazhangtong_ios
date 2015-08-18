@@ -108,4 +108,9 @@
     NSLog(@"emoji requestFailed:%@====%@", domain.emojiName, domain.descriptionUrl);
 }
 
+
+- (void)resetChatHTML {
+    _chatHTMLInfo = [NSMutableString new];
+}
+
 @end

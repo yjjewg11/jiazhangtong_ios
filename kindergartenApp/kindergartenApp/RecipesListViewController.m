@@ -22,6 +22,7 @@
     NSInteger lastIndex;
     BOOL      isFirstReq;
     UIScrollView * contentScrollView;
+    RecipesInfoView * lastSelItemView;
 }
 
 @end
@@ -35,6 +36,9 @@
     self.view.layer.masksToBounds = YES;
     self.view.clipsToBounds = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    self.keyBoardController.isShowKeyBoard = YES;
+    self.keyboardTopType = EmojiAndTextMode;
     
     totalCount = Number_Thirtyt;
     isFirstReq = YES;
@@ -78,10 +82,10 @@
     int currentIndex = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     
     if(lastIndex!=currentIndex) {
-        RecipesInfoView * itemView = [itemViewArray objectAtIndex:currentIndex];
-        if(!itemView.recipesDomain) {
+        lastSelItemView = [itemViewArray objectAtIndex:currentIndex];
+        if(!lastSelItemView.recipesDomain) {
             [self getQueryDate:currentIndex];
-            [self loadRecipesInfoByData:itemView];
+            [self loadRecipesInfoByData];
         }
         isFirstReq = NO;
         lastIndex = currentIndex;
@@ -90,7 +94,7 @@
 
 
 //加载食谱数据
-- (void)loadRecipesInfoByData:(RecipesInfoView *)recInfoView {
+- (void)loadRecipesInfoByData {
     [[KGHUD sharedHud] show:self.contentView];
     
     [[KGHttpService sharedService] getRecipesList:lastDateStr endDate:nil success:^(NSArray *recipesArray) {
@@ -104,7 +108,7 @@
             tempDomain.isReqSuccessData = YES;
         }
         
-        [recInfoView loadRecipesData:tempDomain];
+        [lastSelItemView loadRecipesData:tempDomain];
         
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
@@ -120,6 +124,11 @@
     } else {
         lastDateStr = [KGDateUtil getDate:Number_Zero];
     }
+}
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    [lastSelItemView resetTopicReplyContent:domain];
 }
 
 

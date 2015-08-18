@@ -548,8 +548,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 #pragma mark - size fit result
 - (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth
 {
-    maxWidth = maxWidth - self.textInsets.left - self.textInsets.right;
-    return [self sizeThatFits:CGSizeMake(maxWidth, CGFLOAT_MAX)];
+    CGFloat newmaxWidth = maxWidth - self.textInsets.left - self.textInsets.right;
+    return [self sizeThatFits:CGSizeMake(newmaxWidth, CGFLOAT_MAX)];
 }
 
 #pragma mark - setter
@@ -699,8 +699,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
     replyView.font = TopicCellDateFont;
     replyView.customEmojiRegex = String_DefValue_EmojiRegex;
     replyView.text = text;
-    
-    CGSize size = [replyView preferredSizeWithMaxWidth:CELLCONTENTWIDTH];
+//    CELLCONTENTWIDTH
+    CGSize size = [replyView preferredSizeWithMaxWidth:width];
     return size;
 }
 

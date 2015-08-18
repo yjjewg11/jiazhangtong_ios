@@ -51,7 +51,7 @@
                         <action selector="emojiBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ipi-js-w0z"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="hjveruiohfiuer" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
                     <rect key="frame" x="16" y="13" width="230" height="20"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>

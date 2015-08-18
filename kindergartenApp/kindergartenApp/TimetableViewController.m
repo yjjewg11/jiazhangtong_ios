@@ -27,6 +27,7 @@
     NSString  * beginDataStr;
     NSString  * endDataStr;
     NSInteger   reqIndex; //记录请求的inex
+    TimetableItemView * lastSelItemView; //当前选中的view
 }
 
 @end
@@ -40,6 +41,9 @@
     self.title = @"课程表";
     self.view.layer.masksToBounds = YES;
     self.view.clipsToBounds = YES;
+    
+    self.keyBoardController.isShowKeyBoard = YES;
+    self.keyboardTopType = EmojiAndTextMode;
     
     lastIndex  = Number_Fifteen;
     totalCount = Number_Thirtyt;
@@ -100,10 +104,10 @@
     
     if(lastIndex!=currentIndex) {
         [self getQueryDate:currentIndex];
-        TimetableItemView * itemView = [itemViewArray objectAtIndex:currentIndex];
-        if(!itemView.tableDataSource || [itemView.tableDataSource count]==Number_Zero) {
+        lastSelItemView = [itemViewArray objectAtIndex:currentIndex];
+        if(!lastSelItemView.tableDataSource || [lastSelItemView.tableDataSource count]==Number_Zero) {
             
-            [self loadRecipesInfoByData:itemView];
+            [self loadRecipesInfoByData];
         }
         isFirstReq = NO;
         lastIndex = currentIndex;
@@ -112,7 +116,7 @@
 
 
 //加载课程表数据
-- (void)loadRecipesInfoByData:(TimetableItemView *)itemView {
+- (void)loadRecipesInfoByData {
     [[KGHUD sharedHud] show:self.contentView];
     [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray) {
         
@@ -122,10 +126,10 @@
             [allTimetableMDic setObject:teachPlanArray forKey:[classuuidMArray objectAtIndex:reqIndex]];
         }
         
-        [self responseHandler:itemView];
+        [self responseHandler];
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-        [self responseHandler:itemView];
+        [self responseHandler];
     }];
 }
 
@@ -153,13 +157,13 @@
 }
 
 //请求之后的处理 需要判断是否还需要再次请求
-- (void)responseHandler:(TimetableItemView *)itemView {
+- (void)responseHandler {
     reqIndex++;
     if(reqIndex < [classuuidMArray count]) {
-        [self loadRecipesInfoByData:itemView];
+        [self loadRecipesInfoByData];
     } else {
         
-        [itemView loadTimetableData:[self packageItemViewData] date:[NSString stringWithFormat:@"%@~%@", beginDataStr, endDataStr]];
+        [lastSelItemView loadTimetableData:[self packageItemViewData] date:[NSString stringWithFormat:@"%@~%@", beginDataStr, endDataStr]];
         [allTimetableMDic removeAllObjects];
         reqIndex = Number_Zero;
     }
@@ -180,6 +184,11 @@
     }
     
     return allTimetableMArray;
+}
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    [lastSelItemView resetTopicReplyContent:domain];
 }
 
 

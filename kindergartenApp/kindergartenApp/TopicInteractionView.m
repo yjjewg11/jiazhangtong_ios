@@ -62,14 +62,14 @@
     _browseCountLabel.textColor = KGColorFrom16(0xff4966);
     [_funView addSubview:_browseCountLabel];
     
-    //回复按钮
+    //点赞按钮
     _dianzanBtn = [[UIButton alloc] init];
     [_dianzanBtn setBackgroundImage:@"anzan" selImg:@"hongzan"];
     _dianzanBtn.tag = Number_Ten;
-    [_dianzanBtn addTarget:self action:@selector(topicFunBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_dianzanBtn addTarget:self action:@selector(topicDZBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_funView addSubview:_dianzanBtn];
     
-    //点赞按钮
+    //回复按钮
     _replyBtn = [[UIButton alloc] init];
     [_replyBtn setBackgroundImage:@"pinglun" selImg:@"pinglun"];
     _replyBtn.tag = Number_Eleven;
@@ -141,8 +141,11 @@
     _replyTextField = [[KGTextField alloc] init];
     _replyTextField.placeholder = @"我来说一句...";
     _replyTextField.returnKeyType = UIReturnKeySend;
-    //    _replyTextField.backgroundColor = [UIColor brownColor];
+//    _replyTextField.backgroundColor = [UIColor brownColor];
     _replyTextField.delegate = self;
+    _replyTextField.enabled = YES;
+//    [_replyTextField addTarget:self action:@selector(textFieldEditingDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
+    [_replyTextField addTarget:self action:@selector(textFieldEditingDidBegin:) forControlEvents:UIControlEventTouchUpInside];
     [_replyTextField setBorderWithWidth:1 color:[UIColor blackColor] radian:5.0];
     [self addSubview:_replyTextField];
 }
@@ -267,42 +270,48 @@
 
 
 //键盘回车
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSString * replyText = [KGNSStringUtil trimString:textField.text];
-    if(replyText && ![replyText isEqualToString:String_DefValue_Empty]) {
-        NSDictionary *dic = @{Key_TopicTypeReplyText : [KGNSStringUtil trimString:textField.text],
-                              Key_TopicUUID : _topicUUID,
-                              Key_TopicType : [NSNumber numberWithInteger:_topicType]};
-        [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicFunClicked object:self userInfo:dic];
-        textField.text = String_DefValue_Empty;
-        [textField resignFirstResponder];
-    }
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    NSString * replyText = [KGNSStringUtil trimString:textField.text];
+//    if(replyText && ![replyText isEqualToString:String_DefValue_Empty]) {
+//        NSDictionary *dic = @{Key_TopicTypeReplyText : [KGNSStringUtil trimString:textField.text],
+//                              Key_TopicUUID : _topicUUID,
+//                              Key_TopicType : [NSNumber numberWithInteger:_topicType]};
+//        [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicReply object:self userInfo:dic];
+//        textField.text = String_DefValue_Empty;
+//        [textField resignFirstResponder];
+//    }
+//    
+//    return YES;
+//}
+
+//点赞按钮点击
+- (void)topicDZBtnClicked:(UIButton *)sender {
+    sender.selected = !sender.selected;
     
-    return YES;
+    NSDictionary *dic = @{Key_TopicInteractionDomain : _topicInteractionFrame.topicInteractionDomain,
+                          Key_TopicFunRequestType : [NSNumber numberWithBool:sender.selected],
+                          Key_TopicInteractionView : self};
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicDZ object:self userInfo:dic];
 }
 
+//回复按钮点击
+//1. 输入框获得焦点。
+//2.发送开始回复的通知 把当前数据传递出去  在回复键盘点击发送后 才知道是对哪条帖子进行回复
 - (void)replyBtnClicked:(UIButton *)sender {
-    [_replyTextField becomeFirstResponder];
+    [self textFieldEditingDidBegin:_replyTextField];
+//    [_replyTextField becomeFirstResponder];
+}
+
+//回复框开始编辑
+- (void)textFieldEditingDidBegin:(UITextField *)textField {
+    NSDictionary *dic = @{Key_TopicInteractionDomain : _topicInteractionFrame.topicInteractionDomain};
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BeginReplyTopic object:self userInfo:dic];
 }
 
 //加载更多按钮点击
 - (void)moreBtnClicked:(UIButton *)sender {
-    NSDictionary *dic = @{Key_TopicUUID : _topicUUID,
-                          Key_TopicFunRequestType : [NSNumber numberWithBool:sender.selected],
-                          Key_TopicType : [NSNumber numberWithInteger:_topicType]};
+    NSDictionary *dic = @{Key_TopicInteractionDomain : _topicInteractionFrame.topicInteractionDomain};
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicLoadMore object:self userInfo:dic];
-}
-
-
-- (void)topicFunBtnClicked:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    
-    NSDictionary *dic = @{Key_TopicCellFunType : [NSNumber numberWithInteger:sender.tag],
-                          Key_TopicUUID : _topicUUID,
-                          Key_TopicFunRequestType : [NSNumber numberWithBool:sender.selected],
-                          Key_TopicType : [NSNumber numberWithInteger:_topicType],
-                          Key_TopicInteractionView : self};
-    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicFunClicked object:self userInfo:dic];
 }
 
 
@@ -328,7 +337,7 @@
                 break;
             }
             
-            if(![[nameArray objectAtIndex:i] isEqualToString:name]) {
+            if(![[nameArray objectAtIndex:i] isEqualToString:name] && ![[nameArray objectAtIndex:i] isEqualToString:String_DefValue_Empty]) {
                 [tempNames appendFormat:@",%@", [nameArray objectAtIndex:i]];
             }
         }

@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReplyDomain.h"
 #import "RecipesDomain.h"
+#import "TopicInteractionView.h"
 
 @interface RecipesInfoView : UIView <UITableViewDataSource, UITableViewDelegate> {
     
     UITableView    * recipesTableView;
     NSMutableArray * recipesDataSourceMArray;
+    TopicInteractionView * topicView;
+    UITableViewCell * topicViewCell;
 }
 
 @property (strong, nonatomic) NSMutableArray * tableDataSource; //根据食谱对象重新封装
@@ -20,6 +24,9 @@
 
 //加载食谱数据
 - (void)loadRecipesData:(RecipesDomain *)recipes;
+
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain;
 
 
 @end

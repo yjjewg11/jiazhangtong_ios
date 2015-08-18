@@ -15,7 +15,7 @@
 - (IBAction)emojiBtnPressed:(UIButton *)sender {
     sender.selected = !sender.selected;
     if(sender.selected) {
-        [sender setImage:@"chat_ipunt_message" selImg:@"chat_ipunt_message"];
+        [sender setImage:@"jianpan" selImg:@"jianpan"];
         
     } else {
         [sender setImage:@"biaoqing1" selImg:@"biaoqing1"];
