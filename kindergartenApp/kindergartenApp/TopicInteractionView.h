@@ -15,7 +15,7 @@
 #import "MLEmojiLabel.h"
 #import "TopicInteractionFrame.h"
 
-@interface TopicInteractionView : UIView <UITextFieldDelegate>
+@interface TopicInteractionView : UIView 
 
 @property (strong, nonatomic) TopicInteractionFrame * topicInteractionFrame;
 @property (strong, nonatomic) DianZanDomain   * dianzan;//点赞数据
@@ -46,7 +46,7 @@
 /** 显示更多*/
 @property (strong, nonatomic) UIButton * moreBtn;
 /** 回复输入框 */
-@property (strong, nonatomic) KGTextField * replyTextField;
+@property (strong, nonatomic) UIButton * replyTextField;
 
 
 //重置点赞列表
