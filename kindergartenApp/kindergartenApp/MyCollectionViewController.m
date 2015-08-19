@@ -16,6 +16,11 @@
 
 @implementation MyCollectionViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getListWithPage:_pageIndex];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的收藏";

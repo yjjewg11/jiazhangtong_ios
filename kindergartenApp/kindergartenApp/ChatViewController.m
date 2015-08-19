@@ -228,12 +228,24 @@
         if (msgArray && msgArray.count != 0) {
             ++_pageNo;
         }
+        [self resetChatNameToTitle:msgArray];
         [self loadChatListData:msgArray];
         [_chatTableView headerEndRefreshing];
     } faild:^(NSString *errorMsg) {
         [_chatTableView headerEndRefreshing];
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
     }];
+}
+
+//设置聊天对方名字
+- (void)resetChatNameToTitle:(NSArray *)msgArray {
+    NSString * loginName = [KGHttpService sharedService].loginRespDomain.userinfo.name;
+    for(ChatInfoDomain * domain in msgArray) {
+        if(![domain.send_user isEqualToString:loginName]) {
+            self.title = domain.send_user;
+            break;
+        }
+    }
 }
 
 

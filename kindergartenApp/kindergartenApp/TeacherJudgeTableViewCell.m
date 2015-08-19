@@ -86,7 +86,8 @@
     _judgeTextView.editable = NO;
     _submitBtn.enabled = YES;
     _submitBtn.userInteractionEnabled = NO;
-    [_submitBtn setBackgroundImage:@"teacherJudgetijiao2" selImg:@"teacherJudgetijiao2"];
+    [_submitBtn setText:@"已评价"];
+    [_submitBtn setBackgroundImage:@"" selImg:@""];
     UIImageView * imageView = (UIImageView *)[self viewWithTag:_teachVO.type * 100];
     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"judge_yes_%ld", (long)_teachVO.type * Number_Ten]];
 }

@@ -2283,9 +2283,9 @@
 		4D5CE7581B7E4308002F1088 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				4D5CE7741B7E4354002F1088 /* View */,
-				4D5CE7731B7E434A002F1088 /* Model */,
 				4D5CE7591B7E431B002F1088 /* Controller */,
+				4D5CE7731B7E434A002F1088 /* Model */,
+				4D5CE7741B7E4354002F1088 /* View */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2357,9 +2357,9 @@
 		4DE384511B7F726C009F12E4 /* MyCollection */ = {
 			isa = PBXGroup;
 			children = (
-				4DE384591B7F756C009F12E4 /* View */,
-				4DE384581B7F7566009F12E4 /* Model */,
 				4DE384571B7F7558009F12E4 /* Controller */,
+				4DE384581B7F7566009F12E4 /* Model */,
+				4DE384591B7F756C009F12E4 /* View */,
 			);
 			name = MyCollection;
 			sourceTree = "<group>";

@@ -32,6 +32,7 @@
     [super viewDidLoad];
     
     self.title = @"互动";
+    
     self.keyBoardController.isShowKeyBoard = YES;
     self.keyboardTopType = EmojiAndTextMode;
     
@@ -66,7 +67,8 @@
             break;
         }
     }
-    reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
+//    reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
+    reFreshView.dataSource = [[NSMutableArray alloc] initWithArray:[self topicFramesWithtopics]];
     [reFreshView.tableView reloadData];
 }
 

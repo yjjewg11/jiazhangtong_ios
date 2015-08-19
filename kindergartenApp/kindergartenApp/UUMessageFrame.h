@@ -17,7 +17,7 @@
 #define ChatContentTop 15   //文本内容与按钮上边缘间隔
 #define ChatContentLeft 25  //文本内容与按钮左边缘间隔25
 #define ChatContentBottom 15 //文本内容与按钮下边缘间隔
-#define ChatContentRight 15 //文本内容与按钮右边缘间隔15
+#define ChatContentRight 0 //文本内容与按钮右边缘间隔15
 
 #define ChatTimeFont [UIFont systemFontOfSize:11]   //时间字体
 #define ChatContentFont [UIFont systemFontOfSize:12]//内容字体

@@ -26,7 +26,7 @@
 #define queryByTeacherURL    @"rest/message/queryByTeacher.json" //查询和老师的信件
 #define saveToLeaderURL      @"rest/message/saveToLeader.json"   //给园长写信
 #define queryByLeaderURL     @"rest/message/queryByLeader.json"  //查询和园长的信件
-#define readMsgURL           @"rest/message/read.json"  //阅读信件
+#define readMsgURL           @"rest/pushMessage/read.json"  //阅读信件
 
 
 #define phoneCodeURL           @"rest/sms/sendCode.json"               //短信验证码

@@ -81,7 +81,7 @@
     item2.headHeight = Number_Zero;
     item2.isArrow = NO;
     NSString * groupName = [[KGHttpService sharedService] getGroupNameByUUID:_studentInfo.groupuuid];
-    NSString * className = [[KGHttpService sharedService] getClassNameByUUID:_studentInfo.uuid];
+    NSString * className = [[KGHttpService sharedService] getClassNameByUUID:_studentInfo.classuuid];
     
     item2.contentMArray = [[NSMutableArray alloc] initWithObjects:
                            [NSString stringWithFormat:@"关联学校:%@", groupName ? groupName : @""],

@@ -37,9 +37,10 @@
         self.btnSendMessage = [UIButton buttonWithType:UIButtonTypeCustom];
         self.btnSendMessage.frame = CGRectMake(Main_Screen_Width-40, 5, 30, 30);
         self.isAbleToSendTextMessage = NO;
-        [self.btnSendMessage setTitle:@"send" forState:UIControlStateNormal];
+//        [self.btnSendMessage setTitle:@"send" forState:UIControlStateNormal];
 //        [self.btnSendMessage setBackgroundImage:[UIImage imageNamed:@"Chat_take_picture"] forState:UIControlStateNormal];
-        [self.btnSendMessage setBackgroundImage:[UIImage imageNamed:@"chat_send_message"] forState:UIControlStateNormal];
+//        [self.btnSendMessage setBackgroundImage:[UIImage imageNamed:@"fasong"] forState:UIControlStateNormal];
+        [self.btnSendMessage setImage:[UIImage imageNamed:@"fasong"] forState:UIControlStateNormal];
         self.btnSendMessage.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.btnSendMessage addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.btnSendMessage];
@@ -48,8 +49,8 @@
         self.btnChangeVoiceState = [UIButton buttonWithType:UIButtonTypeCustom];
         self.btnChangeVoiceState.frame = CGRectMake(5, 5, 30, 30);
         isbeginVoiceRecord = NO;
-        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_voice_record"] forState:UIControlStateNormal];
-        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"chat_ipunt_message"] forState:UIControlStateSelected];
+        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"biaoqing1"] forState:UIControlStateNormal];//chat_voice_record
+        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"jianpan"] forState:UIControlStateSelected];//chat_ipunt_message
         self.btnChangeVoiceState.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.btnChangeVoiceState addTarget:self action:@selector(textEmojiRecord:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.btnChangeVoiceState];
