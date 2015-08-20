@@ -29,10 +29,12 @@
 #import "UIButton+Extension.h"
 #import "ItemTitleButton.h"
 #import "BrowseURLViewController.h"
-
+#import "KGAccountTool.h"
 #import "BaiduMobAdInterstitial.h"
 #import "BaiduMobAdDelegateProtocol.h"
 #import "BaiduMobAdView.h"
+#import "KGNavigationController.h"
+#import "LoginViewController.h"
 
 @interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,BaiduMobAdViewDelegate> {
     
@@ -67,15 +69,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     scrollView.contentSize = CGSizeMake(self.view.width, funiView.y + funiView.height + Number_Ten);
-    
+    [self loadNavTitle];
     [self loadPhotoView];
+    [self autoLogin];
 }
 
 - (void)loadNavTitle {
     titleBtn = [[ItemTitleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
     [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
     // 设置图片和文字
-    [titleBtn setTitle:@"首页"
+    NSString * title = @"首页";
+    if([KGHttpService sharedService].groupDomain) {
+        title = [KGHttpService sharedService].groupDomain.brand_name;
+    }
+    
+    [titleBtn setTitle:title
                  forState:UIControlStateNormal];
     // 监听标题点击
     [titleBtn addTarget:self
@@ -156,14 +164,18 @@
 }
 
 - (void)requestGroupDate {
-    [[KGHttpService sharedService] getGroupList:^(NSArray *groupArray) {
-        
-        groupDataArray = groupArray;
-        [self loadNavTitle];
-        [self loadGroupListView];
-    } faild:^(NSString *errorMsg) {
-        
-    }];
+    groupDataArray = [KGHttpService sharedService].loginRespDomain.group_list;
+    [self loadNavTitle];
+    [self loadGroupListView];
+    
+//    [[KGHttpService sharedService] getGroupList:^(NSArray *groupArray) {
+//        
+//        groupDataArray = groupArray;
+//        [self loadNavTitle];
+//        [self loadGroupListView];
+//    } faild:^(NSString *errorMsg) {
+//        
+//    }];
 }
 
 
@@ -388,6 +400,21 @@
         vc.title = domain.name;
         vc.url = domain.url;
         [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+//自动登录
+- (void)autoLogin {
+    KGUser * account = [KGAccountTool account];
+    if(account) {
+        [[KGHttpService sharedService] login:account success:^(NSString *msgStr) {
+            [self requestGroupDate];
+//            [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
+        } faild:^(NSString *errorMsg) {
+            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+            UIWindow * window = [UIApplication sharedApplication].keyWindow;
+            window.rootViewController = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+        }];
     }
 }
 

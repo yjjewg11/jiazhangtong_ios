@@ -694,9 +694,9 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 //根据文本 和显示区域宽度 计算出 需要显示的大小
 + (CGSize)boundingRectWithSize:(NSString *)text w:(CGFloat)width font:(CGFloat)fontSize {
     MLEmojiLabel * replyView = [MLEmojiLabel new];
-    replyView.backgroundColor = [UIColor blueColor];
+    replyView.backgroundColor = [UIColor clearColor];
     replyView.numberOfLines = Number_Zero;
-    replyView.font = TopicCellDateFont;
+    replyView.font = [UIFont systemFontOfSize:fontSize];
     replyView.customEmojiRegex = String_DefValue_EmojiRegex;
     replyView.text = text;
 //    CELLCONTENTWIDTH

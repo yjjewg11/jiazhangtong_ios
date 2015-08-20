@@ -150,17 +150,17 @@
 //save token
 - (void)savePushToken:(NSString *)key{
     KeychainItemWrapper * wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:Key_KeyChain accessGroup:nil];
-    NSString * wrapperToken = [wrapper objectForKey:(__bridge id)kSecAttrAccount];
+//    NSString * wrapperToken = [wrapper objectForKey:(__bridge id)kSecAttrAccount];
     
-    if(![key isEqualToString:wrapperToken] || [key isEqualToString:String_DefValue_Empty]){
-        
+//    if(![key isEqualToString:wrapperToken] || [key isEqualToString:String_DefValue_Empty]){
+    
         [KGHttpService sharedService].pushToken = key;
         
         [[KGHttpService sharedService] submitPushToken:^(NSString *msgStr) {
             [wrapper setObject:key forKey:(__bridge id)kSecAttrAccount];
         } faild:^(NSString *errorMsg) {
         }];
-    }
+//    }
 }
 
 

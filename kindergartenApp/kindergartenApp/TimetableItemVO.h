@@ -13,5 +13,9 @@
 @property (strong, nonatomic) NSString * classuuid; //
 @property (strong, nonatomic) NSString * headUrl; //
 @property (strong, nonatomic) NSMutableArray * timetableMArray;
+@property (assign, nonatomic) CGFloat  cellHeight;
+@property (assign, nonatomic) BOOL     isDZReply;
+@property (strong, nonatomic) UIView * dzReplyView;
+@property (assign, nonatomic) NSInteger   weekday;
 
 @end

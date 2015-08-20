@@ -28,9 +28,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    lastIndex = Number_Eleven;
     UIButton * btn = nil;
-    for(NSInteger i=Number_Eleven; i<=Number_Five; i++) {
+    for(NSInteger i=Number_Eleven; i<=Number_Fifteen; i++) {
         btn = (UIButton *)[self viewWithTag:i];
         [btn setTextColor:[UIColor whiteColor] sel:[UIColor whiteColor]];
     }
@@ -43,9 +42,10 @@
 
 - (void)resetTimetable:(TimetableItemVO *)timetableVO {
     timetableItemVO = timetableVO;
+    lastIndex = timetableItemVO.weekday + Number_Ten;
     
-    [self loadTimetable:Number_One];
-    UIButton * btn = (UIButton *)[self viewWithTag:Number_Eleven];
+    [self loadTimetable:timetableItemVO.weekday];
+    UIButton * btn = (UIButton *)[self viewWithTag:lastIndex];
     btn.selected = YES;
     
     [headImageView sd_setImageWithURL:[NSURL URLWithString:timetableItemVO.headUrl] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -57,10 +57,12 @@
 - (IBAction)dateBtnClicked:(UIButton *)sender {
     sender.selected = YES;
     if(sender.tag != lastIndex) {
-        [self loadTimetable:sender.tag - Number_Ten];
-        UIButton * btn = (UIButton *)[self viewWithTag:lastIndex];
-        btn.selected = NO;
-        lastIndex = sender.tag;
+        
+        _selWeekday = sender.tag - Number_Ten;
+        
+        if(self.TimetableItemCellBlock) {
+            self.TimetableItemCellBlock(self);
+        }
     }
 }
 
@@ -69,6 +71,8 @@
     BOOL judge = NO;
     for(TimetableDomain * domain in timetableItemVO.timetableMArray) {
         NSInteger weekday = [KGDateUtil weekdayStringFromDate:domain.plandate];
+        _selWeekday = weekday;
+        _selTimetableDomain = domain;
         if(weekday == index) {
             [self resetTimetableData:domain];
             judge = YES;
@@ -88,10 +92,6 @@
     } else {
         morningLabel.text = String_DefValue_Empty;
         afternoonLabel.text = String_DefValue_Empty;
-    }
-    
-    if(self.TimetableItemCellBlock) {
-        self.TimetableItemCellBlock(domain);
     }
 }
 

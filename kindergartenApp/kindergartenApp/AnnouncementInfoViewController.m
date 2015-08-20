@@ -40,11 +40,13 @@
     myWebView.backgroundColor = [UIColor clearColor];
     myWebView.opaque = NO;
     myWebView.delegate = self;
+    myWebView.scrollView.scrollEnabled = NO;
     [self getAnnouncementDomainInfo];
     
     self.contentView.width = KGSCREEN.size.width;
     contentScrollView.width = KGSCREEN.size.width;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -99,6 +101,7 @@
 
 - (void)resetViewParam {
     titleLabel.text = announcementDomain.title;
+    announcementDomain.message = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>",announcementDomain.message];
     [myWebView loadHTMLString:announcementDomain.message baseURL:nil];
     groupLabel.text = [[KGHttpService sharedService] getGroupNameByUUID:announcementDomain.groupuuid];
     createTimeLabel.text = announcementDomain.create_time;
@@ -106,10 +109,27 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     //webview 自适应高度
-    CGRect frame = webView.frame;
-    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
-    frame.size = fittingSize;
-    webView.frame = CGRectMake(Number_Zero, CGRectGetMaxY(titleLabel.frame), KGSCREEN.size.width, fittingSize.height);
+//    CGRect frame = webView.frame;
+//    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+//    frame.size = fittingSize;
+//    webView.frame = CGRectMake(Number_Zero, CGRectGetMaxY(titleLabel.frame), KGSCREEN.size.width, fittingSize.height);
+    
+    //获取页面高度（像素）
+    NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+    float clientheight = [clientheight_str floatValue];
+    //设置到WebView上
+    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, clientheight);
+    //获取WebView最佳尺寸（点）
+    CGSize frame = [webView sizeThatFits:webView.frame.size];
+    //获取内容实际高度（像素）
+    NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
+    float height = [height_str floatValue];
+    //内容实际高度（像素）* 点和像素的比
+    height = height * frame.height / clientheight;
+    //再次设置WebView高度（点）
+    webView.frame = CGRectMake(0, CGRectGetMaxY(titleLabel.frame), self.view.frame.size.width, height);
+    
+    
     groupLabel.y = CGRectGetMaxY(webView.frame) + Number_Ten;
     groupLabel.x = KGSCREEN.size.width - groupLabel.width - CELLPADDING;
     createTimeLabel.y = CGRectGetMaxY(groupLabel.frame) + Number_Ten;

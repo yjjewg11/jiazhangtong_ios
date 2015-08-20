@@ -26,7 +26,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ieM-ek-Oyy">
-                                <rect key="frame" x="74" y="12" width="30" height="30"/>
+                                <rect key="frame" x="94" y="12" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="5JQ-4z-X7k"/>
                                     <constraint firstAttribute="width" constant="30" id="fy6-VU-aWS"/>
@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgf-tG-Pz5">
-                                <rect key="frame" x="124" y="12" width="30" height="30"/>
+                                <rect key="frame" x="139" y="12" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8dX-V1-043"/>
                                     <constraint firstAttribute="width" constant="30" id="IgY-xe-4ua"/>
@@ -68,7 +68,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pge-u7-E4r">
-                                <rect key="frame" x="174" y="12" width="30" height="30"/>
+                                <rect key="frame" x="184" y="12" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0L1-Uc-tGm"/>
                                     <constraint firstAttribute="width" constant="30" id="lDc-uC-tUu"/>
@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C80-aO-rkr">
-                                <rect key="frame" x="224" y="12" width="30" height="30"/>
+                                <rect key="frame" x="229" y="12" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="9nI-tv-Nyt"/>
                                     <constraint firstAttribute="height" constant="30" id="bn6-8h-GPQ"/>
@@ -136,7 +136,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ieM-ek-Oyy" secondAttribute="bottom" constant="16" id="4HT-tv-OcO"/>
                             <constraint firstItem="C80-aO-rkr" firstAttribute="top" secondItem="F7w-YL-kud" secondAttribute="top" constant="12" id="5mT-rz-PtM"/>
-                            <constraint firstItem="DFj-Xh-dcA" firstAttribute="leading" secondItem="C80-aO-rkr" secondAttribute="trailing" constant="20" id="9kh-IE-O1f"/>
+                            <constraint firstItem="DFj-Xh-dcA" firstAttribute="leading" secondItem="C80-aO-rkr" secondAttribute="trailing" constant="15" id="9kh-IE-O1f"/>
                             <constraint firstItem="DFj-Xh-dcA" firstAttribute="top" secondItem="F7w-YL-kud" secondAttribute="top" constant="12" id="ERp-DF-EJ4"/>
                             <constraint firstItem="ieM-ek-Oyy" firstAttribute="top" secondItem="F7w-YL-kud" secondAttribute="top" constant="12" id="FQi-8z-NLg"/>
                             <constraint firstAttribute="height" constant="58" id="IMb-Yy-MrP"/>
@@ -148,10 +148,10 @@
                             <constraint firstAttribute="bottom" secondItem="DFj-Xh-dcA" secondAttribute="bottom" constant="16" id="Xmz-aw-0Su"/>
                             <constraint firstAttribute="bottom" secondItem="Tqo-9K-oaG" secondAttribute="bottom" constant="7" id="bub-Hc-C7V"/>
                             <constraint firstItem="Bgf-tG-Pz5" firstAttribute="top" secondItem="F7w-YL-kud" secondAttribute="top" constant="12" id="dCy-Nf-Zyp"/>
-                            <constraint firstItem="Bgf-tG-Pz5" firstAttribute="leading" secondItem="ieM-ek-Oyy" secondAttribute="trailing" constant="20" id="eN2-GC-3kv"/>
-                            <constraint firstItem="C80-aO-rkr" firstAttribute="leading" secondItem="pge-u7-E4r" secondAttribute="trailing" constant="20" id="lUw-Oh-o82"/>
+                            <constraint firstItem="Bgf-tG-Pz5" firstAttribute="leading" secondItem="ieM-ek-Oyy" secondAttribute="trailing" constant="15" id="eN2-GC-3kv"/>
+                            <constraint firstItem="C80-aO-rkr" firstAttribute="leading" secondItem="pge-u7-E4r" secondAttribute="trailing" constant="15" id="lUw-Oh-o82"/>
                             <constraint firstItem="pge-u7-E4r" firstAttribute="top" secondItem="F7w-YL-kud" secondAttribute="top" constant="12" id="oyI-4Y-Bui"/>
-                            <constraint firstItem="pge-u7-E4r" firstAttribute="leading" secondItem="Bgf-tG-Pz5" secondAttribute="trailing" constant="20" id="pXp-mJ-LLG"/>
+                            <constraint firstItem="pge-u7-E4r" firstAttribute="leading" secondItem="Bgf-tG-Pz5" secondAttribute="trailing" constant="15" id="pXp-mJ-LLG"/>
                             <constraint firstAttribute="bottom" secondItem="C80-aO-rkr" secondAttribute="bottom" constant="16" id="vFp-b7-zD8"/>
                         </constraints>
                     </view>

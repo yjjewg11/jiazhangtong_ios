@@ -19,7 +19,9 @@
     NSInteger   lastIndex;
 }
 
-@property (nonatomic, copy) void (^TimetableItemCellBlock)(TimetableDomain * domain);
+@property (strong, nonatomic) TimetableDomain * selTimetableDomain;
+@property (assign, nonatomic) NSInteger         selWeekday;
+@property (nonatomic, copy) void (^TimetableItemCellBlock)(TimetableItemTableViewCell * timetableItemTableViewCell);
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

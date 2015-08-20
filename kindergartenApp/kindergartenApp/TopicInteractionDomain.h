@@ -18,5 +18,7 @@
 @property (assign, nonatomic) KGTopicType       topicType; //帖子类型
 @property (assign, nonatomic) KGTopicBrowseType borwseType;//浏览类型
 @property (strong, nonatomic) NSString        * createTime;//贴子创建时间
+@property (assign, nonatomic) NSInteger         cellIndex; //课程表记录点击的行
+@property (assign, nonatomic) NSInteger         weekday;   //课程表记录点击的星期几
 
 @end

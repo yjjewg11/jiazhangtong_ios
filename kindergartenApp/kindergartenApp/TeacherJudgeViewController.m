@@ -9,7 +9,7 @@
 #import "TeacherJudgeViewController.h"
 #import "ReFreshTableViewController.h"
 #import "KGHttpService.h"
-#import "TeacherVO.h"
+
 #import "KGHUD.h"
 #import "PageInfoDomain.h"
 #import "UIColor+Extension.h"
@@ -36,6 +36,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(teacherJudgeClickedNotification:) name:Key_Notification_TeacherJudge object:nil];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -48,11 +53,26 @@
 
 //cell点击监听通知
 - (void)teacherJudgeClickedNotification:(NSNotification *)notification {
-    NSDictionary * dic = [notification userInfo];
-    TeacherVO * teacherObj = [dic objectForKey:@"tearchVO"];
-    TeacherJudgeTableViewCell * cell = [dic objectForKey:@"tableViewCell"];
+    _tempDic = [notification userInfo];
+    TeacherVO * teacherObj = [_tempDic objectForKey:@"tearchVO"];
     
-    [self saveTeacherJudge:teacherObj cell:cell];
+    if (teacherObj.content.length == 0 || teacherObj.type == 0) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:@"请填写正确的评价"];
+        return;
+    }
+    
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"确定对%@进行评价?",teacherObj.name] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [alertView show];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        TeacherVO * teacherObj = [_tempDic objectForKey:@"tearchVO"];
+        TeacherJudgeTableViewCell * cell = [_tempDic objectForKey:@"tableViewCell"];
+        ;
+        [self saveTeacherJudge:teacherObj cell:cell];
+    }
 }
 
 //获取数据加载表格

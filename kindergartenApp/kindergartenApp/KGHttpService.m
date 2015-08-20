@@ -319,6 +319,18 @@
     }
 }
 
+#pragma mark - 设置cookie
+- (void)setupCookie{
+    NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
+    [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+    [cookieDic setObject:_loginRespDomain.JSESSIONID forKey:NSHTTPCookieValue];
+    [cookieDic setObject:@"wenjienet.com" forKey:NSHTTPCookiePath];
+    [cookieDic setObject:@"0" forKey:NSHTTPCookieVersion];
+    [cookieDic setObject:[[NSDate date] dateByAddingTimeInterval:2629743] forKey:NSHTTPCookieExpires];
+    NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
+}
+
 
 #pragma mark 账号相关 begin
 
@@ -334,6 +346,7 @@
                                               //取到服务器返回的cookies
                                               NSString * cookies = ((NSHTTPURLResponse *)task.response).allHeaderFields[@"Set-Cookie"];
                                               NSLog(@"response cookies:%@",cookies);
+                                              [self setupCookie];
 //                                              [self userCookie:cookies];
                                               
                                               

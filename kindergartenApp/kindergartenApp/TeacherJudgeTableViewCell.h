@@ -16,6 +16,7 @@
 }
 
 @property (strong, nonatomic) TeacherVO * teachVO;
+@property (assign, nonatomic) BOOL isClicked;//选择满意程度是否能够点击
 
 @property (strong, nonatomic) IBOutlet UIImageView * headImageView;
 @property (strong, nonatomic) IBOutlet UILabel * nameLabel;

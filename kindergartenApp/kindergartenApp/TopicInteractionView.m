@@ -109,6 +109,7 @@
     
     _replyView = [MLEmojiLabel new];
     _replyView.backgroundColor = [UIColor clearColor];
+//    _replyView.backgroundColor = [UIColor brownColor];
     _replyView.numberOfLines = Number_Zero;
     _replyView.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
     _replyView.textColor = [UIColor blackColor];

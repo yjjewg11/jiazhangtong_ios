@@ -53,6 +53,8 @@
     [self reqTotal];
     [self loadFlowScrollView];
     [self loadRecipesInfoViewToScrollView];
+//    [self getQueryDate:lastIndex];
+//    [self loadRecipesInfoByData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,6 +84,11 @@
     contentScrollView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT- APPWINDOWTOPHEIGHTIOS7);
     contentScrollView.origin = CGPointZero;
     contentScrollView.contentSize = CGSizeMake(APPWINDOWWIDTH * totalCount, contentScrollView.height);
+    
+//    TimetableItemView * itemView = [[TimetableItemView alloc] initWithFrame:CGRectMake(0, Number_Zero, APPWINDOWWIDTH, contentScrollView.height)];
+//    [contentScrollView addSubview:itemView];
+//    
+//    lastSelItemView = itemView;
 }
 
 - (void)loadRecipesInfoViewToScrollView {
@@ -106,7 +113,7 @@
         [self getQueryDate:currentIndex];
         lastSelItemView = [itemViewArray objectAtIndex:currentIndex];
         if(!lastSelItemView.tableDataSource || [lastSelItemView.tableDataSource count]==Number_Zero) {
-            
+            [[KGHUD sharedHud] show:self.contentView];
             [self loadRecipesInfoByData];
         }
         isFirstReq = NO;
@@ -117,7 +124,7 @@
 
 //加载课程表数据
 - (void)loadRecipesInfoByData {
-    [[KGHUD sharedHud] show:self.contentView];
+    
     [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray) {
         
         [[KGHUD sharedHud] hide:self.contentView];
@@ -162,33 +169,17 @@
     if(reqIndex < [classuuidMArray count]) {
         [self loadRecipesInfoByData];
     } else {
-        
-        [lastSelItemView loadTimetableData:[self packageItemViewData] date:[NSString stringWithFormat:@"%@~%@", beginDataStr, endDataStr]];
+        [lastSelItemView loadTimetableData:allTimetableMDic date:[NSString stringWithFormat:@"%@~%@", beginDataStr, endDataStr]];
         [allTimetableMDic removeAllObjects];
         reqIndex = Number_Zero;
     }
 }
 
-//数据封装
-- (NSMutableArray *)packageItemViewData {
-    NSMutableArray  * allTimetableMArray = [[NSMutableArray alloc] init];
-    TimetableItemVO * itemVO = nil;
-    NSArray * users = [KGHttpService sharedService].loginRespDomain.list;
-    
-    for(KGUser * user in users) {
-        itemVO = [[TimetableItemVO alloc] init];
-        itemVO.classuuid = user.classuuid;
-        itemVO.headUrl   = user.headimg;
-        itemVO.timetableMArray = [allTimetableMDic objectForKey:user.classuuid];
-        [allTimetableMArray addObject:itemVO];
-    }
-    
-    return allTimetableMArray;
-}
+
 
 //重置回复内容
 - (void)resetTopicReplyContent:(ReplyDomain *)domain {
-    [lastSelItemView resetTopicReplyContent:domain];
+    [lastSelItemView resetTopicReplyContent:domain topicInteraction:self.topicInteractionDomain];
 }
 
 

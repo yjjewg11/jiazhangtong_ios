@@ -74,6 +74,10 @@
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -152,7 +156,13 @@
 
 //发表动态
 - (void)pustTopicBtnClicked {
-    [self loadImg];
+    NSString * topicText = [KGNSStringUtil trimString:contentTextView.text];
+    if((!topicText || [topicText isEqualToString:String_DefValue_Empty]) && [imagesMArray count]==Number_Zero) {
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"内容或者图片必填其中一项。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    } else {
+        [self loadImg];
+    }
 }
 
 
@@ -172,7 +182,7 @@
             [self uploadImgSuccessHandler];
         }];
     } else {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:@"请添加图片"];
+        [self sendReplyInfo];
     }
 }
 

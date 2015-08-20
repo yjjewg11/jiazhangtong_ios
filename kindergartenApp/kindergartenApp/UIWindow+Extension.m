@@ -34,7 +34,7 @@
         if (!account) {//没有登陆
             self.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         }else{//直接跳转到首页
-            [self autoLogin:account];
+//            [self autoLogin:account];
             self.rootViewController = [[KGTabBarViewController alloc] init];
         }
         [self makeKeyAndVisible];

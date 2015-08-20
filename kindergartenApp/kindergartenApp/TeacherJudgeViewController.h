@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "BaseKeyboardViewController.h"
+#import "TeacherVO.h"
 
-@interface TeacherJudgeViewController : BaseViewController
+@interface TeacherJudgeViewController : BaseKeyboardViewController <UIAlertViewDelegate>
+
+@property (strong, nonatomic) NSDictionary * tempDic;//提交按钮点击 通知字典
 
 @end

@@ -217,8 +217,57 @@
 //    }
 }
 
+#pragma mark - 获取字符串中所有指定字符出现的range
+- (NSMutableArray *)getSubStringShowNumsInStringBy:(NSString*)string andSubstring:(NSString*)Substring
+{
+    int count =0;
+    NSMutableArray * array = [[NSMutableArray alloc] init];
+    NSRange range = [string rangeOfString:Substring];
+    if(range.length>0)
+    {
+        count++;
+        [array addObject:[NSValue valueWithRange:range]];
+        while (range.length>0) {
+            NSInteger startIndex = range.location+range.length;
+            NSInteger endIndex = string.length -startIndex;
+            string= [string substringWithRange:NSMakeRange(startIndex, endIndex)];
+            range = [string rangeOfString:Substring];
+            if(range.length>0) 
+            { 
+                [array addObject:[NSValue valueWithRange:range]];
+            } 
+        } 
+    } 
+    return array;
+}
 
 #pragma mark - TextViewDelegate
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    
+    if (text.length == 0) {
+        NSDictionary * dic = [KGEmojiManage sharedManage].emojiMDict;
+        
+        NSMutableArray * array = [[NSMutableArray alloc] init];
+        NSMutableArray * tempArray;
+        for (NSString *key in dic.allKeys) {
+            tempArray = [self getSubStringShowNumsInStringBy:textView.text andSubstring:key];
+            if (tempArray.count != 0) {
+                [array addObjectsFromArray:tempArray];
+            }
+        }
+        
+        for (NSValue * value in array) {
+            NSRange tempRange = [value rangeValue];
+            if (range.location >= tempRange.location && range.location <= tempRange.location + tempRange.length) {
+                textView.text = [textView.text stringByReplacingCharactersInRange:tempRange withString:@""];
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {

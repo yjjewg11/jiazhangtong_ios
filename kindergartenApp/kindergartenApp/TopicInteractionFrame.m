@@ -22,7 +22,7 @@
     // cell的宽度
     CGFloat cellW = CELLWIDTH;
     
-    _funViewF = CGRectMake(CELLPADDING, Number_Zero, CELLCONTENTWIDTH, CELLPADDING);
+    _funViewF = CGRectMake(CELLPADDING, Number_Zero, CELLCONTENTWIDTH, Number_Twenty);
     
     /* cell的高度 */
     self.topicInteractHeight = CGRectGetMaxY(_funViewF);
@@ -36,15 +36,16 @@
     
     
     //回复按钮
-    CGSize funBtnSize = CGSizeMake(31, 16);
+    CGSize funBtnSize = CGSizeMake(40, 20);
     CGFloat replyBtnX = cellW - funBtnSize.width - CELLPADDING - CELLPADDING;
     CGFloat replyBtnY = 0;
     
     //点赞按钮
-    CGFloat dzBtnX = replyBtnX - 15 - funBtnSize.width;
+    CGFloat dzBtnX = replyBtnX - TopicCellBorderW - funBtnSize.width;
     
-    _dianzanBtnF = CGRectMake(replyBtnX, replyBtnY, funBtnSize.width, funBtnSize.height);
-    _replyBtnF   = CGRectMake(dzBtnX, replyBtnY, funBtnSize.width, funBtnSize.height);
+    _replyBtnF   = CGRectMake(replyBtnX, replyBtnY, funBtnSize.width, funBtnSize.height);
+    _dianzanBtnF = CGRectMake(dzBtnX, replyBtnY, funBtnSize.width, funBtnSize.height);
+    
     
     /* 点赞列表 */
     _dianzanViewF = CGRectMake(Number_Zero, self.topicInteractHeight + TopicCellBorderW, CELLCONTENTWIDTH, TopicCellBorderW);
@@ -90,7 +91,7 @@
             count++;
         }
         
-        CGSize size = [MLEmojiLabel boundingRectWithSize:replyStr w:CELLWIDTH font:APPUILABELFONTNO14];
+        CGSize size = [MLEmojiLabel boundingRectWithSize:replyStr w:CELLWIDTH font:APPUILABELFONTNO12];
         
         _replyViewF = CGRectMake(CELLPADDING, CGRectGetMaxY(_dianzanViewF) + TopicCellBorderW
                                       , CELLCONTENTWIDTH, size.height);

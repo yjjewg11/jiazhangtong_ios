@@ -10,6 +10,9 @@
 #import "StudentInfoHeaderView.h"
 #import "UIColor+Extension.h"
 #import "TimetableItemTableViewCell.h"
+#import "KGHttpService.h"
+#import "Masonry.h"
+#import "KGDateUtil.h"
 
 #define TopicInteractionCellIdentifier  @"TopicInteractionCellIdentifier"
 
@@ -43,8 +46,11 @@
 
 
 //加载课程表数据
-- (void)loadTimetableData:(NSMutableArray *)timetableMArray date:(NSString *)queryDate {
-    _tableDataSource = timetableMArray;
+- (void)loadTimetableData:(NSMutableDictionary *)timetableMDict date:(NSString *)queryDate {
+    sourceTimetableMDict = timetableMDict;
+    
+    [self packageItemViewData];
+  
     _queryDate = queryDate;
     
     if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
@@ -62,7 +68,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_tableDataSource count] + Number_One;
+    return [_tableDataSource count];
 }
 
 
@@ -81,7 +87,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([_tableDataSource count]>Number_Zero && indexPath.row == [_tableDataSource count]) {
+    TimetableItemVO   * timetableItemVO = [_tableDataSource objectAtIndex:indexPath.row];
+    
+    if(timetableItemVO.isDZReply) {
         return [self loadTopicInteractView:tableView cellForRowAtIndexPath:indexPath];
     }
     
@@ -89,9 +97,11 @@
     
     if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
         [cell resetTimetable:[_tableDataSource objectAtIndex:indexPath.row]];
-        cell.TimetableItemCellBlock = ^(TimetableDomain * domain){
-            timetableDomain = domain;
-            [self loadDZReply];
+        
+        cell.TimetableItemCellBlock = ^(TimetableItemTableViewCell * timetableItemTableViewCell){
+            
+            NSIndexPath *indexPath = [timetableTableView indexPathForCell:timetableItemTableViewCell];
+            [self resetPackageItemViewData:indexPath.row week:timetableItemTableViewCell.selWeekday];
         };
     }
     return cell;
@@ -103,68 +113,143 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TopicInteractionCellIdentifier];
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TopicInteractionCellIdentifier];
-        cell.selectionStyle = UITableViewRowActionStyleNormal;
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    for(UIView * view in cell.subviews) {
+        [view removeFromSuperview];
+    }
     if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
-        TimetableItemVO   * timetableItemVO = [_tableDataSource objectAtIndex:Number_Zero];
-        
-        if(timetableItemVO.timetableMArray && [timetableItemVO.timetableMArray count]>Number_Zero) {
-            timetableDomain = [timetableItemVO.timetableMArray objectAtIndex:Number_Zero];
-            topicViewCell = cell;
-            
-            [self loadDZReply];
-        }
+        TimetableItemVO   * timetableItemVO = [_tableDataSource objectAtIndex:indexPath.row];
+        [cell addSubview:timetableItemVO.dzReplyView];
     }
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if([_tableDataSource count]>Number_Zero && indexPath.row == [_tableDataSource count]) {
-        return 160;
-    }
-    return 148;
+    TimetableItemVO * itemvO = [_tableDataSource objectAtIndex:indexPath.row];
+    return itemvO.cellHeight;
 }
 
-//设置点赞回复数据
-- (void)loadDZReply {
-    if(topicView) {
-        [topicView removeFromSuperview];
-    }
-    
-    if(timetableDomain) {
-        TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
-        topicInteractionDomain.dianzan   = timetableDomain.dianzan;
-        topicInteractionDomain.replyPage = timetableDomain.replyPage;
-        topicInteractionDomain.topicType = Topic_JPKC;
-        topicInteractionDomain.topicUUID = timetableDomain.uuid;
+
+//数据封装
+- (void)packageItemViewData{
+    NSArray * users = [KGHttpService sharedService].loginRespDomain.list;
+    NSInteger index = Number_Zero;
+    for(KGUser * user in users) {
+        TimetableItemVO * itemVO = [[TimetableItemVO alloc] init];
+        itemVO.cellHeight = 150;
+        itemVO.classuuid = user.classuuid;
+        itemVO.headUrl   = user.headimg;
+        itemVO.weekday = Number_One;
+        itemVO.timetableMArray = [sourceTimetableMDict objectForKey:user.classuuid];
+        [self.tableDataSource addObject:itemVO];
+        index++;
+        TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:Number_One];
+        UIView * view = [self loadDZReply:domain index:index - Number_One week:Number_One];
         
-        TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
-        topicFrame.topicInteractionDomain  = topicInteractionDomain;
-        
-        CGRect frame = CGRectMake(Number_Zero, Number_Fifteen, KGSCREEN.size.width, topicFrame.topicInteractHeight);
-        topicView = [[TopicInteractionView alloc] initWithFrame:frame];
-        [topicViewCell addSubview:topicView];
-        topicView.topicInteractionFrame = topicFrame;
-        
-        //续约刷新cell的height
+        TimetableItemVO * itemVO2 = [[TimetableItemVO alloc] init];
+        itemVO2.isDZReply = YES;
+        itemVO2.cellHeight = CGRectGetMaxY(view.frame);
+        itemVO2.dzReplyView = view;
+        [self.tableDataSource addObject:itemVO2];
+        index++;
     }
 }
+
+//重置table数据源指定数据 再刷新table
+- (void)resetPackageItemViewData:(NSInteger)cellIndex week:(NSInteger)weekday {
+    TimetableItemVO * itemVO = [self.tableDataSource objectAtIndex:cellIndex];
+    itemVO.weekday = weekday;
+    TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:weekday];
+    UIView * view = [self loadDZReply:domain index:cellIndex week:weekday];
+    
+    TimetableItemVO * itemVO2 = [self.tableDataSource objectAtIndex:cellIndex+Number_One];
+    itemVO2.cellHeight  = view.height;
+    itemVO2.dzReplyView = view;
+    itemVO2.weekday     = weekday; //默认选中这个按钮
+    [timetableTableView reloadData];
+}
+
+
+//根据课程表 和选中的 星期几 返回 对应的课程
+- (TimetableDomain *)getTimetableDomainByWeek:(NSMutableArray *)timetableMArray week:(NSInteger)week {
+    TimetableDomain * domain = nil;
+    for(TimetableDomain * tempDomain in timetableMArray) {
+        NSInteger weekday = [KGDateUtil weekdayStringFromDate:tempDomain.plandate];
+        if(week == weekday) {
+            domain = tempDomain;
+            break;
+        }
+    }
+    
+    return domain;
+}
+
+
+//设置点赞回复View
+- (UIView *)loadDZReply:(TimetableDomain *)timetableDomain index:(NSInteger)cellIndex week:(NSInteger)weekday {
+    if(timetableDomain) {
+        return [self loadDZReplyView:timetableDomain index:cellIndex week:weekday];
+    } else {
+        return [self loadNoDZReply];
+    }
+}
+
+//加载点赞回复view
+- (UIView *)loadDZReplyView:(TimetableDomain *)timetableDomain index:(NSInteger)cellIndex week:(NSInteger)weekday{
+    TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
+    topicInteractionDomain.dianzan   = timetableDomain.dianzan;
+    topicInteractionDomain.replyPage = timetableDomain.replyPage;
+    topicInteractionDomain.topicType = Topic_JPKC;
+    topicInteractionDomain.topicUUID = timetableDomain.uuid;
+    topicInteractionDomain.cellIndex = cellIndex;
+    topicInteractionDomain.weekday   = weekday;
+    
+    TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
+    topicFrame.topicInteractionDomain  = topicInteractionDomain;
+    topicFrame.topicInteractHeight += 20;
+    CGRect frame = CGRectMake(Number_Zero, Number_Ten, KGSCREEN.size.width, topicFrame.topicInteractHeight);
+    TopicInteractionView * topicInteractionView = [[TopicInteractionView alloc] initWithFrame:frame];
+    topicInteractionView.topicInteractionFrame = topicFrame;
+    return topicInteractionView;
+}
+
+//加载无点赞回复view
+- (UIView *)loadNoDZReply {
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Ten, KGSCREEN.size.width, 45)];
+    view.backgroundColor = [UIColor clearColor];
+    UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, Number_Ten, KGSCREEN.size.width, Number_Fifteen)];
+    label.textColor = KGColorFrom16(0x666666);
+    label.text = @"暂无课程发布";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:APPUILABELFONTNO15];
+    [view addSubview:label];
+    return view;
+}
+
 
 //重置回复内容
-- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+- (void)resetTopicReplyContent:(ReplyDomain *)domain topicInteraction:(TopicInteractionDomain *)topicInteractionDomain {
     
     //1.对应课程增加回复
-    ReplyPageDomain * replyPageDomain = timetableDomain.replyPage;
+    TimetableItemVO * itemVO = [self.tableDataSource objectAtIndex:topicInteractionDomain.cellIndex];
+    ReplyPageDomain * replyPageDomain = nil;
+    for(TimetableDomain * timetableDomain in itemVO.timetableMArray) {
+        if([timetableDomain.uuid isEqualToString:domain.newsuuid]) {
+            replyPageDomain = timetableDomain.replyPage;
+            break;
+        }
+    }
+    
     if(!replyPageDomain) {
         replyPageDomain = [[ReplyPageDomain alloc] init];
     }
     [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
     
-    //2.重新加载点赞回复view
-    [self loadDZReply];
+    //2.重置对应数据源刷新table
+    [self resetPackageItemViewData:topicInteractionDomain.cellIndex week:topicInteractionDomain.weekday];
 }
-
 
 @end

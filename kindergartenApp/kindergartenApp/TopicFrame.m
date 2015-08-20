@@ -76,7 +76,7 @@
         
         //图片=1 根据图片实际大小决定高度
         //图片>3 换行
-        CGFloat imgCellH = topicContentW / Number_Three;
+        CGFloat imgCellH = (topicContentW - Number_Ten) / Number_Three;
         topicImgsViewH = imgCellH;
         
         if([imgArray count] > Number_Three) {
@@ -85,6 +85,9 @@
             
             topicImgsViewH = page * imgCellH;
         }
+//        else if ([imgArray count] == Number_One) {
+//            topicImgsViewH = topicContentW;
+//        }
         
         self.topicImgsViewF = CGRectMake(topicContentX, topicImgsViewY, topicContentW, topicImgsViewH);
         

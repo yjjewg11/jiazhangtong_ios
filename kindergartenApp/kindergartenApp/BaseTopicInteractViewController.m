@@ -123,39 +123,28 @@
 //回帖。  提交需要的回帖数据从EmojiManage中获取   aaa<img alt="惊恐" src="htt//...png" />
 //replyText只是用来界面显示     aaa[惊恐]bbb[大笑]
 - (void)postTopic:(NSString *)replyText {
-    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
+//    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
     ReplyDomain * replyObj = [[ReplyDomain alloc] init];
-    replyObj.content = requestReplyStr;
+    replyObj.content = replyText;
     replyObj.newsuuid = _topicInteractionDomain.topicUUID;
     replyObj.type = _topicInteractionDomain.topicType;
     
-    ReplyDomain * domain = [[ReplyDomain alloc] init];
-    domain.content = replyText;
-    domain.newsuuid = _topicInteractionDomain.topicUUID;
-    domain.type = _topicInteractionDomain.topicType;
-    domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
-    domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
-    
-    [self resetTopicReplyContent:domain];
-    [_emojiAndTextView.contentTextView resignFirstResponder];
-    
-    
-//    [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
-//        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
-//        
-//        ReplyDomain * domain = [[ReplyDomain alloc] init];
-//        domain.content = replyText;
-//        domain.newsuuid = _topicInteractionDomain.topicUUID;
-//        domain.type = _topicInteractionDomain.topicType;
-//        domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
-//        domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
-//        
-////        [topicInteractionView resetReplyList:domain];
-//        [self resetTopicReplyContent:domain];
-//        
-//    } faild:^(NSString *errorMsg) {
-//        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-//    }];
+    [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        
+        ReplyDomain * domain = [[ReplyDomain alloc] init];
+        domain.content = replyText;
+        domain.newsuuid = _topicInteractionDomain.topicUUID;
+        domain.type = _topicInteractionDomain.topicType;
+        domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
+        domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
+        
+        [self resetTopicReplyContent:domain];
+        [_emojiAndTextView.contentTextView resignFirstResponder];
+        
+    } faild:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
 }
 
 //重置回复内容

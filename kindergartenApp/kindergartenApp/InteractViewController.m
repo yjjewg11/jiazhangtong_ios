@@ -43,15 +43,25 @@
     [self initReFreshView];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [reFreshView beginRefreshing];
+    [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:1];
+}
+
+//延迟刷新
+- (void)lazyRefresh{
+    [reFreshView beginRefreshing];
+}
+
 - (void)postNewTopic {
     PostTopicViewController * postVC = [[PostTopicViewController alloc] init];
     postVC.topicType = Topic_Interact;
     
     postVC.PostTopicBlock = ^(TopicDomain * domain) {
-        //发表互动成功
-        [reFreshView beginRefreshing];
+//        //发表互动成功
+//        [reFreshView beginRefreshing];
     };
-    
+
     [self.navigationController pushViewController:postVC animated:YES];
 }
 
