@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#define webUrl @"http://www.umeng.com/social"
+#define webUrl @"http://www.wenjienet.com/"
 
 #define uMengAppKey             @"55be15a4e0f55a624c007b24"
 

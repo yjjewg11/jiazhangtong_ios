@@ -36,7 +36,7 @@
 
 - (void)umengTrack {
     //    [MobClick setCrashReportEnabled:NO]; // 如果不需要捕捉异常，注释掉此行
-    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+//    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];//参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     //
@@ -205,7 +205,7 @@
     //设置微信AppId、appSecret，分享url
     [UMSocialWechatHandler setWXAppId:ShareKey_WeChat appSecret:ShareKey_WeChatSecret url:webUrl];
     //设置qq
-    [UMSocialQQHandler setQQWithAppId:ShareKey_TencentWB appKey:ShareKey_TencentSecret url:@"http://www.umeng.com/social"];
+    [UMSocialQQHandler setQQWithAppId:ShareKey_TencentWB appKey:ShareKey_TencentSecret url:webUrl];
 
     //打开新浪微博的SSO开关
     [UMSocialSinaHandler openSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];

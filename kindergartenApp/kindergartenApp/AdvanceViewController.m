@@ -34,6 +34,9 @@
     [[KGHUD sharedHud] show:self.view];
     [[UMFeedback sharedInstance] post:@{@"content":_advanceTextView.text} completion:^(NSError *error) {
         [[KGHUD sharedHud] show:self.view onlyMsg:error==nil?@"提交反馈成功,感谢您的支持":error.localizedDescription];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.navigationController popViewControllerAnimated:YES];
+        });
     }];
 }
 

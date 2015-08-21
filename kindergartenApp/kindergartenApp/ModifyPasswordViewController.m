@@ -41,7 +41,7 @@
         [tempArray addObject:cell.passwordTextField.text];
     }
     if (![tempArray[1] isEqualToString:tempArray[2]]) {
-        [[KGHUD sharedHud] show:self.view onlyMsg:@"输入的新密码不同"];
+        [[KGHUD sharedHud] show:self.view onlyMsg:@"两次输入的密码不一致"];
         return;
     }
     if (!([self isRange:tempArray[0]] &&
