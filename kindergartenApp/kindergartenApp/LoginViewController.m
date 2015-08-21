@@ -44,9 +44,10 @@
     [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
     NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:UserNameKey];
     NSString * password = [[NSUserDefaults standardUserDefaults] objectForKey:PasswordKey];
+    _userNameTextField.text = userName;
+    _userPwdTextField.text = password;
+    
     if (userName != nil && password != nil) {
-        _userNameTextField.text = userName;
-        _userPwdTextField.text = password;
         savePwdBtn.selected = YES;
         savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
     }
@@ -76,7 +77,7 @@
 - (IBAction)savePwdBtnClicked:(UIButton *)sender {
     savePwdBtn.selected = !sender.selected;
     savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
-    if (savePwdBtn.selected == false) {
+    if (!savePwdBtn.selected) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserNameKey];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:PasswordKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -94,9 +95,10 @@
 - (IBAction)loginBtnClicked:(UIButton *)sender {
     
     if([self validateInputInView]) {
-        
-        if (savePwdBtn.selected == true) {
-            [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:UserNameKey];
+        //不勾选保存密码 也需要保存用户名
+        [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:UserNameKey];
+        if (savePwdBtn.selected) {
+            
             [[NSUserDefaults standardUserDefaults] setObject:_userPwdTextField.text forKey:PasswordKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }

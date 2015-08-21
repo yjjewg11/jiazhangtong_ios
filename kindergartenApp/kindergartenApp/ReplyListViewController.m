@@ -12,14 +12,13 @@
 #import "PageInfoDomain.h"
 #import "ReFreshTableViewController.h"
 #import "UIColor+Extension.h"
-#import "KGTextField.h"
+#import "UIButton+Extension.h"
 #import "KGNSStringUtil.h"
 
 @interface ReplyListViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
     PageInfoDomain * pageInfo;
     
-    IBOutlet KGTextField *replyTextField;
     IBOutlet UIButton *sendBtn;
 }
 
@@ -33,20 +32,34 @@
     
     self.title = @"评论";
     
-    [self initPageInfo];
+    self.keyBoardController.isShowKeyBoard = YES;
+    self.keyboardTopType = EmojiAndTextMode;
+    
+    [self initViewParam];
     [self initReFreshView];
-    replyTextField.placeholder = @"写下您的评论...";
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)initPageInfo {
+- (void)initViewParam {
     if(!pageInfo) {
         pageInfo = [[PageInfoDomain alloc] init];
     }
+    
+    [_replyBtn setText:@"写下您的评论..."];
+    _replyBtn.titleLabel.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
+    [_replyBtn setTextColor:[UIColor grayColor] sel:[UIColor grayColor]];
+    _replyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _replyBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    
+    self.topicInteractionDomain = [TopicInteractionDomain new];
+    self.topicInteractionDomain.topicType = _topicType;
+    self.topicInteractionDomain.topicUUID = _topicUUID;
 }
+
+
 
 
 //获取数据加载表格
@@ -88,58 +101,22 @@
     
 }
 
-//键盘回车
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self postTopic];
-    return YES;
+
+- (IBAction)writeReplyBtnClicked:(UIButton *)sender {
+    NSDictionary *dic = @{Key_TopicInteractionDomain : self.topicInteractionDomain};
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BeginReplyTopic object:self userInfo:dic];
 }
 
-
-- (IBAction)sendBtnClicked:(UIButton *)sender {
-    [replyTextField resignFirstResponder];
-    [self postTopic];
-}
-
-
-- (void)postTopic {
-    [[KGHUD sharedHud] show:self.contentView];
-    NSString * replyText = [KGNSStringUtil trimString:replyTextField.text];
-    if(replyText && ![replyText isEqualToString:String_DefValue_Empty]) {
-        ReplyDomain * replyObj = [[ReplyDomain alloc] init];
-        replyObj.content = replyText;
-        replyObj.newsuuid = _topicUUID;
-        replyObj.type = _topicType;
-        
-        [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
-            
-            ReplyDomain * domain = [[ReplyDomain alloc] init];
-            domain.content = replyText;
-            domain.newsuuid = _topicUUID;
-            domain.type = _topicType;
-            domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
-            domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
-            
-            if(reFreshView.dataSource) {
-                [reFreshView.dataSource insertObject:domain atIndex:Number_Zero];
-            } else {
-                NSArray * array = [[NSArray alloc] initWithObjects:domain, nil];
-                reFreshView.tableParam.dataSourceMArray = array;
-            }
-            
-            [reFreshView.tableView reloadData];
-            replyTextField.text = String_DefValue_Empty;
-        } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-        }];
-    } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请填写评论." delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
+//重置回复内容
+- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+    NSMutableArray * dataMArray = reFreshView.dataSource;
+    if(!dataMArray){
+        dataMArray = [NSMutableArray new];
+        reFreshView.dataSource = dataMArray;
     }
+    [dataMArray insertObject:domain atIndex:Number_Zero];
+    [reFreshView.tableView reloadData];
 }
 
-- (void)alttextFieldDidEndEditing:(UITextField *)textField {
-    [self postTopic];
-}
 
 @end

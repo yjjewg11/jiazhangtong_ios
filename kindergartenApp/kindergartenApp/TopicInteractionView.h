@@ -52,7 +52,5 @@
 //重置点赞列表
 - (void)resetDZName:(BOOL)isAdd name:(NSString *)name;
 
-//重置回复
-- (void)resetReplyList:(ReplyDomain *)replyDomain;
 
 @end

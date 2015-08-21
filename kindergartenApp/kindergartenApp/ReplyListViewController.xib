@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReplyListViewController">
             <connections>
                 <outlet property="contentView" destination="Ttj-ni-vfV" id="zp0-6F-7MI"/>
-                <outlet property="replyTextField" destination="scK-HZ-K1B" id="qPb-TS-JM5"/>
+                <outlet property="replyBtn" destination="P7q-J1-m0U" id="zwL-OE-cWo"/>
                 <outlet property="sendBtn" destination="UEn-Ww-psg" id="744-LQ-3Fs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,21 +25,18 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tjZ-GB-uVs">
                     <rect key="frame" x="0.0" y="528" width="320" height="40"/>
                     <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scK-HZ-K1B" customClass="KGTextField">
-                            <rect key="frame" x="16" y="0.0" width="258" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7q-J1-m0U">
+                            <rect key="frame" x="16" y="0.0" width="288" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="YnX-Lr-aYO"/>
+                                <constraint firstAttribute="height" constant="40" id="T4D-eS-gnd"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                        </textField>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendReply" translatesAutoresizingMaskIntoConstraints="NO" id="Fu6-ed-7xD">
-                            <rect key="frame" x="284" y="10" width="23" height="23"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="23" id="VGc-4c-pWU"/>
-                                <constraint firstAttribute="width" constant="23" id="yCp-eN-POS"/>
-                            </constraints>
-                        </imageView>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="writeReplyBtnClicked:" destination="-1" eventType="touchUpInside" id="dWR-qx-moz"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEn-Ww-psg">
                             <rect key="frame" x="280" y="0.0" width="40" height="40"/>
                             <constraints>
@@ -56,17 +53,14 @@
                     </subviews>
                     <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="scK-HZ-K1B" secondAttribute="bottom" id="0eD-I8-Bhy"/>
                         <constraint firstAttribute="trailing" secondItem="UEn-Ww-psg" secondAttribute="trailing" id="DgN-4h-2VO"/>
                         <constraint firstAttribute="bottom" secondItem="UEn-Ww-psg" secondAttribute="bottom" id="GAJ-T1-bQA"/>
-                        <constraint firstAttribute="trailing" secondItem="Fu6-ed-7xD" secondAttribute="trailing" constant="13" id="Hdl-uo-Qpj"/>
-                        <constraint firstItem="scK-HZ-K1B" firstAttribute="top" secondItem="tjZ-GB-uVs" secondAttribute="top" id="LQJ-1r-ZBt"/>
-                        <constraint firstAttribute="bottom" secondItem="Fu6-ed-7xD" secondAttribute="bottom" constant="7" id="PLV-RY-bnQ"/>
-                        <constraint firstItem="UEn-Ww-psg" firstAttribute="leading" secondItem="scK-HZ-K1B" secondAttribute="trailing" constant="6" id="Vwt-cD-0yK"/>
                         <constraint firstItem="UEn-Ww-psg" firstAttribute="top" secondItem="tjZ-GB-uVs" secondAttribute="top" id="YG9-Ns-hfk"/>
-                        <constraint firstItem="Fu6-ed-7xD" firstAttribute="top" secondItem="tjZ-GB-uVs" secondAttribute="top" constant="10" id="nkD-Wx-fbn"/>
+                        <constraint firstAttribute="bottom" secondItem="P7q-J1-m0U" secondAttribute="bottom" id="bRn-qm-NCr"/>
+                        <constraint firstAttribute="trailing" secondItem="P7q-J1-m0U" secondAttribute="trailing" constant="16" id="h5J-8Y-qmw"/>
+                        <constraint firstItem="P7q-J1-m0U" firstAttribute="leading" secondItem="tjZ-GB-uVs" secondAttribute="leading" constant="16" id="oWf-Ck-v9a"/>
                         <constraint firstAttribute="height" constant="40" id="r9p-go-x80"/>
-                        <constraint firstItem="scK-HZ-K1B" firstAttribute="leading" secondItem="tjZ-GB-uVs" secondAttribute="leading" constant="16" id="ved-vA-fiw"/>
+                        <constraint firstItem="P7q-J1-m0U" firstAttribute="top" secondItem="tjZ-GB-uVs" secondAttribute="top" id="zbY-Ns-lmb"/>
                     </constraints>
                 </view>
             </subviews>
@@ -84,7 +78,4 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
-    <resources>
-        <image name="sendReply" width="22" height="22"/>
-    </resources>
 </document>

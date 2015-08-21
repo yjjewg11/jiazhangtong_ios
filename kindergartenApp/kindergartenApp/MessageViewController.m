@@ -23,6 +23,7 @@
 #import "MessageTableViewCell.h"
 #import "AddressBookDomain.h"
 #import "ChatViewController.h"
+#import "StudentSignRecordViewController.h"
 
 @interface MessageViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
@@ -125,7 +126,7 @@
             [self chatMesagePush:domain];
             break;
         case Topic_SignRecord:
-            vc = [[InteractViewController alloc] init];
+            vc = [[StudentSignRecordViewController alloc] init];
             break;
         case Topic_HTML:
             vc = [[BrowseURLViewController alloc] init];

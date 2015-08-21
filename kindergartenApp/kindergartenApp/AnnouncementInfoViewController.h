@@ -10,6 +10,7 @@
 #import "BaseTopicInteractViewController.h"
 #import "AnnouncementDomain.h"
 
+//
 @interface AnnouncementInfoViewController : BaseTopicInteractViewController
 
 

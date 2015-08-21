@@ -328,6 +328,15 @@
 		F4DF3BAB1B78B05A001D9DF7 /* TimetableItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DF3BAA1B78B05A001D9DF7 /* TimetableItemView.m */; };
 		F4E2D4811B6B6334001472EC /* GiftwareArticlesInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E2D47F1B6B6334001472EC /* GiftwareArticlesInfoViewController.m */; };
 		F4E2D4821B6B6334001472EC /* GiftwareArticlesInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E2D4801B6B6334001472EC /* GiftwareArticlesInfoViewController.xib */; };
+		F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E36D4C1B85B49D009BD909 /* AssetHelper.m */; };
+		F4E36D5A1B85B49D009BD909 /* DoAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E36D4E1B85B49D009BD909 /* DoAlbumCell.m */; };
+		F4E36D5B1B85B49D009BD909 /* DoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E36D4F1B85B49D009BD909 /* DoAlbumCell.xib */; };
+		F4E36D5C1B85B49D009BD909 /* DoImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E36D511B85B49D009BD909 /* DoImagePickerController.m */; };
+		F4E36D5D1B85B49D009BD909 /* DoImagePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E36D521B85B49D009BD909 /* DoImagePickerController.xib */; };
+		F4E36D5E1B85B49D009BD909 /* DoPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E36D541B85B49D009BD909 /* DoPhotoCell.m */; };
+		F4E36D5F1B85B49D009BD909 /* DoPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E36D551B85B49D009BD909 /* DoPhotoCell.xib */; };
+		F4E36D601B85B49D009BD909 /* ZeroCameraCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E36D571B85B49D009BD909 /* ZeroCameraCell.m */; };
+		F4E36D611B85B49D009BD909 /* ZeroCameraCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E36D581B85B49D009BD909 /* ZeroCameraCell.xib */; };
 		F4E61B6B1B7335A900E5851A /* ReplyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E61B691B7335A900E5851A /* ReplyListViewController.m */; };
 		F4E61B6C1B7335A900E5851A /* ReplyListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4E61B6A1B7335A900E5851A /* ReplyListViewController.xib */; };
 		F4E61B701B73372500E5851A /* ReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E61B6E1B73372500E5851A /* ReplyTableViewCell.m */; };
@@ -971,6 +980,20 @@
 		F4E2D47E1B6B6334001472EC /* GiftwareArticlesInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftwareArticlesInfoViewController.h; sourceTree = "<group>"; };
 		F4E2D47F1B6B6334001472EC /* GiftwareArticlesInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftwareArticlesInfoViewController.m; sourceTree = "<group>"; };
 		F4E2D4801B6B6334001472EC /* GiftwareArticlesInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiftwareArticlesInfoViewController.xib; sourceTree = "<group>"; };
+		F4E36D4B1B85B49D009BD909 /* AssetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssetHelper.h; sourceTree = "<group>"; };
+		F4E36D4C1B85B49D009BD909 /* AssetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssetHelper.m; sourceTree = "<group>"; };
+		F4E36D4D1B85B49D009BD909 /* DoAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoAlbumCell.h; sourceTree = "<group>"; };
+		F4E36D4E1B85B49D009BD909 /* DoAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoAlbumCell.m; sourceTree = "<group>"; };
+		F4E36D4F1B85B49D009BD909 /* DoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoAlbumCell.xib; sourceTree = "<group>"; };
+		F4E36D501B85B49D009BD909 /* DoImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoImagePickerController.h; sourceTree = "<group>"; };
+		F4E36D511B85B49D009BD909 /* DoImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoImagePickerController.m; sourceTree = "<group>"; };
+		F4E36D521B85B49D009BD909 /* DoImagePickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoImagePickerController.xib; sourceTree = "<group>"; };
+		F4E36D531B85B49D009BD909 /* DoPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoPhotoCell.h; sourceTree = "<group>"; };
+		F4E36D541B85B49D009BD909 /* DoPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoPhotoCell.m; sourceTree = "<group>"; };
+		F4E36D551B85B49D009BD909 /* DoPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DoPhotoCell.xib; sourceTree = "<group>"; };
+		F4E36D561B85B49D009BD909 /* ZeroCameraCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZeroCameraCell.h; sourceTree = "<group>"; };
+		F4E36D571B85B49D009BD909 /* ZeroCameraCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZeroCameraCell.m; sourceTree = "<group>"; };
+		F4E36D581B85B49D009BD909 /* ZeroCameraCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZeroCameraCell.xib; sourceTree = "<group>"; };
 		F4E61B681B7335A900E5851A /* ReplyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReplyListViewController.h; sourceTree = "<group>"; };
 		F4E61B691B7335A900E5851A /* ReplyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReplyListViewController.m; sourceTree = "<group>"; };
 		F4E61B6A1B7335A900E5851A /* ReplyListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyListViewController.xib; sourceTree = "<group>"; };
@@ -1578,6 +1601,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				F4E36D4A1B85B48F009BD909 /* DoImagePicker */,
 				4D5CE70D1B7E42E1002F1088 /* Baidu_Union_SDK */,
 				F4DDEBB71B7DFD6900470D76 /* MLEmojiLabel */,
 				F4E61B7B1B73481D00E5851A /* Umeng */,
@@ -2808,6 +2832,27 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		F4E36D4A1B85B48F009BD909 /* DoImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				F4E36D4B1B85B49D009BD909 /* AssetHelper.h */,
+				F4E36D4C1B85B49D009BD909 /* AssetHelper.m */,
+				F4E36D4D1B85B49D009BD909 /* DoAlbumCell.h */,
+				F4E36D4E1B85B49D009BD909 /* DoAlbumCell.m */,
+				F4E36D4F1B85B49D009BD909 /* DoAlbumCell.xib */,
+				F4E36D501B85B49D009BD909 /* DoImagePickerController.h */,
+				F4E36D511B85B49D009BD909 /* DoImagePickerController.m */,
+				F4E36D521B85B49D009BD909 /* DoImagePickerController.xib */,
+				F4E36D531B85B49D009BD909 /* DoPhotoCell.h */,
+				F4E36D541B85B49D009BD909 /* DoPhotoCell.m */,
+				F4E36D551B85B49D009BD909 /* DoPhotoCell.xib */,
+				F4E36D561B85B49D009BD909 /* ZeroCameraCell.h */,
+				F4E36D571B85B49D009BD909 /* ZeroCameraCell.m */,
+				F4E36D581B85B49D009BD909 /* ZeroCameraCell.xib */,
+			);
+			name = DoImagePicker;
+			sourceTree = "<group>";
+		};
 		F4E61B721B73432200E5851A /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -3113,6 +3158,7 @@
 				24C46B411B5A2B1100A58F92 /* MeViewController.xib in Resources */,
 				4D5CE7831B7E4368002F1088 /* SettingViewCell.xib in Resources */,
 				4D5CE7721B7E4333002F1088 /* SettingViewController.xib in Resources */,
+				F4E36D5B1B85B49D009BD909 /* DoAlbumCell.xib in Resources */,
 				4D5CE7811B7E4368002F1088 /* PushNotificationTableViewCell.xib in Resources */,
 				F4E61BE31B734A0300E5851A /* UMSLoginViewController.xib in Resources */,
 				F47AFEAF1B5E22EA00D43F38 /* AnnouncementListViewController.xib in Resources */,
@@ -3147,6 +3193,7 @@
 				4D5CE6FA1B7E42CE002F1088 /* ToolViewInputText@2x.png in Resources */,
 				F48783941B58DA1700CDC1A8 /* LICENSE in Resources */,
 				2474DFB51B6CBB1C0021506F /* StudentSignRecordTableViewCell.xib in Resources */,
+				F4E36D611B85B49D009BD909 /* ZeroCameraCell.xib in Resources */,
 				2457FD031B711A65006A3AB7 /* AddressbookTableViewCell.xib in Resources */,
 				24E634821B6FB9CC00A23A66 /* RecipesHeadTableViewCell.xib in Resources */,
 				F4E61BDC1B734A0300E5851A /* UMSocialLocalizable.strings in Resources */,
@@ -3191,7 +3238,9 @@
 				24C46B381B5A2A9900A58F92 /* HomeViewController.xib in Resources */,
 				F4EC988E1B6211AC00F5721F /* StudentNoteInfoViewController.xib in Resources */,
 				4D077B1E1B8038BE00FFD5CB /* CollectNoticeTableViewCell.xib in Resources */,
+				F4E36D5D1B85B49D009BD909 /* DoImagePickerController.xib in Resources */,
 				4D5CE7451B7E42E1002F1088 /* baidumobadsdk.bundle in Resources */,
+				F4E36D5F1B85B49D009BD909 /* DoPhotoCell.xib in Resources */,
 				4D5CE6C91B7E3F76002F1088 /* FavoritesListViewController.xib in Resources */,
 				F4EA53871B60BD390044BE7A /* MeTableViewCell.xib in Resources */,
 				F4E61BDE1B734A0300E5851A /* UMSCommentDetailController.xib in Resources */,
@@ -3254,6 +3303,7 @@
 				4D5CE7691B7E4333002F1088 /* AboutWeViewController.m in Sources */,
 				24AA0B4C1B690FA800DAC03B /* ChatViewController.m in Sources */,
 				249926E61B8093FB0071DFB3 /* TopicInteractionFrame.m in Sources */,
+				F4E36D5A1B85B49D009BD909 /* DoAlbumCell.m in Sources */,
 				F47AFEB51B5E2BF800D43F38 /* PageInfoDomain.m in Sources */,
 				24AA0B421B690F4300DAC03B /* UUImageAvatarBrowser.m in Sources */,
 				4D5CE7511B7E42E1002F1088 /* CJSONScanner.m in Sources */,
@@ -3332,6 +3382,7 @@
 				F48783B31B58DA1700CDC1A8 /* NSObject+MJProperty.m in Sources */,
 				F4E635FE1B675EB700800924 /* AnnouncementTableViewCell.m in Sources */,
 				F46CBD0A1B7449AB00380EC3 /* RecipesListViewController.m in Sources */,
+				F4E36D5E1B85B49D009BD909 /* DoPhotoCell.m in Sources */,
 				2489B6231B5A40E200039E70 /* RegViewController.m in Sources */,
 				F48783921B58DA1700CDC1A8 /* AFURLResponseSerialization.m in Sources */,
 				24E0636F1B6D4502001F3283 /* TestCollectionViewCell.m in Sources */,
@@ -3360,6 +3411,7 @@
 				2474DFCF1B6CD43C0021506F /* CookbookDomain.m in Sources */,
 				4D5CE7471B7E42E1002F1088 /* mongoose.c in Sources */,
 				2489B66A1B5AB49E00039E70 /* SDWebImageDownloaderOperation.m in Sources */,
+				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
 				4D5CE74A1B7E42E1002F1088 /* CFilteringJSONSerializer.m in Sources */,
 				2474DFB41B6CBB1C0021506F /* StudentSignRecordTableViewCell.m in Sources */,
 				4D5CE7091B7E42CE002F1088 /* UMFullScreenPhotoView.m in Sources */,
@@ -3427,7 +3479,9 @@
 				F4CF7A921B79C5B400BFAA1E /* TimetableItemTableViewCell.m in Sources */,
 				248B6A5F1B19A39200FCB98F /* main.m in Sources */,
 				2457FD021B711A65006A3AB7 /* AddressbookTableViewCell.m in Sources */,
+				F4E36D601B85B49D009BD909 /* ZeroCameraCell.m in Sources */,
 				2491BB521B6E27F00052532B /* RecipesStudentInfoTableViewCell.m in Sources */,
+				F4E36D5C1B85B49D009BD909 /* DoImagePickerController.m in Sources */,
 				24AA0B531B69134400DAC03B /* NSDate+Utils.m in Sources */,
 				F48783B11B58DA1700CDC1A8 /* NSObject+MJCoding.m in Sources */,
 				F4E61B791B73438F00E5851A /* ShareViewController.m in Sources */,

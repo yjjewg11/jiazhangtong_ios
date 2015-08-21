@@ -239,11 +239,13 @@
 
 //设置聊天对方名字
 - (void)resetChatNameToTitle:(NSArray *)msgArray {
-    NSString * loginName = [KGHttpService sharedService].loginRespDomain.userinfo.name;
-    for(ChatInfoDomain * domain in msgArray) {
-        if(![domain.send_user isEqualToString:loginName]) {
-            self.title = domain.send_user;
-            break;
+    if(!_addressbookDomain.name) {
+        NSString * loginName = [KGHttpService sharedService].loginRespDomain.userinfo.name;
+        for(ChatInfoDomain * domain in msgArray) {
+            if(![domain.send_user isEqualToString:loginName]) {
+                self.title = domain.send_user;
+                break;
+            }
         }
     }
 }

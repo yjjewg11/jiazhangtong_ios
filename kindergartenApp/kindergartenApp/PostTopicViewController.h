@@ -9,8 +9,9 @@
 #import "SelectClassCell.h"
 #import "BaseTopicInteractViewController.h"
 #import "TopicDomain.h"
+#import "DoImagePickerController.h"
 
-@interface PostTopicViewController :BaseTopicInteractViewController  <UITableViewDataSource,UITableViewDelegate>
+@interface PostTopicViewController :BaseTopicInteractViewController  <UITableViewDataSource,UITableViewDelegate, DoImagePickerControllerDelegate>
 
 @property (assign, nonatomic) KGTopicType topicType;
 @property (strong, nonatomic) IBOutlet UIView *bgView;
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) UITableView * selectTableView;
 @property (strong, nonatomic) IBOutlet UIView *topBgVIew;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnArray;
+@property (strong, nonatomic) IBOutlet UIButton *addImgBtn;
 
 @property (nonatomic, copy) void (^PostTopicBlock)(TopicDomain * topicDomain);
 

@@ -144,6 +144,7 @@
         
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        [_emojiAndTextView.contentTextView resignFirstResponder];
     }];
 }
 
@@ -155,7 +156,7 @@
 //回复加载更多按钮点击
 - (void)topicRelpyMoreBtnClickedNotification:(NSNotification *)notification {
     NSDictionary  * dic = [notification userInfo];
-    topicInteractionView = [dic objectForKey:Key_TopicInteractionView];
+    _topicInteractionDomain = [dic objectForKey:Key_TopicInteractionDomain];
     
     ReplyListViewController * baseVC = [[ReplyListViewController alloc] init];
     baseVC.topicUUID = _topicInteractionDomain.topicUUID;

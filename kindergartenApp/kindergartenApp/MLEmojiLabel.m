@@ -354,7 +354,7 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
                 runBounds.origin.y = lineOrigins[lineIndex].y;
                 runBounds.origin.y -= runDescent;
                 
-                UIImage *image = [UIImage imageNamed:imageName];
+                UIImage * image = [UIImage imageWithContentsOfFile:imageName];
                 runBounds.origin.y -= emojiOriginYOffset; //稍微矫正下。
                 CGContextDrawImage(c, runBounds, image.CGImage);
             }
@@ -548,8 +548,8 @@ static inline CGFloat TTTFlushFactorForTextAlignment(NSTextAlignment textAlignme
 #pragma mark - size fit result
 - (CGSize)preferredSizeWithMaxWidth:(CGFloat)maxWidth
 {
-    CGFloat newmaxWidth = maxWidth - self.textInsets.left - self.textInsets.right;
-    return [self sizeThatFits:CGSizeMake(newmaxWidth, CGFLOAT_MAX)];
+    maxWidth = maxWidth - self.textInsets.left - self.textInsets.right;
+    return [self sizeThatFits:CGSizeMake(maxWidth, CGFLOAT_MAX)];
 }
 
 #pragma mark - setter

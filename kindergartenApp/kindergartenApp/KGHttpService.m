@@ -205,13 +205,11 @@
     
     [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getUploadImgUrl] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-//        [formData appendPartWithFileData:imageData name:imgName fileName:imgName mimeType:@"multipart/form-data"];
-        
         [formData appendPartWithFileData:imageData name:imgName fileName:imgName mimeType:@"image/jpeg"];
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         
         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
-        NSLog(@"respon:%@", responseObject);
+        
         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
             
             success([responseObject objectForKey:@"imgUrl"]);

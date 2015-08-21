@@ -15,6 +15,7 @@
 #import "KGHttpService.h"
 #import "ClassDomain.h"
 #import "GroupDomain.h"
+#import "AssetHelper.h"
 
 #define contentTextViewDefText   @"说点什么吧..."
 
@@ -28,6 +29,8 @@
     NSMutableString * replyContent;
     NSString * classuuid;//班级id
     NSMutableArray * dataMArray;//数据数组 用于构建班级信息
+    //需要上传的图片集合
+    NSMutableArray        * imgMArray;
 }
 
 @end
@@ -40,6 +43,32 @@
     self.weakTextView = contentTextView;
     self.keyboardTopType = OnlyEmojiMode;
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.title = @"发表互动";
+    
+    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleDone target:self action:@selector(pustTopicBtnClicked)];
+    rightBarItem.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = rightBarItem;
+    
+    filePathMArray = [[NSMutableArray alloc] init];
+    imagesMArray   = [[NSMutableArray alloc] init];
+    replyContent   = [[NSMutableString alloc] init];
+    contentTextView.placeholder = contentTextViewDefText;
+    [contentTextView setContentOffset:CGPointZero];
+    
+    [self loadClassNameListView];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+//加载班级选择
+- (void)loadClassNameListView {
     [self.contentView bringSubviewToFront:contentTextView];
     for (UIView * view in _btnArray) {
         [self.contentView bringSubviewToFront:view];
@@ -55,31 +84,10 @@
         }
     }
     
-    [_selectBtn setTitle:[dataMArray[0] objectForKey:@"name"] forState:UIControlStateNormal];
-    classuuid = [dataMArray[0] objectForKey:@"id"];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.title = @"发表互动";
-    
-    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleDone target:self action:@selector(pustTopicBtnClicked)];
-    rightBarItem.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = rightBarItem;
-    
-    
-    filePathMArray = [[NSMutableArray alloc] init];
-    imagesMArray   = [[NSMutableArray alloc] init];
-    replyContent   = [[NSMutableString alloc] init];
-    contentTextView.placeholder = contentTextViewDefText;
-    [contentTextView setContentOffset:CGPointZero];
-    
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+    if([dataMArray count] > Number_Zero) {
+        [_selectBtn setTitle:[dataMArray[0] objectForKey:@"name"] forState:UIControlStateNormal];
+        classuuid = [dataMArray[0] objectForKey:@"id"];
+    }
 }
 
 //下拉选择菜单
@@ -221,14 +229,22 @@
     
     selAddImgBtn = sender;
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                                  initWithTitle:nil
-                                  delegate:self
-                                  cancelButtonTitle:@"取消"
-                                  destructiveButtonTitle:nil
-                                  otherButtonTitles:@"从相册选取", @"拍照",nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [actionSheet showInView:self.contentView];
+    DoImagePickerController *cont = [[DoImagePickerController alloc] init];
+    cont.delegate = self;
+//    cont.nResultType = DO_PICKER_RESULT_UIIMAGE;
+    cont.nMaxCount = 3;
+    cont.nResultType = DO_PICKER_RESULT_ASSET;  // if you want to get lots photos, you'd better use this mode for memory!!!
+    cont.nColumnCount = 9;
+    [self presentViewController:cont animated:YES completion:nil];
+    
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+//                                  initWithTitle:nil
+//                                  delegate:self
+//                                  cancelButtonTitle:@"取消"
+//                                  destructiveButtonTitle:nil
+//                                  otherButtonTitles:@"从相册选取", @"拍照",nil];
+//    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+//    [actionSheet showInView:self.contentView];
 }
 
 #pragma TextViewDelegate
@@ -298,15 +314,7 @@
     {
         //先把图片转成NSData
         UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData * data;
-        if (UIImagePNGRepresentation(image) == nil)
-        {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        }
-        else
-        {
-            data = UIImagePNGRepresentation(image);
-        }
+        NSData * data = UIImageJPEGRepresentation(image, 0.5);
         
         //图片保存的路径
         //这里将图片放在沙盒的documents文件夹中
@@ -354,6 +362,52 @@
 - (void)selImgAfterHandler {
     if(selAddImgBtn.tag < 12) {
         [self.contentView viewWithTag:selAddImgBtn.tag + 1].hidden = NO;
+    }
+}
+
+
+#pragma mark - DoImagePickerControllerDelegate
+
+/**
+ *  图片选择取消
+ */
+- (void)didCancelDoImagePickerController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+/**
+ *  图片选择确定回调
+ *
+ *  @param picker    图片选择器
+ *  @param aSelected 选中的图片集合
+ */
+- (void)didSelectPhotosFromDoImagePickerController:(DoImagePickerController *)picker result:(NSArray *)aSelected {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if(aSelected && [aSelected count]>Number_Zero) {
+        [self initImgMArray];
+        for(NSInteger i=Number_Zero; i<[aSelected count]; i++) {
+            UIImage * image       = [ASSETHELPER getImageFromAsset:aSelected[0] type:ASSET_PHOTO_SCREEN_SIZE];
+            [imgMArray addObject:image];
+        }
+    }
+    
+    [ASSETHELPER clearData];
+}
+
+- (void)simpleShowImageWithArray:(NSArray *)imgArray {
+    
+}
+
+/**
+ *  初始化imgMArray
+ */
+- (void)initImgMArray {
+    if(!imgMArray) {
+        imgMArray = [[NSMutableArray alloc] init];
+    } else {
+        [imgMArray removeAllObjects];
     }
 }
 

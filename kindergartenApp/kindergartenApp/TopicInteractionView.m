@@ -265,6 +265,8 @@
         } else {
             _moreBtn.hidden = YES;
         }
+    } else {
+        _moreBtn.hidden = YES;
     }
 }
 
@@ -362,23 +364,6 @@
     
     [self resetDZText];
 }
-
-
-
-//重置回复
-- (void)resetReplyList:(ReplyDomain *)replyDomain {
-    if(!_replyPage.data) {
-        _replyPage.data = [[NSMutableArray alloc] init];
-    }
-    [_replyPage.data insertObject:replyDomain atIndex:Number_Zero];
-    [self addReplyData];
-    
-    self.replyTextField.y = CGRectGetMaxY(self.replyView.frame);
-    
-    //通知改变view高度
-    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicHeight object:self userInfo:nil];
-}
-
 
 
 @end

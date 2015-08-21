@@ -6,14 +6,15 @@
 //  Copyright (c) 2015年 funi. All rights reserved.
 //
 
-#import "BaseKeyboardViewController.h"
+#import "BaseTopicInteractViewController.h"
 
-@interface ReplyListViewController : BaseKeyboardViewController
+@interface ReplyListViewController : BaseTopicInteractViewController
 
 @property (strong, nonatomic) NSString * topicUUID;
 @property (assign, nonatomic) KGTopicType topicType;
+@property (strong, nonatomic) IBOutlet UIButton *replyBtn;
 
-- (IBAction)sendBtnClicked:(UIButton *)sender;
+- (IBAction)writeReplyBtnClicked:(UIButton *)sender;
 
 
 @end

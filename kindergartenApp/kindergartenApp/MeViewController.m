@@ -22,7 +22,7 @@
 #define CellIdentifier @"MyCellIdentifier"
 #define CellDefIdentifier @"MyDefCellIdentifier"
 
-@interface MeViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface MeViewController () <UITableViewDataSource, UITableViewDelegate> {
     
     IBOutlet UITableView * meTableView;
     NSArray              * studentMArray;
@@ -44,31 +44,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-
-
-#pragma UIAlertView delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if(buttonIndex == Number_One) {
-        
-        KGUser * currentUser =  [KGAccountTool account];
-        LoginViewController * loginVC = [[LoginViewController alloc] init];
-        loginVC.userNameTextField.text = currentUser.loginname;
-        loginVC.userPwdTextField.text = currentUser.password;
-        
-        [[KGHttpService sharedService] logout:^(NSString *msgStr) {
-            [KGAccountTool delAccount];
-            [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [UIApplication sharedApplication].keyWindow.rootViewController = [[KGNavigationController alloc] initWithRootViewController:loginVC];
-            });
-        } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
-        }];
-        
-       
-    }
 }
 
 
@@ -104,7 +79,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
-    [cell resetCellParam:(KGUser *)[studentMArray objectAtIndex:indexPath.row]];
+    [cell resetCellParam:(KGUser *)[studentMArray objectAtIndex:indexPath.section]];
     return cell;
 }
 
@@ -146,7 +121,7 @@
     if(indexPath.section < [studentMArray count]) {
         //学生信息详情
         StudentInfoViewController * studentInfoVC = [[StudentInfoViewController alloc] init];
-        studentInfoVC.studentInfo = [studentMArray objectAtIndex:indexPath.row];
+        studentInfoVC.studentInfo = [studentMArray objectAtIndex:indexPath.section];
         
         [self.navigationController pushViewController:studentInfoVC animated:YES];
     } else {

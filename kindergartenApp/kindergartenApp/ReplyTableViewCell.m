@@ -18,6 +18,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    messageLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    messageLabel.customEmojiRegex = String_DefValue_EmojiRegex;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ReFreshBaseCell.h"
+#import "MLEmojiLabel.h"
 
 @interface ReplyTableViewCell : ReFreshBaseCell {
     
     IBOutlet UIImageView * headImageView;
     IBOutlet UILabel * timeLabel;
     IBOutlet UILabel * titleLabel;
-    IBOutlet UILabel * messageLabel;
+    IBOutlet MLEmojiLabel * messageLabel;
     IBOutlet UIImageView * dzImageView;
     IBOutlet UILabel * dzCountLabel;
 }

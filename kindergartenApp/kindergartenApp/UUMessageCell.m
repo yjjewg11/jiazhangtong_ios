@@ -154,7 +154,6 @@
     [[UUAVAudioPlayer sharedInstance]stopSound];
 }
 
-
 //内容及Frame设置
 - (void)setMessageFrame:(UUMessageFrame *)messageFrame{
 
