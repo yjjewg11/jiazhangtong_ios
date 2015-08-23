@@ -193,7 +193,7 @@
 //食谱 begin
 
 //食谱列表
-- (void)getRecipesList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild;
+- (void)getRecipesList:(NSString *)groupuuid beginDate:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild;
 
 //食谱 end
 

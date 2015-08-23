@@ -7,6 +7,10 @@
 //
 
 #import "RecipesStudentInfoTableViewCell.h"
+#import "KGHttpService.h"
+#import "UIImageView+WebCache.h"
+#import "UIView+Extension.h"
+#import "UIColor+Extension.h"
 
 @implementation RecipesStudentInfoTableViewCell
 
@@ -32,6 +36,11 @@
 
 - (void)resetCellParam:(RecipesDomain *)recipes {
     timeLabel.text = recipes.plandate;
+    
+    NSString * groupimg = [[KGHttpService sharedService] getGroupImgByUUID:recipes.groupuuid];
+    [headImageView sd_setImageWithURL:[NSURL URLWithString:groupimg] placeholderImage:[UIImage imageNamed:@"group_head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:headImageView.width / Number_Two];
+    }];
 }
 
 @end

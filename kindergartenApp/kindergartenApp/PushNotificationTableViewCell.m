@@ -8,10 +8,20 @@
 
 #import "PushNotificationTableViewCell.h"
 
+#define NewMessageKey @"newMessage"
+#define VoiceKey @"voice"
+#define ShakeKey @"shake"
+
 @implementation PushNotificationTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    [_mySwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
+    _dic = @{@"新消息":NewMessageKey,@"声音":VoiceKey,@"震动":ShakeKey};
+}
+
+#pragma mark - 开关点击
+- (void)switchChange:(UISwitch *)sender{
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:[_dic objectForKey:_flagTitleLabel.text]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

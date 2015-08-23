@@ -22,6 +22,10 @@
     self = [super initWithFrame:frame];
     if(self) {
         [self initTableView];
+        nowwWeekday = [KGDateUtil weekdayStringFromDate:[KGDateUtil presentTime]];
+        if(nowwWeekday==Number_Seven || nowwWeekday==Number_Six) {
+            nowwWeekday = Number_One;
+        }
     }
     
     return self;
@@ -142,7 +146,7 @@
         itemVO.cellHeight = 150;
         itemVO.classuuid = user.classuuid;
         itemVO.headUrl   = user.headimg;
-        itemVO.weekday = Number_One;
+        itemVO.weekday = nowwWeekday;
         itemVO.timetableMArray = [sourceTimetableMDict objectForKey:user.classuuid];
         [self.tableDataSource addObject:itemVO];
         index++;

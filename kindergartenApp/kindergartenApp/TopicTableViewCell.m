@@ -44,6 +44,8 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = KGColorFrom16(0xEBEBF2);
 //        self.backgroundColor = [UIColor purpleColor];
+        
+        imagesMArray = [NSMutableArray new];
         //用户信息加载
         [self initUserView];
         
@@ -174,7 +176,7 @@
     //帖子互动视图
     self.topicInteractionView.frame = self.topicFrame.topicInteractionViewF;
     self.topicInteractionView.topicInteractionFrame = self.topicFrame.topicInteractionFrame;
-    
+    NSLog(@"bbbbb=%@", NSStringFromCGRect(self.topicFrame.topicInteractionViewF));
     //分割线
     self.levelab.frame = self.topicFrame.levelabF;
 }
@@ -219,7 +221,8 @@
         [self.topicImgsView addSubview:imageView];
         
         [imageView sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
+            if(image)
+                [imagesMArray addObject:image];
         }];
         
         UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
@@ -230,10 +233,10 @@
         
         if(index == Number_Two) {
             index = Number_Zero;
-            y += wh;
+            y += wh + Number_Five;
+        } else {
+            index++;
         }
-        
-        index++;
     }
 }
 
@@ -269,7 +272,11 @@
     UIImageView * imageView = (UIImageView *)sender.targetObj;
     NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
     [UUImageAvatarBrowser showImage:imageView url:imgUrl];
+    
+//    NSDictionary * dic = @{Key_ImagesArray : imagesMArray};
+//    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BrowseImages object:self userInfo:dic];
 }
+
 
 
 @end

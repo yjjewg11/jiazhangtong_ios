@@ -11,7 +11,8 @@
 @implementation ModifyPasswordTableViewCell
 
 - (void)awakeFromNib {
-    
+    [super awakeFromNib];
+    _passwordTextField.clearsOnBeginEditing = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

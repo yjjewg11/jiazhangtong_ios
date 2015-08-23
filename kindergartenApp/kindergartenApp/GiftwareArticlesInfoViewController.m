@@ -16,6 +16,8 @@
 #import "FavoritesDomain.h"
 #import "KGDateUtil.h"
 
+#define RemoveHUDNotification @"RemoveHUD"
+
 @interface GiftwareArticlesInfoViewController () <UIWebViewDelegate> {
     
     IBOutlet UIScrollView *contentScrollView;
@@ -48,6 +50,18 @@
     myWebView.scrollView.scrollEnabled = NO;
     myWebView.delegate = self;
     [self getArticlesInfo];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHUD) name:RemoveHUDNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 移除hud通知方法
+- (void)removeHUD{
+    [[KGHUD sharedHud] hide:popupView];
 }
 
 - (void)didReceiveMemoryWarning {

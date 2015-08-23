@@ -44,14 +44,12 @@ typedef enum : NSInteger {
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
     if (_flag) {
         [_keyBoardController addKeyBoardNotification];
-        NSLog(@"%@",self);
     }
     _flag = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    NSLog(@"%@",self);
     [_keyBoardController removeKeyBoardNotification];
 }
 
@@ -76,7 +74,7 @@ typedef enum : NSInteger {
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([touch.view isKindOfClass:[UITextField class]] ||
         [touch.view.superview isKindOfClass:[UITextView class]] ||
-        [touch.view isKindOfClass:[UIButton class]])
+        [touch.view isKindOfClass:[UIButton class]] || [touch.view isKindOfClass:[UIScrollView class]])
         return NO;
     return YES;
 }

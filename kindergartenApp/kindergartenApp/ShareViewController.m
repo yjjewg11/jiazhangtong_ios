@@ -56,6 +56,10 @@
 - (void)handelShareWithShareType:(NSString *)shareType{
     
     NSString * contentString = [NSString stringWithFormat:@"%@ %@",_announcementDomain.title,@"www.baidu.com"];
+    NSString * shareurl = _announcementDomain.share_url;
+    if(!shareurl || [shareurl length]==Number_Zero) {
+        shareurl = webUrl;
+    }
     
     [[KGHUD sharedHud] show:self.view.superview];
     
@@ -63,14 +67,14 @@
     [UMSocialData defaultData].extConfig.wechatSessionData.title = _announcementDomain.title;
     //朋友圈title设置方法：
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = _announcementDomain.title;
+    [UMSocialWechatHandler setWXAppId:ShareKey_WeChat appSecret:ShareKey_WeChatSecret url:shareurl];
     [UMSocialData defaultData].extConfig.qqData.title = _announcementDomain.title;
-    [UMSocialData defaultData].extConfig.qqData.url = webUrl;
+    [UMSocialData defaultData].extConfig.qqData.url = shareurl;
     
     //设置分享内容，和回调对象
-    [[UMSocialControllerService defaultControllerService] setShareText:contentString shareImage:[UIImage imageNamed:@"mingzihetu"] socialUIDelegate:self];
+    [[UMSocialControllerService defaultControllerService] setShareText:contentString shareImage:[UIImage imageNamed:@"jiazhang_180"] socialUIDelegate:self];
     UMSocialSnsPlatform * snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareType];
     snsPlatform.snsClickHandler(self, [UMSocialControllerService defaultControllerService],YES);
-    
 }
 
 /**

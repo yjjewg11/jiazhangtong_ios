@@ -81,7 +81,7 @@
     
     topicView.topicInteractionFrame = topicFrame;
     
-    topicView.size = CGSizeMake(CELLCONTENTWIDTH, topicFrame.topicInteractHeight);
+    topicView.size = CGSizeMake(APPWINDOWWIDTH, topicFrame.topicInteractHeight);
     topicView.origin = CGPointMake(0, CGRectGetMaxY(createTimeLabel.frame));
     
     CGFloat contentHeight = y + topicFrame.topicInteractHeight + 64;

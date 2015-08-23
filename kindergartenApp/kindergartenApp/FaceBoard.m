@@ -171,7 +171,7 @@
 
 - (void)packageChatHTMLInfo:(EmojiDomain *)domain text:(NSString *)text{
     NSString * imgHTML = [NSString stringWithFormat:@"<img alt=\"%@\" src=\"%@\" />", domain.datavalue, domain.descriptionUrl];
-    [[KGEmojiManage sharedManage].chatHTMLInfo appendFormat:@"%@%@", text, imgHTML];
+    [[KGEmojiManage sharedManage].chatHTMLInfo appendFormat:@"%@", imgHTML];
 }
 
 - (void)backFace{

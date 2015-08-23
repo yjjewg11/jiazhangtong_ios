@@ -347,6 +347,10 @@
                                               [self setupCookie];
 //                                              [self userCookie:cookies];
                                               
+                                              //默热门选中第一个机构
+                                              if([_loginRespDomain.group_list count] > Number_Zero) {
+                                                  _groupDomain = [_loginRespDomain.group_list objectAtIndex:Number_Zero];
+                                              }
                                               
                                               //获取首页动态菜单
                                               [self getDynamicMenu:^(NSArray *menuArray) {
@@ -870,11 +874,11 @@
 #pragma 食谱 begin
 
 //食谱列表
-- (void)getRecipesList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild {
+- (void)getRecipesList:(NSString *)groupuuid beginDate:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild {
     
     NSDictionary * dic = @{@"begDateStr" : beginDate,
                            @"endDateStr" : endDate ? endDate : beginDate,
-                           @"groupuuid"  : _groupDomain.uuid};
+                           @"groupuuid"  : groupuuid};
     
 //    NSDictionary * dic = @{@"begDateStr" : @"2015-07-01",
 //                           @"endDateStr" : @"2015-08-01",

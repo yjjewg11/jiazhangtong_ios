@@ -74,6 +74,7 @@
     [_replyBtn setBackgroundImage:@"pinglun" selImg:@"pinglun"];
     _replyBtn.tag = Number_Eleven;
     [_replyBtn addTarget:self action:@selector(replyBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    _replyBtn.backgroundColor = [UIColor brownColor];
     [_funView addSubview:_replyBtn];
 }
 
@@ -109,7 +110,6 @@
     
     _replyView = [MLEmojiLabel new];
     _replyView.backgroundColor = [UIColor clearColor];
-//    _replyView.backgroundColor = [UIColor brownColor];
     _replyView.numberOfLines = Number_Zero;
     _replyView.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
     _replyView.textColor = [UIColor blackColor];
@@ -353,8 +353,10 @@
             break;
         }
         
-        if(![[nameArray objectAtIndex:i] isEqualToString:name]) {
-            [tempNames appendString:[nameArray objectAtIndex:i]];
+        if(![[nameArray objectAtIndex:i] isEqualToString:name] && ![[nameArray objectAtIndex:i] isEqualToString:String_DefValue_Empty]) {
+            if(![tempNames isEqualToString:String_DefValue_Empty])
+                [tempNames appendString:@","];
+            [tempNames appendFormat:@"%@", [nameArray objectAtIndex:i]];
         }
     }
     

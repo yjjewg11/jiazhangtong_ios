@@ -97,7 +97,7 @@
 - (void)loadRecipesInfoByData {
     [[KGHUD sharedHud] show:self.contentView];
     
-    [[KGHttpService sharedService] getRecipesList:lastDateStr endDate:nil success:^(NSArray *recipesArray) {
+    [[KGHttpService sharedService] getRecipesList:_groupuuid beginDate:lastDateStr endDate:nil success:^(NSArray *recipesArray) {
         
         [[KGHUD sharedHud] hide:self.contentView];
         

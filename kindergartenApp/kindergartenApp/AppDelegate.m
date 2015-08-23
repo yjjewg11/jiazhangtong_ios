@@ -20,6 +20,7 @@
 #import "UMessage.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define RemoveHUDNotification @"RemoveHUD"
 
 @interface AppDelegate ()
 
@@ -119,6 +120,9 @@
     }
 }
 
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 // 在 iOS8 系统中，还需要添加这个方法。通过新的 API 注册推送服务
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -236,6 +240,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [UMSocialSnsService  applicationDidBecomeActive];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+    [[NSNotificationCenter defaultCenter] postNotificationName:RemoveHUDNotification object:nil];
 }
 
 #pragma mark - 注册友盟的消息推送

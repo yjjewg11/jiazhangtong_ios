@@ -58,6 +58,13 @@
 - (void)loadRecipesData:(RecipesDomain *)recipes {
     _recipesDomain = recipes;
     
+    if (!_recipesDomain.isReqSuccessData) {
+        PromptView * pView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] lastObject];
+        pView.size = CGSizeMake(APPWINDOWWIDTH, 80);
+        pView.origin = CGPointMake(0, 80);
+        [recipesTableView addSubview:pView];
+    }
+    
     [self packageTableData];
     [recipesTableView reloadData];
 }

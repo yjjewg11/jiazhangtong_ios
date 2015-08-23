@@ -20,6 +20,7 @@
 #define Key_Notification_BeginReplyTopic   @"beginReplyTopic"
 #define Key_Notification_TopicHeight       @"topicCellHeightChange"
 #define Key_Notification_TopicLoadMore     @"topicCellLoadMore"
+#define Key_Notification_BrowseImages      @"browseImagesNotification"
 #define Key_Notification_TeacherJudge      @"teacherJudgeClicked"
 #define Key_Notification_AddressbookCellFun @"AddressbookCellFun"
 
@@ -28,6 +29,7 @@
 #define Key_TopicCellFunType               @"topicCellFunType"
 #define Key_TopicInteractionDomain         @"TopicInteractionDomain"
 #define Key_TopicUUID                      @"topicUUID"
+#define Key_ImagesArray                    @"imagesMArray"
 #define Key_TopicFunRequestType            @"topicFunRequestType"
 #define Key_TopicType                      @"topicType"
 #define Key_TopicTypeReplyText             @"topicReplyText"

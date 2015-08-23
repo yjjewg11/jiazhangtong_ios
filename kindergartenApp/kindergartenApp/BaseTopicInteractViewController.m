@@ -14,7 +14,7 @@
 #import "UUInputFunctionView.h"
 #import "Masonry.h"
 #import "KGEmojiManage.h"
-
+#import "PhotoVC.h"
 
 
 @interface BaseTopicInteractViewController () <UUInputFunctionViewDelegate, UIGestureRecognizerDelegate> {
@@ -25,6 +25,11 @@
 @end
 
 @implementation BaseTopicInteractViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self regNotification];
+}
 
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -38,7 +43,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self loadInputFuniView];
-    
+    [self regNotification];
+}
+
+- (void)regNotification {
     self.keyBoardController.isEmojiInput = YES;
     
     //注册点赞通知
@@ -52,6 +60,9 @@
     
     //注册加载更多回复通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicRelpyMoreBtnClickedNotification:) name:Key_Notification_TopicLoadMore object:nil];
+    
+    //注册点击图片浏览图片通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(browseImagesNotification:) name:Key_Notification_BrowseImages object:nil];
 }
 
 //设置键盘顶部悬浮类型
@@ -162,6 +173,16 @@
     baseVC.topicUUID = _topicInteractionDomain.topicUUID;
     baseVC.topicType = _topicInteractionDomain.topicType;
     [self.navigationController pushViewController:baseVC animated:YES];
+}
+
+//图片点击浏览图片通知
+- (void)browseImagesNotification:(NSNotification *)notification {
+    NSDictionary  * dic = [notification userInfo];
+    NSMutableArray * imagesMArray = [dic objectForKey:Key_ImagesArray];
+    
+    PhotoVC * vc = [[PhotoVC alloc] init];
+    vc.imgMArray = imagesMArray;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

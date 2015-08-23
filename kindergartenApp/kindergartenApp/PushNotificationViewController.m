@@ -8,6 +8,10 @@
 
 #import "PushNotificationViewController.h"
 
+#define NewMessageKey @"newMessage"
+#define VoiceKey @"voice"
+#define ShakeKey @"shake"
+
 @interface PushNotificationViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -39,6 +43,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     PushNotificationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PushNotificationTableViewCell"];
     cell.flagTitleLabel.text = _dataArray[indexPath.row];
+    
+    NSString * key;
+    switch (indexPath.row) {
+        case 0:
+            key = NewMessageKey;
+            break;
+        case 1:
+            key = VoiceKey;
+            break;
+        case 2:
+            key = ShakeKey;
+            break;
+    }
+    
+    cell.mySwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:key];
     return cell;
 }
 
