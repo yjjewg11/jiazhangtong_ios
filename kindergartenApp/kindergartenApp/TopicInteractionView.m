@@ -175,11 +175,9 @@
     }
     
     /** 点赞按钮 */
-    if(_dianzan && !_dianzan.canDianzan) {
-        _dianzanBtn.selected = YES;
-    } else {
-        _dianzanBtn.selected = NO;
-    }
+    if(_dianzan) {
+        _dianzanBtn.selected = !_dianzan.canDianzan;
+    } 
     _dianzanBtn.frame = _topicInteractionFrame.dianzanBtnF;
     
     /** 回复按钮 */

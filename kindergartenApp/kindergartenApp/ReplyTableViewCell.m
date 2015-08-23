@@ -41,7 +41,7 @@
     titleLabel.text = replyDomain.title;
     messageLabel.text = replyDomain.content;
     if(replyDomain.dianzan) {
-        dzBtn.selected = replyDomain.dianzan.canDianzan;
+        dzBtn.selected = !replyDomain.dianzan.canDianzan;
         dzCountLabel.text = [NSString stringWithFormat:@"%ld", (long)replyDomain.dianzan.count];
     }
     
