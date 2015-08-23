@@ -150,6 +150,7 @@
     AddressBookDomain * addressbookDomain = [[AddressBookDomain alloc] init];
     addressbookDomain.teacher_uuid = domain.rel_uuid;
     addressbookDomain.type = (domain.type == Topic_TeacherChat) ? YES : NO;
+    addressbookDomain.img  = domain.url;
     ChatViewController * chatVC = [[ChatViewController alloc] init];
     chatVC.addressbookDomain = addressbookDomain;
     [self.navigationController pushViewController:chatVC animated:YES];

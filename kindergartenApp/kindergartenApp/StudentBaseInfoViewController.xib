@@ -14,6 +14,7 @@
                 <outlet property="headImageView" destination="XM4-QK-2U2" id="p9O-Ky-R2X"/>
                 <outlet property="nameTextField" destination="Qce-9l-RQK" id="f7o-MZ-FAg"/>
                 <outlet property="nickTextField" destination="llh-je-Z3s" id="b5M-dq-oaf"/>
+                <outlet property="peopleCardTextField" destination="jUK-D1-YVD" id="hiG-1m-Pmw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -207,14 +208,44 @@
                                 <constraint firstAttribute="width" constant="288" id="gTP-mQ-PSs"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMl-Nu-CDj">
+                            <rect key="frame" x="16" y="370" width="288" height="70"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="3Sx-RZ-QZf">
+                                    <rect key="frame" x="16" y="15" width="5" height="13"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="身份证" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fM7-NU-PkE">
+                                    <rect key="frame" x="29" y="15" width="60" height="15"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wodekuang" translatesAutoresizingMaskIntoConstraints="NO" id="uWy-lI-QN6">
+                                    <rect key="frame" x="0.0" y="40" width="288" height="30"/>
+                                </imageView>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入身份证" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jUK-D1-YVD" customClass="KGTextField">
+                                    <rect key="frame" x="10" y="40" width="278" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="288" id="3au-gN-0ch"/>
+                                <constraint firstAttribute="height" constant="70" id="bfe-ht-L1c"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="XSY-zw-2NY" secondAttribute="centerX" id="4Q7-3x-e7l"/>
                         <constraint firstItem="SKj-sQ-67x" firstAttribute="top" secondItem="2PI-UF-gnx" secondAttribute="top" id="6HL-q7-rw1"/>
+                        <constraint firstAttribute="centerX" secondItem="SMl-Nu-CDj" secondAttribute="centerX" id="BHy-eI-Zan"/>
                         <constraint firstItem="XnT-XC-5mN" firstAttribute="top" secondItem="Shg-Vv-zoJ" secondAttribute="bottom" constant="15" id="Cog-xD-LPQ"/>
                         <constraint firstAttribute="centerX" secondItem="Shg-Vv-zoJ" secondAttribute="centerX" id="ET3-DK-JAQ"/>
                         <constraint firstItem="XSY-zw-2NY" firstAttribute="top" secondItem="SKj-sQ-67x" secondAttribute="bottom" id="RJ5-cg-MhV"/>
+                        <constraint firstItem="SMl-Nu-CDj" firstAttribute="top" secondItem="CQ7-Dl-JPh" secondAttribute="bottom" id="TRK-tB-kHG"/>
                         <constraint firstItem="SKj-sQ-67x" firstAttribute="leading" secondItem="2PI-UF-gnx" secondAttribute="leading" id="UyD-iT-8IW"/>
                         <constraint firstAttribute="centerX" secondItem="CQ7-Dl-JPh" secondAttribute="centerX" id="YXU-Ob-HTD"/>
                         <constraint firstItem="Shg-Vv-zoJ" firstAttribute="top" secondItem="XSY-zw-2NY" secondAttribute="bottom" id="l9D-hW-sx2"/>

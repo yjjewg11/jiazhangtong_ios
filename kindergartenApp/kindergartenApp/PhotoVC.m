@@ -78,7 +78,12 @@
 - (void)initAttachemnMArray{
     for (int i = 0; i < _imgMArray.count; ++ i) {
         KGAttachment * attachemnt = [[KGAttachment alloc] init];
-        attachemnt.image = _imgMArray[i];
+        if([_imgMArray[i] isKindOfClass:[UIImage class]]) {
+            attachemnt.image = _imgMArray[i];
+        } else {
+            attachemnt.imageUrl = _imgMArray[i];
+        }
+        
         [_attachemnMArray addObject:attachemnt];
     }
 }
@@ -87,10 +92,10 @@
  *  初始化图片浏览视图
  */
 - (void)initContentView{
-    KGImageBrowseView * imgBrowseView = [[KGImageBrowseView alloc] initImageBrowse:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64) attach:_attachemnMArray size:@"12" isPageing:YES];
+    KGImageBrowseView * imgBrowseView = [[KGImageBrowseView alloc] initImageBrowse:CGRectMake(0, 64, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64) attach:_attachemnMArray size:@"12" isPageing:YES];
     imgBrowseView._delegate = self;
     imgBrowseView.backgroundColor = [UIColor blackColor];
-    [self.contentView addSubview:imgBrowseView];
+    [self.view addSubview:imgBrowseView];
 }
 
 - (void)viewDidLoad {

@@ -10,4 +10,7 @@
 
 @interface PromptView : UIView
 
+@property (strong, nonatomic) IBOutlet UIView *cnView;
+
+
 @end

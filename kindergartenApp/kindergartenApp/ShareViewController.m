@@ -55,13 +55,14 @@
 //处理分享操作
 - (void)handelShareWithShareType:(NSString *)shareType{
     
-    NSString * contentString = [NSString stringWithFormat:@"%@ %@",_announcementDomain.title,@"www.baidu.com"];
+    NSString * contentString = _announcementDomain.title;
+
     NSString * shareurl = _announcementDomain.share_url;
     if(!shareurl || [shareurl length]==Number_Zero) {
         shareurl = webUrl;
     }
     
-    [[KGHUD sharedHud] show:self.view.superview];
+//    [[KGHUD sharedHud] show:self.view.superview];
     
     //微信title设置方法：
     [UMSocialData defaultData].extConfig.wechatSessionData.title = _announcementDomain.title;

@@ -53,6 +53,11 @@ typedef enum : NSInteger {
     [_keyBoardController removeKeyBoardNotification];
 }
 
+//注册通知
+- (void)regNotification {
+    [self registerMessageListen];
+}
+
 //滑动手势
 - (void)addSwipeGesture {
     UIPanGestureRecognizer* recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];

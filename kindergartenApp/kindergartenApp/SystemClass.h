@@ -23,8 +23,10 @@
 #define Key_Notification_BrowseImages      @"browseImagesNotification"
 #define Key_Notification_TeacherJudge      @"teacherJudgeClicked"
 #define Key_Notification_AddressbookCellFun @"AddressbookCellFun"
+#define Key_Notification_ChatSecondSend     @"ChatSecondSend"
 
 
+#define Key_WriteVO                        @"WriteVO"
 #define Key_KeyChain                       @"KeyChain"
 #define Key_TopicCellFunType               @"topicCellFunType"
 #define Key_TopicInteractionDomain         @"TopicInteractionDomain"

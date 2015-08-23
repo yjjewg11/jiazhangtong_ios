@@ -12,6 +12,8 @@
 
 #define key_Result    @"result"
 #define key_FileName  @"fileName"
+#define key_RightBracket @"]"
+#define key_LeftBracket  @"["
 
 @implementation KGEmojiManage
 
@@ -26,19 +28,19 @@
     return _sharedService;
 }
 
-- (NSMutableString *)chatHTMLInfo {
-    if(!_chatHTMLInfo) {
-        _chatHTMLInfo = [[NSMutableString alloc] init];
-    }
-    
-    return _chatHTMLInfo;
-}
 
 - (NSMutableDictionary *)emojiMDict {
     if(!_emojiMDict) {
         _emojiMDict = [[NSMutableDictionary alloc] init];
     }
     return _emojiMDict;
+}
+
+- (NSMutableDictionary *)emojiInfoMDict {
+    if(!_emojiInfoMDict) {
+        _emojiInfoMDict = [[NSMutableDictionary alloc] init];
+    }
+    return _emojiInfoMDict;
 }
 
 
@@ -49,6 +51,7 @@
     
     for(EmojiDomain * domain in emojiArray) {
         [self downloadFileURL:domain];
+        [self.emojiInfoMDict setObject:domain.descriptionUrl forKey:domain.emojiName];
     }
 }
 
@@ -109,8 +112,68 @@
 }
 
 
-- (void)resetChatHTML {
-    _chatHTMLInfo = [NSMutableString new];
+//键盘回退
+- (NSString *)keyboardBack:(NSString *)inputString {
+    NSString *string = nil;
+    NSInteger stringLength = inputString.length;
+    if (stringLength > Number_Zero) {
+        if ([key_RightBracket isEqualToString:[inputString substringFromIndex:stringLength-Number_One]]) {
+            if ([inputString rangeOfString:key_LeftBracket].location == NSNotFound){
+                string = [inputString substringToIndex:stringLength];
+            } else {
+                NSRange range = [inputString rangeOfString:key_LeftBracket options:NSBackwardsSearch];
+                NSString * str = [inputString substringFromIndex:range.location];
+                if([self judgeEmojiExist:str]) {
+                    string = [inputString substringToIndex:range.location];
+                }else {
+                    string = inputString;
+                }
+            }
+        } else {
+            string = [inputString substringToIndex:stringLength];
+        }
+    }
+    
+    return string;
 }
+
+//判断指定字符串是否是表情
+- (BOOL)judgeEmojiExist:(NSString *)str {
+    BOOL judge = NO;
+    for(NSString * tempStr in self.emojiMDict.allKeys) {
+        if([str isEqualToString:tempStr]) {
+            judge = YES; break;
+        }
+    }
+    return judge;
+}
+
+//替换表情为html
+- (NSString *)textConventHTMLText:(NSString *)text {
+    if (text.length > Number_Zero) {
+        NSRange right = [text rangeOfString:key_RightBracket options:NSBackwardsSearch];
+        NSRange left  = [text rangeOfString:key_LeftBracket options:NSBackwardsSearch];
+        NSRange rang = NSMakeRange(left.location, right.location - left.location + Number_One);
+        if(left.length>Number_Zero && right.length>Number_Zero) {
+            NSString * emojiNameStr = [text substringWithRange:rang];
+            NSString * htmlStr = [self getEmojiHTML:emojiNameStr];
+            if(htmlStr) {
+                text = [text stringByReplacingOccurrencesOfString:emojiNameStr withString:htmlStr];
+                return [self textConventHTMLText:text];
+            }
+        }
+    }
+    return text;
+}
+
+- (NSString *)getEmojiHTML:(NSString *)key {
+    NSString * url = [self.emojiInfoMDict objectForKey:key];;
+    if(url) {
+        key = [[key stringByReplacingOccurrencesOfString:key_RightBracket withString:String_DefValue_Empty] stringByReplacingOccurrencesOfString:key_LeftBracket withString:String_DefValue_Empty];
+        return [NSString stringWithFormat:@"<img alt=\"%@\" src=\"%@\" />", key, url];
+    }
+    return String_DefValue_Empty;
+}
+
 
 @end

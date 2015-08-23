@@ -51,17 +51,14 @@
     myWebView.delegate = self;
     [self getArticlesInfo];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeHUD) name:RemoveHUDNotification object:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-#pragma mark - 移除hud通知方法
-- (void)removeHUD{
-    [[KGHUD sharedHud] hide:popupView];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (announcementDomain) {
+        [[KGHUD sharedHud] show:self.view];
+        [self performSelector:@selector(lazyEx) withObject:self afterDelay:1.0];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

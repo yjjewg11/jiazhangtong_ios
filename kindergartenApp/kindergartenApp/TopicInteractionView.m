@@ -177,6 +177,8 @@
     /** 点赞按钮 */
     if(_dianzan && !_dianzan.canDianzan) {
         _dianzanBtn.selected = YES;
+    } else {
+        _dianzanBtn.selected = NO;
     }
     _dianzanBtn.frame = _topicInteractionFrame.dianzanBtnF;
     

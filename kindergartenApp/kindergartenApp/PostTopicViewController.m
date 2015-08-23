@@ -16,7 +16,6 @@
 #import "ClassDomain.h"
 #import "GroupDomain.h"
 #import "AssetHelper.h"
-#import "PhotoBroswerVC.h"
 
 #define contentTextViewDefText   @"说点什么吧..."
 #define AddBtnWidth (70) //图片按钮的宽度
@@ -128,37 +127,8 @@
             [weakSelf resetScrollViewPhoto];
         }];
         [self.navigationController pushViewController:vc animated:YES];
-//        NSUInteger index;
-//        for (index = 0; index < _addPhotoBtnMArray.count; ++ index) {
-//            if (sender == _addPhotoBtnMArray[index]) {
-//                break;
-//            }
-//        }
-//        [self loadLocalImage:index];
     }
     
-}
-
-#pragma mark - 显示图片
-- (void)loadLocalImage:(NSUInteger)index{
-    __weak typeof(self) weakSelf = self;
-    [PhotoBroswerVC show:self type:PhotoBroswerVCTypeModal index:index photoModelBlock:^NSArray *{
-        NSArray *localImages = imagesMArray;
-        
-        NSMutableArray *modelsM = [NSMutableArray arrayWithCapacity:localImages.count];
-        for (NSUInteger i = 0; i< localImages.count; i++) {
-            
-            PhotoModel *pbModel=[[PhotoModel alloc] init];
-            pbModel.mid = i + 1;
-            pbModel.image = localImages[i];
-            
-            pbModel.sourceImageView = weakSelf.addPhotoBtnMArray[i];
-            
-            [modelsM addObject:pbModel];
-        }
-        
-        return modelsM;
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

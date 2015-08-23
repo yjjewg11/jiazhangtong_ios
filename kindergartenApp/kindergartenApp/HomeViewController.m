@@ -189,17 +189,9 @@
     
     sharedAdView = [[BaiduMobAdView alloc] init];
     sharedAdView.AdType = BaiduMobAdViewTypeBanner;
-//    sharedAdView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, photosView.height);
+    sharedAdView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, photosView.height);
     sharedAdView.delegate = self;
     [photosView addSubview:sharedAdView];
-    
-    [sharedAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(Number_Zero));
-        make.left.equalTo(@(Number_Zero));
-        make.right.equalTo(@(Number_Zero));
-        make.width.equalTo(@(KGSCREEN.size.width));
-        make.height.equalTo(@(photosView.height));
-    }];
     
     [sharedAdView start];
 }
@@ -222,13 +214,19 @@
 
 - (void)willDisplayAd:(BaiduMobAdView *)adview{
     sharedAdView.hidden = NO;
-    CGRect f = sharedAdView.frame;
-    f.origin.x = -APPWINDOWWIDTH;
-    sharedAdView.frame = f;
-    [UIView beginAnimations:nil context:nil];
-    f.origin.x = 0;
-    sharedAdView.frame = f;
-    [UIView commitAnimations];
+    sharedAdView.x = -APPWINDOWWIDTH;
+    [UIView animateWithDuration:0.3 animations:^{
+        sharedAdView.x = 0;
+    } completion:^(BOOL finished) {
+    }];
+    
+//    CGRect f = sharedAdView.frame;
+//    f.origin.x = -APPWINDOWWIDTH;
+//    sharedAdView.frame = f;
+//    [UIView beginAnimations:nil context:nil];
+//    f.origin.x = 0;
+//    sharedAdView.frame = f;
+//    [UIView commitAnimations];
 }
 
 - (void)failedDisplayAd:(BaiduMobFailReason)reason{

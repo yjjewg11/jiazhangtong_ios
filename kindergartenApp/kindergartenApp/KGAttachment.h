@@ -18,6 +18,7 @@
 @property(strong, nonatomic) NSString * path;
 @property(strong, nonatomic) NSString * fileType;
 @property (strong, nonatomic) UIImage * image;
+@property (strong, nonatomic) NSString * imageUrl;
 
 - (id)initAttachment:(NSString *)cover;
 

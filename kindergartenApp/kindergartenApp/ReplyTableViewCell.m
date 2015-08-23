@@ -15,6 +15,7 @@
 #import "KGNSStringUtil.h"
 #import "KGHttpService.h"
 #import "UIButton+Extension.h"
+#import "KGHUD.h"
 
 @implementation ReplyTableViewCell
 
@@ -57,20 +58,29 @@
     if(sender.selected) {
         [[KGHttpService sharedService] delDZ:replyDomain.uuid success:^(NSString *msgStr) {
             sender.selected = NO;
-            replyDomain.dianzan.count--;
+            if(replyDomain.dianzan.count > Number_Zero); {
+                replyDomain.dianzan.count--;
+            }
             dzCountLabel.text = [NSString stringWithFormat:@"%ld", (long)replyDomain.dianzan.count];
+            [self messageNotification:msgStr];
         } faild:^(NSString *errorMsg) {
-            
+            [self messageNotification:errorMsg];
         }];
     } else {
         [[KGHttpService sharedService] saveDZ:replyDomain.uuid type:replyDomain.type success:^(NSString *msgStr) {
             sender.selected = YES;
             replyDomain.dianzan.count++;
             dzCountLabel.text = [NSString stringWithFormat:@"%ld", (long)replyDomain.dianzan.count];
+            [self messageNotification:msgStr];
         } faild:^(NSString *errorMsg) {
-            
+            [self messageNotification:errorMsg];
         }];
     }
-    
 }
+
+- (void)messageNotification:(NSString *)message {
+    NSDictionary * dic = [NSDictionary dictionaryWithObject:message forKey:Key_Notification_MessageText];
+    [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
+}
+
 @end

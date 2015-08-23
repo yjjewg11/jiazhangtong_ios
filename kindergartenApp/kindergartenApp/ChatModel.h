@@ -15,11 +15,7 @@
 
 @property (nonatomic) BOOL isGroupChat;
 
-- (void)populateRandomDataSource;
-
 - (void)addChatInfosToDataSource:(NSArray *)chatsArray;
-
-- (void)addRandomItemsToDataSource:(NSInteger)number;
 
 - (void)addSpecifiedItem:(NSDictionary *)dic;
 

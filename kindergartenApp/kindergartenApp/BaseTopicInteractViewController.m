@@ -28,6 +28,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self regNotification];
 }
 
@@ -47,6 +48,8 @@
 }
 
 - (void)regNotification {
+    [super regNotification];
+    
     self.keyBoardController.isEmojiInput = YES;
     
     //注册点赞通知
@@ -211,7 +214,6 @@
                 [_emojiAndTextView.contentTextView resignFirstResponder];
                 _emojiAndTextView.contentTextView.inputView = nil;
                 [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
-                [[KGEmojiManage sharedManage] resetChatHTML];
             }
             return;
         }
@@ -226,7 +228,6 @@
             IFView.y = wH;
             IFView.hidden = YES;
             IFView.TextViewInput.text = String_DefValue_Empty;
-            [KGEmojiManage sharedManage].chatHTMLInfo = [[NSMutableString alloc] initWithString:String_DefValue_Empty];
             [IFView.TextViewInput resignFirstResponder];
         }
     } else {

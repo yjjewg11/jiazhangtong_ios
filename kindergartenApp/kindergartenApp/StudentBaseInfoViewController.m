@@ -31,6 +31,8 @@
     PopupView * popupView;
     UIDatePicker * datePicker;
     BOOL isSetHeadImg; //是否设置过头像
+    
+    IBOutlet KGTextField *peopleCardTextField;
 }
 
 @end
@@ -76,6 +78,7 @@
     nameTextField.text = _studentInfo.name;
     nickTextField.text = _studentInfo.nickname;
     birthdayTextField.text = _studentInfo.birthday;
+    peopleCardTextField.text = _studentInfo.idcard;
     
     [self resetStudentSet];
 }
@@ -98,6 +101,7 @@
         _studentInfo.name = [KGNSStringUtil trimString:nameTextField.text];
         _studentInfo.nickname = [KGNSStringUtil trimString:nickTextField.text];
         _studentInfo.birthday = [KGNSStringUtil trimString:birthdayTextField.text];
+        _studentInfo.idcard = [KGNSStringUtil trimString:peopleCardTextField.text];
         
         //提交数据
         if(isSetHeadImg) {
@@ -169,7 +173,7 @@
     if(buttonIndex == Number_Zero) {
         //从相册
         [self localPhoto];
-    } else {
+    } else if (buttonIndex == Number_One) {
         //拍照
         [self openCamera];
     }
@@ -213,15 +217,7 @@
     {
         //先把图片转成NSData
         UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData * data;
-        if (UIImagePNGRepresentation(image) == nil)
-        {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        }
-        else
-        {
-            data = UIImagePNGRepresentation(image);
-        }
+        NSData * data = UIImageJPEGRepresentation(image, 0.1);
         
         //图片保存的路径
         //这里将图片放在沙盒的documents文件夹中

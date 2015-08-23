@@ -28,7 +28,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eTp-3s-4e6">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="241"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-180" translatesAutoresizingMaskIntoConstraints="NO" id="Vrc-LZ-vIh">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_wuzi" translatesAutoresizingMaskIntoConstraints="NO" id="Vrc-LZ-vIh">
                             <rect key="frame" x="115" y="76" width="90" height="90"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="90" id="IL4-Gv-0GI"/>
@@ -192,12 +192,12 @@
         </view>
     </objects>
     <resources>
-        <image name="Icon-180" width="90" height="90"/>
         <image name="bujizhu" width="15" height="15"/>
         <image name="denglu1" width="220" height="35"/>
         <image name="denglu2" width="220" height="35"/>
         <image name="dianhua" width="55" height="60"/>
         <image name="loginBg" width="320" height="568"/>
+        <image name="logo_wuzi" width="89" height="83"/>
         <image name="mima" width="18" height="18"/>
         <image name="zhhao" width="221" height="36"/>
         <image name="zhuche1" width="220" height="35"/>

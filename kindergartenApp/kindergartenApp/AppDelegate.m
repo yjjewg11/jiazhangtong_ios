@@ -22,6 +22,8 @@
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"
 
+#define NewMessageKey @"newMessage"
+
 @interface AppDelegate ()
 
 @end
@@ -94,18 +96,6 @@
     //消除icon badge
     [self clearBadge];
     
-    UILocalNotification * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(remoteNotification){
-        [self handleNotification:application notification:nil remoteNotification:remoteNotification];
-        remoteNotification.fireDate = [NSDate date];
-        remoteNotification.timeZone = [NSTimeZone defaultTimeZone];
-        remoteNotification.soundName = UILocalNotificationDefaultSoundName;
-        NSDictionary * dic = [(NSDictionary *)remoteNotification objectForKey:@"aps"];
-        remoteNotification.alertBody = [dic objectForKey:@"alert"];
-        UIApplication * app = [UIApplication sharedApplication];
-        [app scheduleLocalNotification:remoteNotification];
-    }
-    
     return YES;
 }
 
@@ -158,13 +148,24 @@
     
 //    if(![key isEqualToString:wrapperToken] || [key isEqualToString:String_DefValue_Empty]){
     
-        [KGHttpService sharedService].pushToken = key;
+    [KGHttpService sharedService].pushToken = key;
+    id temp = [[NSUserDefaults standardUserDefaults] objectForKey:NewMessageKey];
+    if (temp == nil) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:NewMessageKey];
+    }
+    NSString * status;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:NewMessageKey]) {
+        status = @"0";
+    }else{
+        status = @"2";
+    }
+    
+    [[KGHttpService sharedService] submitPushTokenWithStatus:status success:^(NSString *msgStr) {
+        [wrapper setObject:key forKey:(__bridge id)kSecAttrAccount];
+    } faild:^(NSString *errorMsg) {
         
-        [[KGHttpService sharedService] submitPushToken:^(NSString *msgStr) {
-            [wrapper setObject:key forKey:(__bridge id)kSecAttrAccount];
-        } faild:^(NSString *errorMsg) {
-        }];
-//    }
+    }];
+        
 }
 
 
