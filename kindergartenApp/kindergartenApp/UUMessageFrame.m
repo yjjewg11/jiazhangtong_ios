@@ -47,8 +47,6 @@
     CGSize contentSize;
     switch (_message.type) {
         case UUMessageTypeText:
-//            contentSize = [_message.strContent sizeWithFont:ChatContentFont  constrainedToSize:CGSizeMake(ChatContentW, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-        
             contentSize = [MLEmojiLabel boundingRectWithSize:_message.strContent w:ChatContentW font:14];
             break;
         case UUMessageTypePicture:
@@ -67,12 +65,11 @@
         contentTextViewX = contentX + 5;
     }
     
-    
-//    _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft + ChatContentRight, contentSize.height + ChatContentTop + ChatContentBottom);
-    
     _contentF = CGRectMake(contentX, contentY, contentSize.width + ChatContentLeft, contentSize.height + 20);
     
     _contentTextViewF = CGRectMake(contentTextViewX, contentY+ChatMargin, contentSize.width, contentSize.height);
+    
+    _hudF = CGRectMake(contentX - 40, contentY, 30, 30);
     
     _cellHeight = MAX(CGRectGetMaxY(_contentF), CGRectGetMaxY(_nameF))  + ChatMargin;
     

@@ -40,6 +40,7 @@
     self.keyBoardController.isShowKeyBoard = YES;
     self.keyboardTopType = EmojiAndTextMode;
     
+    lastIndex  = Number_Fifteen;
     totalCount = Number_Thirtyt;
     isFirstReq = YES;
     
@@ -72,7 +73,7 @@
         [contentScrollView addSubview:itemView];
         [itemViewArray addObject:itemView];
     }
-    [contentScrollView setContentOffset:CGPointMake(APPWINDOWWIDTH * (totalCount-Number_One), Number_Zero) animated:NO];
+    [contentScrollView setContentOffset:CGPointMake(APPWINDOWWIDTH *  (totalCount / Number_Twelve), Number_Zero) animated:NO];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -97,7 +98,7 @@
 - (void)loadRecipesInfoByData {
     [[KGHUD sharedHud] show:self.contentView];
     
-    [[KGHttpService sharedService] getRecipesList:lastDateStr endDate:nil success:^(NSArray *recipesArray) {
+    [[KGHttpService sharedService] getRecipesList:_groupuuid beginDate:lastDateStr endDate:nil success:^(NSArray *recipesArray) {
         
         [[KGHUD sharedHud] hide:self.contentView];
         

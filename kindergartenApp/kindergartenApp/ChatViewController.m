@@ -20,8 +20,9 @@
 #import "QueryChatsVO.h"
 #import "ChatInfoDomain.h"
 #import "KGHUD.h"
+#import <objc/runtime.h>
 
-@interface ChatViewController () <UUInputFunctionViewDelegate,UUMessageCellDelegate,UITableViewDataSource,UITableViewDelegate> {
+@interface ChatViewController () <UUInputFunctionViewDelegate,UUMessageCellDelegate,UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     UUInputFunctionView *IFView;
 }
 
@@ -46,12 +47,11 @@
     
     [self loadBaseViewsAndData];
     [self loadInputFuniView];
+    [self getTeacherInfo];
+    [self loadTableView];
     
-    __weak typeof(self) weakSelf = self;
-    [_chatTableView addHeaderWithCallback:^{
-        [weakSelf getChatInfoList:weakSelf.pageNo+1];
-    }];
-    [_chatTableView headerBeginRefreshing];
+    //注册消息未发送成功点击第二次发送通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatSecondSendNotification:) name:Key_Notification_ChatSecondSend object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -68,6 +68,32 @@
 {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+//消息未发送成功点击第二次发送
+- (void)chatSecondSendNotification:(NSNotification *)notification {
+    UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"重新发送",nil];
+    objc_setAssociatedObject(actionSheet, Key_WriteVO, notification.userInfo, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [actionSheet showInView:self.view];
+}
+
+// UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex != actionSheet.cancelButtonIndex) {
+        NSDictionary * dic = objc_getAssociatedObject(actionSheet, Key_WriteVO);
+        WriteVO * domain = (WriteVO *)[dic objectForKey:Key_WriteVO];
+        [self sendChatInfo:domain];
+    }
+}
+
+//table加载
+- (void)loadTableView {
+    __weak typeof(self) weakSelf = self;
+    [_chatTableView addHeaderWithCallback:^{
+        [weakSelf getChatInfoList:weakSelf.pageNo+1];
+    }];
+    [_chatTableView headerBeginRefreshing];
+
 }
 
 
@@ -138,16 +164,27 @@
 }
 
 
+- (void)sendChatInfo:(WriteVO *)domain {
+    NSDictionary *dic = @{@"strContent": domain.strContent,
+                          @"isNewMsg" : [NSNumber numberWithBool:YES],
+                          @"requestData" : domain,
+                          @"type": @(UUMessageTypeText)};
+    [self dealTheFunctionData:dic];
+}
+
+
 #pragma mark - InputFunctionViewDelegate
 - (void)UUInputFunctionView:(UUInputFunctionView *)funcView sendMessage:(NSString *)message
 {
-    NSDictionary *dic = @{@"strContent": message,
-                          @"type": @(UUMessageTypeText)};
-    funcView.TextViewInput.text = @"";
-    [funcView changeSendBtnWithPhoto:YES];
-    [self dealTheFunctionData:dic];
+    WriteVO * writeVO = [[WriteVO alloc] init];
+    writeVO.isTeacher = _addressbookDomain.type;
+    writeVO.revice_useruuid = _addressbookDomain.teacher_uuid;
+    writeVO.message = message;
+    writeVO.strContent = message;
     
-    [self sendTextInfo:[KGEmojiManage sharedManage].chatHTMLInfo];
+    funcView.TextViewInput.text = @"";
+//    [funcView changeSendBtnWithPhoto:YES];
+    [self sendChatInfo:writeVO];
 }
 
 - (void)dealTheFunctionData:(NSDictionary *)dic
@@ -187,32 +224,26 @@
 #pragma mark - cellDelegate
 - (void)headImageDidClick:(UUMessageCell *)cell userId:(NSString *)userId{
     // headIamgeIcon is clicked
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:cell.messageFrame.message.strName message:@"headImage clicked" delegate:nil cancelButtonTitle:@"sure" otherButtonTitles:nil];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:cell.messageFrame.message.strName message:@"headImage clicked" delegate:nil cancelButtonTitle:@"sure" otherButtonTitles:nil];
+//    [alert show];
 }
 
-//提交发送文本
-- (void)sendTextInfo:(NSString *)message {
-    WriteVO * writeVO = [[WriteVO alloc] init];
-    writeVO.isTeacher = _addressbookDomain.type;
-    writeVO.revice_useruuid = _addressbookDomain.teacher_uuid;
-    writeVO.message = message;
-    
-    [[KGHttpService sharedService] saveAddressBookInfo:writeVO success:^(NSString *msgStr) {
-        
-        [KGEmojiManage sharedManage].chatHTMLInfo = nil;
-    } faild:^(NSString *errorMsg) {
-        
-    }];
-}
 
 //发送图片
 - (void)sendImgInfo:(UIImage *)image {
     
     [[KGHttpService sharedService] uploadImg:image withName:@"file" type:0 success:^(NSString *msgStr) {
         
-        [self sendTextInfo:msgStr];
+    } faild:^(NSString *errorMsg) {
         
+    }];
+}
+
+
+//获得老师信息
+- (void)getTeacherInfo {
+    [[KGHttpService sharedService] getUserInfo:_addressbookDomain.teacher_uuid success:^(KGUser *userInfo) {
+        self.title = userInfo.name;
     } faild:^(NSString *errorMsg) {
         
     }];
@@ -228,7 +259,7 @@
         if (msgArray && msgArray.count != 0) {
             ++_pageNo;
         }
-        [self resetChatNameToTitle:msgArray];
+//        [self resetChatNameToTitle:msgArray];
         [self loadChatListData:msgArray];
         [_chatTableView headerEndRefreshing];
     } faild:^(NSString *errorMsg) {

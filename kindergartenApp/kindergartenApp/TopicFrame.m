@@ -82,8 +82,8 @@
         if([imgArray count] > Number_Three) {
             //大于三张图片需要换行
             NSInteger page = ([imgArray count] + Number_Three - Number_One) / Number_Three;
-            
-            topicImgsViewH = page * imgCellH;
+            //显示的行数*单张图片高度 + 行间隔
+            topicImgsViewH = page * imgCellH + (page-Number_One) * Number_Five;
         }
 //        else if ([imgArray count] == Number_One) {
 //            topicImgsViewH = topicContentW;

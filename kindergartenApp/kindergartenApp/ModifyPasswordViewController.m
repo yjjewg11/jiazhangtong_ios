@@ -44,8 +44,7 @@
         [[KGHUD sharedHud] show:self.view onlyMsg:@"两次输入的密码不一致"];
         return;
     }
-    if (!([self isRange:tempArray[0]] &&
-        [self isRange:tempArray[1]] &&
+    if (!([self isRange:tempArray[1]] &&
         [self isRange:tempArray[2]])) {
         [[KGHUD sharedHud] show:self.view onlyMsg:@"请输入长度在6~16位的密码"];
         return;
@@ -88,10 +87,10 @@
     ModifyPasswordTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ModifyPasswordTableViewCell"];
     if (indexPath.row == 0) {
         cell.flagImageView.image = [UIImage imageNamed:@"yuanmima"];
-        cell.passwordTextField.secureTextEntry = NO;
     }else{
         cell.flagImageView.image = [UIImage imageNamed:@"xinmima"];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.passwordTextField.placeholder = _dataArray[indexPath.row];
     return cell;
 }

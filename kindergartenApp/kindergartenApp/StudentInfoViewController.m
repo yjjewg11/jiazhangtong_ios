@@ -267,6 +267,16 @@
     
     baseInfoVC.StudentUpdateBlock = ^(KGUser * studentObj){
         self.studentInfo = studentObj;
+        
+        NSMutableArray * tempArray = [[NSMutableArray alloc] initWithArray:[KGHttpService sharedService].loginRespDomain.list];
+        for (int i = 0; i < tempArray.count; ++ i) {
+            KGUser * model = tempArray[i];
+            if ([model.uuid isEqualToString:studentObj.uuid]) {
+                [tempArray replaceObjectAtIndex:i withObject:studentObj];
+                [KGHttpService sharedService].loginRespDomain.list = [NSArray arrayWithArray:tempArray];
+                break;
+            }
+        }
         [self packageTableDataSource];
         [studentInfoTableView reloadData];
     };

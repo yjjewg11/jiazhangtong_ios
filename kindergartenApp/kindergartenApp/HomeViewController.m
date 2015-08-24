@@ -20,7 +20,6 @@
 #import "SpecialtyCoursesViewController.h"
 #import "GiftwareArticlesViewController.h"
 #import "StudentSignRecordViewController.h"
-#import "RecipesViewController.h"
 #import "MoreMenuView.h"
 #import "PopupView.h"
 #import "RecipesListViewController.h"
@@ -69,14 +68,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     scrollView.contentSize = CGSizeMake(self.view.width, funiView.y + funiView.height + Number_Ten);
-    [self loadNavTitle];
+//    [self loadNavTitle];
     [self loadPhotoView];
     [self autoLogin];
 }
 
 - (void)loadNavTitle {
     titleBtn = [[ItemTitleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
+    if([[KGHttpService sharedService].loginRespDomain.group_list count] > Number_Zero) {
+        [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
+    }
+    
     // 设置图片和文字
     NSString * title = @"首页";
     if([KGHttpService sharedService].groupDomain) {
@@ -187,9 +189,10 @@
     
     sharedAdView = [[BaiduMobAdView alloc] init];
     sharedAdView.AdType = BaiduMobAdViewTypeBanner;
-    sharedAdView.frame = CGRectMake(0, 0, photosView.width, photosView.height);
+    sharedAdView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, photosView.height);
     sharedAdView.delegate = self;
     [photosView addSubview:sharedAdView];
+    
     [sharedAdView start];
 }
 
@@ -211,13 +214,19 @@
 
 - (void)willDisplayAd:(BaiduMobAdView *)adview{
     sharedAdView.hidden = NO;
-    CGRect f = sharedAdView.frame;
-    f.origin.x = -APPWINDOWWIDTH;
-    sharedAdView.frame = f;
-    [UIView beginAnimations:nil context:nil];
-    f.origin.x = 0;
-    sharedAdView.frame = f;
-    [UIView commitAnimations];
+    sharedAdView.x = -APPWINDOWWIDTH;
+    [UIView animateWithDuration:0.3 animations:^{
+        sharedAdView.x = 0;
+    } completion:^(BOOL finished) {
+    }];
+    
+//    CGRect f = sharedAdView.frame;
+//    f.origin.x = -APPWINDOWWIDTH;
+//    sharedAdView.frame = f;
+//    [UIView beginAnimations:nil context:nil];
+//    f.origin.x = 0;
+//    sharedAdView.frame = f;
+//    [UIView commitAnimations];
 }
 
 - (void)failedDisplayAd:(BaiduMobFailReason)reason{
@@ -252,7 +261,7 @@
  *  - 用户城市
  */
 -(NSString*) userCity{
-    return @"上海";
+    return @"成都";
 }
 
 
@@ -260,7 +269,7 @@
  *  - 用户邮编
  */
 -(NSString*) userPostalCode{
-    return @"435200";
+    return @"610000";
 }
 
 
@@ -306,7 +315,7 @@
     return other;
 }
 
-#pragma ImageCollectionViewDelegate
+#pragma mark - ImageCollectionViewDelegate
 
 //单击回调
 -(void)singleTapEvent:(NSString *)pType {
@@ -314,7 +323,7 @@
 }
 
 
-
+#pragma mark - 功能按钮点击
 - (IBAction)funBtnClicked:(UIButton *)sender {
     BaseViewController * baseVC = nil;
     switch (sender.tag) {
@@ -335,6 +344,7 @@
             break;
         case 15:
             baseVC = [[RecipesListViewController alloc] init];
+            ((RecipesListViewController *)baseVC).groupuuid = [KGHttpService sharedService].groupDomain.uuid;
             break;
         case 16:
             baseVC = [[GiftwareArticlesViewController alloc] init];

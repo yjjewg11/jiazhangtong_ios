@@ -14,7 +14,9 @@
 
 @class TopicFrame;
 
-@interface TopicTableViewCell : UITableViewCell
+@interface TopicTableViewCell : UITableViewCell {
+    NSMutableArray * imagesMArray;
+}
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 

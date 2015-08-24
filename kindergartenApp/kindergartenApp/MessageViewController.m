@@ -17,7 +17,7 @@
 #import "InteractViewController.h"
 #import "IntroductionViewController.h"
 #import "TimetableViewController.h"
-#import "RecipesViewController.h"
+#import "RecipesListViewController.h"
 #import "GiftwareArticlesInfoViewController.h"
 #import "AnnouncementInfoViewController.h"
 #import "MessageTableViewCell.h"
@@ -110,7 +110,8 @@
             ((IntroductionViewController *)vc).isNoXYXG = YES;
             break;
         case Topic_Recipes:
-            vc = [[RecipesViewController alloc] init];
+            vc = [[RecipesListViewController alloc] init];
+            ((RecipesListViewController *)vc).groupuuid = domain.group_uuid;
             break;
         case Topic_JPKC:
             vc = [[TimetableViewController alloc] init];
@@ -149,6 +150,7 @@
     AddressBookDomain * addressbookDomain = [[AddressBookDomain alloc] init];
     addressbookDomain.teacher_uuid = domain.rel_uuid;
     addressbookDomain.type = (domain.type == Topic_TeacherChat) ? YES : NO;
+    addressbookDomain.img  = domain.url;
     ChatViewController * chatVC = [[ChatViewController alloc] init];
     chatVC.addressbookDomain = addressbookDomain;
     [self.navigationController pushViewController:chatVC animated:YES];

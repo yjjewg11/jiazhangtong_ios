@@ -45,7 +45,9 @@
     NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:UserNameKey];
     NSString * password = [[NSUserDefaults standardUserDefaults] objectForKey:PasswordKey];
     _userNameTextField.text = userName;
+    _userNameTextField.delegate = self;
     _userPwdTextField.text = password;
+    _userPwdTextField.delegate = self;
     
     if (userName != nil && password != nil) {
         savePwdBtn.selected = YES;
@@ -57,6 +59,15 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == _userNameTextField) {
+        [_userPwdTextField becomeFirstResponder];
+    }else{
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
 
 /**
  *  添加输入框到array统一管理验证

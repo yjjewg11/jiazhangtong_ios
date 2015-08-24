@@ -7,8 +7,18 @@
 //
 
 #import "AnnouncementDomain.h"
+#import "MJExtension.h"
 
 @implementation AnnouncementDomain
+
+//属性名映射
+//+(void)initialize{
+//    [super initialize];
+//    
+//    [self setupObjectClassInArray:^NSDictionary *{
+//        return @{@"\"share_url\""       : @"shareUrl"};
+//    }];
+//}
 
 - (void)setType:(NSInteger)type {
     _type = type;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -7,11 +7,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostTopicViewController">
             <connections>
-                <outlet property="addImgBtn" destination="nhr-ZU-795" id="5YV-Y2-33r"/>
                 <outlet property="arrowImageView" destination="Gbw-Cb-Gd5" id="EW4-fY-AvT"/>
                 <outlet property="bgView" destination="XTA-MT-4GQ" id="k0U-fw-uZM"/>
                 <outlet property="contentTextView" destination="ceG-Fw-d6L" id="KUb-hd-hbZ"/>
                 <outlet property="contentView" destination="gaH-5h-MxE" id="CP0-iI-5Yo"/>
+                <outlet property="photoScrollView" destination="Lhf-Gd-ryP" id="aOL-GR-9w0"/>
                 <outlet property="selectBtn" destination="XDU-Gn-2Kz" id="O0o-gg-JZ4"/>
                 <outlet property="topBgVIew" destination="gf9-au-hL7" id="nC1-JG-Iam"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -39,33 +39,8 @@
                                 </textView>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lhf-Gd-ryP">
                                     <rect key="frame" x="16" y="100" width="288" height="70"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNM-Ct-AN9">
-                                            <rect key="frame" x="0.0" y="0.0" width="670" height="70"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhr-ZU-795">
-                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                                    <state key="normal" backgroundImage="tianjiatupian">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="addImgBtnClicked:" destination="-1" eventType="touchUpInside" id="JMF-cO-rnU"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="670" id="z59-4S-2YX"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="fNM-Ct-AN9" secondAttribute="bottom" id="084-ED-jKE"/>
-                                        <constraint firstItem="fNM-Ct-AN9" firstAttribute="top" secondItem="Lhf-Gd-ryP" secondAttribute="top" id="5Ef-lC-Rsc"/>
-                                        <constraint firstItem="fNM-Ct-AN9" firstAttribute="leading" secondItem="Lhf-Gd-ryP" secondAttribute="leading" id="K7y-ND-6p6"/>
                                         <constraint firstAttribute="height" constant="70" id="MKV-fO-6St"/>
-                                        <constraint firstAttribute="centerY" secondItem="fNM-Ct-AN9" secondAttribute="centerY" id="Rzd-Cd-rtQ"/>
-                                        <constraint firstAttribute="trailing" secondItem="fNM-Ct-AN9" secondAttribute="trailing" constant="-382" id="ogc-wj-vJV"/>
                                     </constraints>
                                 </scrollView>
                             </subviews>
@@ -161,7 +136,6 @@
         </view>
     </objects>
     <resources>
-        <image name="tianjiatupian" width="70" height="70"/>
         <image name="xiajiantou-1" width="12" height="7"/>
     </resources>
 </document>

@@ -13,6 +13,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "UIButton+AFNetworking.h"
 #import "UUImageAvatarBrowser.h"
+#import "KGHttpService.h"
+#import "KGEmojiManage.h"
 
 @interface UUMessageCell ()<UUAVAudioPlayerDelegate>
 {
@@ -68,7 +70,7 @@
         [self.btnContent setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.btnContent.titleLabel.font = ChatContentFont;
         self.btnContent.titleLabel.numberOfLines = 0;
-        [self.btnContent addTarget:self action:@selector(btnContentClick)  forControlEvents:UIControlEventTouchUpInside];
+//        [self.btnContent addTarget:self action:@selector(btnContentClick)  forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:self.btnContent];
         
 //        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(UUAVAudioPlayerDidFinishPlay) name:@"VoicePlayHasInterrupt" object:nil];
@@ -80,6 +82,22 @@
         self.contentTextView.isNeedAtAndPoundSign = YES;
         self.contentTextView.customEmojiRegex = String_DefValue_EmojiRegex;
         [self addSubview:self.contentTextView];
+        
+        self.contentTransparentBtn = [[UIButton alloc] init];
+        self.contentTransparentBtn.backgroundColor = [UIColor clearColor];
+        [self.contentTransparentBtn addTarget:self action:@selector(btnContentClick)  forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.contentTransparentBtn];
+        
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] init];
+        self.activityIndicatorView.activityIndicatorViewStyle= UIActivityIndicatorViewStyleGray;
+        self.activityIndicatorView.hidesWhenStopped = NO;
+        [self addSubview:self.activityIndicatorView ];
+        self.activityIndicatorView.hidden = YES;
+        
+        self.sendErrorImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fasongshibai"]];
+//        self.sendErrorImageView.hidden = YES;
+        self.sendErrorImageView.alpha = Number_Zero;
+        [self addSubview:self.sendErrorImageView];
         
         //红外线感应监听
 //        [[NSNotificationCenter defaultCenter] addObserver:self
@@ -128,10 +146,15 @@
 //    else
     if (self.messageFrame.message.type == UUMessageTypeText)
     {
-        [self.btnContent becomeFirstResponder];
-        UIMenuController *menu = [UIMenuController sharedMenuController];
-        [menu setTargetRect:self.btnContent.frame inView:self.btnContent.superview];
-        [menu setMenuVisible:YES animated:YES];
+//        [self.btnContent becomeFirstResponder];
+//        UIMenuController *menu = [UIMenuController sharedMenuController];
+//        [menu setTargetRect:self.btnContent.frame inView:self.btnContent.superview];
+//        [menu setMenuVisible:YES animated:YES];
+        if(_isSendError) {
+            //通知二次发送
+            NSDictionary *dic = @{Key_WriteVO : _messageFrame.message.writeVO};
+            [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_ChatSecondSend object:self userInfo:dic];
+        }
     }
 }
 
@@ -189,6 +212,7 @@
     self.btnContent.backImageView.hidden = YES;
 
     self.btnContent.frame = messageFrame.contentF;
+    self.contentTransparentBtn.frame = messageFrame.contentF;
     self.contentTextView.frame = messageFrame.contentTextViewF;
     
     if (message.from == UUMessageFromMe) {
@@ -241,6 +265,16 @@
         default:
             break;
     }
+    
+    if (message.from == UUMessageFromMe && message.isNewMsg) {
+        [self sendTextInfo];
+        self.activityIndicatorView.frame = messageFrame.hudF;
+        [self.activityIndicatorView startAnimating];
+        self.activityIndicatorView.hidden = NO;
+        _sendErrorImageView.frame = CGRectMake(_messageFrame.hudF.origin.x + 20, _messageFrame.hudF.origin.y + 10, 15, 15);
+    } else {
+        self.activityIndicatorView.hidden = YES;
+    }
 }
 
 - (void)makeMaskView:(UIView *)view withImage:(UIImage *)image
@@ -261,6 +295,33 @@
         NSLog(@"Device is not close to user");
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
     }
+}
+
+//提交发送文本
+- (void)sendTextInfo {
+    WriteVO * domain = _messageFrame.message.writeVO;
+    domain.message = [[KGEmojiManage sharedManage] textConventHTMLText:domain.strContent];
+    [[KGHttpService sharedService] saveAddressBookInfo:domain success:^(NSString *msgStr) {
+        
+        [self hideActivity:NO];
+        _isSendError = NO;
+        _sendErrorImageView.alpha = Number_Zero;
+    } faild:^(NSString *errorMsg) {
+        [self hideActivity:YES];
+    }];
+}
+
+- (void)hideActivity:(BOOL)isError {
+    _isSendError = isError;
+    [_activityIndicatorView stopAnimating];
+    [UIView animateWithDuration:0.3 animations:^{
+        _activityIndicatorView.alpha = Number_Zero;
+        if(isError) {
+            _sendErrorImageView.alpha = Number_One;
+        }
+    } completion:^(BOOL finished) {
+        [_activityIndicatorView removeFromSuperview];
+    }];
 }
 
 @end

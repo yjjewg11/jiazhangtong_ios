@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ReFreshBaseCell.h"
 #import "MLEmojiLabel.h"
+#import "ReplyDomain.h"
 
 @interface ReplyTableViewCell : ReFreshBaseCell {
     
@@ -16,8 +17,12 @@
     IBOutlet UILabel * timeLabel;
     IBOutlet UILabel * titleLabel;
     IBOutlet MLEmojiLabel * messageLabel;
-    IBOutlet UIImageView * dzImageView;
+    ReplyDomain * replyDomain;
+    IBOutlet UIButton *dzBtn;
     IBOutlet UILabel * dzCountLabel;
 }
+
+
+- (IBAction)dzBtnClicked:(UIButton *)sender;
 
 @end

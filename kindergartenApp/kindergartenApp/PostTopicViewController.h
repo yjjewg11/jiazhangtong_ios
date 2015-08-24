@@ -10,6 +10,7 @@
 #import "BaseTopicInteractViewController.h"
 #import "TopicDomain.h"
 #import "DoImagePickerController.h"
+#import "PhotoVC.h"
 
 @interface PostTopicViewController :BaseTopicInteractViewController  <UITableViewDataSource,UITableViewDelegate, DoImagePickerControllerDelegate>
 
@@ -20,10 +21,12 @@
 @property (strong, nonatomic) UITableView * selectTableView;
 @property (strong, nonatomic) IBOutlet UIView *topBgVIew;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnArray;
-@property (strong, nonatomic) IBOutlet UIButton *addImgBtn;
 
 @property (nonatomic, copy) void (^PostTopicBlock)(TopicDomain * topicDomain);
 
-- (IBAction)addImgBtnClicked:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIScrollView *photoScrollView;//图片横向滚动
+@property (strong, nonatomic) UIView *photoContentView;//图片内容视图
+@property (strong, nonatomic) NSMutableArray * addPhotoBtnMArray;//图片按钮
+
 
 @end
