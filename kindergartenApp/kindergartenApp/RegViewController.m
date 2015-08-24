@@ -47,7 +47,7 @@
         [submitBtn setBackgroundImage:[UIImage imageNamed:@"zhuche3"] forState:UIControlStateHighlighted];
     } else {
         self.title = @"找回密码";
-        pwdLabel.text = @"旧密码";
+//        pwdLabel.text = @"旧密码";
     }
     
 //    [self setViewParame];

@@ -14,7 +14,7 @@
 #import "UUInputFunctionView.h"
 #import "Masonry.h"
 #import "KGEmojiManage.h"
-
+#import "PhotoVC.h"
 
 
 @interface BaseTopicInteractViewController () <UUInputFunctionViewDelegate, UIGestureRecognizerDelegate> {
@@ -25,6 +25,12 @@
 @end
 
 @implementation BaseTopicInteractViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self regNotification];
+}
 
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -38,6 +44,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self loadInputFuniView];
+    [self regNotification];
+}
+
+- (void)regNotification {
+    [super regNotification];
     
     self.keyBoardController.isEmojiInput = YES;
     
@@ -52,6 +63,9 @@
     
     //注册加载更多回复通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(topicRelpyMoreBtnClickedNotification:) name:Key_Notification_TopicLoadMore object:nil];
+    
+    //注册点击图片浏览图片通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(browseImagesNotification:) name:Key_Notification_BrowseImages object:nil];
 }
 
 //设置键盘顶部悬浮类型
@@ -100,22 +114,22 @@
 
 
 - (void)dzOperationHandler:(BOOL)isSelected {
-    [[KGHUD sharedHud] show:self.contentView];
+//    [[KGHUD sharedHud] show:self.contentView];
     if(isSelected) {
         //点赞
         [[KGHttpService sharedService] saveDZ:_topicInteractionDomain.topicUUID type:_topicInteractionDomain.topicType success:^(NSString *msgStr) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+//            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
             [topicInteractionView resetDZName:YES name:[KGHttpService sharedService].loginRespDomain.userinfo.name];
         } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+//            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         }];
     } else {
         //取消点赞
         [[KGHttpService sharedService] delDZ:_topicInteractionDomain.topicUUID success:^(NSString *msgStr) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+//            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
             [topicInteractionView resetDZName:NO name:[KGHttpService sharedService].loginRespDomain.userinfo.name];
         } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+//            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         }];
     }
 }
@@ -164,6 +178,16 @@
     [self.navigationController pushViewController:baseVC animated:YES];
 }
 
+//图片点击浏览图片通知
+- (void)browseImagesNotification:(NSNotification *)notification {
+    NSDictionary  * dic = [notification userInfo];
+    NSMutableArray * imagesMArray = [dic objectForKey:Key_ImagesArray];
+    
+    PhotoVC * vc = [[PhotoVC alloc] init];
+    vc.imgMArray = imagesMArray;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 //键盘通知
 - (void)keyboardWillShowOrHide:(BOOL)isShow inputY:(CGFloat)y {
@@ -190,7 +214,6 @@
                 [_emojiAndTextView.contentTextView resignFirstResponder];
                 _emojiAndTextView.contentTextView.inputView = nil;
                 [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
-                [[KGEmojiManage sharedManage] resetChatHTML];
             }
             return;
         }
@@ -205,7 +228,6 @@
             IFView.y = wH;
             IFView.hidden = YES;
             IFView.TextViewInput.text = String_DefValue_Empty;
-            [KGEmojiManage sharedManage].chatHTMLInfo = [[NSMutableString alloc] initWithString:String_DefValue_Empty];
             [IFView.TextViewInput resignFirstResponder];
         }
     } else {

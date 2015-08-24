@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WriteVO.h"
 
 typedef NS_ENUM(NSInteger, MessageType) {
     UUMessageTypeText     = 0 , // 文字
@@ -28,15 +29,17 @@ typedef NS_ENUM(NSInteger, MessageFrom) {
 @property (nonatomic, copy) NSString *strTime;
 @property (nonatomic, copy) NSString *strName;
 
+@property (nonatomic, copy) NSString *requestContent;
 @property (nonatomic, copy) NSString *strContent;
 @property (nonatomic, copy) UIImage  *picture;
 @property (nonatomic, copy) NSData   *voice;
 @property (nonatomic, copy) NSString *strVoiceTime;
-
+@property (nonatomic, assign) BOOL isNewMsg; //上方新消息 =YES 需要显示hud
 @property (nonatomic, assign) MessageType type;
 @property (nonatomic, assign) MessageFrom from;
 
 @property (nonatomic, assign) BOOL showDateLabel;
+@property (nonatomic, strong) WriteVO * writeVO;
 
 - (void)setWithDict:(NSDictionary *)dict;
 

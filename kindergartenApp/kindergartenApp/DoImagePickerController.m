@@ -7,7 +7,6 @@
 
 #import "DoImagePickerController.h"
 #import "AssetHelper.h"
-
 #import "DoAlbumCell.h"
 #import "DoPhotoCell.h"
 
@@ -301,9 +300,6 @@
 #pragma mark - UICollectionViewDelegates for photos
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    if (section == 0) {
-//        return [ASSETHELPER getPhotoCountOfCurrentGroup] + 1;
-//    }
     return [ASSETHELPER getPhotoCountOfCurrentGroup] + 1;
 }
 

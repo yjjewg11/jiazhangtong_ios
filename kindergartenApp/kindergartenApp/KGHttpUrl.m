@@ -17,7 +17,7 @@
 #define regURL               @"rest/userinfo/reg.json"               //注册
 //#define updatepasswordURL    @"rest/userinfo/updatepassword.json"    //修改密码
 #define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"  //修改密码
-
+#define getTeacherInfo          @"rest/userinfo/getTeacherInfo.json"        //获取用户信息
 #define KDInfoURL            @"rest/share/getKDInfo.html" //校园相关
 #define ZSJHInfoURL          @"rest/share/getRecruitBygroupuuid.html" //招生计划
 
@@ -106,6 +106,11 @@
 //updatepassword
 + (NSString *)getUpdatepasswordUrl {
     return URL(baseServiceURL, updatepasswordURL);
+}
+
+//获取用户信息
++ (NSString *)getUserInfoUrl:(NSString *)uuid {
+    return [NSString stringWithFormat:@"%@%@?uuid=%@", baseServiceURL, getTeacherInfo, uuid];
 }
 
 //绑定的卡号列表

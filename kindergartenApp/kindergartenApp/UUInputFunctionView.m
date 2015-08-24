@@ -209,6 +209,7 @@
 //    if (self.isAbleToSendTextMessage) {
         NSString *resultStr = [self.TextViewInput.text stringByReplacingOccurrencesOfString:@"   " withString:@""];
         [self.delegate UUInputFunctionView:self sendMessage:resultStr];
+    [self.TextViewInput resignFirstResponder];
 //    }
 //    else{
 //        [self.TextViewInput resignFirstResponder];
@@ -245,26 +246,33 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     
-    if (text.length == 0) {
-        NSDictionary * dic = [KGEmojiManage sharedManage].emojiMDict;
-        
-        NSMutableArray * array = [[NSMutableArray alloc] init];
-        NSMutableArray * tempArray;
-        for (NSString *key in dic.allKeys) {
-            tempArray = [self getSubStringShowNumsInStringBy:textView.text andSubstring:key];
-            if (tempArray.count != 0) {
-                [array addObjectsFromArray:tempArray];
-            }
-        }
-        
-        for (NSValue * value in array) {
-            NSRange tempRange = [value rangeValue];
-            if (range.location >= tempRange.location && range.location <= tempRange.location + tempRange.length) {
-                textView.text = [textView.text stringByReplacingCharactersInRange:tempRange withString:@""];
-                return NO;
-            }
-        }
+    NSString * inputString = textView.text;
+    NSString * tempStr = [inputString substringFromIndex:range.location];
+    if ([@"]" isEqualToString:tempStr]) {
+        NSString * ss = [[KGEmojiManage sharedManage] keyboardBack:textView.text];
+        textView.text = [NSString stringWithFormat:@"%@]", ss];
     }
+    
+//    if (text.length == 0) {
+//        NSDictionary * dic = [KGEmojiManage sharedManage].emojiMDict;
+//        
+//        NSMutableArray * array = [[NSMutableArray alloc] init];
+//        NSMutableArray * tempArray;
+//        for (NSString *key in dic.allKeys) {
+//            tempArray = [self getSubStringShowNumsInStringBy:textView.text andSubstring:key];
+//            if (tempArray.count != 0) {
+//                [array addObjectsFromArray:tempArray];
+//            }
+//        }
+//        
+//        for (NSValue * value in array) {
+//            NSRange tempRange = [value rangeValue];
+//            if (range.location >= tempRange.location && range.location <= tempRange.location + tempRange.length) {
+//                textView.text = [textView.text stringByReplacingCharactersInRange:tempRange withString:@""];
+//                return NO;
+//            }
+//        }
+//    }
     
     return YES;
 }

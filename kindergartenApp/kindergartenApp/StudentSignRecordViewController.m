@@ -65,6 +65,16 @@
 //更正学生打卡记录数据
 - (void)packageSignRecord:(NSArray *)recordArray {
     
+    if (recordArray.count == 0) {
+        PromptView * pView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] lastObject];
+        pView.size = CGSizeMake(APPWINDOWWIDTH, 80);
+        pView.origin = CGPointMake(0, (APPWINDOWHEIGHT-pView.height-64)/2.0);
+        pView.backgroundColor = signRecordTableView.backgroundColor;
+        pView.cnView.backgroundColor = pView.backgroundColor;
+        [signRecordTableView addSubview:pView];
+        return;
+    }
+    
     for(StudentSignRecordDomain * domain in recordArray) {
         [self addStudentSignRecord:domain];
     }

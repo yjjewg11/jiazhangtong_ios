@@ -60,6 +60,13 @@
     
     [self packageTableData];
     [recipesTableView reloadData];
+    
+    if (!_recipesDomain.isReqSuccessData) {
+        PromptView * pView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] lastObject];
+        pView.size = CGSizeMake(APPWINDOWWIDTH, 80);
+        pView.origin = CGPointMake(0, 90);
+        [recipesTableView addSubview:pView];
+    }
 }
 
 - (void)packageTableData {

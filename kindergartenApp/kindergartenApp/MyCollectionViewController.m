@@ -18,6 +18,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _pageIndex = Number_One;
     [self getListWithPage:_pageIndex];
 }
 
@@ -46,6 +47,10 @@
 - (void)getListWithPage:(NSUInteger)pageNo{
     [[KGHttpService sharedService] getFavoritesList:pageNo success:^(NSArray *favoritesArray) {
         if (favoritesArray && favoritesArray.count != 0) {
+            if(_pageIndex == Number_One) {
+                //因为从收藏单击cell进入文章详情之后 可能会有取消收藏的动作  所以收藏列表是每次进入都需要刷新
+                [_dataArray removeAllObjects];
+            }
             [_dataArray addObjectsFromArray:favoritesArray];
             [_tableView reloadData];
             if (pageNo != 1) {

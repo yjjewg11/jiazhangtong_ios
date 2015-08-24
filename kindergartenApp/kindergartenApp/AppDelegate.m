@@ -20,6 +20,9 @@
 #import "UMessage.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define RemoveHUDNotification @"RemoveHUD"
+
+#define NewMessageKey @"newMessage"
 
 @interface AppDelegate ()
 
@@ -93,18 +96,6 @@
     //消除icon badge
     [self clearBadge];
     
-    UILocalNotification * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    if(remoteNotification){
-        [self handleNotification:application notification:nil remoteNotification:remoteNotification];
-        remoteNotification.fireDate = [NSDate date];
-        remoteNotification.timeZone = [NSTimeZone defaultTimeZone];
-        remoteNotification.soundName = UILocalNotificationDefaultSoundName;
-        NSDictionary * dic = [(NSDictionary *)remoteNotification objectForKey:@"aps"];
-        remoteNotification.alertBody = [dic objectForKey:@"alert"];
-        UIApplication * app = [UIApplication sharedApplication];
-        [app scheduleLocalNotification:remoteNotification];
-    }
-    
     return YES;
 }
 
@@ -115,10 +106,14 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         [UIApplication sharedApplication].applicationIconBadgeNumber = Number_Zero;
     }else{
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert];
         [UIApplication sharedApplication].applicationIconBadgeNumber = Number_Zero;
     }
 }
 
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 // 在 iOS8 系统中，还需要添加这个方法。通过新的 API 注册推送服务
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -154,13 +149,24 @@
     
 //    if(![key isEqualToString:wrapperToken] || [key isEqualToString:String_DefValue_Empty]){
     
-        [KGHttpService sharedService].pushToken = key;
+    [KGHttpService sharedService].pushToken = key;
+    id temp = [[NSUserDefaults standardUserDefaults] objectForKey:NewMessageKey];
+    if (temp == nil) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:NewMessageKey];
+    }
+    NSString * status;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:NewMessageKey]) {
+        status = @"0";
+    }else{
+        status = @"2";
+    }
+    
+    [[KGHttpService sharedService] submitPushTokenWithStatus:status success:^(NSString *msgStr) {
+        [wrapper setObject:key forKey:(__bridge id)kSecAttrAccount];
+    } faild:^(NSString *errorMsg) {
         
-        [[KGHttpService sharedService] submitPushToken:^(NSString *msgStr) {
-            [wrapper setObject:key forKey:(__bridge id)kSecAttrAccount];
-        } faild:^(NSString *errorMsg) {
-        }];
-//    }
+    }];
+        
 }
 
 
@@ -236,6 +242,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [UMSocialSnsService  applicationDidBecomeActive];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+    [[NSNotificationCenter defaultCenter] postNotificationName:RemoveHUDNotification object:nil];
 }
 
 #pragma mark - 注册友盟的消息推送

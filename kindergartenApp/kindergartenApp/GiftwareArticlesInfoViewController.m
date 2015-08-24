@@ -16,6 +16,8 @@
 #import "FavoritesDomain.h"
 #import "KGDateUtil.h"
 
+#define RemoveHUDNotification @"RemoveHUD"
+
 @interface GiftwareArticlesInfoViewController () <UIWebViewDelegate> {
     
     IBOutlet UIScrollView *contentScrollView;
@@ -48,6 +50,15 @@
     myWebView.scrollView.scrollEnabled = NO;
     myWebView.delegate = self;
     [self getArticlesInfo];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (announcementDomain) {
+        [[KGHUD sharedHud] show:self.view];
+        [self performSelector:@selector(lazyEx) withObject:self afterDelay:1.0];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

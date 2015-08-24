@@ -23,6 +23,8 @@
  *  移除messageView
  */
 //- (void)removeCurrentMessageView;
+//注册通知
+- (void)regNotification;
 
 //滑动手势
 - (void)addSwipeGesture;

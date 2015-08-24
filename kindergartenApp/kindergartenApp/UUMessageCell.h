@@ -28,9 +28,11 @@
 
 @property (nonatomic, retain)UUMessageContentButton *btnContent;
 @property (nonatomic, strong) MLEmojiLabel * contentTextView;
-
+@property (nonatomic, strong) UIButton     * contentTransparentBtn;
+@property (nonatomic, strong) UIActivityIndicatorView * activityIndicatorView;
+@property (nonatomic, strong) UIImageView * sendErrorImageView;
 @property (nonatomic, retain)UUMessageFrame *messageFrame;
-
+@property (nonatomic, assign) BOOL isSendError;
 @property (nonatomic, assign)id<UUMessageCellDelegate>delegate;
 
 @end

@@ -44,6 +44,8 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.backgroundColor = KGColorFrom16(0xEBEBF2);
 //        self.backgroundColor = [UIColor purpleColor];
+        
+        imagesMArray = [NSMutableArray new];
         //用户信息加载
         [self initUserView];
         
@@ -174,7 +176,7 @@
     //帖子互动视图
     self.topicInteractionView.frame = self.topicFrame.topicInteractionViewF;
     self.topicInteractionView.topicInteractionFrame = self.topicFrame.topicInteractionFrame;
-    
+    NSLog(@"bbbbb=%@", NSStringFromCGRect(self.topicFrame.topicInteractionViewF));
     //分割线
     self.levelab.frame = self.topicFrame.levelabF;
 }
@@ -222,6 +224,8 @@
             
         }];
         
+        [self downloadBgImg:imgUrl];
+        
         UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
         btn.targetObj = imageView;
         objc_setAssociatedObject(btn, "imgUrl", imgUrl, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -230,10 +234,10 @@
         
         if(index == Number_Two) {
             index = Number_Zero;
-            y += wh;
+            y += wh + Number_Five;
+        } else {
+            index++;
         }
-        
-        index++;
     }
 }
 
@@ -266,9 +270,22 @@
 }
 
 - (void)showTopicImgClicked:(UIButton *)sender{
-    UIImageView * imageView = (UIImageView *)sender.targetObj;
-    NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
-    [UUImageAvatarBrowser showImage:imageView url:imgUrl];
+//    UIImageView * imageView = (UIImageView *)sender.targetObj;
+//    NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
+//    [UUImageAvatarBrowser showImage:imageView url:imgUrl];
+    
+    NSDictionary * dic = @{Key_ImagesArray : imagesMArray};
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BrowseImages object:self userInfo:dic];
+}
+
+- (void)downloadBgImg:(NSString *)imgUrl {
+    NSArray * array = [imgUrl componentsSeparatedByString:@"@"];
+    if(array && [array count]>Number_Zero) {
+        [SDWebImageManager.sharedManager downloadImageWithURL:[array objectAtIndex:Number_Zero] options:SDWebImageLowPriority progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            if(image)
+                [imagesMArray addObject:image];
+        }];
+    }
 }
 
 
