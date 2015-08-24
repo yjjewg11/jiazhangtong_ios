@@ -20,7 +20,6 @@
     
     UIScrollView * timetableItemScrollView;
     UIView       * scrollectContentView;
-    NSInteger nowwWeekday; //今天是周几  如果是6 7则设置1
 }
 
 @property (strong, nonatomic) NSMutableArray   * tableDataSource; //<TimetableItemVO>

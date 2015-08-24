@@ -196,7 +196,7 @@
 //图片上传
 - (void)uploadImg:(UIImage *)img withName:(NSString *)imgName type:(NSInteger)imgType success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
-    NSData * imageData = UIImageJPEGRepresentation(img, 0.4);
+    NSData * imageData = UIImageJPEGRepresentation(img, 1.0);
     
     NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
     [parameters setObject:imgName forKey:@"file"];
@@ -223,11 +223,10 @@
 }
 
 //提交推送token
-- (void)submitPushTokenWithStatus:(NSString *)status success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+- (void)submitPushToken:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     NSDictionary * dic = @{@"device_id" : _pushToken,
-                           @"device_type": @"ios",
-                           @"status":status};
+                           @"device_type": @"ios"};
     
     [self getServerJson:[KGHttpUrl getPushTokenUrl] params:dic success:^(KGBaseDomain *baseDomain) {
         success(baseDomain.ResMsg.message);
@@ -348,10 +347,6 @@
                                               [self setupCookie];
 //                                              [self userCookie:cookies];
                                               
-                                              //默热门选中第一个机构
-                                              if([_loginRespDomain.group_list count] > Number_Zero) {
-                                                  _groupDomain = [_loginRespDomain.group_list objectAtIndex:Number_Zero];
-                                              }
                                               
                                               //获取首页动态菜单
                                               [self getDynamicMenu:^(NSArray *menuArray) {
@@ -430,30 +425,6 @@
                                              NSArray * arrayResp = [CardInfoDomain objectArrayWithKeyValuesArray:baseDomain.data];
                                              
                                              success(arrayResp);
-                                         } else {
-                                             faild(baseDomain.ResMsg.message);
-                                         }
-                                     }
-                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
-                                         [self requestErrorCode:error faild:faild];
-                                     }];
-}
-
-//获取用户信息
-- (void)getUserInfo:(NSString *)useruuid success:(void (^)(KGUser * userInfo))success faild:(void (^)(NSString * errorMsg))faild {
-    
-    NSString * url = [KGHttpUrl getUserInfoUrl:useruuid];
-    [[AFAppDotNetAPIClient sharedClient] GET:url
-                                  parameters:nil
-                                     success:^(NSURLSessionDataTask* task, id responseObject) {
-                                         
-                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
-                                         
-                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
-                                             
-                                             KGUser * user = [KGUser objectWithKeyValues:baseDomain.data];
-                                             
-                                             success(user);
                                          } else {
                                              faild(baseDomain.ResMsg.message);
                                          }
@@ -830,9 +801,6 @@
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              AnnouncementDomain * announcement = [AnnouncementDomain objectWithKeyValues:baseDomain.data];
-                                             announcement.share_url = [responseObject objectForKey:@"share_url"];
-                                             announcement.isFavor = [[responseObject objectForKey:@"isFavor"] boolValue];
-                                             announcement.count = [[responseObject objectForKey:@"count"] integerValue];
                                              
                                              success(announcement);
                                          } else {
@@ -902,11 +870,11 @@
 #pragma 食谱 begin
 
 //食谱列表
-- (void)getRecipesList:(NSString *)groupuuid beginDate:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild {
+- (void)getRecipesList:(NSString *)beginDate endDate:(NSString *)endDate success:(void (^)(NSArray * recipesArray))success faild:(void (^)(NSString * errorMsg))faild {
     
     NSDictionary * dic = @{@"begDateStr" : beginDate,
                            @"endDateStr" : endDate ? endDate : beginDate,
-                           @"groupuuid"  : groupuuid};
+                           @"groupuuid"  : _groupDomain.uuid};
     
 //    NSDictionary * dic = @{@"begDateStr" : @"2015-07-01",
 //                           @"endDateStr" : @"2015-08-01",

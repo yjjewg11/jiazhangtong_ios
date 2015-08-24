@@ -12,6 +12,5 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *flagTitleLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *mySwitch;
-@property (strong, nonatomic) NSDictionary * dic;
 
 @end

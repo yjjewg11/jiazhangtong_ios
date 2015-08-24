@@ -11,8 +11,7 @@
 
 @implementation UUMessage
 - (void)setWithDict:(NSDictionary *)dict{
-    self.writeVO = dict[@"requestData"];
-    self.isNewMsg = dict[@"isNewMsg"];
+    
     self.strIcon = dict[@"strIcon"];
     self.strName = dict[@"strName"];
     self.strId = dict[@"strId"];

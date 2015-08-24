@@ -153,11 +153,13 @@
     NSString * emojiStr = [NSString stringWithFormat:@"[%@]", domain.datavalue];
     if (self.inputTextField) {
         NSMutableString *faceString = [[NSMutableString alloc]initWithString:self.inputTextField.text];
+        [self packageChatHTMLInfo:domain text:faceString];
         [faceString appendString:emojiStr];
         self.inputTextField.text = faceString;
     }
     if (self.inputTextView) {
         NSMutableString *faceString = [[NSMutableString alloc]initWithString:self.inputTextView.text];
+        [self packageChatHTMLInfo:domain text:faceString];
         [faceString appendString:emojiStr];
         self.inputTextView.text = faceString;
     }
@@ -167,6 +169,10 @@
     }
 }
 
+- (void)packageChatHTMLInfo:(EmojiDomain *)domain text:(NSString *)text{
+    NSString * imgHTML = [NSString stringWithFormat:@"<img alt=\"%@\" src=\"%@\" />", domain.datavalue, domain.descriptionUrl];
+    [[KGEmojiManage sharedManage].chatHTMLInfo appendFormat:@"%@%@", text, imgHTML];
+}
 
 - (void)backFace{
     NSString *inputString;
@@ -182,8 +188,7 @@
             if ([inputString rangeOfString:@"["].location == NSNotFound){
                 string = [inputString substringToIndex:stringLength - 1];
             } else {
-                NSRange rang = [inputString rangeOfString:@"[" options:NSBackwardsSearch];
-                string = [inputString substringToIndex:rang.location];
+                string = [inputString substringToIndex:[inputString rangeOfString:@"[" options:NSBackwardsSearch].location];
             }
         } else {
             string = [inputString substringToIndex:stringLength - 1];

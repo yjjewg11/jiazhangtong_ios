@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-#import "PromptView.h"
 
 @interface StudentSignRecordViewController : BaseViewController
 

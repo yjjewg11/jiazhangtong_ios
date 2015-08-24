@@ -46,7 +46,6 @@
 @property (strong, nonatomic) NSString * note;
 @property (strong, nonatomic) NSString * ma_work;
 @property (strong, nonatomic) NSString * ba_work;
-@property (strong, nonatomic) NSString * idcard;
 
 @property (strong, nonatomic) NSString * smscode;
 

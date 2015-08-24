@@ -10,6 +10,4 @@
 
 @interface RecipesListViewController : BaseTopicInteractViewController
 
-@property (strong, nonatomic) NSString * groupuuid;
-
 @end

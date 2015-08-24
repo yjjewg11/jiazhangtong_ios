@@ -18,9 +18,6 @@
 #import "AssetHelper.h"
 
 #define contentTextViewDefText   @"说点什么吧..."
-#define AddBtnWidth (70) //图片按钮的宽度
-#define BtnInterval (5) //图片按钮之间的间隙
-#define AddImageName @"tianjiatupian"
 
 @interface PostTopicViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UITextViewDelegate> {
     
@@ -43,15 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    _photoScrollView.contentSize = CGSizeMake(AddBtnWidth, _photoScrollView.height);
-    _addPhotoBtnMArray = [[NSMutableArray alloc] init];
-    _photoContentView = [[UIView alloc] init];
-    _photoContentView.height = _photoScrollView.height;
-    _photoContentView.width = AddBtnWidth;
-    [_photoScrollView addSubview:_photoContentView];
-    [self resetScrollViewPhoto];
-    
     self.weakTextView = contentTextView;
     self.keyboardTopType = OnlyEmojiMode;
     
@@ -69,66 +57,6 @@
     [contentTextView setContentOffset:CGPointZero];
     
     [self loadClassNameListView];
-}
-
-#pragma mark - 重置显示横向滚动图片
-- (void)resetScrollViewPhoto{
-
-    for (UIButton * button in _addPhotoBtnMArray) {
-        [button removeFromSuperview];
-    }
-    [_addPhotoBtnMArray removeAllObjects];
-    
-    for (int i = 0; i < imagesMArray.count; ++ i) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.size = CGSizeMake(AddBtnWidth, AddBtnWidth);
-        button.origin = CGPointMake(i*(AddBtnWidth+BtnInterval), 0);
-        [button setImage:imagesMArray[i] forState:UIControlStateNormal];
-        [button setImage:imagesMArray[i] forState:UIControlStateHighlighted];
-        [button setImage:imagesMArray[i] forState:UIControlStateSelected];
-        [button addTarget:self action:@selector(photoHandle:) forControlEvents:UIControlEventTouchUpInside];
-        [_photoContentView addSubview:button];
-        [_addPhotoBtnMArray addObject:button];
-    }
-    
-    if (imagesMArray.count < 9) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.size = CGSizeMake(AddBtnWidth, AddBtnWidth);
-        button.origin = CGPointMake(_addPhotoBtnMArray.count*(AddBtnWidth+BtnInterval), 0);
-        [button setImage:[UIImage imageNamed:AddImageName] forState:UIControlStateNormal];
-        [button setImage:[UIImage imageNamed:AddImageName] forState:UIControlStateHighlighted];
-        [button setImage:[UIImage imageNamed:AddImageName] forState:UIControlStateSelected];
-        [button addTarget:self action:@selector(photoHandle:) forControlEvents:UIControlEventTouchUpInside];
-        [_photoContentView addSubview:button];
-        [_addPhotoBtnMArray addObject:button];
-    }
-    
-    _photoContentView.frame = CGRectMake(0, 0, _addPhotoBtnMArray.count*(AddBtnWidth+BtnInterval), _photoScrollView.height);
-    _photoScrollView.contentSize = CGSizeMake(_photoContentView.width, _photoScrollView.height);
-}
-
-#pragma mark - 图片点击
-- (void)photoHandle:(UIButton*)sender{
-    
-    if (imagesMArray.count < 9 && sender == [_addPhotoBtnMArray lastObject]) {
-        DoImagePickerController *cont = [[DoImagePickerController alloc] init];
-        cont.delegate = self;
-        cont.nMaxCount = 9 - imagesMArray.count;
-        cont.nResultType = DO_PICKER_RESULT_ASSET;
-        cont.nColumnCount = 4;
-        [self presentViewController:cont animated:YES completion:nil];
-    }else{
-        PhotoVC * vc = [[PhotoVC alloc] init];
-        vc.imgMArray = imagesMArray;
-        vc.isShowDel = YES;
-        __weak typeof(self) weakSelf = self;
-        [vc setMyBlock:^(NSArray * array){
-            imagesMArray = [NSMutableArray arrayWithArray:array];
-            [weakSelf resetScrollViewPhoto];
-        }];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -296,6 +224,29 @@
     }];
 }
 
+
+- (IBAction)addImgBtnClicked:(UIButton *)sender {
+    
+    selAddImgBtn = sender;
+    
+    DoImagePickerController *cont = [[DoImagePickerController alloc] init];
+    cont.delegate = self;
+//    cont.nResultType = DO_PICKER_RESULT_UIIMAGE;
+    cont.nMaxCount = 3;
+    cont.nResultType = DO_PICKER_RESULT_ASSET;  // if you want to get lots photos, you'd better use this mode for memory!!!
+    cont.nColumnCount = 9;
+    [self presentViewController:cont animated:YES completion:nil];
+    
+//    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+//                                  initWithTitle:nil
+//                                  delegate:self
+//                                  cancelButtonTitle:@"取消"
+//                                  destructiveButtonTitle:nil
+//                                  otherButtonTitles:@"从相册选取", @"拍照",nil];
+//    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+//    [actionSheet showInView:self.contentView];
+}
+
 #pragma TextViewDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -437,18 +388,16 @@
     if(aSelected && [aSelected count]>Number_Zero) {
         [self initImgMArray];
         for(NSInteger i=Number_Zero; i<[aSelected count]; i++) {
-            UIImage * image       = [ASSETHELPER getImageFromAsset:aSelected[i] type:ASSET_PHOTO_SCREEN_SIZE];
-            [imagesMArray addObject:image];
+            UIImage * image       = [ASSETHELPER getImageFromAsset:aSelected[0] type:ASSET_PHOTO_SCREEN_SIZE];
+            [imgMArray addObject:image];
         }
     }
-    [self resetScrollViewPhoto];
     
     [ASSETHELPER clearData];
 }
 
 - (void)simpleShowImageWithArray:(NSArray *)imgArray {
-    [imagesMArray addObjectsFromArray:imgArray];
-    [self resetScrollViewPhoto];
+    
 }
 
 /**

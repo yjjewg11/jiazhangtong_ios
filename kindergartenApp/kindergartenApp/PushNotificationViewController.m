@@ -8,8 +8,6 @@
 
 #import "PushNotificationViewController.h"
 
-#define NewMessageKey @"newMessage"
-
 @interface PushNotificationViewController () <UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -26,7 +24,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"PushNotificationTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"PushNotificationTableViewCell"];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _dataArray = @[@"新消息"];
+    _dataArray = @[@"新消息",@"声音",@"震动"];
 }
 
 #pragma mark - UITableViewDelegate,UITableViewDataSource
@@ -35,14 +33,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     PushNotificationTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"PushNotificationTableViewCell"];
     cell.flagTitleLabel.text = _dataArray[indexPath.row];
-    
-    cell.mySwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:NewMessageKey];
     return cell;
 }
 

@@ -10,7 +10,6 @@
 #import "ReplyDomain.h"
 #import "RecipesDomain.h"
 #import "TopicInteractionView.h"
-#import "PromptView.h"
 
 @interface RecipesInfoView : UIView <UITableViewDataSource, UITableViewDelegate> {
     

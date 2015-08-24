@@ -124,23 +124,20 @@
 
 //加载课程表数据
 - (void)loadRecipesInfoByData {
-    if([classuuidMArray count] > Number_Zero) {
-        [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray) {
-            
-            [[KGHUD sharedHud] hide:self.contentView];
-            
-            if(teachPlanArray && [teachPlanArray count] > Number_Zero) {
-                [allTimetableMDic setObject:teachPlanArray forKey:[classuuidMArray objectAtIndex:reqIndex]];
-            }
-            
-            [self responseHandler];
-        } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-            [self responseHandler];
-        }];
-    } else {
+    
+    [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray) {
+        
         [[KGHUD sharedHud] hide:self.contentView];
-    }
+        
+        if(teachPlanArray && [teachPlanArray count] > Number_Zero) {
+            [allTimetableMDic setObject:teachPlanArray forKey:[classuuidMArray objectAtIndex:reqIndex]];
+        }
+        
+        [self responseHandler];
+    } faild:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        [self responseHandler];
+    }];
 }
 
 

@@ -74,7 +74,6 @@
     [_replyBtn setBackgroundImage:@"pinglun" selImg:@"pinglun"];
     _replyBtn.tag = Number_Eleven;
     [_replyBtn addTarget:self action:@selector(replyBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    _replyBtn.backgroundColor = [UIColor brownColor];
     [_funView addSubview:_replyBtn];
 }
 
@@ -110,6 +109,7 @@
     
     _replyView = [MLEmojiLabel new];
     _replyView.backgroundColor = [UIColor clearColor];
+//    _replyView.backgroundColor = [UIColor brownColor];
     _replyView.numberOfLines = Number_Zero;
     _replyView.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
     _replyView.textColor = [UIColor blackColor];
@@ -175,9 +175,9 @@
     }
     
     /** 点赞按钮 */
-    if(_dianzan) {
-        _dianzanBtn.selected = !_dianzan.canDianzan;
-    } 
+    if(_dianzan && !_dianzan.canDianzan) {
+        _dianzanBtn.selected = YES;
+    }
     _dianzanBtn.frame = _topicInteractionFrame.dianzanBtnF;
     
     /** 回复按钮 */
@@ -235,14 +235,13 @@
         for(ReplyDomain * reply in _replyPage.data) {
             if(count < Number_Five) {
                 [replyStr appendFormat:@"%@:%@\n", reply.create_user, reply.content ? reply.content : @""];
-                NSString * createUser = [NSString stringWithFormat:@"%@:", reply.create_user];
                 
-//                NSRange  range = [replyStr rangeOfString:[NSString stringWithFormat:@"%@:", reply.create_user]];
-//                KGRange * tempRange = [KGRange new];
-//                tempRange.location = range.location;
-//                tempRange.length   = range.length;
-//                [attributedStrArray addObject:tempRange];
-                [attributedStrArray addObjectsFromArray:[self getSubStringShowNumsInStringBy:replyStr andSubstring:createUser]];
+                NSRange  range = [replyStr rangeOfString:[NSString stringWithFormat:@"%@:", reply.create_user]];
+                KGRange * tempRange = [KGRange new];
+                tempRange.location = range.location;
+                tempRange.length   = range.length;
+                
+                [attributedStrArray addObject:tempRange];
             }
             count++;
         }
@@ -354,10 +353,8 @@
             break;
         }
         
-        if(![[nameArray objectAtIndex:i] isEqualToString:name] && ![[nameArray objectAtIndex:i] isEqualToString:String_DefValue_Empty]) {
-            if(![tempNames isEqualToString:String_DefValue_Empty])
-                [tempNames appendString:@","];
-            [tempNames appendFormat:@"%@", [nameArray objectAtIndex:i]];
+        if(![[nameArray objectAtIndex:i] isEqualToString:name]) {
+            [tempNames appendString:[nameArray objectAtIndex:i]];
         }
     }
     
@@ -366,38 +363,6 @@
     _dianzan.names = tempNames;
     
     [self resetDZText];
-}
-
-#pragma mark - 获取字符串中所有指定字符出现的range
-- (NSMutableArray *)getSubStringShowNumsInStringBy:(NSString*)string andSubstring:(NSString*)Substring
-{
-    int count = Number_Zero;
-    NSMutableArray * array = [[NSMutableArray alloc] init];
-    NSRange range = [string rangeOfString:Substring];
-    if(range.length > Number_Zero)
-    {
-        count++;
-        [array addObject:[self packageRange:range]];
-        while (range.length > Number_Zero) {
-            NSInteger startIndex = range.location+range.length;
-            NSInteger endIndex = string.length -startIndex;
-            string= [string substringWithRange:NSMakeRange(startIndex, endIndex)];
-            range = [string rangeOfString:Substring];
-            if(range.length > Number_Zero)
-            {
-//                [array addObject:[NSValue valueWithRange:range]];
-                [array addObject:[self packageRange:range]];
-            }
-        }
-    }
-    return array;
-}
-
-- (KGRange *)packageRange:(NSRange)range {
-    KGRange * tempRange = [KGRange new];
-    tempRange.location = range.location;
-    tempRange.length   = range.length;
-    return tempRange;
 }
 
 

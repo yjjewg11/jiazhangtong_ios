@@ -34,9 +34,6 @@
 //绑定的卡号列表
 + (NSString *)getBuildCardUrl:(NSString *)uuid;
 
-//获取用户信息
-+ (NSString *)getUserInfoUrl:(NSString *)uuid;
-
 
 //phone code
 + (NSString *)getPhoneCodeUrl;

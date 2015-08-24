@@ -42,12 +42,6 @@
     meTableView.dataSource = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    studentMArray = [KGHttpService sharedService].loginRespDomain.list;
-    [meTableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -139,6 +133,7 @@
 - (void)funCellSelected:(NSIndexPath *)indexPath {
     NSInteger index = indexPath.section - [studentMArray count];
     
+//    BaseViewController * vc = nil;
     switch (index) {
         case Number_Zero:{
             MyCollectionViewController * vc = [[MyCollectionViewController alloc] init];

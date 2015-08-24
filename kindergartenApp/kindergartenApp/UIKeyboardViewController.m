@@ -11,7 +11,6 @@
 #import "AppDelegate.h"
 #import "KGTextField.h"
 #import "KGTextView.h"
-#import "KGEmojiManage.h"
 
 //static CGFloat self.kboardHeight = 254.0f;
 //static CGFloat spacerY = 10.0f;
@@ -81,6 +80,8 @@ static CGFloat viewFrameY = 10;
 
 //注销监听事件
 - (void)removeKeyBoardNotification {
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+//	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -222,7 +223,11 @@ static CGFloat viewFrameY = 10;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//	[textField resignFirstResponder];
     [self firstResponderMove:2];
+//    if([allInputFields count] == Number_One) {
+//        [self textFieldDidEndEditing:textField];
+//    }
 	return YES;
 }
 
@@ -246,12 +251,22 @@ static CGFloat viewFrameY = 10;
 #pragma mark - UITextView delegate methods
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    NSString * inputString = textView.text;
-    NSString * tempStr = [inputString substringFromIndex:range.location];
-    if ([@"]" isEqualToString:tempStr]) {
-        NSString * ss = [[KGEmojiManage sharedManage] keyboardBack:textView.text];
-        textView.text = [NSString stringWithFormat:@"%@]", ss];
+    if (range.location >= Number_Hundred_Forty)
+    {
+        NSString *lang = [[UITextInputMode currentInputMode] primaryLanguage];
+        if ( [lang isEqualToString:@"zh-Hans"]&&[self pureLetters:text])
+            return YES;
+        else
+            return NO;
     }
+    else{
+        return YES;
+    }
+    
+	if ([text isEqualToString:@"\n"]) {
+        [self firstResponderMove:2];
+		return NO;
+	}
 	return YES;
 }
 
