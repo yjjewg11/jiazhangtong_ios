@@ -230,29 +230,25 @@
         self.replyView.text = String_DefValue_Empty;
         
         NSMutableString  * replyStr = [[NSMutableString alloc] init];
-        NSMutableArray   * attributedStrArray = [[NSMutableArray alloc] init];
+        NSMutableArray   * replyDataMArray = [[NSMutableArray alloc] init];
         NSInteger count = Number_Zero;
         for(ReplyDomain * reply in _replyPage.data) {
             if(count < Number_Five) {
                 [replyStr appendFormat:@"%@:%@\n", reply.create_user, reply.content ? reply.content : @""];
-                NSString * createUser = [NSString stringWithFormat:@"%@:", reply.create_user];
-                
-//                NSRange  range = [replyStr rangeOfString:[NSString stringWithFormat:@"%@:", reply.create_user]];
-//                KGRange * tempRange = [KGRange new];
-//                tempRange.location = range.location;
-//                tempRange.length   = range.length;
-//                [attributedStrArray addObject:tempRange];
-                [attributedStrArray addObjectsFromArray:[self getSubStringShowNumsInStringBy:replyStr andSubstring:createUser]];
+                NSString * createUser = [NSString stringWithFormat:@"%@:%@", reply.create_user, reply.content ? reply.content : @""];
+                [replyDataMArray addObject:createUser];
             }
             count++;
         }
         
+        NSMutableArray * attributedStrArray = [self replySendNameRangeArray:replyDataMArray];
+        
         NSMutableAttributedString * attString = [[NSMutableAttributedString alloc] initWithString:replyStr];
         [self.replyView setText:attString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
             
-            for(KGRange * tempRange in attributedStrArray) {
-                [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:KGColorFrom16(0xff4966) range:NSMakeRange(tempRange.location, tempRange.length)];
-            }
+//            for(KGRange * tempRange in attributedStrArray) {
+//                [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:KGColorFrom16(0xff4966) range:NSMakeRange(tempRange.location, tempRange.length)];
+//            }
             
             return mutableAttributedString;
         }];
@@ -341,11 +337,11 @@
     NSRange range = [_dianzan.names rangeOfString:name];//判断字符串是否包含
     if (range.length > Number_Zero) {
         //包含
-        [self reserDZListText:name];
+        [self resetDZListText:name];
     }
 }
 
-- (void)reserDZListText:(NSString *)name {
+- (void)resetDZListText:(NSString *)name {
     NSArray * nameArray = [_dianzan.names componentsSeparatedByString:String_DefValue_SpliteStr];
     NSMutableString * tempNames = [[NSMutableString alloc] init];
     
@@ -369,28 +365,19 @@
 }
 
 #pragma mark - 获取字符串中所有指定字符出现的range
-- (NSMutableArray *)getSubStringShowNumsInStringBy:(NSString*)string andSubstring:(NSString*)Substring
-{
-    int count = Number_Zero;
-    NSMutableArray * array = [[NSMutableArray alloc] init];
-    NSRange range = [string rangeOfString:Substring];
-    if(range.length > Number_Zero)
-    {
-        count++;
-        [array addObject:[self packageRange:range]];
-        while (range.length > Number_Zero) {
-            NSInteger startIndex = range.location+range.length;
-            NSInteger endIndex = string.length -startIndex;
-            string= [string substringWithRange:NSMakeRange(startIndex, endIndex)];
-            range = [string rangeOfString:Substring];
-            if(range.length > Number_Zero)
-            {
-//                [array addObject:[NSValue valueWithRange:range]];
-                [array addObject:[self packageRange:range]];
-            }
-        }
+
+- (NSMutableArray *)replySendNameRangeArray:(NSMutableArray *)sendMArray {
+    NSMutableArray * replySendNames = [NSMutableArray new];
+    NSInteger offSet = 0;
+    for(NSString * str in sendMArray) {
+        NSRange range = [str rangeOfString:@":"];
+        
+        NSRange tempRange = NSMakeRange(offSet, offSet + range.location + range.length);
+        [replySendNames addObject:[self packageRange:tempRange]];
+        offSet += str.length;
     }
-    return array;
+    
+    return replySendNames;
 }
 
 - (KGRange *)packageRange:(NSRange)range {

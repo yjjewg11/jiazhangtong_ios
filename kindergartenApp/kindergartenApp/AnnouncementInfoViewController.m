@@ -172,6 +172,7 @@
     }
     
     [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
+    replyPageDomain.totalCount++;
     
     [self loadTopicInteractionView];
 }

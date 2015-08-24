@@ -34,6 +34,20 @@
     [self initReFreshView];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (_onceFlag == 0) {
+        _onceFlag = -1;
+    }else{
+        [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:0.5];
+    }
+}
+
+//延迟刷新
+- (void)lazyRefresh{
+    [reFreshView beginRefreshing];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

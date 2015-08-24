@@ -16,18 +16,17 @@
     
     UITableView    * recipesTableView;
     NSMutableArray * recipesDataSourceMArray;
-    TopicInteractionView * topicView;
     UITableViewCell * topicViewCell;
 }
 
 @property (strong, nonatomic) NSMutableArray * tableDataSource; //根据食谱对象重新封装
-@property (strong, nonatomic) RecipesDomain  * recipesDomain;
+@property (copy, nonatomic) NSMutableArray * allRecipesArray;
 
 //加载食谱数据
-- (void)loadRecipesData:(RecipesDomain *)recipes;
+- (void)loadRecipesData:(NSMutableArray *)recipesArray;
 
 //重置回复内容
-- (void)resetTopicReplyContent:(ReplyDomain *)domain;
+- (void)resetTopicReplyContent:(ReplyDomain *)domain topicInteraction:(TopicInteractionDomain *)topicInteractionDomain;
 
 
 @end

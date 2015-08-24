@@ -10,4 +10,6 @@
 
 @interface GiftwareArticlesViewController : BaseViewController
 
+@property (assign, nonatomic) NSInteger onceFlag;//第一次进入标识
+
 @end

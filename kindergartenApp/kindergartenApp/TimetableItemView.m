@@ -251,6 +251,7 @@
         replyPageDomain = [[ReplyPageDomain alloc] init];
     }
     [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
+    replyPageDomain.totalCount++;
     
     //2.重置对应数据源刷新table
     [self resetPackageItemViewData:topicInteractionDomain.cellIndex week:topicInteractionDomain.weekday];

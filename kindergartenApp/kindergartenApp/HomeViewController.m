@@ -69,9 +69,11 @@
     [super viewDidLoad];
     scrollView.contentSize = CGSizeMake(self.view.width, funiView.y + funiView.height + Number_Ten);
 //    [self loadNavTitle];
-    [self loadPhotoView];
+    [self loadBaiduADView];
     [self autoLogin];
+
 }
+
 
 - (void)loadNavTitle {
     titleBtn = [[ItemTitleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
@@ -185,13 +187,22 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)loadPhotoView {
+- (void)loadBaiduADView {
     
     sharedAdView = [[BaiduMobAdView alloc] init];
     sharedAdView.AdType = BaiduMobAdViewTypeBanner;
-    sharedAdView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, photosView.height);
+//    sharedAdView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, photosView.height);
     sharedAdView.delegate = self;
     [photosView addSubview:sharedAdView];
+    
+    [sharedAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@(0));
+        make.left.equalTo(@(0));
+        make.right.equalTo(@(0));
+        make.bottom.equalTo(@(0));
+        make.width.equalTo(@(APPWINDOWWIDTH));
+        make.height.equalTo(@(photosView.height));
+    }];
     
     [sharedAdView start];
 }
@@ -329,6 +340,7 @@
     switch (sender.tag) {
         case 10:
             baseVC = [[InteractViewController alloc] init];
+//            [self showChildView:sharedAdView];
             break;
         case 11:
             baseVC = [[IntroductionViewController alloc] init];
@@ -344,7 +356,6 @@
             break;
         case 15:
             baseVC = [[RecipesListViewController alloc] init];
-            ((RecipesListViewController *)baseVC).groupuuid = [KGHttpService sharedService].groupDomain.uuid;
             break;
         case 16:
             baseVC = [[GiftwareArticlesViewController alloc] init];

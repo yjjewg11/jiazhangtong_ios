@@ -45,4 +45,7 @@
 //输入参数是日期字符串，输出结果是星期几的数字。
 + (NSInteger)weekdayStringFromDate:(NSString *)inputDateStr;
 
+//输入参数是日期字符串，输出结果是星期几。
++ (NSString *)weekdayFromDate:(NSString *)inputDateStr;
+
 @end

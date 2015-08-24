@@ -187,6 +187,8 @@
     if(remoteNotification){
         notification = (NSDictionary *)remoteNotification;
     }
+    __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)self.window.rootViewController;
+    tabVC.selectedIndex = 2;
 //    NSDictionary * dic = [notification objectForKey:@"aps"];
     //关闭友盟自带的弹出框
     [UMessage setAutoAlert:NO];
@@ -231,6 +233,7 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    NSLog(@"%@",url);
     BOOL judge = [UMSocialSnsService handleOpenURL:url];
     
     return  judge;

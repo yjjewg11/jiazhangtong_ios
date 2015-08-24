@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RecipesDomain.h"
+#import "RecipesItemVO.h"
 
 @interface RecipesStudentInfoTableViewCell : UITableViewCell {
     
     IBOutlet UIImageView * headImageView;
     IBOutlet UILabel * timeLabel;
+    IBOutlet UILabel *weekLabel;
 }
 
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
-- (void)resetCellParam:(RecipesDomain *)recipes;
+- (void)resetCellParam:(RecipesItemVO *)recipes;
 
 @end

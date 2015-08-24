@@ -109,13 +109,14 @@
 
 //重置回复内容
 - (void)resetTopicReplyContent:(ReplyDomain *)domain {
-    NSMutableArray * dataMArray = reFreshView.dataSource;
-    if(!dataMArray){
-        dataMArray = [NSMutableArray new];
-        reFreshView.dataSource = dataMArray;
-    }
-    [dataMArray insertObject:domain atIndex:Number_Zero];
-    [reFreshView.tableView reloadData];
+    [reFreshView beginRefreshing];
+//    NSMutableArray * dataMArray = reFreshView.dataSource;
+//    if(!dataMArray){
+//        dataMArray = [NSMutableArray new];
+//        reFreshView.dataSource = dataMArray;
+//    }
+//    [dataMArray insertObject:domain atIndex:Number_Zero];
+//    [reFreshView.tableView reloadData];
 }
 
 

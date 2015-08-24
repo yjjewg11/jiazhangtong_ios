@@ -41,8 +41,6 @@
     recipesTableView.delegate   = self;
     recipesTableView.dataSource = self;
     [self addSubview:recipesTableView];
-    
-    self.backgroundColor = [UIColor yellowColor];
 }
 
 
@@ -53,55 +51,107 @@
     return _tableDataSource;
 }
 
+- (NSMutableArray *)allRecipesArrsy {
+    if(!_allRecipesArray) {
+        _allRecipesArray = [[NSMutableArray alloc] init];
+    }
+    return _allRecipesArray;
+}
+
 
 //加载食谱数据
-- (void)loadRecipesData:(RecipesDomain *)recipes {
-    _recipesDomain = recipes;
+- (void)loadRecipesData:(NSMutableArray *)recipesArray {
+    self.allRecipesArray = recipesArray;
     
     [self packageTableData];
     [recipesTableView reloadData];
-    
-    if (!_recipesDomain.isReqSuccessData) {
-        PromptView * pView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] lastObject];
-        pView.size = CGSizeMake(APPWINDOWWIDTH, 80);
-        pView.origin = CGPointMake(0, 90);
-        [recipesTableView addSubview:pView];
-    }
 }
 
 - (void)packageTableData {
     [self.tableDataSource removeAllObjects];
     
-    RecipesItemVO * itemVO1 = [[RecipesItemVO alloc] initItemVO:_recipesDomain.plandate cbArray:nil];
-    [self.tableDataSource addObject:itemVO1];
-    
-    if(_recipesDomain.list_time_1 && [_recipesDomain.list_time_1 count]>Number_Zero) {
-        RecipesItemVO * itemVO2 = [[RecipesItemVO alloc] initItemVO:@"早餐" cbArray:_recipesDomain.list_time_1];
-        [self.tableDataSource addObject:itemVO2];
+    for(RecipesDomain * recipesDomain in _allRecipesArray) {
+        RecipesItemVO * itemVO1 = [[RecipesItemVO alloc] initItemVO:recipesDomain.plandate cbArray:nil];
+        itemVO1.headHeight = 15;
+        itemVO1.cellHeight = 59;
+        itemVO1.recipesItemType = RecipesItem_Base;
+        itemVO1.recipesDomain = recipesDomain;
+        [self.tableDataSource addObject:itemVO1];
+        
+        if(recipesDomain.isReqSuccessData) {
+            if(recipesDomain.list_time_1 && [recipesDomain.list_time_1 count]>Number_Zero) {
+                RecipesItemVO * itemVO2 = [[RecipesItemVO alloc] initItemVO:@"早餐" cbArray:recipesDomain.list_time_1];
+                itemVO2.headHeight = 30;
+                itemVO2.cellHeight = [self getCellHeight:[recipesDomain.list_time_1 count]];
+                itemVO2.recipesItemType = RecipesItem_Recip;
+                [self.tableDataSource addObject:itemVO2];
+            }
+            
+            if(recipesDomain.list_time_2 && [recipesDomain.list_time_2 count]>Number_Zero) {
+                RecipesItemVO * itemVO3 = [[RecipesItemVO alloc] initItemVO:@"早上加餐" cbArray:recipesDomain.list_time_2];
+                itemVO3.headHeight = 30;
+                itemVO3.cellHeight = [self getCellHeight:[recipesDomain.list_time_2 count]];
+                itemVO3.recipesItemType = RecipesItem_Recip;
+                [self.tableDataSource addObject:itemVO3];
+            }
+            
+            if(recipesDomain.list_time_3 && [recipesDomain.list_time_3 count]>Number_Zero) {
+                RecipesItemVO * itemVO4 = [[RecipesItemVO alloc] initItemVO:@"午餐" cbArray:recipesDomain.list_time_3];
+                itemVO4.headHeight = 30;
+                itemVO4.cellHeight = [self getCellHeight:[recipesDomain.list_time_3 count]];
+                itemVO4.recipesItemType = RecipesItem_Recip;
+                [self.tableDataSource addObject:itemVO4];
+            }
+            
+            if(recipesDomain.list_time_4 && [recipesDomain.list_time_4 count]>Number_Zero) {
+                RecipesItemVO * itemVO5 = [[RecipesItemVO alloc] initItemVO:@"下午加餐" cbArray:recipesDomain.list_time_4];
+                itemVO5.headHeight = 30;
+                itemVO5.cellHeight = [self getCellHeight:[recipesDomain.list_time_4 count]];
+                itemVO5.recipesItemType = RecipesItem_Recip;
+                [self.tableDataSource addObject:itemVO5];
+            }
+            
+            if(recipesDomain.list_time_5 && [recipesDomain.list_time_5 count]>Number_Zero) {
+                RecipesItemVO * itemVO6 = [[RecipesItemVO alloc] initItemVO:@"晚餐" cbArray:recipesDomain.list_time_5];
+                itemVO6.headHeight = 30;
+                itemVO6.cellHeight = [self getCellHeight:[recipesDomain.list_time_5 count]];
+                itemVO6.recipesItemType = RecipesItem_Recip;
+                [self.tableDataSource addObject:itemVO6];
+            }
+            
+            TopicInteractionView * topicView = [self loadDZReplyView:recipesDomain];
+            
+            RecipesItemVO * itemVO7 = [[RecipesItemVO alloc] initItemVO:@"营养分析" cbArray:nil];
+            itemVO7.headHeight = 30;
+            itemVO7.cellHeight = topicView.topicInteractionFrame.topicInteractHeight + 160 +  Number_Ten;
+            itemVO7.recipesItemType = RecipesItem_Desc;
+            itemVO7.dzReplyView = topicView;
+            itemVO7.recipesDomain = recipesDomain;
+            [self.tableDataSource addObject:itemVO7];
+        } else {
+            RecipesItemVO * itemVO8 = [[RecipesItemVO alloc] initItemVO:nil cbArray:nil];
+            itemVO8.headHeight = 0;
+            itemVO8.cellHeight = 80;
+            itemVO8.recipesItemType = RecipesItem_None;
+            itemVO8.dzReplyView = [self loadNoDataView];
+            [self.tableDataSource addObject:itemVO8];
+        }
+        
     }
     
-    if(_recipesDomain.list_time_2 && [_recipesDomain.list_time_2 count]>Number_Zero) {
-        RecipesItemVO * itemVO3 = [[RecipesItemVO alloc] initItemVO:@"早上加餐" cbArray:_recipesDomain.list_time_2];
-        [self.tableDataSource addObject:itemVO3];
-    }
-    
-    if(_recipesDomain.list_time_3 && [_recipesDomain.list_time_3 count]>Number_Zero) {
-        RecipesItemVO * itemVO4 = [[RecipesItemVO alloc] initItemVO:@"午餐" cbArray:_recipesDomain.list_time_3];
-        [self.tableDataSource addObject:itemVO4];
-    }
-    
-    if(_recipesDomain.list_time_4 && [_recipesDomain.list_time_4 count]>Number_Zero) {
-        RecipesItemVO * itemVO5 = [[RecipesItemVO alloc] initItemVO:@"下午加餐" cbArray:_recipesDomain.list_time_4];
-        [self.tableDataSource addObject:itemVO5];
-    }
-    
-    if(_recipesDomain.list_time_5 && [_recipesDomain.list_time_5 count]>Number_Zero) {
-        RecipesItemVO * itemVO6 = [[RecipesItemVO alloc] initItemVO:@"晚餐" cbArray:_recipesDomain.list_time_5];
-        [self.tableDataSource addObject:itemVO6];
-    }
-    
-    RecipesItemVO * itemVO7 = [[RecipesItemVO alloc] initItemVO:@"营养分析" cbArray:nil];
-    [self.tableDataSource addObject:itemVO7];
+}
+
+- (CGFloat)getCellHeight:(NSInteger)total {
+    NSInteger pageSize = Number_Three;
+    NSInteger page = (total + pageSize - Number_One) / pageSize;
+    return 70 * page;
+}
+
+- (UIView *)loadNoDataView {
+    PromptView * pView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] lastObject];
+//    pView.size = CGSizeMake(APPWINDOWWIDTH, 80);
+//    pView.origin = CGPointMake(0, 0);
+    return pView;
 }
 
 
@@ -119,18 +169,14 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if(section == Number_Zero) {
-        return 15;
-    } else {
-        return 30;
-    }
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:section];
+    return itemVO.headHeight;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if(section!=Number_Zero && _recipesDomain.isReqSuccessData) {
-        RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:section];
-        
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:section];
+    if(itemVO.recipesItemType != RecipesItem_Base) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"RecipesHeadTableViewCell" owner:nil options:nil];
         RecipesHeadTableViewCell * view = (RecipesHeadTableViewCell *)[nib objectAtIndex:Number_Zero];
         [view resetHead:itemVO.headStr];
@@ -143,21 +189,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == Number_Zero) {
-        //学生基本信息
-        return [self loadStudentInfoCell:tableView cellForRowAtIndexPath:indexPath];
-    } else if(indexPath.section == [self.tableDataSource count]-Number_One){
-        return [self loadRecipesNote:tableView];
-    } else {
-        return [self loadRecipesCell:tableView cellForRowAtIndexPath:indexPath];
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
+    switch (itemVO.recipesItemType) {
+        case RecipesItem_Base:
+            //学生基本信息
+            return [self loadStudentInfoCell:tableView cellForRowAtIndexPath:indexPath];
+            break;
+        case RecipesItem_Recip:
+            return [self loadRecipesCell:tableView cellForRowAtIndexPath:indexPath];
+            break;
+        case RecipesItem_Desc:
+            return [self loadRecipesNote:tableView cellForRowAtIndexPath:indexPath];
+            break;
+        case RecipesItem_None:
+            return [self loadNoRecipesData:tableView cellForRowAtIndexPath:indexPath];
+            break;
     }
 }
 
 
 - (UITableViewCell *)loadStudentInfoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
     RecipesStudentInfoTableViewCell * cell = [RecipesStudentInfoTableViewCell cellWithTableView:tableView];
     cell.backgroundColor = KGColorFrom16(0xff4966);
-    [cell resetCellParam:_recipesDomain];
+    [cell resetCellParam:itemVO];
     return cell;
 }
 
@@ -180,17 +235,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section == Number_Zero) {
-        return 59;
-    } else if (indexPath.section == [self.tableDataSource count]-Number_One) {
-        return 380;
-    } else {
-        RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
-        NSInteger total = [itemVO.cookbookArray count];
-        NSInteger pageSize = Number_Three;
-        NSInteger page = (total + pageSize - Number_One) / pageSize;
-        return 70 * page;
-    }
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
+    NSLog(@"type:%d,h:%d", itemVO.recipesItemType, itemVO.cellHeight);
+    return itemVO.cellHeight;
 }
 
 //加载菜谱
@@ -238,7 +285,7 @@
 }
 
 //加载营养分析及帖子回复
-- (UITableViewCell *)loadRecipesNote:(UITableView *)tableView {
+- (UITableViewCell *)loadRecipesNote:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RecipesNoteCellIdentifier];
     if (cell == nil) {
@@ -247,38 +294,69 @@
     }
     cell.backgroundColor = [UIColor clearColor];
     
-    if(_recipesDomain.isReqSuccessData) {
+    
+    for(UIView * view in cell.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
+    
+    if(itemVO.recipesDomain.isReqSuccessData) {
         KGTextView * textView = [[KGTextView alloc] initWithFrame:CGRectMake(CELLPADDING, Number_Five, CELLCONTENTWIDTH, 150)];
         [textView setBorderWithWidth:Number_One color:[UIColor blackColor] radian:Number_Five];
-        textView.text = _recipesDomain.analysis;
+        textView.text = itemVO.recipesDomain.analysis;
         textView.editable = NO;
         [cell addSubview:textView];
         
-        topicViewCell = cell;
-        [self loadDZReplyView];
+        if(itemVO.dzReplyView) {
+            [cell addSubview:itemVO.dzReplyView];
+        }
     }
     
     return cell;
 }
 
-//加载点赞回复
-- (void)loadDZReplyView {
-    if(topicView) {
-        [topicView removeFromSuperview];
+//加载无数据提示cell
+- (UITableViewCell *)loadNoRecipesData:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RecipesNoteCellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecipesNoteCellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
-    topicInteractionDomain.dianzan   = _recipesDomain.dianzan;
-    topicInteractionDomain.replyPage = _recipesDomain.replyPage;
-    topicInteractionDomain.topicType = Topic_Recipes;
-    topicInteractionDomain.topicUUID = _recipesDomain.uuid;
+    cell.backgroundColor = [UIColor clearColor];
     
-    TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
-    topicFrame.topicInteractionDomain  = topicInteractionDomain;
+    for(UIView * view in cell.subviews) {
+        [view removeFromSuperview];
+    }
     
-    CGRect frame = CGRectMake(Number_Zero, 160, KGSCREEN.size.width, topicFrame.topicInteractHeight);
-    topicView = [[TopicInteractionView alloc] initWithFrame:frame];
-    [topicViewCell addSubview:topicView];
-    topicView.topicInteractionFrame = topicFrame;
+    RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
+    [cell addSubview:itemVO.dzReplyView];
+    
+    NSLog(@"ccell:%@", NSStringFromCGRect(cell.frame));
+    return cell;
+}
+
+//加载点赞回复
+- (TopicInteractionView *)loadDZReplyView:(RecipesDomain *)recipesDomain {
+    if(recipesDomain.dianzan) {
+        TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
+        topicInteractionDomain.dianzan   = recipesDomain.dianzan;
+        topicInteractionDomain.replyPage = recipesDomain.replyPage;
+        topicInteractionDomain.topicType = Topic_Recipes;
+        topicInteractionDomain.topicUUID = recipesDomain.uuid;
+        
+        TopicInteractionFrame * topicFrame = [TopicInteractionFrame new];
+        topicFrame.topicInteractionDomain  = topicInteractionDomain;
+        
+        CGRect frame = CGRectMake(Number_Zero, 160, KGSCREEN.size.width, topicFrame.topicInteractHeight);
+        TopicInteractionView * topicView = [[TopicInteractionView alloc] initWithFrame:frame];
+        [topicViewCell addSubview:topicView];
+        topicView.topicInteractionFrame = topicFrame;
+        return topicView;
+    }
+    
+    return nil;
 }
 
 - (void)showRecipesImgClicked:(UIButton *)sender{
@@ -288,16 +366,28 @@
 }
 
 //重置回复内容
-- (void)resetTopicReplyContent:(ReplyDomain *)domain {
+- (void)resetTopicReplyContent:(ReplyDomain *)domain topicInteraction:(TopicInteractionDomain *)topicInteractionDomain {
     //1.对应食谱增加回复
-    ReplyPageDomain * replyPageDomain = _recipesDomain.replyPage;
-    if(!replyPageDomain) {
-        replyPageDomain = [[ReplyPageDomain alloc] init];
+    RecipesDomain * recipesDomain = nil;
+    for(RecipesDomain * domain in _allRecipesArray) {
+        if([domain.uuid isEqualToString:topicInteractionDomain.topicUUID]) {
+            recipesDomain = domain;
+            break;
+        }
     }
-    [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
     
-    //2.重新加载点赞回复view
-    [self loadDZReplyView];
+    if(recipesDomain) {
+        ReplyPageDomain * replyPageDomain = recipesDomain.replyPage;
+        if(!replyPageDomain) {
+            replyPageDomain = [[ReplyPageDomain alloc] init];
+        }
+        [replyPageDomain.data insertObject:domain atIndex:Number_Zero];
+        replyPageDomain.totalCount++;
+        
+        //2.重新加载点赞回复view
+        [self packageTableData];
+        [recipesTableView reloadData];
+    }
 }
 
 @end

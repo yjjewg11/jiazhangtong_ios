@@ -111,7 +111,6 @@
             break;
         case Topic_Recipes:
             vc = [[RecipesListViewController alloc] init];
-            ((RecipesListViewController *)vc).groupuuid = domain.group_uuid;
             break;
         case Topic_JPKC:
             vc = [[TimetableViewController alloc] init];
