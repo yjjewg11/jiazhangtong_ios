@@ -287,17 +287,10 @@
 //加载营养分析及帖子回复
 - (UITableViewCell *)loadRecipesNote:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RecipesDescCellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecipesDescCellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecipesDescCellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     cell.backgroundColor = [UIColor clearColor];
-    
-    
-//    for(UIView * view in cell.subviews) {
-//        [view removeFromSuperview];
-//    }
     
     RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
     

@@ -113,16 +113,9 @@
 
 //加载点赞回复
 - (UITableViewCell *)loadTopicInteractView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TopicInteractionCellIdentifier];
-    if(!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TopicInteractionCellIdentifier];
-    }
+    UITableViewCell * cell  = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TopicInteractionCellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    for(UIView * view in cell.subviews) {
-        [view removeFromSuperview];
-    }
+
     if(_tableDataSource && [_tableDataSource count]>Number_Zero) {
         TimetableItemVO   * timetableItemVO = [_tableDataSource objectAtIndex:indexPath.row];
         [cell addSubview:timetableItemVO.dzReplyView];

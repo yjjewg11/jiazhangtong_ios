@@ -35,6 +35,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (announcementDomain) {
+        [[KGHUD sharedHud] show:self.view];
+        [self performSelector:@selector(lazyEx) withObject:self afterDelay:1];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
