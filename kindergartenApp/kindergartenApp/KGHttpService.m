@@ -225,15 +225,17 @@
 //提交推送token
 - (void)submitPushTokenWithStatus:(NSString *)status success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
-    NSDictionary * dic = @{@"device_id" : _pushToken,
-                           @"device_type": @"ios",
-                           @"status":status};
-    
-    [self getServerJson:[KGHttpUrl getPushTokenUrl] params:dic success:^(KGBaseDomain *baseDomain) {
-        success(baseDomain.ResMsg.message);
-    } faild:^(NSString *errorMessage) {
-        NSLog(@"errorMsg:%@", errorMessage);
-    }];
+    if(_pushToken) {
+        NSDictionary * dic = @{@"device_id" : _pushToken,
+                               @"device_type": @"ios",
+                               @"status":status};
+        
+        [self getServerJson:[KGHttpUrl getPushTokenUrl] params:dic success:^(KGBaseDomain *baseDomain) {
+            success(baseDomain.ResMsg.message);
+        } faild:^(NSString *errorMessage) {
+            NSLog(@"errorMsg:%@", errorMessage);
+        }];
+    }
 }
 
 //获取表情
