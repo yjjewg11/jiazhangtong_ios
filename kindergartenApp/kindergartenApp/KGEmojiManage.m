@@ -65,7 +65,7 @@
     
     //检查本地文件是否已存在
     NSString *fileName = [NSString stringWithFormat:@"%@/%@.png", KGEmojiPath, emojiDomain.emojiName];
-    NSLog(@"fileName:%@", fileName);
+    
     //检查附件是否存在
     if ([fileManager fileExistsAtPath:fileName]) {
         [self.emojiMDict setObject:fileName forKey:emojiDomain.emojiName];

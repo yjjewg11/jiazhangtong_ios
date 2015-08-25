@@ -236,6 +236,7 @@
 
 //发表动态
 - (void)pustTopicBtnClicked {
+    [contentTextView resignFirstResponder];
     NSString * topicText = [KGNSStringUtil trimString:contentTextView.text];
     if((!topicText || [topicText isEqualToString:String_DefValue_Empty]) && [imagesMArray count]==Number_Zero) {
         UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"内容或者图片必填其中一项。" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
@@ -249,7 +250,7 @@
 //上传图片
 - (void)loadImg {
     if([imagesMArray count] > Number_Zero) {
-        [[KGHUD sharedHud] show:self.contentView msg:@"上传图片中..."];
+        [[KGHUD sharedHud] show:self.view msg:@"上传图片中..."];
         [[KGHttpService sharedService] uploadImg:[imagesMArray objectAtIndex:count] withName:@"file" type:self.topicType success:^(NSString *msgStr) {
             
             if(![replyContent isEqualToString:String_DefValue_EmptyStr]) {
@@ -277,7 +278,7 @@
 }
 
 - (void)sendReplyInfo {
-    [[KGHUD sharedHud] changeText:self.contentView text:@"发表中..."];
+    [[KGHUD sharedHud] changeText:self.view text:@"发表中..."];
     
     TopicDomain * domain = [[TopicDomain alloc] init];
     domain.classuuid = classuuid;
@@ -285,14 +286,14 @@
     domain.imgs = replyContent;
     
     [[KGHttpService sharedService] saveClassNews:domain success:^(NSString *msgStr) {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
         
         if(_PostTopicBlock) {
             _PostTopicBlock(domain);
             [self.navigationController popViewControllerAnimated:YES];
         }
     } faild:^(NSString *errorMsg) {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
 }
 

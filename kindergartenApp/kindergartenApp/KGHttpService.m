@@ -331,8 +331,6 @@
                                           if([_loginRespDomain.ResMsg.status isEqualToString:String_Success]) {
                                               
                                               //取到服务器返回的cookies
-                                              NSString * cookies = ((NSHTTPURLResponse *)task.response).allHeaderFields[@"Set-Cookie"];
-                                              NSLog(@"response cookies:%@",cookies);
                                               [self setupCookie];
 //                                              [self userCookie:cookies];
                                               

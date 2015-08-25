@@ -140,6 +140,7 @@
     _topicFrame = topicFrame;
     TopicDomain * topic = self.topicFrame.topic;
     
+    [imagesMArray removeAllObjects];
     /** 用户信息 */
     self.userView.frame =self.topicFrame.userViewF;
     //头部图片
@@ -176,7 +177,6 @@
     //帖子互动视图
     self.topicInteractionView.frame = self.topicFrame.topicInteractionViewF;
     self.topicInteractionView.topicInteractionFrame = self.topicFrame.topicInteractionFrame;
-    NSLog(@"bbbbb=%@", NSStringFromCGRect(self.topicFrame.topicInteractionViewF));
     //分割线
     self.levelab.frame = self.topicFrame.levelabF;
 }
