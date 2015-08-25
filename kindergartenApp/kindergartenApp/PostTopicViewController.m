@@ -34,6 +34,7 @@
     NSMutableArray * dataMArray;//数据数组 用于构建班级信息
     //需要上传的图片集合
     NSMutableArray        * imgMArray;
+    UIBarButtonItem * rightBarItem;
 }
 
 @end
@@ -58,7 +59,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"发表互动";
     
-    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleDone target:self action:@selector(pustTopicBtnClicked)];
+    rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"发表" style:UIBarButtonItemStyleDone target:self action:@selector(pustTopicBtnClicked)];
     rightBarItem.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
@@ -249,6 +250,7 @@
 
 //上传图片
 - (void)loadImg {
+    rightBarItem.enabled = NO;
     if([imagesMArray count] > Number_Zero) {
         [[KGHUD sharedHud] show:self.view msg:@"上传图片中..."];
         [[KGHttpService sharedService] uploadImg:[imagesMArray objectAtIndex:count] withName:@"file" type:self.topicType success:^(NSString *msgStr) {
@@ -287,13 +289,14 @@
     
     [[KGHttpService sharedService] saveClassNews:domain success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
-        
+        rightBarItem.enabled = YES;
         if(_PostTopicBlock) {
             _PostTopicBlock(domain);
             [self.navigationController popViewControllerAnimated:YES];
         }
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        rightBarItem.enabled = YES;
     }];
 }
 
