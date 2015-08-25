@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutWeViewController">
             <connections>
+                <outlet property="versionLabel" destination="ied-Ia-h5O" id="fyQ-ZI-jFr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jiazhang_180" translatesAutoresizingMaskIntoConstraints="NO" id="xuu-pj-9wh">
-                    <rect key="frame" x="100.5" y="223" width="120" height="121"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="xuu-pj-9wh">
+                    <rect key="frame" x="100" y="223" width="120" height="121"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="121" id="Mdd-NF-5vP"/>
                         <constraint firstAttribute="width" constant="120" id="j6f-kE-8qg"/>
@@ -32,7 +33,7 @@
                                 <constraint firstAttribute="width" constant="53" id="o8c-lY-oex"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V 1.1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ied-Ia-h5O">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ied-Ia-h5O">
                             <rect key="frame" x="66" y="0.0" width="114" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="Ozs-wV-LCe"/>
@@ -90,6 +91,6 @@
     </objects>
     <resources>
         <image name="erweima" width="53" height="53"/>
-        <image name="jiazhang_180" width="90" height="90"/>
+        <image name="logo" width="116" height="109"/>
     </resources>
 </document>

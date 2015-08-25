@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -18,14 +18,14 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_def" translatesAutoresizingMaskIntoConstraints="NO" id="M8Z-yL-L38">
                         <rect key="frame" x="18" y="9" width="45" height="45"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="45" id="7xR-Nb-XjM"/>
-                            <constraint firstAttribute="width" constant="45" id="E7X-gW-V1W"/>
+                            <constraint firstAttribute="height" constant="45" id="IK0-4B-XgW"/>
+                            <constraint firstAttribute="width" constant="45" id="LLc-SQ-HKf"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agW-P1-VWh">
                         <rect key="frame" x="78" y="12" width="211" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="14" id="UJ2-Az-3vP"/>
+                            <constraint firstAttribute="height" constant="14" id="KfT-J9-lYA"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -34,7 +34,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePH-Lx-Fhb">
                         <rect key="frame" x="78" y="31" width="217" height="14"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="14" id="0xk-xx-Pvg"/>
+                            <constraint firstAttribute="height" constant="14" id="W1I-1g-0OZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,16 +42,14 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="agW-P1-VWh" secondAttribute="trailing" constant="23" id="57o-vz-cPG"/>
-                    <constraint firstItem="ePH-Lx-Fhb" firstAttribute="leading" secondItem="M8Z-yL-L38" secondAttribute="trailing" constant="15" id="9OG-5L-ve0"/>
-                    <constraint firstItem="M8Z-yL-L38" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="ER0-j3-TwO"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ePH-Lx-Fhb" secondAttribute="trailing" constant="17" id="FY1-f3-KSk"/>
-                    <constraint firstItem="agW-P1-VWh" firstAttribute="leading" secondItem="M8Z-yL-L38" secondAttribute="trailing" constant="15" id="R64-MR-bew"/>
-                    <constraint firstItem="ePH-Lx-Fhb" firstAttribute="top" secondItem="agW-P1-VWh" secondAttribute="bottom" constant="5" id="Ust-j5-d3Z"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="M8Z-yL-L38" secondAttribute="bottom" constant="-3" id="dme-YY-q9u"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ePH-Lx-Fhb" secondAttribute="bottom" constant="6" id="npU-v0-h2H"/>
-                    <constraint firstItem="M8Z-yL-L38" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="sdr-P6-ve6"/>
-                    <constraint firstItem="agW-P1-VWh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="yMZ-GC-ImW"/>
+                    <constraint firstItem="ePH-Lx-Fhb" firstAttribute="top" secondItem="agW-P1-VWh" secondAttribute="bottom" constant="5" id="OMs-aA-ues"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ePH-Lx-Fhb" secondAttribute="trailing" constant="17" id="T6p-5B-LNE"/>
+                    <constraint firstItem="agW-P1-VWh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="XmA-Pr-HiF"/>
+                    <constraint firstItem="M8Z-yL-L38" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="YLW-Eq-0PG"/>
+                    <constraint firstItem="agW-P1-VWh" firstAttribute="leading" secondItem="M8Z-yL-L38" secondAttribute="trailing" constant="15" id="ahN-Os-0iU"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="agW-P1-VWh" secondAttribute="trailing" constant="23" id="nGz-uv-Azm"/>
+                    <constraint firstItem="M8Z-yL-L38" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="uRZ-TH-ZEf"/>
+                    <constraint firstItem="ePH-Lx-Fhb" firstAttribute="leading" secondItem="M8Z-yL-L38" secondAttribute="trailing" constant="15" id="xYa-5R-c5A"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

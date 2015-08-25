@@ -24,6 +24,7 @@
 #define Key_Notification_TeacherJudge      @"teacherJudgeClicked"
 #define Key_Notification_AddressbookCellFun @"AddressbookCellFun"
 #define Key_Notification_ChatSecondSend     @"ChatSecondSend"
+#define Key_Notification_SessionTimeout     @"SessionTimeout"
 
 
 #define Key_WriteVO                        @"WriteVO"

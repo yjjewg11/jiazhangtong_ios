@@ -235,20 +235,20 @@
         for(ReplyDomain * reply in _replyPage.data) {
             if(count < Number_Five) {
                 [replyStr appendFormat:@"%@:%@\n", reply.create_user, reply.content ? reply.content : @""];
-                NSString * createUser = [NSString stringWithFormat:@"%@:%@", reply.create_user, reply.content ? reply.content : @""];
+                NSString * createUser = [NSString stringWithFormat:@"%@:%@\n", reply.create_user, reply.content ? reply.content : @""];
                 [replyDataMArray addObject:createUser];
             }
             count++;
         }
         
         NSMutableArray * attributedStrArray = [self replySendNameRangeArray:replyDataMArray];
-        
+        __block NSMutableArray *  tempRangeArray =  attributedStrArray;
         NSMutableAttributedString * attString = [[NSMutableAttributedString alloc] initWithString:replyStr];
         [self.replyView setText:attString afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
             
-//            for(KGRange * tempRange in attributedStrArray) {
-//                [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:KGColorFrom16(0xff4966) range:NSMakeRange(tempRange.location, tempRange.length)];
-//            }
+            for(KGRange * tempRange in tempRangeArray) {
+                [mutableAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:KGColorFrom16(0xff4966) range:NSMakeRange(tempRange.location, tempRange.length)];
+            }
             
             return mutableAttributedString;
         }];
@@ -372,7 +372,7 @@
     for(NSString * str in sendMArray) {
         NSRange range = [str rangeOfString:@":"];
         
-        NSRange tempRange = NSMakeRange(offSet, offSet + range.location + range.length);
+        NSRange tempRange = NSMakeRange(offSet, range.location + range.length);
         [replySendNames addObject:[self packageRange:tempRange]];
         offSet += str.length;
     }

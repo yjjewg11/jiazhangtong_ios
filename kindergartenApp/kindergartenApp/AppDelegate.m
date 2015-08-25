@@ -18,6 +18,9 @@
 #import "MobClick.h"
 #import "UMSocialQQHandler.h"
 #import "UMessage.h"
+#import "KGNavigationController.h"
+#import "LoginViewController.h"
+#import "KGHUD.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"
@@ -96,7 +99,16 @@
     //消除icon badge
     [self clearBadge];
     
+    //注册SessionTimeout通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionTimeoutNotification:) name:Key_Notification_SessionTimeout object:nil];
+    
     return YES;
+}
+
+- (void)sessionTimeoutNotification:(NSNotification *)notification {
+   self.window.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+    [self.window makeKeyAndVisible];
+    [[KGHUD sharedHud] show:self.window onlyMsg:@"登录超时,请重新登录."];
 }
 
 //清除Badge

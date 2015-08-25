@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -11,38 +11,31 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JK-ks-oDs">
-                    <rect key="frame" x="16" y="34" width="264" height="1"/>
-                    <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="P86-Qx-M36"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBP-3I-SyI">
-                    <rect key="frame" x="287" y="9" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="1GI-u8-ARx"/>
-                        <constraint firstAttribute="height" constant="25" id="2en-Kr-QJ9"/>
-                    </constraints>
-                    <state key="normal" image="fasongfly">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="postBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="7qQ-E5-48g"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBO-fl-lJS">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                     <color key="backgroundColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="0.5" id="Cch-Rs-2ra"/>
+                        <constraint firstAttribute="height" constant="1" id="jGQ-cA-TR5"/>
+                    </constraints>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
+                    <rect key="frame" x="16" y="13" width="235" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JK-ks-oDs">
+                    <rect key="frame" x="16" y="34" width="264" height="1"/>
+                    <color key="backgroundColor" red="0.60392156862745094" green="0.60392156862745094" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ujS-Xg-gpM"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-RZ-NkS">
-                    <rect key="frame" x="254" y="9" width="25" height="25"/>
+                    <rect key="frame" x="259" y="9" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="v6B-7b-ZGd"/>
-                        <constraint firstAttribute="width" constant="25" id="yBj-ux-sGh"/>
+                        <constraint firstAttribute="height" constant="25" id="7s4-Q6-W3Q"/>
+                        <constraint firstAttribute="width" constant="25" id="Ouu-WF-hXB"/>
                     </constraints>
                     <state key="normal" image="biaoqing1">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,31 +44,40 @@
                         <action selector="emojiBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ipi-js-w0z"/>
                     </connections>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
-                    <rect key="frame" x="16" y="13" width="230" height="20"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBP-3I-SyI">
+                    <rect key="frame" x="286" y="3" width="34" height="34"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="0aq-QQ-Y39"/>
+                        <constraint firstAttribute="height" constant="34" id="0kU-oo-QHa"/>
+                        <constraint firstAttribute="width" constant="34" id="ZRM-Io-Lzj"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                    <state key="normal" image="fasongfly">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="postBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="7qQ-E5-48g"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fBO-fl-lJS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0SW-Pa-kGQ"/>
-                <constraint firstItem="dEP-RZ-NkS" firstAttribute="leading" secondItem="Ihz-YZ-T1j" secondAttribute="trailing" constant="8" id="7zf-Z7-d5S"/>
-                <constraint firstAttribute="bottom" secondItem="3JK-ks-oDs" secondAttribute="bottom" constant="5" id="EGW-iC-Ir6"/>
-                <constraint firstAttribute="trailing" secondItem="IBP-3I-SyI" secondAttribute="trailing" constant="8" id="HLZ-GA-sBI"/>
-                <constraint firstItem="fBO-fl-lJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KI3-mK-VaS"/>
-                <constraint firstItem="3JK-ks-oDs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="P3O-1p-1i6"/>
-                <constraint firstAttribute="trailing" secondItem="fBO-fl-lJS" secondAttribute="trailing" id="U2q-9U-ipc"/>
-                <constraint firstItem="IBP-3I-SyI" firstAttribute="leading" secondItem="dEP-RZ-NkS" secondAttribute="trailing" constant="8" id="dDt-5x-6kR"/>
-                <constraint firstAttribute="trailing" secondItem="3JK-ks-oDs" secondAttribute="trailing" constant="40" id="i3x-0I-WPc"/>
-                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="IBP-3I-SyI" secondAttribute="bottom" id="i85-52-ly4"/>
-                <constraint firstItem="Ihz-YZ-T1j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="lYz-1I-6zl"/>
-                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="Ihz-YZ-T1j" secondAttribute="bottom" constant="1" id="luF-re-7qi"/>
-                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" id="xdv-N7-PgT"/>
+                <constraint firstItem="Ihz-YZ-T1j" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="12" id="09v-65-26c"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="Ihz-YZ-T1j" secondAttribute="bottom" constant="1" id="2yy-ei-K13"/>
+                <constraint firstAttribute="trailing" secondItem="fBO-fl-lJS" secondAttribute="trailing" id="5vl-dV-RJS"/>
+                <constraint firstAttribute="trailing" secondItem="3JK-ks-oDs" secondAttribute="trailing" constant="40" id="9oN-qd-BLi"/>
+                <constraint firstAttribute="trailing" secondItem="IBP-3I-SyI" secondAttribute="trailing" id="C2v-Cd-GQU"/>
+                <constraint firstItem="dEP-RZ-NkS" firstAttribute="leading" secondItem="Ihz-YZ-T1j" secondAttribute="trailing" constant="8" id="I6x-NE-4bI"/>
+                <constraint firstItem="fBO-fl-lJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="JHh-Mm-S78"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Jvw-3W-Bik"/>
+                <constraint firstAttribute="bottom" secondItem="IBP-3I-SyI" secondAttribute="bottom" constant="3" id="S6L-QP-apd"/>
+                <constraint firstItem="Ihz-YZ-T1j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="S9s-VO-g3v"/>
+                <constraint firstItem="fBO-fl-lJS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ecd-hM-4lM"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="2" id="fWZ-1i-Inb"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" id="gAd-ds-JN8"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="2" id="hu7-Pd-ZXF"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="leading" secondItem="dEP-RZ-NkS" secondAttribute="trailing" constant="2" id="l9W-r8-Fxm"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" id="qnB-xC-2rK"/>
+                <constraint firstAttribute="bottom" secondItem="3JK-ks-oDs" secondAttribute="bottom" constant="5" id="tlR-kP-KMY"/>
+                <constraint firstItem="dEP-RZ-NkS" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="8" id="zdP-E6-nHw"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

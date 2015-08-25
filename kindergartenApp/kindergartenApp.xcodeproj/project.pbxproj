@@ -153,6 +153,7 @@
 		4D077B2B1B80B16100FFD5CB /* OnlyEmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D077B2A1B80B16100FFD5CB /* OnlyEmojiView.xib */; };
 		4D0A91861B81088700373E5C /* EmojiAndTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0A91851B81088700373E5C /* EmojiAndTextView.m */; };
 		4D0A91881B81089000373E5C /* EmojiAndTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A91871B81089000373E5C /* EmojiAndTextView.xib */; };
+		4D1CDE9F1B8CB24700165B9A /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1CDE9E1B8CB24700165B9A /* VPImageCropperViewController.m */; };
 		4D5CE6C81B7E3F76002F1088 /* FavoritesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */; };
 		4D5CE6C91B7E3F76002F1088 /* FavoritesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */; };
 		4D5CE6F41B7E42CE002F1088 /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D5CE6CB1B7E42CE002F1088 /* UMFeedbackLocalizable.strings */; };
@@ -662,6 +663,8 @@
 		4D0A91841B81088700373E5C /* EmojiAndTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiAndTextView.h; sourceTree = "<group>"; };
 		4D0A91851B81088700373E5C /* EmojiAndTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiAndTextView.m; sourceTree = "<group>"; };
 		4D0A91871B81089000373E5C /* EmojiAndTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiAndTextView.xib; sourceTree = "<group>"; };
+		4D1CDE9D1B8CB24700165B9A /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
+		4D1CDE9E1B8CB24700165B9A /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
 		4D5CE6C51B7E3F76002F1088 /* FavoritesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListViewController.h; sourceTree = "<group>"; };
 		4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesListViewController.m; sourceTree = "<group>"; };
 		4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesListViewController.xib; sourceTree = "<group>"; };
@@ -1599,6 +1602,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				4D1CDE9C1B8CB24700165B9A /* VPImageCropper */,
 				4DF056C81B877E3D00ED3840 /* PhotoVC */,
 				F4E36D4A1B85B48F009BD909 /* DoImagePicker */,
 				4D5CE70D1B7E42E1002F1088 /* Baidu_Union_SDK */,
@@ -2116,6 +2120,15 @@
 				24E1F5661B7279C600057C44 /* MoreMenuView.m */,
 			);
 			name = MoreView;
+			sourceTree = "<group>";
+		};
+		4D1CDE9C1B8CB24700165B9A /* VPImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				4D1CDE9D1B8CB24700165B9A /* VPImageCropperViewController.h */,
+				4D1CDE9E1B8CB24700165B9A /* VPImageCropperViewController.m */,
+			);
+			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
 		4D5CE6CA1B7E42CE002F1088 /* UMengFeedback_SDK */ = {
@@ -3407,6 +3420,7 @@
 				F4C0AB8C1B1C39D4007B0E35 /* KGNSStringUtil.m in Sources */,
 				F471EDF01B70A79B00EEBA1D /* WriteVO.m in Sources */,
 				4D5CE70B1B7E42CE002F1088 /* UMRadialView.m in Sources */,
+				4D1CDE9F1B8CB24700165B9A /* VPImageCropperViewController.m in Sources */,
 				2489B6661B5AB49E00039E70 /* UIImageView+HighlightedWebCache.m in Sources */,
 				244F74921B62A4630078D30D /* PostTopicViewController.m in Sources */,
 				4D5CE7051B7E42CE002F1088 /* UMFeedbackViewController.m in Sources */,

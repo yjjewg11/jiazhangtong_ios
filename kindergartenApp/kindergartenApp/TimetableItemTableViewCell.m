@@ -43,6 +43,7 @@
 - (void)resetTimetable:(TimetableItemVO *)timetableVO {
     timetableItemVO = timetableVO;
     lastIndex = timetableItemVO.weekday + Number_Ten;
+    _selWeekday = timetableItemVO.weekday;
     
     [self loadTimetable:timetableItemVO.weekday];
     UIButton * btn = (UIButton *)[self viewWithTag:lastIndex];

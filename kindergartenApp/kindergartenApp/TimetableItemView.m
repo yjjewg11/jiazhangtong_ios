@@ -150,8 +150,8 @@
         itemVO.timetableMArray = [sourceTimetableMDict objectForKey:user.classuuid];
         [self.tableDataSource addObject:itemVO];
         index++;
-        TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:Number_One];
-        UIView * view = [self loadDZReply:domain index:index - Number_One week:Number_One];
+        TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:nowwWeekday];
+        UIView * view = [self loadDZReply:domain index:index - Number_One week:nowwWeekday];
         
         TimetableItemVO * itemVO2 = [[TimetableItemVO alloc] init];
         itemVO2.isDZReply = YES;

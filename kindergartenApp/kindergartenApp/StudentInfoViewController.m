@@ -226,7 +226,9 @@
     StudentInfoItemVO * itemVO = [tableDataSource objectAtIndex:indexPath.section];
     cell.textLabel.text = [itemVO.contentMArray objectAtIndex:indexPath.row];
     if(itemVO.isArrow) {
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     if(indexPath.section == [tableDataSource count]-Number_One) {

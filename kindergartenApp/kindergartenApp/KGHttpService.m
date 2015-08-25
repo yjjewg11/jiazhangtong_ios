@@ -58,7 +58,7 @@
 //根据组织id得到图片
 - (NSString *)getGroupImgByUUID:(NSString *)groupUUID {
     NSString * str = @"group_head_def";
-    for(GroupDomain * domain in self.groupArray) {
+    for(GroupDomain * domain in self.loginRespDomain.group_list) {
         if([domain.uuid isEqualToString:groupUUID]) {
             str = domain.img;
             break;
@@ -116,6 +116,14 @@
     return nil;
 }
 
+//sessionTimeout处理
+- (void)sessionTimeoutHandle:(KGBaseDomain *)baseDomain {
+    if([baseDomain.ResMsg.status isEqualToString:String_SessionTimeout]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_SessionTimeout object:self userInfo:nil];
+        return;
+    }
+}
+
 
 /**
  *  获取服务器数据
@@ -160,6 +168,8 @@
                 if([baseDomainResp.ResMsg.status isEqualToString:String_Success]) {
                     success(baseDomainResp);
                 } else {
+                    [self sessionTimeoutHandle:baseDomainResp];
+                    
                     NSString * errorMessage = baseDomainResp.ResMsg.message;
                     if(!errorMessage) {
                         errorMessage = String_Message_RequestError;
@@ -169,27 +179,6 @@
             });
         }
     });
-}
-
-
-
-- (void)POST:(NSString *)url param:(NSDictionary *)param success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
-    
-    AFAppDotNetAPIClient * client = [AFAppDotNetAPIClient sharedClient];
-    
-    
-    [client POST:url parameters:param success:^(NSURLSessionDataTask* task, id responseObject) {
-    
-        _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
-        if([_loginRespDomain.ResMsg.status isEqualToString:String_Success]) {
-            success(_loginRespDomain.ResMsg.message);
-        } else {
-            faild(_loginRespDomain.ResMsg.message);
-        }
-        
-    } failure:^(NSURLSessionDataTask* task, NSError* error) {
-         [self requestErrorCode:error faild:faild];
-    }];
 }
 
 
@@ -209,6 +198,7 @@
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         
         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        [self sessionTimeoutHandle:baseDomain];
         
         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
             
@@ -225,15 +215,17 @@
 //提交推送token
 - (void)submitPushTokenWithStatus:(NSString *)status success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
-    NSDictionary * dic = @{@"device_id" : _pushToken,
-                           @"device_type": @"ios",
-                           @"status":status};
-    
-    [self getServerJson:[KGHttpUrl getPushTokenUrl] params:dic success:^(KGBaseDomain *baseDomain) {
-        success(baseDomain.ResMsg.message);
-    } faild:^(NSString *errorMessage) {
-        NSLog(@"errorMsg:%@", errorMessage);
-    }];
+    if(_pushToken) {
+        NSDictionary * dic = @{@"device_id" : _pushToken,
+                               @"device_type": @"ios",
+                               @"status":status};
+        
+        [self getServerJson:[KGHttpUrl getPushTokenUrl] params:dic success:^(KGBaseDomain *baseDomain) {
+            success(baseDomain.ResMsg.message);
+        } faild:^(NSString *errorMessage) {
+            NSLog(@"errorMsg:%@", errorMessage);
+        }];
+    }
 }
 
 //获取表情
@@ -302,10 +294,6 @@
                                                  NSArray * groupArrayResp = [GroupDomain objectArrayWithKeyValuesArray:(NSDictionary *)responseObject[@"list"]];
                                                  
                                                  _groupArray = groupArrayResp;
-                                                 
-                                                 if(groupArrayResp && [groupArrayResp count]>Number_Zero) {
-                                                     _groupDomain = [groupArrayResp objectAtIndex:Number_Zero];
-                                                 }
                                                  
                                                  success(groupArrayResp);
                                              } else {
@@ -386,8 +374,8 @@
 
 - (void)logout:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
-    [self POST:[KGHttpUrl getLogoutUrl] param:nil success:^(NSString *msgStr) {
-        success(msgStr);
+    [self getServerJson:[KGHttpUrl getLogoutUrl] params:nil success:^(KGBaseDomain *baseDomain) {
+        success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMsg) {
         faild(errorMsg);
     }];
@@ -409,6 +397,7 @@
 - (void)updatePwd:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getUpdatepasswordUrl] params:user.keyValues success:^(KGBaseDomain * baseDomain) {
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMsg) {
         faild(errorMsg);
@@ -424,6 +413,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -448,7 +439,7 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
-                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              KGUser * user = [KGUser objectWithKeyValues:baseDomain.data];
@@ -501,6 +492,9 @@
 - (void)saveClassNews:(TopicDomain *)topicDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getSaveClassNewsUrl] params:topicDomain.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -516,6 +510,8 @@
                                       success:^(NSURLSessionDataTask* task, id responseObject) {
                                           
                                           KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                          
+                                          [self sessionTimeoutHandle:baseDomain];
                                           
                                           if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                               
@@ -540,6 +536,8 @@
 - (void)saveStudentInfo:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getSaveChildrenUrl] params:user.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -558,6 +556,8 @@
     NSDictionary * dic = @{@"type":[NSNumber numberWithInteger:dzype], @"newsuuid":newsuid};
     
     [self getServerJson:[KGHttpUrl getSaveDZUrl] params:dic success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -570,6 +570,8 @@
     NSDictionary * dic = @{@"newsuuid":newsuid};
     
     [self getServerJson:[KGHttpUrl getDelDZUrl] params:dic success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -587,6 +589,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          DianZanDomain * baseDomain = [DianZanDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -609,6 +613,8 @@
 - (void)saveReply:(ReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getSaveReplyUrl] params:reply.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -621,6 +627,8 @@
     NSDictionary * dic = @{@"uuid":uuid};
     
     [self getServerJson:[KGHttpUrl getDelReplyUrl] params:dic success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -638,6 +646,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -668,6 +678,8 @@
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              AnnouncementDomain * announcement = [AnnouncementDomain objectWithKeyValues:baseDomain.data];
@@ -690,6 +702,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -717,6 +731,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -761,6 +777,8 @@
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              success([self packageTeacherVO:responseObject]);
@@ -799,6 +817,8 @@
     
     [self getServerJson:[KGHttpUrl getSaveTeacherJudgeUrl] params:teacherVO.keyValues success:^(KGBaseDomain *baseDomain) {
         
+        [self sessionTimeoutHandle:baseDomain];
+        
         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
             success(baseDomain.ResMsg.message);
         } else {
@@ -827,6 +847,8 @@
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              AnnouncementDomain * announcement = [AnnouncementDomain objectWithKeyValues:baseDomain.data];
@@ -852,6 +874,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -881,6 +905,8 @@
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              NSArray * tempRecordArray = [StudentSignRecordDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
@@ -908,15 +934,13 @@
                            @"endDateStr" : endDate ? endDate : beginDate,
                            @"groupuuid"  : groupuuid};
     
-//    NSDictionary * dic = @{@"begDateStr" : @"2015-07-01",
-//                           @"endDateStr" : @"2015-08-01",
-//                           @"groupuuid"  : _groupDomain.uuid};
-    
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getRecipesListUrl]
                                   parameters:dic
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
@@ -949,6 +973,8 @@
                                          
                                          AddressBookResp * baseDomain = [AddressBookResp objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              success(baseDomain);
@@ -975,6 +1001,8 @@
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              NSArray * tempResp = [ChatInfoDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
                                              
@@ -998,6 +1026,8 @@
     
     [self getServerJson:url params:writeVO.keyValues success:^(KGBaseDomain *baseDomain) {
         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+            
+            [self sessionTimeoutHandle:baseDomain];
             
             success(baseDomain.ResMsg.message);
         } else {
@@ -1026,6 +1056,8 @@
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
                                          
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              NSArray * tempResp = [TimetableDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
@@ -1056,6 +1088,8 @@
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
                                          
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              NSArray * tempResp = [FavoritesDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
                                              
@@ -1073,6 +1107,8 @@
 - (void)saveFavorites:(FavoritesDomain *)favoritesDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getsaveFavoritesUrl] params:favoritesDomain.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
@@ -1085,6 +1121,8 @@
 
     [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getDelFavoritesUrl] parameters:dic success:^(NSURLSessionDataTask *task, id responseObject) {
         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        
+        [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         faild(error.localizedDescription);

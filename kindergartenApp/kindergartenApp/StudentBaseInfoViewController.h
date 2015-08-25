@@ -8,8 +8,11 @@
 
 #import "BaseKeyboardViewController.h"
 #import "KGUser.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "VPImageCropperViewController.h"
 
-@interface StudentBaseInfoViewController : BaseKeyboardViewController
+@interface StudentBaseInfoViewController : BaseKeyboardViewController <VPImageCropperDelegate>
 
 @property (strong, nonatomic) KGUser * studentInfo;
 @property (nonatomic, copy) void (^StudentUpdateBlock)(KGUser * stidentObj);

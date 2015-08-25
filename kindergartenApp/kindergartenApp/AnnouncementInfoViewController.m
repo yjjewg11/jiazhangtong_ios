@@ -82,7 +82,7 @@
     topicView.topicInteractionFrame = topicFrame;
     
     topicView.size = CGSizeMake(APPWINDOWWIDTH, topicFrame.topicInteractHeight);
-    topicView.origin = CGPointMake(0, CGRectGetMaxY(createTimeLabel.frame));
+    topicView.origin = CGPointMake(0, CGRectGetMaxY(createTimeLabel.frame) + Number_Ten);
     
     CGFloat contentHeight = y + topicFrame.topicInteractHeight + 64;
     CGFloat contentWidth  = KGSCREEN.size.width;

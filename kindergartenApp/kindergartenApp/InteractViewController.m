@@ -36,9 +36,12 @@
     self.keyBoardController.isShowKeyBoard = YES;
     self.keyboardTopType = EmojiAndTextMode;
     
-    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"xiangji"] style:UIBarButtonItemStyleDone target:self action:@selector(postNewTopic)];
-    [rightBarItem setTintColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = rightBarItem;
+    NSArray * classArray = [KGHttpService sharedService].loginRespDomain.class_list;
+    if(classArray && [classArray count] >Number_Zero) {
+        UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"xiangji"] style:UIBarButtonItemStyleDone target:self action:@selector(postNewTopic)];
+        [rightBarItem setTintColor:[UIColor whiteColor]];
+        self.navigationItem.rightBarButtonItem = rightBarItem;
+    }
     
     [self initReFreshView];
 }

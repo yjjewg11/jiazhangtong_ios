@@ -18,6 +18,9 @@
 #import "UIView+Extension.h"
 #import "UIColor+Extension.h"
 
+#define ORIGINAL_MAX_WIDTH 640.0f
+
+
 @interface StudentBaseInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     
     IBOutlet UIImageView * headImageView;
@@ -172,21 +175,58 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == Number_Zero) {
         //从相册
-        [self localPhoto];
+        if ([self isPhotoLibraryAvailable]) {
+            [self localPhoto];
+        }
     } else if (buttonIndex == Number_One) {
         //拍照
         [self openCamera];
     }
 }
 
+#pragma mark - 是否授权相机
+- (BOOL) isCameraAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL) doesCameraSupportTakingPhotos {
+    return [self cameraSupportsMedia:(__bridge NSString *)kUTTypeImage sourceType:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (BOOL) cameraSupportsMedia:(NSString *)paramMediaType sourceType:(UIImagePickerControllerSourceType)paramSourceType{
+    __block BOOL result = NO;
+    if ([paramMediaType length] == 0) {
+        return NO;
+    }
+    NSArray *availableMediaTypes = [UIImagePickerController availableMediaTypesForSourceType:paramSourceType];
+    [availableMediaTypes enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *mediaType = (NSString *)obj;
+        if ([mediaType isEqualToString:paramMediaType]){
+            result = YES;
+            *stop= YES;
+        }
+    }];
+    return result;
+}
+
+#pragma mark - 是否允许打开相册
+- (BOOL)isPhotoLibraryAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:
+            UIImagePickerControllerSourceTypePhotoLibrary];
+}
 
 //打开本地相册
 - (void)localPhoto {
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+    [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+    picker.mediaTypes = mediaTypes;
+    
     picker.delegate = self;
     //设置选择后的图片可被编辑
-    picker.allowsEditing = true;
+//    picker.allowsEditing = true;
     [self.navigationController presentViewController:picker animated:YES completion:nil];
 }
 
@@ -198,7 +238,7 @@
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         picker.delegate = self;
         //设置选择后的图片可被编辑
-        picker.allowsEditing = true;
+//        picker.allowsEditing = true;
         [self.navigationController presentViewController:picker animated:YES completion:nil];
     } else {
         //没有相机
@@ -206,40 +246,116 @@
     }
 }
 
+#pragma mark image scale utility
+- (UIImage *)imageByScalingToMaxSize:(UIImage *)sourceImage {
+    if (sourceImage.size.width < ORIGINAL_MAX_WIDTH) return sourceImage;
+    CGFloat btWidth = 0.0f;
+    CGFloat btHeight = 0.0f;
+    if (sourceImage.size.width > sourceImage.size.height) {
+        btHeight = ORIGINAL_MAX_WIDTH;
+        btWidth = sourceImage.size.width * (ORIGINAL_MAX_WIDTH / sourceImage.size.height);
+    } else {
+        btWidth = ORIGINAL_MAX_WIDTH;
+        btHeight = sourceImage.size.height * (ORIGINAL_MAX_WIDTH / sourceImage.size.width);
+    }
+    CGSize targetSize = CGSizeMake(btWidth, btHeight);
+    return [self imageByScalingAndCroppingForSourceImage:sourceImage targetSize:targetSize];
+}
+
+- (UIImage *)imageByScalingAndCroppingForSourceImage:(UIImage *)sourceImage targetSize:(CGSize)targetSize {
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+            scaleFactor = widthFactor; // scale to fit height
+        else
+            scaleFactor = heightFactor; // scale to fit width
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }
+        else
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+            }
+    }
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil) NSLog(@"could not scale image");
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 
 //当选择一张图片后进入这里
 -(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    NSString * type = [info objectForKey:UIImagePickerControllerMediaType];
+    [picker dismissViewControllerAnimated:YES completion:^() {
+        UIImage *portraitImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        portraitImg = [self imageByScalingToMaxSize:portraitImg];
+        // present the cropper view controller
+        VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.view.frame.size.width, self.view.frame.size.width) limitScaleRatio:3.0];
+        imgCropperVC.delegate = self;
+        [self presentViewController:imgCropperVC animated:YES completion:^{
+            // TO DO
+        }];
+    }];
     
-    //当选择的类型是图片
-    if ([type isEqualToString:@"public.image"])
-    {
-        //先把图片转成NSData
-        UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData * data = UIImageJPEGRepresentation(image, 0.1);
-        
-        //图片保存的路径
-        //这里将图片放在沙盒的documents文件夹中
-        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        
-        //文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
-        
-        //得到选择后沙盒中图片的完整路径
-        filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
-        
-        //关闭相册界面
-        [picker dismissViewControllerAnimated:YES completion:nil];
-        
-        headImageView.image = image;
-        
-        isSetHeadImg = YES;
-    } 
+//    NSString * type = [info objectForKey:UIImagePickerControllerMediaType];
+//    
+//    //当选择的类型是图片
+//    if ([type isEqualToString:@"public.image"])
+//    {
+//        //先把图片转成NSData
+//        UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+//        NSData * data = UIImageJPEGRepresentation(image, 0.1);
+//        
+//        //图片保存的路径
+//        //这里将图片放在沙盒的documents文件夹中
+//        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//        
+//        //文件管理器
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        
+//        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
+//        
+//        //得到选择后沙盒中图片的完整路径
+//        filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
+//        
+//        //关闭相册界面
+//        [picker dismissViewControllerAnimated:YES completion:nil];
+//        
+//        headImageView.image = image;
+//        
+//        isSetHeadImg = YES;
+//    } 
     
 }
 
@@ -248,6 +364,32 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - 缩放图片到指定尺寸
+- (UIImage *)compressImage:(UIImage *)imgSrc
+{
+    CGSize size = {99, 99};
+    UIGraphicsBeginImageContext(size);
+    CGRect rect = {{0,0}, size};
+    [imgSrc drawInRect:rect];
+    UIImage *compressedImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return compressedImg;
+}
+
+#pragma mark - VPImageCropperDelegate
+- (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage{
+    UIImage * image = [self compressImage:editedImage];
+    headImageView.image = image;
+    isSetHeadImg = YES;
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+        // TO DO
+    }];
+}
+
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+    }];
+}
 
 - (IBAction)sexBtnClicked:(UIButton *)sender {
     _studentInfo.sex = sender.tag-Number_Ten;

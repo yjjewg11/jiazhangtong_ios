@@ -21,6 +21,7 @@
 #import "CookbookDomain.h"
 
 #define RecipesInfoCellIdentifier  @"RecipesInfoCellIdentifier"
+#define RecipesDescCellIdentifier  @"RecipesDescCellIdentifier"
 #define RecipesNoteCellIdentifier  @"RecipesNoteCellIdentifier"
 
 @implementation RecipesInfoView
@@ -236,7 +237,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
-    NSLog(@"type:%d,h:%d", itemVO.recipesItemType, itemVO.cellHeight);
     return itemVO.cellHeight;
 }
 
@@ -287,17 +287,17 @@
 //加载营养分析及帖子回复
 - (UITableViewCell *)loadRecipesNote:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RecipesNoteCellIdentifier];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:RecipesDescCellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecipesNoteCellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:RecipesDescCellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     cell.backgroundColor = [UIColor clearColor];
     
     
-    for(UIView * view in cell.subviews) {
-        [view removeFromSuperview];
-    }
+//    for(UIView * view in cell.subviews) {
+//        [view removeFromSuperview];
+//    }
     
     RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
     
@@ -326,9 +326,9 @@
     }
     cell.backgroundColor = [UIColor clearColor];
     
-    for(UIView * view in cell.subviews) {
-        [view removeFromSuperview];
-    }
+//    for(UIView * view in cell.subviews) {
+//        [view removeFromSuperview];
+//    }
     
     RecipesItemVO * itemVO = [self.tableDataSource objectAtIndex:indexPath.section];
     [cell addSubview:itemVO.dzReplyView];
