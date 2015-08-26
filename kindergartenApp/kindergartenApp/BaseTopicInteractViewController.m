@@ -154,10 +154,12 @@
         domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
         
         [self resetTopicReplyContent:domain];
+        [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
         [_emojiAndTextView.contentTextView resignFirstResponder];
         
     } faild:^(NSString *errorMsg) {
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
         [_emojiAndTextView.contentTextView resignFirstResponder];
     }];
 }
@@ -246,7 +248,7 @@
                 _emojiInputY = _emojiAndTextView.y;
             }else{
                 _emojiAndTextView.y = wH;
-                [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
+//                [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
             }
             return;
         }
