@@ -102,6 +102,8 @@
     //注册SessionTimeout通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionTimeoutNotification:) name:Key_Notification_SessionTimeout object:nil];
     
+    [self loadMessageList:launchOptions];
+    
     return YES;
 }
 
@@ -109,6 +111,16 @@
    self.window.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     [self.window makeKeyAndVisible];
     [[KGHUD sharedHud] show:self.window onlyMsg:@"登录超时,请重新登录."];
+}
+
+//打开app 直接定位到消息页
+- (void)loadMessageList:(NSDictionary *)launchOptions {
+    UILocalNotification * remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if(remoteNotification){
+        //从通知栏打开app 直接定位到消息页
+        __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)self.window.rootViewController;
+        tabVC.selectedIndex = Number_Two;
+    }
 }
 
 //清除Badge
@@ -137,8 +149,6 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"test:%@",deviceToken);
-    
     NSString * token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:String_DefValue_Arrows]];
     
     NSArray * strAry = [token componentsSeparatedByString:String_DefValue_EmptyStr];
@@ -157,9 +167,6 @@
 //save token
 - (void)savePushToken:(NSString *)key{
     KeychainItemWrapper * wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:Key_KeyChain accessGroup:nil];
-//    NSString * wrapperToken = [wrapper objectForKey:(__bridge id)kSecAttrAccount];
-    
-//    if(![key isEqualToString:wrapperToken] || [key isEqualToString:String_DefValue_Empty]){
     
     [KGHttpService sharedService].pushToken = key;
     id temp = [[NSUserDefaults standardUserDefaults] objectForKey:NewMessageKey];
@@ -185,7 +192,7 @@
 // 当 DeviceToken 获取失败时，系统会回调此方法
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    NSLog(@"DeviceToken 获取失败，原因：%@",error);
+//    NSLog(@"DeviceToken 获取失败，原因：%@",error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -200,15 +207,18 @@
         notification = (NSDictionary *)remoteNotification;
     }
     __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)self.window.rootViewController;
-    tabVC.selectedIndex = 2;
+    if(tabVC.selectedIndex != Number_Two) {
+        UIViewController * vc = [tabVC.childViewControllers objectAtIndex:Number_Two];
+        vc.tabBarItem.image = [[UIImage imageNamed:@"zhuye_xinxiaoxi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    }
+    
+    
 //    NSDictionary * dic = [notification objectForKey:@"aps"];
     //关闭友盟自带的弹出框
     [UMessage setAutoAlert:NO];
     [UMessage sendClickReportForRemoteNotification:notification];
 //    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"通知" message:[dic objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"忽略" otherButtonTitles:@"查看", nil];
 //    [alertView show];
-    _pushNotification = notification;
-    NSLog(@"%@",notification);
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
@@ -245,7 +255,6 @@
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    NSLog(@"%@",url);
     BOOL judge = [UMSocialSnsService handleOpenURL:url];
     
     return  judge;

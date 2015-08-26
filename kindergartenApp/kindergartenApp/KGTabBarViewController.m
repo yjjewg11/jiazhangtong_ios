@@ -58,11 +58,11 @@
     childVc.title = title; // 同时设置tabbar和navigationBar的文字
     
     // 设置子控制器的图片
-    childVc.tabBarItem.image = [UIImage imageNamed:image];
+    childVc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     if (bIsIos7) {
         childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     } else {
-        childVc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImage];
+        childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }
     // 设置文字的样式
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];

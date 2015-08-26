@@ -24,6 +24,7 @@
 #import "AddressBookDomain.h"
 #import "ChatViewController.h"
 #import "StudentSignRecordViewController.h"
+#import "AppDelegate.h"
 
 @interface MessageViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
@@ -33,6 +34,20 @@
 @end
 
 @implementation MessageViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)[AppDelegate appDelegate].window.rootViewController;
+    UIViewController * vc = [tabVC.childViewControllers objectAtIndex:Number_Two];
+    vc.tabBarItem.image = [[UIImage imageNamed:@"xiaoxi2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:0.5];
+}
+
+//延迟刷新
+- (void)lazyRefresh{
+    [reFreshView beginRefreshing];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
