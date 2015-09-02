@@ -27,7 +27,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"SettingViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SettingViewCell"];
-    _dataArray = @[@[@"修改密码",@"推送通知"],@[@"意见反馈",@"关于我们",@"检查更新"],@[@"退出"]];
+    _dataArray = @[@[@"修改密码",@"推送通知"],@[@"意见反馈",@"关于我们"],@[@"退出"]];
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -70,10 +70,6 @@
                 vc = [[AboutWeViewController alloc] init];
             }
                 break;
-            case 2:
-                [[KGHUD sharedHud] show:self.view];
-                [MobClick checkUpdateWithDelegate:self selector:@selector(handleUpdate:)];
-                return;
         }
     }else if (indexPath.section == 2){
         [self logoutBtnClicked];
@@ -94,32 +90,10 @@
     [alert show];
 }
 
-#pragma mark - 处理更新回调
-- (void)handleUpdate:(NSDictionary *)dic{
-    [[KGHUD sharedHud] hide:self.view];
-    BOOL update = [[dic objectForKey:@"update"] boolValue];
-    if (update) {
-        _urlString = [dic objectForKey:@"path"];
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您有新版本需要更新!" delegate:self cancelButtonTitle:@"忽略" otherButtonTitles:@"更新", nil];
-        alertView.tag = 21;
-        [alertView show];
-    }else{
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"已经是最新版本了" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
 
 #pragma UIAlertView delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if (alertView.tag == 21) {
-        if (buttonIndex == Number_One) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_urlString]];
-        }
-        return;
-    }
     
     if(buttonIndex == Number_One) {
         
