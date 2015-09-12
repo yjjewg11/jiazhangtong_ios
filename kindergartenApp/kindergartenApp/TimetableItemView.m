@@ -140,7 +140,7 @@
     NSInteger index = Number_Zero;
     for(KGUser * user in users) {
         TimetableItemVO * itemVO = [[TimetableItemVO alloc] init];
-        itemVO.cellHeight = 150;
+        itemVO.cellHeight = 330;
         itemVO.classuuid = user.classuuid;
         itemVO.headUrl   = user.headimg;
         itemVO.weekday = week;
