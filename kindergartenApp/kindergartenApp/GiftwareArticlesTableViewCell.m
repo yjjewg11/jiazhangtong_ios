@@ -59,6 +59,8 @@
     
     if(domain.dianzan) {
         dzCountLabel.text = [NSString stringWithFormat:@"%ld", (long)domain.dianzan.count];
+        NSString * imgName = domain.dianzan.canDianzan ? @"wodehuizan" : @"zan2";
+        dzImageView.image = [UIImage imageNamed:imgName];
     }
 }
 

@@ -12,9 +12,15 @@
 
 @interface TimetableItemTableViewCell : UITableViewCell {
     
+    IBOutlet UIView *timetableContentView;
     IBOutlet UIImageView * headImageView;
     IBOutlet UILabel * morningLabel;
     IBOutlet UILabel * afternoonLabel;
+    IBOutlet UITextView *morningTextView;
+    IBOutlet UITextView *afternoonTextView;
+    IBOutlet UILabel *label1;
+    IBOutlet UILabel *label2;
+    IBOutlet UILabel *label3;
     TimetableItemVO   * timetableItemVO;
     NSInteger   lastIndex;
 }

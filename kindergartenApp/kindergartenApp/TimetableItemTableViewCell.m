@@ -12,6 +12,10 @@
 #import "UIButton+Extension.h"
 #import "UIColor+Extension.h"
 #import "KGDateUtil.h"
+#import "MLEmojiLabel.h"
+#import "Masonry.h"
+
+#define defHeight  42
 
 @implementation TimetableItemTableViewCell
 
@@ -90,10 +94,47 @@
     if(domain) {
         morningLabel.text = domain.morning;
         afternoonLabel.text = domain.afternoon;
+        morningTextView.text = domain.morning;
+        afternoonTextView.text = domain.afternoon;
+//        [self resetContentFrame:domain];
     } else {
         morningLabel.text = String_DefValue_Empty;
         afternoonLabel.text = String_DefValue_Empty;
+        morningTextView.text = String_DefValue_Empty;
+        afternoonTextView.text = String_DefValue_Empty;
+//        [self resetNoDataContentFrame];
     }
+}
+
+
+- (void)resetContentFrame:(TimetableDomain *)domain {
+    CGFloat width = KGSCREEN.size.width - 93 - 16;
+    CGFloat height = 90;
+    CGSize size = [MLEmojiLabel boundingRectWithSize:domain.morning w:width font:APPUILABELFONTNO12];
+//    morningLabel.height = size.height;
+    morningLabel.width  = width;
+    if(size.height > defHeight) {
+        height += size.height - defHeight;
+//        label2.y += size.height - defHeight;
+        afternoonLabel.y = CGRectGetMaxY(label2.frame);
+    }
+    
+    CGSize size2 = [MLEmojiLabel boundingRectWithSize:domain.afternoon w:width font:APPUILABELFONTNO12];
+    afternoonLabel.height = size2.height;
+    afternoonLabel.width  = width;
+    if(size2.height > defHeight) {
+        height += size2.height - defHeight;
+    }
+    
+    label1.height = height;
+    label3.y = height - Number_One;
+    timetableContentView.height = height;
+}
+
+
+- (void)resetNoDataContentFrame {
+    morningLabel.height = 42;
+    afternoonLabel.height = 42;
 }
 
 @end

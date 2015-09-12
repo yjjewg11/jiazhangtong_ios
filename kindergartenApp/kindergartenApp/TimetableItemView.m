@@ -13,8 +13,10 @@
 #import "KGHttpService.h"
 #import "Masonry.h"
 #import "KGDateUtil.h"
+#import "MLEmojiLabel.h"
 
 #define TopicInteractionCellIdentifier  @"TopicInteractionCellIdentifier"
+#define defContentHeight  42
 
 @implementation TimetableItemView
 
@@ -23,7 +25,7 @@
     if(self) {
         [self initTableView];
         nowwWeekday = [KGDateUtil weekdayStringFromDate:[KGDateUtil presentTime]];
-        if(nowwWeekday==Number_Seven || nowwWeekday==Number_Six) {
+        if(nowwWeekday==Number_Seven || nowwWeekday==Number_Six || nowwWeekday==Number_Zero) {
             nowwWeekday = Number_One;
         }
     }
@@ -53,7 +55,7 @@
 - (void)loadTimetableData:(NSMutableDictionary *)timetableMDict date:(NSString *)queryDate {
     sourceTimetableMDict = timetableMDict;
     
-    [self packageItemViewData];
+    [self packageItemViewData:nowwWeekday];
   
     _queryDate = queryDate;
     
@@ -106,6 +108,8 @@
             
             NSIndexPath *indexPath = [timetableTableView indexPathForCell:timetableItemTableViewCell];
             [self resetPackageItemViewData:indexPath.row week:timetableItemTableViewCell.selWeekday];
+//            [self packageItemViewData:timetableItemTableViewCell.selWeekday];
+//            [timetableTableView reloadData];
         };
     }
     return cell;
@@ -131,7 +135,7 @@
 
 
 //数据封装
-- (void)packageItemViewData{
+- (void)packageItemViewData:(NSInteger)week {
     NSArray * users = [KGHttpService sharedService].loginRespDomain.list;
     NSInteger index = Number_Zero;
     for(KGUser * user in users) {
@@ -139,12 +143,15 @@
         itemVO.cellHeight = 150;
         itemVO.classuuid = user.classuuid;
         itemVO.headUrl   = user.headimg;
-        itemVO.weekday = nowwWeekday;
+        itemVO.weekday = week;
         itemVO.timetableMArray = [sourceTimetableMDict objectForKey:user.classuuid];
         [self.tableDataSource addObject:itemVO];
+        
         index++;
-        TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:nowwWeekday];
-        UIView * view = [self loadDZReply:domain index:index - Number_One week:nowwWeekday];
+        TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:week];
+//        itemVO.cellHeight = [self calculateTimetableHeight:domain];
+        
+        UIView * view = [self loadDZReply:domain index:index - Number_One week:week];
         
         TimetableItemVO * itemVO2 = [[TimetableItemVO alloc] init];
         itemVO2.isDZReply = YES;
@@ -160,6 +167,8 @@
     TimetableItemVO * itemVO = [self.tableDataSource objectAtIndex:cellIndex];
     itemVO.weekday = weekday;
     TimetableDomain * domain = [self getTimetableDomainByWeek:itemVO.timetableMArray week:weekday];
+//    itemVO.cellHeight = [self calculateTimetableHeight:domain];
+    
     UIView * view = [self loadDZReply:domain index:cellIndex week:weekday];
     
     TimetableItemVO * itemVO2 = [self.tableDataSource objectAtIndex:cellIndex+Number_One];
@@ -224,6 +233,24 @@
     label.font = [UIFont systemFontOfSize:APPUILABELFONTNO15];
     [view addSubview:label];
     return view;
+}
+
+//计算课程cell高度
+- (CGFloat)calculateTimetableHeight:(TimetableDomain *)domain {
+    CGFloat width = KGSCREEN.size.width - 93 - 16;
+    CGFloat height = 150;
+    CGSize size = [MLEmojiLabel boundingRectWithSize:domain.morning w:width font:APPUILABELFONTNO12];
+    
+    if(size.height > defContentHeight) {
+        height += size.height - defContentHeight;
+    }
+    
+    CGSize size2 = [MLEmojiLabel boundingRectWithSize:domain.afternoon w:width font:APPUILABELFONTNO12];
+    
+    if(size2.height > defContentHeight) {
+        height += size2.height - defContentHeight;
+    }
+    return height;
 }
 
 
