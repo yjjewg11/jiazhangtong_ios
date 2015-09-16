@@ -187,6 +187,7 @@
     
     PhotoVC * vc = [[PhotoVC alloc] init];
     vc.imgMArray = imagesMArray;
+    vc.isShowSave = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -215,7 +216,6 @@
                 _emojiAndTextView.y = wH;
                 [_emojiAndTextView.contentTextView resignFirstResponder];
                 _emojiAndTextView.contentTextView.inputView = nil;
-                [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
             }
             return;
         }

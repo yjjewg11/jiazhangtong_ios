@@ -26,11 +26,13 @@
 - (void)addChatInfosToDataSource:(NSArray *)chatsArray {
    
     for (int i=0; i<[chatsArray count]; i++) {
-        
-        NSDictionary * dataDic = [self getChatDic:[chatsArray objectAtIndex:i]];
+        ChatInfoDomain * domain = [chatsArray objectAtIndex:i];
+        NSDictionary * dataDic = [self getChatDic:domain];
         UUMessageFrame * messageFrame = [[UUMessageFrame alloc]init];
         UUMessage *message = [[UUMessage alloc] init];
         [message setWithDict:dataDic];
+        message.isTeacher = _isTeacher;
+        
         [message minuteOffSetStart:previousTime end:dataDic[@"strTime"]];
         messageFrame.showTime = message.showDateLabel;
         [messageFrame setMessage:message];
@@ -51,12 +53,15 @@
     if([domain.send_useruuid isEqualToString:[KGHttpService sharedService].loginRespDomain.userinfo.uuid]) {
         //判断发送者id是否=login的用户id  相等者发送为自己
         [dictionary setObject:@(UUMessageFromMe) forKey:@"from"];
-        [dictionary setObject:@"head_def" forKey:@"strIcon"];
+//        [dictionary setObject:domain.send_userheadimg forKey:@"strIcon"];
     } else {
         //别人发送
         [dictionary setObject:@(UUMessageFromOther) forKey:@"from"];
-        [dictionary setObject:_isTeacher?@"head_def":@"group_head_def" forKey:@"strIcon"];
+//        [dictionary setObject:domain.revice_userimg forKey:@"strIcon"];
     }
+    
+    [dictionary setObject:domain.send_userheadimg forKey:@"strIcon"];
+    
     [dictionary setObject:@(UUMessageTypeText) forKey:@"type"];
     [dictionary setObject:[domain.create_time description] forKey:@"strTime"];
     

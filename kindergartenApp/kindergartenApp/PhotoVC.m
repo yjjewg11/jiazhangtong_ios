@@ -109,6 +109,12 @@
         self.navigationItem.rightBarButtonItem = rightBarItem;
     }
     
+    if(_isShowSave) {
+        UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(savePhotoToLocal)];
+        rightBarItem.tintColor = [UIColor whiteColor];
+        self.navigationItem.rightBarButtonItem = rightBarItem;
+    }
+    
     self.title = [NSString stringWithFormat:@"1/%ld", (long)_imgMArray.count];
     
     [self initAttachemnMArray];
@@ -119,5 +125,26 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)savePhotoToLocal {
+    KGAttachment * attachemnt = [_attachemnMArray objectAtIndex:_curentPage];
+    UIImageWriteToSavedPhotosAlbum(attachemnt.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+
+// 指定回调方法
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    NSString *msg = nil ;
+    if(error != NULL){
+        msg = @"保存图片失败" ;
+    }else{
+        msg = @"保存图片成功" ;
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:msg
+                                                   delegate:self
+                                          cancelButtonTitle:@"确定"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
 
 @end

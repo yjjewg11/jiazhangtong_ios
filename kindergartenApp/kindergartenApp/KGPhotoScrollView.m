@@ -73,10 +73,33 @@
         photoImageView.image    = singleImage;
         imageview.frame         = CGRectMake(Number_Zero, Number_Zero, photosize.width, photosize.height);
     }
-    else if(attachment && attachment.image){
-        photoImageView.image = attachment.image;
-        photoImageView.frame = CGRectMake(Number_Zero, Number_Zero, APPWINDOWWIDTH,APPWINDOWHEIGHT - 64);
+    else if(attachment){
+        if(attachment.imageUrl) {
+            
+            NSString * imgUrl = [self getImageUrl:attachment.imageUrl];
+            [photoImageView sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                if(image)
+                    photoImageView.frame = CGRectMake(Number_Zero, Number_Zero, APPWINDOWWIDTH,APPWINDOWHEIGHT - 64);
+                
+            }];
+        } else if(attachment.image) {
+            photoImageView.image = attachment.image;
+            photoImageView.frame = CGRectMake(Number_Zero, Number_Zero, APPWINDOWWIDTH,APPWINDOWHEIGHT - 64);
+        }
     }
+}
+
+
+- (NSString *)getImageUrl:(NSString *)imgUrl {
+    if(imgUrl && ![imgUrl isEqualToString:String_DefValue_Empty]) {
+        
+        NSArray * array = [imgUrl componentsSeparatedByString:@"@"];
+        if(array && [array count]>Number_Zero) {
+            return [array objectAtIndex:Number_Zero];
+        }
+    }
+    return @"";
 }
 
 - (void)setScrollViewZoomScale{

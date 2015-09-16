@@ -24,6 +24,7 @@
 
 @interface ChatViewController () <UUInputFunctionViewDelegate,UUMessageCellDelegate,UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
     UUInputFunctionView *IFView;
+    KGUser * teacherInfo;
 }
 
 @property (strong, nonatomic) IBOutlet UITableView * chatTableView;
@@ -48,7 +49,6 @@
     [self loadBaseViewsAndData];
     [self loadInputFuniView];
     [self getTeacherInfo];
-    [self loadTableView];
     
     //注册消息未发送成功点击第二次发送通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chatSecondSendNotification:) name:Key_Notification_ChatSecondSend object:nil];
@@ -244,8 +244,11 @@
 - (void)getTeacherInfo {
     [[KGHttpService sharedService] getUserInfo:_addressbookDomain.teacher_uuid success:^(KGUser *userInfo) {
         self.title = userInfo.name;
-    } faild:^(NSString *errorMsg) {
         
+        teacherInfo = userInfo;
+        [self loadTableView];
+    } faild:^(NSString *errorMsg) {
+        [self loadTableView];
     }];
 }
 
@@ -259,7 +262,8 @@
         if (msgArray && msgArray.count != 0) {
             ++_pageNo;
         }
-//        [self resetChatNameToTitle:msgArray];
+        
+        [self resetMessageImg:msgArray];
         [self loadChatListData:msgArray];
         [_chatTableView headerEndRefreshing];
     } faild:^(NSString *errorMsg) {
@@ -268,15 +272,21 @@
     }];
 }
 
-//设置聊天对方名字
-- (void)resetChatNameToTitle:(NSArray *)msgArray {
-    if(!_addressbookDomain.name) {
-        NSString * loginName = [KGHttpService sharedService].loginRespDomain.userinfo.name;
-        for(ChatInfoDomain * domain in msgArray) {
-            if(![domain.send_user isEqualToString:loginName]) {
-                self.title = domain.send_user;
-                break;
-            }
+- (void)resetMessageImg:(NSArray *)msgArray {
+    KGUser * loginUser = [KGHttpService sharedService].loginRespDomain.userinfo;
+    NSString * meHeadimg = loginUser.headimg ? loginUser.headimg : @"head_def";
+    NSString * teacherimg = _addressbookDomain.type ? @"head_def" : @"group_head_def";
+    if(_addressbookDomain.img) {
+        teacherimg = _addressbookDomain.img;
+    }
+    NSString * otherHeadimg = teacherInfo.headimg ? teacherInfo.headimg : teacherimg;
+    for(ChatInfoDomain * domain in msgArray) {
+        if([domain.send_useruuid isEqualToString:loginUser.uuid]) {
+            domain.send_userheadimg = meHeadimg;
+            domain.revice_userimg = otherHeadimg;
+        } else {
+            domain.send_userheadimg = otherHeadimg;
+            domain.revice_userimg = meHeadimg;
         }
     }
 }

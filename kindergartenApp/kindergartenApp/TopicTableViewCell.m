@@ -224,11 +224,11 @@
             
         }];
         
-        [self downloadBgImg:imgUrl];
+//        [self downloadBgImg:imgUrl];
         
         UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
         btn.targetObj = imageView;
-        objc_setAssociatedObject(btn, "imgUrl", imgUrl, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(btn, "imgUrl", imgUrlArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [btn addTarget:self action:@selector(showTopicImgClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.topicImgsView addSubview:btn];
         
@@ -273,8 +273,8 @@
 //    UIImageView * imageView = (UIImageView *)sender.targetObj;
 //    NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
 //    [UUImageAvatarBrowser showImage:imageView url:imgUrl];
-    
-    NSDictionary * dic = @{Key_ImagesArray : imagesMArray};
+    NSArray * imgUrlArray = objc_getAssociatedObject(sender, "imgUrl");
+    NSDictionary * dic = @{Key_ImagesArray : imgUrlArray};
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BrowseImages object:self userInfo:dic];
 }
 

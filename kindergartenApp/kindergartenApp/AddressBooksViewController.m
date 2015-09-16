@@ -42,7 +42,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addressbookCellFunBtnNotification:) name:Key_Notification_AddressbookCellFun object:nil];
 }
 
-//帖子高度改变通知
+//发信息点击通知
 - (void)addressbookCellFunBtnNotification:(NSNotification *)notification {
     NSDictionary * dic = notification.userInfo;
     AddressBookDomain * domain = [dic objectForKey:@"addressBookDomain"];

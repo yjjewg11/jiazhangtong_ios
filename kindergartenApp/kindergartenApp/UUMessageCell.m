@@ -190,9 +190,7 @@
     // 2、设置头像
     headImageBackView.frame = messageFrame.iconF;
     self.btnHeadImage.frame = CGRectMake(2, 2, ChatIconWH-4, ChatIconWH-4);
-    [self.btnHeadImage setBackgroundImageForState:UIControlStateNormal
-                                          withURL:[NSURL URLWithString:message.strIcon]
-                                 placeholderImage:[UIImage imageNamed:message.strIcon]];
+    
     
     // 3、设置下标
 //    self.labelNum.text = message.strName;
@@ -225,6 +223,7 @@
         self.btnContent.contentEdgeInsets = UIEdgeInsetsMake(ChatContentTop, ChatContentLeft, ChatContentBottom, ChatContentRight);
     }
     
+    NSString * defheadImage = @"head_def";
     //背景气泡图
     UIImage *normal;
     if (message.from == UUMessageFromMe) {
@@ -234,7 +233,13 @@
     else{
         normal = [UIImage imageNamed:@"massage2_box"];
         normal = [normal resizableImageWithCapInsets:UIEdgeInsetsMake(35, 22, 10, 10)];
+        defheadImage = message.isTeacher ? defheadImage : @"group_head_def";
     }
+    
+    [self.btnHeadImage setBackgroundImageForState:UIControlStateNormal
+                                          withURL:[NSURL URLWithString:message.strIcon]
+                                 placeholderImage:[UIImage imageNamed:defheadImage]];
+    
     [self.btnContent setBackgroundImage:normal forState:UIControlStateNormal];
     [self.btnContent setBackgroundImage:normal forState:UIControlStateHighlighted];
 

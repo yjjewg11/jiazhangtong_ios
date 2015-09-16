@@ -35,6 +35,7 @@ typedef NS_ENUM(NSInteger, MessageFrom) {
 @property (nonatomic, copy) NSData   *voice;
 @property (nonatomic, copy) NSString *strVoiceTime;
 @property (nonatomic, assign) BOOL isNewMsg; //上方新消息 =YES 需要显示hud
+@property (nonatomic, assign) BOOL isTeacher; //是否是老师
 @property (nonatomic, assign) MessageType type;
 @property (nonatomic, assign) MessageFrom from;
 
