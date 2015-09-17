@@ -9,8 +9,9 @@
 
 @interface DoPhotoCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView    *ivPhoto;
-@property (weak, nonatomic) IBOutlet UIView         *vSelect;
+@property (weak, nonatomic) IBOutlet UIImageView    * ivPhoto;
+@property (weak, nonatomic) IBOutlet UIView         * vSelect;
+@property (strong, nonatomic) IBOutlet UIImageView  * vSelectedImageView;
 
 - (void)setSelectMode:(BOOL)bSelect;
 

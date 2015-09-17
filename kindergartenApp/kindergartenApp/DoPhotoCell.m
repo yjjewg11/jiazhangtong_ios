@@ -20,19 +20,15 @@
 
 - (void)setSelectMode:(BOOL)bSelect
 {
-    if (bSelect)
-        _ivPhoto.alpha = 0.2;
-    else
-        _ivPhoto.alpha = 1.0;
+    if (bSelect) {
+//        _ivPhoto.alpha = 0.2;
+        _vSelectedImageView.image = [UIImage imageNamed:@"xuanzhong"];
+    } else {
+//        _ivPhoto.alpha = 1.0;
+        _vSelectedImageView.image = [UIImage imageNamed:@"moren"];
+    }
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+
 
 @end

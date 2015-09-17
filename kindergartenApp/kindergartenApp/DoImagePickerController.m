@@ -25,6 +25,13 @@
     return self;
 }
 
+- (NSMutableArray *)dSelectedMArray {
+    if(!_dSelectedMArray) {
+        _dSelectedMArray = [NSMutableArray new];
+    }
+    return _dSelectedMArray;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
