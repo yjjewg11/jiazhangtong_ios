@@ -49,7 +49,7 @@
         self.btnChangeVoiceState = [UIButton buttonWithType:UIButtonTypeCustom];
         self.btnChangeVoiceState.frame = CGRectMake(5, 5, 30, 30);
         isbeginVoiceRecord = NO;
-        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"biaoqing1"] forState:UIControlStateNormal];//chat_voice_record
+        [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"biaoqing"] forState:UIControlStateNormal];//chat_voice_record
         [self.btnChangeVoiceState setBackgroundImage:[UIImage imageNamed:@"jianpan"] forState:UIControlStateSelected];//chat_ipunt_message
         self.btnChangeVoiceState.titleLabel.font = [UIFont systemFontOfSize:12];
         [self.btnChangeVoiceState addTarget:self action:@selector(textEmojiRecord:) forControlEvents:UIControlEventTouchUpInside];

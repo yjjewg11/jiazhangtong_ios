@@ -18,7 +18,7 @@
         [sender setImage:@"jianpan" selImg:@"jianpan"];
         
     } else {
-        [sender setImage:@"biaoqing1" selImg:@"biaoqing1"];
+        [sender setImage:@"biaoqing" selImg:@"biaoqing"];
     }
     if (_pressedBlock) {
         _pressedBlock(sender);

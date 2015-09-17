@@ -14,7 +14,7 @@
 #import "KGEmojiManage.h"
 
 //static CGFloat self.kboardHeight = 254.0f;
-//static CGFloat spacerY = 10.0f;
+static CGFloat viewFrameH = 44.0f;
 static CGFloat spacerY = 0.0f;
 static CGFloat viewFrameY = 10;
 
@@ -109,7 +109,7 @@ static CGFloat viewFrameY = 10;
     
     UIView * window = [UIApplication sharedApplication].keyWindow;
     CGFloat  wH = window.height;
-    CGFloat  emojiY = wH - kheight - 40;
+    CGFloat  emojiY = wH - kheight - viewFrameH;
 	if (isShow) {
 		if ([textField isKindOfClass:[UITextField class]]) {
 			UITextField *newText = ((UITextField *)textField);
@@ -127,7 +127,7 @@ static CGFloat viewFrameY = 10;
                 }
                 
                 rect.origin.y = y;
-                emojiY = textPoint.y - 40;
+                emojiY = textPoint.y - viewFrameH;
             } else {
                 rect.origin.y = viewFrameY;
             }
@@ -138,7 +138,7 @@ static CGFloat viewFrameY = 10;
 			CGPoint textPoint = [newView convertPoint:CGPointMake(0, newView.frame.size.height + spacerY) toView:objectView];
             if (rect.size.height - textPoint.y < kheight) {
 				rect.origin.y = rect.size.height - textPoint.y - kheight + viewFrameY;
-                emojiY = textPoint.y - 40;
+                emojiY = textPoint.y - viewFrameH;
             } else rect.origin.y = viewFrameY;
 		}
     } else {

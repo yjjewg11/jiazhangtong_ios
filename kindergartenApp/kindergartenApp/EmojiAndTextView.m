@@ -33,7 +33,7 @@
         
     } else {
         _contentTextView.inputView = nil;
-        [sender setImage:@"biaoqing1" selImg:@"biaoqing1"];
+        [sender setImage:@"biaoqing" selImg:@"biaoqing"];
     }
     
     [_contentTextView becomeFirstResponder];
