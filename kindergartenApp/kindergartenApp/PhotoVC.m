@@ -8,8 +8,6 @@
 
 #import "PhotoVC.h"
 #import "SystemResource.h"
-#import "KGImageBrowseView.h"
-#import "KGImageBrowseView.h"
 
 @interface PhotoVC ()<UIActionSheetDelegate,FuniImageBrowseViewDelegate>
 
@@ -92,10 +90,10 @@
  *  初始化图片浏览视图
  */
 - (void)initContentView{
-    KGImageBrowseView * imgBrowseView = [[KGImageBrowseView alloc] initImageBrowse:CGRectMake(0, 64, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64) attach:_attachemnMArray size:@"12" isPageing:YES];
-    imgBrowseView._delegate = self;
-    imgBrowseView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:imgBrowseView];
+    _imgBrowseView = [[KGImageBrowseView alloc] initImageBrowse:CGRectMake(0, 64, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64) attach:_attachemnMArray size:@"12" isPageing:YES];
+    _imgBrowseView._delegate = self;
+    _imgBrowseView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:_imgBrowseView];
 }
 
 - (void)viewDidLoad {
@@ -126,8 +124,8 @@
 }
 
 - (void)savePhotoToLocal {
-    KGAttachment * attachemnt = [_attachemnMArray objectAtIndex:_curentPage];
-    UIImageWriteToSavedPhotosAlbum(attachemnt.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+
+    UIImageWriteToSavedPhotosAlbum([_imgBrowseView getCurrentImage], self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
 }
 
 // 指定回调方法

@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "KGAttachment.h"
+#import "KGImageBrowseView.h"
 
 typedef void(^CallBack)(NSArray*);
 
@@ -19,5 +20,6 @@ typedef void(^CallBack)(NSArray*);
 @property (assign, nonatomic) BOOL  isShowDel;
 @property (assign, nonatomic) BOOL  isShowSave;
 @property (strong, nonatomic) CallBack myBlock;
+@property (strong, nonatomic) KGImageBrowseView * imgBrowseView;
 
 @end

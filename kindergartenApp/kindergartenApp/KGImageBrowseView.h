@@ -36,7 +36,10 @@
 }
 
 @property(retain, nonatomic)id<FuniImageBrowseViewDelegate> _delegate;
+@property (strong, nonatomic) KGPhotoScrollView * photoScrollView;
 
+//获取当前图片
+- (UIImage *)getCurrentImage;
 
 - (id)initImageBrowse:(CGRect)frame attach:(NSMutableArray *)attachAry size:(NSString *)imageSize;
 

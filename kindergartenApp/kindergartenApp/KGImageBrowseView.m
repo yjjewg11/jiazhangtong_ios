@@ -31,6 +31,14 @@
     return self;
 }
 
+//获取当前图片
+- (UIImage *)getCurrentImage{
+    UITableViewCell *cell = [photoTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
+    KGPhotoScrollView * tempview = (KGPhotoScrollView *)[cell viewWithTag:1111];
+    NSLog(@"%@",tempview.photoImageView.image);
+    return tempview.photoImageView.image;
+}
+
 
 - (id)initImageBrowse:(CGRect)frame attach:(NSMutableArray *)attachAry size:(NSString *)imageSize{
     self = [self initWithFrame:frame];
@@ -127,32 +135,34 @@
         [view removeFromSuperview];
     }
     if(isSingle){
-        KGPhotoScrollView * photoScrollView = [[KGPhotoScrollView alloc] initWithSingleImage:CGRectMake(Number_Zero, Number_Zero, self.frame.size.width, self.frame.size.height) image:singleImage defImg:defImgName];
-        photoScrollView.photoScrollViewDelegate = self;
-        photoScrollView.delegate = self;
+        _photoScrollView = [[KGPhotoScrollView alloc] initWithSingleImage:CGRectMake(Number_Zero, Number_Zero, self.frame.size.width, self.frame.size.height) image:singleImage defImg:defImgName];
+        _photoScrollView.tag = 1111;
+        _photoScrollView.photoScrollViewDelegate = self;
+        _photoScrollView.delegate = self;
         //顺时针旋转90度
-        photoScrollView.transform = CGAffineTransformMakeRotation(M_PI / Number_Two);
-        photoScrollView.frame = CGRectMake(Number_Zero, Number_Zero, photoScrollView.frame.size.width, photoScrollView.frame.size.height);
-        photoScrollView.backgroundColor = [UIColor blackColor];
-        photoScrollView.multipleTouchEnabled = YES;
-        photoScrollView.minimumZoomScale = Number_One;
-        photoScrollView.maximumZoomScale = Number_Eight;
-        [cell.contentView addSubview:photoScrollView];
+        _photoScrollView.transform = CGAffineTransformMakeRotation(M_PI / Number_Two);
+        _photoScrollView.frame = CGRectMake(Number_Zero, Number_Zero, _photoScrollView.frame.size.width, _photoScrollView.frame.size.height);
+        _photoScrollView.backgroundColor = [UIColor blackColor];
+        _photoScrollView.multipleTouchEnabled = YES;
+        _photoScrollView.minimumZoomScale = Number_One;
+        _photoScrollView.maximumZoomScale = Number_Eight;
+        [cell.contentView addSubview:_photoScrollView];
     }
     else if(attachArray && [attachArray count]>Number_Zero){
-        KGPhotoScrollView * photoScrollView = [[KGPhotoScrollView alloc] initWithPath:CGRectMake(Number_Zero, Number_Zero, self.frame.size.width, self.frame.size.height)
+        _photoScrollView = [[KGPhotoScrollView alloc] initWithPath:CGRectMake(Number_Zero, Number_Zero, self.frame.size.width, self.frame.size.height)
                  attach:[attachArray objectAtIndex:indexPath.row]
                  size:downImgSize defImg:defImgName];
-        photoScrollView.photoScrollViewDelegate = self;
-        photoScrollView.delegate = self;
+        _photoScrollView.tag = 1111;
+        _photoScrollView.photoScrollViewDelegate = self;
+        _photoScrollView.delegate = self;
         //顺时针旋转90度
-        photoScrollView.transform = CGAffineTransformMakeRotation(M_PI / Number_Two);
-        photoScrollView.frame = CGRectMake(Number_Zero, Number_Zero, photoScrollView.frame.size.width, photoScrollView.frame.size.height);
-        photoScrollView.backgroundColor = [UIColor blackColor];
-        photoScrollView.multipleTouchEnabled = YES;
-        photoScrollView.minimumZoomScale = Number_One;
-        photoScrollView.maximumZoomScale = Number_Eight;
-        [cell.contentView addSubview:photoScrollView];
+        _photoScrollView.transform = CGAffineTransformMakeRotation(M_PI / Number_Two);
+        _photoScrollView.frame = CGRectMake(Number_Zero, Number_Zero, _photoScrollView.frame.size.width, _photoScrollView.frame.size.height);
+        _photoScrollView.backgroundColor = [UIColor blackColor];
+        _photoScrollView.multipleTouchEnabled = YES;
+        _photoScrollView.minimumZoomScale = Number_One;
+        _photoScrollView.maximumZoomScale = Number_Eight;
+        [cell.contentView addSubview:_photoScrollView];
         
     }
     return cell;
