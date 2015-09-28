@@ -214,6 +214,7 @@
     CGFloat y = Number_Zero;
     CGFloat wh = (self.topicFrame.topicImgsViewF.size.width-Number_Ten) / Number_Three;
     CGFloat index = Number_Zero;
+    NSInteger tag = Number_Zero;
     
     for(NSString * imgUrl in imgUrlArray) {
         
@@ -228,6 +229,7 @@
         
         UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(index * wh, y, wh, wh)];
         btn.targetObj = imageView;
+        btn.tag = tag;
         objc_setAssociatedObject(btn, "imgUrl", imgUrlArray, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [btn addTarget:self action:@selector(showTopicImgClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.topicImgsView addSubview:btn];
@@ -238,6 +240,8 @@
         } else {
             index++;
         }
+        
+        tag++;
     }
 }
 
@@ -274,7 +278,7 @@
 //    NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
 //    [UUImageAvatarBrowser showImage:imageView url:imgUrl];
     NSArray * imgUrlArray = objc_getAssociatedObject(sender, "imgUrl");
-    NSDictionary * dic = @{Key_ImagesArray : imgUrlArray};
+    NSDictionary * dic = @{Key_ImagesArray : imgUrlArray, Key_Tag : [NSNumber numberWithInteger:sender.tag]};
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BrowseImages object:self userInfo:dic];
 }
 

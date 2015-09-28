@@ -117,6 +117,7 @@
     
     [self initAttachemnMArray];
     [self initContentView];
+    [_imgBrowseView resetTableViewCellIndex:_curentPage];
 }
 
 - (void)didReceiveMemoryWarning {

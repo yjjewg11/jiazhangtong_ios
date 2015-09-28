@@ -184,10 +184,11 @@
 - (void)browseImagesNotification:(NSNotification *)notification {
     NSDictionary  * dic = [notification userInfo];
     NSMutableArray * imagesMArray = [dic objectForKey:Key_ImagesArray];
-    
+    NSInteger index = [[dic objectForKey:Key_Tag] integerValue];
     PhotoVC * vc = [[PhotoVC alloc] init];
     vc.imgMArray = imagesMArray;
     vc.isShowSave = YES;
+    vc.curentPage = index;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

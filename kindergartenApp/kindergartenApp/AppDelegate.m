@@ -21,6 +21,8 @@
 #import "KGNavigationController.h"
 #import "LoginViewController.h"
 #import "KGHUD.h"
+#import "KGAccountTool.h"
+#import <Bugly/CrashReporter.h>
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"
@@ -99,12 +101,69 @@
     //消除icon badge
     [self clearBadge];
     
+    //关闭友盟Crash收集
+    [MobClick setCrashReportEnabled:NO];
+    //bugly
+     [[CrashReporter sharedInstance] installWithAppId:@"900009876"];
+    
     //注册SessionTimeout通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionTimeoutNotification:) name:Key_Notification_SessionTimeout object:nil];
     
     [self loadMessageList:launchOptions];
     
     return YES;
+}
+
+static int exception_callback_handler() {
+    NSLog(@"bugly exception callback handler");
+    
+    NSException * exception = [[CrashReporter sharedInstance] getCurrentException];
+    if (exception) {
+        // 捕获的Obj-C异常
+    }
+    
+    // 捕获的错误信号堆栈
+    NSString * callStack = [[CrashReporter sharedInstance] getCrashStack];
+    NSLog(@" %@", callStack);
+    
+    KGUser * userinfo = [KGAccountTool account];
+    
+    // 设置崩溃场景的附件
+    if (userinfo) {
+        [[CrashReporter sharedInstance] setUserData:@"用户身份" value:userinfo.loginname];
+    }else{
+        [[CrashReporter sharedInstance] setUserData:@"用户身份" value:@"未登录用户"];
+    }
+    
+    [[CrashReporter sharedInstance] setAttachLog:@"业务关键日志"];
+    
+    return 1;
+}
+
+// 自定义Bugly配置
+- (void)customizeBuglySDKConfig {
+    // 调试阶段开启sdk日志打印, 发布阶段请务必关闭
+#if DEBUG == 1
+    [[CrashReporter sharedInstance] enableLog:YES];
+#endif
+    
+    // SDK默认采用BundleShortVersion(BundleVersion)的格式作为版本,如果你的应用版本不是采用这样的格式，你可以通过此接口设置
+    //    [[CrashReporter sharedInstance] setBundleVer:@"1.0.2"];
+    
+    // 如果你的App有对应的发布渠道(如AppStore),你可以通过此接口设置, 默认值为unknown,
+    [[CrashReporter sharedInstance] setChannel:@"测试渠道"];
+    KGUser * userinfo = [KGAccountTool account];
+    // 你可以在初始化之前设置本地保存的用户身份, 也可以在用户身份切换后调用此接口即时修改
+    [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"测试用户:%@", userinfo.loginname]];
+    
+    // 关闭卡顿监听上报
+    [[CrashReporter sharedInstance] enableBlockMonitor:NO autoReport:NO];
+    
+    // 关闭进程内符号化处理, SDK默认开启此功能, 如果开启, 请检查Xcode工程配置Strip Style不能为ALL Symbols
+    [[CrashReporter sharedInstance] setEnableSymbolicateInProcess:NO];
+    
+    // 自定义崩溃处理回调函数
+    exp_call_back_func = &exception_callback_handler;
 }
 
 - (void)sessionTimeoutNotification:(NSNotification *)notification {

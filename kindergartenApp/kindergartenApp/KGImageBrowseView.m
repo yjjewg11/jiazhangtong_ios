@@ -35,7 +35,7 @@
 - (UIImage *)getCurrentImage{
     UITableViewCell *cell = [photoTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
     KGPhotoScrollView * tempview = (KGPhotoScrollView *)[cell viewWithTag:1111];
-    NSLog(@"%@",tempview.photoImageView.image);
+//    NSLog(@"%@",tempview.photoImageView.image);
     return tempview.photoImageView.image;
 }
 

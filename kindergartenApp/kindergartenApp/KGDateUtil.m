@@ -114,8 +114,6 @@
     [dateFormat_first setDateFormat:dateFormatStr1];
     NSString * dateString2Prev = [dateFormat stringFromDate:beginningOfWeek];
     
-    NSLog(@"StartDate:%@",dateString2Prev);
-    
     return dateString2Prev;
 }
 
@@ -140,7 +138,6 @@
     [dateFormat_End setDateFormat:dateFormatStr1];
     NSString * dateEndPrev = [dateFormat stringFromDate:EndOfWeek];
     
-    NSLog(@"EndDate:%@",dateEndPrev);
     return dateEndPrev;
 }
 

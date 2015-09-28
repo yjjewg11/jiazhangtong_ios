@@ -21,5 +21,6 @@ typedef void(^CallBack)(NSArray*);
 @property (assign, nonatomic) BOOL  isShowSave;
 @property (strong, nonatomic) CallBack myBlock;
 @property (strong, nonatomic) KGImageBrowseView * imgBrowseView;
+//@property (assign, nonatomic) NSInteger index;
 
 @end

@@ -94,7 +94,7 @@
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             
             [self.emojiMDict setObject:fileName forKey:emojiDomain.emojiName];
-            NSLog(@"requestFinished:%@====%@", url, fileName);
+//            NSLog(@"requestFinished:%@====%@", url, fileName);
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             

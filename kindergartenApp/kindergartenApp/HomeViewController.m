@@ -338,11 +338,13 @@
 - (IBAction)funBtnClicked:(UIButton *)sender {
     BaseViewController * baseVC = nil;
     switch (sender.tag) {
-        case 10:
+        case 10: {
+//            NSArray * array = [NSArray new];
+//            NSLog(@"====%@",  [array objectAtIndex:3]);
             baseVC = [[InteractViewController alloc] init];
 //            [self showChildView:sharedAdView];
             break;
-        case 11:
+        } case 11:
             baseVC = [[IntroductionViewController alloc] init];
             break;
         case 12:
