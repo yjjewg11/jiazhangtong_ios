@@ -42,7 +42,8 @@
         timeLabel.text = [KGNSStringUtil compareCurrentTime:date];
     }
     
-    [headImageView sd_setImageWithURL:[NSURL URLWithString:[KGHttpService sharedService].groupDomain.img] placeholderImage:[UIImage imageNamed:@"group_head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    NSString * groupImg = [[KGHttpService sharedService] getGroupImgByUUID:domain.groupuuid];
+    [headImageView sd_setImageWithURL:[NSURL URLWithString:groupImg] placeholderImage:[UIImage imageNamed:@"group_head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
     }];
     
