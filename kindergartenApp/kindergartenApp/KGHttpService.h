@@ -187,7 +187,7 @@
 //签到记录 begin
 
 //签到记录列表
-- (void)getStudentSignRecordList:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild;
+- (void)getStudentSignRecordList:(NSInteger)pageNo  success:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild;
 
 //签到记录 end
 

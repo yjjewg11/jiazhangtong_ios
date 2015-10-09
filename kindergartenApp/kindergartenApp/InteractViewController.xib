@@ -2,13 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8191"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InteractViewController">
             <connections>
                 <outlet property="contentView" destination="JhK-A6-yUq" id="NbU-e4-wt1"/>
-                <outlet property="myWebView" destination="dBa-8A-tfQ" id="VX3-7L-bfK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,19 +18,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhK-A6-yUq">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                    <subviews>
-                        <webView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBa-8A-tfQ">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </webView>
-                    </subviews>
                     <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="dBa-8A-tfQ" firstAttribute="top" secondItem="JhK-A6-yUq" secondAttribute="top" id="58B-fS-JMA"/>
-                        <constraint firstItem="dBa-8A-tfQ" firstAttribute="leading" secondItem="JhK-A6-yUq" secondAttribute="leading" id="Jb3-Mg-i2u"/>
-                        <constraint firstAttribute="bottom" secondItem="dBa-8A-tfQ" secondAttribute="bottom" id="hs3-ca-hgT"/>
-                        <constraint firstAttribute="trailing" secondItem="dBa-8A-tfQ" secondAttribute="trailing" id="t7T-DP-2Cw"/>
-                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

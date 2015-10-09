@@ -20,7 +20,6 @@
 
 @interface InteractViewController () <KGReFreshViewDelegate> {
     ReFreshTableViewController * reFreshView;
-    IBOutlet UIWebView * myWebView;
     NSArray * interactArray;
 }
 

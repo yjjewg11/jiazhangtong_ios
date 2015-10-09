@@ -895,10 +895,12 @@
 #pragma 签到记录 begin
 
 //签到记录列表
-- (void)getStudentSignRecordList:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild {
+- (void)getStudentSignRecordList:(NSInteger)pageNo  success:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSDictionary * dic = @{@"pageNo" : [NSNumber numberWithInteger:pageNo]};
     
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getStudentSignRecordUrl]
-                                  parameters:nil
+                                  parameters:dic
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
@@ -1079,7 +1081,7 @@
 - (void)getFavoritesList:(NSInteger)pageNo success:(void (^)(NSArray * favoritesArray))success faild:(void (^)(NSString * errorMsg))faild {
     
     NSDictionary * dic = @{@"PageNo" : [NSNumber numberWithInteger:pageNo]};
-    NSLog(@"%@",_loginRespDomain);
+    
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getFavoritesListUrl]
                                   parameters:dic
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
