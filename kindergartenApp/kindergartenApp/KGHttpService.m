@@ -861,6 +861,7 @@
                                      }
                                      failure:^(NSURLSessionDataTask* task, NSError* error) {
                                          [self requestErrorCode:error faild:faild];
+                                         NSLog(@"%@",error);
                                      }];
 }
 

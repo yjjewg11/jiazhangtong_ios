@@ -11,6 +11,8 @@
 #define URL(baseURL, businessURL) [NSString stringWithFormat:@"%@%@", baseURL, businessURL];
 
 #define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
+//#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
+
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单
 #define loginURL             @"rest/userinfo/login.json"             //登录
 #define logoutURL            @"rest/userinfo/logout.json"            //登出
@@ -57,6 +59,8 @@
 
 //#define saveTeacherJudgesURL  @"rest/teachingjudge/save.json" //通讯录
 #define specialtyCoursesURL   @"px/index.html"  //特长课程
+
+
 #define articleListURL        @"rest/share/articleList.json"  //精品文章
 #define studentSignRecordURL  @"rest/studentSignRecord/queryMy.json"  //签到记录
 
@@ -264,8 +268,9 @@
 
 //精品文章详情
 + (NSString *)getArticleInfoListUrl:(NSString *)uuid {
-    return [NSString stringWithFormat:@"%@rest/share/getArticleJSON.json?uuid=%@", baseServiceURL, uuid];
+    return [NSString stringWithFormat:@"%@rest/share/getArticleUrlJSON.json?uuid=%@", baseServiceURL, uuid];
 }
+
 
 //签到记录
 + (NSString *)getStudentSignRecordUrl {

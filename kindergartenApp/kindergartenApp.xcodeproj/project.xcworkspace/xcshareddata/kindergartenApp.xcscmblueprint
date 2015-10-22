@@ -1,0 +1,32 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E53BA3B1910B5C13A105D000202DEBFA867B3EEA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "6fab51ae-0ef0-1b48-a761-3e95f7517cbf++5379" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6fab51ae-0ef0-1b48-a761-3e95f7517cbf++5379" : 0,
+    "E53BA3B1910B5C13A105D000202DEBFA867B3EEA" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2DD5B6D7-3EEF-4060-AE63-BE8533F98653",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6fab51ae-0ef0-1b48-a761-3e95f7517cbf++5379" : "jiazhangtong_ios_wjltz\/kindergartenApp\/kindergartenApp\/Frameworks\/MJRefresh\/MJRefresh.bundle\/",
+    "E53BA3B1910B5C13A105D000202DEBFA867B3EEA" : "jiazhangtong_ios_wjltz\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "kindergartenApp",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "kindergartenApp\/kindergartenApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.1.240",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6fab51ae-0ef0-1b48-a761-3e95f7517cbf++5379"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yjjewg11\/jiazhangtong_ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E53BA3B1910B5C13A105D000202DEBFA867B3EEA"
+    }
+  ]
+}

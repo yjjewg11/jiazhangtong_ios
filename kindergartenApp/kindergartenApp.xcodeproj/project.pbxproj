@@ -16,7 +16,7 @@
 		2457FD031B711A65006A3AB7 /* AddressbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2457FD011B711A65006A3AB7 /* AddressbookTableViewCell.xib */; };
 		2457FD0B1B712C13006A3AB7 /* FaceBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457FD061B712C13006A3AB7 /* FaceBoard.m */; };
 		2457FD0D1B712C13006A3AB7 /* GrayPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457FD0A1B712C13006A3AB7 /* GrayPageControl.m */; };
-		246187F21BB9875800D7DDA8 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246187F11BB9875800D7DDA8 /* Bugly.framework */; settings = {ASSET_TAGS = (); }; };
+		246187F21BB9875800D7DDA8 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246187F11BB9875800D7DDA8 /* Bugly.framework */; };
 		2463BF741B76593D00467B32 /* libiconv.2.4.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2463BF731B76593D00467B32 /* libiconv.2.4.0.dylib */; };
 		2469E2131B5B5E45004888A4 /* LoginRespDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469E2121B5B5E45004888A4 /* LoginRespDomain.m */; };
 		2469E2161B5B6039004888A4 /* ResMsgDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469E2151B5B6039004888A4 /* ResMsgDomain.m */; };
@@ -3152,7 +3152,7 @@
 		248B6A511B19A39200FCB98F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = funi;
 				TargetAttributes = {
 					248B6A581B19A39200FCB98F = {
@@ -3625,6 +3625,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -3717,6 +3718,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/UMAnalytics_Sdk_3.5.10",
 					"$(PROJECT_DIR)/kindergartenApp/Share_4.2.3/UMessage_Sdk_1.1.0",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = "问界互动家园";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3755,6 +3757,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/UMAnalytics_Sdk_3.5.10",
 					"$(PROJECT_DIR)/kindergartenApp/Share_4.2.3/UMessage_Sdk_1.1.0",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = "问界互动家园";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

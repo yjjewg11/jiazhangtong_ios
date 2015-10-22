@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GiftwareArticlesInfoViewController">
             <connections>
                 <outlet property="contentScrollView" destination="fMD-t3-7Lv" id="cae-Od-Feb"/>
                 <outlet property="contentView" destination="R2w-uO-8XB" id="ii9-mV-bye"/>
-                <outlet property="createUserLabel" destination="6it-xu-0Qt" id="I0C-k0-Vai"/>
                 <outlet property="dzBtn" destination="428-LE-jEd" id="pQJ-bj-PXc"/>
                 <outlet property="dzImageView" destination="Nqq-zx-brt" id="U0u-IR-2aD"/>
                 <outlet property="favBtn" destination="pcS-43-jew" id="U1I-Ll-4H5"/>
                 <outlet property="favImageView" destination="yNZ-Ye-nrD" id="2P9-G1-V86"/>
                 <outlet property="myWebView" destination="Eba-Co-a5l" id="G7Q-RG-umR"/>
-                <outlet property="timeLabel" destination="VK4-QC-NtL" id="agM-RD-uB9"/>
-                <outlet property="titleLabel" destination="WFH-zg-nYI" id="Uar-31-RVZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,42 +26,22 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMD-t3-7Lv">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ysZ-0d-lPX">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WFH-zg-nYI">
-                                            <rect key="frame" x="15" y="15" width="290" height="15"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="15" id="gDP-ed-8Nv"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eba-Co-a5l">
-                                            <rect key="frame" x="15" y="40" width="290" height="10"/>
+                                        <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eba-Co-a5l">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </webView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6it-xu-0Qt">
-                                            <rect key="frame" x="208" y="60" width="100" height="13"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VK4-QC-NtL">
-                                            <rect key="frame" x="108" y="83" width="200" height="13"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="WFH-zg-nYI" firstAttribute="top" secondItem="ysZ-0d-lPX" secondAttribute="top" constant="15" id="Jq1-d6-qEy"/>
-                                        <constraint firstItem="WFH-zg-nYI" firstAttribute="leading" secondItem="ysZ-0d-lPX" secondAttribute="leading" constant="15" id="MEX-sO-hfb"/>
-                                        <constraint firstAttribute="trailing" secondItem="WFH-zg-nYI" secondAttribute="trailing" constant="15" id="dD8-4c-JzO"/>
+                                        <constraint firstItem="Eba-Co-a5l" firstAttribute="top" secondItem="ysZ-0d-lPX" secondAttribute="top" id="1BD-wW-ooX"/>
+                                        <constraint firstAttribute="trailing" secondItem="Eba-Co-a5l" secondAttribute="trailing" id="9H8-Sl-eHt"/>
+                                        <constraint firstAttribute="bottom" secondItem="Eba-Co-a5l" secondAttribute="bottom" id="NHz-HH-JBO"/>
+                                        <constraint firstItem="Eba-Co-a5l" firstAttribute="leading" secondItem="ysZ-0d-lPX" secondAttribute="leading" id="iea-0d-9HK"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -296,7 +273,7 @@
                         <constraint firstAttribute="bottom" secondItem="k3R-ZI-PAP" secondAttribute="bottom" id="IrR-e4-Fx0"/>
                         <constraint firstItem="k3R-ZI-PAP" firstAttribute="leading" secondItem="R2w-uO-8XB" secondAttribute="leading" id="bNj-3a-b8H"/>
                         <constraint firstItem="fMD-t3-7Lv" firstAttribute="leading" secondItem="R2w-uO-8XB" secondAttribute="leading" id="eiw-Tt-XEK"/>
-                        <constraint firstItem="k3R-ZI-PAP" firstAttribute="top" secondItem="fMD-t3-7Lv" secondAttribute="bottom" id="kVB-cd-Zun"/>
+                        <constraint firstItem="k3R-ZI-PAP" firstAttribute="bottom" secondItem="fMD-t3-7Lv" secondAttribute="bottom" id="kVB-cd-Zun"/>
                     </constraints>
                 </view>
             </subviews>

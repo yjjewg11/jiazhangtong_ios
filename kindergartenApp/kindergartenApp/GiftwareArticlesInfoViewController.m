@@ -21,11 +21,8 @@
 @interface GiftwareArticlesInfoViewController () <UIWebViewDelegate> {
     
     IBOutlet UIScrollView *contentScrollView;
-    IBOutlet UILabel * titleLabel;
     IBOutlet UIWebView * myWebView;
-    IBOutlet UILabel * createUserLabel;
-    IBOutlet UILabel * timeLabel;
-    IBOutlet UIView * bottomFunView;
+
     IBOutlet UIImageView * dzImageView;
     IBOutlet UIButton *dzBtn;
     
@@ -34,7 +31,10 @@
     PopupView * popupView;
     ShareViewController * shareVC;
     AnnouncementDomain * announcementDomain;
+    
 }
+
+@property (strong, nonatomic) NSString * urlStr;
 
 @end
 
@@ -44,20 +44,20 @@
     [super viewDidLoad];
     
     self.title = @"文章详情";
-    
     myWebView.backgroundColor = [UIColor clearColor];
     myWebView.opaque = NO;
-    myWebView.scrollView.scrollEnabled = NO;
-    myWebView.delegate = self;
-    [self getArticlesInfo];
+    contentScrollView.scrollEnabled = NO;
+    myWebView.scrollView.scrollEnabled = YES;
     
+    myWebView.delegate = self;
+    [self getArticlesInfo];//获取精品文章详情
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (announcementDomain) {
         [[KGHUD sharedHud] show:self.view];
-        [self performSelector:@selector(lazyEx) withObject:self afterDelay:1.0];
+        [self performSelector:@selector(lazyUrlExc) withObject:self afterDelay:1.0];
     }
 }
 
@@ -65,26 +65,24 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 精品文章详情，点赞收藏信息
 - (void)getArticlesInfo {
     
-    [[KGHttpService sharedService] getArticlesInfo:_annuuid success:^(AnnouncementDomain *announcementObj) {
-        
+    [[KGHttpService sharedService] getArticlesInfo:_annuuid success:^(AnnouncementDomain *announcementObj)
+    {
         announcementDomain = announcementObj;
+        self.urlStr = announcementDomain.share_url;
+        
         [self resetViewParam];
-        
-    } faild:^(NSString *errorMsg) {
-        
+    }
+    faild:^(NSString *errorMsg)
+    {
     }];
 }
 
 - (void)resetViewParam {
-    titleLabel.text = announcementDomain.title;
     
-    announcementDomain.message = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>",announcementDomain.message];
-    
-    [myWebView loadHTMLString:announcementDomain.message baseURL:nil];
-    timeLabel.text = announcementDomain.create_time;
-    createUserLabel.text = announcementDomain.create_user;
+    [myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
     
     if(announcementDomain.dianzan && !announcementDomain.dianzan.canDianzan) {
         dzImageView.image = [UIImage imageNamed:@"zan2"];
@@ -224,38 +222,18 @@
     }];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    
-    [[KGHUD sharedHud] show:self.view];
-    [self performSelector:@selector(lazyEx) withObject:self afterDelay:0.5];
+#pragma mark - 重新设置webview contentsize
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    myWebView.scrollView.contentSize = CGSizeMake(0, myWebView.scrollView.contentSize.height + 100);
 }
 
-#pragma mark - 延迟执行
-- (void)lazyEx{
-    
+#pragma mark - 最新通过url加载webview数据
+- (void)lazyUrlExc
+{
     [[KGHUD sharedHud] hide:self.view];
     
-    //获取页面高度（像素）
-    NSString * clientheight_str = [myWebView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
-    float clientheight = [clientheight_str floatValue];
-    //设置到WebView上
-    myWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, clientheight);
-    //获取WebView最佳尺寸（点）
-    CGSize frame = [myWebView sizeThatFits:myWebView.frame.size];
-    //获取内容实际高度（像素）
-    NSString * height_str= [myWebView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
-    float height = [height_str floatValue];
-    //内容实际高度（像素）* 点和像素的比
-    height = height * frame.height / clientheight;
-    //再次设置WebView高度（点）
-    myWebView.frame = CGRectMake(0, CGRectGetMaxY(titleLabel.frame), self.view.frame.size.width, height);
-    
-    
-    createUserLabel.y = CGRectGetMaxY(myWebView.frame) + Number_Ten;
-    createUserLabel.x = KGSCREEN.size.width - createUserLabel.width - CELLPADDING;
-    timeLabel.y = CGRectGetMaxY(createUserLabel.frame) + Number_Ten;
-    timeLabel.x = KGSCREEN.size.width - timeLabel.width - CELLPADDING;
-    contentScrollView.contentSize = CGSizeMake(KGSCREEN.size.width, timeLabel.height + timeLabel.y + CELLPADDING);
+    [myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
 }
 
 @end

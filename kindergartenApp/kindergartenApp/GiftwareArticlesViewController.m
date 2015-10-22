@@ -26,6 +26,7 @@
 @implementation GiftwareArticlesViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.title = @"精品文章";
@@ -95,8 +96,11 @@
  */
 - (void)didSelectRowCallBack:(id)baseDomain tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     AnnouncementDomain * annDomain = (AnnouncementDomain *)baseDomain;
+    
     GiftwareArticlesInfoViewController * infoVC = [[GiftwareArticlesInfoViewController alloc] init];
+    
     infoVC.annuuid = annDomain.uuid;
+    
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 

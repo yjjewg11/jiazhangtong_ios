@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString * groupuuid; //关联学校id,需要转换成学校
 @property (strong, nonatomic) NSString * title; 	//标题
 @property (strong, nonatomic) NSString * message;	     //HTML	内容
+@property (strong, nonatomic) NSString * url;            //网页url
 @property (strong, nonatomic) NSString * create_user;	 //创建人名
 @property (strong, nonatomic) NSString * create_useruuid;//创建人uuid
 @property (strong, nonatomic) NSString * create_time;	 //创建时间
