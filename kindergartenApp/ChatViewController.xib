@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatViewController">
+            <connections>
+                <outlet property="chatTableView" destination="w4X-zA-hKK" id="fom-Za-C6T"/>
+                <outlet property="contentView" destination="9On-r8-zgb" id="ESK-S3-ttb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9On-r8-zgb">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="w4X-zA-hKK">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="528"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="w4X-zA-hKK" firstAttribute="top" secondItem="9On-r8-zgb" secondAttribute="top" id="6qx-fS-nfk"/>
+                        <constraint firstAttribute="bottom" secondItem="w4X-zA-hKK" secondAttribute="bottom" constant="40" id="7mh-7m-Won"/>
+                        <constraint firstAttribute="trailing" secondItem="w4X-zA-hKK" secondAttribute="trailing" id="TF3-3P-fW8"/>
+                        <constraint firstItem="w4X-zA-hKK" firstAttribute="leading" secondItem="9On-r8-zgb" secondAttribute="leading" id="mHf-RA-4oq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9On-r8-zgb" secondAttribute="trailing" id="5ay-E2-G94"/>
+                <constraint firstAttribute="bottom" secondItem="9On-r8-zgb" secondAttribute="bottom" id="84Q-4K-X1Y"/>
+                <constraint firstItem="9On-r8-zgb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GPx-1y-Qoe"/>
+                <constraint firstItem="9On-r8-zgb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="M1b-25-5Ib"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

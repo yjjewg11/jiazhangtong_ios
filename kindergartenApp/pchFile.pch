@@ -1,0 +1,33 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "UIView+Extension.h"
+#import "UIBarButtonItem+Extension.h"
+#import "UIWindow+Extension.h"
+//#import "NSDate+Extension.h"
+//#import "NSString+Extension.h"
+//#import "NSString+Emoji.h"
+//#import "UITextView+Extension.h"
+#import "SystemResource.h"
+
+
+
+#ifdef DEBUG // 处于开发阶段
+#define FuniLog(...) NSLog(__VA_ARGS__)
+#else // 处于发布阶段
+#define FuniLog(...)
+#endif
+
+#endif
