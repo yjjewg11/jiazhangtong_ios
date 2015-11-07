@@ -15,7 +15,6 @@
 
 @interface SpCourseVC () <UITableViewDataSource,UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray * hotSpCourses;  //热门课程数据
 
 @end
 
@@ -45,15 +44,6 @@
 #pragma mark - Table view data source
 
 #pragma mark - 数据表方法
-- (NSArray *)hotSpCourses
-{
-    if(_hotSpCourses == nil)
-    {
-        _hotSpCourses = [NSArray array];
-    }
-    return _hotSpCourses;
-}
-
 - (void)setUpTableViewWithFrame:(CGRect)rect
 {
     self.tableView.frame = rect;
@@ -141,11 +131,6 @@
     {
         [self.delegate pushToDetailVC:self dataSourceType:1 selIndexPath:indexPath];
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
 }
 
 

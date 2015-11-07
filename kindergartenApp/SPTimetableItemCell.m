@@ -73,4 +73,10 @@
     return cell;
 }
 
+- (IBAction)moreCourseBtnClick:(id)sender
+{
+    NSLog(@"dawdaw");
+}
+
+
 @end

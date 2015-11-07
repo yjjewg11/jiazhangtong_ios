@@ -16,8 +16,7 @@
 
 @implementation BaseViewController
 
-
--(void) viewDidAppear:(BOOL)animated
+- (void) viewDidAppear:(BOOL)animated
 {
     NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
     [MobClick beginLogPageView:cName];

@@ -66,12 +66,14 @@
 }
 
 #pragma mark - 精品文章详情，点赞收藏信息
-- (void)getArticlesInfo {
+- (void)getArticlesInfo
+{
     
     [[KGHttpService sharedService] getArticlesInfo:_annuuid success:^(AnnouncementDomain *announcementObj)
     {
         announcementDomain = announcementObj;
         self.urlStr = announcementDomain.share_url;
+
         
         [self resetViewParam];
     }
@@ -147,11 +149,13 @@
 }
 
 //取消点赞
-- (void)delDZ:(UIButton *)sender{
+- (void)delDZ:(UIButton *)sender
+{
     [[KGHUD sharedHud] show:self.view];
 
     sender.enabled = NO;
-    [[KGHttpService sharedService] delDZ:announcementDomain.uuid success:^(NSString *msgStr) {
+    [[KGHttpService sharedService] delDZ:announcementDomain.uuid success:^(NSString *msgStr)
+    {
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
 
         dzImageView.image = [UIImage imageNamed:@"zan1"];
@@ -166,8 +170,10 @@
 
 
 //分享
-- (void)shareClicked {
-    if(!popupView) {
+- (void)shareClicked
+{
+    if(!popupView)
+    {
         popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
         popupView.alpha = Number_Zero;
         
@@ -185,7 +191,8 @@
 }
 
 //保存收藏
-- (void)saveFavorites:(UIButton *)button {
+- (void)saveFavorites:(UIButton *)button
+{
     [[KGHUD sharedHud] show:self.view];
     
     FavoritesDomain * domain = [[FavoritesDomain alloc] init];
@@ -194,6 +201,7 @@
     domain.reluuid = announcementDomain.uuid;
     domain.createtime = [KGDateUtil presentTime];
     button.enabled = NO;
+    
     [[KGHttpService sharedService] saveFavorites:domain success:^(NSString *msgStr) {
         favImageView.image = [UIImage imageNamed:@"shoucang2"];
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];

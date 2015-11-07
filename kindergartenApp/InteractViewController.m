@@ -18,10 +18,16 @@
 #import "PostTopicViewController.h"
 #import "KGHttpUrl.h"
 
-@interface InteractViewController () <KGReFreshViewDelegate> {
+#import "AdMoGoDelegateProtocol.h"
+#import "AdMoGoView.h"
+#import "AdMoGoWebBrowserControllerUserDelegate.h"
+
+@interface InteractViewController () <KGReFreshViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate> {
     ReFreshTableViewController * reFreshView;
     NSArray * interactArray;
 }
+
+@property (strong, nonatomic) AdMoGoView * adView;
 
 @end
 
@@ -43,6 +49,17 @@
     }
     
     [self initReFreshView];
+    
+    //芒果横幅广告
+    self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone
+                                         adType:AdViewTypeNormalBanner                                adMoGoViewDelegate:self
+                                      autoScale:YES];
+    self.adView.adWebBrowswerDelegate = self;
+    self.adView.frame = CGRectMake(0.0, 0.0, APPWINDOWWIDTH, 50.0);
+
+    if ([[UIDevice currentDevice].systemVersion floatValue] >=7.0) {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -118,9 +135,25 @@
 
 - (UITableViewCell *)createTableViewCell:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     // 获得cell
-    TopicTableViewCell * cell = [TopicTableViewCell cellWithTableView:tableView];
-    cell.topicFrame = reFreshView.dataSource[indexPath.row];
-    return cell;
+    if(indexPath.row == 0)
+    {
+        UITableViewCell * cell = [[UITableViewCell alloc] init];
+        
+        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        
+        [cell addSubview:self.adView];
+        
+        return cell;
+    }
+    
+    else
+    {
+        TopicTableViewCell * cell = [TopicTableViewCell cellWithTableView:tableView];
+        cell.topicFrame = reFreshView.dataSource[indexPath.row - 1];
+        return cell;
+    }
+    
+
 }
 
 //选中cell
@@ -137,7 +170,13 @@
  *  @return 返回cell的高
  */
 - (CGFloat)tableViewCellHeight:(NSIndexPath *)indexPath {
-    TopicFrame *frame = reFreshView.dataSource[indexPath.row];
+    
+    if (indexPath.row == 0)
+    {
+        return 50;
+    }
+    
+    TopicFrame *frame = reFreshView.dataSource[indexPath.row - 1];
     return frame.cellHeight;
 }
 
@@ -153,6 +192,96 @@
     }
     return frames;
 }
+
+#pragma mark - 芒果
+#pragma mark - 芒果ad
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark AdMoGoDelegate delegate
+/*
+ 返回广告rootViewController
+ */
+- (UIViewController *)viewControllerForPresentingModalView{
+    return self;
+}
+
+/**
+ * 广告开始请求回调
+ */
+- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告开始请求回调");
+}
+/**
+ * 广告接收成功回调
+ */
+- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告接收成功回调");
+}
+/**
+ * 广告接收失败回调
+ */
+- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error{
+    NSLog(@"广告接收失败回调");
+}
+/**
+ * 点击广告回调
+ */
+- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"点击广告回调");
+}
+/**
+ *You can get notified when the user delete the ad
+ 广告关闭回调
+ */
+- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告关闭回调");
+}
+
+#pragma mark -
+#pragma mark AdMoGoWebBrowserControllerUserDelegate delegate
+
+/*
+ 浏览器将要展示
+ */
+- (void)webBrowserWillAppear{
+    NSLog(@"浏览器将要展示");
+}
+
+/*
+ 浏览器已经展示
+ */
+- (void)webBrowserDidAppear{
+    NSLog(@"浏览器已经展示");
+}
+
+/*
+ 浏览器将要关闭
+ */
+- (void)webBrowserWillClosed{
+    NSLog(@"浏览器将要关闭");
+}
+
+/*
+ 浏览器已经关闭
+ */
+- (void)webBrowserDidClosed{
+    NSLog(@"浏览器已经关闭");
+}
+/**
+ *直接下载类广告 是否弹出Alert确认
+ */
+-(BOOL)shouldAlertQAView:(UIAlertView *)alertView{
+    return NO;
+}
+
+- (void)webBrowserShare:(NSString *)url{
+    
+}
+
 
 
 @end

@@ -7,9 +7,19 @@
 //
 
 #import "SPSchoolDomain.h"
+#import "MJExtension.h"
 
 @implementation SPSchoolDomain
 
+//属性名映射
++(void)initialize{
+    [super initialize];
+    [self setupReplacedKeyFromPropertyName:^NSDictionary *{
+        return @{
+                 @"groupDescription":@"description",
+                 };
+    }];
+}
 
 
 @end

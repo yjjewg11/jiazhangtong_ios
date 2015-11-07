@@ -127,6 +127,13 @@
 + (NSString *)getSpecialtyCourseDetailURL:(NSString *)uuid;
 + (NSString *)getSpecialtyCourseDetailSchoolInfoURL:(NSString *)groupuuid;
 + (NSString *)getSpecialtyCourseCommentURL;
++ (NSString *)getSpecialtyTeacherListURL;
++ (NSString *)getSpecialtyTeacherDetailURL:(NSString *)teacheruuid;
+
+//优惠活动
++ (NSString *)getYouHuiListURL:(NSString *)map_point pageNo:(NSInteger)pageNo;
++ (NSString *)getYouHuiInfoListUrl:(NSString *)uuid;
+
 //精品文章
 + (NSString *)getArticleListUrl;
 

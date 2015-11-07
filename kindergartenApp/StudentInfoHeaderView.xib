@@ -39,6 +39,7 @@
                 <outlet property="funBtn" destination="kdO-Fh-Ypn" id="35B-2v-DQX"/>
                 <outlet property="titleLabel" destination="VMd-42-csj" id="9t6-Ks-apx"/>
             </connections>
+            <point key="canvasLocation" x="245" y="208"/>
         </view>
     </objects>
     <resources>

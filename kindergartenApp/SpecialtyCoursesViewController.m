@@ -9,7 +9,6 @@
 
 #import "SpecialtyCoursesViewController.h"
 #import "AFNetworking.h"
-#import "SDCycleScrollView.h"
 #import "KGHttpService.h"
 #import "KGHttpUrl.h"
 #import "SpCourseItem.h"
@@ -17,22 +16,26 @@
 #import "SpCourseVC.h"
 #import "SPCourseSchoolVC.h"
 #import "KGHUD.h"
+#import "SPCourseDomain.h"
+#import "MJExtension.h"
+#import "SPHotCourseVC.h"
+#import "SPCourseDetailVC.h"
+#import <CoreLocation/CoreLocation.h>
 
+#import "AdMoGoDelegateProtocol.h"
+#import "AdMoGoView.h"
+#import "AdMoGoWebBrowserControllerUserDelegate.h"
 
-@interface SpecialtyCoursesViewController () <SDCycleScrollViewDelegate>
-{
-    __weak IBOutlet UIView *adScrollView;
-    __weak IBOutlet UIView *courseView;
-    __weak IBOutlet UIScrollView *contentScrollView;
-}
+@interface SpecialtyCoursesViewController () <SPHotCourseVCDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
+
+@property (strong, nonatomic) AdMoGoView * adView;
+@property (strong, nonatomic) UIView * courseView;
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIView * sepView;
 
 @property (strong, nonatomic) NSArray * adPictures;
 
-@property (strong, nonatomic) NSArray * spCourseDomains;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint * spCourseViewHeight;
-
-@property (strong, nonatomic) SpCourseVC * tableVC;
+@property (strong, nonatomic) NSMutableArray * spCourseDomains;
 
 @property (strong, nonatomic) NSArray * hotSpCourses;
 
@@ -40,15 +43,63 @@
 
 @property (assign, nonatomic) NSInteger reqIndex;
 
+@property (strong, nonatomic) SPHotCourseVC *hotCourseTable;
+
+@property (assign, nonatomic) CGFloat contentHeight;
+
+@property (strong, nonatomic) NSString * map_point;
+
+@property (strong, nonatomic) CLLocationManager * mgr;
+
 @end
 
 @implementation SpecialtyCoursesViewController
 
+- (CLLocationManager *)mgr
+{
+    if (_mgr == nil)
+    {
+        _mgr = [[CLLocationManager alloc] init];
+    }
+    return _mgr;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:YES];
+    [super viewDidAppear:animated];
+
+    self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
+                                  adMoGoViewDelegate:self];
     
-    contentScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.tableVC.tableView.frame));
+    self.adView.adWebBrowswerDelegate = self;
+    self.adView.frame = CGRectMake(0.0, 0, APPWINDOWWIDTH, 150.0);
+    
+    [self.scrollView addSubview:self.adView];
+    
+}
+
+- (SPHotCourseVC *)hotCourseTable
+{
+    if (_hotCourseTable == nil)
+    {
+        _hotCourseTable = [[SPHotCourseVC alloc] init];
+        _hotCourseTable.delegate = self;
+        CGFloat tableX = Number_Zero;
+        CGFloat tableY = _sepView.frame.size.height + _courseView.frame.size.height + APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 20 + Cell_Height2 + 10;
+        CGFloat tableW = App_Frame_Width;
+        CGFloat tableH = Row_Height * self.hotSpCourses.count + Cell_Height3 + Cell_Height2;
+        _hotCourseTable.tableFrame = CGRectMake(tableX, tableY, tableW, tableH);
+    }
+    return _hotCourseTable;
+}
+
+- (NSArray *)hotSpCourses
+{
+    if (_hotSpCourses == nil)
+    {
+        _hotSpCourses = [NSArray array];
+    }
+    return _hotSpCourses;
 }
 
 - (NSMutableArray *)spCourseDatakeys
@@ -60,21 +111,6 @@
     return _spCourseDatakeys;
 }
 
-- (SpCourseVC * )tableVC
-{
-    if (_tableVC == nil)
-    {
-        _tableVC = [[SpCourseVC alloc] init];
-        CGFloat tableX = Number_Zero;
-        CGFloat tableY = CGRectGetMaxY(courseView.frame) + self.spCourseViewHeight.constant - Number_Ten;
-        CGFloat tableW = App_Frame_Width;
-        CGFloat tableH = Row_Height * 10 + Cell_Height3;
-        _tableVC.tableFrame = CGRectMake(tableX, tableY, tableW, tableH);
-        _tableVC.showHeaderView = YES;
-    }
-    return _tableVC;
-}
-
 - (NSArray * )adPictures
 {
     if (_adPictures == nil)
@@ -84,11 +120,11 @@
     return _adPictures;
 }
 
-- (NSArray * )spCourseDomains
+- (NSMutableArray * )spCourseDomains
 {
     if (_spCourseDomains == nil)
     {
-        _spCourseDomains = [NSArray array];
+        _spCourseDomains = [NSMutableArray array];
     }
     return _spCourseDomains;
 }
@@ -97,46 +133,26 @@
 {
     [super viewDidLoad];
     self.title = @"特长课程";
+    _scrollView = [[UIScrollView alloc] init];
+    _scrollView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT);
+
     
-    for (UIView *v in self.view.subviews)
+    _courseView = [[UIView alloc] init];
+    _courseView.frame = CGRectMake(0, 150, 1, 1);
+    
+    _sepView = [[UIView alloc] init];
+    _sepView.frame = CGRectMake(0, 1, APPWINDOWWIDTH, 20);
+    _sepView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+
+    [self.view addSubview:_scrollView];
+    [self loadSPCourse];
+    [self getLocationData];
+    
+    for (UIView *v in _scrollView.subviews)
     {
         v.hidden = YES;
     }
-    
-    [self loadAdPicts];
-    
-    [self loadSPCourse];
-    
-    [self setUpAdScroll];//创建滚动广告
-    
-    [self setUpSPCoursesTable];
-}
-
-#pragma mark - SDCycleScrollViewDelegate
-- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
-{
-    //试一试
-}
-
-#pragma mark - 创建图片轮播器
-- (void)setUpAdScroll
-{
-    SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:adScrollView.frame imageURLStringsGroup:self.adPictures];
-    cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-    cycleScrollView2.delegate = self;
-    cycleScrollView2.dotColor = [UIColor redColor]; // 自定义分页控件小圆标颜色
-    cycleScrollView2.placeholderImage = [UIImage imageNamed:@"placeholder"];
-    [adScrollView addSubview:cycleScrollView2];
-}
-
-#pragma mark - 从接口加载广告内容
-- (void)loadAdPicts
-{
-    self.adPictures = @[
-                        @"https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a4b3d7085dee3d6d2293d48b252b5910/0e2442a7d933c89524cd5cd4d51373f0830200ea.jpg",
-                        @"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
-                        @"http://c.hiphotos.baidu.com/image/w%3D400/sign=c2318ff84334970a4773112fa5c8d1c0/b7fd5266d0160924c1fae5ccd60735fae7cd340d.jpg"
-                        ];
 }
 
 #pragma mark - 加载特长课程分类
@@ -146,33 +162,91 @@
     
     [[KGHttpService sharedService] getSPCourseType:^(NSArray *spCourseTypeArr)
     {
-        [[KGHUD sharedHud] hide:self.view];
+        self.spCourseDomains = [NSMutableArray arrayWithArray:spCourseTypeArr];
         
-        self.spCourseDomains = spCourseTypeArr;
+        SPCourseTypeDomain * totalDomain = [[SPCourseTypeDomain alloc] init];
+        totalDomain.datavalue = @"查看全部";
+        totalDomain.datakey = -1;
+        
+        [self.spCourseDomains addObject:totalDomain];
+        
         [self setUpSPCourses];
+        
+        [self loadHotCourse];  //加载热门课程
         
         [self responseHandler];
     }
     faild:^(NSString *errorMsg)
     {
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
-        [self responseHandler];
+    }];
+}
+
+#pragma mark - 加载热门课程
+- (void)loadHotCourse
+{
+    if (self.map_point == nil)
+    {
+        self.map_point = @"";
+    }
+    
+    [[KGHttpService sharedService] getSPHotCourse:self.map_point success:^(SPDataListVO *hotCourseList)
+    {
+        [[KGHUD sharedHud] hide:self.view];
+        
+        NSMutableArray * marr = [NSMutableArray array];
+        
+        for (NSDictionary *d in hotCourseList.data)
+        {
+            SPCourseDomain * domain = [SPCourseDomain objectWithKeyValues:d];
+            
+            [marr addObject:domain];
+        }
+        
+        self.hotSpCourses = marr;
+        
+        [self setUpSPCoursesTable];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            self.contentHeight = CGRectGetMaxY(self.hotCourseTable.tableView.frame);
+            _scrollView.contentSize = CGSizeMake(0, self.contentHeight);
+        });
+        
+        self.hotCourseTable.hotSpCourses = marr;
+        
+        [self responseHandlerOfHotCourse];
+        
+        [self.hotCourseTable.tableView reloadData];
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
 }
 
 //请求之后的处理 需要判断是否还需要再次请求
-- (void)responseHandler {
-    self.reqIndex++;
+- (void)responseHandler
+{
     if(self.spCourseDomains.count == 0)
     {
         [self loadSPCourse];
     }
+}
+
+- (void)responseHandlerOfHotCourse
+{
+    self.reqIndex++;
+    if(self.hotSpCourses.count == 0)
+    {
+        [self loadHotCourse];
+    }
     else
     {
-        for (UIView *v in self.view.subviews)
+        for (UIView *v in _scrollView.subviews)
         {
             v.hidden = NO;
         }
+        _courseView.hidden = NO;
         self.reqIndex = Number_Zero;
     }
 }
@@ -180,13 +254,13 @@
 #pragma mark - 根据特长课程创建图标显示
 - (void)setUpSPCourses
 {
-    int totalloc = 4;
+    int totalloc = 5;
     CGFloat spcoursew = 53;
     CGFloat spcourseh = 71;
     CGFloat margin = (App_Frame_Width - totalloc * spcoursew) / (totalloc + 1);
     CGFloat lastH = 0;
     
-    for (NSInteger i = 0; i < self.spCourseDomains.count; i++)
+    for (NSInteger i = 0; i < self.spCourseDomains.count - 1; i++)
     {
         NSInteger row = (NSInteger)(i / totalloc);  //行号
         NSInteger loc = i % totalloc;               //列号
@@ -208,10 +282,18 @@
         
         item.frame = CGRectMake(itemX, itemY, itemW, itemH);
         lastH = CGRectGetMaxY(item.frame);
-        [courseView addSubview:item];
+        [_courseView addSubview:item];
     }
+    [self.spCourseDatakeys addObject:@""];
     
-    self.spCourseViewHeight.constant = Number_Ten + lastH;
+    [_courseView setSize:CGSizeMake(APPWINDOWWIDTH, Number_Ten + lastH)];
+    _courseView.hidden = YES;
+    
+    [_sepView setOrigin:CGPointMake(0, CGRectGetMaxY(_courseView.frame))];
+    _sepView.hidden = YES;
+    
+    [_scrollView addSubview:_sepView];
+    [_scrollView addSubview:_courseView];
 }
 
 #pragma mark - 选择课程按钮点击
@@ -235,19 +317,134 @@
     
     [marr exchangeObjectAtIndex:0 withObjectAtIndex:clickedIndex];
     [self.spCourseDatakeys exchangeObjectAtIndex:0 withObjectAtIndex:clickedIndex];
-    
+
     courseSchoolVC.courseNameList = marr;
     courseSchoolVC.firstJoinSelType = domain.datavalue;
     courseSchoolVC.firstJoinSelDatakey = domain.datakey;
     courseSchoolVC.courseDatakeys = self.spCourseDatakeys;
     
     [self.navigationController pushViewController:courseSchoolVC animated:YES];
-    
 }
 
 - (void)setUpSPCoursesTable
 {
-    [contentScrollView addSubview:self.tableVC.tableView];
+    [_scrollView addSubview:self.hotCourseTable.tableView];
+}
+
+- (void)spHotCourseVCSearchAllCourse:(SPHotCourseVC *)hotCourse
+{
+    SPCourseSchoolVC * courseSchoolVC = [[SPCourseSchoolVC alloc] init];
+    
+    NSMutableArray *marr = [NSMutableArray array];
+
+    for (NSInteger i=0;i<self.spCourseDomains.count;i++)
+    {
+        SPCourseTypeDomain *d = self.spCourseDomains[i];
+
+        [marr addObject:d.datavalue];
+    }
+    
+    [marr exchangeObjectAtIndex:0 withObjectAtIndex:self.spCourseDomains.count - 1];
+    [self.spCourseDatakeys exchangeObjectAtIndex:0 withObjectAtIndex:self.spCourseDomains.count - 1];
+    
+    courseSchoolVC.courseNameList = marr;
+    courseSchoolVC.firstJoinSelType = @"查看全部";
+    courseSchoolVC.firstJoinSelDatakey = -1;
+    courseSchoolVC.courseDatakeys = self.spCourseDatakeys;
+    
+    [self.navigationController pushViewController:courseSchoolVC animated:YES];
+}
+
+- (void)pushToDetailVC:(SPHotCourseVC *)hotCourseVC dataSourceType:(HotDataSourseType)type selIndexPath:(NSIndexPath *)indexPath
+{
+    SPCourseDetailVC * detailVC = [[SPCourseDetailVC alloc] init];
+    
+    SPCourseDomain * domain = self.hotSpCourses[indexPath.row];
+    
+    detailVC.uuid = domain.uuid;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+#pragma mark - 芒果广告
+#pragma mark - 芒果广告相关
+- (CGSize)adMoGoCustomSize
+{
+    return CGSizeMake(APPWINDOWWIDTH, 150);
+}
+
+#pragma mark AdMoGoDelegate delegate
+/*
+ 返回广告rootViewController
+ */
+- (UIViewController *)viewControllerForPresentingModalView{
+    return self;
+}
+/**
+ * 广告开始请求回调
+ */
+- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告开始请求回调");
+}
+/**
+ * 广告接收成功回调
+ */
+- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告接收成功回调");
+}
+/**
+ * 广告接收失败回调
+ */
+- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error{
+    NSLog(@"广告接收失败回调");
+}
+/**
+ * 点击广告回调
+ */
+- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"点击广告回调");
+}
+/**
+ *You can get notified when the user delete the ad
+ 广告关闭回调
+ */
+- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告关闭回调");
+}
+
+#pragma mark - 获取位置
+- (void)getLocationData
+{
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] > 8.0)
+    {
+        [self.mgr requestWhenInUseAuthorization];
+    }
+    
+    self.mgr.delegate = self;
+    
+    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    self.mgr.distanceFilter = 5.0;
+    
+    [self.mgr startUpdatingLocation];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    CLLocation *loc = [locations firstObject];
+    
+    self.map_point = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
+    
+    NSLog(@"%@",self.map_point);
+    
+    //请求数据，刷新表格
+    [self loadHotCourse];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%@",error);
 }
 
 @end

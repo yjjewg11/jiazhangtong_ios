@@ -25,6 +25,11 @@
 #import "SPCourseDetailDomain.h"
 #import "SPSchoolDomain.h"
 #import "SPCommentDomain.h"
+#import "SPCommentVO.h"
+#import "SPTeacherDetailDomain.h"
+#import "SPShareSaveDomain.h"
+#import "YouHuiDomain.h"
+#import "YouHuiDataListVO.h"
 
 @interface KGHttpService : NSObject
 
@@ -249,7 +254,7 @@
 #pragma mark - 特长课程
 - (void)getSPCourseType:(void(^)(NSArray * spCourseTypeArr))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getSPCourseList:(NSString *)type sort:(NSString *)sort success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getSPSchoolList:(NSString *)mapPoint sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild;
 
@@ -257,6 +262,21 @@
 
 - (void)getSPCourseDetailSchoolInfo:(NSString *)groupuuid success:(void (^)(SPSchoolDomain * spSchoolDetail))success faild:(void (^)(NSString * errorMsg))faild;
 
-- (void)getSPCourseComment:(NSString *)ext_uuid pageNo:(NSString *)pageNo success:(void (^)(SPCommentDomain * spComment))success faild:(void (^)(NSString * errorMsg))faild;
+- (void)getSPCourseComment:(NSString *)ext_uuid pageNo:(NSString *)pageNo success:(void (^)(SPCommentVO * commentVO))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)getSPHotCourse:(NSString *)map_point success:(void(^)(SPDataListVO * hotCourseList))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getSPTeacherList:(NSString *)groupuuid pageNo:(NSString *)pageNo success:(void (^)(SPDataListVO * dataListVo))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)getSPTeacherDetail:(NSString *)uuid success:(void (^)(SPTeacherDetailDomain * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)getSPCourseExtraFun:(NSString *)uuid success:(void(^)(SPShareSaveDomain * shareSaveDomain))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getSPSchoolExtraFun:(NSString *)uuid success:(void(^)(SPShareSaveDomain * shareSaveDomain))success faild:(void(^)(NSString * errorMsg))faild;
+
+#pragma mark - 优惠活动
+- (void)getYouHuiList:(NSString *)map_point pageNo:(NSInteger)pageNo success:(void (^)(YouHuiDataListVO * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)getYouHuiInfo:(NSString *)uuid success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild;
 
 @end

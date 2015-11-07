@@ -28,6 +28,7 @@
 #import "SPCourseTypeDomain.h"
 #import "SPCourseDetailDomain.h"
 
+
 @implementation KGHttpService
 
 
@@ -1140,7 +1141,6 @@
 - (void)saveFavorites:(FavoritesDomain *)favoritesDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getsaveFavoritesUrl] params:favoritesDomain.keyValues success:^(KGBaseDomain *baseDomain) {
-        
         [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
@@ -1188,29 +1188,6 @@
 //特长课程首页 start
 - (void)getSPCourseType:(void(^)(NSArray * spCourseTypeArr))success faild:(void(^)(NSString * errorMsg))faild
 {
-//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-//    
-//    [mgr GET:[KGHttpUrl getCourseTypeUrl] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-//     {
-//         //获取到字典数据
-//         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
-//         //控制超时
-//         [self sessionTimeoutHandle:baseDomain];
-//         
-//         if([baseDomain.ResMsg.status isEqualToString:String_Success])
-//         {
-//             NSArray * tempResp = [SPCourseTypeDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
-//             success(tempResp);
-//         }
-//         else
-//         {
-//             faild(baseDomain.ResMsg.message);
-//         }
-//     }
-//     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
-//     {
-//         [self requestErrorCode:error faild:faild];
-//     }];
     
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getCourseTypeUrl]
                                   parameters:nil
@@ -1232,16 +1209,10 @@
                                      }];
 
 }
-//特长课程首页 end
 
-
-
-//特长课程列表 start
-
-//班级列表
-- (void)getSPCourseList:(NSString *)type sort:(NSString *)sort success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getSPHotCourse:(NSString *)map_point success:(void(^)(SPDataListVO * hotCourseList))success faild:(void(^)(NSString * errorMsg))faild
 {
-    NSDictionary * dic = @{@"type":type,@"sort":sort};
+    NSDictionary *dic = @{@"map_point":map_point};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -1250,6 +1221,39 @@
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
          [self sessionTimeoutHandle:baseDomain];
          
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+//特长课程首页 end
+
+
+//特长课程列表 start
+
+//班级列表
+- (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild
+{
+    NSDictionary * dic = @{@"groupuuid":groupuuid,@"type":type,@"sort":sort,@"teacheruuid":teacheruuid,@"map_point":map_point};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSpecialtyCoursesListURL] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+ 
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
              SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
@@ -1325,18 +1329,78 @@
     
 }
 
-- (void)getSPCourseDetailSchoolInfo:(NSString *)groupuuid success:(void (^)(SPSchoolDomain * spSchoolDetail))success faild:(void (^)(NSString * errorMsg))faild
+- (void)getSPCourseExtraFun:(NSString *)uuid success:(void(^)(SPShareSaveDomain * shareSaveDomain))success faild:(void(^)(NSString * errorMsg))faild
 {
+    
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    [mgr GET:[KGHttpUrl getSpecialtyCourseDetailSchoolInfoURL:groupuuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    [mgr GET:[KGHttpUrl getSpecialtyCourseDetailURL:uuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
          [self sessionTimeoutHandle:baseDomain];
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
+             SPShareSaveDomain * tempResp = [[SPShareSaveDomain alloc] init];
+             
+             tempResp = [SPShareSaveDomain objectWithKeyValues:responseObject];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+- (void)getSPCourseDetailSchoolInfo:(NSString *)groupuuid success:(void (^)(SPSchoolDomain * spSchoolDetail))success faild:(void (^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSpecialtyCourseDetailSchoolInfoURL:groupuuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
              SPSchoolDomain * tempResp = [SPSchoolDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+- (void)getSPSchoolExtraFun:(NSString *)uuid success:(void(^)(SPShareSaveDomain * shareSaveDomain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSpecialtyCourseDetailSchoolInfoURL:uuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPShareSaveDomain * tempResp = [[SPShareSaveDomain alloc] init];
+             
+             tempResp = [SPShareSaveDomain objectWithKeyValues:responseObject];
+             
              success(tempResp);
          }
          else
@@ -1353,21 +1417,52 @@
 //特长课程 - 课程详情end
 
 //特长课程 - 课程评价start
-- (void)getSPCourseComment:(NSString *)ext_uuid pageNo:(NSString *)pageNo success:(void (^)(SPCommentDomain * spComment))success faild:(void (^)(NSString * errorMsg))faild
+- (void)getSPCourseComment:(NSString *)ext_uuid pageNo:(NSString *)pageNo success:(void (^)(SPCommentVO * commentVO))success faild:(void (^)(NSString * errorMsg))faild
 {
-    
     NSDictionary * dic = @{@"ext_uuid":ext_uuid,@"pageNo":pageNo};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
     [mgr GET:[KGHttpUrl getSpecialtyCourseCommentURL] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
+
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
          [self sessionTimeoutHandle:baseDomain];
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
-             SPCommentDomain * tempResp = [SPCommentDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             SPCommentVO * tempResp = [SPCommentVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+//特长课程 - 课程评价end
+
+//特长课程 - 教师列表 start
+
+- (void)getSPTeacherList:(NSString *)groupuuid pageNo:(NSString *)pageNo success:(void (^)(SPDataListVO * dataListVo))success faild:(void (^)(NSString * errorMsg))faild
+{
+    NSDictionary * dic = @{@"groupuuid":groupuuid};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSpecialtyTeacherListURL] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
              success(tempResp);
          }
          else
@@ -1380,7 +1475,97 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
-//特长课程 - 课程评价end
 
+//特长课程 - 教师列表 end
+
+//特长课程 - 老师详情 start
+- (void)getSPTeacherDetail:(NSString *)uuid success:(void (^)(SPTeacherDetailDomain * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSpecialtyTeacherDetailURL:uuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPTeacherDetailDomain * tempResp = [SPTeacherDetailDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+//特长课程 - 老师详情 end
+
+//优惠活动 - start
+
+- (void)getYouHuiList:(NSString *)map_point pageNo:(NSInteger)pageNo success:(void (^)(YouHuiDataListVO * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getYouHuiListURL:map_point pageNo:pageNo] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             YouHuiDataListVO * tempResp = [YouHuiDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+//获取单个活动详情
+- (void)getYouHuiInfo:(NSString *)uuid success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild {
+
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getYouHuiInfoListUrl:uuid]
+                                  parameters:nil
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
+
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             AnnouncementDomain * announcement = [AnnouncementDomain objectWithKeyValues:baseDomain.data];
+                                             announcement.share_url = [responseObject objectForKey:@"share_url"];
+                                             announcement.isFavor = [[responseObject objectForKey:@"isFavor"] boolValue];
+                                             announcement.count = [[responseObject objectForKey:@"count"] integerValue];
+                                             announcement.link_tel = [responseObject objectForKey:@"link_tel"];
+                                             
+                                             success(announcement);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         NSLog(@"%@",error);
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//优惠活动 - end
 
 @end

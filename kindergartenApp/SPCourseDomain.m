@@ -10,4 +10,6 @@
 
 @implementation SPCourseDomain
 
+
+
 @end

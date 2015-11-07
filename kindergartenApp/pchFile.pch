@@ -22,7 +22,7 @@
 //#import "UITextView+Extension.h"
 #import "SystemResource.h"
 
-
+#define MoGo_ID_IPhone @"39bcb217618d43f2b626c875a9f4717b"
 
 #ifdef DEBUG // 处于开发阶段
 #define FuniLog(...) NSLog(__VA_ARGS__)

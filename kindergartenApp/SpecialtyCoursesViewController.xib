@@ -7,10 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpecialtyCoursesViewController">
             <connections>
-                <outlet property="adScrollView" destination="H3J-Da-L8H" id="HE3-sd-SSm"/>
-                <outlet property="contentScrollView" destination="FVR-Hj-srd" id="4OA-fT-fao"/>
-                <outlet property="courseView" destination="43N-CN-bMR" id="S7d-qJ-LCg"/>
-                <outlet property="spCourseViewHeight" destination="103-Dp-2zc" id="byY-ON-VLw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,68 +14,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="764"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1aC-ri-Wvi" userLabel="ContentView">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="764"/>
-                    <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVR-Hj-srd">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="764"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXr-NY-t5P">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="764"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3J-Da-L8H">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
-                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="150" id="dfF-9y-sWB"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="43N-CN-bMR" userLabel="CourseView">
-                                            <rect key="frame" x="0.0" y="150" width="320" height="100"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="100" id="103-Dp-2zc"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.86188052400000004" green="0.86188052400000004" blue="0.86188052400000004" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="43N-CN-bMR" firstAttribute="leading" secondItem="rXr-NY-t5P" secondAttribute="leading" id="0Yg-bd-iRs"/>
-                                        <constraint firstItem="H3J-Da-L8H" firstAttribute="leading" secondItem="rXr-NY-t5P" secondAttribute="leading" id="8MR-an-kdI"/>
-                                        <constraint firstAttribute="trailing" secondItem="43N-CN-bMR" secondAttribute="trailing" id="8N1-Xw-x6q"/>
-                                        <constraint firstItem="43N-CN-bMR" firstAttribute="top" secondItem="H3J-Da-L8H" secondAttribute="bottom" id="BMQ-vC-rOX"/>
-                                        <constraint firstItem="H3J-Da-L8H" firstAttribute="top" secondItem="rXr-NY-t5P" secondAttribute="top" id="mlL-Hd-FKk"/>
-                                        <constraint firstAttribute="trailing" secondItem="H3J-Da-L8H" secondAttribute="trailing" id="oMF-HQ-T3Y"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="rXr-NY-t5P" secondAttribute="trailing" id="5Ac-nQ-JqL"/>
-                                <constraint firstItem="rXr-NY-t5P" firstAttribute="top" secondItem="FVR-Hj-srd" secondAttribute="top" id="6FF-9n-lyi"/>
-                                <constraint firstItem="rXr-NY-t5P" firstAttribute="centerX" secondItem="FVR-Hj-srd" secondAttribute="centerX" id="9Dr-9b-b5H"/>
-                                <constraint firstItem="rXr-NY-t5P" firstAttribute="leading" secondItem="FVR-Hj-srd" secondAttribute="leading" id="HJg-5Q-NyA"/>
-                                <constraint firstItem="rXr-NY-t5P" firstAttribute="centerY" secondItem="FVR-Hj-srd" secondAttribute="centerY" id="URE-kT-ERS"/>
-                                <constraint firstAttribute="bottom" secondItem="rXr-NY-t5P" secondAttribute="bottom" id="Vbz-Y5-Qar"/>
-                            </constraints>
-                        </scrollView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="FVR-Hj-srd" firstAttribute="leading" secondItem="1aC-ri-Wvi" secondAttribute="leading" id="1NU-6f-4V7"/>
-                        <constraint firstAttribute="trailing" secondItem="FVR-Hj-srd" secondAttribute="trailing" id="JjQ-qO-qc0"/>
-                        <constraint firstAttribute="bottom" secondItem="FVR-Hj-srd" secondAttribute="bottom" id="spd-we-OYn"/>
-                        <constraint firstItem="FVR-Hj-srd" firstAttribute="top" secondItem="1aC-ri-Wvi" secondAttribute="top" id="yOJ-WJ-KQJ"/>
-                    </constraints>
-                </view>
-            </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="1aC-ri-Wvi" secondAttribute="bottom" id="6s1-C4-BzH"/>
-                <constraint firstItem="1aC-ri-Wvi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IW0-lT-16z"/>
-                <constraint firstAttribute="trailing" secondItem="1aC-ri-Wvi" secondAttribute="trailing" id="NSO-55-TBp"/>
-                <constraint firstItem="1aC-ri-Wvi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oCu-qg-Eot"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-187" y="157"/>
         </view>

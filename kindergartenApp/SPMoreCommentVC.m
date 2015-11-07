@@ -34,26 +34,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self loadDatas];
+//    [self loadDatas];
     
 }
 
 #pragma mark - 根据页数请求数据
-- (void)loadDatas
-{
-    [[KGHUD sharedHud] show:self.view];
-    
-    [[KGHttpService sharedService] getSPCourseComment:self.ext_uuid pageNo:[NSString stringWithFormat:@"%ld",self.page] success:^(SPCommentDomain *spComment)
-    {
-        [[KGHUD sharedHud] hide:self.view];
-        
-        [self.commitDomains addObject:spComment];
-    }
-    faild:^(NSString *errorMsg)
-    {
-        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
-    }];
-}
+//- (void)loadDatas
+//{
+//    [[KGHUD sharedHud] show:self.view];
+//    
+//    [[KGHttpService sharedService] getSPCourseComment:self.ext_uuid pageNo:[NSString stringWithFormat:@"%ld",(long)self.page] success:^(SPCommentVO *commentVO)
+//    {
+//        [[KGHUD sharedHud] hide:self.view];
+//        
+//        [self.commitDomains addObject:spComment];
+//    }
+//    faild:^(NSString *errorMsg)
+//    {
+//        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+//    }];
+//}
 
 #pragma mark - 表格数据源及代理方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

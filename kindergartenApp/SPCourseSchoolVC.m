@@ -18,9 +18,11 @@
 #import "MJRefresh.h"
 #import "MJExtension.h"
 #import "SPSchoolDomain.h"
-#import "SpCourseDetailsVC.h"
+#import "SPCourseDetailVC.h"
+#import "SPSchoolDetailVC.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface SPCourseSchoolVC () <MXPullDownMenuDelegate,SpCourseVCDelegate>
+@interface SPCourseSchoolVC () <MXPullDownMenuDelegate,SpCourseVCDelegate,CLLocationManagerDelegate>
 {
     NSMutableArray *_dataOfCourseType;
     NSArray *_dataOfSort;
@@ -35,14 +37,27 @@
 @property (strong, nonatomic) SpCourseVC * tableVC;
 @property (strong, nonatomic) MXPullDownMenu *dropMenu;
 
+
+
 //请求参数:控制再次请求
 @property (strong, nonatomic) NSString * courseSort;
 @property (strong, nonatomic) NSString * schoolSort;
 @property (strong, nonatomic) NSString * type;
 
+@property (strong, nonatomic) CLLocationManager * mgr;
+@property (strong, nonatomic) NSString * mappoint;
 @end
 
 @implementation SPCourseSchoolVC
+
+- (CLLocationManager *)mgr
+{
+    if (_mgr == nil)
+    {
+        _mgr = [[CLLocationManager alloc] init];
+    }
+    return _mgr;
+}
 
 - (SPDataListVO *)courseList
 {
@@ -95,13 +110,24 @@
     self.tableVC.delegate = self;
     
     //载入课程数据
-    self.type = [NSString stringWithFormat:@"%ld",(long)self.firstJoinSelDatakey];
+    if (self.firstJoinSelDatakey == -1)
+    {
+        self.type = @"";
+    }
+    else
+    {
+        self.type = [NSString stringWithFormat:@"%ld",(long)self.firstJoinSelDatakey];
+    }
+    
     self.courseSort = [self getSortValueWithName:_dataOfSort[0]];
     [self getCourseDataWithCourseType:self.type sort:self.courseSort];
     
     //载入培训机构数据
     self.schoolSort = [self getSortValueWithName:_dataOfSort[_currentDataOfSortIndex]];
-    [self getSchoolDataWithMapPoint:nil sort:self.schoolSort];
+    
+    [self getSchoolDataWithMapPoint:self.mappoint sort:self.schoolSort];
+    
+    [self getLocationData];
 }
 
 - (NSString *)getSortValueWithName:(NSString *)sortName
@@ -129,7 +155,12 @@
 {
     [[KGHUD sharedHud] show:self.view];
     
-    [[KGHttpService sharedService] getSPCourseList:courseType sort:sort success:^(SPDataListVO *spCourseList)
+    if (self.mappoint == nil)
+    {
+        self.mappoint = @"";
+    }
+    
+    [[KGHttpService sharedService] getSPCourseList:@"" map_point:self.mappoint type:courseType sort:sort teacheruuid:@"" success:^(SPDataListVO *spCourseList)
     {
         [[KGHUD sharedHud] hide:self.view];
         
@@ -258,7 +289,7 @@
     testArray = @[_dataOfCourseType, _dataOfSort];
     self.dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor blackColor]];
     self.dropMenu.delegate = self;
-    self.dropMenu.frame = CGRectMake(0,APPSTATUSBARHEIGHT+APPTABBARHEIGHT, self.dropMenu.frame.size.width, self.dropMenu.frame.size.height);
+    self.dropMenu.frame = CGRectMake(0,APPSTATUSBARHEIGHT+APPTABBARHEIGHT, APPWINDOWWIDTH, self.dropMenu.frame.size.height);
     [self.view addSubview:self.dropMenu];
 }
 
@@ -368,15 +399,65 @@
 {
     if (type == 0)
     {
-        SpCourseDetailsVC *detailVC = [[SpCourseDetailsVC alloc] init];
+        SPCourseDetailVC * detailVC = [[SPCourseDetailVC alloc] init];
+        
         NSDictionary *dict = self.courseList.data[indexPath.row];
+        
         detailVC.uuid = [dict objectForKey:@"uuid"];
+        
         [self.navigationController pushViewController:detailVC animated:YES];
     }
     else if (type == 1)
     {
+        SPSchoolDetailVC * detailVC = [[SPSchoolDetailVC alloc] init];
         
+        NSDictionary * dict = self.schoolList.data[indexPath.row];
+        
+        detailVC.groupuuid = [dict objectForKey:@"uuid"];
+        
+        detailVC.schoolDomain = [SPSchoolDomain objectWithKeyValues:self.schoolList.data[indexPath.row]];
+        
+        [self.navigationController pushViewController:detailVC animated:YES];
+    
     }
+}
+
+#pragma mark - 获取位置
+- (void)getLocationData
+{
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] > 8.0)
+    {
+        [self.mgr requestWhenInUseAuthorization];
+    }
+    
+    self.mgr.delegate = self;
+    
+    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    self.mgr.distanceFilter = 5.0;
+    
+    [self.mgr startUpdatingLocation];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    CLLocation *loc = [locations firstObject];
+    
+    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
+    
+    //请求数据，刷新表格
+    self.schoolSort = [self getSortValueWithName:_dataOfSort[_currentDataOfSortIndex]];
+    [self getSchoolDataWithMapPoint:self.mappoint sort:self.schoolSort];
+    
+    self.courseSort = _dataOfSort[_currentDataOfSortIndex];
+    self.type = self.courseDatakeys[_currentDataOfCourseTypeIndex];
+    [self getCourseDataWithCourseType:self.type sort:[self getSortValueWithName:self.courseSort]];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%@",error);
 }
 
 

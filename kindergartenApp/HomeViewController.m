@@ -34,8 +34,15 @@
 #import "BaiduMobAdView.h"
 #import "KGNavigationController.h"
 #import "LoginViewController.h"
+#import "YouHuiVC.h"
 
-@interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,BaiduMobAdViewDelegate> {
+#import "AdMoGoDelegateProtocol.h"
+#import "AdMoGoView.h"
+#import "AdMoGoWebBrowserControllerUserDelegate.h"
+
+
+@interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,BaiduMobAdViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate>
+{
     
     IBOutlet UIScrollView * scrollView;
     IBOutlet UIView * photosView;
@@ -50,7 +57,10 @@
     CGFloat     groupViewHeight;
     
     BaiduMobAdView * sharedAdView;
+    
 }
+
+@property (strong, nonatomic) AdMoGoView * adView;
 
 @end
 
@@ -63,17 +73,71 @@
 //    if(!groupListView) {
 //        [self loadGroupListView];
 //    }
+    
+    
+    self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
+                                  adMoGoViewDelegate:self];
+    
+    self.adView.adWebBrowswerDelegate = self;
+    self.adView.frame = CGRectMake(0.0, APPTABBARHEIGHT, 320, 140.0);
+    [self.view addSubview:self.adView];
+    [self.view bringSubviewToFront:self.adView];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     scrollView.contentSize = CGSizeMake(self.view.width, funiView.y + funiView.height + Number_Ten);
 //    [self loadNavTitle];
-    [self loadBaiduADView];
+//    [self loadBaiduADView];
     [self autoLogin];
 
 }
 
+#pragma mark - 芒果广告相关
+- (CGSize)adMoGoCustomSize
+{
+    return CGSizeMake(APPWINDOWWIDTH, 150);
+}
+
+#pragma mark AdMoGoDelegate delegate
+/*
+ 返回广告rootViewController
+ */
+- (UIViewController *)viewControllerForPresentingModalView{
+    return self;
+}
+/**
+ * 广告开始请求回调
+ */
+- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告开始请求回调");
+}
+/**
+ * 广告接收成功回调
+ */
+- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告接收成功回调");
+}
+/**
+ * 广告接收失败回调
+ */
+- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error{
+    NSLog(@"广告接收失败回调");
+}
+/**
+ * 点击广告回调
+ */
+- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"点击广告回调");
+}
+/**
+ *You can get notified when the user delete the ad
+ 广告关闭回调
+ */
+- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView{
+    NSLog(@"广告关闭回调");
+}
 
 - (void)loadNavTitle {
     titleBtn = [[ItemTitleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
@@ -214,35 +278,35 @@
 }
 
 
-#pragma mark - 百度广告代理方法
-- (NSString *)publisherId{
-    return @"e7fccb77";
-}
-
-- (BOOL)enableLocation{
-    return NO;
-}
-
-- (void)willDisplayAd:(BaiduMobAdView *)adview{
-    sharedAdView.hidden = NO;
-    sharedAdView.x = -APPWINDOWWIDTH;
-    [UIView animateWithDuration:0.3 animations:^{
-        sharedAdView.x = 0;
-    } completion:^(BOOL finished) {
-    }];
-    
-//    CGRect f = sharedAdView.frame;
-//    f.origin.x = -APPWINDOWWIDTH;
-//    sharedAdView.frame = f;
-//    [UIView beginAnimations:nil context:nil];
-//    f.origin.x = 0;
-//    sharedAdView.frame = f;
-//    [UIView commitAnimations];
-}
-
-- (void)failedDisplayAd:(BaiduMobFailReason)reason{
-    NSLog(@"广告加载失败");
-}
+//#pragma mark - 百度广告代理方法
+//- (NSString *)publisherId{
+//    return @"e7fccb77";
+//}
+//
+//- (BOOL)enableLocation{
+//    return NO;
+//}
+//
+//- (void)willDisplayAd:(BaiduMobAdView *)adview{
+//    sharedAdView.hidden = NO;
+//    sharedAdView.x = -APPWINDOWWIDTH;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        sharedAdView.x = 0;
+//    } completion:^(BOOL finished) {
+//    }];
+//    
+////    CGRect f = sharedAdView.frame;
+////    f.origin.x = -APPWINDOWWIDTH;
+////    sharedAdView.frame = f;
+////    [UIView beginAnimations:nil context:nil];
+////    f.origin.x = 0;
+////    sharedAdView.frame = f;
+////    [UIView commitAnimations];
+//}
+//
+//- (void)failedDisplayAd:(BaiduMobFailReason)reason{
+//    NSLog(@"广告加载失败");
+//}
 
 //人群属性接口
 /**
@@ -370,6 +434,9 @@
             break;
         case 19:
             [self loadMoreFunMenu:sender];
+            break;
+        case 20:
+            baseVC = [[YouHuiVC alloc] init];
             break;
         default:
             break;

@@ -12,10 +12,8 @@
 
 typedef enum
 {
-    
     CourseType = 0,
     SchoolType = 1
-    
 }DataSourseType;
 
 @class SpCourseVC;
@@ -25,9 +23,7 @@ typedef enum
 
 @end
 
-
 @interface SpCourseVC : UITableViewController
-
 
 @property (assign, nonatomic) CGRect tableFrame;
 

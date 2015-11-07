@@ -19,7 +19,7 @@
 #define regURL               @"rest/userinfo/reg.json"               //注册
 //#define updatepasswordURL    @"rest/userinfo/updatepassword.json"    //修改密码
 #define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"  //修改密码
-#define getTeacherInfo          @"rest/userinfo/getTeacherInfo.json"        //获取用户信息
+#define getTeacherInfo       @"rest/userinfo/getTeacherInfo.json"        //获取用户信息
 #define KDInfoURL            @"rest/share/getKDInfo.html" //校园相关
 #define ZSJHInfoURL          @"rest/share/getRecruitBygroupuuid.html" //招生计划
 
@@ -65,7 +65,11 @@
 
 #define specialtyCoursesListURL @"rest/pxCourse/queryByPage.json" //特长课程列表
 
+#define specialtyHotCoursesListURL @"rest/pxCourse/hotByPage.json"  //热门课程列表
+
 #define specialtySchoolListURL @"rest/group/pxlistByPage.json"    //特长班列表
+
+#define specialtyTeacherListURL @"rest/pxteacher/queryByPage.json" //教师列表
 
 #define specialtyCourseCommentURL @"rest/appraise/queryByPage.json"  //课程家长评论
 
@@ -280,9 +284,16 @@
     return [NSString stringWithFormat:@"%@rest/pxCourse/queryByPage.json?type=%@&sort=%@",baseServiceURL,type,sort];
 }
 
++ (NSString *)getSpecialtyHotCourseListURL{
+    return URL(baseServiceURL,specialtyHotCoursesListURL);
+}
 
 + (NSString *)getSpecialtySchoolListURL{
     return URL(baseServiceURL, specialtySchoolListURL);
+}
+
++ (NSString *)getSpecialtyTeacherListURL{
+    return URL(baseServiceURL, specialtyTeacherListURL);
 }
 
 + (NSString *)getSpecialtySchoolListURL:(NSString *)mapPoint sort:(NSString *)sort{
@@ -295,6 +306,19 @@
 
 + (NSString *)getSpecialtyCourseDetailSchoolInfoURL:(NSString *)groupuuid{
     return [NSString stringWithFormat:@"%@rest/group/%@.json",baseServiceURL,groupuuid];
+}
+
++ (NSString *)getSpecialtyTeacherDetailURL:(NSString *)teacheruuid{
+    return [NSString stringWithFormat:@"%@rest/pxteacher/%@.json",baseServiceURL,teacheruuid];
+}
+
+//优惠活动
++ (NSString *)getYouHuiListURL:(NSString *)map_point pageNo:(NSInteger)pageNo{
+    return [NSString stringWithFormat:@"%@rest/share/pxbenefitList.json?map_point=%@&pageNo=%ld",baseServiceURL,map_point,(long)pageNo];
+}
+
++ (NSString *)getYouHuiInfoListUrl:(NSString *)uuid {
+    return [NSString stringWithFormat:@"%@rest/share/getPxbenefitJSON.json?uuid=%@", baseServiceURL, uuid];
 }
 
 + (NSString *)getSpecialtyCourseCommentURL{

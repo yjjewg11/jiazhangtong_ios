@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="qp0-b2-DCe" customClass="SPBottomItem">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdS-CI-y96">
+                    <rect key="frame" x="28" y="5" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="QfF-36-ZEH"/>
+                        <constraint firstAttribute="width" constant="24" id="TRG-cU-E11"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bp0-K0-cCs">
+                    <rect key="frame" x="0.0" y="34" width="80" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="TSO-Yc-ln1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR8-dK-WfU">
+                    <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="dR8-dK-WfU" firstAttribute="top" secondItem="qp0-b2-DCe" secondAttribute="top" id="43a-kk-2Bm"/>
+                <constraint firstAttribute="trailing" secondItem="dR8-dK-WfU" secondAttribute="trailing" id="9uu-sq-YQm"/>
+                <constraint firstItem="vdS-CI-y96" firstAttribute="leading" secondItem="qp0-b2-DCe" secondAttribute="leading" constant="28" id="EFM-Tx-bcU"/>
+                <constraint firstAttribute="bottom" secondItem="dR8-dK-WfU" secondAttribute="bottom" id="Kby-tn-i3b"/>
+                <constraint firstItem="Bp0-K0-cCs" firstAttribute="leading" secondItem="qp0-b2-DCe" secondAttribute="leading" id="Kc8-zg-62S"/>
+                <constraint firstItem="dR8-dK-WfU" firstAttribute="leading" secondItem="qp0-b2-DCe" secondAttribute="leading" id="NB9-ul-M1d"/>
+                <constraint firstAttribute="trailing" secondItem="Bp0-K0-cCs" secondAttribute="trailing" id="QCS-Yi-r36"/>
+                <constraint firstItem="Bp0-K0-cCs" firstAttribute="top" secondItem="vdS-CI-y96" secondAttribute="bottom" constant="5" id="VHV-aq-xHC"/>
+                <constraint firstAttribute="trailing" secondItem="vdS-CI-y96" secondAttribute="trailing" constant="28" id="b9R-xQ-xxL"/>
+                <constraint firstItem="vdS-CI-y96" firstAttribute="top" secondItem="qp0-b2-DCe" secondAttribute="top" constant="5" id="rEL-Bs-CnR"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btn" destination="dR8-dK-WfU" id="IVo-xh-2mk"/>
+                <outlet property="imgView" destination="vdS-CI-y96" id="cKP-VQ-LoE"/>
+                <outlet property="titleLbl" destination="Bp0-K0-cCs" id="rNZ-jL-W4U"/>
+            </connections>
+            <point key="canvasLocation" x="251" y="8"/>
+        </view>
+    </objects>
+</document>

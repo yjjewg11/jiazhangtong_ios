@@ -30,7 +30,7 @@
 
 @property (strong, nonatomic) NSString * summary;
 
-@property (strong, nonatomic) NSString * description;
+@property (strong, nonatomic) NSString * groupDescription;
 
 @property (assign, nonatomic) BOOL isFavor;
 

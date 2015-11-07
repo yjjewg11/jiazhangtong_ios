@@ -62,6 +62,7 @@
 {
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.logo] placeholderImage:[UIImage imageNamed:@""]];
     
+    self.titleLbl.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [self.titleLbl setTitle:domain.title forState:UIControlStateNormal];
     
     self.groupNameLbl.text = domain.group_name;

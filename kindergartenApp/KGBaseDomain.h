@@ -15,8 +15,6 @@
 @property (strong, nonatomic) NSString       * uuid;
 @property (strong, nonatomic) ResMsgDomain   * ResMsg;
 
-
 @property (strong, nonatomic) id  data;
-
 
 @end

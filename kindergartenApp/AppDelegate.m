@@ -23,6 +23,7 @@
 #import "KGHUD.h"
 #import "KGAccountTool.h"
 #import <Bugly/CrashReporter.h>
+#import "AdMoGoLogCenter.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"

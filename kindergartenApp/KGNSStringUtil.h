@@ -50,7 +50,7 @@
  */
 + (BOOL)isPureFloat:(NSString*)str;
 
-
++ (float) heightForString:(NSString *)value fontSize:(float)fontSize andWidth:(float)width;
 /**
  *  判空
  *
