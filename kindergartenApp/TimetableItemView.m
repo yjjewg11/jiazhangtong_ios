@@ -25,10 +25,21 @@
 
 @property (assign, nonatomic) NSInteger spCourseDataArrCount;
 
+@property (strong, nonatomic) ReplyPageDomain * tempDomain;
+
 @end
 
 
 @implementation TimetableItemView
+
+- (ReplyPageDomain *)tempDomain
+{
+    if (_tempDomain)
+    {
+        _tempDomain = [[ReplyPageDomain alloc] init];
+    }
+    return _tempDomain;
+}
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -424,7 +435,9 @@
 {
     TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
     topicInteractionDomain.dianzan   = spTimetableDomain.dianzan;
-    topicInteractionDomain.replyPage = spTimetableDomain.replyPage;
+#warning aaaa
+//    topicInteractionDomain.replyPage = spTimetableDomain.replyPage;
+    
     topicInteractionDomain.topicType = Topic_PXJXJH;
     topicInteractionDomain.topicUUID = spTimetableDomain.uuid;
     topicInteractionDomain.cellIndex = cellIndex;
@@ -500,7 +513,8 @@
     ReplyPageDomain * spPageDomain = nil;
     for (SPTimetableDomain * spDomain in spVO.spTimetableMArray) {
         if([spDomain.uuid isEqualToString:domain.newsuuid]){
-            spPageDomain = spDomain.replyPage;
+#warning 11111
+//            spPageDomain = spDomain.replyPage;
             break;
         }
     }

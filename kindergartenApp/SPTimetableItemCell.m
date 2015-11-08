@@ -75,7 +75,7 @@
 
 - (IBAction)moreCourseBtnClick:(id)sender
 {
-    NSLog(@"dawdaw");
+    
 }
 
 
