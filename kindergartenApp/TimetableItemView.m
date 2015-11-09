@@ -435,8 +435,8 @@
 {
     TopicInteractionDomain * topicInteractionDomain = [TopicInteractionDomain new];
     topicInteractionDomain.dianzan   = spTimetableDomain.dianzan;
-#warning aaaa
-//    topicInteractionDomain.replyPage = spTimetableDomain.replyPage;
+
+    topicInteractionDomain.replyPage = spTimetableDomain.replyPage;
     
     topicInteractionDomain.topicType = Topic_PXJXJH;
     topicInteractionDomain.topicUUID = spTimetableDomain.uuid;
@@ -513,8 +513,7 @@
     ReplyPageDomain * spPageDomain = nil;
     for (SPTimetableDomain * spDomain in spVO.spTimetableMArray) {
         if([spDomain.uuid isEqualToString:domain.newsuuid]){
-#warning 11111
-//            spPageDomain = spDomain.replyPage;
+            spPageDomain = spDomain.replyPage;
             break;
         }
     }

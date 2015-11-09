@@ -40,11 +40,11 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成都市武侯区金太阳幼儿园" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpE-MA-DZk">
-                        <rect key="frame" x="116" y="79" width="139" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成都市武侯区金太阳幼儿园" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpE-MA-DZk">
+                        <rect key="frame" x="116" y="79" width="143" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="0uG-x3-IFQ"/>
-                            <constraint firstAttribute="width" constant="139" id="f4m-H9-8pz"/>
+                            <constraint firstAttribute="width" constant="143" id="f4m-H9-8pz"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -82,31 +82,61 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKX-5b-h14" userLabel="StarView">
                         <rect key="frame" x="116" y="33" width="81" height="15"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fW-QP-7Dr">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fW-QP-7Dr">
                                 <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
-                                <state key="normal" image="xing1"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="K3v-42-Ajh"/>
+                                    <constraint firstAttribute="height" constant="15" id="pTu-Ps-TfA"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="xing1"/>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Maf-fR-eS7">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Maf-fR-eS7">
                                 <rect key="frame" x="15" y="0.0" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="VTP-E5-XJk"/>
+                                    <constraint firstAttribute="width" constant="15" id="pCg-at-gJ2"/>
+                                </constraints>
                                 <state key="normal" image="xing1"/>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fx9-i2-mIi">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fx9-i2-mIi">
                                 <rect key="frame" x="30" y="0.0" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="eJ4-Ac-TsE"/>
+                                    <constraint firstAttribute="width" constant="15" id="iDi-ED-Bvz"/>
+                                </constraints>
                                 <state key="normal" image="xing1"/>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nu-b0-0td">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Nu-b0-0td">
                                 <rect key="frame" x="45" y="0.0" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="XBe-Ch-CRd"/>
+                                    <constraint firstAttribute="height" constant="15" id="pj1-fC-Ley"/>
+                                </constraints>
                                 <state key="normal" image="xing1"/>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahd-My-9z8">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahd-My-9z8">
                                 <rect key="frame" x="60" y="0.0" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="Kam-NV-bua"/>
+                                    <constraint firstAttribute="height" constant="15" id="Z9D-lQ-iIO"/>
+                                </constraints>
                                 <state key="normal" image="xing1"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="8qv-08-oEk"/>
+                            <constraint firstItem="3Nu-b0-0td" firstAttribute="leading" secondItem="fx9-i2-mIi" secondAttribute="trailing" id="F83-FT-nSt"/>
+                            <constraint firstItem="fx9-i2-mIi" firstAttribute="leading" secondItem="Maf-fR-eS7" secondAttribute="trailing" id="JIt-5K-AHc"/>
+                            <constraint firstItem="Maf-fR-eS7" firstAttribute="top" secondItem="cKX-5b-h14" secondAttribute="top" id="JYL-TY-mP1"/>
+                            <constraint firstItem="Maf-fR-eS7" firstAttribute="leading" secondItem="3fW-QP-7Dr" secondAttribute="trailing" id="Jzo-ea-DC6"/>
+                            <constraint firstItem="3fW-QP-7Dr" firstAttribute="top" secondItem="cKX-5b-h14" secondAttribute="top" id="c7W-DK-fQV"/>
+                            <constraint firstItem="3fW-QP-7Dr" firstAttribute="leading" secondItem="cKX-5b-h14" secondAttribute="leading" id="gLz-iK-Mme"/>
                             <constraint firstAttribute="width" constant="81" id="iQh-ay-N5e"/>
+                            <constraint firstItem="ahd-My-9z8" firstAttribute="top" secondItem="cKX-5b-h14" secondAttribute="top" id="kM3-Bb-Lcy"/>
+                            <constraint firstItem="fx9-i2-mIi" firstAttribute="top" secondItem="cKX-5b-h14" secondAttribute="top" id="m03-ey-hjK"/>
+                            <constraint firstItem="ahd-My-9z8" firstAttribute="leading" secondItem="3Nu-b0-0td" secondAttribute="trailing" id="tUb-DN-U7Z"/>
+                            <constraint firstItem="3Nu-b0-0td" firstAttribute="top" secondItem="cKX-5b-h14" secondAttribute="top" id="xkz-UO-fiw"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -136,7 +166,7 @@
                 <outlet property="groupNameLbl" destination="dTt-ON-qag" id="IoC-0Q-MbL"/>
                 <outlet property="imgView" destination="a3u-bd-Onh" id="DB5-Mm-NRc"/>
                 <outlet property="locationLbl" destination="UpE-MA-DZk" id="6hJ-zI-l9N"/>
-                <outlet property="starNum" destination="cKX-5b-h14" id="XMr-C0-EyT"/>
+                <outlet property="starView" destination="cKX-5b-h14" id="E6I-Bo-Sx5"/>
                 <outlet property="studyPersonNum" destination="dUU-Y1-K5a" id="7ML-eg-HWx"/>
                 <outlet property="titleLbl" destination="eTu-qr-Po1" id="80L-gy-wuY"/>
             </connections>

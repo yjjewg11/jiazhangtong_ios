@@ -39,31 +39,37 @@
     
     NSInteger intCount = (NSInteger)(domain.ct_stars / 10);
     
-    NSInteger halfCount = domain.ct_stars - intCount;
+    NSInteger halfCount = domain.ct_stars - intCount * 10;
     
     [self setUpStarts:intCount halfCount:halfCount];
 }
 
 - (void)setUpStarts:(NSInteger)intCount halfCount:(NSInteger)halfCount
 {
-    for (NSInteger i = 0; i<intCount; i++)
+    for (NSInteger i = 0; i < 5; i++)
     {
-        if(i == intCount)
+        for (UIButton * btn in self.starView.subviews)
         {
-            if (halfCount >= 5)
+            if (btn.tag == i)
             {
-                UIButton *starBtn = self.starView.subviews[i];
-                starBtn.imageView.image = [UIImage imageNamed:@"bankexing"];
-                break;
-            }
-            
-            else
-            {
-                break;
+                if (btn.tag < intCount)
+                {
+                    [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
+                }
+                
+                if (btn.tag == intCount)
+                {
+                    if (halfCount >= 5)
+                    {
+                        [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
+                    }
+                    else
+                    {
+                        [btn setImage:[UIImage imageNamed:@"banekexing"] forState:UIControlStateNormal];
+                    }
+                }
             }
         }
-        UIButton *starBtn = self.starView.subviews[i];
-        starBtn.imageView.image = [UIImage imageNamed:@"xing"];
     }
 }
 

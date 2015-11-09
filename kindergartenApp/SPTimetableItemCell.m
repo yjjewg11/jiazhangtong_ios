@@ -21,7 +21,8 @@
         [headIcon sd_setImageWithURL:[NSURL URLWithString:_spTimetableDomain.student_headimg] placeholderImage:[UIImage imageNamed:@"head_def"]];
         
         schoolName.text = _spTimetableDomain.group_name;
-        courseName.text = _spTimetableDomain.name;
+        
+        courseName.text = _spTimetableDomain.class_name;
         
         NSDate *currentDate = [[NSDate alloc] init];
         
