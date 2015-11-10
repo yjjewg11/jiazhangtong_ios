@@ -104,11 +104,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    AddressbookTableViewCell * cell = [AddressbookTableViewCell cellWithTableView:tableView];
-    AddressbookTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"AddressbookTableViewCell"];
+    AddressbookTableViewCell * cell = nil;
+
     if(indexPath.section == Number_Zero) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"AddressbookTableViewCell" owner:nil options:nil] firstObject];
         [cell resetValue:[addressBookList.listKD objectAtIndex:indexPath.row] parame:nil];
     } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"AddressbookTableViewCell"];
         AddressBookDomain * domain = [addressBookList.list objectAtIndex:indexPath.row];
         [cell resetValue:domain parame:nil];
     }

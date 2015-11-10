@@ -58,13 +58,13 @@
                 }
                 if (btn.tag == intCount)
                 {
-                    if (halfCount >= 5)
+                    if (halfCount > 5)
                     {
                         [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
                     }
-                    else if(halfCount > 0 && halfCount <5)
+                    else if(halfCount > 0 && halfCount <=5)
                     {
-                        [btn setImage:[UIImage imageNamed:@"banekexing"] forState:UIControlStateNormal];
+                        [btn setImage:[UIImage imageNamed:@"bankexing"] forState:UIControlStateNormal];
                     }
                     else
                     {
