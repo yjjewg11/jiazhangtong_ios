@@ -15,6 +15,8 @@
 #import "PopupView.h"
 #import "FavoritesDomain.h"
 #import "KGDateUtil.h"
+#import "UMSocial.h"
+#import "SystemShareKey.h"
 
 #define RemoveHUDNotification @"RemoveHUD"
 

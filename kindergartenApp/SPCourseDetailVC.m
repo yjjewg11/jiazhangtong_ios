@@ -17,6 +17,7 @@
 #import "PopupView.h"
 #import "ShareViewController.h"
 #import "InteractViewController.h"
+#import "KGUser.h"
 
 @interface SPCourseDetailVC () <UIWebViewDelegate,UIActionSheetDelegate>
 {
@@ -90,8 +91,7 @@
     [self getShareData];
     
     [self getDetailData];
-//    [self setupScrollView];
-//    [self setupCourseInfoView];
+
     self.tableVC.tableView.hidden = YES;
     [self.view addSubview:self.tableVC.tableView];
 }
@@ -176,6 +176,8 @@
     [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:filePath]]];
     
     _webview.alpha = 0;
+    
+//    _webview.scrollView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
 
     [self.view addSubview:_webview];
 }
@@ -309,6 +311,22 @@
     }
     
     NSString *callString = [NSString stringWithFormat:@"tel://%@",self.telsNum[buttonIndex-1]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+        NSString * uuid = self.uuid;
+        
+        //调用接口保存用户信息
+        [[KGHttpService sharedService] saveTelUserDatas:uuid type:@"82" success:^(NSString *msg)
+        {
+            
+        }
+        faild:^(NSString *errorMsg)
+        {
+            NSLog(@"保存咨询信息失败");
+        }];
+        
+    });
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callString]];
 }

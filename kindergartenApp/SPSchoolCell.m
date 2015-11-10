@@ -28,7 +28,7 @@
 
 - (void)setData:(SPSchoolDomain *)domain
 {
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@""]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.schoolNameLbl.text = domain.brand_name;
     
@@ -56,17 +56,24 @@
                 {
                     [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
                 }
-                
                 if (btn.tag == intCount)
                 {
                     if (halfCount >= 5)
                     {
                         [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
                     }
-                    else
+                    else if(halfCount > 0 && halfCount <5)
                     {
                         [btn setImage:[UIImage imageNamed:@"banekexing"] forState:UIControlStateNormal];
                     }
+                    else
+                    {
+                        [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+                    }
+                }
+                if (btn.tag > intCount)
+                {
+                    [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
                 }
             }
         }

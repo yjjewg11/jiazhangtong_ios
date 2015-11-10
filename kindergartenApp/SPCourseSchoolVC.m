@@ -415,7 +415,7 @@
         
         detailVC.groupuuid = [dict objectForKey:@"uuid"];
         
-        detailVC.schoolDomain = [SPSchoolDomain objectWithKeyValues:self.schoolList.data[indexPath.row]];
+//        detailVC.schoolDomain = [SPSchoolDomain objectWithKeyValues:self.schoolList.data[indexPath.row]];
         
         [self.navigationController pushViewController:detailVC animated:YES];
     
@@ -432,7 +432,7 @@
     
     self.mgr.delegate = self;
     
-    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
+    self.mgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
     self.mgr.distanceFilter = 5.0;
     
@@ -444,7 +444,7 @@
 {
     CLLocation *loc = [locations firstObject];
     
-    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
+    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
     
     //请求数据，刷新表格
     self.schoolSort = [self getSortValueWithName:_dataOfSort[_currentDataOfSortIndex]];

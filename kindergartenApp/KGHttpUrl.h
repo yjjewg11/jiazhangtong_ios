@@ -129,6 +129,7 @@
 + (NSString *)getSpecialtyCourseCommentURL;
 + (NSString *)getSpecialtyTeacherListURL;
 + (NSString *)getSpecialtyTeacherDetailURL:(NSString *)teacheruuid;
++ (NSString *)saveTelUserDatasURL:(NSString *)ext_uuid type:(NSString *)type;
 
 //优惠活动
 + (NSString *)getYouHuiListURL:(NSString *)map_point pageNo:(NSInteger)pageNo;

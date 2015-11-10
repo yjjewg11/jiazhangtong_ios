@@ -46,7 +46,9 @@
     
     BOOL isFavor;
 }
+@property (strong, nonatomic) SPSchoolCell * cell;
 
+@property (strong, nonatomic) SPSchoolDomain * schoolDomain;
 
 @property (strong, nonatomic) NSArray * courseList;
 @property (strong, nonatomic) NSArray * teacherList;
@@ -61,6 +63,24 @@
 @end
 
 @implementation SPSchoolDetailVC
+
+- (SPSchoolCell *)cell
+{
+    if (_cell == nil)
+    {
+        _cell = [[[NSBundle mainBundle] loadNibNamed:@"SPSchoolCell" owner:nil options:nil] firstObject];
+    }
+    return _cell;
+}
+
+- (SPSchoolDomain *)schoolDomain
+{
+    if (_schoolDomain == nil)
+    {
+        _schoolDomain = [[SPSchoolDomain alloc] init];
+    }
+    return _schoolDomain;
+}
 
 - (CLLocationManager *)mgr
 {
@@ -244,6 +264,22 @@
         return;
     }
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+       NSString * uuid = self.groupuuid;
+       
+       //调用接口保存用户信息
+       [[KGHttpService sharedService] saveTelUserDatas:uuid type:@"81" success:^(NSString *msg)
+        {
+            
+        }
+        faild:^(NSString *errorMsg)
+        {
+            NSLog(@"保存咨询信息失败");
+        }];
+       
+    });
+    
     NSString *callString = [NSString stringWithFormat:@"tel://%@",self.telsNum[buttonIndex-1]];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callString]];
@@ -283,7 +319,7 @@
     [[KGHUD sharedHud] show:self.view];
     button.enabled = NO;
     
-    [[KGHttpService sharedService] delFavorites:self.schoolDomain.uuid success:^(NSString *msgStr)
+    [[KGHttpService sharedService] delFavorites:self.groupuuid success:^(NSString *msgStr)
     {
         button.selected = !button.selected;
         button.enabled = YES;
@@ -333,16 +369,12 @@
 #pragma mark - 创建顶部schoolinfo
 - (void)addInfoCell:(UIView *)view
 {
-    SPSchoolCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"SPSchoolCell" owner:nil options:nil] firstObject];
-    
     CGFloat padding = (APPWINDOWWIDTH - 320) / 2;
     
-    [cell setOrigin:CGPointMake(padding, 0)];
+    [self.cell setOrigin:CGPointMake(padding, 0)];
     
     //设置数据
-    [cell setData:self.schoolDomain];
     
-    [_schoolInfoView addSubview:cell];
     
     [self.view addSubview:_schoolInfoView];
 }
@@ -532,10 +564,16 @@
 {
     [[KGHUD sharedHud] show:self.view];
     
-    [[KGHttpService sharedService] getSPCourseDetailSchoolInfo:self.schoolDomain.uuid success:^(SPSchoolDomain *spSchoolDetail)
+    [[KGHttpService sharedService] getSPCourseDetailSchoolInfo:self.groupuuid success:^(SPSchoolDomain *spSchoolDetail)
     {
         [[KGHUD sharedHud] hide:self.view];
         
+        self.schoolDomain = spSchoolDetail;
+        
+        [self.cell setData:self.schoolDomain];
+        
+        [_schoolInfoView addSubview:self.cell];
+
         [_webView loadHTMLString:spSchoolDetail.groupDescription baseURL:nil];
         
     }
@@ -601,7 +639,7 @@
     
     self.mgr.delegate = self;
     
-    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
+    self.mgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
     self.mgr.distanceFilter = 5.0;
     
@@ -613,7 +651,7 @@
 {
     CLLocation *loc = [locations firstObject];
     
-    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
+    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
     
     //请求数据，刷新表格
     [self getCourseData];

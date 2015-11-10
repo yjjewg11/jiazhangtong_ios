@@ -111,7 +111,7 @@
                 <outlet property="schoolNameLbl" destination="awo-5w-Fov" id="WVv-5L-1h7"/>
                 <outlet property="starView" destination="CFj-U3-b8q" id="2dV-WF-0dz"/>
             </connections>
-            <point key="canvasLocation" x="194" y="170"/>
+            <point key="canvasLocation" x="178" y="159"/>
         </view>
     </objects>
     <resources>

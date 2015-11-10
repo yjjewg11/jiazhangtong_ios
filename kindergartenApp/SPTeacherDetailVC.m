@@ -14,6 +14,8 @@
 #import "SpCourseVC.h"
 #import "PromptView.h"
 #import <CoreLocation/CoreLocation.h>
+#import "SPCourseDomain.h"
+#import "MJExtension.h"
 
 @interface SPTeacherDetailVC () <UIWebViewDelegate,CLLocationManagerDelegate>
 {
@@ -25,10 +27,10 @@
     UIView * _warningView;
     
     UIScrollView *_scrollView;
-    
-    SpCourseVC * _tableVC;
+
 }
-@property (strong, nonatomic) CLLocationManager * mgr;
+
+@property (strong, nonatomic) SpCourseVC * tableVC;
 
 @property (strong, nonatomic) NSString * mappoint;
 
@@ -43,13 +45,18 @@
 
 @implementation SPTeacherDetailVC
 
-- (CLLocationManager *)mgr
+- (SpCourseVC *)tableVC
 {
-    if (_mgr == nil)
+    if (_tableVC == nil)
     {
-        _mgr = [[CLLocationManager alloc] init];
+        _tableVC = [[SpCourseVC alloc] init];
+        CGFloat tableX = Number_Zero;
+        CGFloat tableY = _webView.frame.size.height + _teacherInfoView.frame.size.height + 30;
+        CGFloat tableW = APPWINDOWWIDTH;
+        CGFloat tableH = Row_Height * self.courseList.count + Cell_Height3 + Cell_Height2;
+        _tableVC.tableFrame = CGRectMake(tableX, tableY, tableW, tableH);
     }
-    return _mgr;
+    return _tableVC;
 }
 
 - (NSArray * )courseList
@@ -73,6 +80,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.title = @"教师详情";
     
     //创建scrollview
@@ -90,16 +98,11 @@
     StudentInfoHeaderView * view = (StudentInfoHeaderView *)[nib objectAtIndex:Number_Zero];
     view.titleLabel.text = @"简介";
     view.backgroundColor = [UIColor whiteColor];
-    [view setOrigin:CGPointMake(0,100)];
+    [view setOrigin:CGPointMake(0,100+20)];
     [_scrollView addSubview:view];
     
     //请求老师详情
     [self getTeacherDetail];
-    
-    //请求课程列表
-    [self getCourseList];
-    
-    [self getLocationData];
     
 }
 
@@ -121,6 +124,9 @@
         
         [self setUpWebView];
         
+        //请求课程列表
+        [self getCourseList];
+        
     }
     faild:^(NSString *errorMsg)
     {
@@ -138,12 +144,19 @@
         self.mappoint = @"";
     }
     
-    [[KGHttpService sharedService] getSPCourseList:@"" map_point:self.mappoint type:@"" sort:@"" teacheruuid:self.domain.uuid success:^(SPDataListVO *spCourseList)
+    [[KGHttpService sharedService] getSPCourseList:@"" map_point:@"" type:@"" sort:@"" teacheruuid:self.domain.uuid success:^(SPDataListVO *spCourseList)
     {
         [[KGHUD sharedHud] hide:self.view];
         
-        self.courseList = spCourseList.data;
+        NSMutableArray * marr = [NSMutableArray array];
         
+        for (NSDictionary * dict in spCourseList.data)
+        {
+            SPCourseDomain * model = [SPCourseDomain objectWithKeyValues:dict];
+            [marr addObject:model];
+        }
+        
+        self.courseList = marr;
         if (self.courseList.count == 0 || self.courseList == nil)
         {
             [self setUpWarningView];
@@ -154,7 +167,7 @@
             
             dispatch_async(dispatch_get_main_queue(), ^
             {
-                self.contentHeight = CGRectGetMaxY(_tableVC.tableView.frame);
+                self.contentHeight = CGRectGetMaxY(self.tableVC.tableView.frame);
                 _scrollView.contentSize = CGSizeMake(0, self.contentHeight);
             });
 
@@ -174,12 +187,12 @@
     StudentInfoHeaderView * view = (StudentInfoHeaderView *)[nib objectAtIndex:Number_Zero];
     view.titleLabel.text = @"教授课程";
     view.backgroundColor = [UIColor whiteColor];
-    [view setOrigin:CGPointMake(0,self.contentHeight + 44 + 100)];
+    [view setOrigin:CGPointMake(0,_webView.frame.size.height + _teacherInfoView.frame.size.height)];
     [_scrollView addSubview:view];
     
     _warningView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] firstObject];
     
-    [_warningView setOrigin:CGPointMake(0, 44 + self.contentHeight + 44 + 100)];
+    [_warningView setOrigin:CGPointMake(0, 44 + _webView.frame.size.height + _teacherInfoView.frame.size.height)];
     
     [_scrollView addSubview:_warningView];
 }
@@ -187,15 +200,13 @@
 #pragma mark - 创建tableview
 - (void)setUpTableView
 {
-    _tableVC = [[SpCourseVC alloc] init];
+    self.tableVC.courseListArr = self.courseList;
     
-    _tableVC.tableFrame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 100 + 44, APPWINDOWWIDTH, self.courseList.count * 103 + 44);
+    self.tableVC.dataSourceType = 0;
     
-    _tableVC.courseListArr = self.courseList;
+    self.tableVC.showHeaderView = YES;
     
-    _tableVC.dataSourceType = 0;
-    
-    _tableVC.showHeaderView = YES;
+    [_scrollView addSubview:self.tableVC.tableView];
 }
 
 #pragma mark - 创建顶部teacherinfo
@@ -217,7 +228,7 @@
 
 - (void)getContextHeight:(NSString *)context type:(NSString *)type
 {
-    if (context == nil)
+    if (context == nil || [context isEqualToString:@""])
     {
         context = @"暂无内容";
     }
@@ -246,7 +257,9 @@
 - (void)webViewDidFinishLoad:(UIWebView *)wb
 {
     CGRect frame = wb.frame;
+    
     frame.size.width = APPWINDOWWIDTH;
+    
     frame.size.height = 1;
     
     wb.frame = frame;
@@ -255,41 +268,8 @@
     
     wb.frame = frame;
     
-    _webView.frame = CGRectMake(0,100 + 44, APPWINDOWWIDTH, wb.frame.size.height);
+    _webView.frame = CGRectMake(0,100 + 44 + 20, APPWINDOWWIDTH, wb.frame.size.height + 15);
 
-}
-
-#pragma mark - 获取位置数据
-- (void)getLocationData
-{
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] > 8.0)
-    {
-        [self.mgr requestWhenInUseAuthorization];
-    }
-    
-    self.mgr.delegate = self;
-    
-    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
-    
-    self.mgr.distanceFilter = 5.0;
-    
-    [self.mgr startUpdatingLocation];
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    CLLocation *loc = [locations firstObject];
-    
-    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
-    
-    //请求数据，刷新表格
-    [self getCourseList];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"%@",error);
 }
 
 @end

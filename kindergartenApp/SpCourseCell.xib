@@ -88,7 +88,7 @@
                                     <constraint firstAttribute="width" constant="15" id="K3v-42-Ajh"/>
                                     <constraint firstAttribute="height" constant="15" id="pTu-Ps-TfA"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="xing1"/>
+                                <state key="normal" image="xing1"/>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Maf-fR-eS7">
                                 <rect key="frame" x="15" y="0.0" width="15" height="15"/>

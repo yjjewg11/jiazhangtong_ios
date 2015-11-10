@@ -7,6 +7,8 @@
 //
 
 #import "MyCollectionViewController.h"
+#import "SPCourseDetailVC.h"
+#import "YouHuiDetailVC.h"
 
 @interface MyCollectionViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -30,17 +32,17 @@
     //创建数据数组
     _dataArray = [[NSMutableArray alloc] init];
     __weak typeof(self) weakSelf = self;
-    [_tableView addHeaderWithCallback:^{
-        weakSelf.pageIndex = 1;
-        [weakSelf.dataArray removeAllObjects];
-        [weakSelf getListWithPage:1];
-    }];
+//    [_tableView addHeaderWithCallback:^{
+//        weakSelf.pageIndex = 1;
+//        [weakSelf.dataArray removeAllObjects];
+//        [weakSelf getListWithPage:1];
+//    }];
     
     [_tableView addFooterWithCallback:^{
         [weakSelf getListWithPage:weakSelf.pageIndex+1];
     }];
     
-    [_tableView headerBeginRefreshing];
+//    [_tableView headerBeginRefreshing];
 }
 
 //根据页数获取 数据
@@ -57,10 +59,10 @@
                 _pageIndex += 1;
             }
         }
-        [_tableView headerEndRefreshing];
+//        [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
     } faild:^(NSString *errorMsg) {
-        [_tableView headerEndRefreshing];
+//        [_tableView headerEndRefreshing];
         [_tableView footerEndRefreshing];
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
@@ -70,7 +72,7 @@
 - (void)createTableView{
     _tableView = [[UITableView alloc] init];;
     _tableView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT);
-    _tableView.origin = CGPointZero;
+    _tableView.origin = CGPointMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT - 65);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -126,6 +128,24 @@
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:data.url]];
             }
         }
+        case Topic_PXJG:{
+            SPSchoolDetailVC * vc = [[SPSchoolDetailVC alloc] init];
+            vc.groupuuid = data.reluuid;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case Topic_PXKC:{
+            SPCourseDetailVC * vc = [[SPCourseDetailVC alloc] init];
+            vc.uuid = data.reluuid;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case Topic_YHHD:{
+            YouHuiDetailVC * vc = [[YouHuiDetailVC alloc] init];
+            vc.uuid = data.reluuid;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
         default:
             break;
     }

@@ -14,8 +14,9 @@
 
 #define ShareKey_TencentWB      @"1104813270"
 #define ShareKey_TencentSecret  @"SumAAk7jtaUSnZqd"
-#define ShareKey_SinaWB         @"2868383197"
-#define ShareKey_SinaSecret     @"60248f289483fef5b6b3e15f26c7491a"
+
 #define ShareKey_WeChat         @"wx6699cf8b21e12618"
 #define ShareKey_WeChatSecret   @"639c78a45d012434370f4c1afc57acd1"
 
+#define ShareKey_SinaWB         @"2868383197"
+#define ShareKey_SinaSecret     @"60248f289483fef5b6b3e15f26c7491a"

@@ -1568,4 +1568,21 @@
 
 //优惠活动 - end
 
+- (void)saveTelUserDatas:(NSString *)ext_uuid type:(NSString *)type success:(void(^)(NSString * msg))success faild:(void(^)(NSString * errorMsg))faild
+{
+    NSDictionary * dict = @{@"type":type,@"ext_uuid":ext_uuid};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr POST:[KGHttpUrl saveTelUserDatasURL:ext_uuid type:type] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         NSLog(@"啊");
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+         NSLog(@"%@",error);
+     }];
+}
+
 @end

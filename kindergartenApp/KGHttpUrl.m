@@ -73,6 +73,8 @@
 
 #define specialtyCourseCommentURL @"rest/appraise/queryByPage.json"  //课程家长评论
 
+#define saveUserTelDatasURL @"rest/pxTelConsultation/save.json" //保存用户咨询
+
 #define articleListURL        @"rest/share/articleList.json"  //精品文章
 #define studentSignRecordURL  @"rest/studentSignRecord/queryMy.json"  //签到记录
 
@@ -310,6 +312,10 @@
 
 + (NSString *)getSpecialtyTeacherDetailURL:(NSString *)teacheruuid{
     return [NSString stringWithFormat:@"%@rest/pxteacher/%@.json",baseServiceURL,teacheruuid];
+}
+
++ (NSString *)saveTelUserDatasURL:(NSString *)ext_uuid type:(NSString *)type{
+    return URL(baseServiceURL, saveUserTelDatasURL);
 }
 
 //优惠活动

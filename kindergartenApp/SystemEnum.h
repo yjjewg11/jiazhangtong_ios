@@ -34,9 +34,11 @@ typedef enum {
     Topic_JPKC        = 7,  //精品课程
     Topic_YEYJS       = 8,  //幼儿园介绍
     Topic_PXJXJH      = 84, //培训机构 - 教学计划
+    
     Topic_PXJG        = 81, //培训机构
     Topic_PXKC        = 82, //培训课程
-    Topic_YHHD        = 85,
+    Topic_YHHD        = 85, //优惠活动
+    
     Topic_Interact    = 99, //班级互动
     Topic_TeacherChat = 11, //与老师的写信列表
     Topic_LeaderChat  = 12, //与幼儿园园长的写信列表

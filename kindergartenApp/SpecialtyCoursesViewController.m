@@ -422,7 +422,7 @@
     
     self.mgr.delegate = self;
     
-    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
+    self.mgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
     self.mgr.distanceFilter = 5.0;
     
@@ -434,7 +434,7 @@
 {
     CLLocation *loc = [locations firstObject];
     
-    self.map_point = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
+    self.map_point = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
     
     NSLog(@"%@",self.map_point);
     

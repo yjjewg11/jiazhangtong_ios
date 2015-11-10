@@ -7,7 +7,6 @@
 //
 
 #import "BaseViewController.h"
-
 #import "UIColor+Extension.h"
 #import "ACMacros.h"
 #import "CollectNoticeTableViewCell.h"
@@ -18,6 +17,7 @@
 #import "GiftwareArticlesInfoViewController.h"
 #import "AnnouncementInfoViewController.h"
 #import "IntroductionViewController.h"
+#import "SPSchoolDetailVC.h"
 
 @interface MyCollectionViewController : BaseViewController
 

@@ -42,17 +42,24 @@
                 {
                     [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
                 }
-                
                 if (btn.tag == intCount)
                 {
                     if (halfCount >= 5)
                     {
                         [btn setImage:[UIImage imageNamed:@"xing"] forState:UIControlStateNormal];
                     }
-                    else
+                    else if(halfCount > 0 && halfCount <5)
                     {
                         [btn setImage:[UIImage imageNamed:@"banekexing"] forState:UIControlStateNormal];
                     }
+                    else
+                    {
+                        [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+                    }
+                }
+                if (btn.tag > intCount)
+                {
+                    [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
                 }
             }
         }
@@ -88,7 +95,7 @@
 
 - (void)setSchoolCellData:(SPSchoolDomain *)domain
 {
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@""]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     [self.titleLbl setTitle:domain.brand_name forState:UIControlStateNormal];
     
@@ -102,7 +109,7 @@
     
     NSInteger intCount = (NSInteger)(domain.ct_stars / 10);
     
-    NSInteger halfCount = domain.ct_stars - intCount;
+    NSInteger halfCount = domain.ct_stars - intCount * 10;
     
     [self setUpStarts:intCount halfCount:halfCount];
 }

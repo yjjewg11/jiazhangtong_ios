@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) NSString * groupuuid;
 
-@property (strong, nonatomic) SPSchoolDomain * schoolDomain;
+
 
 @end
 

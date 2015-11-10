@@ -162,6 +162,22 @@
         return;
     }
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+       NSString * uuid = self.uuid;
+       
+       //调用接口保存用户信息
+       [[KGHttpService sharedService] saveTelUserDatas:uuid type:@"85" success:^(NSString *msg)
+        {
+            
+        }
+        faild:^(NSString *errorMsg)
+        {
+            NSLog(@"保存咨询信息失败");
+        }];
+       
+    });
+    
     NSString *callString = [NSString stringWithFormat:@"tel://%@",self.telsNum[buttonIndex-1]];
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callString]];
