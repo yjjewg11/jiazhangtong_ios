@@ -370,7 +370,7 @@
 #pragma mark - 芒果广告相关
 - (CGSize)adMoGoCustomSize
 {
-    return CGSizeMake(APPWINDOWWIDTH, 150);
+    return CGSizeMake(300, 150);
 }
 
 #pragma mark AdMoGoDelegate delegate
@@ -435,8 +435,6 @@
     CLLocation *loc = [locations firstObject];
     
     self.map_point = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
-    
-    NSLog(@"%@",self.map_point);
     
     //请求数据，刷新表格
     [self loadHotCourse];

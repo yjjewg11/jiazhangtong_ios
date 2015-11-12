@@ -10,8 +10,8 @@
 
 #define URL(baseURL, businessURL) [NSString stringWithFormat:@"%@%@", baseURL, businessURL];
 
-#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
-//#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
+//#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
+#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
 
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单
 #define loginURL             @"rest/userinfo/login.json"             //登录
@@ -316,6 +316,11 @@
 
 + (NSString *)saveTelUserDatasURL:(NSString *)ext_uuid type:(NSString *)type{
     return URL(baseServiceURL, saveUserTelDatasURL);
+}
+
+//我的特长课程
++ (NSString *)getMySPCourseListURL:(NSString *)pageNo isdisable:(NSString *)isdisable{
+    return [NSString stringWithFormat:@"%@rest/pxclass/listMyChildClassByPage.json?pageNo=%@&isdisable=%@",baseServiceURL,pageNo,isdisable];
 }
 
 //优惠活动

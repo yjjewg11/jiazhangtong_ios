@@ -41,7 +41,7 @@
     __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)[AppDelegate appDelegate].window.rootViewController;
     UIViewController * vc = [tabVC.childViewControllers objectAtIndex:Number_Two];
     vc.tabBarItem.image = [[UIImage imageNamed:@"xiaoxi2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:0.5];
+//    [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:0.5];
 }
 
 //延迟刷新

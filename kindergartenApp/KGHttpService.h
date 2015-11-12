@@ -281,4 +281,7 @@
 
 - (void)saveTelUserDatas:(NSString *)ext_uuid type:(NSString *)type success:(void(^)(NSString * msg))success faild:(void(^)(NSString * errorMsg))faild;
 
+#pragma mark - 我的特长课程
+- (void)MySPCourseList:(NSString *)pageNo isdisable:(NSString *)isdisable success:(void(^)(SPDataListVO * msg))success faild:(void(^)(NSString * errorMsg))faild;
+
 @end

@@ -1508,7 +1508,6 @@
 //特长课程 - 老师详情 end
 
 //优惠活动 - start
-
 - (void)getYouHuiList:(NSString *)map_point pageNo:(NSInteger)pageNo success:(void (^)(YouHuiDataListVO * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
@@ -1567,7 +1566,6 @@
 }
 
 //优惠活动 - end
-
 - (void)saveTelUserDatas:(NSString *)ext_uuid type:(NSString *)type success:(void(^)(NSString * msg))success faild:(void(^)(NSString * errorMsg))faild
 {
     NSDictionary * dict = @{@"type":type,@"ext_uuid":ext_uuid};
@@ -1576,7 +1574,7 @@
     
     [mgr POST:[KGHttpUrl saveTelUserDatasURL:ext_uuid type:type] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
-         NSLog(@"啊");
+         NSLog(@"保存用户咨询记录成功");
      }
      failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
      {
@@ -1584,5 +1582,34 @@
          NSLog(@"%@",error);
      }];
 }
+
+//我的特长课程 - 参加的班级列表 start
+- (void)MySPCourseList:(NSString *)pageNo isdisable:(NSString *)isdisable success:(void(^)(SPDataListVO * msg))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMySPCourseListURL:pageNo isdisable:isdisable] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 
 @end

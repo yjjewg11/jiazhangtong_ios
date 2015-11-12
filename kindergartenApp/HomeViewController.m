@@ -56,8 +56,6 @@
     NSArray   * groupDataArray;
     CGFloat     groupViewHeight;
     
-    BaiduMobAdView * sharedAdView;
-    
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -70,19 +68,17 @@
     [super viewDidAppear:animated];
     
     [self requestGroupDate];
+    
 //    if(!groupListView) {
 //        [self loadGroupListView];
 //    }
-    
     
     self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
                                   adMoGoViewDelegate:self];
     
     self.adView.adWebBrowswerDelegate = self;
-    self.adView.frame = CGRectMake(0.0, APPTABBARHEIGHT, 320, 140.0);
+    self.adView.frame = CGRectMake(0, APPTABBARHEIGHT, APPWINDOWWIDTH, 150.0);
     [self.view addSubview:self.adView];
-    [self.view bringSubviewToFront:self.adView];
-    
 }
 
 - (void)viewDidLoad {
@@ -97,7 +93,7 @@
 #pragma mark - 芒果广告相关
 - (CGSize)adMoGoCustomSize
 {
-    return CGSizeMake(APPWINDOWWIDTH, 150);
+    return CGSizeMake(320, 140);
 }
 
 #pragma mark AdMoGoDelegate delegate
@@ -251,62 +247,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)loadBaiduADView {
-    
-    sharedAdView = [[BaiduMobAdView alloc] init];
-    sharedAdView.AdType = BaiduMobAdViewTypeBanner;
-//    sharedAdView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, photosView.height);
-    sharedAdView.delegate = self;
-    [photosView addSubview:sharedAdView];
-    
-    [sharedAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(0));
-        make.left.equalTo(@(0));
-        make.right.equalTo(@(0));
-        make.bottom.equalTo(@(0));
-        make.width.equalTo(@(APPWINDOWWIDTH));
-        make.height.equalTo(@(photosView.height));
-    }];
-    
-    [sharedAdView start];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    if (sharedAdView) {
-        [sharedAdView start];
-    }
-}
-
-
-//#pragma mark - 百度广告代理方法
-//- (NSString *)publisherId{
-//    return @"e7fccb77";
-//}
-//
-//- (BOOL)enableLocation{
-//    return NO;
-//}
-//
-//- (void)willDisplayAd:(BaiduMobAdView *)adview{
-//    sharedAdView.hidden = NO;
-//    sharedAdView.x = -APPWINDOWWIDTH;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        sharedAdView.x = 0;
-//    } completion:^(BOOL finished) {
-//    }];
-//    
-////    CGRect f = sharedAdView.frame;
-////    f.origin.x = -APPWINDOWWIDTH;
-////    sharedAdView.frame = f;
-////    [UIView beginAnimations:nil context:nil];
-////    f.origin.x = 0;
-////    sharedAdView.frame = f;
-////    [UIView commitAnimations];
-//}
-//
-//- (void)failedDisplayAd:(BaiduMobFailReason)reason{
-//    NSLog(@"广告加载失败");
-//}
 
 //人群属性接口
 /**

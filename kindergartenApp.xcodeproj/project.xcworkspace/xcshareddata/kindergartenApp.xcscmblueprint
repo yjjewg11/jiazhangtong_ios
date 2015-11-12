@@ -11,12 +11,12 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9B87967E-4CE0-4E97-B9E5-7048208B7239",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "6fab51ae-0ef0-1b48-a761-3e95f7517cbf++5379" : "jiazhangtong_ios\/kindergartenApp\/kindergartenApp\/Frameworks\/MJRefresh\/MJRefresh.bundle\/",
-    "E53BA3B1910B5C13A105D000202DEBFA867B3EEA" : "jiazhangtong_ios\/"
+    "6fab51ae-0ef0-1b48-a761-3e95f7517cbf++5379" : "kindergartenApp\/kindergartenApp\/kindergartenApp\/Frameworks\/MJRefresh\/MJRefresh.bundle\/",
+    "E53BA3B1910B5C13A105D000202DEBFA867B3EEA" : "kindergartenApp\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "kindergartenApp",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "kindergartenApp\/kindergartenApp.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "kindergartenApp.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.1.240",

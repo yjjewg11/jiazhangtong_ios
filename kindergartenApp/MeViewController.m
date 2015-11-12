@@ -18,6 +18,7 @@
 #import "KGHttpService.h"
 #import "MeFunTableViewCell.h"
 #import "StudentInfoViewController.h"
+#import "MySPCourseVC.h"
 
 #define CellIdentifier @"MyCellIdentifier"
 #define CellDefIdentifier @"MyDefCellIdentifier"
@@ -54,10 +55,8 @@
 
 
 #pragma UITableView delegate
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [studentMArray count] + Number_Two;
+    return [studentMArray count] + Number_Three;
 }
 
 
@@ -75,7 +74,6 @@
         return [self loadFunCell:tableView cellForRowAtIndexPath:indexPath];
     }
 }
-
 
 - (UITableViewCell *)loadStudentInfoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -107,8 +105,9 @@
         case Number_One:
             [cell resetCellParam:@"设置" img:@"meshezhi"];
             break;
+        case Number_Two:
+            [cell resetCellParam:@"我的特长课程" img:@"metechangkecheng"];
     }
-    
     return cell;
 }
 
@@ -150,6 +149,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
+        case Number_Two:{
+            MySPCourseVC * vc = [[MySPCourseVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

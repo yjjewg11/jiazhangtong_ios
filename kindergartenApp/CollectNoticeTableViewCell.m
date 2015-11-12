@@ -30,9 +30,12 @@
         NSMutableAttributedString * attString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"来自%@",_fromLabel.text]];
         [attString addAttribute:NSForegroundColorAttributeName value:KGColorFrom16(0xff4966) range:NSMakeRange(2, attString.length-2)];
         _fromLabel.attributedText = attString;
+        
         defaultImage = [UIImage imageNamed:@"group_head_def"];
     }else if (data.type == Topic_XYGG){
         defaultImage = [UIImage imageNamed:@"wenzhang"];
+    }else {
+        defaultImage = [UIImage imageNamed:@"group_head_def"];
     }
     
     [_flagImageView sd_setImageWithURL:[NSURL URLWithString:data.show_img] placeholderImage:defaultImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

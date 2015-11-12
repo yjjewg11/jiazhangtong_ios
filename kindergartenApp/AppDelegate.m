@@ -45,7 +45,7 @@
 
 - (void)umengTrack {
 //    [MobClick setCrashReportEnabled:NO]; // 如果不需要捕捉异常，注释掉此行]
-//    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];//参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
     //
@@ -252,7 +252,7 @@ static int exception_callback_handler() {
 // 当 DeviceToken 获取失败时，系统会回调此方法
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    NSLog(@"DeviceToken 获取失败，原因：%@",error);
+//    NSLog(@"DeviceToken 获取失败，原因：%@",error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
