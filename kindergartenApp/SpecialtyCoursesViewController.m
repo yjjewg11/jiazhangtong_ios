@@ -370,7 +370,7 @@
 #pragma mark - 芒果广告相关
 - (CGSize)adMoGoCustomSize
 {
-    return CGSizeMake(300, 150);
+    return CGSizeMake(320, 150);
 }
 
 #pragma mark AdMoGoDelegate delegate

@@ -17,6 +17,7 @@
 #import "KGDateUtil.h"
 #import "UMSocial.h"
 #import "SystemShareKey.h"
+#import "MBProgressHUD+HM.h"
 
 #define RemoveHUDNotification @"RemoveHUD"
 
@@ -70,13 +71,13 @@
 #pragma mark - 精品文章详情，点赞收藏信息
 - (void)getArticlesInfo
 {
+    [[KGHUD sharedHud] show:self.view];
     
     [[KGHttpService sharedService] getArticlesInfo:_annuuid success:^(AnnouncementDomain *announcementObj)
     {
         announcementDomain = announcementObj;
         self.urlStr = announcementDomain.share_url;
-
-        
+        [[KGHUD sharedHud] hide:self.view];
         [self resetViewParam];
     }
     faild:^(NSString *errorMsg)
@@ -138,6 +139,17 @@
 - (void)savwDZ:(UIButton *)sender {
     [[KGHUD sharedHud] show:self.view];
     sender.enabled = NO;
+    
+    if (announcementDomain.uuid == nil)
+    {
+        sender.enabled = YES;
+        [MBProgressHUD showError:@"现在还不能点赞呢,请稍后再试"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+        {
+            [[KGHUD sharedHud] hide:self.view];
+        });
+        return;
+    }
     [[KGHttpService sharedService] saveDZ:announcementDomain.uuid type:Topic_Articles success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
 
@@ -197,12 +209,24 @@
 {
     [[KGHUD sharedHud] show:self.view];
     
+
     FavoritesDomain * domain = [[FavoritesDomain alloc] init];
     domain.title = announcementDomain.title;
     domain.type  = Topic_Articles;
     domain.reluuid = announcementDomain.uuid;
     domain.createtime = [KGDateUtil presentTime];
     button.enabled = NO;
+    
+    if (announcementDomain.title == nil)
+    {
+        [MBProgressHUD showError:@"现在还不能收藏哦,请稍后再试"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+        {
+           [[KGHUD sharedHud] hide:self.view];
+        });
+        return;
+    }
+    
     
     [[KGHttpService sharedService] saveFavorites:domain success:^(NSString *msgStr) {
         favImageView.image = [UIImage imageNamed:@"shoucang2"];

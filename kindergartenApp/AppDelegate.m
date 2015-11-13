@@ -102,8 +102,12 @@
     //消除icon badge
     [self clearBadge];
     
+    
     //关闭友盟Crash收集
     [MobClick setCrashReportEnabled:NO];
+    [MobClick setLogEnabled:NO];
+    
+    [[CrashReporter sharedInstance] enableLog:NO];
     //bugly
      [[CrashReporter sharedInstance] installWithAppId:@"900009876"];
     

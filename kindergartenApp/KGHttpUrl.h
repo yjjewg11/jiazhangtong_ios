@@ -19,10 +19,8 @@
 //login
 + (NSString *)getLoginUrl;
 
-
 //logout
 + (NSString *)getLogoutUrl;
-
 
 //reg
 + (NSString *)getRegUrl;

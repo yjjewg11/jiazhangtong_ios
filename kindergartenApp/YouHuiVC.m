@@ -123,7 +123,7 @@
 {
     CLLocation *loc = [locations firstObject];
 
-    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.latitude,loc.coordinate.longitude];
+    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
     
     //请求数据，刷新表格
     [self getYouHuiData];
@@ -179,13 +179,13 @@
     }
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                   {
-                       // 刷新表格
-                       [self.tableVC.tableView reloadData];
-                       
-                       // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-                       [self.tableVC.tableView headerEndRefreshing];
-                   });
+    {
+       // 刷新表格
+       [self.tableVC.tableView reloadData];
+       
+       // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+       [self.tableVC.tableView headerEndRefreshing];
+    });
 }
 
 - (void)footerRereshing
@@ -197,13 +197,13 @@
     }
     // 2.2秒后刷新表格UI
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                   {
-                       // 刷新表格
-                       [self.tableVC.tableView reloadData];
-                       
-                       // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-                       [self.tableVC.tableView footerEndRefreshing];
-                   });
+    {
+       // 刷新表格
+       [self.tableVC.tableView reloadData];
+       
+       // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+       [self.tableVC.tableView footerEndRefreshing];
+    });
 }
 
 @end

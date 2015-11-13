@@ -14,4 +14,10 @@
 
 @property (strong, nonatomic) NSString * uuid;
 
+@property (strong, nonatomic) SpCourseDetailTableVC *tableVC;
+
+@property (strong, nonatomic) UIView * bottomView;
+
+@property (assign, nonatomic) NSInteger haveBottomView;
+
 @end

@@ -22,7 +22,7 @@
 
 - (void)setDatas:(SPCourseTypeDomain * )domain
 {
-    [self.courseBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:domain.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"genggaitouxiang"]];
+    [self.courseBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:domain.img] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.nameLbl.text = domain.datavalue;
 }

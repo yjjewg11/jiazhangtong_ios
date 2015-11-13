@@ -24,6 +24,8 @@
 
 #define MoGo_ID_IPhone @"39bcb217618d43f2b626c875a9f4717b"
 
+//#define MoGo_ID_IPhone @"bb0bf739cd8f4bbabb74bbaa9d2768bf"//测试
+
 #ifdef DEBUG // 处于开发阶段
 #define FuniLog(...) NSLog(__VA_ARGS__)
 #else // 处于发布阶段

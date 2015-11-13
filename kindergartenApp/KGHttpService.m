@@ -1595,7 +1595,7 @@
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
-             SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
              
              success(tempResp);
          }

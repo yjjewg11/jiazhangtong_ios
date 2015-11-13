@@ -7,7 +7,7 @@
 //
 
 #import "MYSPCourseTableVC.h"
-#import "MySPCourseTableCell.h"
+#import "MYSPCourseTableViewCell.h"
 
 @interface MYSPCourseTableVC () <UITableViewDataSource,UITableViewDelegate>
 
@@ -22,6 +22,8 @@
     [super viewDidLoad];
     
     self.tableView.delegate = self;
+    
+    self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     self.tableView.dataSource = self;
     
@@ -44,11 +46,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MySPCourseTableCell * cell = [tableView dequeueReusableCellWithIdentifier:@"mycoursecell"];
+    MYSPCourseTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"mysp"];
     
     if (cell == nil)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPCourseTableCell" owner:nil options:nil] firstObject];;
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"MYSPCourseTableViewCell" owner:nil options:nil] firstObject];;
     }
 
     if (self.dataSourceType == 0)
@@ -71,8 +73,11 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate pushToDetailVC:self dataSourseType:self.dataSourceType selIndexPath:indexPath];
+}
 
 @end

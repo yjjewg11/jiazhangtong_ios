@@ -264,7 +264,7 @@
         [self.superview addSubview:tableView];
         
         #pragma mark - 跳整最大下拉显示个数
-        CGFloat tableViewHeight = ([tableView numberOfRowsInSection:0] > 6) ? (6 * tableView.rowHeight) : ([tableView numberOfRowsInSection:0] * tableView.rowHeight);
+        CGFloat tableViewHeight = ([tableView numberOfRowsInSection:0] > 10) ? (10 * tableView.rowHeight) : ([tableView numberOfRowsInSection:0] * tableView.rowHeight);
         
         [UIView animateWithDuration:0.2 animations:^{
             _tableView.frame = CGRectMake(0, self.frame.origin.y + self.frame.size.height, self.frame.size.width, tableViewHeight);

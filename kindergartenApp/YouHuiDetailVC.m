@@ -75,17 +75,19 @@
 #pragma mark - 优惠活动详情，点赞收藏信息
 - (void)getArticlesInfo
 {
+    [[KGHUD sharedHud] show:self.view];
+    
     [[KGHttpService sharedService] getYouHuiInfo:self.uuid success:^(AnnouncementDomain *announcementObj)
     {
         announcementDomain = announcementObj;
         self.urlStr = announcementDomain.share_url;
         self.tels = announcementDomain.link_tel;
-        NSLog(@"%@",self.tels);
+        [[KGHUD sharedHud] hide:self.view];
         [self resetViewParam];
     }
     faild:^(NSString *errorMsg)
     {
-        
+        [[KGHUD sharedHud] show:self.view msg:errorMsg];
     }];
 }
 
@@ -168,13 +170,13 @@
        
        //调用接口保存用户信息
        [[KGHttpService sharedService] saveTelUserDatas:uuid type:@"85" success:^(NSString *msg)
-        {
+       {
             
-        }
-        faild:^(NSString *errorMsg)
-        {
-            NSLog(@"保存咨询信息失败");
-        }];
+       }
+       faild:^(NSString *errorMsg)
+       {
+           NSLog(@"保存咨询信息失败");
+       }];
        
     });
     

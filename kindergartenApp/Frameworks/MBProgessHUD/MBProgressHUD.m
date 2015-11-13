@@ -206,7 +206,7 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 }
 
 - (void)dealloc {
-    NSLog(@"%s",__func__);
+    //NSLog(@"%s",__func__);
 	[self unregisterFromNotifications];
 	[self unregisterFromKVO];
 #if !__has_feature(objc_arc)

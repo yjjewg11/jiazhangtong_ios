@@ -41,7 +41,7 @@
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
 
 
-@interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,BaiduMobAdViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate>
+@interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate>
 {
     
     IBOutlet UIScrollView * scrollView;
@@ -79,6 +79,7 @@
     self.adView.adWebBrowswerDelegate = self;
     self.adView.frame = CGRectMake(0, APPTABBARHEIGHT, APPWINDOWWIDTH, 150.0);
     [self.view addSubview:self.adView];
+    
 }
 
 - (void)viewDidLoad {

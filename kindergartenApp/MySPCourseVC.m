@@ -12,8 +12,9 @@
 #import "KGHttpService.h"
 #import "MySPCourseDomain.h"
 #import "MJExtension.h"
+#import "MySPCourseDetailVC.h"
 
-@interface MySPCourseVC ()
+@interface MySPCourseVC () <UIScrollViewDelegate,MYSPCourseTableVCDelegate>
 
 @property (strong, nonatomic) UIView * topSelView;
 
@@ -31,18 +32,41 @@
 
 @property (strong, nonatomic) UIScrollView * scrollView;
 
+@property (strong, nonatomic) NSArray * nowStudyArr;
+
+@property (strong, nonatomic) NSArray * endStudyArr;
+
 @end
 
 @implementation MySPCourseVC
+
+- (NSArray *)nowStudyArr
+{
+    if (_nowStudyArr == nil)
+    {
+        _nowStudyArr = [NSArray array];
+    }
+    return _nowStudyArr;
+}
+
+- (NSArray *)endStudyArr
+{
+    if (_endStudyArr == nil)
+    {
+        _endStudyArr = [NSArray array];
+    }
+    return _endStudyArr;
+}
 
 - (MYSPCourseTableVC *)tableViewStudying
 {
     if (_tableViewStudying == nil)
     {
         _tableViewStudying = [[MYSPCourseTableVC alloc] init];
-        _tableViewStudying.tableFrame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
+        _tableViewStudying.tableFrame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
         _tableViewStudying.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _tableViewStudying.dataSourceType = 0;
+        _tableViewStudying.delegate = self;
     }
     return _tableViewStudying;
 }
@@ -52,14 +76,13 @@
     if (_tableViewEnding == nil)
     {
         _tableViewEnding = [[MYSPCourseTableVC alloc] init];
-        _tableViewEnding.tableFrame = CGRectMake(APPWINDOWWIDTH, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
+        _tableViewEnding.tableFrame = CGRectMake(APPWINDOWWIDTH, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
         _tableViewEnding.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _tableViewEnding.dataSourceType = 1;
+        _tableViewEnding.delegate = self;
     }
     return _tableViewEnding;
 }
-
-
 
 - (UIImageView *)sepView
 {
@@ -129,9 +152,11 @@
     if (_scrollView == nil)
     {
         _scrollView = [[UIScrollView alloc] init];
-        _scrollView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30, APPWINDOWWIDTH * 2, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
+        _scrollView.delegate = self;
+        _scrollView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
         _scrollView.contentSize = CGSizeMake(APPWINDOWWIDTH * 2, 0);
         _scrollView.pagingEnabled = YES;
+        _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     }
     return _scrollView;
@@ -164,15 +189,19 @@
     [self getMySPEndingCourseListData];
 }
 
+
+#pragma mark - 请求正在学学习数据
 - (void)getMySPStudyingCourseListData
 {
     [[KGHUD sharedHud] show:self.view];
     
     [[KGHttpService sharedService] MySPCourseList:@"" isdisable:@"0" success:^(SPDataListVO *msg)
     {
-        [[KGHUD sharedHud] hide:self.view];
-        
         self.tableViewStudying.studyingCourseArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+        
+        self.nowStudyArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+        
+        [[KGHUD sharedHud] hide:self.view];
         
         [self.tableViewStudying.tableView reloadData];
         
@@ -183,15 +212,18 @@
     }];
 }
 
+#pragma mark - 请求已完成数据
 - (void)getMySPEndingCourseListData
 {
     [[KGHUD sharedHud] show:self.view];
     
     [[KGHttpService sharedService] MySPCourseList:@"" isdisable:@"1" success:^(SPDataListVO *msg)
     {
+        self.tableViewEnding.endingCourseArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+     
+        self.endStudyArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+        
         [[KGHUD sharedHud] hide:self.view];
-         
-        self.tableViewStudying.endingCourseArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
         
         [self.tableViewEnding.tableView reloadData];
     }
@@ -201,10 +233,43 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - scrollView代理
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [super didReceiveMemoryWarning];
+    CGFloat index = (self.scrollView.contentOffset.x / APPWINDOWWIDTH);
     
+    if (index <= 0.5)
+    {
+        [UIView animateWithDuration:0.4 animations:^
+        {
+            [self.pointerView setCenter:CGPointMake(self.nowStudyBtn.centerX, self.pointerView.centerY)];
+        }];
+    }
+    else if (index > 0.5)
+    {
+        [UIView animateWithDuration:0.4 animations:^
+        {
+            [self.pointerView setCenter:CGPointMake(self.endStudyBtn.centerX, self.pointerView.centerY)];
+        }];
+    }
+    
+}
+
+#pragma mark - 页面跳转代理
+- (void)pushToDetailVC:(MYSPCourseTableVC *)vc dataSourseType:(NSInteger)dataScourseType selIndexPath:(NSIndexPath *)indexPath
+{
+    MySPCourseDetailVC * detailVC = [[MySPCourseDetailVC alloc] init];
+    
+    if (dataScourseType == 0)
+    {
+        detailVC.domain = self.nowStudyArr[indexPath.row];
+    }
+    else if (dataScourseType == 1)
+    {
+        detailVC.domain = self.endStudyArr[indexPath.row];
+    }
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 

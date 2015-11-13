@@ -73,7 +73,7 @@
 
 - (void)setCourseCellData:(SPCourseDomain *)domain
 {
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.logo] placeholderImage:[UIImage imageNamed:@""]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.logo] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.titleLbl.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     [self.titleLbl setTitle:domain.title forState:UIControlStateNormal];
@@ -85,8 +85,6 @@
     self.studyPersonNum.text = [NSString stringWithFormat:@"%ld",(long)domain.ct_study_students];
     
     self.distanceLbl.text = domain.distance;
-    
-    NSLog(@"%d",domain.ct_stars);
     
     NSInteger intCount = (NSInteger)(domain.ct_stars / 10);
     

@@ -32,10 +32,6 @@
 
 @property (strong, nonatomic) UIWebView * webview;
 
-@property (strong, nonatomic) SpCourseDetailTableVC *tableVC;
-
-@property (strong, nonatomic) UIView * bottomView;
-
 @property (strong, nonatomic) NSMutableArray * buttonItems;
 
 @property (strong, nonatomic) NSString * share_url;
@@ -71,7 +67,14 @@
     if (_tableVC == nil)
     {
         _tableVC = [[SpCourseDetailTableVC alloc] init];
-        _tableVC.tableView.frame = CGRectMake(0, 64, APPWINDOWWIDTH, APPWINDOWHEIGHT-64-48);
+        if (self.haveBottomView == 100)
+        {
+            _tableVC.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT);
+        }
+        else
+        {
+            _tableVC.tableView.frame = CGRectMake(0, 64, APPWINDOWWIDTH, APPWINDOWHEIGHT-64-48);
+        }
     }
     return _tableVC;
 }
