@@ -27,7 +27,7 @@
 
 - (void)setData:(YouHuiDomain *)domain
 {
-    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.group_img] placeholderImage:[UIImage imageNamed:@""]];
+    [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.group_img] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.titleLbl.text = domain.title;
     

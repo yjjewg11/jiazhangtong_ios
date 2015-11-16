@@ -266,6 +266,14 @@
 		04F817051BE9C0E700EEEAB2 /* SPTextCellOfCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F817041BE9C0E700EEEAB2 /* SPTextCellOfCourse.m */; };
 		04F946ED1BF5ECD200F8B31F /* MySPCourseCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */; };
 		04F9C6791BEC457B000DD5CE /* SPSchoolDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C6781BEC457B000DD5CE /* SPSchoolDetailTableVC.m */; };
+		04F9F2F21BF9B55500470F0C /* MySPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2F11BF9B55500470F0C /* MySPCommentDomain.m */; };
+		04F9F2F61BF9BF4500470F0C /* MySPCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2F41BF9BF4500470F0C /* MySPCourseCommentCell.m */; };
+		04F9F2F71BF9BF4500470F0C /* MySPCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9F2F51BF9BF4500470F0C /* MySPCourseCommentCell.xib */; };
+		04F9F2FB1BF9C38700470F0C /* MySPNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2F91BF9C38700470F0C /* MySPNormalCell.m */; };
+		04F9F2FC1BF9C38700470F0C /* MySPNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9F2FA1BF9C38700470F0C /* MySPNormalCell.xib */; };
+		04F9F3001BF9C67500470F0C /* MySPButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2FE1BF9C67500470F0C /* MySPButtonCell.m */; };
+		04F9F3011BF9C67500470F0C /* MySPButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */; };
+		04F9F3041BF9DD7E00470F0C /* MySPCourseTeacherList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F3031BF9DD7E00470F0C /* MySPCourseTeacherList.m */; };
 		04F9FB2C1BF1A64B00AEFB88 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB291BF1A64B00AEFB88 /* libMobClickLibrary.a */; };
 		04F9FB571BF1A67400AEFB88 /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F9FB2E1BF1A67400AEFB88 /* UMFeedbackLocalizable.strings */; };
 		04F9FB581BF1A67400AEFB88 /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB301BF1A67400AEFB88 /* libUMFeedback.a */; };
@@ -1028,6 +1036,19 @@
 		04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseCommentVC.m; sourceTree = "<group>"; };
 		04F9C6771BEC457B000DD5CE /* SPSchoolDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSchoolDetailTableVC.h; sourceTree = "<group>"; };
 		04F9C6781BEC457B000DD5CE /* SPSchoolDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSchoolDetailTableVC.m; sourceTree = "<group>"; };
+		04F9F2F01BF9B55500470F0C /* MySPCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCommentDomain.h; sourceTree = "<group>"; };
+		04F9F2F11BF9B55500470F0C /* MySPCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCommentDomain.m; sourceTree = "<group>"; };
+		04F9F2F31BF9BF4500470F0C /* MySPCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseCommentCell.h; sourceTree = "<group>"; };
+		04F9F2F41BF9BF4500470F0C /* MySPCourseCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseCommentCell.m; sourceTree = "<group>"; };
+		04F9F2F51BF9BF4500470F0C /* MySPCourseCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseCommentCell.xib; sourceTree = "<group>"; };
+		04F9F2F81BF9C38700470F0C /* MySPNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPNormalCell.h; sourceTree = "<group>"; };
+		04F9F2F91BF9C38700470F0C /* MySPNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPNormalCell.m; sourceTree = "<group>"; };
+		04F9F2FA1BF9C38700470F0C /* MySPNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPNormalCell.xib; sourceTree = "<group>"; };
+		04F9F2FD1BF9C67500470F0C /* MySPButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPButtonCell.h; sourceTree = "<group>"; };
+		04F9F2FE1BF9C67500470F0C /* MySPButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPButtonCell.m; sourceTree = "<group>"; };
+		04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPButtonCell.xib; sourceTree = "<group>"; };
+		04F9F3021BF9DD7E00470F0C /* MySPCourseTeacherList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseTeacherList.h; sourceTree = "<group>"; };
+		04F9F3031BF9DD7E00470F0C /* MySPCourseTeacherList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseTeacherList.m; sourceTree = "<group>"; };
 		04F9FB291BF1A64B00AEFB88 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		04F9FB2A1BF1A64B00AEFB88 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		04F9FB2B1BF1A64B00AEFB88 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -3459,6 +3480,10 @@
 				F4EA538E1B60D8390044BE7A /* StudentInfoItemVO.m */,
 				040109B21BF1F8CB00A18622 /* MySPCourseDomain.h */,
 				040109B31BF1F8CB00A18622 /* MySPCourseDomain.m */,
+				04F9F2F01BF9B55500470F0C /* MySPCommentDomain.h */,
+				04F9F2F11BF9B55500470F0C /* MySPCommentDomain.m */,
+				04F9F3021BF9DD7E00470F0C /* MySPCourseTeacherList.h */,
+				04F9F3031BF9DD7E00470F0C /* MySPCourseTeacherList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3481,6 +3506,15 @@
 				0403DCE51BF5C84D0089E463 /* MySPCourseView.h */,
 				0403DCE61BF5C84D0089E463 /* MySPCourseView.m */,
 				0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */,
+				04F9F2F31BF9BF4500470F0C /* MySPCourseCommentCell.h */,
+				04F9F2F41BF9BF4500470F0C /* MySPCourseCommentCell.m */,
+				04F9F2F51BF9BF4500470F0C /* MySPCourseCommentCell.xib */,
+				04F9F2F81BF9C38700470F0C /* MySPNormalCell.h */,
+				04F9F2F91BF9C38700470F0C /* MySPNormalCell.m */,
+				04F9F2FA1BF9C38700470F0C /* MySPNormalCell.xib */,
+				04F9F2FD1BF9C67500470F0C /* MySPButtonCell.h */,
+				04F9F2FE1BF9C67500470F0C /* MySPButtonCell.m */,
+				04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -4586,9 +4620,11 @@
 				F487839E1B58DA1700CDC1A8 /* LICENSE in Resources */,
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
 				04A4DE8B1BF484DF002ABBB1 /* hengtiao.png in Resources */,
+				04F9F3011BF9C67500470F0C /* MySPButtonCell.xib in Resources */,
 				24C46B531B5A2BC800A58F92 /* MessageViewController.xib in Resources */,
 				04A4DE2F1BF484DF002ABBB1 /* adsmogo_button_pressed@2x.png in Resources */,
 				04F9FBA41BF1A77E00AEFB88 /* UMShareEditViewController.xib in Resources */,
+				04F9F2F71BF9BF4500470F0C /* MySPCourseCommentCell.xib in Resources */,
 				04F9FBA21BF1A77E00AEFB88 /* UMSCommentInputController.xib in Resources */,
 				04A4DE971BF484DF002ABBB1 /* webview_bar_next_grey.png in Resources */,
 				04A4DE621BF484DF002ABBB1 /* hengtiao@2x.png in Resources */,
@@ -4602,6 +4638,7 @@
 				04F9FB631BF1A67400AEFB88 /* umeng_fb_audio_dialog_content@2x.png in Resources */,
 				04A4DE431BF484DF002ABBB1 /* mogoVideo.html in Resources */,
 				04A4DE451BF484DF002ABBB1 /* adsmogo_adclose@3x.png in Resources */,
+				04F9F2FC1BF9C38700470F0C /* MySPNormalCell.xib in Resources */,
 				F4E635FF1B675EB700800924 /* AnnouncementTableViewCell.xib in Resources */,
 				04A4DE3C1BF484DF002ABBB1 /* ads_alert_left_button.png in Resources */,
 				24DE91BA1B67C9D400D3FFCE /* TeacherJudgeTableViewCell.xib in Resources */,
@@ -4862,6 +4899,7 @@
 				4DF056D61B877F3A00ED3840 /* KGPhotoScrollView.m in Sources */,
 				248B6A931B19A9D900FCB98F /* UIColor+Extension.m in Sources */,
 				24A175F31B55430600295997 /* KGTableParam.m in Sources */,
+				04F9F2FB1BF9C38700470F0C /* MySPNormalCell.m in Sources */,
 				24850B141B7B860E003C442E /* ClassDomain.m in Sources */,
 				2489B6651B5AB49E00039E70 /* UIImage+WebP.m in Sources */,
 				04FEC57A1BEDD84A00C642A6 /* YouHuiCell.m in Sources */,
@@ -4900,6 +4938,7 @@
 				F4E636071B67939D00800924 /* MessageDomain.m in Sources */,
 				24A175E71B5541BF00295997 /* KGDBHelper.m in Sources */,
 				04FEC56D1BEDC9D100C642A6 /* YouHuiVC.m in Sources */,
+				04F9F3001BF9C67500470F0C /* MySPButtonCell.m in Sources */,
 				04A5A0A51BE76F3A00024E21 /* SPPresentsComment.m in Sources */,
 				F4DCD0EF1B1C2C50007D61CA /* KGDeviceUtil.m in Sources */,
 				04FEC57F1BEDDE7200C642A6 /* YouHuiDetailVC.m in Sources */,
@@ -4909,6 +4948,7 @@
 				0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */,
 				F48783931B58DA1700CDC1A8 /* AFURLSessionManager.m in Sources */,
 				04F3D4611BF47FD3007E7AC0 /* CDataScanner_Extensions.m in Sources */,
+				04F9F3041BF9DD7E00470F0C /* MySPCourseTeacherList.m in Sources */,
 				F48783B21B58DA1700CDC1A8 /* NSObject+MJKeyValue.m in Sources */,
 				F487838D1B58DA1700CDC1A8 /* AFHTTPSessionManager.m in Sources */,
 				248B6ACF1B19B57400FCB98F /* KeychainItemWrapper.m in Sources */,
@@ -4929,6 +4969,7 @@
 				24A175E81B5541BF00295997 /* KGDBHelperHandle.m in Sources */,
 				04F3D45C1BF47FD3007E7AC0 /* CDataScanner.m in Sources */,
 				F4CF7A921B79C5B400BFAA1E /* TimetableItemTableViewCell.m in Sources */,
+				04F9F2F21BF9B55500470F0C /* MySPCommentDomain.m in Sources */,
 				248B6A5F1B19A39200FCB98F /* main.m in Sources */,
 				2457FD021B711A65006A3AB7 /* AddressbookTableViewCell.m in Sources */,
 				04F7FB1B1BEAF66500B02444 /* SPHotCourseVC.m in Sources */,
@@ -4941,6 +4982,7 @@
 				F48783B11B58DA1700CDC1A8 /* NSObject+MJCoding.m in Sources */,
 				4DF056D01B877F0200ED3840 /* KGAttachment.m in Sources */,
 				F4E61B791B73438F00E5851A /* ShareViewController.m in Sources */,
+				04F9F2F61BF9BF4500470F0C /* MySPCourseCommentCell.m in Sources */,
 				24E634811B6FB9CC00A23A66 /* RecipesHeadTableViewCell.m in Sources */,
 				2474DFCC1B6CD4240021506F /* RecipesDomain.m in Sources */,
 				F4E636031B676AD400800924 /* AnnouncementInfoViewController.m in Sources */,

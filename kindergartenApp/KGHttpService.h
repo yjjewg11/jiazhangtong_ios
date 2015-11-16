@@ -30,6 +30,7 @@
 #import "SPShareSaveDomain.h"
 #import "YouHuiDomain.h"
 #import "YouHuiDataListVO.h"
+#import "MySPCourseTeacherList.h"
 
 @interface KGHttpService : NSObject
 
@@ -283,5 +284,9 @@
 
 #pragma mark - 我的特长课程
 - (void)MySPCourseList:(NSString *)pageNo isdisable:(NSString *)isdisable success:(void(^)(SPDataListVO * msg))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)MySPCourseComment:(NSString *)classuuid pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * msg))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)MySPCourseTeacherList:(NSString *)classuuid success:(void(^)(NSArray * teacherArr))success faild:(void(^)(NSString * errorMsg))faild;
 
 @end

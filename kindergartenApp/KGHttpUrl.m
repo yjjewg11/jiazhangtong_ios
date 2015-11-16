@@ -323,6 +323,14 @@
     return [NSString stringWithFormat:@"%@rest/pxclass/listMyChildClassByPage.json?pageNo=%@&isdisable=%@",baseServiceURL,pageNo,isdisable];
 }
 
++ (NSString *)getMySPCourseComments:(NSString *)classuuid pageNo:(NSString *)pageNo{
+    return [NSString stringWithFormat:@"%@rest/appraise/queryMyByPage.json?class_uuid=%@&pageNo=%@",baseServiceURL,classuuid,pageNo];
+}
+
++ (NSString *)getMySPCourseTeacherList:(NSString *)classuuid{
+    return [NSString stringWithFormat:@"%@rest/pxclass/listclassTeacher.json?classuuid=%@",baseServiceURL,classuuid];
+}
+
 //优惠活动
 + (NSString *)getYouHuiListURL:(NSString *)map_point pageNo:(NSInteger)pageNo{
     return [NSString stringWithFormat:@"%@rest/share/pxbenefitList.json?map_point=%@&pageNo=%ld",baseServiceURL,map_point,(long)pageNo];

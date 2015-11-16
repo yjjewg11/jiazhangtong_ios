@@ -27,6 +27,8 @@
     
     self.tableView.dataSource = self;
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.tableView.frame = self.tableFrame;
 }
 

@@ -10,6 +10,7 @@
 #import "ACMacros.h"
 #import "MySPCourseView.h"
 #import "SPCourseDetailVC.h"
+#import "MySPCourseCommentVC.h"
 
 @interface MySPCourseDetailVC () <UIScrollViewDelegate>
 {
@@ -25,9 +26,21 @@
 
 @property (strong, nonatomic) MySPCourseView * courseView;
 
+@property (strong, nonatomic) MySPCourseCommentVC * commentVC;
+
 @end
 
 @implementation MySPCourseDetailVC
+
+- (MySPCourseCommentVC *)commentVC
+{
+    if (_commentVC == nil)
+    {
+        _commentVC = [[MySPCourseCommentVC alloc] init];
+    }
+    
+    return _commentVC;
+}
 
 - (MySPCourseView *)courseView
 {
@@ -154,7 +167,12 @@
     [_contentView addSubview:vc.view];
     
     //第三个
+    self.commentVC.classuuid = self.domain.uuid;
+    self.commentVC.groupuuid = self.domain.groupuuid;
     
+    self.commentVC.tableFrame = CGRectMake(APPWINDOWWIDTH + APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    
+    [_contentView addSubview:self.commentVC.tableView];
     
     
     //添加

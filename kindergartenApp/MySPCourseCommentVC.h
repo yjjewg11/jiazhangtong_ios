@@ -10,4 +10,11 @@
 
 @interface MySPCourseCommentVC : UITableViewController
 
+@property (strong, nonatomic) NSString * classuuid;
+
+@property (strong, nonatomic) NSString * groupuuid;
+
+@property (assign, nonatomic) CGRect tableFrame;
+
+
 @end

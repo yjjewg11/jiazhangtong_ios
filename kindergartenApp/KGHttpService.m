@@ -1448,7 +1448,6 @@
 //特长课程 - 课程评价end
 
 //特长课程 - 教师列表 start
-
 - (void)getSPTeacherList:(NSString *)groupuuid pageNo:(NSString *)pageNo success:(void (^)(SPDataListVO * dataListVo))success faild:(void (^)(NSString * errorMsg))faild
 {
     NSDictionary * dic = @{@"groupuuid":groupuuid};
@@ -1610,6 +1609,68 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
+// end
+
+//我的特长课程 - 获取评价
+- (void)MySPCourseComment:(NSString *)classuuid pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * msg))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMySPCourseComments:classuuid pageNo:pageNo] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+//end
+
+//我的特长课程 - 根据课程id请求老师列表
+- (void)MySPCourseTeacherList:(NSString *)classuuid success:(void(^)(NSArray * teacherArr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMySPCourseTeacherList:classuuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             NSArray * tempResp = [MySPCourseTeacherList objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 
 
 @end

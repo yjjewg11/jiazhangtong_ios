@@ -131,6 +131,8 @@
 
 //我的特长课程
 + (NSString *)getMySPCourseListURL:(NSString *)pageNo isdisable:(NSString *)isdisable;
++ (NSString *)getMySPCourseComments:(NSString *)classuuid pageNo:(NSString *)pageNo;
++ (NSString *)getMySPCourseTeacherList:(NSString *)classuuid;
 
 //优惠活动
 + (NSString *)getYouHuiListURL:(NSString *)map_point pageNo:(NSInteger)pageNo;

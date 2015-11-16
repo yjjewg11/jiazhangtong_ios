@@ -37,6 +37,7 @@ typedef enum {
     
     Topic_PXJG        = 81, //培训机构
     Topic_PXKC        = 82, //培训课程
+    Topic_PXJS        = 83, //培训教师
     Topic_YHHD        = 85, //优惠活动
     
     Topic_Interact    = 99, //班级互动
