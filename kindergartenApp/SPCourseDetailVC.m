@@ -166,6 +166,10 @@
     
     _webview.delegate = self;
     
+    _webview.scrollView.bounces = NO;
+    
+    [_webview sizeToFit];
+    
     NSString * filename = [NSString stringWithFormat:@"Documents/%@-%@.html",type,self.uuid];
     
     NSString * filePath = [NSHomeDirectory() stringByAppendingPathComponent:filename];
@@ -174,7 +178,10 @@
         
     [fileManager createFileAtPath:filePath contents:nil attributes:nil];
     
-    [context writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    NSString * htmlcontent = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>", context];
+//    [_webview loadHTMLString:htmlcontent baseURL:nil];
+    
+    [htmlcontent writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:filePath]]];
     
@@ -185,22 +192,40 @@
     [self.view addSubview:_webview];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)wb
+- (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    CGRect frame = wb.frame;
-    frame.size.width = APPWINDOWWIDTH;
-    frame.size.height = 1;
-
-    wb.frame = frame;
+//    CGRect frame = wb.frame;
+//    frame.size.width = APPWINDOWWIDTH;
+//    frame.size.height = 1;
+//
+//    wb.frame = frame;
+//    
+//    frame.size.height = wb.scrollView.contentSize.height;
+//
+//    wb.frame = frame;
+//    
+//    self.tableVC.courseRowHeight = wb.frame.size.height;
+//
+//    [self.tableVC.tableView reloadData];
     
-    frame.size.height = wb.scrollView.contentSize.height;
-
-    wb.frame = frame;
+    //获取页面高度（像素）
+    NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+    float clientheight = [clientheight_str floatValue];
+    //设置到WebView上
+    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, clientheight);
+    //获取WebView最佳尺寸（点）
+    CGSize frame = [webView sizeThatFits:webView.frame.size];
+    //获取内容实际高度（像素）
+    NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
+    float height = [height_str floatValue];
+    //内容实际高度（像素）* 点和像素的比
+    height = height * frame.height / clientheight;
+    //再次设置WebView高度（点）
+    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
     
-    self.tableVC.courseRowHeight = wb.frame.size.height;
-
+    self.tableVC.courseRowHeight = webView.frame.size.height;
+    
     [self.tableVC.tableView reloadData];
-
 }
 
 #pragma mark - 添加底部按钮

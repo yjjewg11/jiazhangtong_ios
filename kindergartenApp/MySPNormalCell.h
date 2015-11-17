@@ -16,4 +16,10 @@
 
 - (void)setSchoolData:(MySPCommentDomain *)domain;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *teacherNameLbl;
+
+@property (weak, nonatomic) IBOutlet UIView *starView;
+
+
 @end

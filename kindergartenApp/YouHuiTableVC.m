@@ -19,6 +19,8 @@
 {
     [super viewDidLoad];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     self.tableView.rowHeight = 90;
     
     [self.tableView setFrame:self.tableRect];

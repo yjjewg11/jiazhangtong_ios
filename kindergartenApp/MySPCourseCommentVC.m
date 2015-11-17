@@ -113,9 +113,11 @@
 {
     [[KGHUD sharedHud] show:self.tableView];
     
-    [[KGHttpService sharedService] MySPCourseTeacherList:self.groupuuid success:^(NSArray *teacherArr)
+    [[KGHttpService sharedService] MySPCourseTeacherList:self.classuuid success:^(NSArray *teacherArr)
     {
         self.teacherList = [NSMutableArray arrayWithArray:teacherArr];
+        
+        [self.tableView reloadData];
     }
     faild:^(NSString *errorMsg)
     {
@@ -235,11 +237,16 @@
         {
             [cell setData:self.courseDomain];
             
-            cell.textView.editable = NO;
+//            cell.textView.editable = NO;
             
-            cell.textView.backgroundColor = [UIColor whiteColor];
+//            cell.textView.backgroundColor = [UIColor whiteColor];
             
             cell.textView.textColor = [UIColor blackColor];
+            
+            for (UIButton * v in cell.starView.subviews)
+            {
+                v.enabled = NO;
+            }
         }
         else
         {
@@ -259,15 +266,31 @@
             
             [cell setSchoolData:self.schoolDomain];
             
+            if (self.flag == YES)
+            {
+                for (UIButton * b in cell.starView.subviews)
+                {
+//                    b.enabled = NO;
+                }
+            }
+            
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
         }
-        else     //教师
+        else                     //教师
         {
             MySPNormalCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPNormalCell" owner:nil options:nil] firstObject];
             
             [cell setData:self.teacherList[indexPath.row - 1]];
+            
+            if (self.flag == YES)
+            {
+                for (UIButton * b in cell.starView.subviews)
+                {
+//                    b.enabled = NO;
+                }
+            }
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
@@ -286,6 +309,8 @@
             cell.btn.backgroundColor = [UIColor grayColor];
             
             [cell.btn setTitle:@"已评价" forState:UIControlStateNormal];
+            
+//            cell.btn.enabled = NO;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone; 

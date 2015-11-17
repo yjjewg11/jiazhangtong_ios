@@ -10,10 +10,6 @@
 
 @interface MySPNormalCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *teacherNameLbl;
-
-@property (weak, nonatomic) IBOutlet UIView *starView;
-
 @end
 
 @implementation MySPNormalCell
@@ -77,9 +73,16 @@
                 {
                     [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
                 }
+                
+                [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
     }
+}
+
+- (void)btnClick:(UIButton *)btn
+{
+    NSLog(@"%d",btn.tag);
 }
 
 @end

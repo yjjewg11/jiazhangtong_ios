@@ -1621,8 +1621,6 @@
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
          [self sessionTimeoutHandle:baseDomain];
          
-         NSLog(@"%@",responseObject);
-         
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
              SPDataListVO * tempResp = [SPDataListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];

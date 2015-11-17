@@ -10,10 +10,6 @@
 
 @interface MySPCourseCommentCell() <UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *starView;
-
-
-
 @end
 
 
@@ -78,8 +74,19 @@
                     [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
                 }
             }
+            
+            [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
+}
+- (IBAction)btnCC:(UIButton *)sender
+{
+    NSLog(@"%d",sender.tag);
+}
+
+- (void)btnClick:(UIButton *)btn
+{
+    
 }
 
 @end

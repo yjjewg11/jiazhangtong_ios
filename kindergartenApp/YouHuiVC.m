@@ -17,6 +17,9 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface YouHuiVC () <CLLocationManagerDelegate,YouHuiTableVCDelegate>
+{
+    UIView * _warningView;
+}
 
 @property (strong, nonatomic) YouHuiTableVC * tableVC;
 
@@ -91,10 +94,22 @@
             [marr addObject:domain];
         }
         
-        self.tableVC.dataArr = marr;  //设置数据
-        
-        [self.tableVC.tableView reloadData];
-        
+        if (marr == nil  ||  marr.count == 0)
+        {
+            _warningView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] firstObject];
+            
+            [_warningView setOrigin:CGPointMake(0,APPTABBARHEIGHT + APPSTATUSBARHEIGHT + 20)];
+            
+            [self.view addSubview:_warningView];
+            
+            return;
+        }
+        else
+        {
+            self.tableVC.dataArr = marr;  //设置数据
+            
+            [self.tableVC.tableView reloadData];
+        }
     }
     faild:^(NSString *errorMsg)
     {

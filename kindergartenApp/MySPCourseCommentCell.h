@@ -15,4 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
+@property (weak, nonatomic) IBOutlet UIView *starView;
+
 @end

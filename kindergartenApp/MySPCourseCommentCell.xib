@@ -17,45 +17,60 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bO7-ZV-FmS" userLabel="StarView">
                         <rect key="frame" x="140" y="10" width="170" height="30"/>
                         <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5BY-1B-mjB">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5BY-1B-mjB">
                                 <rect key="frame" x="35" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0FC-FK-vEK"/>
                                     <constraint firstAttribute="width" constant="30" id="gga-9r-PoA"/>
                                 </constraints>
                                 <state key="normal" image="xing1"/>
+                                <connections>
+                                    <action selector="btnCC:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="mKD-cd-DIL"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzL-Po-Wek">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzL-Po-Wek">
                                 <rect key="frame" x="70" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="0UY-zM-WjE"/>
                                     <constraint firstAttribute="height" constant="30" id="WyL-Aa-6vh"/>
                                 </constraints>
                                 <state key="normal" image="xing1"/>
+                                <connections>
+                                    <action selector="btnCC:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="E6V-uy-viU"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jP5-Yz-yma">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jP5-Yz-yma">
                                 <rect key="frame" x="105" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="AFn-Jm-2kU"/>
                                     <constraint firstAttribute="width" constant="30" id="uZT-xQ-hfw"/>
                                 </constraints>
                                 <state key="normal" image="xing1"/>
+                                <connections>
+                                    <action selector="btnCC:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yeS-WR-ipT"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5a-56-90s">
+                            <button opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5a-56-90s">
                                 <rect key="frame" x="140" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="UUu-b3-yYJ"/>
                                     <constraint firstAttribute="height" constant="30" id="xTN-O1-uBi"/>
                                 </constraints>
                                 <state key="normal" image="xing1"/>
+                                <connections>
+                                    <action selector="btnCC:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="U3E-mk-QeE"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZW-tO-RgC">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZZW-tO-RgC">
                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="66E-le-fpl"/>
                                     <constraint firstAttribute="height" constant="30" id="PWr-7U-XuU"/>
                                 </constraints>
                                 <state key="normal" image="xing1"/>
+                                <connections>
+                                    <action selector="btnCC:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="LpU-OX-7l3"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
