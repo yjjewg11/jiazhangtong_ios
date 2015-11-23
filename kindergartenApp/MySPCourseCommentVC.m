@@ -42,6 +42,8 @@
 
 @property (strong, nonatomic) NSString * tempCommentText;
 
+@property (strong, nonatomic) NSString * courseScore;
+
 @end
 
 @implementation MySPCourseCommentVC
@@ -104,6 +106,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.courseScore = @"50";
     
     _teachersCell = [NSMutableArray array];
     
@@ -380,6 +384,8 @@
 #pragma mark - 提交按钮代理方法
 - (void)saveComments:(MySPButtonCell *)cell
 {
+    self.flag = YES;
+    
     _courseCell.textView.text = _courseCell.content;
     
     _courseCell.textView.editable = NO;
@@ -419,7 +425,7 @@
 //课程评价
 - (void)commentCourse
 {
-    [[KGHttpService sharedService] MySPCourseSaveComment:self.courseuuid classuuid:self.classuuid type:[NSString stringWithFormat:@"%d",Topic_PXKC] score:_courseCell.userscore content:_courseCell.content success:^(NSString *mgr)
+    [[KGHttpService sharedService] MySPCourseSaveComment:self.courseuuid classuuid:self.classuuid type:[NSString stringWithFormat:@"%d",Topic_PXKC] score:self.courseScore content:_courseCell.content success:^(NSString *mgr)
      {
          [self commentSchool];
      }
@@ -468,6 +474,11 @@
 - (void)saveCommentText:(NSString *)content
 {
     self.tempCommentText = content;
+}
+
+- (void)saveCourseScore:(NSString *)score
+{
+    self.courseScore = score;
 }
 
 @end

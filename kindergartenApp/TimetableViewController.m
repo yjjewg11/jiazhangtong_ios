@@ -225,8 +225,6 @@
     }
 }
 
-
-
 //重置回复内容
 - (void)resetTopicReplyContent:(ReplyDomain *)domain {
     [lastSelItemView resetTopicReplyContent:domain topicInteraction:self.topicInteractionDomain];

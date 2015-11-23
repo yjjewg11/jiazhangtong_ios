@@ -13,6 +13,8 @@
 
 - (void)saveCommentText:(NSString *)content;
 
+- (void)saveCourseScore:(NSString *)score;
+
 @end
 
 @interface MySPCourseCommentCell : UITableViewCell

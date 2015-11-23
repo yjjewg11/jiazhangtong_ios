@@ -76,6 +76,8 @@
 - (void)awakeFromNib
 {
     [self setUpBtns];
+    
+    self.userscore = @"50";
 }
 
 - (void)setUpBtns
@@ -112,6 +114,8 @@
     }
     
     self.userscore = [NSString stringWithFormat:@"%ld",((long)btn.tag + 1) * 10];
+    
+    NSLog(@" 学校评分是 :%@",self.userscore);
 }
 
 @end

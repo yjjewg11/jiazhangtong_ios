@@ -27,8 +27,9 @@
 
 @implementation MySPEndCourseView
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    
 }
 
 - (void)setData:(MySPCourseDomain *)domain

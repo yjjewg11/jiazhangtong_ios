@@ -22,6 +22,14 @@
 - (void)awakeFromNib
 {
     [self setUpBtns];
+    
+    for (NSInteger i=0; i<self.teacherList.count; i++)
+    {
+        if (self.row == i)
+        {
+            ((MySPCourseTeacherList *)self.teacherList[i]).score = [NSString stringWithFormat:@"50"];
+        }
+    }
 }
 
 - (void)btnClick:(UIButton *)btn
@@ -44,10 +52,9 @@
         if (self.row == i)
         {
             ((MySPCourseTeacherList *)self.teacherList[i]).score = [NSString stringWithFormat:@"%ld",((long)btn.tag + 1) * 10];
-            
-            [self.delegate reloadTeacherListData:self.teacherList];
         }
     }
+    [self.delegate reloadTeacherListData:self.teacherList];
 }
 
 - (void)setUpBtns
@@ -114,8 +121,6 @@
     self.teacherList = teacherList;
     
     self.row = rowNum - 1;
-    
-//=====
     
     self.teacherNameLbl.text = [NSString stringWithFormat:@"%@老师",domain.name];
     

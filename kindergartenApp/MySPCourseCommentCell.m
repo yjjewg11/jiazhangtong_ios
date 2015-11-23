@@ -39,6 +39,8 @@
 {
     self.textView.delegate = self;
     
+    self.userscore = @"50";
+    
     [self setUpBtns];
 }
 
@@ -86,6 +88,7 @@
     
     if (self.content != nil || ![self.content isEqualToString:@""])
     {
+        NSLog(@"课程评价是:%@",self.content);
         [self.delegate saveCommentText:self.content];
     }
 }
@@ -147,7 +150,9 @@
     }
     
     self.userscore = [NSString stringWithFormat:@"%ld",((long)btn.tag + 1) * 10];
-
+    
+    NSLog(@"课程评分是: %@",self.userscore);
+    [self.delegate saveCourseScore:self.userscore];
 }
 
 @end
