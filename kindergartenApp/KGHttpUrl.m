@@ -303,11 +303,17 @@
 }
 
 + (NSString *)getSpecialtyCourseDetailURL:(NSString *)uuid{
-    return [NSString stringWithFormat:@"%@rest/pxCourse/%@.json",baseServiceURL,uuid];
+    return [NSString stringWithFormat:@"%@rest/pxCourse/get2.json?uuid=%@",baseServiceURL,uuid];
 }
+
+
 
 + (NSString *)getSpecialtyCourseDetailSchoolInfoURL:(NSString *)groupuuid{
     return [NSString stringWithFormat:@"%@rest/group/%@.json",baseServiceURL,groupuuid];
+}
+
++ (NSString *)getSchoolInfoShareUrl:(NSString *)groupuuid{
+    return [NSString stringWithFormat:@"%@rest/group/get2.json?uuid=%@",baseServiceURL,groupuuid];
 }
 
 + (NSString *)getSpecialtyTeacherDetailURL:(NSString *)teacheruuid{
@@ -329,6 +335,14 @@
 
 + (NSString *)getMySPCourseTeacherList:(NSString *)classuuid{
     return [NSString stringWithFormat:@"%@rest/pxclass/listclassTeacher.json?classuuid=%@",baseServiceURL,classuuid];
+}
+
++ (NSString *)getMySPListAll:(NSString *)classuuid pageNo:(NSString *)pageNo{
+    return [NSString stringWithFormat:@"%@rest/pxteachingplan/listAllByclassuuid.json?classuuid=%@&pageNo=%@",baseServiceURL,classuuid,pageNo];
+}
+
++ (NSString *)getSaveMySPCommentURL{
+    return URL(baseServiceURL, @"rest/appraise/save.json");
 }
 
 //优惠活动

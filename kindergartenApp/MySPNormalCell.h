@@ -12,14 +12,14 @@
 
 @interface MySPNormalCell : UITableViewCell
 
-- (void)setData:(MySPCommentDomain *)domain;
-
 - (void)setSchoolData:(MySPCommentDomain *)domain;
-
 
 @property (weak, nonatomic) IBOutlet UILabel *teacherNameLbl;
 
 @property (weak, nonatomic) IBOutlet UIView *starView;
 
+@property (strong, nonatomic) NSString * userscore;
+
+- (void)initNoCommentData;
 
 @end

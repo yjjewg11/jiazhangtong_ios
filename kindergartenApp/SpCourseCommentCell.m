@@ -7,6 +7,8 @@
 //
 
 #import "SpCourseCommentCell.h"
+#import "KGNSStringUtil.h"
+#import "NSDate+Utils.h"
 
 @interface SpCourseCommentCell()
 
@@ -17,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLbl;
 
 @property (weak, nonatomic) IBOutlet UIView *starView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textHeight;
 
 @end
 
@@ -30,7 +34,7 @@
     
     self.contentLbl.text = domain.content;
     
-    self.dateLbl.text = domain.create_time;
+  self.dateLbl.text =  domain.create_time;
     
     NSInteger intCount = (NSInteger)([domain.score integerValue] * 10 / 10);
     
@@ -38,6 +42,19 @@
     
     [self setUpStarts:intCount halfCount:halfCount];
     
+    [self calCellHeight];
+    
+}
+
+- (void)calCellHeight
+{
+    NSString * text = self.contentLbl.text;
+    
+    CGFloat textHeight = [KGNSStringUtil heightForString:text andWidth:self.contentLbl.frame.size.width];
+    
+    self.rowHeight = 139 + ABS(self.textHeight.constant - textHeight);
+    
+    self.textHeight.constant = textHeight;
 }
 
 - (void)setUpStarts:(NSInteger)intCount halfCount:(NSInteger)halfCount

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="comment" rowHeight="50" id="J7T-s2-eZ1" customClass="MySPTeacherCommentCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J7T-s2-eZ1" id="kQW-A5-B0g">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iL0-0v-GNJ" userLabel="StarView">
+                        <rect key="frame" x="140" y="10" width="170" height="30"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="170" id="Lxc-Ua-Qgd"/>
+                            <constraint firstAttribute="height" constant="30" id="Yed-rX-Mv9"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学校评价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yh4-nH-04M">
+                        <rect key="frame" x="10" y="15" width="125" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="s2H-uH-YWk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="iL0-0v-GNJ" firstAttribute="leading" secondItem="yh4-nH-04M" secondAttribute="trailing" constant="5" id="BCV-0c-rsR"/>
+                    <constraint firstItem="iL0-0v-GNJ" firstAttribute="top" secondItem="kQW-A5-B0g" secondAttribute="top" constant="10" id="LWA-Jv-cML"/>
+                    <constraint firstItem="yh4-nH-04M" firstAttribute="leading" secondItem="kQW-A5-B0g" secondAttribute="leading" constant="10" id="Xlj-7y-PvT"/>
+                    <constraint firstItem="yh4-nH-04M" firstAttribute="top" secondItem="kQW-A5-B0g" secondAttribute="top" constant="15" id="nYP-7K-kxL"/>
+                    <constraint firstAttribute="trailing" secondItem="iL0-0v-GNJ" secondAttribute="trailing" constant="10" id="rfu-S7-Hqk"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="starView" destination="iL0-0v-GNJ" id="IpW-me-bfe"/>
+                <outlet property="teacherNameLbl" destination="yh4-nH-04M" id="s8w-s2-S4c"/>
+            </connections>
+            <point key="canvasLocation" x="251" y="213"/>
+        </tableViewCell>
+    </objects>
+</document>

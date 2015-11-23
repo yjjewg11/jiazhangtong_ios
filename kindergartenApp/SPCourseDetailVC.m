@@ -18,19 +18,34 @@
 #import "ShareViewController.h"
 #import "InteractViewController.h"
 #import "KGUser.h"
+#import "SPCourseDetailWebView.h"
+#import "SPCourseDetailVO.h"
+#import "SPCourseDetailScrollInfoWebView.h"
+#import "MJExtension.h"
 
-@interface SPCourseDetailVC () <UIWebViewDelegate,UIActionSheetDelegate>
+@interface SPCourseDetailVC () <UIActionSheetDelegate,SpCourseDetailTableVCDelegate,UIScrollViewDelegate>
 {
     PopupView * popupView;
     ShareViewController * shareVC;
     BOOL isFavor;
+
+    SPCourseDetailWebView * _courseDetailView;
+    
+    SPCourseDetailScrollInfoWebView * _schoolInfoView;
+    
+    SpCourseDetailTableVC * _tableVC;
+    
+    UIView * _buttonsView;
+    
+    NSMutableArray * _redViews;
+    NSMutableArray * _btns;
 }
 
 @property (strong, nonatomic) NSString * groupuuid;
 
 @property (strong, nonatomic) SPCourseDetailDomain * courseDetailDomain;
 
-@property (strong, nonatomic) UIWebView * webview;
+@property (strong, nonatomic) NSString * url;
 
 @property (strong, nonatomic) NSMutableArray * buttonItems;
 
@@ -39,6 +54,13 @@
 @property (strong, nonatomic) NSString * tels;
 
 @property (strong, nonatomic) NSArray * telsNum;
+
+@property (strong, nonatomic) NSString * obj_url;
+
+@property (strong, nonatomic) NSString * age_min_max;
+
+@property (assign, nonatomic) BOOL reqFlag;
+@property (assign, nonatomic) BOOL reqFlagOFComment;
 
 @end
 
@@ -62,41 +84,166 @@
     return _buttonItems;
 }
 
-- (SpCourseDetailTableVC *)tableVC
-{
-    if (_tableVC == nil)
-    {
-        _tableVC = [[SpCourseDetailTableVC alloc] init];
-        if (self.haveBottomView == 100)
-        {
-            _tableVC.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT);
-        }
-        else
-        {
-            _tableVC.tableView.frame = CGRectMake(0, 64, APPWINDOWWIDTH, APPWINDOWHEIGHT-64-48);
-        }
-    }
-    return _tableVC;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = @"课程详情";
+    self.reqFlag = YES;
+    self.reqFlagOFComment = YES;
+    
+    self.title = @"";
 
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    //创建底部view
     _bottomView = [[UIView alloc] init];
     _bottomView.backgroundColor = [UIColor whiteColor];
     _bottomView.frame = CGRectMake(0, APPWINDOWHEIGHT - 48, APPWINDOWWIDTH, 48);
-    
     [self addBtn:_bottomView];
     
+    //获取数据
     [self getShareData];
     
+    //创建上面三个按钮view
+    _buttonsView = [[UIView alloc] init];
+    _buttonsView.frame = CGRectMake(0, 64, APPWINDOWWIDTH, 40);
+    [self addSelBtns:_buttonsView];
+    
+    //创建按钮下面红线
+    [self createBtnRedView];
+    
+    
+    
+    
+    //创建课程详情view
+    SPCourseDetailWebView * courseDetailView = [[[NSBundle mainBundle] loadNibNamed:@"SPCourseDetailWebView" owner:nil options:nil] firstObject];
+    _courseDetailView = courseDetailView;
+    courseDetailView.frame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
+    
+    
+    
+    
+    //创建学校简介view
+    SPCourseDetailScrollInfoWebView * schoolInfoView = [[[NSBundle mainBundle] loadNibNamed:@"SPCourseDetailScrollInfoWebView" owner:nil options:nil] firstObject];
+    _schoolInfoView = schoolInfoView;
+    schoolInfoView.frame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
+    schoolInfoView.hidden = YES;
+    
+    
+    
+    
+    //创建家长评论view
+    //tableview显示完
+    SpCourseDetailTableVC * tableVC = [[SpCourseDetailTableVC alloc] init];
+    _tableVC = tableVC;
+    tableVC.tableFrame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
+    tableVC.tableView.hidden = YES;
+    
+    //请求课程详情
     [self getDetailData];
+}
 
-    self.tableVC.tableView.hidden = YES;
-    [self.view addSubview:self.tableVC.tableView];
+
+#pragma mark - 创建上面3个选择按钮
+- (void)addSelBtns:(UIView *)view
+{
+    NSArray * titlts = @[@"课程详情",@"学校简介",@"家长评价"];
+    _btns = [NSMutableArray array];
+    
+    for (NSInteger i=0; i<3; i++)
+    {
+        MyButtonThree * btn = [[MyButtonThree alloc] initWithFrame:CGRectMake(i * (APPWINDOWWIDTH / 3), 0, (APPWINDOWWIDTH / 3), 40)];
+        
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        
+        [btn setTitle:titlts[i] forState:UIControlStateNormal];
+        [btn setTitle:titlts[i] forState:UIControlStateSelected];
+        
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+        [btn setBackgroundColor:[UIColor whiteColor]];
+        
+        btn.tag = i;
+        
+        [btn addTarget:self action:@selector(selBtn:) forControlEvents:UIControlEventTouchDown];
+        
+        //创建btn之间的分割线
+        if (i!=2)
+        {
+            UIView * sepView = [[UIView alloc] init];
+            sepView.frame = CGRectMake(btn.frame.size.width - 1, 10, 1, 20);
+            sepView.backgroundColor = [UIColor lightGrayColor];
+            [btn addSubview:sepView];
+        }
+        [_btns addObject:btn];
+        
+        [_buttonsView addSubview:btn];
+    }
+    
+    ((UIButton *)_btns[0]).selected = YES;
+
+    [self.view addSubview:_buttonsView];
+}
+
+#pragma mark - 创建按钮下面红色view
+- (void)createBtnRedView
+{
+    _redViews = [NSMutableArray array];
+    
+    for (NSInteger i=0;i<_btns.count;i++)
+    {
+        //创建btn底部的红线
+        UIView * redView = [[UIView alloc] init];
+        redView.frame = CGRectMake(i * (APPWINDOWWIDTH / 3), 64+41, (APPWINDOWWIDTH / 3), 1);
+        redView.backgroundColor = [UIColor redColor];
+        
+        redView.hidden = YES;
+        
+        [_redViews addObject:redView];
+        
+        [self.view addSubview:redView];
+    }
+    
+    ((UIView *)_redViews[0]).hidden = NO;
+}
+
+#pragma mark - 选择按钮显示效果
+- (void)selBtn:(UIButton *)btn
+{
+    if (btn.tag == 0)
+    {
+        _schoolInfoView.hidden = YES;
+        _courseDetailView.hidden = NO;
+    }
+    else if (btn.tag == 1)
+    {
+        [self getSchoolData];
+        _courseDetailView.hidden = YES;
+        _schoolInfoView.hidden = NO;
+    }
+    else if (btn.tag == 2)
+    {
+        [self getCommentsData];
+        _tableVC.tableView.hidden = NO;
+        _courseDetailView.hidden = YES;
+        _schoolInfoView.hidden = YES;
+    }
+    
+    btn.selected = YES;
+    
+    for (NSInteger i=0; i<_btns.count; i++)
+    {
+        if (btn.tag == i)
+        {
+            ((UIButton *)_btns[i]).selected = YES;
+            ((UIView *)_redViews[i]).hidden = NO;
+        }
+        else
+        {
+            ((UIButton *)_btns[i]).selected = NO;
+            ((UIView *)_redViews[i]).hidden = YES;
+        }
+    }
 }
 
 #pragma mark - 请求课程详情
@@ -104,17 +251,17 @@
 {
     [[KGHUD sharedHud] show:self.view];
     
-    [[KGHttpService sharedService] getSPCourseDetail:self.uuid success:^(SPCourseDetailDomain *spCourseDetail)
+    [[KGHttpService sharedService] getSPCourseDetail:self.uuid success:^(SPCourseDetailVO *vo)
     {
-        self.courseDetailDomain = spCourseDetail;
+        [[KGHUD sharedHud] hide:self.view];
         
-        self.tableVC.courseDetailDomain = spCourseDetail;
-        
-        [self getContextHeight:self.courseDetailDomain.context type:@"course"];
+        self.courseDetailDomain = [SPCourseDetailDomain objectWithKeyValues:vo.data];
+    
+        //设置数据
+        [_courseDetailView setData:vo];
+        [self.view addSubview:_courseDetailView];
         
         self.groupuuid = self.courseDetailDomain.groupuuid;
-        
-        [self.tableVC.tableView reloadData];
 
         [self responseHandler];
     }
@@ -124,26 +271,72 @@
     }];
 }
 
-//#pragma mark - 请求评论列表
-//- (void)getCommentsData
-//{
-//    [[KGHUD sharedHud] show:self.tableVC.tableView];
-//    
-//    [[KGHttpService sharedService] getSPCourseComment:self.uuid pageNo:@"" success:^(SPCommentVO *commentVO)
-//    {
-//        [[KGHUD sharedHud] hide:self.tableVC.tableView];
-//        
-//        self.tableVC.presentsComments = commentVO.data;
-//        
-////        [self responseHandler];
-//    }
-//    faild:^(NSString *errorMsg)
-//    {
-//        [[KGHUD sharedHud] show:self.tableVC.tableView onlyMsg:errorMsg];
-//    }];
-//}
+#pragma mark - 请求学校介绍url
+- (void)getSchoolData
+{
+    if (self.reqFlag)
+    {
+        [[KGHUD sharedHud] show:self.view];
+        
+        [[KGHttpService sharedService] getSPSchoolInfoShareUrl:self.courseDetailDomain.groupuuid success:^(NSString *url)
+         {
+             [[KGHUD sharedHud] hide:self.view];
+             
+             self.url = url;
+             //设置数据
+             [_schoolInfoView setData:url];
+             [self.view addSubview:_schoolInfoView];
+             
+             self.reqFlag = NO;
+             
+             [self responseHandlerOfSchool];
+        }
+        faild:^(NSString *errorMsg)
+        {
+             [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        }];
+    }
+}
+
+#pragma mark - 请求评论列表
+- (void)getCommentsData
+{
+    if (self.reqFlagOFComment == YES)
+    {
+        [[KGHUD sharedHud] show:self.view];
+        
+        [[KGHttpService sharedService] getSPCourseComment:self.uuid pageNo:@"1" success:^(SPCommentVO *commentVO)
+        {
+            [[KGHUD sharedHud] hide:self.view];
+            self.reqFlagOFComment = NO;
+            
+            _tableVC.uuid = self.uuid;
+            
+            _tableVC.presentsComments = [NSMutableArray arrayWithArray:[SPCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
+            
+            [self.view addSubview:_tableVC.tableView];
+        }
+        faild:^(NSString *errorMsg)
+        {
+            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        }];
+    }
+    
+}
 
 //请求之后的处理 需要判断是否还需要再次请求
+- (void)responseHandlerOfSchool
+{
+    if (self.url == nil)
+    {
+        [self getSchoolData];
+    }
+    else
+    {
+        
+    }
+}
+
 - (void)responseHandler
 {
     if(self.courseDetailDomain == nil)
@@ -152,80 +345,8 @@
     }
     else
     {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-        {
-            [[KGHUD sharedHud] hide:self.view];
-            self.tableVC.tableView.hidden = NO;
-        });
-    }
-}
-
-- (void)getContextHeight:(NSString *)context type:(NSString *)type
-{
-    _webview = [[UIWebView alloc] init];
-    
-    _webview.delegate = self;
-    
-    _webview.scrollView.bounces = NO;
-    
-    [_webview sizeToFit];
-    
-    NSString * filename = [NSString stringWithFormat:@"Documents/%@-%@.html",type,self.uuid];
-    
-    NSString * filePath = [NSHomeDirectory() stringByAppendingPathComponent:filename];
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
         
-    [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-    
-    NSString * htmlcontent = [NSString stringWithFormat:@"<div id=\"webview_content_wrapper\">%@</div>", context];
-//    [_webview loadHTMLString:htmlcontent baseURL:nil];
-    
-    [htmlcontent writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
-    
-    [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:filePath]]];
-    
-    _webview.alpha = 0;
-    
-//    _webview.scrollView.contentInset = UIEdgeInsetsMake(0, 10, 0, 10);
-
-    [self.view addSubview:_webview];
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-//    CGRect frame = wb.frame;
-//    frame.size.width = APPWINDOWWIDTH;
-//    frame.size.height = 1;
-//
-//    wb.frame = frame;
-//    
-//    frame.size.height = wb.scrollView.contentSize.height;
-//
-//    wb.frame = frame;
-//    
-//    self.tableVC.courseRowHeight = wb.frame.size.height;
-//
-//    [self.tableVC.tableView reloadData];
-    
-    //获取页面高度（像素）
-    NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
-    float clientheight = [clientheight_str floatValue];
-    //设置到WebView上
-    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, clientheight);
-    //获取WebView最佳尺寸（点）
-    CGSize frame = [webView sizeThatFits:webView.frame.size];
-    //获取内容实际高度（像素）
-    NSString * height_str= [webView stringByEvaluatingJavaScriptFromString: @"document.getElementById('webview_content_wrapper').offsetHeight + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-top'))  + parseInt(window.getComputedStyle(document.getElementsByTagName('body')[0]).getPropertyValue('margin-bottom'))"];
-    float height = [height_str floatValue];
-    //内容实际高度（像素）* 点和像素的比
-    height = height * frame.height / clientheight;
-    //再次设置WebView高度（点）
-    webView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-    
-    self.tableVC.courseRowHeight = webView.frame.size.height;
-    
-    [self.tableVC.tableView reloadData];
+    }
 }
 
 #pragma mark - 添加底部按钮
@@ -442,8 +563,12 @@
 #pragma mark - 获取分享收藏信息
 - (void)getShareData
 {
+    [[KGHUD sharedHud] show:self.view];
+    
     [[KGHttpService sharedService] getSPCourseExtraFun:self.uuid success:^(SPShareSaveDomain *shareSaveDomain)
     {
+        [[KGHUD sharedHud] hide:self.view];
+        
         isFavor = shareSaveDomain.isFavor;
         self.share_url = shareSaveDomain.share_url;
         self.tels = shareSaveDomain.link_tel;
@@ -455,8 +580,19 @@
     }
     faild:^(NSString *errorMsg)
     {
-        
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
+}
+
+@end
+
+#pragma mark - 实现自定义Button
+@implementation MyButtonThree
+
+//图片高亮会调用这个方法
+- (void)setHighlighted:(BOOL)highlighted
+{
+    //取消点击效果
 }
 
 @end

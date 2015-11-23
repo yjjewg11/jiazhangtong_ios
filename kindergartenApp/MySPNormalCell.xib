@@ -16,35 +16,13 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JFV-Bd-rPy" userLabel="StarView">
                         <rect key="frame" x="140" y="10" width="170" height="30"/>
-                        <subviews>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pYW-lf-AP1">
-                                <rect key="frame" x="35" y="0.0" width="30" height="30"/>
-                                <state key="normal" image="xing1"/>
-                            </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7U0-KE-nLm">
-                                <rect key="frame" x="70" y="0.0" width="30" height="30"/>
-                                <state key="normal" image="xing1"/>
-                            </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALu-qd-bUs">
-                                <rect key="frame" x="105" y="0.0" width="30" height="30"/>
-                                <state key="normal" image="xing1"/>
-                            </button>
-                            <button opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I72-jo-qQp">
-                                <rect key="frame" x="140" y="0.0" width="30" height="30"/>
-                                <state key="normal" image="xing1"/>
-                            </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="20" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAx-2G-VfE">
-                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                <state key="normal" image="xing1"/>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="170" id="4xo-I0-HxS"/>
                             <constraint firstAttribute="height" constant="30" id="Ncz-cr-pQb"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="汤老师评价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb5-3G-VvQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学校评价" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb5-3G-VvQ">
                         <rect key="frame" x="10" y="15" width="125" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="gGh-u2-bcY"/>
@@ -69,7 +47,4 @@
             <point key="canvasLocation" x="251" y="213"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="xing1" width="24" height="23"/>
-    </resources>
 </document>

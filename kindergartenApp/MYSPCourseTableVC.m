@@ -15,8 +15,6 @@
 
 @implementation MYSPCourseTableVC
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -11,6 +11,12 @@
 #import "MySPCourseView.h"
 #import "SPCourseDetailVC.h"
 #import "MySPCourseCommentVC.h"
+#import "MySPCourseTimeListVC.h"
+#import "KGHUD.h"
+#import "MJExtension.h"
+#import "KGHttpService.h"
+#import "MySPAllCouseListDomain.h"
+#import "MySPCourseSchoolDetailWebView.h"
 
 @interface MySPCourseDetailVC () <UIScrollViewDelegate>
 {
@@ -18,6 +24,8 @@
     UIView * _buttonsView;
     UIScrollView * _contentView;
     NSMutableArray * _btns;
+    
+    MySPCourseTimeListVC *_listVC;
     
     NSMutableArray * _buttonItems;
     
@@ -51,6 +59,7 @@
     return _courseView;
 }
 
+#pragma mark - viewdidload
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -75,6 +84,28 @@
     //获取数据
     
 }
+
+#pragma mark - 请求一个班级的全部课程安排
+- (void)getListData
+{
+    [[KGHUD sharedHud] show:self.view];
+    
+    [[KGHttpService sharedService] getListAll:self.domain.uuid pageNo:@"" success:^(MySPAllCourseListVO *courseListVO)
+    {
+        _listVC.listDatas = [NSMutableArray arrayWithArray:[MySPAllCouseListDomain objectArrayWithKeyValuesArray:courseListVO.data]];
+        
+        _listVC.classuuid = self.domain.uuid;
+        
+        [_contentView addSubview:_listVC.tableView];
+        
+        [_listVC.tableView reloadData];
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+    }];
+}
+
 
 #pragma mark - 创建顶部schoolinfo
 - (void)addInfoCell:(UIView *)view
@@ -121,6 +152,7 @@
     [self.view addSubview:_buttonsView];
 }
 
+#pragma mark - 选择按钮显示效果
 - (void)selBtn:(UIButton *)btn
 {
     btn.selected = YES;
@@ -136,9 +168,7 @@
             ((UIButton *)_btns[i]).selected = NO;
         }
     }
-    
     [_contentView setContentOffset:CGPointMake(btn.tag * APPWINDOWWIDTH, 0) animated:NO];
-    
 }
 
 #pragma mark - 创建scroll中子控件
@@ -153,27 +183,35 @@
     _contentView.showsHorizontalScrollIndicator = NO;
     
     //第一个
-
+    MySPCourseTimeListVC * timelistVC = [[MySPCourseTimeListVC alloc] init];
+    
+    _listVC = timelistVC;
+    
+    timelistVC.classuuid = self.domain.uuid;
+    
+    timelistVC.tableFrame = CGRectMake(0,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    
+    [self getListData];
     
     //第二个
-    SPCourseDetailVC * vc = [[SPCourseDetailVC alloc] init];
+    MySPCourseSchoolDetailWebView * web = [[[NSBundle mainBundle] loadNibNamed:@"MySPCourseSchoolDetailWebView" owner:nil options:nil] firstObject];
     
-    vc.haveBottomView = 100;
-    vc.uuid = self.domain.courseuuid;
-    vc.bottomView.alpha = 0;
-
-    [vc.bottomView removeFromSuperview];
-    vc.view.frame = CGRectMake(APPWINDOWWIDTH,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
-    [_contentView addSubview:vc.view];
+    web.frame = CGRectMake(APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    
+    web.groupuuid = self.domain.groupuuid;
+    
+    [_contentView addSubview:web];
     
     //第三个
     self.commentVC.classuuid = self.domain.uuid;
+    
     self.commentVC.groupuuid = self.domain.groupuuid;
+    
+    self.commentVC.courseuuid = self.domain.courseuuid;
     
     self.commentVC.tableFrame = CGRectMake(APPWINDOWWIDTH + APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
     
     [_contentView addSubview:self.commentVC.tableView];
-    
     
     //添加
     [self.view addSubview:_contentView];
@@ -194,13 +232,11 @@
         {
             ((MyButtonTwo *)_btns[i]).selected = NO;
         }
-        
     }
 }
 
+
 @end
-
-
 
 #pragma mark - 实现自定义Button
 @implementation MyButtonTwo

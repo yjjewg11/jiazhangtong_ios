@@ -13,4 +13,6 @@
 
 @property (strong, nonatomic) SPCommentDomain * domain;
 
+@property (assign, nonatomic) CGFloat rowHeight;
+
 @end

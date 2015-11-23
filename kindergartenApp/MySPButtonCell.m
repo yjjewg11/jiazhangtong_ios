@@ -8,8 +8,16 @@
 
 #import "MySPButtonCell.h"
 
+@interface MySPButtonCell()
+
+
+@end
+
 @implementation MySPButtonCell
 
-
+- (IBAction)btnClick:(UIButton *)sender
+{
+    [self.delegate saveComments:self];
+}
 
 @end

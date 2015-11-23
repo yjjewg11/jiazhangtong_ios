@@ -128,11 +128,15 @@
 + (NSString *)getSpecialtyTeacherListURL;
 + (NSString *)getSpecialtyTeacherDetailURL:(NSString *)teacheruuid;
 + (NSString *)saveTelUserDatasURL:(NSString *)ext_uuid type:(NSString *)type;
++ (NSString *)getSchoolInfoShareUrl:(NSString *)groupuuid;
 
 //我的特长课程
 + (NSString *)getMySPCourseListURL:(NSString *)pageNo isdisable:(NSString *)isdisable;
 + (NSString *)getMySPCourseComments:(NSString *)classuuid pageNo:(NSString *)pageNo;
 + (NSString *)getMySPCourseTeacherList:(NSString *)classuuid;
++ (NSString *)getSaveMySPCommentURL;
++ (NSString *)getMySPListAll:(NSString *)classuuid pageNo:(NSString *)pageNo;
+
 
 //优惠活动
 + (NSString *)getYouHuiListURL:(NSString *)map_point pageNo:(NSInteger)pageNo;

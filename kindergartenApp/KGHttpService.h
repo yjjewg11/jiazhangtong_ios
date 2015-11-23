@@ -31,6 +31,8 @@
 #import "YouHuiDomain.h"
 #import "YouHuiDataListVO.h"
 #import "MySPCourseTeacherList.h"
+#import "MySPAllCourseListVO.h"
+#import "SPCourseDetailVO.h"
 
 @interface KGHttpService : NSObject
 
@@ -259,7 +261,7 @@
 
 - (void)getSPSchoolList:(NSString *)mapPoint sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getSPCourseDetail:(NSString *)uuid success:(void(^)(SPCourseDetailDomain * spCourseDetail))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getSPCourseDetail:(NSString *)uuid success:(void(^)(SPCourseDetailVO * detailVO))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getSPCourseDetailSchoolInfo:(NSString *)groupuuid success:(void (^)(SPSchoolDomain * spSchoolDetail))success faild:(void (^)(NSString * errorMsg))faild;
 
@@ -275,6 +277,8 @@
 
 - (void)getSPSchoolExtraFun:(NSString *)uuid success:(void(^)(SPShareSaveDomain * shareSaveDomain))success faild:(void(^)(NSString * errorMsg))faild;
 
+- (void)getSPSchoolInfoShareUrl:(NSString *)groupuuid success:(void (^)(NSString * url))success faild:(void (^)(NSString * errorMsg))faild;
+
 #pragma mark - 优惠活动
 - (void)getYouHuiList:(NSString *)map_point pageNo:(NSInteger)pageNo success:(void (^)(YouHuiDataListVO * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild;
 
@@ -289,4 +293,7 @@
 
 - (void)MySPCourseTeacherList:(NSString *)classuuid success:(void(^)(NSArray * teacherArr))success faild:(void(^)(NSString * errorMsg))faild;
 
+- (void)MySPCourseSaveComment:(NSString *)extuuid classuuid:(NSString *)classuuid type:(NSString *)type score:(NSString *)score content:(NSString *)content success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getListAll:(NSString *)classuuid pageNo:(NSString *)pageNo success:(void(^)(MySPAllCourseListVO * courseListVO))success faild:(void(^)(NSString * errorMsg))faild;
 @end

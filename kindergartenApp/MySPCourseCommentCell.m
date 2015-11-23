@@ -17,7 +17,16 @@
 
 - (void)setData:(MySPCommentDomain *)commentDomain
 {
-    self.textView.text = commentDomain.content;
+    if (commentDomain.content == nil || [commentDomain.content isEqualToString:@""])
+    {
+        self.textView.text = @"您没有填写评价哦";
+    }
+    else
+    {
+        self.textView.text = commentDomain.content;
+    }
+    
+    self.extuuid = commentDomain.ext_uuid;
     
     NSInteger intCount = (NSInteger)([commentDomain.score integerValue] / 10);
     
@@ -29,10 +38,39 @@
 - (void)awakeFromNib
 {
     self.textView.delegate = self;
+    
+    [self setUpBtns];
+}
+
+- (void)initNoCommentData
+{
+    NSInteger intCount = (NSInteger)([@"50" integerValue] / 10);
+    
+    NSInteger halfCount = [@"50" integerValue] - intCount * 10;
+    
+    [self setUpStarts:intCount halfCount:halfCount];
+}
+
+- (void)setUpBtns
+{
+    for (NSInteger i=0; i<5; i++)
+    {
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        btn.frame = CGRectMake(i * 30 + (i * 5), 0, 30, 30);
+        
+        btn.tag = i;
+        
+        [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+        
+        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.starView addSubview:btn];
+    }
 }
 
 #pragma mark - UITextView Delegate Methods
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"])
     {
@@ -40,6 +78,18 @@
         return NO;
     }
     return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    self.content = self.textView.text;
+    
+    if (self.content != nil || ![self.content isEqualToString:@""])
+    {
+        [self.delegate saveCommentText:self.content];
+        
+        NSLog(@"评价内容 %@",self.content);
+    }
 }
 
 - (void)setUpStarts:(NSInteger)intCount halfCount:(NSInteger)halfCount
@@ -53,40 +103,53 @@
                 if (btn.tag < intCount)
                 {
                     [btn setImage:[UIImage imageNamed:@"xing30"] forState:UIControlStateNormal];
+                    [btn setImage:[UIImage imageNamed:@"xing30"] forState:UIControlStateDisabled];
                 }
                 if (btn.tag == intCount)
                 {
                     if (halfCount > 5)
                     {
                         [btn setImage:[UIImage imageNamed:@"xing30"] forState:UIControlStateNormal];
+                        [btn setImage:[UIImage imageNamed:@"xing30"] forState:UIControlStateDisabled];
                     }
                     else if(halfCount > 0 && halfCount <=5)
                     {
                         [btn setImage:[UIImage imageNamed:@"bankexing30"] forState:UIControlStateNormal];
+                        [btn setImage:[UIImage imageNamed:@"bankexing30"] forState:UIControlStateDisabled];
                     }
                     else
                     {
                         [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+                        [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateDisabled];
                     }
                 }
                 if (btn.tag > intCount)
                 {
                     [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+                    [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateDisabled];
                 }
             }
-            
-            [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-}
-- (IBAction)btnCC:(UIButton *)sender
-{
-    NSLog(@"%d",sender.tag);
 }
 
 - (void)btnClick:(UIButton *)btn
 {
+    for (UIButton *btn in self.starView.subviews)
+    {
+        [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"xing1"] forState:UIControlStateDisabled];
+    }
     
+    for (NSInteger i=0; i<btn.tag+1; i++)
+    {
+        [self.starView.subviews[i] setImage:[UIImage imageNamed:@"xing30"] forState:UIControlStateNormal];
+        
+        [self.starView.subviews[i] setImage:[UIImage imageNamed:@"xing30"] forState:UIControlStateDisabled];
+    }
+    
+    self.userscore = [NSString stringWithFormat:@"%ld",((long)btn.tag + 1) * 10];
+
 }
 
 @end

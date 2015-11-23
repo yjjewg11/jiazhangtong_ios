@@ -24,4 +24,7 @@
 @property (assign, nonatomic) NSString * share_url;
 @property (strong, nonatomic) NSString * address;
 
+@property (strong, nonatomic) NSString * age_min_max;
+@property (strong, nonatomic) NSString * obj_url;
+
 @end

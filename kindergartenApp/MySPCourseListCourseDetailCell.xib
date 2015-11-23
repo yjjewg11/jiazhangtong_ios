@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="MySPCourseListCourseDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="课程名称" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zqt-4Z-bH3">
+                        <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="93t-Me-pKj"/>
+                            <constraint firstAttribute="width" constant="90" id="x9G-Jk-969"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qwO-An-uYz">
+                        <rect key="frame" x="89" y="0.0" width="231" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="z4B-ZK-bhS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IRz-Co-Zsa">
+                        <rect key="frame" x="89" y="29" width="231" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="m3H-tm-e4F"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s5r-ti-QmO">
+                        <rect key="frame" x="89" y="58" width="231" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Gae-k3-Q4O"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="上课时间" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wP6-5y-whK">
+                        <rect key="frame" x="0.0" y="29" width="90" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="FVT-B3-f9f"/>
+                            <constraint firstAttribute="height" constant="30" id="GUV-v3-X89"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="上课地点" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RTr-E8-bME">
+                        <rect key="frame" x="0.0" y="58" width="90" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="GYF-R0-hgc"/>
+                            <constraint firstAttribute="width" constant="90" id="tCo-5P-mF4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="准备物品" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YyB-Jg-sae">
+                        <rect key="frame" x="0.0" y="87" width="90" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="90" id="q1C-WO-FcW"/>
+                            <constraint firstAttribute="height" constant="30" id="wIL-0w-gdg"/>
+                        </constraints>
+                        <color key="textColor" red="1" green="0.36738617670000001" blue="0.4498634977" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="19B-Hl-E5k">
+                        <rect key="frame" x="89" y="87" width="231" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="f54-KZ-CJH"/>
+                        </constraints>
+                        <color key="textColor" red="1" green="0.36738617670000001" blue="0.4498634977" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="YyB-Jg-sae" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2yJ-BV-yok"/>
+                    <constraint firstAttribute="trailing" secondItem="IRz-Co-Zsa" secondAttribute="trailing" id="4oc-Dy-YJu"/>
+                    <constraint firstItem="IRz-Co-Zsa" firstAttribute="leading" secondItem="RTr-E8-bME" secondAttribute="trailing" constant="-1" id="5kU-ow-zs6"/>
+                    <constraint firstItem="s5r-ti-QmO" firstAttribute="top" secondItem="IRz-Co-Zsa" secondAttribute="bottom" constant="-1" id="6xD-lL-anB"/>
+                    <constraint firstAttribute="trailing" secondItem="qwO-An-uYz" secondAttribute="trailing" id="7XO-6H-MWe"/>
+                    <constraint firstItem="qwO-An-uYz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="9Ou-hK-S0G"/>
+                    <constraint firstAttribute="trailing" secondItem="s5r-ti-QmO" secondAttribute="trailing" id="C5K-zn-3K5"/>
+                    <constraint firstAttribute="trailing" secondItem="19B-Hl-E5k" secondAttribute="trailing" id="Etg-pb-sm9"/>
+                    <constraint firstItem="YyB-Jg-sae" firstAttribute="top" secondItem="RTr-E8-bME" secondAttribute="bottom" constant="-1" id="TcQ-TH-GD3"/>
+                    <constraint firstItem="19B-Hl-E5k" firstAttribute="top" secondItem="s5r-ti-QmO" secondAttribute="bottom" constant="-1" id="dJb-E5-POB"/>
+                    <constraint firstItem="Zqt-4Z-bH3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dYZ-fj-mVa"/>
+                    <constraint firstItem="s5r-ti-QmO" firstAttribute="leading" secondItem="RTr-E8-bME" secondAttribute="trailing" constant="-1" id="fUP-Ie-FVb"/>
+                    <constraint firstItem="qwO-An-uYz" firstAttribute="leading" secondItem="Zqt-4Z-bH3" secondAttribute="trailing" constant="-1" id="iOC-kX-6UO"/>
+                    <constraint firstItem="RTr-E8-bME" firstAttribute="top" secondItem="wP6-5y-whK" secondAttribute="bottom" constant="-1" id="jKu-Wy-LJn"/>
+                    <constraint firstItem="wP6-5y-whK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="k8s-lH-xB1"/>
+                    <constraint firstItem="IRz-Co-Zsa" firstAttribute="top" secondItem="qwO-An-uYz" secondAttribute="bottom" constant="-1" id="kBS-11-ai1"/>
+                    <constraint firstItem="19B-Hl-E5k" firstAttribute="leading" secondItem="YyB-Jg-sae" secondAttribute="trailing" constant="-1" id="kZl-5E-vY9"/>
+                    <constraint firstItem="wP6-5y-whK" firstAttribute="top" secondItem="Zqt-4Z-bH3" secondAttribute="bottom" constant="-1" id="vwS-PA-cB8"/>
+                    <constraint firstItem="Zqt-4Z-bH3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="wDG-0D-yPv"/>
+                    <constraint firstItem="RTr-E8-bME" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="z4y-pn-MgO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="couresTime" destination="IRz-Co-Zsa" id="UvB-T1-gY4"/>
+                <outlet property="courseLocation" destination="s5r-ti-QmO" id="fLR-fw-Ezb"/>
+                <outlet property="couserName" destination="qwO-An-uYz" id="EJM-Y7-OJ8"/>
+                <outlet property="rdyGood" destination="19B-Hl-E5k" id="MF7-Jj-hIi"/>
+            </connections>
+            <point key="canvasLocation" x="278" y="285"/>
+        </tableViewCell>
+    </objects>
+</document>

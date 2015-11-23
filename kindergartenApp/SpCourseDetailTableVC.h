@@ -10,20 +10,22 @@
 #import "SPCourseDetailDomain.h"
 #import "SPSchoolDomain.h"
 
+@class SpCourseDetailTableVC;
+@protocol  SpCourseDetailTableVCDelegate <NSObject>
+
+- (void)pushWebViewModelWindow:(SpCourseDetailTableVC *)tableVC;
+
+@end
+
+
 @interface SpCourseDetailTableVC : UITableViewController
 
 @property (strong, nonatomic) NSString * uuid;
 
-@property (strong, nonatomic) SPCourseDetailDomain * courseDetailDomain;
-
-@property (strong, nonatomic) SPSchoolDomain * schoolDomain;
-
 @property (assign, nonatomic) CGRect tableFrame;
 
-@property (strong, nonatomic) NSArray * presentsComments;
+@property (strong, nonatomic) NSMutableArray * presentsComments;
 
-@property (assign, nonatomic) CGFloat courseRowHeight;
-
-@property (assign, nonatomic) CGFloat schollRowHeight;
+@property (weak, nonatomic) id<SpCourseDetailTableVCDelegate> delegate;
 
 @end

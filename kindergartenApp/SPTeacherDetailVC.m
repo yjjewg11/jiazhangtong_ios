@@ -27,7 +27,6 @@
     UIView * _warningView;
     
     UIScrollView *_scrollView;
-
 }
 
 @property (strong, nonatomic) SpCourseVC * tableVC;
@@ -41,7 +40,6 @@
 @property (assign, nonatomic) CGFloat contentHeight;
 
 @end
-
 
 @implementation SPTeacherDetailVC
 

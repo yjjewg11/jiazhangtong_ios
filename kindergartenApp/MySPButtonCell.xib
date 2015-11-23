@@ -21,6 +21,9 @@
                         <state key="normal" title="提交">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="btnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xeH-hF-aOa"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -31,7 +34,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="btn" destination="X8X-m4-T65" id="Bfc-Cv-uk6"/>
+                <outlet property="btn" destination="X8X-m4-T65" id="zQi-Fp-9qH"/>
             </connections>
             <point key="canvasLocation" x="314" y="252"/>
         </tableViewCell>

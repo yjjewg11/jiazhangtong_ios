@@ -10,6 +10,8 @@
 #import "ACMacros.h"
 #import "UMFeedback.h"
 #import "KGHUD.h"
+#import "KGUser.h"
+#import "KGAccountTool.h"
 
 @interface AdvanceViewController ()
 
@@ -32,7 +34,11 @@
 
 - (void)handleCommit{
     [[KGHUD sharedHud] show:self.view];
-    [[UMFeedback sharedInstance] post:@{@"content":_advanceTextView.text} completion:^(NSError *error) {
+    KGUser * account = [KGAccountTool account];
+    
+    NSString * contents = [NSString stringWithFormat:@"%@:%@",account.tel,_advanceTextView.text];
+    
+    [[UMFeedback sharedInstance] post:@{@"content":contents} completion:^(NSError *error) {
         [[KGHUD sharedHud] show:self.view onlyMsg:error==nil?@"提交反馈成功,感谢您的支持":error.localizedDescription];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];

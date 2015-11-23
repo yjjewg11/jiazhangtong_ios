@@ -490,6 +490,7 @@ forHTTPHeaderField:(NSString *)field
         NSString *query = nil;
         if (self.queryStringSerialization) {
             NSError *serializationError;
+            NSLog(@"%@",parameters);
             query = self.queryStringSerialization(request, parameters, &serializationError);
 
             if (serializationError) {

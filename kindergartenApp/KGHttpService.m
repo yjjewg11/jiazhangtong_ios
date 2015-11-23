@@ -1303,7 +1303,7 @@
 //特长课程列表 end
 
 //特长课程 - 课程详情start
-- (void)getSPCourseDetail:(NSString *)uuid success:(void(^)(SPCourseDetailDomain * spCourseDetail))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getSPCourseDetail:(NSString *)uuid success:(void(^)(SPCourseDetailVO * detailVO))success faild:(void(^)(NSString * errorMsg))faild
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -1314,7 +1314,8 @@
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
-             SPCourseDetailDomain * tempResp = [SPCourseDetailDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             SPCourseDetailVO * tempResp = [SPCourseDetailVO objectWithKeyValues:responseObject];
+             
              success(tempResp);
          }
          else
@@ -1385,6 +1386,32 @@
      }];
 }
 
+- (void)getSPSchoolInfoShareUrl:(NSString *)groupuuid success:(void (^)(NSString * vo))success faild:(void (^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSchoolInfoShareUrl:groupuuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPCourseDetailVO * vo = [SPCourseDetailVO objectWithKeyValues:responseObject];
+             
+             success(vo.share_url);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 - (void)getSPSchoolExtraFun:(NSString *)uuid success:(void(^)(SPShareSaveDomain * shareSaveDomain))success faild:(void(^)(NSString * errorMsg))faild
 {
     
@@ -1425,7 +1452,6 @@
     
     [mgr GET:[KGHttpUrl getSpecialtyCourseCommentURL] parameters:dic success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
-
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
          [self sessionTimeoutHandle:baseDomain];
          
@@ -1441,7 +1467,6 @@
      }
      failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
      {
-         NSLog(@"%@",error);
          [self requestErrorCode:error faild:faild];
      }];
 }
@@ -1565,15 +1590,19 @@
 }
 
 //优惠活动 - end
+
+//保存电话
 - (void)saveTelUserDatas:(NSString *)ext_uuid type:(NSString *)type success:(void(^)(NSString * msg))success faild:(void(^)(NSString * errorMsg))faild
 {
     NSDictionary * dict = @{@"type":type,@"ext_uuid":ext_uuid};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
     [mgr POST:[KGHttpUrl saveTelUserDatasURL:ext_uuid type:type] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
-         NSLog(@"保存用户咨询记录成功");
+         NSLog(@"保存用户咨询记录成功%@",responseObject);
      }
      failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
      {
@@ -1668,7 +1697,78 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
+//end
 
+//我的特长课程 - 保存评价
+- (void)MySPCourseSaveComment:(NSString *)extuuid classuuid:(NSString *)classuuid type:(NSString *)type score:(NSString *)score content:(NSString *)content success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (extuuid == nil) extuuid=@"";
+    if (classuuid == nil) classuuid=@"";
+    if (type == nil) type=@"";
+    if (score == nil) score=@"";
+    if (content == nil) content=@"";
+    
+    NSDictionary * dict = @{
+                                @"ext_uuid":extuuid,
+                                @"class_uuid":classuuid,
+                                @"type":type,
+                                @"score":score,
+                                @"content":content
+                            };
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [mgr POST:[KGHttpUrl getSaveMySPCommentURL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+        KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        [self sessionTimeoutHandle:baseDomain];
+        
+        if([baseDomain.ResMsg.status isEqualToString:String_Success])
+        {
+            success(baseDomain.ResMsg.message);
+        }
+        else
+        {
+            faild(baseDomain.ResMsg.message);
+        }
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+        NSLog(@"%@",error);
+        [self requestErrorCode:error faild:faild];
+    }];
+}
+//end
+
+//我的特长课程 - 全部课程安排
+- (void)getListAll:(NSString *)classuuid pageNo:(NSString *)pageNo success:(void(^)(MySPAllCourseListVO * courseListVO))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMySPListAll:classuuid pageNo:pageNo] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             MySPAllCourseListVO * tempResp = [MySPAllCourseListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
 
 
 @end
