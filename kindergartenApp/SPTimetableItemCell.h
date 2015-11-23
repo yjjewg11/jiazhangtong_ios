@@ -10,6 +10,13 @@
 #import "SPTimetableDomain.h"
 #import "SPTimetableItemVO.h"
 
+@protocol SPTimetableItemCellDelegate <NSObject>
+
+- (void)pushVCWithClassuuid:(NSString *)uuid;
+
+@end
+
+
 @interface SPTimetableItemCell : UITableViewCell
 {
     __weak IBOutlet UIImageView *headIcon;
@@ -33,7 +40,7 @@
 @property (strong, nonatomic) SPTimetableDomain * spTimetableDomain;         //培训班课程表数据
 @property (nonatomic, copy) void (^SPTimetableItemCellBlock)(SPTimetableItemCell * spTimetableItemTableViewCell);
 
-
+@property (weak, nonatomic) id<SPTimetableItemCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *moreCourseBtnClick;
 

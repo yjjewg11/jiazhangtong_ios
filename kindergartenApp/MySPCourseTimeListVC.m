@@ -32,6 +32,8 @@
 
 @property (assign, nonatomic) NSInteger pageNo;
 
+@property (assign, nonatomic) NSInteger futureCount;
+
 @end
 
 @implementation MySPCourseTimeListVC
@@ -71,6 +73,8 @@
     
     self.pageNo = 2;
     
+    self.futureCount = 0;
+    
     [self setupRefresh];
     
     self.tableView.frame = self.tableFrame;
@@ -80,8 +84,6 @@
     self.tableView.dataSource = self;
 
     [self getColorCellIndex];
-    
-    [self.listDatas removeAllObjects];
     
     [self setUpViews];
 }
@@ -104,22 +106,30 @@
         
         [view setData:d row:i];
         
-        if (i == self.oriCell)
+        if (self.futureCount != 0)
         {
-            view.courseNameLbl.textColor = [UIColor whiteColor];
-            view.courseCountLbl.textColor = [UIColor whiteColor];
-            view.timeLbl.textColor = [UIColor whiteColor];
-            view.backgroundColor = [UIColor orangeColor];
+            if (i == self.oriCell)
+            {
+                view.courseNameLbl.textColor = [UIColor whiteColor];
+                view.courseCountLbl.textColor = [UIColor whiteColor];
+                view.timeLbl.textColor = [UIColor whiteColor];
+                view.backgroundColor = [UIColor orangeColor];
+            }
+            else if (i >= self.blueCell)
+            {
+                view.courseNameLbl.textColor = [UIColor blueColor];
+                view.courseCountLbl.textColor = [UIColor blueColor];
+                view.timeLbl.textColor = [UIColor blueColor];
+            }
         }
-        else if (i >= self.blueCell)
+        else
         {
-            view.courseNameLbl.textColor = [UIColor blueColor];
-            view.courseCountLbl.textColor = [UIColor blueColor];
-            view.timeLbl.textColor = [UIColor blueColor];
+            view.courseNameLbl.textColor = [UIColor blackColor];
+            view.courseCountLbl.textColor = [UIColor blackColor];
+            view.timeLbl.textColor = [UIColor blackColor];
         }
-        
-        [self.views addObject:view];
 
+        [self.views addObject:view];
     }
 }
 
@@ -134,6 +144,8 @@
         
         if ([inputDate daysBetweenCurrentDateAndDate] > 0) //未来的
         {
+            self.futureCount++;
+            
             self.oriCell = i;
             self.blueCell = i+1;
             break;

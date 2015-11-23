@@ -14,8 +14,12 @@
 #import "KGDateUtil.h"
 #import "KGUser.h"
 #import "TimetableItemVO.h"
+#import "MJExtension.h"
+#import "MySPCourseDomain.h"
+#import "SPTimetableDomain.h"
+#import "MySPCourseDetailVC.h"
 
-@interface TimetableViewController () <UIScrollViewDelegate>
+@interface TimetableViewController () <UIScrollViewDelegate,TimetableItemViewDelegate>
 {
     NSMutableArray  * itemViewArray;
     NSInteger totalCount;
@@ -31,6 +35,8 @@
     NSInteger   reqIndex; //记录请求的index
     TimetableItemView * lastSelItemView; //当前选中的view
 }
+
+@property (strong, nonatomic) NSMutableArray * studyingCourseArr;
 
 @end
 
@@ -107,6 +113,9 @@
     
     for(NSInteger i=Number_Zero; i<totalCount; i++){
         TimetableItemView * itemView = [[TimetableItemView alloc] initWithFrame:CGRectMake(i*APPWINDOWWIDTH, Number_Zero, APPWINDOWWIDTH, contentScrollView.height)];
+        
+        itemView.delegate = self;
+        
         [contentScrollView addSubview:itemView];
         [itemViewArray addObject:itemView];
     }
@@ -218,5 +227,40 @@
     [lastSelItemView resetTopicReplyContent:domain topicInteraction:self.topicInteractionDomain];
 }
 
+#pragma mark - 请求正在学学习数据
+- (void)getMySPStudyingCourseListData:(NSString *)uuid
+{
+    [[KGHUD sharedHud] show:self.view];
+    
+    [[KGHttpService sharedService] MySPCourseList:@"" isdisable:@"0" success:^(SPDataListVO *msg)
+    {
+        [[KGHUD sharedHud] hide:self.view];
+        
+        self.studyingCourseArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+        
+        for (MySPCourseDomain * domain in self.studyingCourseArr)
+        {
+            if ([domain.uuid isEqualToString:uuid])
+            {
+                MySPCourseDetailVC * vc = [[MySPCourseDetailVC alloc] init];
+                
+                vc.domain = domain;
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                break;
+            }
+        }
+    }
+    faild:^(NSString *errorMsg)
+    {
+        
+    }];
+}
+
+- (void)pushVCWithClassuuid:(NSString *)uuid
+{
+    [self getMySPStudyingCourseListData:uuid];
+}
 
 @end

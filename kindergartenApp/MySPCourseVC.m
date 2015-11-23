@@ -116,6 +116,10 @@
         
         [_nowStudyBtn setTitle:@"正在学习" forState:UIControlStateNormal];
         
+        _nowStudyBtn.tag = 0;
+        
+        [_nowStudyBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
         [_nowStudyBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
         
     }
@@ -131,6 +135,10 @@
         [_endStudyBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
         [_endStudyBtn setTitle:@"学习完成" forState:UIControlStateNormal];
+        
+        _endStudyBtn.tag = 1;
+        
+        [_endStudyBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [_endStudyBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
     }
@@ -271,6 +279,18 @@
     }
     
     [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)btnClick:(UIButton *)btn
+{
+    if (btn.tag == 0)
+    {
+        [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    else if(btn.tag == 1)
+    {
+        [self.scrollView setContentOffset:CGPointMake(APPWINDOWWIDTH, 0) animated:YES];
+    }
 }
 
 

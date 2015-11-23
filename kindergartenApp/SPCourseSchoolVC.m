@@ -160,7 +160,7 @@
         self.mappoint = @"";
     }
     
-    [[KGHttpService sharedService] getSPCourseList:@"" map_point:self.mappoint type:courseType sort:sort teacheruuid:@"" success:^(SPDataListVO *spCourseList)
+    [[KGHttpService sharedService] getSPCourseList:@"" map_point:self.mappoint type:courseType sort:sort teacheruuid:@"" pageNo:@"" success:^(SPDataListVO *spCourseList)
     {
         [[KGHUD sharedHud] hide:self.view];
         
@@ -414,6 +414,8 @@
         NSDictionary * dict = self.schoolList.data[indexPath.row];
         
         detailVC.groupuuid = [dict objectForKey:@"uuid"];
+        
+        detailVC.mappoint = self.mappoint;
         
 //        detailVC.schoolDomain = [SPSchoolDomain objectWithKeyValues:self.schoolList.data[indexPath.row]];
         

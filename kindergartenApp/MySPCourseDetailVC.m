@@ -21,9 +21,14 @@
 @interface MySPCourseDetailVC () <UIScrollViewDelegate>
 {
     UIView * _courseInfoView;
+    
     UIView * _buttonsView;
+    
     UIScrollView * _contentView;
+    
     NSMutableArray * _btns;
+    
+    UIWebView *_web;
     
     MySPCourseTimeListVC *_listVC;
     
@@ -63,7 +68,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"学校详情";
+    self.title = @"我的课程详情";
     
     //创建顶部课程信息view
     _courseInfoView = [[UIView alloc] init];
@@ -72,7 +77,7 @@
     
     //创建上面三个按钮view
     _buttonsView = [[UIView alloc] init];
-    _buttonsView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 120, APPWINDOWWIDTH, 30);
+    _buttonsView.frame = CGRectMake(1, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 120, self.view.width, 30);
     [self addSelBtns:_buttonsView];
     
     //创建scrollView
@@ -80,9 +85,7 @@
     _contentView.frame = CGRectMake(0, CGRectGetMaxY(_buttonsView.frame) + 1, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
 
     [self addContent:_contentView];
-    
-    //获取数据
-    
+
 }
 
 #pragma mark - 请求一个班级的全部课程安排
@@ -92,6 +95,8 @@
     
     [[KGHttpService sharedService] getListAll:self.domain.uuid pageNo:@"" success:^(MySPAllCourseListVO *courseListVO)
     {
+        [[KGHUD sharedHud] hide:self.view];
+        
         _listVC.listDatas = [NSMutableArray arrayWithArray:[MySPAllCouseListDomain objectArrayWithKeyValuesArray:courseListVO.data]];
         
         _listVC.classuuid = self.domain.uuid;
@@ -125,12 +130,12 @@
 #pragma mark - 创建上面3个选择按钮
 - (void)addSelBtns:(UIView *)view
 {
-    NSArray * titlts = @[@"课程",@"简介",@"评价"];
+    NSArray * titlts = @[@"课程表",@"简介",@"评价"];
     _btns = [NSMutableArray array];
     
     for (NSInteger i=0; i<3; i++)
     {
-        MyButtonTwo * btn = [[MyButtonTwo alloc] initWithFrame:CGRectMake(i * (APPWINDOWWIDTH / 3), 0, (APPWINDOWWIDTH / 3), 30)];
+        MyButtonTwo * btn = [[MyButtonTwo alloc] initWithFrame:CGRectMake(i * (_buttonsView.frame.size.width / 3), 0, (_buttonsView.frame.size.width / 3), 30)];
         
         [btn setTitle:titlts[i] forState:UIControlStateNormal];
         [btn setTitle:titlts[i] forState:UIControlStateSelected];
@@ -140,7 +145,7 @@
         
         btn.tag = i;
         
-        [btn addTarget:self action:@selector(selBtn:) forControlEvents:UIControlEventTouchDown];
+        [btn addTarget:self action:@selector(selBtns:) forControlEvents:UIControlEventTouchDown];
         
         [_btns addObject:btn];
         
@@ -153,7 +158,7 @@
 }
 
 #pragma mark - 选择按钮显示效果
-- (void)selBtn:(UIButton *)btn
+- (void)selBtns:(UIButton *)btn
 {
     btn.selected = YES;
     
@@ -180,8 +185,6 @@
     
     _contentView.pagingEnabled = YES;
     
-    _contentView.showsHorizontalScrollIndicator = NO;
-    
     //第一个
     MySPCourseTimeListVC * timelistVC = [[MySPCourseTimeListVC alloc] init];
     
@@ -194,13 +197,17 @@
     [self getListData];
     
     //第二个
-    MySPCourseSchoolDetailWebView * web = [[[NSBundle mainBundle] loadNibNamed:@"MySPCourseSchoolDetailWebView" owner:nil options:nil] firstObject];
+    UIWebView * web = [[UIWebView alloc] init];
+    
+    _web = web;
+    
+    web.scalesPageToFit = NO;
     
     web.frame = CGRectMake(APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
     
-    web.groupuuid = self.domain.groupuuid;
+    web.scrollView.contentSize = CGSizeMake(0, web.scrollView.contentSize.height);
     
-    [_contentView addSubview:web];
+    [self getSchoolData];
     
     //第三个
     self.commentVC.classuuid = self.domain.uuid;
@@ -215,6 +222,29 @@
     
     //添加
     [self.view addSubview:_contentView];
+}
+
+#pragma mark - 请求学校介绍的web
+#pragma mark - 请求学校介绍url
+- (void)getSchoolData
+{
+    [[KGHUD sharedHud] show:self.view];
+    
+    [[KGHttpService sharedService] getSPSchoolInfoShareUrl:self.domain.groupuuid success:^(NSString *url)
+    {
+        [[KGHUD sharedHud] hide:self.view];
+        
+        if (url != nil || ![url isEqualToString:@""])
+        {
+            [_web loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+            
+            [_contentView addSubview:_web];
+        }
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+    }];
 }
 
 #pragma mark - scrollview代理方法
@@ -233,6 +263,8 @@
             ((MyButtonTwo *)_btns[i]).selected = NO;
         }
     }
+    
+    NSLog(@"%f",scrollView.contentOffset.x);
 }
 
 

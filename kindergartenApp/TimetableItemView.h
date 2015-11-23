@@ -10,6 +10,13 @@
 #import "TimetableDomain.h"
 #import "TopicInteractionView.h"
 
+@protocol TimetableItemViewDelegate <NSObject>
+
+- (void)pushVCWithClassuuid:(NSString *)uuid;
+
+@end
+
+
 @interface TimetableItemView : UIView <UITableViewDataSource, UITableViewDelegate> {
     
     UITableView    * timetableTableView;
@@ -20,7 +27,7 @@
     
     //特长班课程表数据
     NSMutableDictionary * spSourceTimetableMDict;
-    NSArray * spTimetableDataSourceMMarray;     //查到对应特长班班级的uuid返回的所有课程表数据
+//    NSArray * spTimetableDataSourceMMarray;     //查到对应特长班班级的uuid返回的所有课程表数据
     
     //评论
     TopicInteractionView * topicView;
@@ -31,9 +38,9 @@
     NSInteger nowwWeekday; //今天是周几  如果是6 7则设置1
 }
 
+@property (strong, nonatomic) NSArray * spTimetableDataSourceMMarray;
 
-
-
+@property (weak, nonatomic) id<TimetableItemViewDelegate> delegate;
 
 //幼儿园相关
 @property (strong, nonatomic) NSMutableArray   * tableDataSource;       //<TimetableItemVO>

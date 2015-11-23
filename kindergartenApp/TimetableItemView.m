@@ -21,7 +21,7 @@
 
 #define defContentHeight  42
 
-@interface TimetableItemView()
+@interface TimetableItemView()<SPTimetableItemCellDelegate>
 
 @property (assign, nonatomic) NSInteger spCourseDataArrCount;
 
@@ -31,6 +31,14 @@
 
 
 @implementation TimetableItemView
+- (NSArray *)spTimetableDataSourceMMarray
+{
+    if (_spTimetableDataSourceMMarray == nil)
+    {
+        _spTimetableDataSourceMMarray = [NSArray array];
+    }
+    return _spTimetableDataSourceMMarray;
+}
 
 - (ReplyPageDomain *)tempDomain
 {
@@ -85,7 +93,7 @@
 #pragma mark - 加载特长班课表数据
 - (void)loadSPTimetableData:(NSArray *)spTimetableMDict
 {
-    spTimetableDataSourceMMarray = spTimetableMDict;
+    self.spTimetableDataSourceMMarray = spTimetableMDict;
     
     [self packageSPItemViewData];
 
@@ -215,6 +223,8 @@
         
         SPTimetableItemCell * spCell = [SPTimetableItemCell spCellWithTableView:tableView];
         
+        spCell.delegate = self;
+        
         if (_spTableDataSource && [_spTableDataSource count] > Number_Zero)
         {
             [spCell setSpTimetableDomain:spTimetableItemVO.spTimetableMArray[indexPath.row / 2]];
@@ -312,16 +322,16 @@
 {
     NSInteger index = Number_Zero;
     NSInteger cellIndex = Number_Zero;
-    for(SPTimetableDomain * spTimetable in spTimetableDataSourceMMarray)
+    for(SPTimetableDomain * spTimetable in self.spTimetableDataSourceMMarray)
     {
         SPTimetableItemVO * itemVO = [[SPTimetableItemVO alloc] init];
         itemVO.cellHeight = 245;
         itemVO.headUrl   = spTimetable.student_headimg;
-        itemVO.spTimetableMArray = (NSMutableArray *)spTimetableDataSourceMMarray;
+        itemVO.spTimetableMArray = (NSMutableArray *)self.spTimetableDataSourceMMarray;
         [self.spTableDataSource addObject:itemVO];
         
         index++;
-        SPTimetableDomain * domain = spTimetableDataSourceMMarray[cellIndex];
+        SPTimetableDomain * domain = self.spTimetableDataSourceMMarray[cellIndex];
         //itemVO.cellHeight = [self calculateTimetableHeight:domain];
         
         UIView * view = [self loadDZReply:domain index:index - Number_One];
@@ -340,7 +350,7 @@
 #pragma mark - 重置特长班课程班table数据源指定数据 再刷新table
 - (void)resetPackageSPItemViewData:(NSInteger)cellIndex
 {
-    SPTimetableDomain * spDomain = [spTimetableDataSourceMMarray objectAtIndex:cellIndex / Number_Two];    //这里是从存放domain的数组里面取出来，对应要/2
+    SPTimetableDomain * spDomain = [self.spTimetableDataSourceMMarray objectAtIndex:cellIndex / Number_Two];    //这里是从存放domain的数组里面取出来，对应要/2
     
     UIView * view = [self loadDZReply:spDomain index:cellIndex];
     SPTimetableItemVO * itemVO2 = [self.spTableDataSource objectAtIndex:cellIndex + Number_One];
@@ -524,6 +534,11 @@
     [spPageDomain.data insertObject:domain atIndex:Number_Zero];
     spPageDomain.totalCount++;
     [self resetPackageSPItemViewData:topicInteractionDomain.cellIndex];
+}
+
+- (void)pushVCWithClassuuid:(NSString *)uuid
+{
+    [self.delegate pushVCWithClassuuid:uuid];
 }
 
 @end

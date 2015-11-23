@@ -113,6 +113,8 @@
 // 分页获取班级互动列表
 - (void)getClassNews:(PageInfoDomain *)pageObj success:(void (^)(PageInfoDomain * pageInfo))success faild:(void (^)(NSString * errorMsg))faild;
 
+- (void)getClassOrSchoolNews:(PageInfoDomain *)pageObj groupuuid:(NSString *)groupuuid courseuuid:(NSString *)courseuuid success:(void (^)(PageInfoDomain * pageInfo))success faild:(void (^)(NSString * errorMsg))faild;
+
 // 班级互动 end
 
 
@@ -257,7 +259,7 @@
 #pragma mark - 特长课程
 - (void)getSPCourseType:(void(^)(NSArray * spCourseTypeArr))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getSPSchoolList:(NSString *)mapPoint sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild;
 
@@ -267,7 +269,7 @@
 
 - (void)getSPCourseComment:(NSString *)ext_uuid pageNo:(NSString *)pageNo success:(void (^)(SPCommentVO * commentVO))success faild:(void (^)(NSString * errorMsg))faild;
 
-- (void)getSPHotCourse:(NSString *)map_point success:(void(^)(SPDataListVO * hotCourseList))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getSPHotCourse:(NSString *)map_point pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * hotCourseList))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getSPTeacherList:(NSString *)groupuuid pageNo:(NSString *)pageNo success:(void (^)(SPDataListVO * dataListVo))success faild:(void (^)(NSString * errorMsg))faild;
 

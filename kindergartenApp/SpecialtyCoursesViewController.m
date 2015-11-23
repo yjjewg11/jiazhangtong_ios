@@ -21,12 +21,13 @@
 #import "SPHotCourseVC.h"
 #import "SPCourseDetailVC.h"
 #import <CoreLocation/CoreLocation.h>
+#import "MJRefresh.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
 
-@interface SpecialtyCoursesViewController () <SPHotCourseVCDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
+@interface SpecialtyCoursesViewController () <UIScrollViewDelegate,SPHotCourseVCDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
 
 @property (strong, nonatomic) AdMoGoView * adView;
 @property (strong, nonatomic) UIView * courseView;
@@ -37,7 +38,7 @@
 
 @property (strong, nonatomic) NSMutableArray * spCourseDomains;
 
-@property (strong, nonatomic) NSArray * hotSpCourses;
+@property (strong, nonatomic) NSMutableArray * hotSpCourses;
 
 @property (strong, nonatomic) NSMutableArray * spCourseDatakeys;
 
@@ -50,6 +51,8 @@
 @property (strong, nonatomic) NSString * map_point;
 
 @property (strong, nonatomic) CLLocationManager * mgr;
+
+@property (assign, nonatomic) NSInteger pageNo;
 
 @end
 
@@ -93,11 +96,11 @@
     return _hotCourseTable;
 }
 
-- (NSArray *)hotSpCourses
+- (NSMutableArray *)hotSpCourses
 {
     if (_hotSpCourses == nil)
     {
-        _hotSpCourses = [NSArray array];
+        _hotSpCourses = [NSMutableArray array];
     }
     return _hotSpCourses;
 }
@@ -133,9 +136,10 @@
 {
     [super viewDidLoad];
     self.title = @"特长课程";
+    
     _scrollView = [[UIScrollView alloc] init];
     _scrollView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT);
-
+    _scrollView.delegate = self;
     
     _courseView = [[UIView alloc] init];
     _courseView.frame = CGRectMake(0, 150, 1, 1);
@@ -190,7 +194,7 @@
         self.map_point = @"";
     }
     
-    [[KGHttpService sharedService] getSPHotCourse:self.map_point success:^(SPDataListVO *hotCourseList)
+    [[KGHttpService sharedService] getSPHotCourse:self.map_point pageNo:@"" success:^(SPDataListVO *hotCourseList)
     {
         [[KGHUD sharedHud] hide:self.view];
         
@@ -209,10 +213,12 @@
         dispatch_async(dispatch_get_main_queue(), ^
         {
             self.contentHeight = CGRectGetMaxY(self.hotCourseTable.tableView.frame);
+            
             _scrollView.contentSize = CGSizeMake(0, self.contentHeight);
         });
         
         self.hotCourseTable.hotSpCourses = marr;
+        self.hotCourseTable.mappoint = self.map_point;
         
         [self responseHandlerOfHotCourse];
         
@@ -443,6 +449,11 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     NSLog(@"%@",error);
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%f -- %f",scrollView.contentSize.height,scrollView.contentOffset.y);
 }
 
 @end

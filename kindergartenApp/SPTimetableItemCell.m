@@ -8,6 +8,13 @@
 
 #import "SPTimetableItemCell.h"
 #import "UIImageView+WebCache.h"
+#import "MySPCourseDomain.h"
+
+@interface SPTimetableItemCell()
+
+@property (strong, nonatomic) NSString * classuuid;
+
+@end
 
 @implementation SPTimetableItemCell
 
@@ -17,6 +24,8 @@
     if(_spTimetableDomain == nil)
     {
         _spTimetableDomain = spTimetableDomain;
+     
+        self.classuuid = spTimetableDomain.classuuid;
         
         [headIcon sd_setImageWithURL:[NSURL URLWithString:_spTimetableDomain.student_headimg] placeholderImage:[UIImage imageNamed:@"head_def"]];
         
@@ -38,16 +47,12 @@
         {
             todayImage.image = [UIImage imageNamed:@"jinri2x"];
         }
-        
-        
         nextCourseDate.text = dateStr;
 
-        
         courseNameText.text = _spTimetableDomain.name;
         courseDateText.text = _spTimetableDomain.plandate;
         courseLocationText.text = _spTimetableDomain.address;
         preparedItemsText.text = _spTimetableDomain.readyfor;
-        
     }
 }
 
@@ -76,7 +81,7 @@
 
 - (IBAction)moreCourseBtnClick:(id)sender
 {
-    
+    [self.delegate pushVCWithClassuuid:self.classuuid];
 }
 
 

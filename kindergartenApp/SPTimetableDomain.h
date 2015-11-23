@@ -12,8 +12,8 @@
 
 @interface SPTimetableDomain : KGBaseDomain
 
-
 @property (strong, nonatomic) NSString * name;              //课程名
+@property (strong, nonatomic) NSString * classuuid;         //班级uuid
 @property (strong, nonatomic) NSString * readyfor;          //准备物品
 @property (strong, nonatomic) NSString * address;           //上课地址
 @property (strong, nonatomic) NSString * class_name;        //班级名称

@@ -10,4 +10,10 @@
 
 @interface InteractViewController : BaseTopicInteractViewController
 
+@property (strong, nonatomic) NSString * groupuuid;
+
+@property (strong, nonatomic) NSString * courseuuid;
+
+@property (assign, nonatomic) NSInteger dataScourseType;
+
 @end

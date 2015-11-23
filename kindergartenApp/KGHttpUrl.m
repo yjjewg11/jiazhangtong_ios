@@ -206,7 +206,10 @@
     return URL(baseServiceURL, classNewsMyURL);
 }
 
-
+//分页获取学校或者班级的互动列表
++ (NSString *)getSchoolOrClassNewsUrl:(NSString *)groupuuid courseuuid:(NSString *)courseuuid {
+    return [NSString stringWithFormat:@"%@rest/classnews/queryPxClassNewsBy.json?groupuuid=%@&courseuuid=%@",baseServiceURL,groupuuid,courseuuid];
+}
 
 //更新学生资料
 + (NSString *)getSaveStudentInfoUrl {

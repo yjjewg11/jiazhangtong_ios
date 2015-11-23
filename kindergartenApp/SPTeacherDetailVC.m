@@ -142,7 +142,7 @@
         self.mappoint = @"";
     }
     
-    [[KGHttpService sharedService] getSPCourseList:@"" map_point:@"" type:@"" sort:@"" teacheruuid:self.domain.uuid success:^(SPDataListVO *spCourseList)
+    [[KGHttpService sharedService] getSPCourseList:@"" map_point:@"" type:@"" sort:@"" teacheruuid:self.domain.uuid pageNo:@"" success:^(SPDataListVO *spCourseList)
     {
         [[KGHUD sharedHud] hide:self.view];
         

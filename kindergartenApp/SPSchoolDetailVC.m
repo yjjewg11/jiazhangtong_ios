@@ -58,7 +58,6 @@
 @property (strong, nonatomic) NSArray * telsNum;
 
 @property (strong, nonatomic) CLLocationManager * mgr;
-@property (strong, nonatomic) NSString * mappoint;
 
 @end
 
@@ -228,7 +227,10 @@
         }
         case 2: //互动
         {
-            BaseViewController * baseVC = [[InteractViewController alloc] init];
+            InteractViewController * baseVC = [[InteractViewController alloc] init];
+            baseVC.courseuuid = self.groupuuid;
+            baseVC.dataScourseType = 1;
+            
             if(baseVC)
             {
                 [self.navigationController pushViewController:baseVC animated:YES];
@@ -323,7 +325,6 @@
     {
         button.selected = !button.selected;
         button.enabled = YES;
-        [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
         ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"shoucang1"];
     }
     failed:^(NSString *errorMsg)
@@ -374,8 +375,6 @@
     [self.cell setOrigin:CGPointMake(padding, 0)];
     
     //设置数据
-    
-    
     [self.view addSubview:_schoolInfoView];
 }
 
@@ -445,12 +444,18 @@
     
     _contentCourseTableVC.tableRect = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame) - 48);
     
+    _contentCourseTableVC.groupuuid = self.groupuuid;
+    
+    _contentCourseTableVC.mappoint = self.mappoint;
+    
     _contentCourseTableVC.dataSourceType = 0; //课程类型
     
     _contentCourseTableVC.delegate = self;
     
     //第二个
     _contentTeacherTableVC = [[SPSchoolDetailTableVC alloc] init];
+    
+    _contentTeacherTableVC.groupuuid = self.groupuuid;
     
     _contentTeacherTableVC.dataSourceType = 1; //教师类型
     
@@ -504,7 +509,7 @@
         self.mappoint = @"";
     }
     
-    [[KGHttpService sharedService] getSPCourseList:self.groupuuid map_point:self.mappoint type:@"" sort:@"" teacheruuid:@"" success:^(SPDataListVO *spCourseList)
+    [[KGHttpService sharedService] getSPCourseList:self.groupuuid map_point:self.mappoint type:@"" sort:@"" teacheruuid:@"" pageNo:@"" success:^(SPDataListVO *spCourseList)
     {
         [[KGHUD sharedHud] hide:self.view];
         

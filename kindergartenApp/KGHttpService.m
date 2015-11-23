@@ -532,7 +532,30 @@
 
 // 班级互动 end
 
-
+//分页获取班级 或者 学校互动列表
+- (void)getClassOrSchoolNews:(PageInfoDomain *)pageObj groupuuid:(NSString *)groupuuid courseuuid:(NSString *)courseuuid success:(void (^)(PageInfoDomain * pageInfo))success faild:(void (^)(NSString * errorMsg))faild
+{
+    [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getSchoolOrClassNewsUrl:groupuuid courseuuid:courseuuid]
+                                  parameters:pageObj.keyValues
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             baseDomain.list.data = [TopicDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+                                             
+                                             success(baseDomain.list);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
 
 #pragma mark 学生相关 begin
 
@@ -1210,9 +1233,9 @@
 
 }
 
-- (void)getSPHotCourse:(NSString *)map_point success:(void(^)(SPDataListVO * hotCourseList))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getSPHotCourse:(NSString *)map_point pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * hotCourseList))success faild:(void(^)(NSString * errorMsg))faild
 {
-    NSDictionary *dic = @{@"map_point":map_point};
+    NSDictionary *dic = @{@"map_point":map_point,@"pageNo":pageNo};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -1243,9 +1266,9 @@
 //特长课程列表 start
 
 //班级列表
-- (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild
 {
-    NSDictionary * dic = @{@"groupuuid":groupuuid,@"type":type,@"sort":sort,@"teacheruuid":teacheruuid,@"map_point":map_point};
+    NSDictionary * dic = @{@"groupuuid":groupuuid,@"type":type,@"sort":sort,@"teacheruuid":teacheruuid,@"map_point":map_point,@"pageNo":pageNo};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -1475,7 +1498,7 @@
 //特长课程 - 教师列表 start
 - (void)getSPTeacherList:(NSString *)groupuuid pageNo:(NSString *)pageNo success:(void (^)(SPDataListVO * dataListVo))success faild:(void (^)(NSString * errorMsg))faild
 {
-    NSDictionary * dic = @{@"groupuuid":groupuuid};
+    NSDictionary * dic = @{@"groupuuid":groupuuid,@"pageNo":pageNo};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     

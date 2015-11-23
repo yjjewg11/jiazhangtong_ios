@@ -78,7 +78,7 @@
 
 //分页获取我的孩子相关班级互动列表
 + (NSString *)getClassNewsMyByClassIdUrl;
-
++ (NSString *)getSchoolOrClassNewsUrl:(NSString *)groupuuid courseuuid:(NSString *)courseuuid;
 
 //更新学生资料
 + (NSString *)getSaveStudentInfoUrl;

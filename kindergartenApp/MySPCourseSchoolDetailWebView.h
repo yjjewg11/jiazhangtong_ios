@@ -10,6 +10,6 @@
 
 @interface MySPCourseSchoolDetailWebView : UIView
 
-@property (strong, nonatomic) NSString * groupuuid;
+@property (strong, nonatomic) NSString * url;
 
 @end

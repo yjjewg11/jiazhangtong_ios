@@ -108,19 +108,52 @@
 //获取数据加载表格
 - (void)getTableData{
     
-    [[KGHttpService sharedService] getClassNews:[[PageInfoDomain alloc] initPageInfo:reFreshView.page size:reFreshView.pageSize] success:^(PageInfoDomain *pageInfo) {
-        
+    if (self.dataScourseType == 0)
+    {
+        [[KGHttpService sharedService] getClassNews:[[PageInfoDomain alloc] initPageInfo:reFreshView.page size:reFreshView.pageSize] success:^(PageInfoDomain *pageInfo) {
+            
+            interactArray = pageInfo.data;
+            
+            reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
+            [reFreshView reloadRefreshTable];
+            
+        } faild:^(NSString *errorMsg) {
+            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+            [reFreshView endRefreshing];
+        }];
+    }
+    else
+    {
+        [self getTableDataOfSchoolOrClass];
+    }
+
+}
+
+- (void)getTableDataOfSchoolOrClass
+{
+    if (self.groupuuid == nil)
+    {
+        self.groupuuid = @"";
+    }
+    
+    if (self.courseuuid == nil)
+    {
+        self.courseuuid = @"";
+    }
+    
+    [[KGHttpService sharedService] getClassOrSchoolNews:[[PageInfoDomain alloc] initPageInfo:reFreshView.page size:reFreshView.pageSize] groupuuid:self.groupuuid courseuuid:self.courseuuid success:^(PageInfoDomain *pageInfo)
+    {
         interactArray = pageInfo.data;
         
         reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
         [reFreshView reloadRefreshTable];
-        
-    } faild:^(NSString *errorMsg) {
+    }
+    faild:^(NSString *errorMsg)
+    {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         [reFreshView endRefreshing];
     }];
 }
-
 
 //初始化列表
 - (void)initReFreshView{

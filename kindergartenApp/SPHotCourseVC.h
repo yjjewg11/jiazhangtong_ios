@@ -33,4 +33,6 @@ typedef enum
 
 @property (weak, nonatomic) id<SPHotCourseVCDelegate> delegate;
 
+@property (strong, nonatomic) NSString * mappoint;
+
 @end

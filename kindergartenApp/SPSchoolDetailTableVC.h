@@ -33,6 +33,10 @@ typedef enum
 
 @property (assign, nonatomic) DataSourseType dataSourceType;
 
+@property (strong, nonatomic) NSString * groupuuid;
+
+@property (strong, nonatomic) NSString * mappoint;
+
 
 @property (weak, nonatomic) id<SPSchoolDetailTableVCDelegate> delegate;
 

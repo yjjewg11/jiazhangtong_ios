@@ -8,10 +8,14 @@
 
 #import "SPHotCourseVC.h"
 #import "SpCourseCell.h"
-
+#import "MJRefresh.h"
+#import "KGHttpService.h"
+#import "MJExtension.h"
+#import "KGHUD.h"
 
 @interface SPHotCourseVC () <UITableViewDataSource,UITableViewDelegate>
 
+@property (assign, nonatomic) NSInteger pageNo;
 
 @end
 
@@ -29,6 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.pageNo = 2;
     
     self.tableView.scrollEnabled = NO;
     
@@ -98,6 +104,7 @@
 {
     [self.delegate pushToDetailVC:self dataSourceType:0 selIndexPath:indexPath];
 }
+
 
 
 @end

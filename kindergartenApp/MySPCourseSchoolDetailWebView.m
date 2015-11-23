@@ -22,27 +22,7 @@
 - (void)awakeFromNib
 {
     //请求数据
-    [self getSchoolData];
-}
-
-#pragma mark - 请求学校介绍url
-- (void)getSchoolData
-{
-    [[KGHUD sharedHud] show:self];
-    
-    [[KGHttpService sharedService] getSPSchoolInfoShareUrl:self.groupuuid success:^(NSString *url)
-    {
-        [[KGHUD sharedHud] hide:self];
-        
-        if (url != nil || ![url isEqualToString:@""])
-        {
-            [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
-        }
-    }
-    faild:^(NSString *errorMsg)
-    {
-        [[KGHUD sharedHud] show:self onlyMsg:errorMsg];
-    }];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
 }
 
 @end

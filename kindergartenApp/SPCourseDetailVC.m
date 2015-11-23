@@ -424,7 +424,10 @@
         }
         case 2:            //互动
         {
-            BaseViewController * baseVC = [[InteractViewController alloc] init];
+            InteractViewController * baseVC = [[InteractViewController alloc] init];
+            baseVC.courseuuid = self.uuid;
+            baseVC.dataScourseType = 1;
+            
             if(baseVC)
             {
                 [self.navigationController pushViewController:baseVC animated:YES];

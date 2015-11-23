@@ -36,7 +36,7 @@
     [[KGHUD sharedHud] show:self.view];
     KGUser * account = [KGAccountTool account];
     
-    NSString * contents = [NSString stringWithFormat:@"%@:%@",account.tel,_advanceTextView.text];
+    NSString * contents = [NSString stringWithFormat:@"%@:%@",account.loginname,_advanceTextView.text];
     
     [[UMFeedback sharedInstance] post:@{@"content":contents} completion:^(NSError *error) {
         [[KGHUD sharedHud] show:self.view onlyMsg:error==nil?@"提交反馈成功,感谢您的支持":error.localizedDescription];
