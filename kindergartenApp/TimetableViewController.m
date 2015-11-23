@@ -18,6 +18,7 @@
 #import "MySPCourseDomain.h"
 #import "SPTimetableDomain.h"
 #import "MySPCourseDetailVC.h"
+#import "SPCourseDetailDomain.h"
 
 @interface TimetableViewController () <UIScrollViewDelegate,TimetableItemViewDelegate>
 {
@@ -38,12 +39,16 @@
 
 @property (strong, nonatomic) NSMutableArray * studyingCourseArr;
 
+@property (assign, nonatomic) NSInteger pageNo;
+
 @end
 
 @implementation TimetableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.pageNo = 1;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"课程表";
@@ -228,39 +233,31 @@
 }
 
 #pragma mark - 请求正在学学习数据
-- (void)getMySPStudyingCourseListData:(NSString *)uuid
+- (void)getMySPStudyingCourseListData:(MySPCourseDomain *)domain
 {
     [[KGHUD sharedHud] show:self.view];
     
-    [[KGHttpService sharedService] MySPCourseList:@"" isdisable:@"0" success:^(SPDataListVO *msg)
+    [[KGHttpService sharedService] getSPSchoolInfoTimeTableUrl:domain.groupuuid success:^(NSString *vo)
     {
         [[KGHUD sharedHud] hide:self.view];
         
-        self.studyingCourseArr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+        domain.logo = vo;
         
-        for (MySPCourseDomain * domain in self.studyingCourseArr)
-        {
-            if ([domain.uuid isEqualToString:uuid])
-            {
-                MySPCourseDetailVC * vc = [[MySPCourseDetailVC alloc] init];
-                
-                vc.domain = domain;
-                
-                [self.navigationController pushViewController:vc animated:YES];
-                
-                break;
-            }
-        }
+        MySPCourseDetailVC * vc = [[MySPCourseDetailVC alloc] init];
+        
+        vc.domain = domain;
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
     faild:^(NSString *errorMsg)
     {
-        
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
 }
 
-- (void)pushVCWithClassuuid:(NSString *)uuid
+- (void)pushVCWithClassuuid:(MySPCourseDomain *)domain
 {
-    [self getMySPStudyingCourseListData:uuid];
+    [self getMySPStudyingCourseListData:domain];
 }
 
 @end

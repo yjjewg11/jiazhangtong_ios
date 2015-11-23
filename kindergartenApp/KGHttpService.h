@@ -281,6 +281,8 @@
 
 - (void)getSPSchoolInfoShareUrl:(NSString *)groupuuid success:(void (^)(NSString * url))success faild:(void (^)(NSString * errorMsg))faild;
 
+- (void)getSPSchoolInfoTimeTableUrl:(NSString *)groupuuid success:(void (^)(NSString * vo))success faild:(void (^)(NSString * errorMsg))faild;
+
 #pragma mark - 优惠活动
 - (void)getYouHuiList:(NSString *)map_point pageNo:(NSInteger)pageNo success:(void (^)(YouHuiDataListVO * teacherDomain))success faild:(void (^)(NSString * errorMsg))faild;
 

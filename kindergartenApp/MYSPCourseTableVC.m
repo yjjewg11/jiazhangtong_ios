@@ -8,6 +8,7 @@
 
 #import "MYSPCourseTableVC.h"
 #import "MYSPCourseTableViewCell.h"
+#import "MySPEndCourseView.h"
 
 @interface MYSPCourseTableVC () <UITableViewDataSource,UITableViewDelegate>
 
@@ -46,23 +47,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MYSPCourseTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"mysp"];
-    
-    if (cell == nil)
-    {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"MYSPCourseTableViewCell" owner:nil options:nil] firstObject];;
-    }
-
     if (self.dataSourceType == 0)
     {
+        MYSPCourseTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"mysp"];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"MYSPCourseTableViewCell" owner:nil options:nil] firstObject];;
+        }
+        
         [cell setData:self.studyingCourseArr[indexPath.row]];
+        
+        return cell;
     }
     else if (self.dataSourceType == 1)
     {
+        MySPEndCourseView * cell = [tableView dequeueReusableCellWithIdentifier:@"myspend"];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPEndCourseView" owner:nil options:nil] firstObject];
+        }
+        
         [cell setData:self.endingCourseArr[indexPath.row]];
+        
+        return cell;
     }
     
-    return cell;
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

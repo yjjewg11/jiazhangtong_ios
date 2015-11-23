@@ -27,7 +27,7 @@
 #import "SPTimetableDomain.h"
 #import "SPCourseTypeDomain.h"
 #import "SPCourseDetailDomain.h"
-
+#import "SPSchoolDomain.h"
 
 @implementation KGHttpService
 
@@ -1423,6 +1423,34 @@
              SPCourseDetailVO * vo = [SPCourseDetailVO objectWithKeyValues:responseObject];
              
              success(vo.share_url);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+- (void)getSPSchoolInfoTimeTableUrl:(NSString *)groupuuid success:(void (^)(NSString * vo))success faild:(void (^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSchoolInfoShareUrl:groupuuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SPCourseDetailVO * vo = [SPCourseDetailVO objectWithKeyValues:responseObject];
+             
+             SPSchoolDomain * dd = [SPSchoolDomain objectWithKeyValues:vo.data];
+             
+             success(dd.img);
          }
          else
          {

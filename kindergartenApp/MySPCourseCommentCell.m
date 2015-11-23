@@ -87,8 +87,6 @@
     if (self.content != nil || ![self.content isEqualToString:@""])
     {
         [self.delegate saveCommentText:self.content];
-        
-        NSLog(@"评价内容 %@",self.content);
     }
 }
 

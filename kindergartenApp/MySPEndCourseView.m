@@ -1,16 +1,15 @@
 //
-//  MySPCourseView.m
+//  MySPEndCourseView.m
 //  kindergartenApp
 //
-//  Created by Mac on 15/11/13.
+//  Created by Mac on 15/11/23.
 //  Copyright © 2015年 funi. All rights reserved.
 //
 
-#import "MySPCourseView.h"
-
+#import "MySPEndCourseView.h"
 #import "UIImageView+WebCache.h"
 
-@interface MySPCourseView()
+@interface MySPEndCourseView()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
@@ -26,7 +25,11 @@
 
 @end
 
-@implementation MySPCourseView
+@implementation MySPEndCourseView
+
+- (void)awakeFromNib {
+    // Initialization code
+}
 
 - (void)setData:(MySPCourseDomain *)domain
 {
@@ -40,7 +43,6 @@
     
     self.schoolNameLbl.text = domain.group_name;
     
-    self.courseTimeLbl.text = domain.plandate;
+    self.courseTimeLbl.text = domain.disable_time;
 }
-
 @end

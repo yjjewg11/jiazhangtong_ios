@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) MySPCourseDomain * domain;
 
+@property (assign, nonatomic) NSInteger dataSourseType;
+
 @end
 
 @interface MyButtonTwo : UIButton

@@ -17,6 +17,7 @@
 #import "KGHttpService.h"
 #import "MySPAllCouseListDomain.h"
 #import "MySPCourseSchoolDetailWebView.h"
+#import "MySPCourseEndedView.h"
 
 @interface MySPCourseDetailVC () <UIScrollViewDelegate>
 {
@@ -32,6 +33,8 @@
     
     MySPCourseTimeListVC *_listVC;
     
+    MySPCourseCommentVC * _commentVC;
+    
     NSMutableArray * _buttonItems;
     
     BOOL isFavor;
@@ -39,20 +42,21 @@
 
 @property (strong, nonatomic) MySPCourseView * courseView;
 
-@property (strong, nonatomic) MySPCourseCommentVC * commentVC;
+@property (strong, nonatomic) MySPCourseEndedView * courseEndView;
+
+//@property (strong, nonatomic) MySPCourseCommentVC * commentVC;
 
 @end
 
 @implementation MySPCourseDetailVC
 
-- (MySPCourseCommentVC *)commentVC
+- (MySPCourseEndedView *)courseEndView
 {
-    if (_commentVC == nil)
+    if (_courseEndView == nil)
     {
-        _commentVC = [[MySPCourseCommentVC alloc] init];
+        _courseEndView = [[[NSBundle mainBundle] loadNibNamed:@"MySPCourseEndedView" owner:nil options:nil] firstObject];
     }
-    
-    return _commentVC;
+    return _courseEndView;
 }
 
 - (MySPCourseView *)courseView
@@ -73,7 +77,14 @@
     //创建顶部课程信息view
     _courseInfoView = [[UIView alloc] init];
     _courseInfoView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT, APPWINDOWWIDTH, 150);
-    [self addInfoCell:_courseInfoView];
+    if (self.dataSourseType == 0)
+    {
+        [self addInfoCell:_courseInfoView];
+    }
+    else if (self.dataSourseType == 1)
+    {
+        [self addEndInfoCell:_courseEndView];
+    }
     
     //创建上面三个按钮view
     _buttonsView = [[UIView alloc] init];
@@ -124,6 +135,20 @@
     
     //加入
     [_courseInfoView addSubview:self.courseView];
+    [self.view addSubview:_courseInfoView];
+}
+
+- (void)addEndInfoCell:(UIView *)view
+{
+    CGFloat padding = (APPWINDOWWIDTH - 320) / 2;
+    
+    [self.courseEndView setOrigin:CGPointMake(padding, 0)];
+    
+    //设置数据
+    [self.courseEndView setData:self.domain];
+    
+    //加入
+    [_courseInfoView addSubview:self.courseEndView];
     [self.view addSubview:_courseInfoView];
 }
 
@@ -209,16 +234,19 @@
     
     [self getSchoolData];
     
-    //第三个
-    self.commentVC.classuuid = self.domain.uuid;
+    MySPCourseCommentVC * comment = [[MySPCourseCommentVC alloc] init];
     
-    self.commentVC.groupuuid = self.domain.groupuuid;
+    _commentVC = comment;
     
-    self.commentVC.courseuuid = self.domain.courseuuid;
+    comment.classuuid = self.domain.uuid;
     
-    self.commentVC.tableFrame = CGRectMake(APPWINDOWWIDTH + APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    comment.groupuuid = self.domain.groupuuid;
     
-    [_contentView addSubview:self.commentVC.tableView];
+    comment.courseuuid = self.domain.courseuuid;
+    
+    comment.tableFrame = CGRectMake(APPWINDOWWIDTH + APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    
+    [_contentView addSubview:comment.tableView];
     
     //添加
     [self.view addSubview:_contentView];

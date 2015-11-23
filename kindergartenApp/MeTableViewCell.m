@@ -20,8 +20,6 @@
     [super setSelected:selected animated:animated];
 }
 
-
-
 - (void)resetCellParam:(KGUser *)user {
     
     _nameLabel.text = user.name;

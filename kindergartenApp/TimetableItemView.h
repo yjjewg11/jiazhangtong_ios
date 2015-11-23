@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "TimetableDomain.h"
 #import "TopicInteractionView.h"
+#import "MySPCourseDomain.h"
 
 @protocol TimetableItemViewDelegate <NSObject>
 
-- (void)pushVCWithClassuuid:(NSString *)uuid;
+- (void)pushVCWithClassuuid:(MySPCourseDomain *)domain;
 
 @end
 

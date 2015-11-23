@@ -20,6 +20,9 @@
 @property (strong, nonatomic) NSString * group_name;        //培训机构名
 @property (strong, nonatomic) NSString * student_headimg;   //学生头像
 @property (strong, nonatomic) NSString * plandate;          //上课时间，年月日时分秒
+@property (strong, nonatomic) NSString * student_name;
+@property (strong, nonatomic) NSString * courseuuid;
+@property (strong, nonatomic) NSString * groupuuid;
 @property (strong, nonatomic) DianZanDomain * dianzan;      //点赞数据
 @property (strong, nonatomic) ReplyPageDomain * replyPage;  //帖子回复列表
 

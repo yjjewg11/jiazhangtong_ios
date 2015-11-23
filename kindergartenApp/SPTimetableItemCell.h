@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "SPTimetableDomain.h"
 #import "SPTimetableItemVO.h"
+#import "MySPCourseDomain.h"
 
 @protocol SPTimetableItemCellDelegate <NSObject>
 
-- (void)pushVCWithClassuuid:(NSString *)uuid;
+- (void)pushVCWithClassuuid:(MySPCourseDomain *)domain;
 
 @end
 

@@ -24,8 +24,6 @@
     if(_spTimetableDomain == nil)
     {
         _spTimetableDomain = spTimetableDomain;
-     
-        self.classuuid = spTimetableDomain.classuuid;
         
         [headIcon sd_setImageWithURL:[NSURL URLWithString:_spTimetableDomain.student_headimg] placeholderImage:[UIImage imageNamed:@"head_def"]];
         
@@ -81,7 +79,25 @@
 
 - (IBAction)moreCourseBtnClick:(id)sender
 {
-    [self.delegate pushVCWithClassuuid:self.classuuid];
+    MySPCourseDomain * domain = [[MySPCourseDomain alloc] init];
+    
+    domain.group_name = _spTimetableDomain.group_name;
+    
+    domain.course_title = _spTimetableDomain.name;
+    
+    domain.student_name = _spTimetableDomain.student_name;
+    
+    domain.class_name = _spTimetableDomain.class_name;
+    
+    domain.groupuuid = _spTimetableDomain.groupuuid;
+    
+    domain.courseuuid = _spTimetableDomain.courseuuid;
+    
+    domain.plandate = _spTimetableDomain.plandate;
+    
+    [self.delegate pushVCWithClassuuid:domain];
+//    @property (strong, nonatomic) NSString * logo; 有 http://120.25.212.44/px-mobile/rest/group/get2.json
+
 }
 
 

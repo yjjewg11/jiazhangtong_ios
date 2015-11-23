@@ -536,9 +536,9 @@
     [self resetPackageSPItemViewData:topicInteractionDomain.cellIndex];
 }
 
-- (void)pushVCWithClassuuid:(NSString *)uuid
+- (void)pushVCWithClassuuid:(MySPCourseDomain *)domain
 {
-    [self.delegate pushVCWithClassuuid:uuid];
+    [self.delegate pushVCWithClassuuid:domain];
 }
 
 @end

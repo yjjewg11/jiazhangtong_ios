@@ -267,14 +267,22 @@
 #pragma mark - 页面跳转代理
 - (void)pushToDetailVC:(MYSPCourseTableVC *)vc dataSourseType:(NSInteger)dataScourseType selIndexPath:(NSIndexPath *)indexPath
 {
-    MySPCourseDetailVC * detailVC = [[MySPCourseDetailVC alloc] init];
+    MySPCourseDetailVC * detailVC = nil;
     
     if (dataScourseType == 0)
     {
+        detailVC = [[MySPCourseDetailVC alloc] init];
+        
+        detailVC.dataSourseType = 0;
+        
         detailVC.domain = self.nowStudyArr[indexPath.row];
     }
     else if (dataScourseType == 1)
     {
+        detailVC = [[MySPCourseDetailVC alloc] init];
+        
+        detailVC.dataSourseType = 1;
+        
         detailVC.domain = self.endStudyArr[indexPath.row];
     }
     
