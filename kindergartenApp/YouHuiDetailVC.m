@@ -139,7 +139,7 @@
             break;
         }
         case 14: {
-            //咨询
+            
             self.tels = [self.tels stringByReplacingOccurrencesOfString:@"/" withString:@","];
             
             self.telsNum = [self.tels componentsSeparatedByString:@","];

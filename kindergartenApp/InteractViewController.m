@@ -71,16 +71,20 @@
     [reFreshView beginRefreshing];
 }
 
-- (void)postNewTopic {
-    PostTopicViewController * postVC = [[PostTopicViewController alloc] init];
-    postVC.topicType = Topic_Interact;
-    
-    postVC.PostTopicBlock = ^(TopicDomain * domain) {
-        //发表互动成功
-        [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:1];
-    };
-
-    [self.navigationController pushViewController:postVC animated:YES];
+- (void)postNewTopic
+{
+    if (self.dataScourseType == 0)
+    {
+        PostTopicViewController * postVC = [[PostTopicViewController alloc] init];
+        postVC.topicType = Topic_Interact;
+        
+        postVC.PostTopicBlock = ^(TopicDomain * domain) {
+            //发表互动成功
+            [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:1];
+        };
+        
+        [self.navigationController pushViewController:postVC animated:YES];
+    }
 }
 
 //重置回复内容
