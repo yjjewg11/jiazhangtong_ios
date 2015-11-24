@@ -81,6 +81,8 @@
 {
     MySPCourseDomain * domain = [[MySPCourseDomain alloc] init];
     
+    domain.uuid = _spTimetableDomain.classuuid;
+    
     domain.group_name = _spTimetableDomain.group_name;
     
     domain.course_title = _spTimetableDomain.name;
@@ -96,8 +98,6 @@
     domain.plandate = _spTimetableDomain.plandate;
     
     [self.delegate pushVCWithClassuuid:domain];
-//    @property (strong, nonatomic) NSString * logo; 有 http://120.25.212.44/px-mobile/rest/group/get2.json
-
 }
 
 

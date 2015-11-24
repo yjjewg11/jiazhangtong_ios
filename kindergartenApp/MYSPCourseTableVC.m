@@ -9,8 +9,14 @@
 #import "MYSPCourseTableVC.h"
 #import "MYSPCourseTableViewCell.h"
 #import "MySPEndCourseView.h"
+#import "MJRefresh.h"
+#import "KGHttpService.h"
+#import "KGHUD.h"
+#import "MJExtension.h"
 
 @interface MYSPCourseTableVC () <UITableViewDataSource,UITableViewDelegate>
+
+@property (assign, nonatomic) NSInteger pageNo;
 
 @end
 
@@ -19,6 +25,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self setupRefresh];
+    
+    self.pageNo = 2;
     
     self.tableView.delegate = self;
     
@@ -91,5 +101,100 @@
 {
     [self.delegate pushToDetailVC:self dataSourseType:self.dataSourceType selIndexPath:indexPath];
 }
+
+#pragma mark - 上拉刷新，下拉加载数据
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.tableView.footerPullToRefreshText = @"上拉加载更多";
+    self.tableView.footerReleaseToRefreshText = @"松开立即加载";
+    self.tableView.footerRefreshingText = @"正在加载中...";
+}
+
+#pragma mark 开始进入刷新状态
+- (void)footerRereshing
+{
+    if (self.dataSourceType == 0)
+    {
+        [[KGHttpService sharedService] MySPCourseList:[NSString stringWithFormat:@"%ld",(long)self.pageNo] isdisable:@"0" success:^(SPDataListVO *msg)
+        {
+            NSMutableArray * marr = [NSMutableArray array];
+            
+            marr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+             
+            if (marr.count == 0)
+            {
+                self.tableView.footerRefreshingText = @"没有更多了...";
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                {
+                    [self.tableView footerEndRefreshing];
+                });
+                
+            }
+            else
+            {
+                self.pageNo++;
+                
+                [self.studyingCourseArr addObjectsFromArray:marr];
+                
+                [self.tableView footerEndRefreshing];
+                
+                [self.tableView reloadData];
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.studyingCourseArr.count - 1 inSection:0];
+                
+                [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
+         }
+         faild:^(NSString *errorMsg)
+         {
+             [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+         }];
+    }
+    else if (self.dataSourceType == 1)
+    {
+        [[KGHttpService sharedService] MySPCourseList:[NSString stringWithFormat:@"%ld",(long)self.pageNo] isdisable:@"1" success:^(SPDataListVO *msg)
+        {
+            NSMutableArray * marr = [NSMutableArray array];
+            
+            marr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+             
+            if (marr.count == 0)
+            {
+                self.tableView.footerRefreshingText = @"没有更多了...";
+                
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                {
+                    [self.tableView footerEndRefreshing];
+                });
+                
+            }
+            else
+            {
+                self.pageNo++;
+                
+                [self.endingCourseArr addObjectsFromArray:marr];
+                
+                [self.tableView footerEndRefreshing];
+                
+                [self.tableView reloadData];
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.endingCourseArr.count - 1 inSection:0];
+                
+                [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            }
+
+        }
+        faild:^(NSString *errorMsg)
+        {
+              [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        }];
+    }
+}
+
 
 @end

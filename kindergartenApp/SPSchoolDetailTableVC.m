@@ -220,7 +220,6 @@
                     [self.tableView footerEndRefreshing];
                  });
              }
-             
          }
          faild:^(NSString *errorMsg)
          {

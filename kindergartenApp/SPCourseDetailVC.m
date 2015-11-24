@@ -213,12 +213,14 @@
     if (btn.tag == 0)
     {
         _schoolInfoView.hidden = YES;
+        _tableVC.tableView.hidden = YES;
         _courseDetailView.hidden = NO;
     }
     else if (btn.tag == 1)
     {
         [self getSchoolData];
         _courseDetailView.hidden = YES;
+        _tableVC.tableView.hidden = YES;
         _schoolInfoView.hidden = NO;
     }
     else if (btn.tag == 2)
