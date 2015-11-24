@@ -409,7 +409,7 @@
         datePicker.frame = CGRectMake(Number_Zero, KGSCREEN.size.height-height, KGSCREEN.size.width, height);
         datePicker.datePickerMode = UIDatePickerModeDate;
         
-        if(_studentInfo.birthday) {
+        if(_studentInfo.birthday && ![_studentInfo.birthday isEqualToString:@""]) {
             [datePicker setDate:[KGDateUtil getDateByDateStr:_studentInfo.birthday format:dateFormatStr1] animated:YES];
         }
         
