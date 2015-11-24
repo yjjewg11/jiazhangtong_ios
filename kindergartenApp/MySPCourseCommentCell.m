@@ -19,7 +19,7 @@
 {
     if (commentDomain.content == nil || [commentDomain.content isEqualToString:@""])
     {
-        self.textView.text = @"您没有填写评价哦";
+        self.textView.text = @"";
     }
     else
     {
@@ -88,7 +88,6 @@
     
     if (self.content != nil || ![self.content isEqualToString:@""])
     {
-        NSLog(@"课程评价是:%@",self.content);
         [self.delegate saveCommentText:self.content];
     }
 }

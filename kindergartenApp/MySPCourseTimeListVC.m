@@ -38,6 +38,14 @@
 
 @implementation MySPCourseTimeListVC
 
+- (instancetype)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:UITableViewStyleGrouped])
+    {
+    }
+    return self;
+}
+
 - (NSMutableArray *)views
 {
     if (_views == nil)
@@ -72,6 +80,9 @@
     [super viewDidLoad];
     
     self.pageNo = 2;
+    
+    self.tableView.sectionHeaderHeight = 45;
+    self.tableView.sectionFooterHeight = 0.1;
     
     self.futureCount = 0;
     
@@ -280,6 +291,5 @@
          [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
      }];
 }
-
 
 @end

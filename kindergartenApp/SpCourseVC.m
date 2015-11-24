@@ -82,11 +82,14 @@
     else if (self.dataSourceType == 1)
     {
         [cell setSchoolCellData:self.schoolListArr[indexPath.row]];
+        
     }
     else
     {
         return nil;
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }

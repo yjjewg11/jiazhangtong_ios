@@ -23,6 +23,15 @@
 
 @implementation SPSchoolDetailTableVC
 
+- (instancetype)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:UITableViewStyleGrouped])
+    {
+        
+    }
+    return self;
+}
+
 - (NSMutableArray *)courseList
 {
     if (_courseList == nil)
@@ -80,6 +89,8 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"SpCourseCell" owner:nil options:nil] firstObject];
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [cell setCourseCellData:self.courseList[indexPath.row]];
         
         return cell;
@@ -91,6 +102,8 @@
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"SPTeacherCell" owner:nil options:nil] firstObject];
         }
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [cell setTeacherCellData:self.teacherList[indexPath.row]];
         
@@ -226,6 +239,11 @@
              [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
          }];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.1;
 }
 
 @end

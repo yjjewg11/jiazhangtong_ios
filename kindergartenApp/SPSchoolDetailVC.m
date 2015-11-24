@@ -62,7 +62,6 @@
 @end
 
 @implementation SPSchoolDetailVC
-
 - (SPSchoolCell *)cell
 {
     if (_cell == nil)
@@ -325,6 +324,8 @@
     
     [[KGHttpService sharedService] delFavorites:self.groupuuid success:^(NSString *msgStr)
     {
+        [[KGHUD sharedHud] hide:self.view];
+        
         button.selected = !button.selected;
         button.enabled = YES;
         ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"shoucang1"];

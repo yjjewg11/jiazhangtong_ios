@@ -453,7 +453,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"%f -- %f",scrollView.contentSize.height,scrollView.contentOffset.y);
+    
 }
 
 @end

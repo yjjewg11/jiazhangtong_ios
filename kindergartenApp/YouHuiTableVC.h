@@ -20,7 +20,7 @@
 
 @property (assign, nonatomic) CGRect tableRect;
 
-@property (strong, nonatomic) NSArray * dataArr;
+@property (strong, nonatomic) NSMutableArray * dataArr;
 
 @property (weak, nonatomic) id<YouHuiTableVCDelegate> delegate;
 

@@ -100,6 +100,8 @@
         
         if (marr == nil  ||  marr.count == 0)
         {
+            self.tableVC.tableView.scrollEnabled = NO;
+            
             _warningView = [[[NSBundle mainBundle] loadNibNamed:@"PromptView" owner:nil options:nil] firstObject];
             
             [_warningView setOrigin:CGPointMake(0,APPTABBARHEIGHT + APPSTATUSBARHEIGHT + 20)];
@@ -110,6 +112,8 @@
         }
         else
         {
+            self.tableVC.tableView.scrollEnabled = YES;
+            
             self.tableVC.dataArr = marr;  //设置数据
             
             [self.tableVC.tableView reloadData];
@@ -178,9 +182,43 @@
 #pragma mark 开始进入刷新状态
 - (void)footerRereshing
 {
-    [[KGHttpService sharedService] getYouHuiList:self.mappoint pageNo:1 success:^(YouHuiDataListVO *teacherDomain)
+    [[KGHttpService sharedService] getYouHuiList:self.mappoint pageNo:self.pageNo success:^(YouHuiDataListVO *teacherDomain)
     {
+        NSMutableArray * marr = [NSMutableArray array];
         
+        for (NSDictionary * dict in teacherDomain.data)
+        {
+            YouHuiDomain * domain = [YouHuiDomain objectWithKeyValues:dict];
+            
+            [marr addObject:domain];
+        }
+        
+        if (marr.count == 0)
+        {
+            self.tableVC.tableView.footerRefreshingText = @"没有更多了.";
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+            {
+                [self.tableVC.tableView footerEndRefreshing];
+            });
+        }
+        else
+        {
+            self.pageNo++;
+            
+            for (YouHuiDomain * d in marr)
+            {
+                [self.tableVC.dataArr addObject:d];
+            }
+            
+            [self.tableVC.tableView footerEndRefreshing];
+            
+            [self.tableVC.tableView reloadData];
+            
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.tableVC.dataArr.count - 1 inSection:0];
+            
+            [self.tableVC.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
     }
     faild:^(NSString *errorMsg)
     {

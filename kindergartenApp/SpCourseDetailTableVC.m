@@ -28,6 +28,15 @@
 
 @implementation SpCourseDetailTableVC
 
+- (instancetype)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:UITableViewStyleGrouped])
+    {
+        
+    }
+    return self;
+}
+
 - (NSMutableArray *)commentsCells
 {
     if (_commentsCells == nil)
@@ -79,6 +88,8 @@
     
     //设置数据
     [cell setDomain:self.presentsComments[indexPath.row]];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -148,6 +159,11 @@
     {
          [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.1;
 }
 
 @end
