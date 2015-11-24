@@ -63,6 +63,8 @@
     
     self.suitAgeLbl.text = vo.age_min_max;
     
+    self.numberOfStudyLbl.text = [NSString stringWithFormat:@"%ld",(long)domain.ct_study_students];
+    
     if (domain.fees == 0)
     {
         [self.feesLbl setHidden:YES];
