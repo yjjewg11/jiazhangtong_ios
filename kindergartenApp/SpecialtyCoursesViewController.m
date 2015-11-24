@@ -148,15 +148,9 @@
     _sepView.frame = CGRectMake(0, 1, APPWINDOWWIDTH, 20);
     _sepView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
-
     [self.view addSubview:_scrollView];
     [self loadSPCourse];
     [self getLocationData];
-    
-    for (UIView *v in _scrollView.subviews)
-    {
-        v.hidden = YES;
-    }
 }
 
 #pragma mark - 加载特长课程分类
@@ -166,6 +160,8 @@
     
     [[KGHttpService sharedService] getSPCourseType:^(NSArray *spCourseTypeArr)
     {
+        [[KGHUD sharedHud] hide:self.view];
+        
         self.spCourseDomains = [NSMutableArray arrayWithArray:spCourseTypeArr];
         
         SPCourseTypeDomain * totalDomain = [[SPCourseTypeDomain alloc] init];
@@ -176,7 +172,7 @@
         
         [self setUpSPCourses];
         
-        [self responseHandler];
+//        [self responseHandler];
         
         [self loadHotCourse];  //加载热门课程
     }
@@ -193,6 +189,7 @@
     {
         self.map_point = @"";
     }
+    [[KGHUD sharedHud] show:self.view];
     
     [[KGHttpService sharedService] getSPHotCourse:self.map_point pageNo:@"" success:^(SPDataListVO *hotCourseList)
     {
@@ -220,41 +217,12 @@
         self.hotCourseTable.hotSpCourses = marr;
         self.hotCourseTable.mappoint = self.map_point;
         
-        [self responseHandlerOfHotCourse];
-        
         [self.hotCourseTable.tableView reloadData];
     }
     faild:^(NSString *errorMsg)
     {
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
-}
-
-//请求之后的处理 需要判断是否还需要再次请求
-- (void)responseHandler
-{
-    if(self.spCourseDomains.count == 0)
-    {
-        [self loadSPCourse];
-    }
-}
-
-- (void)responseHandlerOfHotCourse
-{
-    self.reqIndex++;
-    if(self.hotSpCourses.count == 0)
-    {
-        [self loadHotCourse];
-    }
-    else
-    {
-        for (UIView *v in _scrollView.subviews)
-        {
-            v.hidden = NO;
-        }
-        _courseView.hidden = NO;
-        self.reqIndex = Number_Zero;
-    }
 }
 
 #pragma mark - 根据特长课程创建图标显示
@@ -293,10 +261,8 @@
     [self.spCourseDatakeys addObject:@""];
     
     [_courseView setSize:CGSizeMake(APPWINDOWWIDTH, Number_Ten + lastH)];
-    _courseView.hidden = YES;
     
     [_sepView setOrigin:CGPointMake(0, CGRectGetMaxY(_courseView.frame))];
-    _sepView.hidden = YES;
     
     [_scrollView addSubview:_sepView];
     [_scrollView addSubview:_courseView];
