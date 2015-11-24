@@ -352,6 +352,10 @@
 		04FEDD481C03542700921AC1 /* MySPEndCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FEDD461C03542700921AC1 /* MySPEndCourseView.xib */; };
 		04FEDD4B1C0359FC00921AC1 /* MySPCourseEndedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEDD4A1C0359FC00921AC1 /* MySPCourseEndedView.m */; };
 		04FEDD4D1C035A0D00921AC1 /* MySPCourseEndedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FEDD4C1C035A0D00921AC1 /* MySPCourseEndedView.xib */; };
+		04FF475E1C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF47531C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		04FF475F1C046D97004DC45D /* AdMoGoAdapterDGTMob.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF47551C046D97004DC45D /* AdMoGoAdapterDGTMob.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF47571C046D97004DC45D /* GDTMobNativeAdapter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		04FF47611C046D97004DC45D /* libGDTMobSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FF475D1C046D97004DC45D /* libGDTMobSDK.a */; };
 		243918E41B5D1E5800F3727E /* KGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243918E31B5D1E5800F3727E /* KGNavigationController.m */; };
 		244F74921B62A4630078D30D /* PostTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 244F74901B62A4630078D30D /* PostTopicViewController.m */; };
 		244F74931B62A4630078D30D /* PostTopicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244F74911B62A4630078D30D /* PostTopicViewController.xib */; };
@@ -1200,6 +1204,17 @@
 		04FEDD491C0359FC00921AC1 /* MySPCourseEndedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseEndedView.h; sourceTree = "<group>"; };
 		04FEDD4A1C0359FC00921AC1 /* MySPCourseEndedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseEndedView.m; sourceTree = "<group>"; };
 		04FEDD4C1C035A0D00921AC1 /* MySPCourseEndedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseEndedView.xib; sourceTree = "<group>"; };
+		04FF47521C046D97004DC45D /* AdMoGoAdapterDGTFullAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterDGTFullAd.h; sourceTree = "<group>"; };
+		04FF47531C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterDGTFullAd.m; sourceTree = "<group>"; };
+		04FF47541C046D97004DC45D /* AdMoGoAdapterDGTMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterDGTMob.h; sourceTree = "<group>"; };
+		04FF47551C046D97004DC45D /* AdMoGoAdapterDGTMob.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterDGTMob.m; sourceTree = "<group>"; };
+		04FF47561C046D97004DC45D /* GDTMobNativeAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTMobNativeAdapter.h; sourceTree = "<group>"; };
+		04FF47571C046D97004DC45D /* GDTMobNativeAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDTMobNativeAdapter.m; sourceTree = "<group>"; };
+		04FF47591C046D97004DC45D /* GDTMobBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTMobBannerView.h; sourceTree = "<group>"; };
+		04FF475A1C046D97004DC45D /* GDTMobInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTMobInterstitial.h; sourceTree = "<group>"; };
+		04FF475B1C046D97004DC45D /* GDTNativeAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeAd.h; sourceTree = "<group>"; };
+		04FF475C1C046D97004DC45D /* GDTSDKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTSDKConfig.h; sourceTree = "<group>"; };
+		04FF475D1C046D97004DC45D /* libGDTMobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGDTMobSDK.a; sourceTree = "<group>"; };
 		243918E21B5D1E5800F3727E /* KGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNavigationController.h; sourceTree = "<group>"; };
 		243918E31B5D1E5800F3727E /* KGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNavigationController.m; sourceTree = "<group>"; };
 		244F748F1B62A4630078D30D /* PostTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTopicViewController.h; sourceTree = "<group>"; };
@@ -1797,6 +1812,7 @@
 				246187F21BB9875800D7DDA8 /* Bugly.framework in Frameworks */,
 				04F3D4591BF47FD2007E7AC0 /* libBaiduMobAdSdk64bit.a in Frameworks */,
 				04A4DE9D1BF484DF002ABBB1 /* libAdsMogo.a in Frameworks */,
+				04FF47611C046D97004DC45D /* libGDTMobSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2275,6 +2291,7 @@
 		04F3D3B01BF47FD2007E7AC0 /* AdNetworkLibs */ = {
 			isa = PBXGroup;
 			children = (
+				04FF47501C046D97004DC45D /* GDTMob_SDK_350 */,
 				04F3D3E51BF47FD2007E7AC0 /* Baidu_3.6.4(3.0)_SDK */,
 			);
 			path = AdNetworkLibs;
@@ -2684,6 +2701,40 @@
 				04FEC5751BEDCCDF00C642A6 /* YouHuiDomain.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		04FF47501C046D97004DC45D /* GDTMob_SDK_350 */ = {
+			isa = PBXGroup;
+			children = (
+				04FF47511C046D97004DC45D /* AdsMoGoAdapter */,
+				04FF47581C046D97004DC45D /* libs */,
+			);
+			path = GDTMob_SDK_350;
+			sourceTree = "<group>";
+		};
+		04FF47511C046D97004DC45D /* AdsMoGoAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				04FF47521C046D97004DC45D /* AdMoGoAdapterDGTFullAd.h */,
+				04FF47531C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m */,
+				04FF47541C046D97004DC45D /* AdMoGoAdapterDGTMob.h */,
+				04FF47551C046D97004DC45D /* AdMoGoAdapterDGTMob.m */,
+				04FF47561C046D97004DC45D /* GDTMobNativeAdapter.h */,
+				04FF47571C046D97004DC45D /* GDTMobNativeAdapter.m */,
+			);
+			path = AdsMoGoAdapter;
+			sourceTree = "<group>";
+		};
+		04FF47581C046D97004DC45D /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				04FF47591C046D97004DC45D /* GDTMobBannerView.h */,
+				04FF475A1C046D97004DC45D /* GDTMobInterstitial.h */,
+				04FF475B1C046D97004DC45D /* GDTNativeAd.h */,
+				04FF475C1C046D97004DC45D /* GDTSDKConfig.h */,
+				04FF475D1C046D97004DC45D /* libGDTMobSDK.a */,
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 		243918E11B5D1E4A00F3727E /* Controller */ = {
@@ -4908,6 +4959,7 @@
 				04F3D45B1BF47FD3007E7AC0 /* OpenUDID.m in Sources */,
 				249926E31B8093BD0071DFB3 /* TopicInteractionDomain.m in Sources */,
 				2489B6381B5AB32F00039E70 /* ImageCollectionViewCell.m in Sources */,
+				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
 				04F9FB6D1BF1A67400AEFB88 /* UMPostTableViewCell.m in Sources */,
 				F4EC98911B62305700F5721F /* TopicTableViewCell.m in Sources */,
 				F48783A01B58DA1700CDC1A8 /* MASConstraint.m in Sources */,
@@ -5075,6 +5127,7 @@
 				04F9FB6A1BF1A67400AEFB88 /* UMChatTableViewCell.m in Sources */,
 				2457FD0D1B712C13006A3AB7 /* GrayPageControl.m in Sources */,
 				F4E6B24A1B6B5D440087EAEB /* GiftwareArticlesTableViewCell.m in Sources */,
+				04FF475F1C046D97004DC45D /* AdMoGoAdapterDGTMob.m in Sources */,
 				F4EA538B1B60C6DF0044BE7A /* MeFunTableViewCell.m in Sources */,
 				243918E41B5D1E5800F3727E /* KGNavigationController.m in Sources */,
 				04F3D4661BF47FD3007E7AC0 /* ioapi.c in Sources */,
@@ -5095,6 +5148,7 @@
 				24AA0B531B69134400DAC03B /* NSDate+Utils.m in Sources */,
 				04F3D4571BF47FD2007E7AC0 /* AdMoGoBaiduSingleton.m in Sources */,
 				F48783B11B58DA1700CDC1A8 /* NSObject+MJCoding.m in Sources */,
+				04FF475E1C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m in Sources */,
 				4DF056D01B877F0200ED3840 /* KGAttachment.m in Sources */,
 				F4E61B791B73438F00E5851A /* ShareViewController.m in Sources */,
 				04F9F2F61BF9BF4500470F0C /* MySPCourseCommentCell.m in Sources */,
@@ -5298,6 +5352,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/UMengFeedback_SDK",
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/UMengFeedback_SDK/UMOpus",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/Baidu_3.6.4(3.0)_SDK/lib",
+					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_350/libs",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -5359,6 +5414,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/UMengFeedback_SDK",
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/UMengFeedback_SDK/UMOpus",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/Baidu_3.6.4(3.0)_SDK/lib",
+					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_350/libs",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
