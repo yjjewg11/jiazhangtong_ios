@@ -140,6 +140,8 @@
         }
         case 14: {
             //咨询
+            self.tels = [self.tels stringByReplacingOccurrencesOfString:@"/" withString:@","];
+            
             self.telsNum = [self.tels componentsSeparatedByString:@","];
             
             UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"为您查询到如下联系号码" delegate:self cancelButtonTitle:@"返回" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
