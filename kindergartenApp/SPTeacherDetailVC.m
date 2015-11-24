@@ -16,8 +16,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import "SPCourseDomain.h"
 #import "MJExtension.h"
+#import "SPCourseDetailVC.h"
 
-@interface SPTeacherDetailVC () <UIWebViewDelegate,CLLocationManagerDelegate>
+@interface SPTeacherDetailVC () <UIWebViewDelegate,CLLocationManagerDelegate,SpCourseVCDelegate>
 {
     UIView * _teacherInfoView;
     UIWebView * _webView;
@@ -48,6 +49,7 @@
     if (_tableVC == nil)
     {
         _tableVC = [[SpCourseVC alloc] init];
+        _tableVC.delegate = self;
         CGFloat tableX = Number_Zero;
         CGFloat tableY = _webView.frame.size.height + _teacherInfoView.frame.size.height + 30;
         CGFloat tableW = APPWINDOWWIDTH;
@@ -122,9 +124,6 @@
         
         [self setUpWebView];
         
-        //请求课程列表
-        [self getCourseList];
-        
     }
     faild:^(NSString *errorMsg)
     {
@@ -155,6 +154,7 @@
         }
         
         self.courseList = marr;
+        
         if (self.courseList.count == 0 || self.courseList == nil)
         {
             [self setUpWarningView];
@@ -268,6 +268,17 @@
     
     _webView.frame = CGRectMake(0,100 + 44 + 20, APPWINDOWWIDTH, wb.frame.size.height + 15);
 
+    //请求课程列表
+    [self getCourseList];
+}
+
+- (void)pushToDetailVC:(SpCourseVC *)spCourseVC dataSourceType:(DataSourseType)type selIndexPath:(NSIndexPath *)indexPath
+{
+    SPCourseDetailVC * vc = [[SPCourseDetailVC alloc] init];
+    
+    vc.uuid = ((SPCourseDomain *) self.courseList[indexPath.row]).uuid;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

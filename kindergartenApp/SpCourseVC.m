@@ -96,11 +96,22 @@
 {
     if (self.showHeaderView)
     {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"StudentInfoHeaderView" owner:nil options:nil];
-        StudentInfoHeaderView * view = (StudentInfoHeaderView *)[nib objectAtIndex:Number_Zero];
-        view.titleLabel.text = @"热门课程";
-        view.backgroundColor = [UIColor whiteColor];
-        return view;
+        if (self.dataSourceType == 0)
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"StudentInfoHeaderView" owner:nil options:nil];
+            StudentInfoHeaderView * view = (StudentInfoHeaderView *)[nib objectAtIndex:Number_Zero];
+            view.titleLabel.text = @"教授课程";
+            view.backgroundColor = [UIColor whiteColor];
+            return view;
+        }
+        else
+        {
+            NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"StudentInfoHeaderView" owner:nil options:nil];
+            StudentInfoHeaderView * view = (StudentInfoHeaderView *)[nib objectAtIndex:Number_Zero];
+            view.titleLabel.text = @"热门课程";
+            view.backgroundColor = [UIColor whiteColor];
+            return view;
+        }
     }
     else
     {

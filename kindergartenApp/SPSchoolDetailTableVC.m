@@ -225,7 +225,6 @@
          {
              [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
          }];
-
     }
 }
 
