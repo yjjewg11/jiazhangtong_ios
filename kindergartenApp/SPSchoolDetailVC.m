@@ -144,13 +144,13 @@
     [self addContent:_contentView];
 
     //获取数据
+    [self getSchoolData];
+    
     [self getShareData];
     
     [self getCourseData];
     
     [self getTeacherData];
-    
-    [self getSchoolData];
     
     [self getLocationData];
 }
@@ -606,6 +606,8 @@
         }
         
     }
+    
+    NSLog(@"%f",scrollView.contentOffset.x);
 }
 
 

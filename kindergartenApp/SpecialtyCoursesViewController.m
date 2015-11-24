@@ -176,9 +176,9 @@
         
         [self setUpSPCourses];
         
-        [self loadHotCourse];  //加载热门课程
-        
         [self responseHandler];
+        
+        [self loadHotCourse];  //加载热门课程
     }
     faild:^(NSString *errorMsg)
     {

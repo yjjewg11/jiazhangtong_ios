@@ -194,6 +194,8 @@
     
     [cell setData:self.listDatas[indexPath.row]];
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 

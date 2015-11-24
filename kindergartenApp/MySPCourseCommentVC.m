@@ -270,21 +270,25 @@
         
         _courseCell = cell;
         
-        if (self.courseDomain.score == NO)
+        if (self.coursecellEdited == NO)
         {
-            self.courseDomain.score = @"50";
+            if (self.flag == NO)
+            {
+                self.courseDomain.score = @"50";
+                
+                if (self.tempCommentText != nil || ![self.tempCommentText isEqualToString:@""])
+                {
+                    cell.textView.text = self.tempCommentText;
+                }
+            }
         }
         else
         {
             self.courseDomain.score = self.courseScore;
+            self.courseDomain.content = self.tempCommentText;
         }
         
         [cell setData:self.courseDomain];
-        
-        if (self.tempCommentText != nil || ![self.tempCommentText isEqualToString:@""])
-        {
-            cell.textView.text = self.tempCommentText;
-        }
         
         if (self.flag == YES) //评价了
         {
@@ -321,7 +325,10 @@
             
             if (self.schoolcellEdited == NO)
             {
-                self.schoolDomain.score = @"50";
+                if (self.flag == NO)
+                {
+                    self.schoolDomain.score = @"50";
+                }
             }
             else
             {
@@ -462,8 +469,12 @@
 //课程评价
 - (void)commentCourse
 {
+    [[KGHUD sharedHud] show:self.view];
+    
     [[KGHttpService sharedService] MySPCourseSaveComment:self.courseuuid classuuid:self.classuuid type:[NSString stringWithFormat:@"%d",Topic_PXKC] score:self.courseScore content:_courseCell.content success:^(NSString *mgr)
      {
+         [[KGHUD sharedHud] hide:self.view];
+         
          [self commentSchool];
      }
      faild:^(NSString *errorMsg)
@@ -475,8 +486,12 @@
 //学校评价
 - (void)commentSchool
 {
+    [[KGHUD sharedHud] show:self.view];
+    
     [[KGHttpService sharedService] MySPCourseSaveComment:self.groupuuid classuuid:self.classuuid type:[NSString stringWithFormat:@"%d",Topic_PXJG] score:_schoolCell.userscore content:@"" success:^(NSString *mgr)
      {
+         [[KGHUD sharedHud] hide:self.view];
+         
          [self commentTeachers];
      }
      faild:^(NSString *errorMsg)
@@ -490,9 +505,11 @@
 {
     for (MySPCourseTeacherList * domain in self.teacherList)
     {
+        [[KGHUD sharedHud] show:self.view];
+        
         [[KGHttpService sharedService] MySPCourseSaveComment:domain.uuid classuuid:self.classuuid type:[NSString stringWithFormat:@"%d",Topic_PXJS] score:domain.score content:@"" success:^(NSString *mgr)
         {
-            
+            [[KGHUD sharedHud] hide:self.view];
         }
         faild:^(NSString *errorMsg)
         {

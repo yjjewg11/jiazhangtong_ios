@@ -27,6 +27,7 @@
     
     IBOutlet UITableView * meTableView;
     NSArray              * studentMArray;
+    BOOL                   switchCell;
 }
 
 @end
@@ -35,6 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    switchCell = NO;
+    
     studentMArray = [KGHttpService sharedService].loginRespDomain.list;
     
     meTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -56,13 +60,20 @@
 
 #pragma UITableView delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [studentMArray count] + Number_Three;
+    return [studentMArray count] + Number_Two;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return Number_One;
+    if ((section - [studentMArray count]) == 0)
+    {
+        return Number_Two;
+    }
+    else
+    {
+        return Number_One;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -89,7 +100,9 @@
 
 
 - (UITableViewCell *)loadFunCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     MeFunTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellDefIdentifier];
+    
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeFunTableViewCell" owner:nil options:nil];
         cell = [nib objectAtIndex:Number_Zero];
@@ -100,13 +113,20 @@
     
     switch (indexPath.section - [studentMArray count]) {
         case Number_Zero:
-            [cell resetCellParam:@"收藏" img:@"meshoucang"];
+            if (switchCell == NO)
+            {
+               [cell resetCellParam:@"收藏" img:@"meshoucang"];
+                switchCell = YES;
+            }
+            else
+            {
+                [cell resetCellParam:@"我的特长课程" img:@"metechangkecheng"];
+                switchCell = NO;
+            }
             break;
         case Number_One:
             [cell resetCellParam:@"设置" img:@"meshezhi"];
             break;
-        case Number_Two:
-            [cell resetCellParam:@"我的特长课程" img:@"metechangkecheng"];
     }
     return cell;
 }
@@ -140,8 +160,18 @@
     
     switch (index) {
         case Number_Zero:{
-            MyCollectionViewController * vc = [[MyCollectionViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            if (indexPath.row == 0)
+            {
+                MyCollectionViewController * vc = [[MyCollectionViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else if (indexPath.row == 1)
+            {
+                MySPCourseVC * vc = [[MySPCourseVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+
         }
             break;
         case Number_One:{
@@ -150,9 +180,7 @@
         }
             break;
         case Number_Two:{
-            MySPCourseVC * vc = [[MySPCourseVC alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+                   }
     }
 }
 
