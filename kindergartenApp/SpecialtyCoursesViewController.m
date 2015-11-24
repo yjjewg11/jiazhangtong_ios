@@ -172,14 +172,26 @@
         
         [self setUpSPCourses];
         
-//        [self responseHandler];
+        [self responseHandler];
         
-        [self loadHotCourse];  //加载热门课程
+        
     }
     faild:^(NSString *errorMsg)
     {
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
+}
+
+- (void)responseHandler
+{
+    if (self.spCourseDomains.count == 0)
+    {
+        [self loadHotCourse];
+    }
+    else
+    {
+        [self loadHotCourse];  //加载热门课程
+    }
 }
 
 #pragma mark - 加载热门课程
