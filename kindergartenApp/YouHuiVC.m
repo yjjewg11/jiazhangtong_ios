@@ -27,6 +27,8 @@
 
 @property (strong, nonatomic) NSString * mappoint;
 
+@property (assign, nonatomic) NSInteger pageNo;
+
 @end
 
 @implementation YouHuiVC
@@ -56,6 +58,8 @@
     [super viewDidLoad];
     
     self.title = @"优惠活动";
+    
+    self.pageNo = 2;
     
     //创建tableview
     [self.view addSubview:self.tableVC.tableView];
@@ -160,65 +164,29 @@
 }
 
 #pragma mark - 上拉刷新，下拉加载数据
-/**
- *  集成刷新控件
- */
 - (void)setupRefresh
 {
-    // 1.下拉刷新(进入刷新状态就会调用self的headerRereshing)
-    [self.tableVC.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    
-    //自动刷新(一进入程序就下拉刷新)
-    //    [self.tableVC.tableView headerBeginRefreshing];
-    
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    // 1.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
     [self.tableVC.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
     
     // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    self.tableVC.tableView.headerPullToRefreshText = @"下拉刷新";
-    self.tableVC.tableView.headerReleaseToRefreshText = @"松开立即刷新";
-    self.tableVC.tableView.headerRefreshingText = @"正在刷新中...";
-    
     self.tableVC.tableView.footerPullToRefreshText = @"上拉加载更多";
     self.tableVC.tableView.footerReleaseToRefreshText = @"松开立即加载更多";
     self.tableVC.tableView.footerRefreshingText = @"正在加载中...";
 }
 
 #pragma mark 开始进入刷新状态
-- (void)headerRereshing
-{
-    // 1.添加数据
-    for (int i = 0; i < 5; i++)
-    {
-        
-    }
-    // 2.2秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    {
-       // 刷新表格
-       [self.tableVC.tableView reloadData];
-       
-       // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-       [self.tableVC.tableView headerEndRefreshing];
-    });
-}
-
 - (void)footerRereshing
 {
-    // 1.添加数据
-    for (int i = 0; i < 5; i++)
+    [[KGHttpService sharedService] getYouHuiList:self.mappoint pageNo:1 success:^(YouHuiDataListVO *teacherDomain)
     {
         
     }
-    // 2.2秒后刷新表格UI
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    faild:^(NSString *errorMsg)
     {
-       // 刷新表格
-       [self.tableVC.tableView reloadData];
-       
-       // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-       [self.tableVC.tableView footerEndRefreshing];
-    });
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+    }];
+
 }
 
 @end

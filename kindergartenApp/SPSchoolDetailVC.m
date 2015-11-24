@@ -228,7 +228,7 @@
         case 2: //互动
         {
             InteractViewController * baseVC = [[InteractViewController alloc] init];
-            baseVC.courseuuid = self.groupuuid;
+            baseVC.groupuuid = self.groupuuid;
             baseVC.dataScourseType = 1;
             
             if(baseVC)

@@ -106,7 +106,7 @@
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeFunTableViewCell" owner:nil options:nil];
         cell = [nib objectAtIndex:Number_Zero];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
     
