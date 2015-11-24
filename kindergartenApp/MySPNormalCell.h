@@ -10,6 +10,12 @@
 #import "MySPCommentDomain.h"
 #import "MySPCourseTeacherList.h"
 
+@protocol  MySPNormalCellDelegate<NSObject>
+
+- (void)saveSchoolScore:(NSString *)score;
+
+@end
+
 @interface MySPNormalCell : UITableViewCell
 
 - (void)setSchoolData:(MySPCommentDomain *)domain;
@@ -19,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIView *starView;
 
 @property (strong, nonatomic) NSString * userscore;
+
+@property (weak, nonatomic) id<MySPNormalCellDelegate> delegate;
 
 - (void)initNoCommentData;
 

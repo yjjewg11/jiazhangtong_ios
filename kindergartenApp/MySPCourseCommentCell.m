@@ -151,7 +151,6 @@
     
     self.userscore = [NSString stringWithFormat:@"%ld",((long)btn.tag + 1) * 10];
     
-    NSLog(@"课程评分是: %@",self.userscore);
     [self.delegate saveCourseScore:self.userscore];
 }
 

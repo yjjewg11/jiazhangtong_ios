@@ -19,7 +19,7 @@
 #import "MySPTeacherCommentCell.h"
 #import "MBProgressHUD+HM.h"
 
-@interface MySPCourseCommentVC () <UITableViewDataSource,UITableViewDelegate,MySPButtonCellDelegate,MySPTeacherCommentCellDelegate,MySPCourseCommentCellDelegate>
+@interface MySPCourseCommentVC () <UITableViewDataSource,UITableViewDelegate,MySPButtonCellDelegate,MySPTeacherCommentCellDelegate,MySPCourseCommentCellDelegate,MySPNormalCellDelegate>
 {
     MySPCourseCommentCell * _courseCell;
     
@@ -43,6 +43,12 @@
 @property (strong, nonatomic) NSString * tempCommentText;
 
 @property (strong, nonatomic) NSString * courseScore;
+
+@property (strong, nonatomic) NSString * schoolScore;
+
+@property (assign, nonatomic) BOOL coursecellEdited;
+
+@property (assign, nonatomic) BOOL schoolcellEdited;
 
 @end
 
@@ -111,6 +117,10 @@
     
     _teachersCell = [NSMutableArray array];
     
+    self.coursecellEdited = NO;
+    
+    self.schoolcellEdited = NO;
+    
     self.tableView.dataSource = self;
     
     self.tableView.delegate = self;
@@ -177,6 +187,16 @@
 #pragma mark - 没评价，初始化数据
 - (void)initData
 {
+    if (self.schoolcellEdited == NO)
+    {
+        self.schoolDomain.score = @"50";
+    }
+    
+    if (self.courseDomain.score == NO)
+    {
+        self.courseDomain.score = @"50";
+    }
+    
     for (MySPCourseTeacherList * domain in self.teacherList)
     {
         domain.score = @"50";
@@ -237,35 +257,44 @@
 {
     if (indexPath.section == 0)
     {
-        MySPCourseCommentCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPCourseCommentCell" owner:nil options:nil] firstObject];
+        static NSString * coursecellid = @"coursecellid";
+        
+        MySPCourseCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:coursecellid];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPCourseCommentCell" owner:nil options:nil] firstObject];
+        }
         
         cell.delegate = self;
         
         _courseCell = cell;
         
+        if (self.courseDomain.score == NO)
+        {
+            self.courseDomain.score = @"50";
+        }
+        else
+        {
+            self.courseDomain.score = self.courseScore;
+        }
+        
+        [cell setData:self.courseDomain];
+        
+        if (self.tempCommentText != nil || ![self.tempCommentText isEqualToString:@""])
+        {
+            cell.textView.text = self.tempCommentText;
+        }
+        
         if (self.flag == YES) //评价了
         {
-            [cell setData:self.courseDomain];
-            
             cell.textView.editable = NO;
             
             cell.textView.backgroundColor = [UIColor whiteColor];
             
             cell.textView.textColor = [UIColor blackColor];
             
-            for (UIButton * b in cell.starView.subviews)
-            {
-                b.enabled = NO;
-            }
-        }
-        else  //没评价
-        {
-            [cell initNoCommentData];
-            
-            if (self.tempCommentText != nil || ![self.tempCommentText isEqualToString:@""])
-            {
-                cell.textView.text = self.tempCommentText;
-            }
+            cell.starView.userInteractionEnabled = NO;
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -277,32 +306,49 @@
     {
         if (indexPath.row == 0)  //学校
         {
-            MySPNormalCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPNormalCell" owner:nil options:nil] firstObject];
+            static NSString * schoolcellid = @"schoolcellid";
+            
+            MySPNormalCell * cell = [tableView dequeueReusableCellWithIdentifier:schoolcellid];
+            
+            if (cell == nil)
+            {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPNormalCell" owner:nil options:nil] firstObject];
+            }
+            
+            cell.delegate = self;
             
             _schoolCell = cell;
             
-            if (self.flag == YES)
+            if (self.schoolcellEdited == NO)
             {
-                [cell setSchoolData:self.schoolDomain];
-                
-                for (UIButton * b in cell.starView.subviews)
-                {
-                    b.enabled = NO;
-                }
+                self.schoolDomain.score = @"50";
             }
-            
             else
             {
-                [cell initNoCommentData];
+                self.schoolDomain.score = self.schoolScore;
             }
             
+            [cell setSchoolData:self.schoolDomain];
+            
+            if (self.flag == YES)
+            {
+                cell.starView.userInteractionEnabled = NO;
+            }
+
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             return cell;
         }
         else                     //教师
         {
-            MySPTeacherCommentCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPTeacherCommentCell" owner:nil options:nil] firstObject];
+            static NSString * teachercellid = @"teachercellid";
+            
+            MySPTeacherCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:teachercellid];
+            
+            if (cell == nil)
+            {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"MySPTeacherCommentCell" owner:nil options:nil] firstObject];
+            }
             
             [_teachersCell addObject:cell];
             
@@ -400,22 +446,13 @@
     
     cell.btn.enabled = NO;
     
-    for (UIButton * b in _courseCell.starView.subviews)
-    {
-        b.enabled = NO;
-    }
-    
-    for (UIButton * b in _schoolCell.starView.subviews)
-    {
-        b.enabled = NO;
-    }
+    _courseCell.starView.userInteractionEnabled = NO;
+
+    _schoolCell.starView.userInteractionEnabled = NO;
     
     for (MySPTeacherCommentCell * cell in _teachersCell)
     {
-        for (UIButton * b in cell.starView.subviews)
-        {
-            b.enabled = NO;
-        }
+        cell.userInteractionEnabled = NO;
     }
     
     [self commentCourse];
@@ -455,7 +492,7 @@
     {
         [[KGHttpService sharedService] MySPCourseSaveComment:domain.uuid classuuid:self.classuuid type:[NSString stringWithFormat:@"%d",Topic_PXJS] score:domain.score content:@"" success:^(NSString *mgr)
         {
-            [[KGHUD sharedHud] show:self.view onlyMsg:mgr];
+            
         }
         faild:^(NSString *errorMsg)
         {
@@ -474,11 +511,23 @@
 - (void)saveCommentText:(NSString *)content
 {
     self.tempCommentText = content;
+    self.coursecellEdited = YES;
 }
 
+#pragma mark - 保存课程分数
 - (void)saveCourseScore:(NSString *)score
 {
     self.courseScore = score;
+    self.coursecellEdited = YES;
 }
+
+#pragma mark - 保存学校分数
+- (void)saveSchoolScore:(NSString *)score
+{
+    self.schoolScore = score;
+    self.schoolcellEdited = YES;
+}
+
+
 
 @end

@@ -38,6 +38,8 @@
     NSMutableArray * _buttonItems;
     
     BOOL isFavor;
+    
+    BOOL keyboardOn;
 }
 
 @property (strong, nonatomic) MySPCourseView * courseView;
@@ -72,6 +74,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    keyboardOn = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
     self.title = @"我的课程详情";
     
     //创建顶部课程信息view
@@ -293,6 +306,29 @@
     }
     
     NSLog(@"%f",scrollView.contentOffset.x);
+}
+
+#pragma mark - 监听键盘事件
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    if (keyboardOn == NO)
+    {
+        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - (_courseInfoView.frame.size.height + 5))];
+        keyboardOn = YES;
+    }
+
+}
+
+
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    if (keyboardOn == YES)
+    {
+        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + (_courseInfoView.frame.size.height + 5))];
+        keyboardOn = NO;
+    }
+    
 }
 
 
