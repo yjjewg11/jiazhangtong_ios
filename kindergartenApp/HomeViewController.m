@@ -17,7 +17,6 @@
 #import "AnnouncementListViewController.h"
 #import "InteractViewController.h"
 #import "TeacherJudgeViewController.h"
-#import "SpecialtyCoursesViewController.h"
 #import "GiftwareArticlesViewController.h"
 #import "StudentSignRecordViewController.h"
 #import "MoreMenuView.h"

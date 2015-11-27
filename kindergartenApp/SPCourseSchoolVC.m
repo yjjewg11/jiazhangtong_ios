@@ -103,10 +103,13 @@
     [super viewDidLoad];
     
     [self setUpSegmentedBtn];
+    
     //下拉菜单
     [self setUpListBtns];
+    
     //集成刷新控件
     [self setupRefresh];
+    
     self.tableVC.delegate = self;
     
     //载入课程数据

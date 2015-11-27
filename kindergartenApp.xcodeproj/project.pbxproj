@@ -260,6 +260,9 @@
 		04F75E1E1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */; };
 		04F75E1F1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */; };
 		04F817051BE9C0E700EEEAB2 /* SPTextCellOfCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F817041BE9C0E700EEEAB2 /* SPTextCellOfCourse.m */; };
+		04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F84EBA1C0851E800A51140 /* NoNetView.m */; };
+		04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F84EBC1C08522700A51140 /* NoNetView.xib */; };
+		04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F84EBF1C085F3400A51140 /* Bugly.framework */; };
 		04F8894A1C058FE9002FBE6D /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889461C058FE9002FBE6D /* HZQDatePickerView.m */; };
 		04F8894B1C058FE9002FBE6D /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F889471C058FE9002FBE6D /* HZQDatePickerView.xib */; };
 		04F8894C1C058FE9002FBE6D /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889491C058FE9002FBE6D /* UIColor+HexString.m */; };
@@ -376,7 +379,6 @@
 		2457FD031B711A65006A3AB7 /* AddressbookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2457FD011B711A65006A3AB7 /* AddressbookTableViewCell.xib */; };
 		2457FD0B1B712C13006A3AB7 /* FaceBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457FD061B712C13006A3AB7 /* FaceBoard.m */; };
 		2457FD0D1B712C13006A3AB7 /* GrayPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2457FD0A1B712C13006A3AB7 /* GrayPageControl.m */; };
-		246187F21BB9875800D7DDA8 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 246187F11BB9875800D7DDA8 /* Bugly.framework */; };
 		2469E2131B5B5E45004888A4 /* LoginRespDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469E2121B5B5E45004888A4 /* LoginRespDomain.m */; };
 		2469E2161B5B6039004888A4 /* ResMsgDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469E2151B5B6039004888A4 /* ResMsgDomain.m */; };
 		2474DFA41B6CA4840021506F /* BaseTopicInteractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474DFA31B6CA4840021506F /* BaseTopicInteractViewController.m */; };
@@ -1059,6 +1061,10 @@
 		04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeCourseTypesCell.xib; sourceTree = "<group>"; };
 		04F817031BE9C0E700EEEAB2 /* SPTextCellOfCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTextCellOfCourse.h; sourceTree = "<group>"; };
 		04F817041BE9C0E700EEEAB2 /* SPTextCellOfCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTextCellOfCourse.m; sourceTree = "<group>"; };
+		04F84EB91C0851E800A51140 /* NoNetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoNetView.h; sourceTree = "<group>"; };
+		04F84EBA1C0851E800A51140 /* NoNetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetView.m; sourceTree = "<group>"; };
+		04F84EBC1C08522700A51140 /* NoNetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetView.xib; sourceTree = "<group>"; };
+		04F84EBF1C085F3400A51140 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		04F889451C058FE9002FBE6D /* HZQDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZQDatePickerView.h; sourceTree = "<group>"; };
 		04F889461C058FE9002FBE6D /* HZQDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZQDatePickerView.m; sourceTree = "<group>"; };
 		04F889471C058FE9002FBE6D /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
@@ -1259,7 +1265,6 @@
 		2457FD061B712C13006A3AB7 /* FaceBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaceBoard.m; sourceTree = "<group>"; };
 		2457FD091B712C13006A3AB7 /* GrayPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrayPageControl.h; sourceTree = "<group>"; };
 		2457FD0A1B712C13006A3AB7 /* GrayPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrayPageControl.m; sourceTree = "<group>"; };
-		246187F11BB9875800D7DDA8 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		2469E2111B5B5E45004888A4 /* LoginRespDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRespDomain.h; sourceTree = "<group>"; };
 		2469E2121B5B5E45004888A4 /* LoginRespDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRespDomain.m; sourceTree = "<group>"; };
 		2469E2141B5B6039004888A4 /* ResMsgDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResMsgDomain.h; sourceTree = "<group>"; };
@@ -1808,6 +1813,7 @@
 				04663DA11BE719DA0033C436 /* PassKit.framework in Frameworks */,
 				04663DA91BE71BD30033C436 /* CoreMedia.framework in Frameworks */,
 				04663D9D1BE719680033C436 /* AddressBook.framework in Frameworks */,
+				04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */,
 				04FE6D251BF5838200181134 /* AddressBookUI.framework in Frameworks */,
 				4D5CE7851B7E4520002F1088 /* AVFoundation.framework in Frameworks */,
 				4D5CE78F1B7E4540002F1088 /* AdSupport.framework in Frameworks */,
@@ -1838,7 +1844,6 @@
 				2487E6411B6166790030320A /* CoreGraphics.framework in Frameworks */,
 				04F9FBAF1BF1A77E00AEFB88 /* libWeChatSDK.a in Frameworks */,
 				2487E63D1B6166660030320A /* UIKit.framework in Frameworks */,
-				246187F21BB9875800D7DDA8 /* Bugly.framework in Frameworks */,
 				04F3D4591BF47FD2007E7AC0 /* libBaiduMobAdSdk64bit.a in Frameworks */,
 				04A4DE9D1BF484DF002ABBB1 /* libAdsMogo.a in Frameworks */,
 				04FF47611C046D97004DC45D /* libGDTMobSDK.a in Frameworks */,
@@ -2504,6 +2509,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		04F84EBE1C085F3400A51140 /* libc++ */ = {
+			isa = PBXGroup;
+			children = (
+				04F84EBF1C085F3400A51140 /* Bugly.framework */,
+			);
+			path = "libc++";
+			sourceTree = "<group>";
+		};
 		04F889441C058FE9002FBE6D /* HZQDatePickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2839,7 +2852,7 @@
 		246187F01BB9874B00D7DDA8 /* Bugly */ = {
 			isa = PBXGroup;
 			children = (
-				246187F11BB9875800D7DDA8 /* Bugly.framework */,
+				04F84EBE1C085F3400A51140 /* libc++ */,
 			);
 			name = Bugly;
 			sourceTree = "<group>";
@@ -2954,6 +2967,9 @@
 				4D0A91841B81088700373E5C /* EmojiAndTextView.h */,
 				4D0A91851B81088700373E5C /* EmojiAndTextView.m */,
 				4D0A91871B81089000373E5C /* EmojiAndTextView.xib */,
+				04F84EB91C0851E800A51140 /* NoNetView.h */,
+				04F84EBA1C0851E800A51140 /* NoNetView.m */,
+				04F84EBC1C08522700A51140 /* NoNetView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -4817,6 +4833,7 @@
 				F4EA53991B60EF800044BE7A /* StudentBaseInfoViewController.xib in Resources */,
 				04FEC8891BEBADDB00D3D8A5 /* SPSchoolCell.xib in Resources */,
 				04A4DE1D1BF484DF002ABBB1 /* admogoVideo_29.png in Resources */,
+				04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */,
 				04A4DE171BF484DF002ABBB1 /* admogoVideo_23.png in Resources */,
 				04A4DE1B1BF484DF002ABBB1 /* admogoVideo_27.png in Resources */,
 				04AA3CB41BE5E62300DCC290 /* SPMoreCommitVC.xib in Resources */,
@@ -5002,6 +5019,7 @@
 				4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */,
 				24A175F71B55433300295997 /* KGHUD.m in Sources */,
 				F48783A51B58DA1700CDC1A8 /* NSArray+MASAdditions.m in Sources */,
+				04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */,
 				F48783A11B58DA1700CDC1A8 /* MASConstraintMaker.m in Sources */,
 				24C46B491B5A2B7A00A58F92 /* InteractViewController.m in Sources */,
 				F4C0AB941B1C3BB6007B0E35 /* KGHttpUrl.m in Sources */,
@@ -5410,6 +5428,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/AdsMoGoSDK",
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp",
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/Share_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/kindergartenApp/libc++",
 				);
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
 				INFOPLIST_FILE = kindergartenApp/Info.plist;
@@ -5472,6 +5491,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/AdsMoGoSDK",
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp",
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/Share_4.2.3/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
+					"$(PROJECT_DIR)/kindergartenApp/libc++",
 				);
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
 				INFOPLIST_FILE = kindergartenApp/Info.plist;

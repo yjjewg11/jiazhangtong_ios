@@ -18,6 +18,7 @@
 #import "SpCourseHomeCourseCell.h"
 #import "SPCourseSchoolVC.h"
 #import "SPCourseDetailVC.h"
+#import "NoNetView.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
@@ -25,9 +26,11 @@
 
 #define FinishReqCount 2
 
-@interface SpCourseHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,SpCourseHomeCourseTypesCellDelegate>
+@interface SpCourseHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,SpCourseHomeCourseTypesCellDelegate,NoNetViewDelegate>
 {
-    SDRotationLoopProgressView *_LoadView;
+    SDRotationLoopProgressView * _LoadView;
+    
+    NoNetView * _noNetView;
     
     UIScrollView * _scrollView;
     
@@ -49,6 +52,7 @@
     
     BOOL _canReqData;
     BOOL _adReqSuccess;
+    BOOL _firstJoinSwitch;
     
     NSString * _mappoint;
 }
@@ -74,8 +78,9 @@ static NSString *const CourseCellID = @"coursecellcoll";
     
     [_adCell.adView addSubview:_adView];
     
-    if (_adReqSuccess)
+    if (_adReqSuccess && _firstJoinSwitch)
     {
+        _firstJoinSwitch = NO;
         _adCell.imgView.hidden = YES;
         [_collectionView reloadData];
     }
@@ -85,6 +90,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
 {
     [super viewDidLoad];
     
+    _firstJoinSwitch = YES;
     _canReqData = YES;
     _pageNo = 2;
     
@@ -145,15 +151,14 @@ static NSString *const CourseCellID = @"coursecellcoll";
             [self hidenLoadView];
             [self.view addSubview:_collectionView];
         }
-        else
-        {
-            _reqFailedCount++;
-            NSLog(@"%d",_reqFailedCount);
-        }
     }
     faild:^(NSString *errorMsg)
     {
-         
+        _reqFailedCount++;
+        if (_reqFailedCount == 2)
+        {
+            [self showNoNetView];
+        }
     }];
 }
 
@@ -170,15 +175,14 @@ static NSString *const CourseCellID = @"coursecellcoll";
             [self hidenLoadView];
             [self.view addSubview:_collectionView];
         }
-        else
-        {
-            _reqFailedCount++;
-            NSLog(@"%d",_reqFailedCount);
-        }
     }
     faild:^(NSString *errorMsg)
     {
-         
+        _reqFailedCount++;
+        if (_reqFailedCount == 2)
+        {
+            [self showNoNetView];
+        }
     }];
 }
 
@@ -357,11 +361,14 @@ static NSString *const CourseCellID = @"coursecellcoll";
 #pragma mark - 菊花相关
 - (void)showLoadView
 {
-    _LoadView = [SDRotationLoopProgressView progressView];
-    
-    _LoadView.frame = CGRectMake(0, 0, 100 * KWidth_Scale, 100 * KWidth_Scale);
-    
-    _LoadView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
+    if (_LoadView == nil)
+    {
+        _LoadView = [SDRotationLoopProgressView progressView];
+        
+        _LoadView.frame = CGRectMake(0, 0, 100 * KWidth_Scale, 100 * KWidth_Scale);
+        
+        _LoadView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
+    }
     
     [self.view addSubview: _LoadView];
 }
@@ -374,6 +381,37 @@ static NSString *const CourseCellID = @"coursecellcoll";
      }];
 }
 
+- (void)tryBtnClicked
+{
+    [_noNetView removeFromSuperview];
+    _noNetView.delegate = nil;
+    _noNetView = nil;
+    
+    _reqSuccessCount = 0;
+    _reqFailedCount = 0;
+    
+    //加载课程分类
+    [self loadCourseTypesData];
+    
+    //加载热门课程
+    [self loadHotCourseData];
+    
+    //初始化视图
+    [self initCollectionView];
+}
+
+- (void)showNoNetView
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    _noNetView = [[[NSBundle mainBundle] loadNibNamed:@"NoNetView" owner:nil options:nil] firstObject];
+    
+    _noNetView.delegate = self;
+    
+    _noNetView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
+    
+    [self.view addSubview:_noNetView];
+}
 
 #pragma mark - 上拉刷新，下拉加载数据
 /**
