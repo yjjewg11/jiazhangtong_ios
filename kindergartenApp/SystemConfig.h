@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#define KWidth_Scale    [UIScreen mainScreen].bounds.size.width/375.0f //相对于ip6屏幕比
+
+
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 #define bIsIos7 [[[UIDevice currentDevice]systemVersion]floatValue]>=7.0
 #define bIsIos8 [[[UIDevice currentDevice]systemVersion]floatValue]>=8.0

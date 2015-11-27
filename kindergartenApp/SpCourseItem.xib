@@ -8,40 +8,42 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="jbD-EL-yMk" customClass="SpCourseItem">
-            <rect key="frame" x="0.0" y="0.0" width="53" height="71"/>
+            <rect key="frame" x="0.0" y="0.0" width="45" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="演员修养" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFJ-Xr-4uN">
-                    <rect key="frame" x="2" y="56" width="49" height="15"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vly-Wv-YRd">
+                    <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="15" id="vmu-OC-EpC"/>
+                        <constraint firstAttribute="width" constant="45" id="Ld5-Pl-q2L"/>
+                        <constraint firstAttribute="height" constant="45" id="lao-Yh-AYT"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="演员修养" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFJ-Xr-4uN">
+                    <rect key="frame" x="0.0" y="49" width="45" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="1Ig-LQ-U7t"/>
+                        <constraint firstAttribute="width" constant="45" id="zgE-zn-Im7"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vly-Wv-YRd">
-                    <rect key="frame" x="6" y="8" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="40" id="ExL-uS-zf6"/>
-                        <constraint firstAttribute="height" constant="40" id="z1o-sb-oZ7"/>
-                    </constraints>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="vly-Wv-YRd" firstAttribute="top" secondItem="jbD-EL-yMk" secondAttribute="top" constant="8" id="0UI-7W-jdS"/>
-                <constraint firstItem="HFJ-Xr-4uN" firstAttribute="leading" secondItem="jbD-EL-yMk" secondAttribute="leading" constant="2" id="4hS-eD-Ke1"/>
-                <constraint firstItem="vly-Wv-YRd" firstAttribute="leading" secondItem="jbD-EL-yMk" secondAttribute="leading" constant="6" id="BzV-jj-HnY"/>
-                <constraint firstAttribute="trailing" secondItem="HFJ-Xr-4uN" secondAttribute="trailing" constant="2" id="s4N-W5-aU8"/>
-                <constraint firstAttribute="bottom" secondItem="HFJ-Xr-4uN" secondAttribute="bottom" id="zit-OM-ekY"/>
+                <constraint firstItem="vly-Wv-YRd" firstAttribute="top" secondItem="jbD-EL-yMk" secondAttribute="top" id="Gnr-7p-iEW"/>
+                <constraint firstAttribute="trailing" secondItem="vly-Wv-YRd" secondAttribute="trailing" id="T9u-jl-3a1"/>
+                <constraint firstItem="HFJ-Xr-4uN" firstAttribute="top" secondItem="vly-Wv-YRd" secondAttribute="bottom" constant="4" id="ea2-k7-ogb"/>
+                <constraint firstItem="HFJ-Xr-4uN" firstAttribute="leading" secondItem="jbD-EL-yMk" secondAttribute="leading" id="geO-bO-nxb"/>
+                <constraint firstItem="vly-Wv-YRd" firstAttribute="leading" secondItem="jbD-EL-yMk" secondAttribute="leading" id="kMW-mr-U2d"/>
+                <constraint firstAttribute="trailing" secondItem="HFJ-Xr-4uN" secondAttribute="trailing" id="sBN-qX-ekv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="courseBtn" destination="vly-Wv-YRd" id="8JE-Zz-MwI"/>
                 <outlet property="nameLbl" destination="HFJ-Xr-4uN" id="23E-LU-oIQ"/>
             </connections>
-            <point key="canvasLocation" x="212.5" y="178.5"/>
+            <point key="canvasLocation" x="208.5" y="175"/>
         </view>
     </objects>
 </document>

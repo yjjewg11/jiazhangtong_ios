@@ -35,13 +35,15 @@
 #import "KGNavigationController.h"
 #import "LoginViewController.h"
 #import "YouHuiVC.h"
+#import <CoreLocation/CoreLocation.h>
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
 
+#import "SpCourseHomeVC.h"
 
-@interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate>
+@interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
 {
     
     IBOutlet UIScrollView * scrollView;
@@ -55,7 +57,7 @@
     ItemTitleButton  * titleBtn;
     NSArray   * groupDataArray;
     CGFloat     groupViewHeight;
-    
+    CLLocationManager *mgr;
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -80,15 +82,18 @@
     self.adView.frame = CGRectMake(0, APPTABBARHEIGHT, APPWINDOWWIDTH, 150.0);
     [self.view addSubview:self.adView];
     
+    
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     scrollView.contentSize = CGSizeMake(self.view.width, funiView.y + funiView.height + Number_Ten);
 //    [self loadNavTitle];
-//    [self loadBaiduADView];
     [self autoLogin];
-
+    
+    mgr = [[CLLocationManager alloc] init];
+    [self getLocationData];
 }
 
 #pragma mark - 芒果广告相关
@@ -368,7 +373,8 @@
             baseVC = [[GiftwareArticlesViewController alloc] init];
             break;
         case 17:
-            baseVC = [[SpecialtyCoursesViewController alloc] init];
+//            baseVC = [[SpecialtyCoursesViewController alloc] init];
+            baseVC = [[SpCourseHomeVC alloc] init];
             break;
         case 18:
             baseVC = [[TeacherJudgeViewController alloc] init];
@@ -447,6 +453,49 @@
             window.rootViewController = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         }];
     }
+}
+
+#pragma mark - 获取位置
+- (void)getLocationData
+{
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue] > 8.0)
+    {
+        [mgr requestWhenInUseAuthorization];
+    }
+    
+    mgr.delegate = self;
+    
+    mgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    
+    mgr.distanceFilter = 5.0;
+    
+    [mgr startUpdatingLocation];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    CLLocation *loc = [locations firstObject];
+    
+    NSString *mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
+    
+    if (mappoint == nil || [mappoint isEqualToString:@""])
+    {
+        mappoint = @"";
+    }
+    
+    //使用偏好设置保存数据
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    
+    [defu setObject:mappoint forKey:@"map_point"];
+    
+    //调用同步的方法，把数据保存到沙盒
+    [defu synchronize];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"请求地理位置失败:%@",error);
 }
 
 

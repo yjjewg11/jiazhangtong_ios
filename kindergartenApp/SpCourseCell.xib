@@ -50,16 +50,6 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="128" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUU-Y1-K5a">
-                        <rect key="frame" x="205" y="33" width="54" height="15"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="54" id="77u-Rs-Ohj"/>
-                            <constraint firstAttribute="height" constant="15" id="UFs-K7-77A"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.2km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gf-VP-0VJ">
                         <rect key="frame" x="263" y="79" width="54" height="15"/>
                         <constraints>
@@ -139,6 +129,16 @@
                             <constraint firstItem="3Nu-b0-0td" firstAttribute="top" secondItem="cKX-5b-h14" secondAttribute="top" id="xkz-UO-fiw"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="128" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUU-Y1-K5a">
+                        <rect key="frame" x="205" y="33" width="54" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="54" id="77u-Rs-Ohj"/>
+                            <constraint firstAttribute="height" constant="15" id="UFs-K7-77A"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="TTm-ET-Al2" firstAttribute="top" secondItem="eTu-qr-Po1" secondAttribute="bottom" constant="-4" id="21D-VZ-lcG"/>

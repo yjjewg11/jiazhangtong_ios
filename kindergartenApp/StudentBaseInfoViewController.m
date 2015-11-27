@@ -17,11 +17,12 @@
 #import "KGDateUtil.h"
 #import "UIView+Extension.h"
 #import "UIColor+Extension.h"
+#import "HZQDatePickerView.h"
 
 #define ORIGINAL_MAX_WIDTH 640.0f
 
 
-@interface StudentBaseInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface StudentBaseInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,HZQDatePickerViewDelegate> {
     
     IBOutlet UIImageView * headImageView;
     IBOutlet KGTextField * nameTextField;
@@ -33,6 +34,8 @@
     
     PopupView * popupView;
     UIDatePicker * datePicker;
+    
+    HZQDatePickerView *_pikerView;
     BOOL isSetHeadImg; //是否设置过头像
     
     IBOutlet KGTextField *peopleCardTextField;
@@ -399,50 +402,85 @@
 
 - (IBAction)birthdayBtnClicked:(UIButton *)sender {
     sender.selected = !sender.selected;
-     
-    if(!popupView) {
-        popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
-        popupView.alpha = Number_Zero;
-        
-        CGFloat height = 216;
-        datePicker = [[UIDatePicker alloc] init];
-        datePicker.frame = CGRectMake(Number_Zero, KGSCREEN.size.height-height, KGSCREEN.size.width, height);
-        datePicker.datePickerMode = UIDatePickerModeDate;
-        
-        if(_studentInfo.birthday && ![_studentInfo.birthday isEqualToString:@""]) {
-            [datePicker setDate:[KGDateUtil getDateByDateStr:_studentInfo.birthday format:dateFormatStr1] animated:YES];
-        }
-        
-        [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged ];
-        [popupView addSubview:datePicker];
-        
-        UIWindow * window = [UIApplication sharedApplication].keyWindow;
-        [window addSubview:popupView];
+//     
+//    if(!popupView) {
+//        popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
+//        popupView.alpha = Number_Zero;
+////        popupView.alpha = 1;
+//        
+//        CGFloat height = 216;
+//        datePicker = [[UIDatePicker alloc] init];
+//        datePicker.frame = CGRectMake(Number_Zero, KGSCREEN.size.height-height, KGSCREEN.size.width, height);
+//        datePicker.datePickerMode = UIDatePickerModeDate;
+//        
+//        if(_studentInfo.birthday && ![_studentInfo.birthday isEqualToString:@""]) {
+//            [datePicker setDate:[KGDateUtil getDateByDateStr:_studentInfo.birthday format:dateFormatStr1] animated:YES];
+//        }
+//        
+//        [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged ];
+//        [popupView addSubview:datePicker];
+//        
+//        UIWindow * window = [UIApplication sharedApplication].keyWindow;
+//        [window addSubview:popupView];
+//        
+//    }
+//    
+//    [UIView viewAnimate:^{
+//        popupView.alpha = Number_One;
+//    } time:Number_AnimationTime_Five];
+    NSDate * currentDate = nil;
+    
+    if(_studentInfo.birthday && ![_studentInfo.birthday isEqualToString:@""])
+    {
+        currentDate = [KGDateUtil getDateByDateStr:_studentInfo.birthday format:dateFormatStr1];
+    }
+    else
+    {
+        currentDate = [NSDate date];
     }
     
-    [UIView viewAnimate:^{
-        popupView.alpha = Number_One;
-    } time:Number_AnimationTime_Five];
+    [self setupDateView:DateTypeOfStart currentDate:currentDate];
+    
 }
 
-
--(void)dateChanged:(id)sender{
-    UIDatePicker * control = (UIDatePicker*)sender;
-    NSString * timeStr = [NSString stringWithFormat:@"%@", control.date];
-    NSArray * timeArray = [timeStr componentsSeparatedByString:@" "];
-    if([timeArray count] > Number_Zero) {
-        birthdayTextField.text = [timeArray objectAtIndex:Number_Zero];
-    }
+#pragma mark - datepicker
+- (void)setupDateView:(DateType)type currentDate:(NSDate *)date
+{
+    _pikerView = [HZQDatePickerView instanceDatePickerView];
+    _pikerView.frame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height + 20);
+    [_pikerView setBackgroundColor:[UIColor clearColor]];
+    _pikerView.delegate = self;
+    _pikerView.type = type;
+    
+    [_pikerView.datePickerView setDate:date animated:NO];
+    
+    [self.view addSubview:_pikerView];
+    
 }
 
-
-- (void)showDatePicker:(BOOL)isShow {
-    [UIView animateWithDuration:Number_AnimationTime_Five animations:^{
-        datePicker.alpha = isShow ? Number_One : Number_Zero;
-    } completion:^(BOOL finished) {
-        
-    }];
+- (void)getSelectDate:(NSString *)date type:(DateType)type
+{
+    birthdayTextField.text = date;
 }
+
+//
+//-(void)dateChanged:(id)sender{
+//    UIDatePicker * control = (UIDatePicker*)sender;
+//    NSString * timeStr = [NSString stringWithFormat:@"%@", control.date];
+//    NSArray * timeArray = [timeStr componentsSeparatedByString:@" "];
+//    if([timeArray count] > Number_Zero) {
+//        birthdayTextField.text = [timeArray objectAtIndex:Number_Zero];
+//    }
+//}
+//
+//
+//- (void)showDatePicker:(BOOL)isShow {
+//    [UIView animateWithDuration:Number_AnimationTime_Five animations:^{
+//        datePicker.alpha = isShow ? Number_One : Number_Zero;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//}
 
 
 @end

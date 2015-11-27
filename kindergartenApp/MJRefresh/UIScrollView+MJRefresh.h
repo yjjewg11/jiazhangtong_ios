@@ -24,7 +24,7 @@
  *  @param action 回调方法
  */
 - (void)addHeaderWithTarget:(id)target action:(SEL)action;
-
+- (void)addFooterWithTarget:(id)target action:(SEL)action showActivityView:(BOOL)show;
 /**
  *  移除下拉刷新头部控件
  */

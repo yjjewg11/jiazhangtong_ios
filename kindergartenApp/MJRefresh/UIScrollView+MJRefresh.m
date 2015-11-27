@@ -160,6 +160,28 @@ static char MJRefreshFooterViewKey;
     // 1.创建新的footer
     if (!self.footer) {
         MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+
+        [self addSubview:footer];
+        self.footer = footer;
+    }
+    
+    // 2.设置目标和回调方法
+    self.footer.beginRefreshingTaget = target;
+    self.footer.beginRefreshingAction = action;
+}
+
+/**
+ *  添加一个上拉刷新尾部控件
+ *
+ *  @param target 目标
+ *  @param action 回调方法
+ */
+- (void)addFooterWithTarget:(id)target action:(SEL)action showActivityView:(BOOL)show
+{
+    // 1.创建新的footer
+    if (!self.footer) {
+        MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+        footer.activityView.hidden = YES;
         [self addSubview:footer];
         self.footer = footer;
     }
