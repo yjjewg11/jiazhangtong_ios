@@ -16,9 +16,9 @@
 #import "SpCourseHomeAdCell.h"
 #import "SpCourseHomeCourseTypesCell.h"
 #import "SpCourseHomeCourseCell.h"
-#import "SPCourseSchoolVC.h"
 #import "SPCourseDetailVC.h"
 #import "NoNetView.h"
+#import "SpCourseAndSchoolListVC.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
@@ -28,17 +28,11 @@
 
 @interface SpCourseHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,SpCourseHomeCourseTypesCellDelegate,NoNetViewDelegate>
 {
-    SDRotationLoopProgressView * _LoadView;
-    
-    NoNetView * _noNetView;
-    
     UIScrollView * _scrollView;
     
     NSMutableArray * _courseTypes;
     
     NSMutableArray * _hotCourseData;
-    
-    NSMutableArray * _courseTypesDatakeys;
     
     UICollectionView * _collectionView;
     
@@ -47,7 +41,9 @@
     SpCourseHomeAdCell * _adCell;
     
     NSInteger _reqSuccessCount;
+    
     NSInteger _reqFailedCount;
+    
     NSInteger _pageNo;
     
     BOOL _canReqData;
@@ -78,12 +74,8 @@ static NSString *const CourseCellID = @"coursecellcoll";
     
     [_adCell.adView addSubview:_adView];
     
-    if (_adReqSuccess && _firstJoinSwitch)
-    {
-        _firstJoinSwitch = NO;
-        _adCell.imgView.hidden = YES;
-        [_collectionView reloadData];
-    }
+    [_adCell bringSubviewToFront:_adView];
+
 }
 
 - (void)viewDidLoad
@@ -131,21 +123,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
         totalDomain.datakey = -1;
         [_courseTypes addObject:totalDomain];
         _reqSuccessCount++;
-        
-        //保存所有datakeys
-        _courseTypesDatakeys = [NSMutableArray array];
-        for (SPCourseTypeDomain * domain in _courseTypes)
-        {
-            if (domain.datakey == -1)
-            {
-                [_courseTypesDatakeys addObject:@""];
-            }
-            else
-            {
-                [_courseTypesDatakeys addObject:@(domain.datakey)];
-            }
 
-        }
         if (_reqSuccessCount == FinishReqCount)
         {
             [self hidenLoadView];
@@ -186,10 +164,25 @@ static NSString *const CourseCellID = @"coursecellcoll";
     }];
 }
 
-
+#pragma mark - 没有网络连接重试代理
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    
+    _reqSuccessCount = 0;
+    _reqFailedCount = 0;
+    
+    //加载课程分类
+    [self loadCourseTypesData];
+    
+    //加载热门课程
+    [self loadHotCourseData];
+    
+    //初始化视图
+    [self initCollectionView];
+}
 
 #pragma mark - collection的数据源 & 代理
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 2 + _hotCourseData.count;
@@ -202,6 +195,8 @@ static NSString *const CourseCellID = @"coursecellcoll";
         SpCourseHomeAdCell * adCell = [collectionView dequeueReusableCellWithReuseIdentifier:ADCellID forIndexPath:indexPath];
         
         _adCell = adCell;
+        
+        _adCell.backgroundColor = [UIColor whiteColor];
         
         return adCell;
     }
@@ -230,61 +225,31 @@ static NSString *const CourseCellID = @"coursecellcoll";
 #pragma mark - 按钮点击跳转
 - (void)pushToVC:(UIButton *)btn
 {
-    SPCourseTypeDomain * domain = _courseTypes[btn.tag];
+    SpCourseAndSchoolListVC * vc = [[SpCourseAndSchoolListVC alloc] init];
     
-    SPCourseSchoolVC * courseSchoolVC = [[SPCourseSchoolVC alloc] init];
+    vc.firstJoinIndex = btn.tag;
     
-    NSMutableArray *marr = [NSMutableArray array];
-    NSInteger clickedIndex = 0;
-    for (NSInteger i=0;i<_courseTypes.count;i++)
-    {
-        SPCourseTypeDomain *d = _courseTypes[i];
-        if ([d.datavalue isEqualToString:domain.datavalue])
-        {
-            clickedIndex = i;
-        }
-        [marr addObject:d.datavalue];
-    }
-    
-    [marr exchangeObjectAtIndex:0 withObjectAtIndex:clickedIndex];
-    [_courseTypesDatakeys exchangeObjectAtIndex:0 withObjectAtIndex:clickedIndex];
-    
-    courseSchoolVC.courseNameList = marr;
-    courseSchoolVC.firstJoinSelType = domain.datavalue;
-    courseSchoolVC.firstJoinSelDatakey = domain.datakey;
-    courseSchoolVC.courseDatakeys = _courseTypesDatakeys;
-    
-    [self.navigationController pushViewController:courseSchoolVC animated:YES];
-
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - 更多按钮点击跳转
 - (void)pushToHotCourseVC
 {
-    SPCourseSchoolVC * courseSchoolVC = [[SPCourseSchoolVC alloc] init];
+    SpCourseAndSchoolListVC * vc = [[SpCourseAndSchoolListVC alloc] init];
     
-    NSMutableArray *marr = [NSMutableArray array];
+    vc.firstJoinIndex = _courseTypes.count - 1;
     
-    for (NSInteger i=0;i<_courseTypes.count;i++)
-    {
-        SPCourseTypeDomain *d = _courseTypes[i];
-        
-        [marr addObject:d.datavalue];
-    }
-    
-    [marr exchangeObjectAtIndex:0 withObjectAtIndex:_courseTypes.count - 1];
-    [_courseTypesDatakeys exchangeObjectAtIndex:0 withObjectAtIndex:_courseTypes.count - 1];
-    
-    courseSchoolVC.courseNameList = marr;
-    courseSchoolVC.firstJoinSelType = @"查看全部";
-    courseSchoolVC.firstJoinSelDatakey = -1;
-    courseSchoolVC.courseDatakeys = _courseTypesDatakeys;
-    
-    [self.navigationController pushViewController:courseSchoolVC animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 选中item后调转
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0 || indexPath.row == 1)
+    {
+        return;
+    }
+    
     SPCourseDetailVC * detailVC = [[SPCourseDetailVC alloc] init];
     
     SPCourseDomain * domain = _hotCourseData[indexPath.row - 2];
@@ -294,7 +259,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-#pragma mark - 初始化视图相关
+#pragma mark - 初始化collectionview
 - (void)initCollectionView
 {
     //创建coll布局
@@ -315,6 +280,8 @@ static NSString *const CourseCellID = @"coursecellcoll";
     [self setupRefresh];
 }
 
+
+#pragma mark - 自动翻页
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGPoint offset = scrollView.contentOffset;
@@ -358,65 +325,8 @@ static NSString *const CourseCellID = @"coursecellcoll";
     }
 }
 
-#pragma mark - 菊花相关
-- (void)showLoadView
-{
-    if (_LoadView == nil)
-    {
-        _LoadView = [SDRotationLoopProgressView progressView];
-        
-        _LoadView.frame = CGRectMake(0, 0, 100 * KWidth_Scale, 100 * KWidth_Scale);
-        
-        _LoadView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
-    }
-    
-    [self.view addSubview: _LoadView];
-}
-
-- (void)hidenLoadView
-{
-    [UIView animateWithDuration:0.3 animations:^
-     {
-         [_LoadView removeFromSuperview];
-     }];
-}
-
-- (void)tryBtnClicked
-{
-    [_noNetView removeFromSuperview];
-    _noNetView.delegate = nil;
-    _noNetView = nil;
-    
-    _reqSuccessCount = 0;
-    _reqFailedCount = 0;
-    
-    //加载课程分类
-    [self loadCourseTypesData];
-    
-    //加载热门课程
-    [self loadHotCourseData];
-    
-    //初始化视图
-    [self initCollectionView];
-}
-
-- (void)showNoNetView
-{
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    _noNetView = [[[NSBundle mainBundle] loadNibNamed:@"NoNetView" owner:nil options:nil] firstObject];
-    
-    _noNetView.delegate = self;
-    
-    _noNetView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
-    
-    [self.view addSubview:_noNetView];
-}
 
 #pragma mark - 上拉刷新，下拉加载数据
-/**
- *  集成刷新控件
- */
 - (void)setupRefresh
 {
     [_collectionView addFooterWithTarget:self action:@selector(footerRereshing) showActivityView:YES];
@@ -437,7 +347,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
 }
 
 
-#pragma mark - 芒果广告
 #pragma mark - 芒果广告相关
 - (CGSize)adMoGoCustomSize
 {
@@ -462,33 +371,38 @@ static NSString *const CourseCellID = @"coursecellcoll";
  */
 - (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
     NSLog(@"广告接收成功回调");
-    _adReqSuccess = YES;
 }
 /**
  * 广告接收失败回调
  */
-- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error{
+- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error
+{
     NSLog(@"广告接收失败回调");
-    _adReqSuccess = NO;
 }
 /**
  * 点击广告回调
  */
-- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView{
+- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView
+{
     NSLog(@"点击广告回调");
 }
 /**
  *You can get notified when the user delete the ad
  广告关闭回调
  */
-- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView{
+- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
+{
     NSLog(@"广告关闭回调");
-    _adCell.imgView.hidden = NO;
-    _adCell.userInteractionEnabled = NO;
-    [_collectionView reloadData];
+    
+    _adCell.adView.hidden = YES;
+    
+    UIImageView * imgView = [[UIImageView alloc] init];
+    
+    imgView.frame = _adCell.frame;
+    
+    imgView.image = [UIImage imageNamed:@"adbanner"];
+    
+    [_adCell addSubview:imgView];
 }
-
-
-
 
 @end

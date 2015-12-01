@@ -12,6 +12,4 @@
 
 @property (weak, nonatomic) IBOutlet UIView *adView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
-
 @end

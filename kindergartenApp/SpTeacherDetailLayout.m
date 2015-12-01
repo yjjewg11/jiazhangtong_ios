@@ -1,25 +1,25 @@
 //
-//  SpCourseHomeWFLayout.m
+//  SpTeacherDetailLayout.m
 //  kindergartenApp
 //
-//  Created by Mac on 15/11/25.
+//  Created by Mac on 15/12/1.
 //  Copyright © 2015年 funi. All rights reserved.
 //
 
-#import "SpCourseHomeWFLayout.h"
+#import "SpTeacherDetailLayout.h"
 
-#define Margin 10
-
-@interface SpCourseHomeWFLayout()
+@interface SpTeacherDetailLayout()
 {
     CGFloat _newMaxHeight;
 }
 
-@property (strong, nonatomic) NSMutableArray *attrsArray;         //存储所有布局属性的数组
+@property (strong, nonatomic) NSMutableArray *attrsArray;       //存储所有布局属性的数组
+
 
 @end
 
-@implementation SpCourseHomeWFLayout
+@implementation SpTeacherDetailLayout
+
 
 - (instancetype)init
 {
@@ -59,7 +59,7 @@
     if (indexPath.row == 0)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = 150;
+        itemHeight = 70;
         itemX = 0;
         itemY = 0;
         _newMaxHeight = itemY + itemHeight;
@@ -72,7 +72,7 @@
     else if (indexPath.row == 1)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = 142;
+        itemHeight = _webcellHeight;
         itemX = 0;
         itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;
@@ -124,5 +124,6 @@
     }
     
 }
+
 
 @end

@@ -1,25 +1,24 @@
 //
-//  SpCourseHomeWFLayout.m
+//  SpCourseAndSchoolListLayout.m
 //  kindergartenApp
 //
-//  Created by Mac on 15/11/25.
+//  Created by Mac on 15/11/30.
 //  Copyright © 2015年 funi. All rights reserved.
 //
 
-#import "SpCourseHomeWFLayout.h"
+#import "SpCourseAndSchoolListLayout.h"
 
-#define Margin 10
-
-@interface SpCourseHomeWFLayout()
+@interface SpCourseAndSchoolListLayout()
 {
     CGFloat _newMaxHeight;
 }
 
 @property (strong, nonatomic) NSMutableArray *attrsArray;         //存储所有布局属性的数组
 
+
 @end
 
-@implementation SpCourseHomeWFLayout
+@implementation SpCourseAndSchoolListLayout
 
 - (instancetype)init
 {
@@ -55,47 +54,16 @@
     CGFloat itemY = 0;
     
     UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+
+    itemWidth = KGSCREEN.size.width;
+    itemHeight = 100;
+    itemX = 0;
+    itemY = _newMaxHeight;
+    _newMaxHeight = itemY + itemHeight;
     
-    if (indexPath.row == 0)
-    {
-        itemWidth = KGSCREEN.size.width;
-        itemHeight = 150;
-        itemX = 0;
-        itemY = 0;
-        _newMaxHeight = itemY + itemHeight;
-        
-        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
-        
-        return attrs;
-    }
+    attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
     
-    else if (indexPath.row == 1)
-    {
-        itemWidth = KGSCREEN.size.width;
-        itemHeight = 142;
-        itemX = 0;
-        itemY = _newMaxHeight;
-        _newMaxHeight = itemY + itemHeight;
-        
-        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
-        
-        return attrs;
-    }
-    
-    else
-    {
-        itemWidth = KGSCREEN.size.width;
-        itemHeight = 100;
-        itemX = 0;
-        itemY = _newMaxHeight;
-        _newMaxHeight = itemY + itemHeight;
-        
-        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
-        
-        return attrs;
-    }
-    
-    return nil;
+    return attrs;
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
@@ -124,5 +92,6 @@
     }
     
 }
+
 
 @end

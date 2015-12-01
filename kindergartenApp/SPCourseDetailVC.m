@@ -112,25 +112,16 @@
     //创建按钮下面红线
     [self createBtnRedView];
     
-    
-    
-    
     //创建课程详情view
     SPCourseDetailWebView * courseDetailView = [[[NSBundle mainBundle] loadNibNamed:@"SPCourseDetailWebView" owner:nil options:nil] firstObject];
     _courseDetailView = courseDetailView;
     courseDetailView.frame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
-    
-    
-    
     
     //创建学校简介view
     SPCourseDetailScrollInfoWebView * schoolInfoView = [[[NSBundle mainBundle] loadNibNamed:@"SPCourseDetailScrollInfoWebView" owner:nil options:nil] firstObject];
     _schoolInfoView = schoolInfoView;
     schoolInfoView.frame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
     schoolInfoView.hidden = YES;
-    
-    
-    
     
     //创建家长评论view
     //tableview显示完
@@ -207,7 +198,7 @@
     ((UIView *)_redViews[0]).hidden = NO;
 }
 
-#pragma mark - 选择按钮显示效果
+#pragma mark - 上面按钮点击
 - (void)selBtn:(UIButton *)btn
 {
     if (btn.tag == 0)

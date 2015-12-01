@@ -261,7 +261,7 @@
 
 - (void)getSPCourseList:(NSString *)groupuuid map_point:(NSString *)map_point type:(NSString *)type sort:(NSString *)sort teacheruuid:(NSString *)teacheruuid pageNo:(NSString *)pageNo success:(void(^)(SPDataListVO * spCourseList))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getSPSchoolList:(NSString *)mapPoint sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getSPSchoolList:(NSString *)mapPoint pageNo:(NSString *)pageNo sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getSPCourseDetail:(NSString *)uuid success:(void(^)(SPCourseDetailVO * detailVO))success faild:(void(^)(NSString * errorMsg))faild;
 

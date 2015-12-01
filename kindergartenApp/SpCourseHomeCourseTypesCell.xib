@@ -132,7 +132,7 @@
                 <outlet property="pageCtrl" destination="pEU-2x-xrp" id="Z0r-zn-ME2"/>
                 <outlet property="scrollView" destination="AjL-1I-NgN" id="38B-xJ-rsI"/>
             </connections>
-            <point key="canvasLocation" x="264.5" y="172"/>
+            <point key="canvasLocation" x="231.5" y="176"/>
         </collectionViewCell>
     </objects>
     <resources>

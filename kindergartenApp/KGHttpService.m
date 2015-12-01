@@ -312,7 +312,8 @@
 }
 
 #pragma mark - 设置cookie
-- (void)setupCookie{
+- (void)setupCookie
+{
     NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
     [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
     [cookieDic setObject:_loginRespDomain.JSESSIONID forKey:NSHTTPCookieValue];
@@ -1295,9 +1296,9 @@
 }
 
 //学校列表
-- (void)getSPSchoolList:(NSString *)mapPoint sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getSPSchoolList:(NSString *)mapPoint pageNo:(NSString *)pageNo sort:(NSString *)sort success:(void(^)(SPDataListVO * spSchoolList))success faild:(void(^)(NSString * errorMsg))faild
 {
-    NSDictionary * dic = @{@"sort":sort};
+    NSDictionary * dic = @{@"sort":sort,@"pageNo":pageNo};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     

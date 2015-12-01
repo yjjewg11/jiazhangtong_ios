@@ -31,7 +31,7 @@ BackGroundViewStatus;
 
 @end
 
-@interface MXPullDownMenu : UIView<UITableViewDelegate, UITableViewDataSource>
+@interface MXPullDownMenu : UIView <UITableViewDelegate, UITableViewDataSource>
 
 - (MXPullDownMenu *)initWithArray:(NSArray *)array selectedColor:(UIColor *)color;
 

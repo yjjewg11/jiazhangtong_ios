@@ -7,14 +7,30 @@
 //
 
 #import "BaseViewController.h"
-#import "UIColor+Extension.h"
-#import "MobClick.h"
 
-@interface BaseViewController ()
+@interface BaseViewController () <NoNetViewDelegate>
 
 @end
 
 @implementation BaseViewController
+
+- (NoNetView *)noNetView
+{
+    if (_noNetView == nil)
+    {
+        _noNetView = [[[NSBundle mainBundle] loadNibNamed:@"NoNetView" owner:nil options:nil] firstObject];
+    }
+    return _noNetView;
+}
+
+- (SDRotationLoopProgressView *)loadingView
+{
+    if (_loadingView == nil)
+    {
+        _loadingView = [SDRotationLoopProgressView progressView];
+    }
+    return _loadingView;
+}
 
 - (void) viewDidAppear:(BOOL)animated
 {
@@ -51,5 +67,41 @@
     bar.barTintColor = KGColorFrom16(0xff4966);
 }
 
+#pragma mark - 菊花相关
+- (void)showLoadView
+{
+    self.loadingView.frame = CGRectMake(0, 0, 100 * KWidth_Scale, 100 * KWidth_Scale);
+    
+    self.loadingView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
+    
+    [self.view addSubview: self.loadingView];
+}
+
+- (void)hidenLoadView
+{
+    [UIView animateWithDuration:0.3 animations:^
+     {
+         [self.loadingView removeFromSuperview];
+     }];
+}
+
+- (void)showNoNetView
+{
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.noNetView.delegate = self;
+    
+    self.noNetView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
+    
+    [self.view addSubview:self.noNetView];
+}
+
+- (void)hidenNoNetView
+{
+    [UIView animateWithDuration:0.3 animations:^
+     {
+         [self.noNetView removeFromSuperview];
+     }];
+}
 
 @end

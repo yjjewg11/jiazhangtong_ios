@@ -7,10 +7,11 @@
 //
 
 #import "SpCourseHomeAdCell.h"
+#import "FeHourGlass.h"
 
 @interface SpCourseHomeAdCell()
 {
-
+    FeHourGlass * _hourGlass;
 }
 
 
@@ -21,8 +22,23 @@
 
 - (void)awakeFromNib
 {
+    _hourGlass = [[FeHourGlass alloc] initWithView:self];
     
+    [self.adView addSubview:_hourGlass];
     
+    [_hourGlass showWhileExecutingBlock:^
+    {
+        [self myTask];
+    }
+    completion:^
+    {
+        
+    }];
+    
+}
+
+- (void)myTask
+{
     
 }
 

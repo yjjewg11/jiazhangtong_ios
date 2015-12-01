@@ -7,13 +7,13 @@
 //
 
 #import "SpCourseDetailTableVC.h"
-#import "SPCouseInfoCell.h"
+
 #import "SPCommentDomain.h"
-#import "SPPresentsComment.h"
+
 #import "KGHttpService.h"
 #import "KGHUD.h"
 #import "StudentInfoHeaderView.h"
-#import "SPTextCellOfCourse.h"
+
 #import "MJRefresh.h"
 #import "SpCourseCommentCell.h"
 #import "MJExtension.h"

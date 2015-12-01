@@ -41,6 +41,11 @@
     return self;
 }
 
+- (void)selectRowAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated scrollPosition:(UITableViewScrollPosition)scrollPosition
+{
+    
+}
+
 - (MXPullDownMenu *)initWithArray:(NSArray *)array selectedColor:(UIColor *)color
 {
     self = [super init];
@@ -105,20 +110,14 @@
 
 
 #pragma mark - tapEvent
-
-
-
 // 处理菜单点击事件.
 - (void)tapMenu:(UITapGestureRecognizer *)paramSender
 {
     CGPoint touchPoint = [paramSender locationInView:self];
     
     // 得到tapIndex
-    
     NSInteger tapIndex = touchPoint.x / (self.frame.size.width / _numOfMenu);
-    
 
-    
     for (int i = 0; i < _numOfMenu; i++) {
         if (i != tapIndex) {
             [self animateIndicator:_indicators[i] Forward:NO complete:^{
@@ -127,7 +126,6 @@
             }];
         }
     }
-    
     
     if (tapIndex == _currentSelectedMenudIndex && _show) {
         
@@ -146,9 +144,6 @@
         }];
         
     }
-
- 
-
 }
 
 - (void)tapBackGround:(UITapGestureRecognizer *)paramSender
@@ -172,7 +167,6 @@
 
 
 #pragma mark tableViewDataSource
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [_array[_currentSelectedMenudIndex] count];
@@ -204,7 +198,6 @@
 
 
 #pragma mark - animation
-
 - (void)animateIndicator:(CAShapeLayer *)indicator Forward:(BOOL)forward complete:(void(^)())complete
 {
     [CATransaction begin];
@@ -226,10 +219,6 @@
     
     complete();
 }
-
-
-
-
 
 - (void)animateBackGroundView:(UIView *)view show:(BOOL)show complete:(void(^)())complete
 {
@@ -315,8 +304,6 @@
 
 
 #pragma mark - drawing
-
-
 - (CAShapeLayer *)creatIndicatorWithColor:(UIColor *)color andPosition:(CGPoint)point
 {
     CAShapeLayer *layer = [CAShapeLayer new];
@@ -392,8 +379,6 @@
 
 
 #pragma mark - otherMethods
-
-
 - (CGSize)calculateTitleSizeWithString:(NSString *)string
 {
     CGFloat fontSize = 13.0;
@@ -417,7 +402,6 @@
     CAShapeLayer *indicator = (CAShapeLayer *)_indicators[_currentSelectedMenudIndex];
     indicator.position = CGPointMake(title.position.x + title.frame.size.width / 2 + 8, indicator.position.y);
 }
-
 
 @end
 

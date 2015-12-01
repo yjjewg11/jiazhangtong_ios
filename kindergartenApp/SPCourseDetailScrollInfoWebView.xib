@@ -16,7 +16,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </webView>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="O8q-Gr-x2S" firstAttribute="top" secondItem="jiz-XC-jgp" secondAttribute="top" constant="10" id="Aiu-sj-dBV"/>
                 <constraint firstAttribute="bottom" secondItem="O8q-Gr-x2S" secondAttribute="bottom" id="EsU-oK-5kU"/>

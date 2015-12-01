@@ -16,4 +16,8 @@
 
 @property (strong, nonatomic) NSString * content;
 
+@property (strong, nonatomic) NSString * course_title;
+
+@property (assign, nonatomic) NSInteger ct_stars;
+
 @end

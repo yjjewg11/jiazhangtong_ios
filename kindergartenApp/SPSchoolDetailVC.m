@@ -19,7 +19,7 @@
 #import "SPCourseDomain.h"
 #import "SPCourseDetailVC.h"
 #import "KGDateUtil.h"
-#import "SPTeacherDetailVC.h"
+#import "SpTeacherDetailViewController.h"
 #import "PopupView.h"
 #import "ShareViewController.h"
 #import "InteractViewController.h"
@@ -609,8 +609,6 @@
         }
         
     }
-    
-    NSLog(@"%f",scrollView.contentOffset.x);
 }
 
 
@@ -629,11 +627,11 @@
     }
     else if (type == 1)  //跳转到教师详情
     {
-        SPTeacherDetailVC * detailVC = [[SPTeacherDetailVC alloc] init];
+        SpTeacherDetailViewController * detailVC = [[SpTeacherDetailViewController alloc] init];
         
         SPTeacherDomain * domain = self.teacherList[indexPath.row];
         
-        detailVC.domain = domain;
+        detailVC.teacheruuid = domain.uuid;
         
         [self.navigationController pushViewController:detailVC animated:YES];
     }
