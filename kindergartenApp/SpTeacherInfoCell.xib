@@ -67,7 +67,7 @@
                             <constraint firstAttribute="width" constant="63" id="XQD-kT-nBf"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7V-it-iIp">
@@ -75,13 +75,14 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="chy-tc-uQB"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="O7V-it-iIp" secondAttribute="bottom" constant="8" id="EJv-EZ-r2H"/>
                 <constraint firstItem="O7V-it-iIp" firstAttribute="leading" secondItem="0Rz-hU-6L8" secondAttribute="trailing" id="FBi-BY-Ohu"/>
@@ -102,7 +103,7 @@
                 <outlet property="starVIew" destination="1UM-TP-EBR" id="xhS-Pi-sxT"/>
                 <outlet property="teacherCourse" destination="O7V-it-iIp" id="SMw-5p-430"/>
             </connections>
-            <point key="canvasLocation" x="235.5" y="254"/>
+            <point key="canvasLocation" x="241.5" y="235"/>
         </collectionViewCell>
     </objects>
     <resources>

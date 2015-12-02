@@ -300,4 +300,7 @@
 - (void)MySPCourseSaveComment:(NSString *)extuuid classuuid:(NSString *)classuuid type:(NSString *)type score:(NSString *)score content:(NSString *)content success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getListAll:(NSString *)classuuid pageNo:(NSString *)pageNo success:(void(^)(MySPAllCourseListVO * courseListVO))success faild:(void(^)(NSString * errorMsg))faild;
+
+#pragma mark - 招生模块
+- (void)getAllSchoolList:(NSString *)groupuuid pageNo:(NSString *)pageNo mappoint:(NSString *)map_point sort:(NSString *)sort success:(void(^)(NSArray * listArr))success faild:(void(^)(NSString * errorMsg))faild;
 @end

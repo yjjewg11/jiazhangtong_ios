@@ -16,6 +16,7 @@
 #import "SpCourseHomeCourseCell.h"
 #import "SpTeacherInfoCell.h"
 #import "SpTeacherDetailWebViewCell.h"
+#import "SPCourseDetailVC.h"
 
 @interface SpTeacherDetailViewController () <UIWebViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -31,6 +32,10 @@
     UIWebView * _webView;
     
     SpTeacherDetailLayout * _layout;
+    
+    BOOL _canReqData;
+    
+    NSInteger _pageNo;
 }
 
 
@@ -47,6 +52,8 @@ static NSString *const CourseCellID = @"coursecellcoll";
     [super viewDidLoad];
     
     self.title = @"教师详情";
+    
+    _pageNo = 2;
     
     //读取坐标
     NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
@@ -152,10 +159,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
     
     _layout.webcellHeight = wb.frame.size.height;
     
-//    wb.delegate = nil;
-//    
-//    wb = nil;
-    
     [self hidenLoadView];
     
     [self.view addSubview:_collectionView];
@@ -250,5 +253,68 @@ static NSString *const CourseCellID = @"coursecellcoll";
     
     return nil;
 }
+
+#pragma mark - 自动翻页
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
+    CGFloat maximumOffset = size.height;
+    //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
+    if(currentOffset >= maximumOffset)
+    {
+        if (_canReqData == YES)
+        {
+            _canReqData = NO;
+            
+            if (_mappoint == nil)
+            {
+                _mappoint = @"";
+            }
+            
+            [[KGHttpService sharedService] getSPCourseList:@"" map_point:@"" type:@"" sort:@"" teacheruuid:_teacherDomain.uuid pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(SPDataListVO *spCourseList)
+             {
+                 NSMutableArray * marr = [NSMutableArray arrayWithArray:[SPCourseDomain objectArrayWithKeyValuesArray:spCourseList.data]];
+                 
+                 if (marr.count == 0)
+                 {
+                    
+                 }
+                 else
+                 {
+                     _pageNo++;
+                     [_courseList addObjectsFromArray:marr];
+                     [_collectionView reloadData];
+                     
+                     _canReqData = YES;
+                 }
+                 
+             }
+             faild:^(NSString *errorMsg)
+             {
+                 [self showNoNetView];
+             }];
+            
+        }
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row >= 2)
+    {
+        SPCourseDetailVC * vc = [[SPCourseDetailVC alloc] init];
+        
+        SPCourseDomain * domain = _courseList[indexPath.row - 2];
+        
+        vc.uuid = domain.uuid;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 
 @end

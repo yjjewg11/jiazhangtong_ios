@@ -36,8 +36,7 @@
         
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
         format.dateFormat = @"YY-MM-dd HH:mm:ss";
-        NSDate *date = [[NSDate alloc] init];
-        date = [format dateFromString:_spTimetableDomain.plandate];
+        NSDate *date = [format dateFromString:_spTimetableDomain.plandate];
         format.dateFormat = @"yyyy-MM-dd";
         NSString * currentDateStr = [format stringFromDate:currentDate];
         NSString * dateStr = [format stringFromDate:date];

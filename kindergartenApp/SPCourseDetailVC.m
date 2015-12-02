@@ -91,7 +91,7 @@
     self.reqFlag = YES;
     self.reqFlagOFComment = YES;
     
-    self.title = @"";
+    self.title = @"课程详情";
 
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     

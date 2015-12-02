@@ -16,8 +16,9 @@
 
 @implementation SpTeacherDetailWebViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    self.webview.scrollView.scrollEnabled = NO;
 }
 
 - (void)setData:(NSString *)content

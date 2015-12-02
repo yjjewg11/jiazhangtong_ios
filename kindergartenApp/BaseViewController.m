@@ -32,18 +32,6 @@
     return _loadingView;
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [MobClick beginLogPageView:cName];
-}
-
--(void) viewDidDisappear:(BOOL)animated
-{
-    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [MobClick endLogPageView:cName];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];

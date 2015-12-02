@@ -72,7 +72,7 @@
     else if (indexPath.row == 1)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = _webcellHeight;
+        itemHeight = _webcellHeight + 47 + 47;
         itemX = 0;
         itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;

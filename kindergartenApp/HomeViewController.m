@@ -34,6 +34,7 @@
 #import "KGNavigationController.h"
 #import "LoginViewController.h"
 #import "YouHuiVC.h"
+#import "EnrolStudentsHomeVC.h"
 #import <CoreLocation/CoreLocation.h>
 
 #import "AdMoGoDelegateProtocol.h"
@@ -354,7 +355,9 @@
 //            [self showChildView:sharedAdView];
             break;
         } case 11:
-            baseVC = [[IntroductionViewController alloc] init];
+//            baseVC = [[IntroductionViewController alloc] init];
+            
+            baseVC = [[EnrolStudentsHomeVC alloc] init];
             break;
         case 12:
             baseVC = [[AnnouncementListViewController alloc] init];
@@ -434,7 +437,7 @@
     if(domain) {
         BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
         vc.title = domain.name;
-        vc.url = domain.url;
+        vc.url = @"http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

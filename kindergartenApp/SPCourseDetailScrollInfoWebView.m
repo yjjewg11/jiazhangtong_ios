@@ -18,7 +18,6 @@
 
 - (void)setData:(NSString *)url
 {
-    
     self.webView.scrollView.showsHorizontalScrollIndicator = YES;
     self.webView.scrollView.showsVerticalScrollIndicator = YES;
     

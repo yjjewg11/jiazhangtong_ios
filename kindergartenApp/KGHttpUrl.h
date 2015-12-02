@@ -193,4 +193,7 @@
 //取消收藏
 + (NSString *)getDelFavoritesUrl;
 
+#pragma mark - 招生模块
++ (NSString *)getAllSchoolListUrl;
+
 @end

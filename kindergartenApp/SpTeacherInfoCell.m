@@ -33,7 +33,7 @@
     [self.img sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.img.layer.masksToBounds = YES;
-    self.img.layer.cornerRadius = 50;
+    self.img.layer.cornerRadius = 25;
     self.img.layer.borderWidth = 1;
     self.img.layer.borderColor = [[UIColor groupTableViewBackgroundColor] CGColor];
     

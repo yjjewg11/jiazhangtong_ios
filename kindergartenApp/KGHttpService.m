@@ -28,6 +28,7 @@
 #import "SPCourseTypeDomain.h"
 #import "SPCourseDetailDomain.h"
 #import "SPSchoolDomain.h"
+#import "EnrolStudentsSchoolDomain.h"
 
 @implementation KGHttpService
 
@@ -1366,9 +1367,7 @@
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
-             SPShareSaveDomain * tempResp = [[SPShareSaveDomain alloc] init];
-             
-             tempResp = [SPShareSaveDomain objectWithKeyValues:responseObject];
+             SPShareSaveDomain * tempResp = [SPShareSaveDomain objectWithKeyValues:responseObject];
              
              success(tempResp);
          }
@@ -1476,9 +1475,7 @@
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
-             SPShareSaveDomain * tempResp = [[SPShareSaveDomain alloc] init];
-             
-             tempResp = [SPShareSaveDomain objectWithKeyValues:responseObject];
+             SPShareSaveDomain * tempResp = [SPShareSaveDomain objectWithKeyValues:responseObject];
              
              success(tempResp);
          }
@@ -1822,5 +1819,38 @@
      }];
 }
 
+#pragma mark - 招生模块
+
+- (void)getAllSchoolList:(NSString *)groupuuid pageNo:(NSString *)pageNo mappoint:(NSString *)map_point sort:(NSString *)sort success:(void(^)(NSArray * listArr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    
+    NSDictionary * dict = @{@"groupuuid":groupuuid,@"pageNo":pageNo,@"map_point":map_point,@"sort":sort};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getAllSchoolListUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             MySPAllCourseListVO * tempResp = [MySPAllCourseListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             NSArray * arr = [EnrolStudentsSchoolDomain objectArrayWithKeyValuesArray:tempResp.data];
+             
+             success(arr);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
 
 @end

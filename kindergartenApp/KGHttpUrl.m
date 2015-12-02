@@ -446,5 +446,11 @@
     return URL(baseServiceURL, modifyPWDURL);
 }
 
+#pragma mark - 招生模块
+
++ (NSString *)getAllSchoolListUrl{
+    return URL(baseServiceURL, @"rest/group/kdlistByPage.json");
+}
+
 
 @end

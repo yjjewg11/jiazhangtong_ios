@@ -16,8 +16,6 @@
 @interface SpCourseHomeCourseTypesCell() <UIScrollViewDelegate>
 {
     __weak IBOutlet UIScrollView *scrollView;
-    
-    __weak IBOutlet UIPageControl *pageCtrl;
 }
 
 
@@ -33,14 +31,7 @@
 #pragma mark - scrollview代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView1
 {
-    if (scrollView1.contentOffset.x == 0)
-    {
-        pageCtrl.currentPage = 0;
-    }
-    else if(scrollView1.contentOffset.x == KGSCREEN.size.width)
-    {
-        pageCtrl.currentPage = 1;
-    }
+    
 }
 
 #pragma mark - 设置数据
@@ -49,11 +40,10 @@
     scrollView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     scrollView.bounces = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.contentSize = CGSizeMake(KGSCREEN.size.width * 2, 0);
+    scrollView.contentSize = CGSizeMake(KGSCREEN.size.width, 0);
     scrollView.pagingEnabled = YES;
     
     CGFloat margin4 = (KGSCREEN.size.width - (4 * (ItemWidth))) / 5;
-    CGFloat margin3 = (KGSCREEN.size.width - (3 * (ItemWidth))) / 4;
     
     //-1是因为最后一个是查看全部，不用显示上去
     for (NSInteger i=0; i<datas.count-1; i++)
@@ -66,18 +56,19 @@
         item.courseBtn.tag = i;
         [item.courseBtn addTarget:self action:@selector(courseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
+        CGFloat itemY = 0;
         CGFloat itemX = 0;
-        if (i<=3)
+        
+        if (i<=4)
         {
             itemX = margin4 + (margin4 * i) + ItemWidth * i;
         }
         else
         {
-            itemX = margin3 + margin3 + (margin4 * i) + ItemWidth * i;
+            itemX = margin4 + (margin4 * (i - 4)) + ItemWidth * (i - 4);
+            itemY = 64 + 10;
         }
-        
-        CGFloat itemY = 0;
-        
+    
         item.frame = CGRectMake(itemX, itemY, ItemWidth, ItemHeight);
         
         [scrollView addSubview:item];

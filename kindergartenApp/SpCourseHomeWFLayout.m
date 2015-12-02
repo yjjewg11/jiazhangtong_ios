@@ -72,7 +72,7 @@
     else if (indexPath.row == 1)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = 142;
+        itemHeight = 200;
         itemX = 0;
         itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;

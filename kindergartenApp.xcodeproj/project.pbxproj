@@ -273,6 +273,11 @@
 		04F9AC5E1BFC82B4004DA63D /* MySPAllListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC5D1BFC82B4004DA63D /* MySPAllListHeaderView.m */; };
 		04F9AC601BFC82D3004DA63D /* MySPAllListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9AC5F1BFC82D3004DA63D /* MySPAllListHeaderView.xib */; };
 		04F9C6791BEC457B000DD5CE /* SPSchoolDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C6781BEC457B000DD5CE /* SPSchoolDetailTableVC.m */; };
+		04F9C9881C0ECDA40078A5F5 /* EnrolStudentsHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C9871C0ECDA40078A5F5 /* EnrolStudentsHomeVC.m */; };
+		04F9C98B1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C98A1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m */; };
+		04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C98E1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m */; };
+		04F9C9941C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C9921C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.m */; };
+		04F9C9951C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9C9931C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib */; };
 		04F9F2F21BF9B55500470F0C /* MySPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2F11BF9B55500470F0C /* MySPCommentDomain.m */; };
 		04F9F2F61BF9BF4500470F0C /* MySPCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2F41BF9BF4500470F0C /* MySPCourseCommentCell.m */; };
 		04F9F2F71BF9BF4500470F0C /* MySPCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9F2F51BF9BF4500470F0C /* MySPCourseCommentCell.xib */; };
@@ -1086,6 +1091,15 @@
 		04F9AC5F1BFC82D3004DA63D /* MySPAllListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPAllListHeaderView.xib; sourceTree = "<group>"; };
 		04F9C6771BEC457B000DD5CE /* SPSchoolDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSchoolDetailTableVC.h; sourceTree = "<group>"; };
 		04F9C6781BEC457B000DD5CE /* SPSchoolDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSchoolDetailTableVC.m; sourceTree = "<group>"; };
+		04F9C9861C0ECDA40078A5F5 /* EnrolStudentsHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentsHomeVC.h; sourceTree = "<group>"; };
+		04F9C9871C0ECDA40078A5F5 /* EnrolStudentsHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentsHomeVC.m; sourceTree = "<group>"; };
+		04F9C9891C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentsSchoolDomain.h; sourceTree = "<group>"; };
+		04F9C98A1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentsSchoolDomain.m; sourceTree = "<group>"; };
+		04F9C98D1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentsHomeLayout.h; sourceTree = "<group>"; };
+		04F9C98E1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentsHomeLayout.m; sourceTree = "<group>"; };
+		04F9C9911C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentsSchoolCell.h; sourceTree = "<group>"; };
+		04F9C9921C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentsSchoolCell.m; sourceTree = "<group>"; };
+		04F9C9931C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentsSchoolCell.xib; sourceTree = "<group>"; };
 		04F9F2F01BF9B55500470F0C /* MySPCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCommentDomain.h; sourceTree = "<group>"; };
 		04F9F2F11BF9B55500470F0C /* MySPCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCommentDomain.m; sourceTree = "<group>"; };
 		04F9F2F31BF9BF4500470F0C /* MySPCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseCommentCell.h; sourceTree = "<group>"; };
@@ -2577,6 +2591,62 @@
 			name = CollectionCell;
 			sourceTree = "<group>";
 		};
+		04F9C9821C0ECD380078A5F5 /* ZhaoSheng */ = {
+			isa = PBXGroup;
+			children = (
+				04F9C9851C0ECD510078A5F5 /* View */,
+				04F9C9841C0ECD480078A5F5 /* Model */,
+				04F9C9831C0ECD420078A5F5 /* Controller */,
+			);
+			name = ZhaoSheng;
+			sourceTree = "<group>";
+		};
+		04F9C9831C0ECD420078A5F5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04F9C9861C0ECDA40078A5F5 /* EnrolStudentsHomeVC.h */,
+				04F9C9871C0ECDA40078A5F5 /* EnrolStudentsHomeVC.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		04F9C9841C0ECD480078A5F5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04F9C9891C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.h */,
+				04F9C98A1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		04F9C9851C0ECD510078A5F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04F9C9901C0ED6D50078A5F5 /* collcells */,
+				04F9C98C1C0ED5480078A5F5 /* layouts */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		04F9C98C1C0ED5480078A5F5 /* layouts */ = {
+			isa = PBXGroup;
+			children = (
+				04F9C98D1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.h */,
+				04F9C98E1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m */,
+			);
+			name = layouts;
+			sourceTree = "<group>";
+		};
+		04F9C9901C0ED6D50078A5F5 /* collcells */ = {
+			isa = PBXGroup;
+			children = (
+				04F9C9911C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.h */,
+				04F9C9921C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.m */,
+				04F9C9931C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib */,
+			);
+			name = collcells;
+			sourceTree = "<group>";
+		};
 		04F9FB281BF1A64B00AEFB88 /* UMAnalytics_Sdk_3.5.10 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3415,6 +3485,7 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				04F9C9821C0ECD380078A5F5 /* ZhaoSheng */,
 				04FEC5671BEDC98A00C642A6 /* Youhuihuodong */,
 				F4885C601B7C4FF000AF97CF /* Favorites */,
 				F4DF3B9D1B78AC40001D9DF7 /* Timetable */,
@@ -4705,6 +4776,7 @@
 				04A4DE391BF484DF002ABBB1 /* adsmogoshareview_below_arrow@2x.png in Resources */,
 				F4CF7A931B79C5B400BFAA1E /* TimetableItemTableViewCell.xib in Resources */,
 				04A4DE351BF484DF002ABBB1 /* adsmogo_mail_iphone@2x.png in Resources */,
+				04F9C9951C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib in Resources */,
 				04F9FBA61BF1A77E00AEFB88 /* UMSLoginViewController.xib in Resources */,
 				04A4DE6B1BF484DF002ABBB1 /* webview_bar_back_hover@2x.png in Resources */,
 				04A4DE4B1BF484DF002ABBB1 /* adsmogo_corner@2x.png in Resources */,
@@ -5030,6 +5102,7 @@
 				04FB7CBC1C0DA84000FD3E31 /* SpCourseDetailTableVC.m in Sources */,
 				4D5CE7711B7E4333002F1088 /* SettingViewController.m in Sources */,
 				2489B6681B5AB49E00039E70 /* UIView+WebCacheOperation.m in Sources */,
+				04F9C9881C0ECDA40078A5F5 /* EnrolStudentsHomeVC.m in Sources */,
 				248B6ABE1B19B53000FCB98F /* QCSlideSwitchDto.m in Sources */,
 				F48783981B58DA1700CDC1A8 /* UIAlertView+AFNetworking.m in Sources */,
 				4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */,
@@ -5068,6 +5141,7 @@
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
 				04F75E1E1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m in Sources */,
 				24AA0B481B690F4300DAC03B /* UUProgressHUD.m in Sources */,
+				04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */,
 				04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */,
 				04F9FB6F1BF1A67400AEFB88 /* UMTextView.m in Sources */,
 				24DED4FC1B7CCFD1005BC46E /* StudentOtherInfoViewController.m in Sources */,
@@ -5083,6 +5157,7 @@
 				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
 				04F9FB6D1BF1A67400AEFB88 /* UMPostTableViewCell.m in Sources */,
 				F4EC98911B62305700F5721F /* TopicTableViewCell.m in Sources */,
+				04F9C98B1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m in Sources */,
 				F48783A01B58DA1700CDC1A8 /* MASConstraint.m in Sources */,
 				249926E01B80545A0071DFB3 /* KGRange.m in Sources */,
 				F48783961B58DA1700CDC1A8 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -5269,6 +5344,7 @@
 				2491BB521B6E27F00052532B /* RecipesStudentInfoTableViewCell.m in Sources */,
 				F4E36D5C1B85B49D009BD909 /* DoImagePickerController.m in Sources */,
 				24AA0B531B69134400DAC03B /* NSDate+Utils.m in Sources */,
+				04F9C9941C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.m in Sources */,
 				04F3D4571BF47FD2007E7AC0 /* AdMoGoBaiduSingleton.m in Sources */,
 				F48783B11B58DA1700CDC1A8 /* NSObject+MJCoding.m in Sources */,
 				04FF475E1C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m in Sources */,

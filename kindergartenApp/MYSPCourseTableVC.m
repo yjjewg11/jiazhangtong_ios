@@ -121,9 +121,7 @@
     {
         [[KGHttpService sharedService] MySPCourseList:[NSString stringWithFormat:@"%ld",(long)self.pageNo] isdisable:@"0" success:^(SPDataListVO *msg)
         {
-            NSMutableArray * marr = [NSMutableArray array];
-            
-            marr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+            NSMutableArray * marr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
              
             if (marr.count == 0)
             {
@@ -159,9 +157,7 @@
     {
         [[KGHttpService sharedService] MySPCourseList:[NSString stringWithFormat:@"%ld",(long)self.pageNo] isdisable:@"1" success:^(SPDataListVO *msg)
         {
-            NSMutableArray * marr = [NSMutableArray array];
-            
-            marr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
+             NSMutableArray * marr = [NSMutableArray arrayWithArray:[MySPCourseDomain objectArrayWithKeyValuesArray:msg.data]];
              
             if (marr.count == 0)
             {
