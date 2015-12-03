@@ -10,6 +10,7 @@
 #import "KGHttpService.h"
 #import "MJRefresh.h"
 #import "EnrolStudentsHomeLayout.h"
+#import "EnrolStudentSchoolDetailVC.h"
 #import "EnrolStudentsSchoolCell.h"
 
 @interface EnrolStudentsHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate>
@@ -382,7 +383,22 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    EnrolStudentSchoolDetailVC * vc = [[EnrolStudentSchoolDetailVC alloc] init];
     
+    if ([_currentSortName isEqualToString:@"intelligent"])
+    {
+        vc.groupuuid = ((EnrolStudentsSchoolDomain *)_schoolListDataOfIntelligent[indexPath.row]).uuid;
+    }
+    else if ([_currentSortName isEqualToString:@"distance"])
+    {
+        vc.groupuuid = ((EnrolStudentsSchoolDomain *)_schoolListDataOfDistance[indexPath.row]).uuid;
+    }
+    else
+    {
+        vc.groupuuid = ((EnrolStudentsSchoolDomain *)_schoolListDataOfAppraise[indexPath.row]).uuid;
+    }
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

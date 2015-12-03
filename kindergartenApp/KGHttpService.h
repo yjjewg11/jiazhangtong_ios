@@ -33,6 +33,7 @@
 #import "MySPCourseTeacherList.h"
 #import "MySPAllCourseListVO.h"
 #import "SPCourseDetailVO.h"
+#import "EnrolStudentDataVO.h"
 
 @interface KGHttpService : NSObject
 
@@ -303,4 +304,6 @@
 
 #pragma mark - 招生模块
 - (void)getAllSchoolList:(NSString *)groupuuid pageNo:(NSString *)pageNo mappoint:(NSString *)map_point sort:(NSString *)sort success:(void(^)(NSArray * listArr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getZhaoShengSchoolDetail:(NSString *)groupuuid mappoint:(NSString *)map_point success:(void(^)(EnrolStudentDataVO * vo))success faild:(void(^)(NSString * errorMsg))faild;
 @end

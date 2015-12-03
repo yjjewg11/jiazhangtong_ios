@@ -55,7 +55,7 @@
     
     NSArray * strArr = [domain.summary componentsSeparatedByString:@","];
     
-    NSLog(@"%@",strArr);
+    NSLog(@"奖杯有: %@",strArr);
     
 }
 

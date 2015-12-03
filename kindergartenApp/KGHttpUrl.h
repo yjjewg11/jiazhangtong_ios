@@ -195,5 +195,6 @@
 
 #pragma mark - 招生模块
 + (NSString *)getAllSchoolListUrl;
++ (NSString *)getZhaoShengSchoolDetailUrl;
 
 @end

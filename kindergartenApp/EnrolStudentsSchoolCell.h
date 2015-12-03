@@ -10,5 +10,7 @@
 #import "EnrolStudentsSchoolDomain.h"
 
 @interface EnrolStudentsSchoolCell : UICollectionViewCell
+
 - (void)setData:(EnrolStudentsSchoolDomain *)domain;
+
 @end

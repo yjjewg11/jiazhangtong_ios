@@ -452,5 +452,8 @@
     return URL(baseServiceURL, @"rest/group/kdlistByPage.json");
 }
 
++ (NSString *)getZhaoShengSchoolDetailUrl{
+    return URL(baseServiceURL, @"rest/group/getKD.json");
+}
 
 @end
