@@ -19,6 +19,7 @@
 #import "KGHUD.h"
 #import "CardInfoDomain.h"
 #import "StudentOtherInfoViewController.h"
+#import "EnrolStudentMySchoolVC.h"
 
 #define StudentInfoCellIdentifier @"StudentInfoCellIdentifier"
 #define StudentOtherInfoCellIdentifier @"StudentOtherInfoCellIdentifier"
@@ -50,7 +51,8 @@
 }
 
 //获取绑定的卡号列表
-- (void)getBuildCardInfo {
+- (void)getBuildCardInfo
+{
     [[KGHUD sharedHud] show:self.contentView];
     
     [[KGHttpService sharedService] getBuildCardList:_studentInfo.uuid success:^(NSArray *cardArray) {
@@ -147,8 +149,6 @@
 
 
 #pragma UITableView delegate
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [tableDataSource count];
 }
@@ -258,6 +258,15 @@
         } else {
             [self editStudentOtherInfo:indexPath.section];
         }
+    }
+    
+    if (indexPath.section == 1 && indexPath.row == 0)
+    {
+        EnrolStudentMySchoolVC * vc = [[EnrolStudentMySchoolVC alloc] init];
+        
+        vc.uuid = self.studentInfo.groupuuid;
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

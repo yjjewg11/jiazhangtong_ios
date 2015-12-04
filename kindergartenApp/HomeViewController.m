@@ -223,7 +223,8 @@
 
 
 //选择机构
-- (void)didSelectedGroupList:(UIButton *)sender {
+- (void)didSelectedGroupList:(UIButton *)sender
+{
     
     GroupDomain * domain = (GroupDomain *)sender.targetObj;
     [titleBtn setText:domain.company_name];
@@ -355,8 +356,6 @@
 //            [self showChildView:sharedAdView];
             break;
         } case 11:
-//            baseVC = [[IntroductionViewController alloc] init];
-            
             baseVC = [[EnrolStudentsHomeVC alloc] init];
             break;
         case 12:

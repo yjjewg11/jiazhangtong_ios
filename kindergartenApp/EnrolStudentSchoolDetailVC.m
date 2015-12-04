@@ -372,6 +372,7 @@ static NSString *const NoDataCell = @"nodata";
         case 2:
         {
             _dataSourceType = DataSource_PingLun;
+            _collectionView.bounces = YES;
             _oriLayout.isCommentCell = YES;
             if (_commentsData == nil)
             {
@@ -388,7 +389,6 @@ static NSString *const NoDataCell = @"nodata";
         default:
             break;
     }
-
 }
 
 #pragma mark - 初始化collectionview

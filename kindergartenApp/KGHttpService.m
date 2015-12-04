@@ -1881,4 +1881,74 @@
      }];
 }
 
+- (void)getMySchoolComment:(NSString *)groupuuid success:(void(^)(EnrolStudentDataVO * vo))success faild:(void(^)(NSString * errorMsg))faild
+{
+    NSDictionary * dict = @{@"groupuuid":groupuuid};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMySchoolCommentUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             EnrolStudentDataVO * tempResp = [EnrolStudentDataVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+- (void)MySchoolSaveComment:(NSString *)extuuid classuuid:(NSString *)classuuid type:(NSString *)type score:(NSString *)score content:(NSString *)content anonymous:(NSString *)anonymous success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (extuuid == nil) extuuid=@"";
+    if (classuuid == nil) classuuid=@"";
+    if (type == nil) type=@"";
+    if (score == nil) score=@"";
+    if (content == nil) content=@"";
+    if (anonymous == nil) anonymous=@"";
+    
+    NSDictionary * dict = @{
+                            @"ext_uuid":extuuid,
+                            @"class_uuid":classuuid,
+                            @"type":type,
+                            @"score":score,
+                            @"content":content,
+                            @"anonymous":anonymous
+                            };
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [mgr POST:[KGHttpUrl getSaveMySPCommentURL] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             success(baseDomain.ResMsg.message);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         NSLog(@"%@",error);
+         [self requestErrorCode:error faild:faild];
+     }];
+}
 @end

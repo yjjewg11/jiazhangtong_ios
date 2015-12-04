@@ -19,6 +19,7 @@
 #import "MeFunTableViewCell.h"
 #import "StudentInfoViewController.h"
 #import "MySPCourseVC.h"
+#import "EnrolStudentMySchoolVC.h"
 
 #define CellIdentifier @"MyCellIdentifier"
 #define CellDefIdentifier @"MyDefCellIdentifier"
@@ -155,7 +156,8 @@
 }
 
 
-- (void)funCellSelected:(NSIndexPath *)indexPath {
+- (void)funCellSelected:(NSIndexPath *)indexPath
+{
     NSInteger index = indexPath.section - [studentMArray count];
     
     switch (index) {

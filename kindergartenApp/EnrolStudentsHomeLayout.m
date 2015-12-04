@@ -56,7 +56,16 @@
     UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
     itemWidth = KGSCREEN.size.width - 20;
-    itemHeight = 144;
+    
+    if ([self.haveSummaryInIndex[indexPath.row] isEqualToString:@"YES"])
+    {
+        itemHeight = 144;
+    }
+    else
+    {
+        itemHeight = 85;
+    }
+    
     itemX = 10;
     itemY = _newMaxHeight;
     _newMaxHeight = itemY + itemHeight + 10;

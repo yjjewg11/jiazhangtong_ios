@@ -12,6 +12,7 @@
 #import "EnrolStudentsHomeLayout.h"
 #import "EnrolStudentSchoolDetailVC.h"
 #import "EnrolStudentsSchoolCell.h"
+#import "EnrolStudentsSchoolDomain.h"
 
 @interface EnrolStudentsHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -33,6 +34,8 @@
     NSInteger _pageNoOfIntelligent;
     NSInteger _pageNoOfAppraise;
     NSInteger _pageNoOfDistance;
+    
+    EnrolStudentsHomeLayout * _layout;
 }
 
 
@@ -81,6 +84,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     //创建coll布局
     EnrolStudentsHomeLayout *layout = [[EnrolStudentsHomeLayout alloc] init];
     
+    _layout = layout;
+    
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 42, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 42) collectionViewLayout:layout];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
@@ -89,6 +94,34 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     _collectionView.delegate = self;
     
     [self setupRefresh];
+}
+
+#pragma mark - 判断现在列表中哪些元素没有summary 字段
+- (void)haveSummaryAtIndex
+{
+    _layout.haveSummaryInIndex = [NSMutableArray array];
+    
+    if ([_currentSortName isEqualToString:@"intelligent"])
+    {
+        for (EnrolStudentsSchoolDomain * d in _schoolListDataOfIntelligent)
+        {
+            [_layout.haveSummaryInIndex addObject:([d.summary isEqualToString:@""]?@"YES":@"NO")];
+        }
+    }
+    else if ([_currentSortName isEqualToString:@"distance"])
+    {
+        for (EnrolStudentsSchoolDomain * d in _schoolListDataOfDistance)
+        {
+            [_layout.haveSummaryInIndex addObject:([d.summary isEqualToString:@""]?@"YES":@"NO")];
+        }
+    }
+    else
+    {
+        for (EnrolStudentsSchoolDomain * d in _schoolListDataOfAppraise)
+        {
+            [_layout.haveSummaryInIndex addObject:([d.summary isEqualToString:@""]?@"YES":@"NO")];
+        }
+    }
 }
 
 #pragma mark - 获取学校列表数据 - 首次进入
@@ -101,6 +134,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         _schoolListDataOfIntelligent = [NSMutableArray arrayWithArray:listArr];
         
         [self hidenLoadView];
+        
+        [self haveSummaryAtIndex];
         
         [self.view addSubview:_collectionView];
     }
@@ -131,7 +166,10 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
              _schoolListDataOfDistance = [NSMutableArray arrayWithArray:listArr];
          }
          
+         [self haveSummaryAtIndex];
+         
          [self hidenLoadView];
+         
          _collectionView.hidden = NO;
          [_collectionView reloadData];
      }
@@ -210,6 +248,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     if (btn.tag == 0)
     {
         _currentSortName = @"intelligent";
+
         if (_currentSortName == nil)
         {
             [self getSchoolLists];
@@ -222,6 +261,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     else if (btn.tag == 1)
     {
         _currentSortName = @"appraise";
+
         if (_schoolListDataOfAppraise == nil)
         {
             [self getSchoolLists];
@@ -234,6 +274,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     else
     {
         _currentSortName = @"distance";
+
         if (_schoolListDataOfDistance == nil)
         {
             [self getSchoolLists];
@@ -365,6 +406,9 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
                          _pageNoOfAppraise++;
                          [_schoolListDataOfAppraise addObjectsFromArray:marr];
                      }
+                     
+                     [self haveSummaryAtIndex];
+                     
                      [_collectionView reloadData];
                      
                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^

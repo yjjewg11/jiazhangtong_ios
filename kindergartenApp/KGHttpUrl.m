@@ -447,13 +447,16 @@
 }
 
 #pragma mark - 招生模块
-
 + (NSString *)getAllSchoolListUrl{
     return URL(baseServiceURL, @"rest/group/kdlistByPage.json");
 }
 
 + (NSString *)getZhaoShengSchoolDetailUrl{
     return URL(baseServiceURL, @"rest/group/getKD.json");
+}
+
++ (NSString *)getMySchoolCommentUrl{
+    return URL(baseServiceURL, @"rest/appraise/queryMyKDByPage.json");
 }
 
 @end

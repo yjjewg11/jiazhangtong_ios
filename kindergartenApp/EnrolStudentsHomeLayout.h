@@ -10,4 +10,6 @@
 
 @interface EnrolStudentsHomeLayout : UICollectionViewFlowLayout
 
+@property (strong, nonatomic) NSMutableArray * haveSummaryInIndex;
+
 @end

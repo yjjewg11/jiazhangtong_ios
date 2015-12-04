@@ -32,6 +32,7 @@
 		04663DAB1BE71D2C0033C436 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04663DAA1BE71D2C0033C436 /* EventKitUI.framework */; };
 		0467A9221BE2653E00FE888C /* MXPullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467A9201BE2653E00FE888C /* MXPullDownMenu.m */; };
 		046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */; };
+		0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */; };
 		048524CD1BEE322D00DA97BB /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524CC1BEE322D00DA97BB /* libiconv.2.4.0.tbd */; };
 		048524CF1BEE324A00DA97BB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524CE1BEE324A00DA97BB /* libiconv.tbd */; };
 		048524D11BEE326600DA97BB /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524D01BEE326600DA97BB /* libstdc++.tbd */; };
@@ -266,6 +267,12 @@
 		04F89A431C1024E000FC0FA6 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A411C1024E000FC0FA6 /* NoDataView.m */; };
 		04F89A441C1024E000FC0FA6 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F89A421C1024E000FC0FA6 /* NoDataView.xib */; };
 		04F89A4E1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */; };
+		04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D3621C1167040098FBAB /* EnrolStudentMySchoolWebCell.m */; };
+		04F8D3651C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D3631C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib */; };
+		04F8D3691C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D3671C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m */; };
+		04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D3681C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib */; };
+		04F8D36E1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D36C1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m */; };
+		04F8D36F1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D36D1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib */; };
 		04F9364C1BFEBAC0002D7621 /* SPCourseDetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9364B1BFEBAC0002D7621 /* SPCourseDetailWebView.m */; };
 		04F9364E1BFEBAD3002D7621 /* SPCourseDetailWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9364D1BFEBAD3002D7621 /* SPCourseDetailWebView.xib */; };
 		04F936511BFEC8D7002D7621 /* SPCourseDetailVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936501BFEC8D7002D7621 /* SPCourseDetailVO.m */; };
@@ -341,6 +348,8 @@
 		04F9FBAD1BF1A77E00AEFB88 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04F9FB961BF1A77E00AEFB88 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		04F9FBAE1BF1A77E00AEFB88 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB991BF1A77E00AEFB88 /* libSocialWechat.a */; };
 		04F9FBAF1BF1A77E00AEFB88 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB9A1BF1A77E00AEFB88 /* libWeChatSDK.a */; };
+		04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */; };
+		04FA22211C114045002A88F1 /* EnrolStudentMySchoolLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA22201C114045002A88F1 /* EnrolStudentMySchoolLayout.m */; };
 		04FAEF671C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */; };
 		04FAEF6C1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAEF6A1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.m */; };
 		04FAEF6D1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAEF6B1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.xib */; };
@@ -733,6 +742,8 @@
 		0467A9211BE2653E00FE888C /* MXPullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXPullDownMenu.h; sourceTree = "<group>"; };
 		046DC9611BDA05A300C9452D /* SPHotCourseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPHotCourseDomain.h; sourceTree = "<group>"; };
 		046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPHotCourseDomain.m; sourceTree = "<group>"; };
+		0477C97D1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolFullScreenLayout.h; sourceTree = "<group>"; };
+		0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolFullScreenLayout.m; sourceTree = "<group>"; };
 		048400981BE7C54A009A689B /* SpCourseDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailTableVC.h; sourceTree = "<group>"; };
 		048524CC1BEE322D00DA97BB /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		048524CE1BEE324A00DA97BB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
@@ -1093,6 +1104,15 @@
 		04F89A421C1024E000FC0FA6 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataView.xib; sourceTree = "<group>"; };
 		04F89A4C1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentSchoolDetailFullScreenLayout.h; sourceTree = "<group>"; };
 		04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentSchoolDetailFullScreenLayout.m; sourceTree = "<group>"; };
+		04F8D3611C1167040098FBAB /* EnrolStudentMySchoolWebCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolWebCell.h; sourceTree = "<group>"; };
+		04F8D3621C1167040098FBAB /* EnrolStudentMySchoolWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolWebCell.m; sourceTree = "<group>"; };
+		04F8D3631C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentMySchoolWebCell.xib; sourceTree = "<group>"; };
+		04F8D3661C1168200098FBAB /* EnrolStudentMySchoolCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolCommentCell.h; sourceTree = "<group>"; };
+		04F8D3671C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolCommentCell.m; sourceTree = "<group>"; };
+		04F8D3681C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentMySchoolCommentCell.xib; sourceTree = "<group>"; };
+		04F8D36B1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolBtnCell.h; sourceTree = "<group>"; };
+		04F8D36C1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolBtnCell.m; sourceTree = "<group>"; };
+		04F8D36D1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentMySchoolBtnCell.xib; sourceTree = "<group>"; };
 		04F9364A1BFEBAC0002D7621 /* SPCourseDetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailWebView.h; sourceTree = "<group>"; };
 		04F9364B1BFEBAC0002D7621 /* SPCourseDetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailWebView.m; sourceTree = "<group>"; };
 		04F9364D1BFEBAD3002D7621 /* SPCourseDetailWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPCourseDetailWebView.xib; sourceTree = "<group>"; };
@@ -1222,6 +1242,10 @@
 		04F9FB9B1BF1A77E00AEFB88 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
 		04F9FB9C1BF1A77E00AEFB88 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		04F9FB9D1BF1A77E00AEFB88 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		04FA221A1C113B2F002A88F1 /* EnrolStudentMySchoolVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolVC.h; sourceTree = "<group>"; };
+		04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolVC.m; sourceTree = "<group>"; };
+		04FA221F1C114045002A88F1 /* EnrolStudentMySchoolLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolLayout.h; sourceTree = "<group>"; };
+		04FA22201C114045002A88F1 /* EnrolStudentMySchoolLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolLayout.m; sourceTree = "<group>"; };
 		04FAEF651C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentSchoolDetailLayout.h; sourceTree = "<group>"; };
 		04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentSchoolDetailLayout.m; sourceTree = "<group>"; };
 		04FAEF691C0FDE9D00BCBE5E /* EnrolStudentButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentButtonCell.h; sourceTree = "<group>"; };
@@ -2889,6 +2913,33 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		04FA221D1C114022002A88F1 /* layouts */ = {
+			isa = PBXGroup;
+			children = (
+				04FA221F1C114045002A88F1 /* EnrolStudentMySchoolLayout.h */,
+				04FA22201C114045002A88F1 /* EnrolStudentMySchoolLayout.m */,
+				0477C97D1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.h */,
+				0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */,
+			);
+			name = layouts;
+			sourceTree = "<group>";
+		};
+		04FA221E1C114029002A88F1 /* collectionviewcell */ = {
+			isa = PBXGroup;
+			children = (
+				04F8D3611C1167040098FBAB /* EnrolStudentMySchoolWebCell.h */,
+				04F8D3621C1167040098FBAB /* EnrolStudentMySchoolWebCell.m */,
+				04F8D3631C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib */,
+				04F8D3661C1168200098FBAB /* EnrolStudentMySchoolCommentCell.h */,
+				04F8D3671C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m */,
+				04F8D3681C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib */,
+				04F8D36B1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.h */,
+				04F8D36C1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m */,
+				04F8D36D1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib */,
+			);
+			name = collectionviewcell;
+			sourceTree = "<group>";
+		};
 		04FEC5671BEDC98A00C642A6 /* Youhuihuodong */ = {
 			isa = PBXGroup;
 			children = (
@@ -3817,6 +3868,8 @@
 				04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */,
 				04FDB4E01BFC265300A73E2E /* MySPCourseTimeListVC.h */,
 				04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */,
+				04FA221A1C113B2F002A88F1 /* EnrolStudentMySchoolVC.h */,
+				04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3843,6 +3896,8 @@
 		24C46B3C1B5A2AF300A58F92 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04FA221E1C114029002A88F1 /* collectionviewcell */,
+				04FA221D1C114022002A88F1 /* layouts */,
 				F4EA53831B60BD390044BE7A /* MeTableViewCell.h */,
 				F4EA53841B60BD390044BE7A /* MeTableViewCell.m */,
 				F4EA53851B60BD390044BE7A /* MeTableViewCell.xib */,
@@ -4987,6 +5042,7 @@
 				F4EA53991B60EF800044BE7A /* StudentBaseInfoViewController.xib in Resources */,
 				04FEC8891BEBADDB00D3D8A5 /* SPSchoolCell.xib in Resources */,
 				04A4DE1D1BF484DF002ABBB1 /* admogoVideo_29.png in Resources */,
+				04F8D3651C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib in Resources */,
 				04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */,
 				04A4DE171BF484DF002ABBB1 /* admogoVideo_23.png in Resources */,
 				04A4DE1B1BF484DF002ABBB1 /* admogoVideo_27.png in Resources */,
@@ -5069,8 +5125,10 @@
 				04F9FB5F1BF1A67400AEFB88 /* ToolViewInputVoice@2x.png in Resources */,
 				F4E36D5F1B85B49D009BD909 /* DoPhotoCell.xib in Resources */,
 				04A4DE291BF484DF002ABBB1 /* adsmenuVoice_on@2x.png in Resources */,
+				04F8D36F1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib in Resources */,
 				4D5CE6C91B7E3F76002F1088 /* FavoritesListViewController.xib in Resources */,
 				F4EA53871B60BD390044BE7A /* MeTableViewCell.xib in Resources */,
+				04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */,
 				04A4DE741BF484DF002ABBB1 /* webview_bar_refresh_hover@2x.png in Resources */,
 				04A4DE2D1BF484DF002ABBB1 /* adsmogo_button_left_default@2x.png in Resources */,
 				04F9FB611BF1A67400AEFB88 /* umeng_add_photo@2x.png in Resources */,
@@ -5115,6 +5173,7 @@
 				F48783901B58DA1700CDC1A8 /* AFURLConnectionOperation.m in Sources */,
 				24759EB01B5FC89900A3087D /* KGListBaseDomain.m in Sources */,
 				2489B6621B5AB49E00039E70 /* UIButton+WebCache.m in Sources */,
+				0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */,
 				F4E6B2451B6B59960087EAEB /* GiftwareArticlesViewController.m in Sources */,
 				24AA0B461B690F4300DAC03B /* UUMessageContentButton.m in Sources */,
 				2489B66E1B5AB49E00039E70 /* SDWebImagePrefetcher.m in Sources */,
@@ -5192,6 +5251,7 @@
 				F4E61B6B1B7335A900E5851A /* ReplyListViewController.m in Sources */,
 				2474DFC91B6CD2070021506F /* RecipesItemVO.m in Sources */,
 				F4EA538F1B60D8390044BE7A /* StudentInfoItemVO.m in Sources */,
+				04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */,
 				248B6AB91B19B51A00FCB98F /* PagedFlowView.m in Sources */,
 				F48783B41B58DA1700CDC1A8 /* NSString+MJExtension.m in Sources */,
 				F471EDFC1B70B40100EEBA1D /* KGEmojiManage.m in Sources */,
@@ -5299,6 +5359,7 @@
 				04F9C9981C0EFA9D0078A5F5 /* EnrolStudentSchoolDetailVC.m in Sources */,
 				2489B6661B5AB49E00039E70 /* UIImageView+HighlightedWebCache.m in Sources */,
 				244F74921B62A4630078D30D /* PostTopicViewController.m in Sources */,
+				04FA22211C114045002A88F1 /* EnrolStudentMySchoolLayout.m in Sources */,
 				248B6A621B19A39200FCB98F /* AppDelegate.m in Sources */,
 				F487838C1B58DA1700CDC1A8 /* AFHTTPRequestOperationManager.m in Sources */,
 				2489B6691B5AB49E00039E70 /* SDWebImageDownloader.m in Sources */,
@@ -5312,6 +5373,7 @@
 				04F9FB6C1BF1A67400AEFB88 /* UMFullScreenPhotoView.m in Sources */,
 				2474DFCF1B6CD43C0021506F /* CookbookDomain.m in Sources */,
 				2489B66A1B5AB49E00039E70 /* SDWebImageDownloaderOperation.m in Sources */,
+				04F8D3691C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m in Sources */,
 				04F969BE1C06F24F00F3B4CB /* SpCourseHomeCourseCell.m in Sources */,
 				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
 				046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */,
@@ -5369,6 +5431,7 @@
 				04F9C99B1C0EFD550078A5F5 /* EnrolStudentDataVO.m in Sources */,
 				04F89A3B1C1018D800FC0FA6 /* EnrolStudentCommentCell.m in Sources */,
 				24759EAD1B5FC48500A3087D /* TopicDomain.m in Sources */,
+				04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */,
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
 				24AA0B501B69112C00DAC03B /* ChatModel.m in Sources */,
 				4D5CE6C81B7E3F76002F1088 /* FavoritesListViewController.m in Sources */,
@@ -5389,6 +5452,7 @@
 				04FDB4DE1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m in Sources */,
 				F48783931B58DA1700CDC1A8 /* AFURLSessionManager.m in Sources */,
 				04F3D4611BF47FD3007E7AC0 /* CDataScanner_Extensions.m in Sources */,
+				04F8D36E1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m in Sources */,
 				04F9F3041BF9DD7E00470F0C /* MySPCourseTeacherList.m in Sources */,
 				F48783B21B58DA1700CDC1A8 /* NSObject+MJKeyValue.m in Sources */,
 				F487838D1B58DA1700CDC1A8 /* AFHTTPSessionManager.m in Sources */,

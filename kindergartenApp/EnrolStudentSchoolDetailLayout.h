@@ -16,4 +16,6 @@
 
 @property (assign, nonatomic) BOOL haveSummary;
 
+
+
 @end

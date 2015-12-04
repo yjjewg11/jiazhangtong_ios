@@ -306,4 +306,8 @@
 - (void)getAllSchoolList:(NSString *)groupuuid pageNo:(NSString *)pageNo mappoint:(NSString *)map_point sort:(NSString *)sort success:(void(^)(NSArray * listArr))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getZhaoShengSchoolDetail:(NSString *)groupuuid mappoint:(NSString *)map_point success:(void(^)(EnrolStudentDataVO * vo))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getMySchoolComment:(NSString *)groupuuid success:(void(^)(EnrolStudentDataVO * vo))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)MySchoolSaveComment:(NSString *)extuuid classuuid:(NSString *)classuuid type:(NSString *)type score:(NSString *)score content:(NSString *)content anonymous:(NSString *)anonymous success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
 @end
