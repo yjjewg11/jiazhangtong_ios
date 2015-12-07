@@ -23,7 +23,7 @@
     
     self.webView.scrollView.delegate = self;
     
-    self.webView.userInteractionEnabled = NO;
+    self.webView.scrollView.scrollEnabled = NO;
     
     self.webView.scalesPageToFit = YES;
 }
@@ -42,7 +42,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
-    if(scrollView.contentOffset.y <= -60)
+    if(scrollView.contentOffset.y <= 0)
     {
         [self.delegate pullDownTopView];
     }

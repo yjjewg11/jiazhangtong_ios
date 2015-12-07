@@ -108,11 +108,11 @@
         itemWidth = KGSCREEN.size.width;
         if (self.haveSummary)
         {
-            itemHeight = KGSCREEN.size.height - 64 - 54 - 144;
+            itemHeight = KGSCREEN.size.height - 64 - 54;
         }
         else
         {
-            itemHeight = KGSCREEN.size.height - 64 - 54 - 85;
+            itemHeight = KGSCREEN.size.height - 64 - 54;
         }
         itemX = 0;
         itemY = _newMaxHeight;

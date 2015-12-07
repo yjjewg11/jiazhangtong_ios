@@ -98,32 +98,20 @@ static NSString *const SchoolCell = @"schoolcoll";
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
     
-    //设置手势
-    UISwipeGestureRecognizer *recognizer;
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    
-    [self.view addGestureRecognizer:recognizer];
+//    //设置手势
+//    UISwipeGestureRecognizer *recognizer;
+//    
+//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+//    
+//    [self.view addGestureRecognizer:recognizer];
+//    
+//    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+//    
+//    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+//    
+//    [self.view addGestureRecognizer:recognizer];
 }
 
 #pragma mark - 分享
@@ -159,27 +147,6 @@ static NSString *const SchoolCell = @"schoolcoll";
 #pragma mark - 手势触发方法
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
 {
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown)
-    {
-        [_collectionView setCollectionViewLayout:_oriLayout animated:YES];
-        
-        _webCell.webView.userInteractionEnabled = NO;
-    }
-    
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionUp)
-    {
-        if (_newLayout == nil)
-        {
-            EnrolStudentMySchoolFullScreenLayout * newLayout = [[EnrolStudentMySchoolFullScreenLayout alloc] init];
-            
-            _newLayout = newLayout;
-        }
-        
-        [_collectionView setCollectionViewLayout:_newLayout animated:YES];
-        
-        _webCell.webView.userInteractionEnabled = YES;
-    }
-    
     if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft)
     {
         NSLog(@"swipe left");
@@ -193,9 +160,40 @@ static NSString *const SchoolCell = @"schoolcoll";
 
 - (void)pullDownTopView
 {
-    [_collectionView setCollectionViewLayout:_oriLayout animated:YES];
+    _collectionView.scrollEnabled = YES;
     
-    _webCell.webView.userInteractionEnabled = NO;
+    _webCell.webView.scrollView.scrollEnabled = NO;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (_oriLayout.haveSummary && _dataSourceType != 2)
+    {
+        if (scrollView.contentOffset.y == 144)
+        {
+            _collectionView.scrollEnabled = NO;
+        }
+    }
+    else if (!_oriLayout.haveSummary && _dataSourceType != 2)
+    {
+        if (scrollView.contentOffset.y == (scrollView.contentSize.height - KGSCREEN.size.height) + 64)
+        {
+            _collectionView.scrollEnabled = NO;
+            
+            _webCell.webView.scrollView.scrollEnabled = YES;
+        }
+    }
+}
+
+#pragma mark - webview scrollable
+- (void)isScrollAble
+{
+    if (_collectionView.contentOffset.y > 0)
+    {
+        _collectionView.scrollEnabled = NO;
+        
+        _webCell.webView.scrollView.scrollEnabled = YES;
+    }
 }
 
 #pragma mark - 初始化collectionview
@@ -206,9 +204,10 @@ static NSString *const SchoolCell = @"schoolcoll";
     
     _oriLayout = layout;
     
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
+    
     _collectionView.bounces = NO;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"EnrolStudentMySchoolCommentCell" bundle:nil] forCellWithReuseIdentifier:PingJiaCell];
@@ -231,6 +230,7 @@ static NSString *const SchoolCell = @"schoolcoll";
     {
         case 0:
         {
+            [self isScrollAble];
             [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = 0;
             
@@ -239,6 +239,7 @@ static NSString *const SchoolCell = @"schoolcoll";
             break;
         case 1:
         {
+            [self isScrollAble];
             [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = 1;
             
@@ -311,6 +312,15 @@ static NSString *const SchoolCell = @"schoolcoll";
         _shareUrl = vo.share_url;
         
         _schoolDomain = [EnrolStudentsSchoolDomain objectWithKeyValues:vo.data];
+        
+        if (_schoolDomain.summary == nil || [_schoolDomain.summary isEqualToString:@""])
+        {
+            _oriLayout.haveSummary = NO;
+        }
+        else
+        {
+            _oriLayout.haveSummary = YES;
+        }
         
         [self hidenLoadView];
         

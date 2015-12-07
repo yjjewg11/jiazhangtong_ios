@@ -69,7 +69,7 @@
                                 <rect key="frame" x="10" y="51" width="300" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="lOt-KS-U9g"/>
+                                    <constraint firstAttribute="height" constant="30" id="SZz-MJ-vef"/>
                                 </constraints>
                                 <state key="normal" title="提交">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,13 +81,12 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gKt-XH-6Nw" secondAttribute="trailing" constant="10" id="HNP-E4-mGO"/>
                             <constraint firstItem="Hu2-56-HjF" firstAttribute="leading" secondItem="YYH-Cb-60N" secondAttribute="leading" constant="15" id="Ofb-nj-iHy"/>
+                            <constraint firstItem="gKt-XH-6Nw" firstAttribute="top" secondItem="db2-pO-8ic" secondAttribute="bottom" constant="11" id="SfJ-9P-Tro"/>
                             <constraint firstItem="db2-pO-8ic" firstAttribute="top" secondItem="YYH-Cb-60N" secondAttribute="top" constant="19" id="Xsl-rI-AUT"/>
-                            <constraint firstAttribute="trailing" secondItem="gKt-XH-6Nw" secondAttribute="trailing" constant="10" id="YeX-iy-3Uc"/>
-                            <constraint firstItem="gKt-XH-6Nw" firstAttribute="leading" secondItem="YYH-Cb-60N" secondAttribute="leading" constant="10" id="ZN1-2J-ZBk"/>
-                            <constraint firstItem="gKt-XH-6Nw" firstAttribute="centerX" secondItem="YYH-Cb-60N" secondAttribute="centerX" id="ZNz-iD-Gfb"/>
-                            <constraint firstAttribute="bottom" secondItem="gKt-XH-6Nw" secondAttribute="bottom" constant="51" id="bW3-i3-kEY"/>
                             <constraint firstItem="db2-pO-8ic" firstAttribute="leading" secondItem="Hu2-56-HjF" secondAttribute="trailing" constant="8" id="fnA-Ak-5Yg"/>
+                            <constraint firstItem="gKt-XH-6Nw" firstAttribute="leading" secondItem="YYH-Cb-60N" secondAttribute="leading" constant="10" id="gl4-IK-dk2"/>
                             <constraint firstItem="Hu2-56-HjF" firstAttribute="top" secondItem="YYH-Cb-60N" secondAttribute="top" constant="15" id="jiJ-Eb-e2U"/>
                         </constraints>
                     </view>

@@ -65,23 +65,33 @@
                             <constraint firstAttribute="height" constant="15" id="INb-MK-dWz"/>
                             <constraint firstAttribute="width" constant="100" id="RY7-HJ-gmf"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9oj-Cq-h8I">
+                        <rect key="frame" x="10" y="119" width="310" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="tt1-8q-Gbh"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="9oj-Cq-h8I" secondAttribute="bottom" id="DM8-lO-642"/>
                 <constraint firstItem="LbE-ec-RBS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="G4z-SV-nmV"/>
                 <constraint firstItem="LbE-ec-RBS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="NOz-7g-fBK"/>
                 <constraint firstItem="QU9-Bp-ahD" firstAttribute="top" secondItem="KoY-Ku-ezF" secondAttribute="bottom" constant="10" id="QhY-fX-oPM"/>
                 <constraint firstItem="KoY-Ku-ezF" firstAttribute="top" secondItem="fGf-mo-B3v" secondAttribute="bottom" constant="10" id="VbF-dD-uR5"/>
                 <constraint firstItem="fGf-mo-B3v" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="VzW-Kd-rqu"/>
                 <constraint firstItem="KoY-Ku-ezF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="X40-uR-3xl"/>
+                <constraint firstAttribute="trailing" secondItem="9oj-Cq-h8I" secondAttribute="trailing" id="dNU-tU-fSV"/>
                 <constraint firstAttribute="trailing" secondItem="QU9-Bp-ahD" secondAttribute="trailing" constant="10" id="kfq-IB-yka"/>
                 <constraint firstAttribute="bottom" secondItem="QU9-Bp-ahD" secondAttribute="bottom" constant="10" id="nlA-tW-EzL"/>
                 <constraint firstAttribute="trailing" secondItem="KoY-Ku-ezF" secondAttribute="trailing" constant="10" id="q55-5L-pkp"/>
+                <constraint firstItem="9oj-Cq-h8I" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="wYr-lb-oTt"/>
                 <constraint firstAttribute="trailing" secondItem="fGf-mo-B3v" secondAttribute="trailing" constant="10" id="xeb-Dy-Klr"/>
             </constraints>
             <size key="customSize" width="320" height="120"/>
@@ -91,7 +101,7 @@
                 <outlet property="name" destination="LbE-ec-RBS" id="7r4-dP-nJi"/>
                 <outlet property="starView" destination="fGf-mo-B3v" id="EtR-9S-LeG"/>
             </connections>
-            <point key="canvasLocation" x="347" y="292"/>
+            <point key="canvasLocation" x="33" y="244"/>
         </collectionViewCell>
     </objects>
     <resources>

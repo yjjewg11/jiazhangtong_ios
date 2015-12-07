@@ -102,7 +102,7 @@
     else if (indexPath.row >= 2 && self.isCommentCell == NO)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = KGSCREEN.size.height - 64 - 144 - 54;
+        itemHeight = KGSCREEN.size.height - 64 - 54 - 48;
         itemX = 0;
         itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;
@@ -117,7 +117,7 @@
         if (self.commentsCellHeights.count != 0)
         {
             itemWidth = KGSCREEN.size.width;
-            itemHeight = [self.commentsCellHeights[indexPath.row - 2] floatValue];
+            itemHeight = [self.commentsCellHeights[indexPath.row - 2] floatValue] + 100;
             itemX = 0;
             itemY = _newMaxHeight;
             _newMaxHeight = itemY + itemHeight;

@@ -22,12 +22,17 @@
 #import "KGHUD.h"
 #import "NoDataView.h"
 #import "EnrolStudentSchoolDetailFullScreenLayout.h"
+#import "SPBottomItem.h"
+#import "InteractViewController.h"
+#import "KGDateUtil.h"
+#import "PopupView.h"
+#import "ShareViewController.h"
 
 #define DataSource_ZhaoSheng 0
 #define DataSource_JianJie 1
 #define DataSource_PingLun 2
 
-@interface EnrolStudentSchoolDetailVC () <UICollectionViewDelegate,UICollectionViewDataSource,EnrolStudentButtonCellDelegate,EnrolStudentWebViewCellDelegate>
+@interface EnrolStudentSchoolDetailVC () <UICollectionViewDelegate,UICollectionViewDataSource,EnrolStudentButtonCellDelegate,EnrolStudentWebViewCellDelegate,UIScrollViewDelegate,UIActionSheetDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -54,6 +59,26 @@
     CGFloat _yPoint;
     
     EnrolStudentWebViewCell * _webCell;
+    
+    BOOL _isFullScreen;
+    
+    BOOL _canReqData;
+    
+    NSMutableArray * _buttonItems;
+    
+    UIView * _bottomView;
+    
+    NSInteger _pageNo;
+    
+    NSString * _currentShareUrl;
+    
+    BOOL isFavor;
+    PopupView * popupView;
+    ShareViewController * shareVC;
+    
+    NSString * _tels;
+    
+    NSMutableArray * _telsNum;
 }
 
 @end
@@ -72,35 +97,11 @@ static NSString *const NoDataCell = @"nodata";
     
     self.title = @"学校详情";
     
+    _canReqData = YES;
     _haveCommentData = NO;
+    _isFullScreen = NO;
     
-    //设置手势
-    UISwipeGestureRecognizer *recognizer;
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
-    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
-    
-    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
-    
-    [self.view addGestureRecognizer:recognizer];
-    
+    _pageNo = 2;
     //读取坐标
     NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
     _mappoint = [defu objectForKey:@"map_point"];
@@ -109,7 +110,10 @@ static NSString *const NoDataCell = @"nodata";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //创建底部按钮
-    
+    _bottomView = [[UIView alloc] init];
+    _bottomView.backgroundColor = [UIColor redColor];
+    _bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame) - 48 - 64, KGSCREEN.size.width, 48);
+    [self addBtn:_bottomView];
     
     //请求学校详情
     [self getSchoolDetailData];
@@ -117,60 +121,66 @@ static NSString *const NoDataCell = @"nodata";
     [self initCollectionView];
 }
 
+#pragma mark - 添加底部按钮
+- (void)addBtn:(UIView *)view
+{
+    _buttonItems = [NSMutableArray array];
+    
+    int totalloc = 4;
+    CGFloat spcoursew = 80;
+    CGFloat spcourseh = 48;
+    CGFloat margin = (KGSCREEN.size.width - totalloc * spcoursew) / (totalloc + 1);
+    
+    
+    NSArray * imageName = @[@"newshoucang1",@"newfenxiang-1",@"newhudong",@"newzixun"];
+    NSArray * titleName = @[@"收藏",@"分享",@"互动",@"咨询"];
+    
+    for (NSInteger i = 0; i < 4; i++)
+    {
+        NSInteger row = (NSInteger)(i / totalloc);  //行号
+        NSInteger loc = i % totalloc;               //列号
+        
+        SPBottomItem * item = [[[NSBundle mainBundle] loadNibNamed:@"SPBottomItem" owner:nil options:nil] firstObject];
+        
+        [item setPic:imageName[i] Title:titleName[i]];
+        
+        item.btn.tag = i;
+        
+        [item.btn addTarget:self action:@selector(bottomBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        CGFloat itemX = margin + (margin + spcoursew) * loc;
+        CGFloat itemY =  (margin + spcourseh) * row;
+        CGFloat itemH = item.frame.size.height;
+        CGFloat itemW = item.frame.size.width;
+        
+        item.frame = CGRectMake(itemX, itemY, itemW, itemH);
+        
+        [_buttonItems addObject:item];
+        
+        [_bottomView addSubview:item];
+    }
+
+}
+
 #pragma mark - 手势触发方法
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
 {
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown)
-    {
-        [_collectionView setCollectionViewLayout:_oriLayout animated:YES];
-        
-        _webCell.webView.userInteractionEnabled = NO;
-    }
-    
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionUp)
-    {
-        if (_newLayout == nil)
-        {
-            EnrolStudentSchoolDetailFullScreenLayout * newLayout = [[EnrolStudentSchoolDetailFullScreenLayout alloc] init];
-            
-            _newLayout = newLayout;
-            
-            _newLayout.haveSummary = _haveSummary;
-            
-            if (_dataSourceType == DataSource_PingLun)
-            {
-                _newLayout.isCommentCell = YES;
-                
-                _newLayout.commentsCellHeights = _dataHeights;
-            }
-            else
-            {
-                _newLayout.isCommentCell = NO;
-
-            }
-        }
-        
-        [_collectionView setCollectionViewLayout:_newLayout animated:YES];
-        
-        _webCell.webView.userInteractionEnabled = YES;
-    }
-    
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft)
-    {
-        NSLog(@"swipe left");
-    }
-    
-    if(recognizer.direction == UISwipeGestureRecognizerDirectionRight)
-    {
-        NSLog(@"swipe right");
-    }
+//    if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft)
+//    {
+//        NSLog(@"swipe left");
+//    }
+//    
+//    if(recognizer.direction == UISwipeGestureRecognizerDirectionRight)
+//    {
+//        NSLog(@"swipe right");
+//    }
 }
 
 - (void)pullDownTopView
 {
-    [_collectionView setCollectionViewLayout:_oriLayout animated:YES];
+    _collectionView.scrollEnabled = YES;
     
-    _webCell.webView.userInteractionEnabled = NO;
+    _webCell.webView.scrollView.scrollEnabled = NO;
 }
 
 #pragma mark - 请求数据 - 首次进入
@@ -197,7 +207,23 @@ static NSString *const NoDataCell = @"nodata";
         
         _oriLayout.haveSummary = _haveSummary;
         
+        isFavor = vo.isFavor;
+        
+        _currentShareUrl = vo.share_url;
+        
+        _tels = _domainData.link_tel;
+        
+        if(!isFavor)
+        {
+            ((SPBottomItem *)_buttonItems[0]).btn.selected = YES;
+            ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang2"];
+        }
+        
         [self.view addSubview:_collectionView];
+        
+        [self.view addSubview:_bottomView];
+        
+        [self.view bringSubviewToFront:_bottomView];
     }
     faild:^(NSString *errorMsg)
     {
@@ -213,6 +239,7 @@ static NSString *const NoDataCell = @"nodata";
     [[KGHttpService sharedService] getSPCourseComment:self.groupuuid pageNo:@"" success:^(SPCommentVO *commentVO)
     {
         _commentsData = [NSMutableArray arrayWithArray:[EnrolStudentSchoolCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
+        
         if (_commentsData.count == 0)
         {
             _haveCommentData = NO;
@@ -352,6 +379,9 @@ static NSString *const NoDataCell = @"nodata";
     {
         case 0:
         {
+            _currentShareUrl = _voData.share_url;
+            [self isScrollAble];
+            _collectionView.bounces = NO;
             [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = DataSource_ZhaoSheng;
             _oriLayout.isCommentCell = NO;
@@ -361,6 +391,9 @@ static NSString *const NoDataCell = @"nodata";
             break;
         case 1:
         {
+            _currentShareUrl = _voData.recruit_url;
+            [self isScrollAble];
+            _collectionView.bounces = NO;
             [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = DataSource_JianJie;
             _oriLayout.isCommentCell = NO;
@@ -371,6 +404,7 @@ static NSString *const NoDataCell = @"nodata";
             
         case 2:
         {
+            _collectionView.scrollEnabled = YES;
             _dataSourceType = DataSource_PingLun;
             _collectionView.bounces = YES;
             _oriLayout.isCommentCell = YES;
@@ -391,6 +425,17 @@ static NSString *const NoDataCell = @"nodata";
     }
 }
 
+#pragma mark - webview scrollable
+- (void)isScrollAble
+{
+    if (_collectionView.contentOffset.y > 0)
+    {
+        _collectionView.scrollEnabled = NO;
+        
+        _webCell.webView.scrollView.scrollEnabled = YES;
+    }
+}
+
 #pragma mark - 初始化collectionview
 - (void)initCollectionView
 {
@@ -399,9 +444,7 @@ static NSString *const NoDataCell = @"nodata";
     
     _oriLayout = layout;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
-    
-//    _collectionView.userInteractionEnabled = NO;
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 48) collectionViewLayout:layout];
     
     _collectionView.bounces = NO;
     
@@ -422,6 +465,240 @@ static NSString *const NoDataCell = @"nodata";
     
     [self setupRefresh];
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (_haveSummary && _dataSourceType != DataSource_PingLun)
+    {
+        if (scrollView.contentOffset.y == (scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64)
+        {
+            _collectionView.scrollEnabled = NO;
+            
+            _webCell.webView.scrollView.scrollEnabled = YES;
+        }
+    }
+    else if (!_haveSummary && _dataSourceType != DataSource_PingLun)
+    {
+        if (scrollView.contentOffset.y == (scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64)
+        {
+            _collectionView.scrollEnabled = NO;
+            
+            _webCell.webView.scrollView.scrollEnabled = YES;
+        }
+    }
+    else
+    {
+        //自动翻页，加载更多评论数据
+        CGPoint offset = scrollView.contentOffset;
+        CGRect bounds = scrollView.bounds;
+        CGSize size = scrollView.contentSize;
+        UIEdgeInsets inset = scrollView.contentInset;
+        CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
+        CGFloat maximumOffset = size.height;
+        //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
+        if(currentOffset >= maximumOffset)
+        {
+            NSLog(@"进入了");
+            if (_canReqData == YES)
+            {
+                _canReqData = NO;
+                
+                if (_dataSourceType == 2)
+                {
+                    [[KGHttpService sharedService] getSPCourseComment:self.groupuuid pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(SPCommentVO *commentVO)
+                     {
+                         NSMutableArray * marr = [NSMutableArray arrayWithArray:[EnrolStudentSchoolCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
+                         
+                         if (marr.count == 0)
+                         {
+                             [[KGHUD sharedHud] show:_collectionView onlyMsg:@"没有更多内容了"];
+                         }
+                         else
+                         {
+                             _pageNo++;
+                             
+                             [_commentsData addObjectsFromArray:marr];
+                             
+                             //计算所有数据的行高
+                             [self calCommentsDataHeight];
+                             
+                             [_collectionView reloadData];
+                             
+                             _canReqData = YES;
+                         }
+                     }
+                     faild:^(NSString *errorMsg)
+                     {
+                         [[KGHUD sharedHud] show:_collectionView onlyMsg:errorMsg];
+                     }];
+                }
+            }
+        }
+    }
+}
+
+#pragma mark - actionsheet代理
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        return;
+    }
+    
+    NSString *callString = [NSString stringWithFormat:@"tel://%@",_telsNum[buttonIndex-1]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+       NSString * uuid = self.groupuuid;
+       
+       //调用接口保存用户信息
+       [[KGHttpService sharedService] saveTelUserDatas:uuid type:@"4" success:^(NSString *msg)
+       {
+            
+       }
+       faild:^(NSString *errorMsg)
+       {
+           NSLog(@"保存咨询信息失败");
+       }];
+       
+    });
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callString]];
+}
+
+#pragma mark - 下面按钮点击
+- (void)bottomBtnClicked:(UIButton *)btn
+{
+    switch (btn.tag)
+    {
+        case 0:            //收藏
+        {
+            if (btn.selected == YES)
+            {
+                [self delFavorites:btn];
+            }
+            else
+            {
+                [self saveFavorites:btn];
+            }
+            break;
+        }
+            
+        case 1:            //分享
+        {
+            [self shareClicked];
+            break;
+        }
+        case 2:            //互动
+        {
+            InteractViewController * baseVC = [[InteractViewController alloc] init];
+            baseVC.groupuuid = self.groupuuid;
+            baseVC.dataScourseType = 1;
+            
+            if(baseVC)
+            {
+                [self.navigationController pushViewController:baseVC animated:YES];
+            }
+            
+            break;
+        }
+        case 3:            //电话
+        {
+            _tels = [_tels stringByReplacingOccurrencesOfString:@"/" withString:@","];
+            
+            _telsNum = [NSMutableArray arrayWithArray:[_tels componentsSeparatedByString:@","]];
+            
+            UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"为您查询到如下联系号码" delegate:self cancelButtonTitle:@"返回" destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+            
+            for (NSString * str in _telsNum)
+            {
+                [sheet addButtonWithTitle:str];
+            }
+            
+            [sheet showInView:self.view];
+            
+            break;
+        }
+    }
+}
+
+#pragma mark - 收藏分享相关
+#pragma mark - 收藏相关
+//保存收藏
+- (void)saveFavorites:(UIButton *)button
+{
+    [[KGHUD sharedHud] show:self.view];
+    
+    FavoritesDomain * domain = [[FavoritesDomain alloc] init];
+    domain.title = _schoolDomain.brand_name;
+    domain.type  = Topic_ZSJH;
+    domain.reluuid = self.groupuuid;
+    domain.createtime = [KGDateUtil presentTime];
+    button.enabled = NO;
+    
+    [[KGHttpService sharedService] saveFavorites:domain success:^(NSString *msgStr)
+     {
+         ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang2"];
+         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
+         button.selected = !button.selected;
+         button.enabled = YES;
+     }
+                                           faild:^(NSString *errorMsg)
+     {
+         button.selected = !button.selected;
+         button.enabled = YES;
+         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+     }];
+}
+
+//取消收藏
+- (void)delFavorites:(UIButton *)button
+{
+    [[KGHUD sharedHud] show:self.view];
+    button.enabled = NO;
+    
+    [[KGHttpService sharedService] delFavorites:self.groupuuid success:^(NSString *msgStr)
+     {
+         button.selected = !button.selected;
+         button.enabled = YES;
+         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
+         ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang1"];
+     }
+                                         failed:^(NSString *errorMsg)
+     {
+         button.enabled = YES;
+         button.selected = !button.selected;
+         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+     }];
+}
+
+#pragma mark - 分享相关
+//分享
+- (void)shareClicked
+{
+    if(!popupView)
+    {
+        popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
+        popupView.alpha = Number_Zero;
+        
+        CGFloat height = 140;
+        shareVC = [[ShareViewController alloc] init];
+        shareVC.view.frame = CGRectMake(Number_Zero,  KGSCREEN.size.height - height - 64, KGSCREEN.size.width, height);
+        [popupView addSubview:shareVC.view];
+        [self.view addSubview:popupView];
+        [self addChildViewController:shareVC];
+    }
+    
+    AnnouncementDomain * domain = [[AnnouncementDomain alloc] init];
+    
+    domain.share_url = _currentShareUrl;
+    domain.isFavor = isFavor;
+    
+    shareVC.announcementDomain = domain;
+    
+    [UIView viewAnimate:^ { popupView.alpha = Number_One; } time:Number_AnimationTime_Five];
+}
+
 
 #pragma mark - 上拉刷新，下拉加载数据
 - (void)setupRefresh

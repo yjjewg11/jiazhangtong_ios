@@ -31,7 +31,13 @@
 {
     self.name.text = domain.create_user;
     
-    self.date.text = domain.create_time;
+    NSDate *date = [NSDate date];
+    NSDateFormatter *format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    date = [format dateFromString:domain.create_time];
+    format.dateFormat = @"yyyy-MM-dd";
+    
+    self.date.text = [format stringFromDate:date];
     
     self.content.text = domain.content;
     
