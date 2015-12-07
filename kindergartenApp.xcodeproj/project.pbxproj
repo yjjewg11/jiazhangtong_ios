@@ -247,6 +247,8 @@
 		04F72AC61BEC994500623E33 /* SPTeacherDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F72AC51BEC994500623E33 /* SPTeacherDetailDomain.m */; };
 		04F75E1E1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */; };
 		04F75E1F1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */; };
+		04F81C241C158F6A00EE24FF /* NoDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */; };
+		04F81C251C158F6A00EE24FF /* NoDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */; };
 		04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F84EBA1C0851E800A51140 /* NoNetView.m */; };
 		04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F84EBC1C08522700A51140 /* NoNetView.xib */; };
 		04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F84EBF1C085F3400A51140 /* Bugly.framework */; };
@@ -1071,6 +1073,9 @@
 		04F75E1B1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeCourseTypesCell.h; sourceTree = "<group>"; };
 		04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeCourseTypesCell.m; sourceTree = "<group>"; };
 		04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeCourseTypesCell.xib; sourceTree = "<group>"; };
+		04F81C211C158F6A00EE24FF /* NoDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataTableViewCell.h; sourceTree = "<group>"; };
+		04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataTableViewCell.m; sourceTree = "<group>"; };
+		04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataTableViewCell.xib; sourceTree = "<group>"; };
 		04F84EB91C0851E800A51140 /* NoNetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoNetView.h; sourceTree = "<group>"; };
 		04F84EBA1C0851E800A51140 /* NoNetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetView.m; sourceTree = "<group>"; };
 		04F84EBC1C08522700A51140 /* NoNetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetView.xib; sourceTree = "<group>"; };
@@ -3165,6 +3170,9 @@
 				04F89A401C1024E000FC0FA6 /* NoDataView.h */,
 				04F89A411C1024E000FC0FA6 /* NoDataView.m */,
 				04F89A421C1024E000FC0FA6 /* NoDataView.xib */,
+				04F81C211C158F6A00EE24FF /* NoDataTableViewCell.h */,
+				04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */,
+				04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -5033,6 +5041,7 @@
 				04F9FB671BF1A67400AEFB88 /* umeng_fb_audio_play_default@2x.png in Resources */,
 				04F9FBA81BF1A77E00AEFB88 /* UMSShareListController.xib in Resources */,
 				04A4DE441BF484DF002ABBB1 /* adsmogo_adclose@2x.png in Resources */,
+				04F81C251C158F6A00EE24FF /* NoDataTableViewCell.xib in Resources */,
 				04A4DE081BF484DF002ABBB1 /* admogoVideo_1.png in Resources */,
 				04A4DE901BF484DF002ABBB1 /* shareviewhead_icon.png in Resources */,
 				04F9FBA91BF1A77E00AEFB88 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -5522,6 +5531,7 @@
 				04F9C6791BEC457B000DD5CE /* SPSchoolDetailTableVC.m in Sources */,
 				048ADD361BD611EB00E6E6D0 /* SPTimetableItemVO.m in Sources */,
 				24AA0B431B690F4300DAC03B /* UUInputFunctionView.m in Sources */,
+				04F81C241C158F6A00EE24FF /* NoDataTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

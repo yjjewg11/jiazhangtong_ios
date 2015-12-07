@@ -163,9 +163,8 @@
     CGFloat spcoursew = 80;
     CGFloat spcourseh = 48;
     CGFloat margin = (App_Frame_Width - totalloc * spcoursew) / (totalloc + 1);
-    
-    
-    NSArray * imageName = @[@"shoucang1",@"fenxiang",@"hudongbtn",@"zixunbtn"];
+
+    NSArray * imageName = @[@"newshoucang1",@"newfenxiang-1",@"newhudong",@"newzixun"];
     NSArray * titleName = @[@"收藏",@"分享",@"互动",@"咨询"];
     
     for (NSInteger i = 0; i < 4; i++)
@@ -176,11 +175,6 @@
         SPBottomItem * item = [[[NSBundle mainBundle] loadNibNamed:@"SPBottomItem" owner:nil options:nil] firstObject];
         
         [item setPic:imageName[i] Title:titleName[i]];
-        
-        if (i == 3)
-        {
-            item.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"zixunbeijing"]];
-        }
         
         item.btn.tag = i;
         
@@ -303,7 +297,7 @@
     
     [[KGHttpService sharedService] saveFavorites:domain success:^(NSString *msgStr)
     {
-        ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"shoucang2"];
+        ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang2"];
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
         button.selected = !button.selected;
         button.enabled = YES;
@@ -328,7 +322,7 @@
         
         button.selected = !button.selected;
         button.enabled = YES;
-        ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"shoucang1"];
+        ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang1"];
     }
     failed:^(NSString *errorMsg)
     {
@@ -492,7 +486,7 @@
         if(!isFavor)
         {
             ((SPBottomItem *)_buttonItems[0]).btn.selected = YES;
-            ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"shoucang2"];
+            ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang2"];
         }
     }
     faild:^(NSString *errorMsg)

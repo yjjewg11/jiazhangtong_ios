@@ -22,6 +22,7 @@
 #import "SPCourseDetailVO.h"
 #import "SPCourseDetailScrollInfoWebView.h"
 #import "MJExtension.h"
+#import "KGNSStringUtil.h"
 
 @interface SPCourseDetailVC () <UIActionSheetDelegate,SpCourseDetailTableVCDelegate,UIScrollViewDelegate>
 {
@@ -242,25 +243,24 @@
 #pragma mark - 请求课程详情
 - (void)getDetailData
 {
-    [[KGHUD sharedHud] show:self.view];
-    
     [[KGHttpService sharedService] getSPCourseDetail:self.uuid success:^(SPCourseDetailVO *vo)
     {
-        [[KGHUD sharedHud] hide:self.view];
+        [self hidenLoadView];
         
         self.courseDetailDomain = [SPCourseDetailDomain objectWithKeyValues:vo.data];
     
         //设置数据
         [_courseDetailView setData:vo];
-        [self.view addSubview:_courseDetailView];
         
         self.groupuuid = self.courseDetailDomain.groupuuid;
-
-        [self responseHandler];
+        
+        [self.view addSubview:_courseDetailView];
+        [self.view addSubview:_bottomView];
+        [self.view bringSubviewToFront:_bottomView];
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        [self showNoNetView];
     }];
 }
 
@@ -269,24 +269,23 @@
 {
     if (self.reqFlag)
     {
-        [[KGHUD sharedHud] show:self.view];
+        [self showLoadView];
         
         [[KGHttpService sharedService] getSPSchoolInfoShareUrl:self.courseDetailDomain.groupuuid success:^(NSString *url)
          {
-             [[KGHUD sharedHud] hide:self.view];
+             [self hidenLoadView];
              
              self.url = url;
              //设置数据
              [_schoolInfoView setData:url];
-             [self.view addSubview:_schoolInfoView];
              
              self.reqFlag = NO;
              
-             [self responseHandlerOfSchool];
+             [self.view addSubview:_schoolInfoView];
         }
         faild:^(NSString *errorMsg)
         {
-             [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+            [self showNoNetView];
         }];
     }
 }
@@ -296,50 +295,55 @@
 {
     if (self.reqFlagOFComment == YES)
     {
-        [[KGHUD sharedHud] show:self.view];
+        [self showLoadView];
         
         [[KGHttpService sharedService] getSPCourseComment:self.uuid pageNo:@"1" success:^(SPCommentVO *commentVO)
         {
-            [[KGHUD sharedHud] hide:self.view];
+            [self hidenLoadView];
             self.reqFlagOFComment = NO;
             
             _tableVC.uuid = self.uuid;
             
             _tableVC.presentsComments = [NSMutableArray arrayWithArray:[SPCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
             
+            //计算行高
+            NSMutableArray * rowHeights = [NSMutableArray array];
+            
+            if (_tableVC.presentsComments.count != 0)
+            {
+                for (SPCommentDomain * domain in _tableVC.presentsComments)
+                {
+                    NSString * text = domain.content;
+                    
+                    CGFloat textHeight = [KGNSStringUtil heightForString:text andWidth:KGSCREEN.size.width - 20];
+                    
+                    CGFloat height = 139 + ABS(67 - textHeight);
+                    
+                    [rowHeights addObject:@(height)];
+                }
+                
+                _tableVC.rowHeights = rowHeights;
+            }
+            
             [self.view addSubview:_tableVC.tableView];
         }
         faild:^(NSString *errorMsg)
         {
-            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+            [self showNoNetView];
         }];
     }
+}
+
+#pragma mark - 没有网络连接重试代理
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
     
-}
-
-//请求之后的处理 需要判断是否还需要再次请求
-- (void)responseHandlerOfSchool
-{
-    if (self.url == nil)
-    {
-        [self getSchoolData];
-    }
-    else
-    {
-        
-    }
-}
-
-- (void)responseHandler
-{
-    if(self.courseDetailDomain == nil)
-    {
-        [self getDetailData];
-    }
-    else
-    {
-        
-    }
+    //请求课程详情
+    [self getDetailData];
+    _schoolInfoView.hidden = YES;
+    _tableVC.tableView.hidden = YES;
+    _courseDetailView.hidden = NO;
 }
 
 #pragma mark - 添加底部按钮
@@ -380,10 +384,6 @@
         
         [_bottomView addSubview:item];
     }
-    
-    [self.view addSubview:_bottomView];
-    
-    [self.view bringSubviewToFront:_bottomView];
 }
 
 #pragma mark - 下面按钮点击
@@ -554,7 +554,7 @@
 #pragma mark - 获取分享收藏信息
 - (void)getShareData
 {
-    [[KGHUD sharedHud] show:self.view];
+    [self showLoadView];
     
     [[KGHttpService sharedService] getSPCourseExtraFun:self.uuid success:^(SPShareSaveDomain *shareSaveDomain)
     {

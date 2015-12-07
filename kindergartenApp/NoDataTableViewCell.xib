@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="215" id="KGk-i7-Jjw" customClass="NoDataTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="204"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="203"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nodatalogo" translatesAutoresizingMaskIntoConstraints="NO" id="QWQ-3A-2bU">
+                        <rect key="frame" x="105" y="53" width="111" height="97"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="97" id="8ei-e2-31d"/>
+                            <constraint firstAttribute="width" constant="111" id="Oph-tl-mXy"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这里空空如也!(&gt;_&lt;)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghY-35-56d">
+                        <rect key="frame" x="73" y="170" width="174" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="HHY-Px-dmS"/>
+                            <constraint firstAttribute="width" constant="174" id="IE6-sQ-PG4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="QWQ-3A-2bU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="7qi-2B-JK2"/>
+                    <constraint firstItem="ghY-35-56d" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UMQ-LA-MKF"/>
+                    <constraint firstItem="QWQ-3A-2bU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="abt-kS-Ya6"/>
+                    <constraint firstItem="ghY-35-56d" firstAttribute="top" secondItem="QWQ-3A-2bU" secondAttribute="bottom" constant="20" id="cyQ-jc-sLj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="303" y="321.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="nodatalogo" width="400" height="373"/>
+    </resources>
+</document>

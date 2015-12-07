@@ -18,9 +18,9 @@
 #import "SpCourseCommentCell.h"
 #import "MJExtension.h"
 
-@interface SpCourseDetailTableVC () <UITableViewDataSource,UITableViewDelegate>
+#import "NoDataTableViewCell.h"
 
-@property (strong, nonatomic) NSMutableArray * commentsCells;
+@interface SpCourseDetailTableVC () <UITableViewDataSource,UITableViewDelegate>
 
 @property (assign, nonatomic) NSInteger pageNO;
 
@@ -37,13 +37,13 @@
     return self;
 }
 
-- (NSMutableArray *)commentsCells
+- (NSMutableArray *)rowHeights
 {
-    if (_commentsCells == nil)
+    if (_rowHeights == nil)
     {
-        _commentsCells = [NSMutableArray array];
+        _rowHeights = [NSMutableArray array];
     }
-    return _commentsCells;
+    return _rowHeights;
 }
 
 - (NSMutableArray *)presentsComments
@@ -70,11 +70,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.presentsComments.count;
+    if (self.presentsComments.count == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return self.presentsComments.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.presentsComments.count == 0)
+    {
+        NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
+        
+        return cell;
+    }
+    
     static NSString * commentCellID = @"comment_cell_id";
     
     SpCourseCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:commentCellID];
@@ -83,8 +97,6 @@
     {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"SpCourseCommentCell" owner:nil options:nil] firstObject];
     }
-    
-    [self.commentsCells addObject:cell];
     
     //设置数据
     [cell setDomain:self.presentsComments[indexPath.row]];
@@ -96,11 +108,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.commentsCells.count !=0 && self.commentsCells != nil)
+    if (self.presentsComments.count != 0)
     {
-        SpCourseCommentCell * cell = self.commentsCells[indexPath.row];
-        
-        return cell.rowHeight;
+        return [self.rowHeights[indexPath.row] floatValue];
+    }
+    else if (self.presentsComments.count == 0)
+    {
+        return 204;
     }
     
     return 1;

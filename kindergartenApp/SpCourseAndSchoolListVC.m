@@ -59,6 +59,8 @@
     //自动翻页控制
     BOOL _canReqData;
     NSInteger _pageNo;
+    
+    NSInteger _schoolPageNo;
 }
 
 @end
@@ -75,6 +77,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     _isFirshJoin = YES;
     _currentSortName = @"智能排序";
     _pageNo = 2;
+    _schoolPageNo = 2;
     _canReqData = YES;
     
     //读取坐标
@@ -217,7 +220,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
             [self getSchoolList];
         }
     }
-
 }
 
 #pragma mark - 顶部tabbar按钮选择
@@ -418,7 +420,27 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
             }
             else if (_dataSourceType == 1)
             {
-                
+                [[KGHttpService sharedService] getSPSchoolList:_mappoint pageNo:[self boxPara:_schoolPageNo] sort:[self getSortValueWithName:_currentSortName] success:^(SPDataListVO *spSchoolList)
+                 {
+                     NSMutableArray * marr = [NSMutableArray arrayWithArray:[SPSchoolDomain objectArrayWithKeyValuesArray:spSchoolList.data]];
+                     
+                     if (marr.count == 0)
+                     {
+                        
+                     }
+                     else
+                     {
+                         _schoolPageNo++;
+                         [_schoolListData addObjectsFromArray:marr];
+                         [_collectionView reloadData];
+                         
+                         _canReqData = YES;
+                     }
+                 }
+                 faild:^(NSString *errorMsg)
+                 {
+                     [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+                 }];
             }
             
         }

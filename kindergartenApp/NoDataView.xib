@@ -40,7 +40,7 @@
                 <constraint firstItem="uUX-J4-oCX" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="iA8-lt-jiu"/>
             </constraints>
             <size key="customSize" width="313" height="152"/>
-            <point key="canvasLocation" x="264" y="313"/>
+            <point key="canvasLocation" x="298" y="249"/>
         </collectionViewCell>
     </objects>
     <resources>

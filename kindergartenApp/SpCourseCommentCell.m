@@ -34,7 +34,7 @@
     
     self.contentLbl.text = domain.content;
     
-  self.dateLbl.text =  domain.create_time;
+    self.dateLbl.text =  domain.create_time;
     
     NSInteger intCount = (NSInteger)([domain.score integerValue] * 10 / 10);
     

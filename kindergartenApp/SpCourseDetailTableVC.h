@@ -28,4 +28,6 @@
 
 @property (weak, nonatomic) id<SpCourseDetailTableVCDelegate> delegate;
 
+@property (strong, nonatomic) NSMutableArray * rowHeights;
+
 @end
