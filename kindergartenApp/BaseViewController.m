@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "UIColor+flat.h"
 
 @interface BaseViewController () <NoNetViewDelegate>
 
@@ -52,7 +53,8 @@
     textAttrs[NSFontAttributeName] = [UIFont boldSystemFontOfSize:16];
     bar.titleTextAttributes = textAttrs;
     //设置显示的颜色
-    bar.barTintColor = KGColorFrom16(0xff4966);
+//    bar.barTintColor = KGColorFrom16(0xff4966);
+    bar.barTintColor = [UIColor colorWithHexCode:@"#FF5A50"];
 }
 
 #pragma mark - 菊花相关

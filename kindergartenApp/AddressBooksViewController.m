@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     addressbookTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     addressbookTableView.separatorColor = [UIColor clearColor];
     addressbookTableView.delegate   = self;

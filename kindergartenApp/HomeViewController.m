@@ -36,6 +36,7 @@
 #import "YouHuiVC.h"
 #import "EnrolStudentsHomeVC.h"
 #import <CoreLocation/CoreLocation.h>
+#import "AddressBooksViewController.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
@@ -45,13 +46,9 @@
 
 @interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
 {
-    
-    IBOutlet UIScrollView * scrollView;
     IBOutlet UIView * photosView;
     IBOutlet UIView * funiView;
     
-    IBOutlet UIView * moreView;
-    IBOutlet UIImageView * moreImageView;
     PopupView * popupView;
     UIView    * groupListView;
     ItemTitleButton  * titleBtn;
@@ -81,14 +78,10 @@
     self.adView.adWebBrowswerDelegate = self;
     self.adView.frame = CGRectMake(0, APPTABBARHEIGHT, APPWINDOWWIDTH, 150.0);
     [self.view addSubview:self.adView];
-    
-    
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    scrollView.contentSize = CGSizeMake(self.view.width, funiView.y + funiView.height + Number_Ten);
 //    [self loadNavTitle];
     [self autoLogin];
     
@@ -374,7 +367,6 @@
             baseVC = [[GiftwareArticlesViewController alloc] init];
             break;
         case 17:
-//            baseVC = [[SpecialtyCoursesViewController alloc] init];
             baseVC = [[SpCourseHomeVC alloc] init];
             break;
         case 18:
@@ -384,7 +376,8 @@
             [self loadMoreFunMenu:sender];
             break;
         case 20:
-            baseVC = [[YouHuiVC alloc] init];
+            baseVC = [[AddressBooksViewController alloc] init];
+            baseVC.title = @"通讯录";
             break;
         default:
             break;

@@ -16,6 +16,10 @@
 #import "KGNavigationController.h"
 #import "KGHttpService.h"
 #import "UIColor+Extension.h"
+#import "UIColor+flat.h"
+#import "SpCourseHomeVC.h"
+#import "DiscorveryVC.h"
+#import "MineHomeVC.h"
 
 @interface KGTabBarViewController ()
 @end
@@ -27,21 +31,26 @@
     [super viewDidLoad];
     
     // 1.初始化子控制器
+    // 1.初始化子控制器
     HomeViewController * home = [[HomeViewController alloc] init];
-    [self addChildVc:home title:@"首页" image:@"zhuye2" selectedImage:@"zhuye1"];
+    [self addChildVc:home title:@"学校" image:@"xuexiao" selectedImage:@"xuexiao2"];
     
-    AddressBooksViewController * addressBooksVC = [[AddressBooksViewController alloc] init];
-    [self addChildVc:addressBooksVC title:@"通讯录" image:@"tongxunlu2" selectedImage:@"tongxunlu1"];
-
+    DiscorveryVC * vc = [[DiscorveryVC alloc] init];
+    [self addChildVc:vc title:@"发现" image:@"faxian" selectedImage:@"faxian2"];
+    
     MessageViewController * messageController = [[MessageViewController alloc] init];
-    [self addChildVc:messageController title:@"消息" image:@"xiaoxi2" selectedImage:@"xiaoxi1"];
+    [self addChildVc:messageController title:@"消息" image:@"xiaoxiq" selectedImage:@"xiaoxi2q"];
     
-    MeViewController * meController = [[MeViewController alloc] init];
-    [self addChildVc:meController title:@"我的" image:@"wode1" selectedImage:@"wode2"];
+    SpCourseHomeVC * spcourseVC = [[SpCourseHomeVC alloc] init];
+    [self addChildVc:spcourseVC title:@"特长课程" image:@"techangkecheng" selectedImage:@"techangkechen2"];
+    
+    MineHomeVC * homeVC = [[MineHomeVC alloc] init];
+    
+//    MeViewController * meController = [[MeViewController alloc] init];
+    [self addChildVc:homeVC title:@"我的" image:@"wode" selectedImage:@"wode2-1"];
     
     // 2.更换系统自带的tabbar
     [KGHttpService sharedService].tabBarViewController = self;
-
 }
 
 /**

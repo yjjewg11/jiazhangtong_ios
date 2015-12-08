@@ -134,6 +134,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 #pragma mark - 获取列表数据
 - (void)getDataList
 {
+    _dropMenu.hidden = YES;
+    
     SPCourseTypeDomain * domain = _courseTypesData[0];
     
     [[KGHttpService sharedService] getSPCourseList:@"" map_point:_mappoint type:[self boxPara:domain.datakey] sort:[self getSortValueWithName:_currentSortName] teacheruuid:@"" pageNo:@"" success:^(SPDataListVO *spCourseList)
@@ -141,6 +143,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
          _courseListData = [NSMutableArray arrayWithArray:[SPCourseDomain objectArrayWithKeyValuesArray:spCourseList.data]];
          
          [self hidenLoadView];
+         
+         _dropMenu.hidden = NO;
          
          [self.view addSubview:_collectionView];
      }
@@ -155,12 +159,15 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 {
     _collectionView.hidden = YES;
     [self showLoadView];
+    _dropMenu.hidden = YES;
 
     [[KGHttpService sharedService] getSPSchoolList:_mappoint pageNo:@"" sort:[self getSortValueWithName:_currentSortName] success:^(SPDataListVO *spSchoolList)
     {
         _schoolListData = [NSMutableArray arrayWithArray:[SPSchoolDomain objectArrayWithKeyValuesArray:spSchoolList.data]];
         
         [self hidenLoadView];
+        
+        _dropMenu.hidden = NO;
         
         [_collectionView reloadData];
 
@@ -176,6 +183,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 - (void)getCourseList
 {
     _collectionView.hidden = YES;
+    _dropMenu.hidden = YES;
+    
     [self showLoadView];
     
     SPCourseTypeDomain * domain = _courseTypesData[_currentTypeDataKeyIndex];
@@ -186,6 +195,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
          
          _courseListData = [NSMutableArray arrayWithArray:[SPCourseDomain objectArrayWithKeyValuesArray:spCourseList.data]];
          
+         _dropMenu.hidden = NO;
          [self hidenLoadView];
          
          [_collectionView reloadData];

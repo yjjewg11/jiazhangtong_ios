@@ -265,7 +265,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
     //创建coll布局
     SpCourseHomeWFLayout *layout = [[SpCourseHomeWFLayout alloc] init];
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 44) collectionViewLayout:layout];
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"SpCourseHomeAdCell" bundle:nil] forCellWithReuseIdentifier:@"adcellcoll"];

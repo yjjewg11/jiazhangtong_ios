@@ -119,7 +119,7 @@
             <connections>
                 <outlet property="scrollView" destination="AjL-1I-NgN" id="38B-xJ-rsI"/>
             </connections>
-            <point key="canvasLocation" x="252.5" y="286"/>
+            <point key="canvasLocation" x="259.5" y="294"/>
         </collectionViewCell>
     </objects>
     <resources>
