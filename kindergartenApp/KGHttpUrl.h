@@ -198,4 +198,8 @@
 + (NSString *)getZhaoShengSchoolDetailUrl;
 + (NSString *)getMySchoolCommentUrl;
 
+#pragma mark - 发现模块
++ (NSString *)getMeiRiTuiJianUrl;
++ (NSString *)getReMenJingXuanUrl;
++ (NSString *)getNewsNumberUrl;
 @end

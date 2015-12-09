@@ -94,6 +94,19 @@
         return attrs;
     }
     
+    else
+    {
+        itemWidth = KGSCREEN.size.width;
+        itemHeight = 215;
+        itemX = 0;
+        itemY = _newMaxHeight;
+        _newMaxHeight = itemY + itemHeight;
+        
+        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
+        
+        return attrs;
+    }
+    
     return nil;
 }
 

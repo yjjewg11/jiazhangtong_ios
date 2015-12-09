@@ -37,6 +37,7 @@
 {
     
 }
+
 - (IBAction)btnClick:(UIButton *)sender
 {
     [UIView animateWithDuration:0.3 animations:^

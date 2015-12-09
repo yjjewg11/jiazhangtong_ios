@@ -14,7 +14,6 @@
 
 @implementation MySPNormalCell
 
-
 - (void)setSchoolData:(MySPCommentDomain *)domain
 {
     NSInteger intCount = (NSInteger)([domain.score integerValue] / 10);

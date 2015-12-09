@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiscorveryMeiRiTuiJianDomain.h"
 
 @interface TuiJianCell : UICollectionViewCell
+
+- (void)setData:(DiscorveryMeiRiTuiJianDomain *)domain;
 
 @end

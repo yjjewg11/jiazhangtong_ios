@@ -269,6 +269,14 @@
 		04F89A431C1024E000FC0FA6 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A411C1024E000FC0FA6 /* NoDataView.m */; };
 		04F89A441C1024E000FC0FA6 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F89A421C1024E000FC0FA6 /* NoDataView.xib */; };
 		04F89A4E1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */; };
+		04F8C6E81C17FCE700EF5E57 /* MineHomeNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6E61C17FCE700EF5E57 /* MineHomeNormalCell.m */; };
+		04F8C6E91C17FCE700EF5E57 /* MineHomeNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8C6E71C17FCE700EF5E57 /* MineHomeNormalCell.xib */; };
+		04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6EB1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m */; };
+		04F8C6EF1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6EE1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m */; };
+		04F8C6F21C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6F11C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m */; };
+		04F8C6F91C18235100EF5E57 /* DiscorveryJingXuanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6F71C18235100EF5E57 /* DiscorveryJingXuanCell.m */; };
+		04F8C6FA1C18235100EF5E57 /* DiscorveryJingXuanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8C6F81C18235100EF5E57 /* DiscorveryJingXuanCell.xib */; };
+		04F8C7001C18351900EF5E57 /* MyUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6FF1C18351900EF5E57 /* MyUILabel.m */; };
 		04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D3621C1167040098FBAB /* EnrolStudentMySchoolWebCell.m */; };
 		04F8D3651C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D3631C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib */; };
 		04F8D3691C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D3671C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m */; };
@@ -1121,6 +1129,20 @@
 		04F89A421C1024E000FC0FA6 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataView.xib; sourceTree = "<group>"; };
 		04F89A4C1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentSchoolDetailFullScreenLayout.h; sourceTree = "<group>"; };
 		04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentSchoolDetailFullScreenLayout.m; sourceTree = "<group>"; };
+		04F8C6E51C17FCE700EF5E57 /* MineHomeNormalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineHomeNormalCell.h; sourceTree = "<group>"; };
+		04F8C6E61C17FCE700EF5E57 /* MineHomeNormalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineHomeNormalCell.m; sourceTree = "<group>"; };
+		04F8C6E71C17FCE700EF5E57 /* MineHomeNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineHomeNormalCell.xib; sourceTree = "<group>"; };
+		04F8C6EA1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryMeiRiTuiJianDomain.h; sourceTree = "<group>"; };
+		04F8C6EB1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryMeiRiTuiJianDomain.m; sourceTree = "<group>"; };
+		04F8C6ED1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryReMenJingXuanDomain.h; sourceTree = "<group>"; };
+		04F8C6EE1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryReMenJingXuanDomain.m; sourceTree = "<group>"; };
+		04F8C6F01C180D1B00EF5E57 /* DiscorveryNewNumberDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryNewNumberDomain.h; sourceTree = "<group>"; };
+		04F8C6F11C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryNewNumberDomain.m; sourceTree = "<group>"; };
+		04F8C6F61C18235100EF5E57 /* DiscorveryJingXuanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryJingXuanCell.h; sourceTree = "<group>"; };
+		04F8C6F71C18235100EF5E57 /* DiscorveryJingXuanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryJingXuanCell.m; sourceTree = "<group>"; };
+		04F8C6F81C18235100EF5E57 /* DiscorveryJingXuanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscorveryJingXuanCell.xib; sourceTree = "<group>"; };
+		04F8C6FE1C18351900EF5E57 /* MyUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUILabel.h; sourceTree = "<group>"; };
+		04F8C6FF1C18351900EF5E57 /* MyUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUILabel.m; sourceTree = "<group>"; };
 		04F8D3611C1167040098FBAB /* EnrolStudentMySchoolWebCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolWebCell.h; sourceTree = "<group>"; };
 		04F8D3621C1167040098FBAB /* EnrolStudentMySchoolWebCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolWebCell.m; sourceTree = "<group>"; };
 		04F8D3631C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentMySchoolWebCell.xib; sourceTree = "<group>"; };
@@ -2978,6 +3000,9 @@
 				04FB237C1C16DC67009B57E2 /* MineHomeChildrenCell.h */,
 				04FB237D1C16DC67009B57E2 /* MineHomeChildrenCell.m */,
 				04FB237E1C16DC67009B57E2 /* MineHomeChildrenCell.xib */,
+				04F8C6E51C17FCE700EF5E57 /* MineHomeNormalCell.h */,
+				04F8C6E61C17FCE700EF5E57 /* MineHomeNormalCell.m */,
+				04F8C6E71C17FCE700EF5E57 /* MineHomeNormalCell.xib */,
 			);
 			name = collectionviewcell;
 			sourceTree = "<group>";
@@ -3004,6 +3029,10 @@
 		04FB23631C16C35E009B57E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04F8C6EA1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.h */,
+				04F8C6EB1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m */,
+				04F8C6ED1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.h */,
+				04F8C6EE1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3035,6 +3064,9 @@
 				04FB23741C16CD62009B57E2 /* TuiJianCell.h */,
 				04FB23751C16CD62009B57E2 /* TuiJianCell.m */,
 				04FB23761C16CD62009B57E2 /* TuiJianCell.xib */,
+				04F8C6F61C18235100EF5E57 /* DiscorveryJingXuanCell.h */,
+				04F8C6F71C18235100EF5E57 /* DiscorveryJingXuanCell.m */,
+				04F8C6F81C18235100EF5E57 /* DiscorveryJingXuanCell.xib */,
 			);
 			name = collectionviewcell;
 			sourceTree = "<group>";
@@ -3563,6 +3595,8 @@
 				F4E61BF11B735D4700E5851A /* PopupView */,
 				F4C4D1C51B69F03100335443 /* TopicInteraction */,
 				24C46B2A1B5A29F700A58F92 /* MessageView */,
+				04F8C6FE1C18351900EF5E57 /* MyUILabel.h */,
+				04F8C6FF1C18351900EF5E57 /* MyUILabel.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3753,6 +3787,8 @@
 				F463E6471B6613D500AB92B9 /* GroupDomain.m */,
 				24850B121B7B860E003C442E /* ClassDomain.h */,
 				24850B131B7B860E003C442E /* ClassDomain.m */,
+				04F8C6F01C180D1B00EF5E57 /* DiscorveryNewNumberDomain.h */,
+				04F8C6F11C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4989,6 +5025,7 @@
 				4D0A91881B81089000373E5C /* EmojiAndTextView.xib in Resources */,
 				4D077B261B80A00300FFD5CB /* SelectClassCell.xib in Resources */,
 				04A4DE141BF484DF002ABBB1 /* admogoVideo_20.png in Resources */,
+				04F8C6E91C17FCE700EF5E57 /* MineHomeNormalCell.xib in Resources */,
 				04A4DE861BF484DF002ABBB1 /* webview_bar_next_ipad.png in Resources */,
 				04FEDD481C03542700921AC1 /* MySPEndCourseView.xib in Resources */,
 				04A4DE191BF484DF002ABBB1 /* admogoVideo_25.png in Resources */,
@@ -5095,6 +5132,7 @@
 				2474DFB51B6CBB1C0021506F /* StudentSignRecordTableViewCell.xib in Resources */,
 				04F969BF1C06F24F00F3B4CB /* SpCourseHomeCourseCell.xib in Resources */,
 				04F9FB5C1BF1A67400AEFB88 /* save@2x.png in Resources */,
+				04F8C6FA1C18235100EF5E57 /* DiscorveryJingXuanCell.xib in Resources */,
 				04A4DE721BF484DF002ABBB1 /* webview_bar_pause_hover@2x.png in Resources */,
 				F4E36D611B85B49D009BD909 /* ZeroCameraCell.xib in Resources */,
 				04A4DE0A1BF484DF002ABBB1 /* admogoVideo_11.png in Resources */,
@@ -5307,6 +5345,7 @@
 				F48783A31B58DA1700CDC1A8 /* MASViewAttribute.m in Sources */,
 				04A5A0901BE7591600024E21 /* SPCourseDetailVC.m in Sources */,
 				24AA0B881B692FFD00DAC03B /* CourseListViewController.m in Sources */,
+				04F8C6E81C17FCE700EF5E57 /* MineHomeNormalCell.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
 				04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */,
@@ -5328,6 +5367,7 @@
 				4D5CE7821B7E4368002F1088 /* SettingViewCell.m in Sources */,
 				4D5CE7801B7E4368002F1088 /* PushNotificationTableViewCell.m in Sources */,
 				F48783951B58DA1700CDC1A8 /* README.md in Sources */,
+				04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */,
 				F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */,
 				248B6A951B19A9D900FCB98F /* UIWindow+Extension.m in Sources */,
 				4D5CE7691B7E4333002F1088 /* AboutWeViewController.m in Sources */,
@@ -5472,6 +5512,7 @@
 				04F72AC61BEC994500623E33 /* SPTeacherDetailDomain.m in Sources */,
 				04F9FB6E1BF1A67400AEFB88 /* UMRadialView.m in Sources */,
 				F4C0AB8C1B1C39D4007B0E35 /* KGNSStringUtil.m in Sources */,
+				04F8C6F21C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m in Sources */,
 				0403DCE41BF5C5980089E463 /* MySPCourseDetailVC.m in Sources */,
 				04F3D45F1BF47FD3007E7AC0 /* CJSONSerialization.m in Sources */,
 				F471EDF01B70A79B00EEBA1D /* WriteVO.m in Sources */,
@@ -5502,6 +5543,7 @@
 				2474DFB41B6CBB1C0021506F /* StudentSignRecordTableViewCell.m in Sources */,
 				04F3D4561BF47FD2007E7AC0 /* AdMoGoAdapterBaiduSplash.m in Sources */,
 				04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */,
+				04F8C7001C18351900EF5E57 /* MyUILabel.m in Sources */,
 				04FEDD471C03542700921AC1 /* MySPEndCourseView.m in Sources */,
 				04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */,
 				24850B201B7BA499003C442E /* ItemTitleButton.m in Sources */,
@@ -5535,9 +5577,11 @@
 				04F3D4551BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.m in Sources */,
 				F4EC98881B61F64400F5721F /* StudentMomOrDodInfoViewController.m in Sources */,
 				F4EA53861B60BD390044BE7A /* MeTableViewCell.m in Sources */,
+				04F8C6F91C18235100EF5E57 /* DiscorveryJingXuanCell.m in Sources */,
 				24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */,
 				2489B6611B5AB49E00039E70 /* NSData+ImageContentType.m in Sources */,
 				24DE91B01B67C24D00D3FFCE /* TeacherVO.m in Sources */,
+				04F8C6EF1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m in Sources */,
 				F471EDF91B70ACC000EEBA1D /* AddressBookResp.m in Sources */,
 				2489B62B1B5A607A00039E70 /* KGAccountTool.m in Sources */,
 				248B6AAA1B19AD7A00FCB98F /* KGBaseDomain.m in Sources */,

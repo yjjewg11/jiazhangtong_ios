@@ -50,7 +50,6 @@
     viewController.animating = YES;
     [super pushViewController:viewController animated:animated];
     //开启iOS7的滑动返回效果
-    
 }
 
 

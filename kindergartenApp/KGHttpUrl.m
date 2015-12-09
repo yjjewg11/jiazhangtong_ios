@@ -459,4 +459,17 @@
     return URL(baseServiceURL, @"rest/appraise/queryMyKDByPage.json");
 }
 
+#pragma mark - 发现模块
++ (NSString *)getMeiRiTuiJianUrl{
+    return URL(baseServiceURL, @"rest/userinfo/getMainTopic.json");
+}
+
++ (NSString *)getReMenJingXuanUrl{
+    return URL(baseServiceURL, @"rest/snsTopic/hotByPage.json");
+}
+
++ (NSString *)getNewsNumberUrl{
+    return URL(baseServiceURL, @"rest/userinfo/getNewMsgNumber.json");
+}
+
 @end

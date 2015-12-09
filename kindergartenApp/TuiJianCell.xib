@@ -56,7 +56,7 @@
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-lo-8Em">
                         <rect key="frame" x="0.0" y="61" width="320" height="20"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="F1f-Ez-hw2"/>
                         </constraints>
@@ -106,6 +106,9 @@
                 <constraint firstItem="kry-cj-5mz" firstAttribute="top" secondItem="bOr-lo-8Em" secondAttribute="bottom" constant="11" id="yoT-Tj-4wu"/>
             </constraints>
             <size key="customSize" width="206" height="110"/>
+            <connections>
+                <outlet property="summary" destination="iJF-gy-eSf" id="RSj-0M-nt2"/>
+            </connections>
             <point key="canvasLocation" x="223" y="230"/>
         </collectionViewCell>
     </objects>

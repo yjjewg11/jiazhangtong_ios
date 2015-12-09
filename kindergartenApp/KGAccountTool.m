@@ -23,7 +23,8 @@
 
 
 
-+ (void)delAccount {
++ (void)delAccount
+{
     //清空沙箱中账号信息
 //    NSFileManager *mgr = [NSFileManager defaultManager];
     //    [mgr removeItemAtPath:MFAccountPath error:nil];

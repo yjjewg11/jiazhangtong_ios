@@ -10,7 +10,6 @@
 
 @interface HomeViewController : BaseViewController
 
-
 - (IBAction)funBtnClicked:(UIButton *)sender;
 
 @end

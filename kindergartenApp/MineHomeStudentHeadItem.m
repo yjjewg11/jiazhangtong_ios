@@ -23,7 +23,7 @@
 
 - (void)awakeFromNib
 {
-    self.backgroundColor = [UIColor colorWithHexCode:@"#FF5A50"];
+    self.backgroundColor = [UIColor colorWithHexCode:@"#FF6666"];
 }
 
 - (void)setData:(KGUser *)user
@@ -31,8 +31,9 @@
     self.name.text = user.name;
     
     [self.header sd_setImageWithURL:[NSURL URLWithString:user.headimg] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [self.header setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:self.header.width / Number_Two];
+        [self.header setBorderWithWidth:2 color:[UIColor whiteColor] radian:self.header.width / Number_Two];
     }];
+    
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DiscorveryNewNumberDomain.h"
 
 @protocol DiscorveryTypeCellDelegate <NSObject>
 
@@ -15,6 +16,8 @@
 @end
 
 @interface DiscorveryTypeCell : UICollectionViewCell
+
+- (void)setData:(DiscorveryNewNumberDomain *)domain;
 
 @property (weak, nonatomic) id<DiscorveryTypeCellDelegate> delegate;
 

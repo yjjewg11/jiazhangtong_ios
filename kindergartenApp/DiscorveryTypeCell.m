@@ -35,4 +35,46 @@
     [self.delegate pushToVC:sender];
 }
 
+- (void)setData:(DiscorveryNewNumberDomain *)domain
+{
+    if (domain.today_goodArticle <= 0)
+    {
+        self.numLblOfJingPingWenZhang.hidden = YES;
+    }
+    else if (domain.today_goodArticle > 99)
+    {
+        self.numLblOfJingPingWenZhang.text = @"99+";
+    }
+    else
+    {
+        self.numLblOfJingPingWenZhang.text = [NSString stringWithFormat:@"%ld",(long)domain.today_goodArticle];
+    }
+    
+    if (domain.today_snsTopic <= 0)
+    {
+        self.numLblOfTopic.hidden = YES;
+    }
+    else if (domain.today_snsTopic > 99)
+    {
+        self.numLblOfTopic.text = @"99+";
+    }
+    else
+    {
+        self.numLblOfTopic.text = [NSString stringWithFormat:@"%ld",(long)domain.today_goodArticle];
+    }
+    
+    if (domain.today_pxbenefit <= 0)
+    {
+        self.numLblOfYouHuiHuoDong.hidden = YES;
+    }
+    else if (domain.today_pxbenefit > 99)
+    {
+        self.numLblOfYouHuiHuoDong.text = @"99+";
+    }
+    else
+    {
+        self.numLblOfYouHuiHuoDong.text = [NSString stringWithFormat:@"%ld",(long)domain.today_goodArticle];
+    }
+}
+
 @end

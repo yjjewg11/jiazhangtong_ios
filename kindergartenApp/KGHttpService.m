@@ -1945,10 +1945,94 @@
              faild(baseDomain.ResMsg.message);
          }
      }
-      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
-         NSLog(@"%@",error);
          [self requestErrorCode:error faild:faild];
      }];
 }
+
+#pragma mark - 发现模块
+- (void)getMeiRiTuiJian:(void(^)(DiscorveryMeiRiTuiJianDomain * mgr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMeiRiTuiJianUrl] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             DiscorveryMeiRiTuiJianDomain * tempResp = [DiscorveryMeiRiTuiJianDomain objectWithKeyValues:baseDomain.data];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+- (void)getReMenJingXuan:(NSString *)pageNo success:(void(^)(NSArray * remenjingxuanarr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    NSDictionary * dict = @{@"pageNo":pageNo};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getReMenJingXuanUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             EnrolStudentDataVO * vo = [EnrolStudentDataVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             NSArray * tempResp = [DiscorveryReMenJingXuanDomain objectArrayWithKeyValuesArray:vo.data];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+- (void)getDiscorveryNewNumber:(void(^)(DiscorveryNewNumberDomain * newnum))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getNewsNumberUrl] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             DiscorveryNewNumberDomain * tempResp = [DiscorveryNewNumberDomain objectWithKeyValues:baseDomain.data];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+
 @end

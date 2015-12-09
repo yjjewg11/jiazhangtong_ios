@@ -26,9 +26,11 @@
 
 - (void)awakeFromNib
 {
-    self.backgroundColor = [UIColor colorWithHexCode:@"FF5A50"];
+    self.backgroundColor = [UIColor colorWithHexCode:@"#FF6666"];
     
     _scrollView = [[UIScrollView alloc] initWithFrame:self.frame];
+    
+    _scrollView.backgroundColor = [UIColor clearColor];
     
     _studentMArray = [KGHttpService sharedService].loginRespDomain.list;
     
@@ -52,7 +54,7 @@
         
         [item setData:user];
         
-        [item setOrigin:CGPointMake( (padding + 91) * i + padding , (self.frame.size.height - 112 ) / 2) ];
+        [item setOrigin:CGPointMake( (padding + 91) * i + padding , 0 )];
         
         [_scrollView addSubview:item];
         

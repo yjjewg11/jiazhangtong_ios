@@ -10,7 +10,6 @@
 
 @interface MySPButtonCell()
 
-
 @end
 
 @implementation MySPButtonCell

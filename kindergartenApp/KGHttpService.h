@@ -34,6 +34,9 @@
 #import "MySPAllCourseListVO.h"
 #import "SPCourseDetailVO.h"
 #import "EnrolStudentDataVO.h"
+#import "DiscorveryMeiRiTuiJianDomain.h"
+#import "DiscorveryNewNumberDomain.h"
+#import "DiscorveryReMenJingXuanDomain.h"
 
 @interface KGHttpService : NSObject
 
@@ -42,8 +45,7 @@
 @property (strong, nonatomic) LoginRespDomain * loginRespDomain;
 @property (strong, nonatomic) NSArray         * dynamicMenuArray;           //首页动态菜单数据
 @property (strong, nonatomic) NSArray         * groupArray;                 //机构列表数据
-@property (strong, nonatomic) GroupDomain     * groupDomain;            //选择的机构 默认为机构列表第一条数据 首页切换机构后需要重置
-
+@property (strong, nonatomic) GroupDomain     * groupDomain;                //选择的机构 默认为机构列表第一条数据 首页切换机构后需要重置
 
 + (KGHttpService *)sharedService;
 
@@ -310,4 +312,9 @@
 - (void)getMySchoolComment:(NSString *)groupuuid success:(void(^)(EnrolStudentDataVO * vo))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)MySchoolSaveComment:(NSString *)extuuid classuuid:(NSString *)classuuid type:(NSString *)type score:(NSString *)score content:(NSString *)content anonymous:(NSString *)anonymous success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+#pragma mark - 发现模块
+- (void)getMeiRiTuiJian:(void(^)(DiscorveryMeiRiTuiJianDomain * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getReMenJingXuan:(NSString *)pageNo success:(void(^)(NSArray * remenjingxuanarr))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getDiscorveryNewNumber:(void(^)(DiscorveryNewNumberDomain * newnum))success faild:(void(^)(NSString * errorMsg))faild;
 @end

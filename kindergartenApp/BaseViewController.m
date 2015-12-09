@@ -37,12 +37,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = NO;
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.contentView setBackgroundColor:KGColorFrom16(0xE7E7EE)];
     [self setNavColor];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
 
@@ -52,9 +53,17 @@
     textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     textAttrs[NSFontAttributeName] = [UIFont boldSystemFontOfSize:16];
     bar.titleTextAttributes = textAttrs;
+    
+    bar.translucent = NO;
+    
+    UIImage * img = [[UIImage alloc] init];
+    
+    [[UINavigationBar appearance] setBackgroundImage:img forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    
+    [[UINavigationBar appearance] setShadowImage:img];
+    
     //设置显示的颜色
-//    bar.barTintColor = KGColorFrom16(0xff4966);
-    bar.barTintColor = [UIColor colorWithHexCode:@"#FF5A50"];
+    bar.barTintColor = [UIColor colorWithHexCode:@"#FF6666"];
 }
 
 #pragma mark - 菊花相关

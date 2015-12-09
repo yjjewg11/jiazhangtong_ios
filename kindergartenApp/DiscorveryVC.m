@@ -17,10 +17,20 @@
 #import "GiftwareArticlesViewController.h"
 #import "YouHuiVC.h"
 #import "KGHUD.h"
+#import "DiscorveryMeiRiTuiJianDomain.h"
+#import "DiscorveryNewNumberDomain.h"
+
+#import "DiscorveryJingXuanCell.h"
 
 @interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate>
 {
     UICollectionView * _collectionView;
+    
+    DiscorveryMeiRiTuiJianDomain * _tuijianDomain;
+    
+    NSMutableArray * _remenjingxuanData;
+    
+    DiscorveryNewNumberDomain * _numberDomain;
 }
 
 @end
@@ -39,20 +49,64 @@ static NSString *const Nodata = @"nodata";
     self.title = @"发现";
     
     //请求最新数据条数显示 红点
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    _numberDomain = [[DiscorveryNewNumberDomain alloc] init];
+    _numberDomain.today_goodArticle = [[defu objectForKey:@"jingpingwenzhangnum"] integerValue];
+    _numberDomain.today_snsTopic = [[defu objectForKey:@"huatinum"] integerValue];
+    _numberDomain.today_pxbenefit = [[defu objectForKey:@"youhuihuodongnum"] integerValue];
+    _numberDomain.today_unreadPushMsg = [[defu objectForKey:@"xiaoxinum"] integerValue];
     
     //请求每日推荐
-    
-    //请求热门精选
+    [self getTuiJianData];
     
     [self initCollectionView];
+}
+
+#pragma mark - 请求每日推荐
+- (void)getTuiJianData
+{
+    [self showLoadView];
     
-    [self.view addSubview:_collectionView];
+    [[KGHttpService sharedService] getMeiRiTuiJian:^(DiscorveryMeiRiTuiJianDomain *mgr)
+    {
+        _tuijianDomain = mgr;
+        
+        //请求热门精选
+        [self getReMenJingXuan];
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [self showNoNetView];
+    }];
+}
+
+- (void)getReMenJingXuan
+{
+    [[KGHttpService sharedService] getReMenJingXuan:@"1" success:^(NSArray *remenjingxuanarr)
+    {
+        [self hidenLoadView];
+        
+        _remenjingxuanData = [NSMutableArray arrayWithArray:remenjingxuanarr];
+        
+        [self.view addSubview:_collectionView];
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [self showNoNetView];
+    }];
 }
 
 #pragma mark - coll数据源
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    if (_remenjingxuanData.count == 0 || _remenjingxuanData == nil)
+    {
+        return 3;
+    }
+    else
+    {
+        return 2 + _remenjingxuanData.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -63,19 +117,34 @@ static NSString *const Nodata = @"nodata";
         
         cell.delegate = self;
         
+        [cell setData:_numberDomain];
+        
         return cell;
     }
     else if (indexPath.row == 1)
     {
         TuiJianCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:TuiJianColl forIndexPath:indexPath];
         
-        return cell;
-    }
-    else if (indexPath.row == 2)
-    {
-        NoDataView * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:Nodata forIndexPath:indexPath];
+        [cell setData:_tuijianDomain];
         
         return cell;
+    }
+    else if (indexPath.row >= 2)
+    {
+        if (_remenjingxuanData.count == 0 || _remenjingxuanData == nil)
+        {
+            NoDataView * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:Nodata forIndexPath:indexPath];
+            
+            return cell;
+        }
+        else
+        {
+            DiscorveryJingXuanCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:TopicColl forIndexPath:indexPath];
+            
+            [cell setData:_remenjingxuanData[indexPath.row - 2]];
+            
+            return cell;
+        }
     }
     
     return nil;
@@ -113,7 +182,7 @@ static NSString *const Nodata = @"nodata";
 }
 
 #pragma mark - 点击跳转
-- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }
@@ -134,6 +203,9 @@ static NSString *const Nodata = @"nodata";
      ];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"NoDataView" bundle:nil] forCellWithReuseIdentifier:Nodata
+     ];
+    
+    [_collectionView registerNib:[UINib nibWithNibName:@"DiscorveryJingXuanCell" bundle:nil] forCellWithReuseIdentifier:TopicColl
      ];
     
     _collectionView.dataSource = self;

@@ -109,7 +109,7 @@
 
 
 -(void)setBorderWithWidth:(CGFloat)width color:(UIColor *)color {
-    self.layer.borderColor =[UIColor grayColor].CGColor;
+    self.layer.borderColor = color.CGColor;
     self.layer.borderWidth = width;
 }
 

@@ -55,6 +55,8 @@
     NSArray   * groupDataArray;
     CGFloat     groupViewHeight;
     CLLocationManager *mgr;
+    
+    DiscorveryNewNumberDomain *numberDomain;
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -76,14 +78,23 @@
                                   adMoGoViewDelegate:self];
     
     self.adView.adWebBrowswerDelegate = self;
-    self.adView.frame = CGRectMake(0, APPTABBARHEIGHT, APPWINDOWWIDTH, 150.0);
+    self.adView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 150.0);
     [self.view addSubview:self.adView];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    self.adView.hidden = YES;
+    funiView.hidden = YES;
+    photosView.hidden = YES;
+    
 //    [self loadNavTitle];
+    
     [self autoLogin];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     mgr = [[CLLocationManager alloc] init];
     [self getLocationData];
@@ -158,7 +169,7 @@
 - (void)titleFunBtnClicked:(UIButton *)sender {
     sender.selected = !sender.selected;
     
-    CGFloat y = 64;
+    CGFloat y = 0;
     if(!sender.selected) {
         y -= groupViewHeight;
         titleBtn.selected = NO;
@@ -175,7 +186,7 @@
         
         groupViewHeight = [groupDataArray count] * Cell_Height2;
         if (!groupListView) {
-            groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, 64-groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
+            groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, -groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
             groupListView.backgroundColor = KGColorFrom16(0xE64662);
             [self.view addSubview:groupListView];
         }else{
@@ -218,7 +229,6 @@
 //选择机构
 - (void)didSelectedGroupList:(UIButton *)sender
 {
-    
     GroupDomain * domain = (GroupDomain *)sender.targetObj;
     [titleBtn setText:domain.company_name];
     [KGHttpService sharedService].groupDomain = domain;
@@ -228,9 +238,13 @@
 }
 
 - (void)requestGroupDate {
+    
     groupDataArray = [KGHttpService sharedService].loginRespDomain.group_list;
+    
     [self loadNavTitle];
     [self loadGroupListView];
+    
+    [self getNewsNumber];
     
 //    [[KGHttpService sharedService] getGroupList:^(NSArray *groupArray) {
 //        
@@ -242,6 +256,35 @@
 //    }];
 }
 
+#pragma mark - 获取话题和消息 显示最新消息数量
+- (void)getNewsNumber
+{
+    [[KGHttpService sharedService] getDiscorveryNewNumber:^(DiscorveryNewNumberDomain *newnum)
+    {
+        //设置给tabbar的消息按钮
+        
+        //使用偏好设置保存数据
+        NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+        
+        if (newnum != nil)
+        {
+            [defu setObject:@(newnum.today_goodArticle) forKey:@"jingpingwenzhangnum"];
+            [defu setObject:@(newnum.today_snsTopic) forKey:@"huatinum"];
+            [defu setObject:@(newnum.today_pxbenefit) forKey:@"youhuihuodongnum"];
+            [defu setObject:@(newnum.today_unreadPushMsg) forKey:@"xiaoxinum"];
+            [defu synchronize];
+        }
+        
+        [self hidenLoadView];
+        self.adView.hidden = NO;
+        funiView.hidden = NO;
+        photosView.hidden = NO;
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -436,12 +479,18 @@
 
 //自动登录
 - (void)autoLogin {
+    
+    [self showLoadView];
+    
     KGUser * account = [KGAccountTool account];
     if(account) {
-        [[KGHttpService sharedService] login:account success:^(NSString *msgStr) {
+        [[KGHttpService sharedService] login:account success:^(NSString *msgStr)
+        {
             [self requestGroupDate];
 //            [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
-        } faild:^(NSString *errorMsg) {
+        }
+        faild:^(NSString *errorMsg)
+        {
             [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
             UIWindow * window = [UIApplication sharedApplication].keyWindow;
             window.rootViewController = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
