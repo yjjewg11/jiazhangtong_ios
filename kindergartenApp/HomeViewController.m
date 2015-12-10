@@ -237,8 +237,8 @@
     
 }
 
-- (void)requestGroupDate {
-    
+- (void)requestGroupDate
+{
     groupDataArray = [KGHttpService sharedService].loginRespDomain.group_list;
     
     [self loadNavTitle];
@@ -478,12 +478,13 @@
 }
 
 //自动登录
-- (void)autoLogin {
-    
+- (void)autoLogin
+{
     [self showLoadView];
-    
+
     KGUser * account = [KGAccountTool account];
-    if(account) {
+    if(account)
+    {
         [[KGHttpService sharedService] login:account success:^(NSString *msgStr)
         {
             [self requestGroupDate];

@@ -20,6 +20,15 @@
 
 @implementation DiscorveryHomeLayout
 
+- (NSMutableArray *)havePicArr
+{
+    if (_havePicArr == nil)
+    {
+        _havePicArr = [NSMutableArray array];
+    }
+    return _havePicArr;
+}
+
 - (instancetype)init
 {
     if (self = [super init])
@@ -81,23 +90,25 @@
         return attrs;
     }
     
-    else if (indexPath.row == 2)
+    else if (indexPath.row >= 2)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = 204;
-        itemX = 0;
-        itemY = _newMaxHeight;
-        _newMaxHeight = itemY + itemHeight;
         
-        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
-        
-        return attrs;
-    }
-    
-    else
-    {
-        itemWidth = KGSCREEN.size.width;
-        itemHeight = 215;
+        if (self.havePicArr.count == 0 || self.havePicArr == nil)
+        {
+            itemHeight = 204; //nodataview;
+        }
+        else
+        {
+            if ([self.havePicArr[indexPath.row - 2] boolValue] == YES)
+            {
+                itemHeight = 215;
+            }
+            else
+            {
+                itemHeight = 125;
+            }
+        }
         itemX = 0;
         itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;

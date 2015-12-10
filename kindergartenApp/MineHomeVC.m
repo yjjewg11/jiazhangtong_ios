@@ -13,9 +13,10 @@
 #import "MineHomeNormalCell.h"
 #import "MyCollectionViewController.h"
 #import "MySPCourseVC.h"
+#import "StudentInfoViewController.h"
 #import "SettingViewController.h"
 
-@interface MineHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface MineHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,MineHomeChildrenCellDelegate>
 {
     UICollectionView * _collectionView;
 }
@@ -76,6 +77,8 @@ static NSString *const NormalColl = @"normalcoll";
     {
         MineHomeChildrenCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:StuColl forIndexPath:indexPath];
         
+        cell.delegate = self;
+        
         return cell;
     }
     else if (indexPath.row == 1)
@@ -123,6 +126,15 @@ static NSString *const NormalColl = @"normalcoll";
         SettingViewController * vc = [[SettingViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+- (void)pushToEditStudentInfo:(UIButton *)btn
+{
+    StudentInfoViewController * vc = [[StudentInfoViewController alloc] init];
+    
+    vc.studentInfo = [KGHttpService sharedService].loginRespDomain.list[btn.tag];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

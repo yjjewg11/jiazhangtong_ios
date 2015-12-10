@@ -21,15 +21,14 @@
 
 #define ORIGINAL_MAX_WIDTH 640.0f
 
-
-@interface StudentBaseInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,HZQDatePickerViewDelegate> {
+@interface StudentBaseInfoViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,HZQDatePickerViewDelegate,UIAlertViewDelegate,UITextFieldDelegate> {
     
     IBOutlet UIImageView * headImageView;
-    IBOutlet KGTextField * nameTextField;
-    IBOutlet KGTextField * nickTextField;
-    IBOutlet KGTextField * birthdayTextField;
-    IBOutlet UIImageView * boyImageView;
-    IBOutlet UIImageView * girlImageView;
+    IBOutlet UITextField * nameTextField;
+    IBOutlet UITextField * nickTextField;
+    IBOutlet UITextField * birthdayTextField;
+    __weak IBOutlet UITextField * sexTextField;
+    
     NSString * filePath;
     
     PopupView * popupView;
@@ -37,19 +36,36 @@
     
     HZQDatePickerView *_pikerView;
     BOOL isSetHeadImg; //是否设置过头像
+    BOOL keyboardOn;   //是否弹出键盘
+    NSInteger alertType;
+    NSInteger currentRole;
     
-    IBOutlet KGTextField *peopleCardTextField;
+    IBOutlet UITextField *peopleCardTextField;
+    
+    UITextField * currentOperationField;
+    __weak IBOutlet UITextField *roleTextField;
 }
 
 @end
 
 @implementation StudentBaseInfoViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
+    keyboardOn = NO;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
     self.title = @"详细信息";
-    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStyleDone target:self action:@selector(saveStudentBaseInfo)];
+    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(saveStudentBaseInfo)];
     [rightBarItem setTintColor:[UIColor whiteColor]];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
@@ -59,22 +75,6 @@
     [self initViewData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-
-/**
- *  添加输入框到array统一管理验证
- */
-- (void)addTextFieldToMArray
-{
-    [nameTextField setTextFielType:KGTextFielType_Empty];
-    [nameTextField setMessageStr:@"姓名不能为空"];
-    [textFieldMArray addObject:nameTextField];
-}
-
-
 //初始化页面值
 - (void)initViewData {
     [headImageView sd_setImageWithURL:[NSURL URLWithString:_studentInfo.headimg] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -82,33 +82,87 @@
     }];
 
     nameTextField.text = _studentInfo.name;
+    nameTextField.delegate = self;
     nickTextField.text = _studentInfo.nickname;
+    nickTextField.delegate = self;
     birthdayTextField.text = _studentInfo.birthday;
+    birthdayTextField.delegate = self;
     peopleCardTextField.text = _studentInfo.idcard;
+    peopleCardTextField.delegate = self;
+    sexTextField.text = _studentInfo.sex == YES ? @"女" : @"男";
+    sexTextField.delegate = self;
     
-    [self resetStudentSet];
-}
-
-//设置性别图
-- (void)resetStudentSet {
-    if(!_studentInfo.sex) {
-        boyImageView.image = [UIImage imageNamed:@"menan2"];
-        girlImageView.image = [UIImage imageNamed:@"menv1"];
-    } else {
-        boyImageView.image = [UIImage imageNamed:@"menan1"];
-        girlImageView.image = [UIImage imageNamed:@"menv2"];
+    if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ma_tel])
+    {
+        roleTextField.text = @"妈妈";
+        currentRole = 1;
+    }
+    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ba_name])
+    {
+        roleTextField.text = @"爸爸";
+        currentRole = 2;
+    }
+    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ye_tel])
+    {
+        roleTextField.text = @"爷爷";
+                currentRole = 3;
+    }
+    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.nai_tel])
+    {
+        roleTextField.text = @"奶奶";
+                currentRole = 4;
+    }
+    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waigong_tel])
+    {
+        roleTextField.text = @"外公";
+                currentRole = 5;
+    }
+    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waipo_tel])
+    {
+        roleTextField.text = @"外婆";
+                currentRole = 6;
+    }
+    else
+    {
+        roleTextField.text = @"妈妈";
+                currentRole = 1;
     }
 }
 
+#pragma mark - 验证输入
+- (BOOL)validateInputInView
+{
+    if ([nameTextField.text isEqualToString:@""] || nameTextField.text == nil)
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:@"姓名不能为空!"];
+        
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+}
+
+#pragma mark - 改变角色
+- (IBAction)changeRoleBtnClicked:(id)sender
+{
+    UIAlertView * aleartView = [[UIAlertView alloc] initWithTitle:@"请选择" message:@"您是宝贝的:" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"妈妈",@"爸爸",@"爷爷",@"奶奶",@"外公",@"外婆", nil];
+    
+    alertType = 2;
+    
+    [aleartView show];
+}
 
 //保存按钮点击
-- (void)saveStudentBaseInfo {
-    if([self validateInputInView]) {
+- (void)saveStudentBaseInfo
+{
+    if([self validateInputInView])
+    {
         _studentInfo.name = [KGNSStringUtil trimString:nameTextField.text];
         _studentInfo.nickname = [KGNSStringUtil trimString:nickTextField.text];
         _studentInfo.birthday = [KGNSStringUtil trimString:birthdayTextField.text];
         _studentInfo.idcard = [KGNSStringUtil trimString:peopleCardTextField.text];
-        
         //提交数据
         if(isSetHeadImg) {
             [[KGHUD sharedHud] show:self.contentView msg:@"上传头像中..."];
@@ -394,40 +448,114 @@
     }];
 }
 
-- (IBAction)sexBtnClicked:(UIButton *)sender {
-    _studentInfo.sex = sender.tag-Number_Ten;
-    [self resetStudentSet];
+- (IBAction)sexBtnClicked:(UIButton *)sender
+{
+    UIAlertView * av = [[UIAlertView alloc] initWithTitle:@"请选择" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"女",@"男",nil, nil];
+    
+    alertType = 1;
+    
+    [av show];
 }
 
 
-- (IBAction)birthdayBtnClicked:(UIButton *)sender {
+#pragma mark - 提示框
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertType == 1)
+    {
+        if (buttonIndex == 1)
+        {
+            _studentInfo.sex = 1;
+            sexTextField.text = @"女";
+        }
+        else if (buttonIndex == 2)
+        {
+            _studentInfo.sex = 0;
+            sexTextField.text = @"男";
+        }
+    }
+    else if (alertType == 2)
+    {
+        [self clearOriRoleTel:currentRole];
+        
+        switch (buttonIndex)
+        {
+            case 1:
+            {
+                _studentInfo.ma_tel = _studentInfo.tel_verify;
+                roleTextField.text = @"妈妈";
+            }
+                break;
+            case 2:
+            {
+                _studentInfo.ba_tel = _studentInfo.tel_verify;
+                roleTextField.text = @"爸爸";
+            }
+                break;
+            case 3:
+            {
+                _studentInfo.ye_tel = _studentInfo.tel_verify;
+                roleTextField.text = @"爷爷";
+            }
+                break;
+            case 4:
+            {
+                _studentInfo.nai_tel = _studentInfo.tel_verify;
+                roleTextField.text = @"奶奶";
+            }
+                break;
+            case 5:
+            {
+                _studentInfo.waigong_tel = _studentInfo.tel_verify;
+                roleTextField.text = @"外公";
+            }
+                break;
+            case 6:
+            {
+                _studentInfo.waipo_tel = _studentInfo.tel_verify;
+                roleTextField.text = @"外婆";
+            }
+                
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark - 清空之前角色的电话
+- (void)clearOriRoleTel:(NSInteger)role
+{
+    switch (role)
+    {
+        case 1:
+            _studentInfo.ma_tel = @"";
+            break;
+        case 2:
+            _studentInfo.ba_tel = @"";
+            break;
+        case 3:
+            _studentInfo.ye_tel = @"";
+            break;
+        case 4:
+            _studentInfo.nai_tel = @"";
+            break;
+        case 5:
+            _studentInfo.waigong_tel = @"";
+            break;
+        case 6:
+            _studentInfo.waipo_tel = @"";
+            break;
+        default:
+            break;
+    }
+}
+
+- (IBAction)birthdayBtnClicked:(UIButton *)sender
+{
+    [currentOperationField resignFirstResponder];
+    
     sender.selected = !sender.selected;
-//     
-//    if(!popupView) {
-//        popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
-//        popupView.alpha = Number_Zero;
-////        popupView.alpha = 1;
-//        
-//        CGFloat height = 216;
-//        datePicker = [[UIDatePicker alloc] init];
-//        datePicker.frame = CGRectMake(Number_Zero, KGSCREEN.size.height-height, KGSCREEN.size.width, height);
-//        datePicker.datePickerMode = UIDatePickerModeDate;
-//        
-//        if(_studentInfo.birthday && ![_studentInfo.birthday isEqualToString:@""]) {
-//            [datePicker setDate:[KGDateUtil getDateByDateStr:_studentInfo.birthday format:dateFormatStr1] animated:YES];
-//        }
-//        
-//        [datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged ];
-//        [popupView addSubview:datePicker];
-//        
-//        UIWindow * window = [UIApplication sharedApplication].keyWindow;
-//        [window addSubview:popupView];
-//        
-//    }
-//    
-//    [UIView viewAnimate:^{
-//        popupView.alpha = Number_One;
-//    } time:Number_AnimationTime_Five];
+
     NSDate * currentDate = nil;
     
     if(_studentInfo.birthday && ![_studentInfo.birthday isEqualToString:@""])
@@ -442,6 +570,7 @@
     [self setupDateView:DateTypeOfStart currentDate:currentDate];
     
 }
+
 
 #pragma mark - datepicker
 - (void)setupDateView:(DateType)type currentDate:(NSDate *)date
@@ -463,24 +592,50 @@
     birthdayTextField.text = date;
 }
 
-//
-//-(void)dateChanged:(id)sender{
-//    UIDatePicker * control = (UIDatePicker*)sender;
-//    NSString * timeStr = [NSString stringWithFormat:@"%@", control.date];
-//    NSArray * timeArray = [timeStr componentsSeparatedByString:@" "];
-//    if([timeArray count] > Number_Zero) {
-//        birthdayTextField.text = [timeArray objectAtIndex:Number_Zero];
-//    }
-//}
-//
-//
-//- (void)showDatePicker:(BOOL)isShow {
-//    [UIView animateWithDuration:Number_AnimationTime_Five animations:^{
-//        datePicker.alpha = isShow ? Number_One : Number_Zero;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//}
 
+#pragma mark - textField Delegate Methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    currentOperationField = textField;
+}
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+#pragma mark - 监听键盘事件
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    if (keyboardOn == NO)
+    {
+        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - (100 + 5))];
+        keyboardOn = YES;
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    if (keyboardOn == YES)
+    {
+        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + (100 + 5))];
+        keyboardOn = NO;
+    }
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (![currentOperationField isExclusiveTouch])
+    {
+        [currentOperationField resignFirstResponder];
+    }
+}
 @end

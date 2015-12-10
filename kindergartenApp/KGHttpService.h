@@ -37,6 +37,7 @@
 #import "DiscorveryMeiRiTuiJianDomain.h"
 #import "DiscorveryNewNumberDomain.h"
 #import "DiscorveryReMenJingXuanDomain.h"
+#import "SystemConfigOfTopic.h"
 
 @interface KGHttpService : NSObject
 
@@ -317,4 +318,6 @@
 - (void)getMeiRiTuiJian:(void(^)(DiscorveryMeiRiTuiJianDomain * mgr))success faild:(void(^)(NSString * errorMsg))faild;
 - (void)getReMenJingXuan:(NSString *)pageNo success:(void(^)(NSArray * remenjingxuanarr))success faild:(void(^)(NSString * errorMsg))faild;
 - (void)getDiscorveryNewNumber:(void(^)(DiscorveryNewNumberDomain * newnum))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getSysConfig:(NSString *)md5 success:(void(^)(SystemConfigOfTopic * sysDomain))success faild:(void(^)(NSString * errorMsg))faild;
 @end

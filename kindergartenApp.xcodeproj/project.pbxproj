@@ -391,6 +391,8 @@
 		04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9F9E1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m */; };
 		04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */; };
 		04FB9FA41C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */; };
+		04FC08711C195B26005BABAA /* MineEditStudentBaseInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC086F1C195B26005BABAA /* MineEditStudentBaseInfoVC.m */; };
+		04FC08721C195B26005BABAA /* MineEditStudentBaseInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC08701C195B26005BABAA /* MineEditStudentBaseInfoVC.xib */; };
 		04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */; };
 		04FC2A001BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */; };
 		04FC31DE1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC31DD1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m */; };
@@ -398,6 +400,7 @@
 		04FDB4DE1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDB4DC1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m */; };
 		04FDB4DF1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FDB4DD1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib */; };
 		04FDB4E21BFC265300A73E2E /* MySPCourseTimeListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */; };
+		04FDBE661C1928A700516755 /* SystemConfigOfTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDBE651C1928A700516755 /* SystemConfigOfTopic.m */; };
 		04FE04231BF1CCE70069CF9A /* MySPCourseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE04221BF1CCE70069CF9A /* MySPCourseVC.m */; };
 		04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE04251BF1DD1E0069CF9A /* MYSPCourseTableVC.m */; };
 		04FE6D251BF5838200181134 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE6D241BF5838200181134 /* AddressBookUI.framework */; };
@@ -1335,6 +1338,9 @@
 		04FB9FA01C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseAndSchoolListSchoolCell.h; sourceTree = "<group>"; };
 		04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseAndSchoolListSchoolCell.m; sourceTree = "<group>"; };
 		04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseAndSchoolListSchoolCell.xib; sourceTree = "<group>"; };
+		04FC086E1C195B26005BABAA /* MineEditStudentBaseInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditStudentBaseInfoVC.h; sourceTree = "<group>"; };
+		04FC086F1C195B26005BABAA /* MineEditStudentBaseInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditStudentBaseInfoVC.m; sourceTree = "<group>"; };
+		04FC08701C195B26005BABAA /* MineEditStudentBaseInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineEditStudentBaseInfoVC.xib; sourceTree = "<group>"; };
 		04FC29FC1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseListCourseDetailCell.h; sourceTree = "<group>"; };
 		04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseListCourseDetailCell.m; sourceTree = "<group>"; };
 		04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseListCourseDetailCell.xib; sourceTree = "<group>"; };
@@ -1346,6 +1352,8 @@
 		04FDB4DD1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPTeacherCommentCell.xib; sourceTree = "<group>"; };
 		04FDB4E01BFC265300A73E2E /* MySPCourseTimeListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseTimeListVC.h; sourceTree = "<group>"; };
 		04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseTimeListVC.m; sourceTree = "<group>"; };
+		04FDBE641C1928A700516755 /* SystemConfigOfTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemConfigOfTopic.h; sourceTree = "<group>"; };
+		04FDBE651C1928A700516755 /* SystemConfigOfTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemConfigOfTopic.m; sourceTree = "<group>"; };
 		04FE04211BF1CCE70069CF9A /* MySPCourseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseVC.h; sourceTree = "<group>"; };
 		04FE04221BF1CCE70069CF9A /* MySPCourseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseVC.m; sourceTree = "<group>"; };
 		04FE04241BF1DD1E0069CF9A /* MYSPCourseTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSPCourseTableVC.h; sourceTree = "<group>"; };
@@ -3789,6 +3797,8 @@
 				24850B131B7B860E003C442E /* ClassDomain.m */,
 				04F8C6F01C180D1B00EF5E57 /* DiscorveryNewNumberDomain.h */,
 				04F8C6F11C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m */,
+				04FDBE641C1928A700516755 /* SystemConfigOfTopic.h */,
+				04FDBE651C1928A700516755 /* SystemConfigOfTopic.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4011,6 +4021,9 @@
 				04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */,
 				04FB23791C16D91C009B57E2 /* MineHomeVC.h */,
 				04FB237A1C16D91C009B57E2 /* MineHomeVC.m */,
+				04FC086E1C195B26005BABAA /* MineEditStudentBaseInfoVC.h */,
+				04FC086F1C195B26005BABAA /* MineEditStudentBaseInfoVC.m */,
+				04FC08701C195B26005BABAA /* MineEditStudentBaseInfoVC.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -5000,6 +5013,7 @@
 				04A4DE7F1BF484DF002ABBB1 /* webview_bar_share_ipad@2x.png in Resources */,
 				04A4DE041BF484DF002ABBB1 /* adchina_stoploading.png in Resources */,
 				24C46B411B5A2B1100A58F92 /* MeViewController.xib in Resources */,
+				04FC08721C195B26005BABAA /* MineEditStudentBaseInfoVC.xib in Resources */,
 				04FB9FA41C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib in Resources */,
 				4D5CE7831B7E4368002F1088 /* SettingViewCell.xib in Resources */,
 				4DC018D11B88D9470097984E /* PromptView.xib in Resources */,
@@ -5370,6 +5384,7 @@
 				04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */,
 				F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */,
 				248B6A951B19A9D900FCB98F /* UIWindow+Extension.m in Sources */,
+				04FC08711C195B26005BABAA /* MineEditStudentBaseInfoVC.m in Sources */,
 				4D5CE7691B7E4333002F1088 /* AboutWeViewController.m in Sources */,
 				24AA0B4C1B690FA800DAC03B /* ChatViewController.m in Sources */,
 				04FAEF6C1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.m in Sources */,
@@ -5670,6 +5685,7 @@
 				048ADD331BD611D600E6E6D0 /* SPTimetableDomain.m in Sources */,
 				4D077B1D1B8038BE00FFD5CB /* CollectNoticeTableViewCell.m in Sources */,
 				24DE91A81B67B94500D3FFCE /* MessageTableViewCell.m in Sources */,
+				04FDBE661C1928A700516755 /* SystemConfigOfTopic.m in Sources */,
 				248B6AD21B19B58D00FCB98F /* MLNavigationController.m in Sources */,
 				04FEC5731BEDCCAA00C642A6 /* YouHuiDataListVO.m in Sources */,
 				4DE384551B7F728A009F12E4 /* MyCollectionViewController.m in Sources */,

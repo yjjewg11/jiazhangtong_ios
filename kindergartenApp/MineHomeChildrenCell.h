@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MineHomeChildrenCellDelegate <NSObject>
+
+- (void)pushToEditStudentInfo:(UIButton *)btn;
+
+@end
+
 @interface MineHomeChildrenCell : UICollectionViewCell
+
+@property (weak, nonatomic) id<MineHomeChildrenCellDelegate> delegate;
 
 @end

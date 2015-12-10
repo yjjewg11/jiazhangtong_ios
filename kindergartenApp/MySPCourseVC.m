@@ -99,7 +99,7 @@
 {
     if (_topSelView == nil)
     {
-        _topSelView = [[UIView alloc] initWithFrame:CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT, APPWINDOWWIDTH, 30)];
+        _topSelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, 30)];
         
         _topSelView.backgroundColor = [UIColor whiteColor];
     }
@@ -162,7 +162,7 @@
     {
         _scrollView = [[UIScrollView alloc] init];
         _scrollView.delegate = self;
-        _scrollView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
+        _scrollView.frame = CGRectMake(0,30, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 30));
         _scrollView.contentSize = CGSizeMake(APPWINDOWWIDTH * 2, 0);
         _scrollView.pagingEnabled = YES;
         _scrollView.showsHorizontalScrollIndicator = NO;

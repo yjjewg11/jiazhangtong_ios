@@ -13,4 +13,6 @@
 
 - (void)setData:(KGUser *)user;
 
+@property (weak, nonatomic) IBOutlet UIButton *btn;
+
 @end

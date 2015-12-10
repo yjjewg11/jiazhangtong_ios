@@ -17,16 +17,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ga7-e9-iQX">
-                    <rect key="frame" x="0.0" y="64" width="320" height="456"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Ga7-e9-iQX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="8DK-iN-pt9"/>
-                <constraint firstItem="Ga7-e9-iQX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="E7h-Nl-tXu"/>
-                <constraint firstAttribute="trailing" secondItem="Ga7-e9-iQX" secondAttribute="trailing" id="YAf-2I-rjC"/>
-                <constraint firstAttribute="bottom" secondItem="Ga7-e9-iQX" secondAttribute="bottom" constant="48" id="lss-g7-5gy"/>
+                <constraint firstItem="Ga7-e9-iQX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9ve-of-Cpv"/>
+                <constraint firstItem="Ga7-e9-iQX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="lLD-Ln-0gO"/>
+                <constraint firstAttribute="trailing" secondItem="Ga7-e9-iQX" secondAttribute="trailing" id="snI-Yo-Key"/>
+                <constraint firstAttribute="bottom" secondItem="Ga7-e9-iQX" secondAttribute="bottom" id="uJX-wL-8Wv"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

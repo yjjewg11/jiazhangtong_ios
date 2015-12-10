@@ -202,4 +202,6 @@
 + (NSString *)getMeiRiTuiJianUrl;
 + (NSString *)getReMenJingXuanUrl;
 + (NSString *)getNewsNumberUrl;
+
++ (NSString *)getSysConfigOfTopic;
 @end

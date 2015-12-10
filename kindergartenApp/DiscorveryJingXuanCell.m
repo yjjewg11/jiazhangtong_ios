@@ -9,6 +9,7 @@
 #import "DiscorveryJingXuanCell.h"
 #import "UIImageView+WebCache.h"
 #import "MyUILabel.h"
+#import "UIColor+flat.h"
 
 @interface DiscorveryJingXuanCell()
 {
@@ -49,6 +50,9 @@
     _mySummaryLbl.textAlignment = UITextAlignmentLeft;
     _mySummaryLbl.numberOfLines = 3;
     _mySummaryLbl.lineBreakMode = UILineBreakModeWordWrap;
+    _mySummaryLbl.textColor = [UIColor darkGrayColor];
+    _mySummaryLbl.font = [UIFont systemFontOfSize:15];
+    _mySummaryLbl.alpha = 0.7;
     [_mySummaryLbl setVerticalAlignment:VerticalAlignmentTop];
     [self addSubview:_mySummaryLbl];
 }
@@ -60,14 +64,36 @@
     self.dzLbl.text = [NSString stringWithFormat:@"%ld",(long)domain.yes_count];
     self.dzLbl.layer.cornerRadius = 5;
     self.dzLbl.layer.masksToBounds = YES;
+    self.dzLbl.backgroundColor = [UIColor colorWithHexCode:@"#FF6666"];
     
-    _mySummaryLbl.text = domain.summary;
-    
-    for (NSInteger i=0; i<domain.imgsList.count; i++)
+    if ([domain.summary isEqualToString:@""] || domain.summary == nil)
     {
-        UIImageView * v = self.imgsView.subviews[i];
+        _mySummaryLbl.text = @"sorry,暂无相关内容...";
+    }
+    else
+    {
+        _mySummaryLbl.text = domain.summary;
+    }
+
+    
+    if (domain.imgList.count == 0)
+    {
+        self.imgsView.hidden = YES;
         
-        [v sd_setImageWithURL:[NSURL URLWithString:domain.imgsList[i]] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
+        self.height = 125;
+    }
+    else
+    {
+        self.height = 215;
+        
+        self.imgsView.hidden = NO;
+        
+        for (NSInteger i=0; i<domain.imgList.count; i++)
+        {
+            UIImageView * v = self.imgsView.subviews[i];
+            
+            [v sd_setImageWithURL:[NSURL URLWithString:domain.imgList[i]] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
+        }
     }
 }
 

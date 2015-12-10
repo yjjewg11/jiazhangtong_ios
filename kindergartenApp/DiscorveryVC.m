@@ -31,6 +31,10 @@
     NSMutableArray * _remenjingxuanData;
     
     DiscorveryNewNumberDomain * _numberDomain;
+    
+    DiscorveryHomeLayout * _layOut;
+    
+    NSMutableArray * _haveReMenJingXuanPic;
 }
 
 @end
@@ -80,6 +84,13 @@ static NSString *const Nodata = @"nodata";
     }];
 }
 
+#pragma mark - 请求判断是否可以点击进入话题详情
+- (void)getCanJoinTopicWeb
+{
+    
+}
+
+#pragma mark - 请求热门精选
 - (void)getReMenJingXuan
 {
     [[KGHttpService sharedService] getReMenJingXuan:@"1" success:^(NSArray *remenjingxuanarr)
@@ -88,12 +99,35 @@ static NSString *const Nodata = @"nodata";
         
         _remenjingxuanData = [NSMutableArray arrayWithArray:remenjingxuanarr];
         
+        [self calCellHavePic];
+        
         [self.view addSubview:_collectionView];
     }
     faild:^(NSString *errorMsg)
     {
         [self showNoNetView];
     }];
+}
+
+#pragma mark - 创建是否有图片的判断数组
+- (void)calCellHavePic
+{
+    _haveReMenJingXuanPic = [NSMutableArray array];
+    
+    for (DiscorveryReMenJingXuanDomain * d in _remenjingxuanData)
+    {
+        if (d.imgList.count == 0)
+        {
+            [_haveReMenJingXuanPic addObject:@(NO)];
+        }
+        else
+        {
+            [_haveReMenJingXuanPic addObject:@(YES)];
+        }
+    }
+    
+    //把数组交给layout
+    _layOut.havePicArr = _haveReMenJingXuanPic;
 }
 
 #pragma mark - coll数据源
@@ -193,8 +227,11 @@ static NSString *const Nodata = @"nodata";
     //创建coll布局
     DiscorveryHomeLayout *layout = [[DiscorveryHomeLayout alloc] init];
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 44) collectionViewLayout:layout];
-    _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _layOut = layout;
+    
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 44 - 70) collectionViewLayout:layout];
+    
+    _collectionView.backgroundColor = [UIColor whiteColor];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"DiscorveryTypeCell" bundle:nil] forCellWithReuseIdentifier:TypeColl
      ];

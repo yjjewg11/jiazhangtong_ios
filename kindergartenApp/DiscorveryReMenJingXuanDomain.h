@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) NSString * summary;
 
-@property (strong, nonatomic) NSArray * imgsList;
+@property (strong, nonatomic) NSArray * imgList;
 
 @property (strong, nonatomic) NSString * title;
 

@@ -123,8 +123,10 @@
 }
 
 //sessionTimeout处理
-- (void)sessionTimeoutHandle:(KGBaseDomain *)baseDomain {
-    if([baseDomain.ResMsg.status isEqualToString:String_SessionTimeout]) {
+- (void)sessionTimeoutHandle:(KGBaseDomain *)baseDomain
+{
+    if([baseDomain.ResMsg.status isEqualToString:String_SessionTimeout])
+    {
         [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_SessionTimeout object:self userInfo:nil];
         return;
     }
@@ -2034,5 +2036,43 @@
      }];
 }
 
+//获取系统参数，是否能进入话题
+- (void)getSysConfig:(NSString *)md5 success:(void(^)(SystemConfigOfTopic * sysDomain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (md5 == nil || [md5 isEqualToString:@""])
+    {
+        md5 = @"";
+    }
+    
+    NSDictionary * dict = @{@"md5":md5};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getSysConfigOfTopic] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             SystemConfigOfTopic * tempResp = [[SystemConfigOfTopic alloc] init];
+             
+             tempResp.md5 = [responseObject objectForKey:@"md5"];
+             tempResp.sns_url = [baseDomain.data objectForKey:@"sns_url"];
+             
+             NSLog(@"系统domain =  %@,%@",tempResp.md5,tempResp.sns_url);
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
 
 @end

@@ -171,8 +171,9 @@ static int exception_callback_handler() {
     exp_call_back_func = &exception_callback_handler;
 }
 
-- (void)sessionTimeoutNotification:(NSNotification *)notification {
-   self.window.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
+- (void)sessionTimeoutNotification:(NSNotification *)notification
+{
+    self.window.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     [self.window makeKeyAndVisible];
     [[KGHUD sharedHud] show:self.window onlyMsg:@"登录超时,请重新登录."];
 }

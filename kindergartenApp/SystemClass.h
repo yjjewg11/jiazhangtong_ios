@@ -33,7 +33,7 @@
 #define Key_TopicInteractionDomain         @"TopicInteractionDomain"
 #define Key_TopicUUID                      @"topicUUID"
 #define Key_ImagesArray                    @"imagesMArray"
-#define Key_Tag                                  @"imagesMArrayTag"
+#define Key_Tag                            @"imagesMArrayTag"
 #define Key_TopicFunRequestType            @"topicFunRequestType"
 #define Key_TopicType                      @"topicType"
 #define Key_TopicTypeReplyText             @"topicReplyText"

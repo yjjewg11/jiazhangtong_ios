@@ -57,6 +57,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="O62-Tg-gyd" secondAttribute="trailing" constant="1" id="10U-GT-daY"/>
                     <constraint firstItem="PLc-Gx-5MM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="1" id="19G-44-U4g"/>
@@ -73,6 +74,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="7J7-Mn-hTY" secondAttribute="trailing" constant="1" id="w54-jN-0p1"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="headImageView" destination="PLc-Gx-5MM" id="1KO-HN-LB1"/>
                 <outlet property="subTitleLabel" destination="DOR-8B-IJZ" id="qQt-p0-QfG"/>
@@ -80,10 +82,11 @@
                 <outlet property="titleLabel" destination="O62-Tg-gyd" id="s3W-XM-YOe"/>
                 <outlet property="unReadIconImageView" destination="sae-1t-VGd" id="tun-U0-cdQ"/>
             </connections>
+            <point key="canvasLocation" x="238" y="220"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="message_image" width="45" height="45"/>
-        <image name="shoucang" width="17" height="17"/>
+        <image name="shoucang" width="22" height="22"/>
     </resources>
 </document>

@@ -61,7 +61,7 @@
 - (void)initCellStyle {
     self.selectionStyle              = UITableViewCellSelectionStyleNone;
     self.autoresizingMask            = UIViewAutoresizingFlexibleRightMargin;
-    [self.contentView setBackgroundColor:KGColorFrom16(0xE7E7EE)];
+    [self.contentView setBackgroundColor:[UIColor whiteColor]];
 }
 
 

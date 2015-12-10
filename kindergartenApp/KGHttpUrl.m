@@ -472,4 +472,9 @@
     return URL(baseServiceURL, @"rest/userinfo/getNewMsgNumber.json");
 }
 
+#pragma mark - 获取系统参数
++ (NSString *)getSysConfigOfTopic{
+    return URL(baseServiceURL, @"rest/share/getConfig.json");
+}
+
 @end

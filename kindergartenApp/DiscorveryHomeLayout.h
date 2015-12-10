@@ -10,4 +10,6 @@
 
 @interface DiscorveryHomeLayout : UICollectionViewFlowLayout
 
+@property (strong, nonatomic) NSMutableArray * havePicArr;
+
 @end

@@ -59,7 +59,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Reg-V8-xN2" firstAttribute="centerX" secondItem="BzF-PV-zJX" secondAttribute="centerX" id="TR7-5A-b6G"/>
                             <constraint firstItem="gHC-E6-uMt" firstAttribute="leading" secondItem="BzF-PV-zJX" secondAttribute="leading" id="X18-J7-XMw"/>
@@ -80,6 +80,13 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="awX-JK-B0m">
+                        <rect key="frame" x="20" y="214" width="300" height="1"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="B4K-qb-fhx"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -92,10 +99,13 @@
                 <constraint firstItem="BzF-PV-zJX" firstAttribute="top" secondItem="21D-Mw-kr0" secondAttribute="bottom" constant="15" id="G0j-TP-6yJ"/>
                 <constraint firstAttribute="trailing" secondItem="FXn-Et-8S3" secondAttribute="trailing" constant="15" id="GK4-u6-ZBz"/>
                 <constraint firstItem="FXn-Et-8S3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="R5k-KZ-K5W"/>
+                <constraint firstAttribute="trailing" secondItem="awX-JK-B0m" secondAttribute="trailing" id="SCg-Ex-eJQ"/>
                 <constraint firstItem="21D-Mw-kr0" firstAttribute="top" secondItem="FXn-Et-8S3" secondAttribute="bottom" constant="15" id="SDh-5A-5Hn"/>
                 <constraint firstItem="FXn-Et-8S3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Yzr-Ms-bZk"/>
                 <constraint firstItem="2Bb-7L-0uR" firstAttribute="top" secondItem="FXn-Et-8S3" secondAttribute="bottom" constant="15" id="el3-ag-k15"/>
+                <constraint firstAttribute="bottom" secondItem="awX-JK-B0m" secondAttribute="bottom" id="feG-gX-EdM"/>
                 <constraint firstItem="21D-Mw-kr0" firstAttribute="leading" secondItem="2Bb-7L-0uR" secondAttribute="trailing" constant="15" id="ofR-Um-yN8"/>
+                <constraint firstItem="awX-JK-B0m" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="ruv-gd-PHV"/>
             </constraints>
             <size key="customSize" width="320" height="215"/>
             <connections>
@@ -107,7 +117,7 @@
                 <outlet property="summaryLbl" destination="21D-Mw-kr0" id="NyR-eg-lPa"/>
                 <outlet property="titleLbl" destination="FXn-Et-8S3" id="g3h-us-RU9"/>
             </connections>
-            <point key="canvasLocation" x="345" y="299.5"/>
+            <point key="canvasLocation" x="364" y="299.5"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -17,8 +17,9 @@
 
 @implementation TuiJianCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    
 }
 
 - (void)setData:(DiscorveryMeiRiTuiJianDomain *)domain

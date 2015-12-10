@@ -99,7 +99,7 @@
     //创建底部view
     _bottomView = [[UIView alloc] init];
     _bottomView.backgroundColor = [UIColor whiteColor];
-    _bottomView.frame = CGRectMake(0, APPWINDOWHEIGHT - 48, APPWINDOWWIDTH, 48);
+    _bottomView.frame = CGRectMake(0, APPWINDOWHEIGHT - 48 - 64, APPWINDOWWIDTH, 48);
     [self addBtn:_bottomView];
     
     //获取数据
@@ -107,7 +107,7 @@
     
     //创建上面三个按钮view
     _buttonsView = [[UIView alloc] init];
-    _buttonsView.frame = CGRectMake(0, 64, APPWINDOWWIDTH, 40);
+    _buttonsView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 40);
     [self addSelBtns:_buttonsView];
     
     //创建按钮下面红线
@@ -116,19 +116,19 @@
     //创建课程详情view
     SPCourseDetailWebView * courseDetailView = [[[NSBundle mainBundle] loadNibNamed:@"SPCourseDetailWebView" owner:nil options:nil] firstObject];
     _courseDetailView = courseDetailView;
-    courseDetailView.frame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
+    courseDetailView.frame = CGRectMake(0, 40 + 0 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
     
     //创建学校简介view
     SPCourseDetailScrollInfoWebView * schoolInfoView = [[[NSBundle mainBundle] loadNibNamed:@"SPCourseDetailScrollInfoWebView" owner:nil options:nil] firstObject];
     _schoolInfoView = schoolInfoView;
-    schoolInfoView.frame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
+    schoolInfoView.frame = CGRectMake(0, 40 + 0 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
     schoolInfoView.hidden = YES;
     
     //创建家长评论view
     //tableview显示完
     SpCourseDetailTableVC * tableVC = [[SpCourseDetailTableVC alloc] init];
     _tableVC = tableVC;
-    tableVC.tableFrame = CGRectMake(0, 40 + 64 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
+    tableVC.tableFrame = CGRectMake(0, 40 + 0 + 2, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 40 - 48 - 2);
     tableVC.tableView.hidden = YES;
     
     //请求课程详情

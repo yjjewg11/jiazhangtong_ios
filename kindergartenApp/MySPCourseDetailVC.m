@@ -89,7 +89,7 @@
     
     //创建顶部课程信息view
     _courseInfoView = [[UIView alloc] init];
-    _courseInfoView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT, APPWINDOWWIDTH, 150);
+    _courseInfoView.frame = CGRectMake(0, 0 + 0, APPWINDOWWIDTH, 150);
     if (self.dataSourseType == 0)
     {
         [self addInfoCell:_courseInfoView];
@@ -101,7 +101,7 @@
     
     //创建上面三个按钮view
     _buttonsView = [[UIView alloc] init];
-    _buttonsView.frame = CGRectMake(1, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 120, self.view.width, 30);
+    _buttonsView.frame = CGRectMake(1, 0 + 0 + 120, self.view.width, 30);
     [self addSelBtns:_buttonsView];
     
     //创建scrollView
@@ -230,7 +230,7 @@
     
     timelistVC.classuuid = self.domain.uuid;
     
-    timelistVC.tableFrame = CGRectMake(0,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    timelistVC.tableFrame = CGRectMake(0,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame) - 64);
     
     [self getListData];
     

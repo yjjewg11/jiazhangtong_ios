@@ -42,13 +42,15 @@ typedef enum : NSInteger {
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
-    if (_flag) {
+    if (_flag)
+    {
         [_keyBoardController addKeyBoardNotification];
     }
     _flag = YES;
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated
+{
     [super viewDidDisappear:animated];
     [_keyBoardController removeKeyBoardNotification];
 }
@@ -85,9 +87,10 @@ typedef enum : NSInteger {
 }
 
 //单击响应
-- (void)singleTap{
-    [KGEmojiManage sharedManage].isSwitchEmoji = NO;
-    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+- (void)singleTap
+{
+//    [KGEmojiManage sharedManage].isSwitchEmoji = NO;
+//    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 
@@ -145,7 +148,8 @@ typedef enum : NSInteger {
 
 
 
-- (void)notificationMessage:(NSString *)msgStr {
+- (void)notificationMessage:(NSString *)msgStr
+{
     NSDictionary * dic = [NSDictionary dictionaryWithObject:msgStr forKey:Key_Notification_MessageText];
     [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
 }
@@ -240,7 +244,8 @@ typedef enum : NSInteger {
 }
 
 //水平手势x值发生改变
-- (void)didChangeViewX:(CGFloat)x gesture:(UIPanGestureRecognizer*)gesture {
+- (void)didChangeViewX:(CGFloat)x gesture:(UIPanGestureRecognizer*)gesture
+{
     
 }
 

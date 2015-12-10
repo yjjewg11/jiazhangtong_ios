@@ -129,12 +129,12 @@
     
     //创建顶部学校信息view
     _schoolInfoView = [[UIView alloc] init];
-    _schoolInfoView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT, APPWINDOWWIDTH, 150);
+    _schoolInfoView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 150);
     [self addInfoCell:_schoolInfoView];
     
     //创建上面三个按钮view
     _buttonsView = [[UIView alloc] init];
-    _buttonsView.frame = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT + 120, APPWINDOWWIDTH, 30);
+    _buttonsView.frame = CGRectMake(0, 0 + 120, APPWINDOWWIDTH, 30);
     [self addSelBtns:_buttonsView];
     
     //创建scrollView
