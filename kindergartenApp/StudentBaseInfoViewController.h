@@ -12,6 +12,12 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VPImageCropperViewController.h"
 
+@protocol StudentBaseInfoViewControllerDelegate <NSObject>
+
+- (void)addStudentReloadData:(KGUser *)addUser;
+
+@end
+
 @interface StudentBaseInfoViewController : BaseViewController <VPImageCropperDelegate>
 
 @property (strong, nonatomic) KGUser * studentInfo;
@@ -23,6 +29,8 @@
 - (IBAction)sexBtnClicked:(UIButton *)sender;
 
 - (IBAction)birthdayBtnClicked:(UIButton *)sender;
+
+@property (weak, nonatomic) id<StudentBaseInfoViewControllerDelegate> delegate;
 
 
 @end

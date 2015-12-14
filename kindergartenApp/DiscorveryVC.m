@@ -19,10 +19,10 @@
 #import "KGHUD.h"
 #import "DiscorveryMeiRiTuiJianDomain.h"
 #import "DiscorveryNewNumberDomain.h"
-
 #import "DiscorveryJingXuanCell.h"
+#import "DiscorveryWebVC.h"
 
-@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate>
+@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -35,7 +35,15 @@
     DiscorveryHomeLayout * _layOut;
     
     NSMutableArray * _haveReMenJingXuanPic;
+    
+    BOOL _canReqData;
+    
+    NSInteger _pageNo;
+    
+    DiscorveryWebVC * _webVC;
 }
+
+@property (strong, nonatomic) NSString * groupuuid;
 
 @end
 
@@ -46,11 +54,36 @@ static NSString *const TuiJianColl= @"tuijiancoll";
 static NSString *const TopicColl = @"topiccoll";
 static NSString *const Nodata = @"nodata";
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (_webVC != nil)
+    {
+        _webVC.view.hidden = YES;
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        self.navigationController.navigationBarHidden = NO;
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+        _collectionView.hidden = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"发现";
+    
+    _pageNo = 2;
     
     //请求最新数据条数显示 红点
     NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
@@ -82,12 +115,6 @@ static NSString *const Nodata = @"nodata";
     {
         [self showNoNetView];
     }];
-}
-
-#pragma mark - 请求判断是否可以点击进入话题详情
-- (void)getCanJoinTopicWeb
-{
-    
 }
 
 #pragma mark - 请求热门精选
@@ -208,7 +235,6 @@ static NSString *const Nodata = @"nodata";
         default:
             break;
     }
-    
     if(baseVC)
     {
         [self.navigationController pushViewController:baseVC animated:YES];
@@ -218,7 +244,26 @@ static NSString *const Nodata = @"nodata";
 #pragma mark - 点击跳转
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (indexPath.row >= 2)
+    {
+        DiscorveryWebVC * webvc = [[DiscorveryWebVC alloc] init];
+        
+        _webVC = webvc;
+        
+        webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
+        
+        NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+        
+        NSString * url = [defu objectForKey:@"sns_url"];
+        
+        [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
+        
+        [self.view addSubview:webvc.view];
+        
+        _collectionView.hidden = YES;
+        
+        self.navigationController.navigationBarHidden = YES;
+    }
 }
 
 #pragma mark - 初始化collectionview
@@ -248,5 +293,69 @@ static NSString *const Nodata = @"nodata";
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
     
+    [self setupRefresh];
+}
+
+#pragma mark - 自动翻页
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint offset = scrollView.contentOffset;
+    CGRect bounds = scrollView.bounds;
+    CGSize size = scrollView.contentSize;
+    UIEdgeInsets inset = scrollView.contentInset;
+    CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
+    CGFloat maximumOffset = size.height;
+    //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
+    if(currentOffset >= maximumOffset)
+    {
+        if (_canReqData == YES)
+        {
+            _canReqData = NO;
+            
+            [[KGHttpService sharedService] getReMenJingXuan:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(NSArray *remenjingxuanarr)
+             {
+                 NSMutableArray * arr = [NSMutableArray arrayWithArray:remenjingxuanarr];
+                 
+                 if (arr.count == 0)
+                 {
+                     
+                 }
+                 else
+                 {
+                     _pageNo ++;
+                     
+                     [_remenjingxuanData addObjectsFromArray:arr];
+                     
+                     [_collectionView reloadData];
+                     
+                      _canReqData = YES;
+                 }
+                 
+             }
+             faild:^(NSString *errorMsg)
+             {
+                 [self showNoNetView];
+             }];
+        }
+    }
+}
+
+#pragma mark - 上拉刷新，下拉加载数据
+- (void)setupRefresh
+{
+    [_collectionView addFooterWithTarget:self action:@selector(footerRereshing) showActivityView:YES];
+    _collectionView.footerPullToRefreshText = @"上拉加载更多";
+    _collectionView.footerReleaseToRefreshText = @"松开立即加载";
+    _collectionView.footerRefreshingText = @"正在加载中...";
+}
+
+#pragma mark 开始进入刷新状态
+- (void)footerRereshing
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    {
+        _collectionView.footerRefreshingText = @"没有更多了";
+        [_collectionView footerEndRefreshing];
+    });
 }
 @end

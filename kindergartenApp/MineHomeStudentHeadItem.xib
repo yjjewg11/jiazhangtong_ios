@@ -11,20 +11,19 @@
             <rect key="frame" x="0.0" y="0.0" width="91" height="112"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TJn-ZC-OWZ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_def" translatesAutoresizingMaskIntoConstraints="NO" id="TJn-ZC-OWZ">
                     <rect key="frame" x="15" y="26" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="XLH-iJ-z6X"/>
                         <constraint firstAttribute="width" constant="60" id="ex6-da-LeG"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="糖或问" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyh-C2-Wd6">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加宝宝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyh-C2-Wd6">
                     <rect key="frame" x="0.0" y="91" width="91" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="IIR-L6-WvJ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ol-Ol-1ia">
@@ -55,4 +54,7 @@
             <point key="canvasLocation" x="-141.5" y="26"/>
         </view>
     </objects>
+    <resources>
+        <image name="head_def" width="45" height="45"/>
+    </resources>
 </document>

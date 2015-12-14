@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O04-zo-mvU">
-                    <rect key="frame" x="0.0" y="64" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每月评价一次，评价结果送达校长，老师无法知晓，请客观评价。" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGr-dN-u8Z">
                             <rect key="frame" x="16" y="0.0" width="288" height="45"/>
@@ -39,7 +39,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyp-IG-zQl">
-                    <rect key="frame" x="0.0" y="109" width="320" height="459"/>
+                    <rect key="frame" x="0.0" y="45" width="320" height="523"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -50,7 +50,7 @@
                 <constraint firstItem="O04-zo-mvU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qdp-Hg-V6A"/>
                 <constraint firstAttribute="trailing" secondItem="O04-zo-mvU" secondAttribute="trailing" id="SLv-sA-Zb4"/>
                 <constraint firstItem="Xyp-IG-zQl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wew-t5-crc"/>
-                <constraint firstItem="O04-zo-mvU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="XnK-79-f4h"/>
+                <constraint firstItem="O04-zo-mvU" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XnK-79-f4h"/>
                 <constraint firstAttribute="bottom" secondItem="Xyp-IG-zQl" secondAttribute="bottom" id="zwV-L3-V1t"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

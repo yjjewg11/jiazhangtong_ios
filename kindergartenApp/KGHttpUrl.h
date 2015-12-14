@@ -82,6 +82,7 @@
 
 //更新学生资料
 + (NSString *)getSaveStudentInfoUrl;
++ (NSString *)getAddChildrenUrl;
 
 //点赞
 + (NSString *)getSaveDZUrl;
@@ -204,4 +205,6 @@
 + (NSString *)getNewsNumberUrl;
 
 + (NSString *)getSysConfigOfTopic;
+
++ (NSString *)uploadPicUrl;
 @end

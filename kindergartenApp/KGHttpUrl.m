@@ -178,6 +178,10 @@
     return URL(baseServiceURL, saveChildrenURL);
 }
 
++ (NSString *)getAddChildrenUrl{
+    return URL(baseServiceURL, @"rest/student/add.json");
+}
+
 
 //根据互动UUID获取单个互动详情
 + (NSString *)getClassNewsByIdUrl:(NSString *)uuid {
@@ -475,6 +479,10 @@
 #pragma mark - 获取系统参数
 + (NSString *)getSysConfigOfTopic{
     return URL(baseServiceURL, @"rest/share/getConfig.json");
+}
+
++ (NSString *)uploadPicUrl{
+    return URL(baseServiceURL, @"rest/uploadFile/upload.json");
 }
 
 @end

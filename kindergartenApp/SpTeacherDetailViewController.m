@@ -215,7 +215,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
         _collectionView.footerRefreshingText = @"没有更多了";
         [_collectionView footerEndRefreshing];
     });
-    
 }
 
 #pragma mark - collection的数据源 & 代理
@@ -269,11 +268,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
         if (_canReqData == YES)
         {
             _canReqData = NO;
-            
-            if (_mappoint == nil)
-            {
-                _mappoint = @"";
-            }
             
             [[KGHttpService sharedService] getSPCourseList:@"" map_point:@"" type:@"" sort:@"" teacheruuid:_teacherDomain.uuid pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(SPDataListVO *spCourseList)
              {

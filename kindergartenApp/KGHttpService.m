@@ -486,7 +486,6 @@
 }
 
 // 账号相关 end
-
 #pragma mark  互动相关
 
 
@@ -562,7 +561,6 @@
 }
 
 #pragma mark 学生相关 begin
-
 - (void)saveStudentInfo:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [self getServerJson:[KGHttpUrl getSaveChildrenUrl] params:user.keyValues success:^(KGBaseDomain *baseDomain) {
@@ -570,6 +568,19 @@
         [self sessionTimeoutHandle:baseDomain];
         success(baseDomain.ResMsg.message);
     } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+- (void)addStudentInfo:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    [self getServerJson:[KGHttpUrl getAddChildrenUrl] params:user.keyValues success:^(KGBaseDomain *baseDomain)
+    {
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+    }
+    faild:^(NSString *errorMessage)
+    {
         faild(errorMessage);
     }];
 }

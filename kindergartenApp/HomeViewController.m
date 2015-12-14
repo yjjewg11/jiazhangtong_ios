@@ -43,6 +43,8 @@
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
 
 #import "SpCourseHomeVC.h"
+#import "KGDateUtil.h"
+#import "NSDate+Utils.h"
 
 @interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
 {
@@ -97,6 +99,15 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     mgr = [[CLLocationManager alloc] init];
+    
+    //使用偏好设置保存数据
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    
+    [defu setObject:@"" forKey:@"map_point"];
+    
+    //调用同步的方法，把数据保存到沙盒
+    [defu synchronize];
+    
     [self getLocationData];
 }
 
@@ -242,10 +253,13 @@
     groupDataArray = [KGHttpService sharedService].loginRespDomain.group_list;
     
     [self loadNavTitle];
+    
     [self loadGroupListView];
     
-    [self getNewsNumber];
+    [self getSysConfig];
     
+    [self getNewsNumber];
+
 //    [[KGHttpService sharedService] getGroupList:^(NSArray *groupArray) {
 //        
 //        groupDataArray = groupArray;
@@ -254,6 +268,69 @@
 //    } faild:^(NSString *errorMsg) {
 //        
 //    }];
+}
+
+- (void)getSysConfig
+{
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    NSString * time = [defu objectForKey:@"timeofreq"];
+    NSString * sns_url = [defu objectForKey:@"sns_url"];
+    NSLog(@"磁盘存放的时间:%@ , 最新话题地址:%@",time,sns_url);
+    
+    if (time == nil || [time isEqualToString:@""])  //第一次进来，请求一个md5,并设置时间
+    {
+        [defu setObject:[KGDateUtil getTime] forKey:@"timeofreq"];//设置当前时间
+        
+        [[KGHttpService sharedService] getSysConfig:@"" success:^(SystemConfigOfTopic *sysDomain)
+        {
+            [defu setObject:sysDomain.md5 forKey:@"md5"]; //设置md5
+            if (sysDomain.sns_url == nil)
+            {
+                sysDomain.sns_url = @"";
+            }
+            [defu setObject:sysDomain.sns_url forKey:@"sns_url"]; //设置话题url
+            [defu synchronize];
+        }
+        faild:^(NSString *errorMsg)
+        {
+            
+        }];
+    }
+    else //不是第一次进来，获取存到磁盘的时间，和当前时间做比较，如果大于一天，就调用sys方法
+    {
+        NSLog(@"相差了:%d 天",[KGDateUtil intervalSinceNow:time]);
+        
+        if ([KGDateUtil intervalSinceNow:time] >= 1)
+        {
+            //是时候调用了
+            NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+            NSString * md5 = [defu objectForKey:@"md5"];
+            
+            if (md5 == nil || [md5 isEqualToString:@""])
+            {
+                md5 = @"";
+            }
+            
+            [[KGHttpService sharedService] getSysConfig:md5 success:^(SystemConfigOfTopic *sysDomain)
+            {
+                [defu setObject:sysDomain.md5 forKey:@"md5"]; //设置md5
+                if (sysDomain.sns_url == nil)
+                {
+                    sysDomain.sns_url = @"";
+                }
+                [defu setObject:sysDomain.sns_url forKey:@"sns_url"]; //设置话题url
+                [defu synchronize];
+            }
+            faild:^(NSString *errorMsg)
+            {
+                
+            }];
+        }
+        else
+        {
+            NSLog(@"还没到时候调用这个方法");
+        }
+    }
 }
 
 #pragma mark - 获取话题和消息 显示最新消息数量
@@ -282,7 +359,7 @@
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        
     }];
 }
 

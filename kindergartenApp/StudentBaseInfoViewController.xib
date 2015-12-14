@@ -10,7 +10,11 @@
                 <outlet property="birthdayTextField" destination="cb8-RN-XMw" id="StB-9l-7lH"/>
                 <outlet property="contentView" destination="2PI-UF-gnx" id="4cA-ht-ilU"/>
                 <outlet property="headImageView" destination="XM4-QK-2U2" id="p9O-Ky-R2X"/>
+                <outlet property="headImgTitle" destination="Qdy-hG-Oj6" id="g3j-HQ-mo6"/>
+                <outlet property="idCardView" destination="SMl-Nu-CDj" id="ZlY-Md-AlM"/>
                 <outlet property="nameTextField" destination="Qce-9l-RQK" id="f7o-MZ-FAg"/>
+                <outlet property="nameView" destination="XSY-zw-2NY" id="rND-Fy-CJ6"/>
+                <outlet property="nickNameView" destination="Shg-Vv-zoJ" id="I7k-Bq-cB5"/>
                 <outlet property="nickTextField" destination="llh-je-Z3s" id="b5M-dq-oaf"/>
                 <outlet property="peopleCardTextField" destination="jUK-D1-YVD" id="hiG-1m-Pmw"/>
                 <outlet property="roleTextField" destination="lDC-Qx-U9T" id="hnT-CB-GFn"/>
@@ -60,7 +64,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="Qdy-hG-Oj6" firstAttribute="centerX" secondItem="SKj-sQ-67x" secondAttribute="centerX" id="7cW-Vj-xkT"/>
                                 <constraint firstItem="Qdy-hG-Oj6" firstAttribute="top" secondItem="XM4-QK-2U2" secondAttribute="bottom" constant="10" id="Agf-9N-hCc"/>
@@ -89,7 +93,7 @@
                                         <constraint firstAttribute="height" constant="20" id="fx9-u1-lel"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7N-hy-GWR">
@@ -130,7 +134,7 @@
                                         <constraint firstAttribute="height" constant="20" id="6nY-UW-xCi"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入宝宝身份证号码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jUK-D1-YVD" customClass="KGTextField">
@@ -166,7 +170,7 @@
                                         <constraint firstAttribute="height" constant="20" id="aPK-Zf-3w6"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入昵称" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="llh-je-Z3s" customClass="KGTextField">
@@ -208,7 +212,7 @@
                                         <constraint firstAttribute="height" constant="20" id="wX3-sb-uqu"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="amn-ZG-82Q">
@@ -269,7 +273,7 @@
                                         <constraint firstAttribute="width" constant="80" id="oVp-xB-WYe"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择出生日期" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cb8-RN-XMw" customClass="KGTextField">
@@ -334,7 +338,7 @@
                                         <constraint firstAttribute="width" constant="80" id="i0Y-ZH-zfo"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="妈妈" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lDC-Qx-U9T" customClass="KGTextField">
@@ -420,7 +424,7 @@
                 <constraint firstAttribute="bottom" secondItem="2PI-UF-gnx" secondAttribute="bottom" id="xER-x2-z4p"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="266" y="262"/>
+            <point key="canvasLocation" x="151" y="234"/>
         </view>
     </objects>
     <resources>

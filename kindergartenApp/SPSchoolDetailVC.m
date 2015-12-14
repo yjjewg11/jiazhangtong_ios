@@ -26,7 +26,7 @@
 #import "SPShareSaveDomain.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface SPSchoolDetailVC () <UIScrollViewDelegate,SPSchoolDetailTableVCDelegate,UIActionSheetDelegate,CLLocationManagerDelegate>
+@interface SPSchoolDetailVC () <UIScrollViewDelegate,SPSchoolDetailTableVCDelegate,UIActionSheetDelegate>
 {
     UIView * _schoolInfoView;
     UIView * _buttonsView;
@@ -56,9 +56,6 @@
 @property (strong, nonatomic) NSString * share_url;
 @property (strong, nonatomic) NSString * tels;
 @property (strong, nonatomic) NSArray * telsNum;
-
-@property (strong, nonatomic) CLLocationManager * mgr;
-
 @end
 
 @implementation SPSchoolDetailVC
@@ -78,15 +75,6 @@
         _schoolDomain = [[SPSchoolDomain alloc] init];
     }
     return _schoolDomain;
-}
-
-- (CLLocationManager *)mgr
-{
-    if (_mgr == nil)
-    {
-        _mgr = [[CLLocationManager alloc] init];
-    }
-    return _mgr;
 }
 
 - (NSArray *)telsNum
@@ -121,6 +109,10 @@
     [super viewDidLoad];
     self.title = @"学校详情";
     
+    //读取坐标
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    _mappoint = [defu objectForKey:@"map_point"];
+    
     //创建底部bar
     _bottomView = [[UIView alloc] init];
     _bottomView.backgroundColor = [UIColor whiteColor];
@@ -150,8 +142,6 @@
     [self getCourseData];
     
     [self getTeacherData];
-    
-    [self getLocationData];
 }
 
 #pragma mark - 添加底部按钮
@@ -605,7 +595,6 @@
     }
 }
 
-
 #pragma mark - 导航跳转代理
 - (void)pushToDetailVC:(SPSchoolDetailTableVC *)schoolDetailVC dataSourceType:(DataSourseType)type selIndexPath:(NSIndexPath *)indexPath
 {
@@ -631,42 +620,7 @@
     }
 }
 
-#pragma mark - 获取位置
-- (void)getLocationData
-{
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] > 8.0)
-    {
-        [self.mgr requestWhenInUseAuthorization];
-    }
-    
-    self.mgr.delegate = self;
-    
-    self.mgr.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-    
-    self.mgr.distanceFilter = 5.0;
-    
-    [self.mgr startUpdatingLocation];
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    CLLocation *loc = [locations firstObject];
-    
-    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
-    
-    //请求数据，刷新表格
-    [self getCourseData];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"%@",error);
-}
-
-
 @end
-
 
 
 #pragma mark - 实现自定义Button

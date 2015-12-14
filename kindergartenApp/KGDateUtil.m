@@ -39,7 +39,8 @@
 }
 
 //获取指定日期差
-+ (NSString *)calculateDay:(NSString *)currentDateStr date:(NSInteger)date {
++ (NSString *)calculateDay:(NSString *)currentDateStr date:(NSInteger)date
+{
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
     [format setDateFormat:dateFormatStr1];
     
@@ -180,5 +181,35 @@
     return [weekdays objectAtIndex:theComponents.weekday];
 }
 
-
+/**
+ *  计算相差几天
+ *
+ *  @param theDate <#theDate description#>
+ *
+ *  @return <#return value description#>
+ */
++ (NSInteger)intervalSinceNow: (NSString *) theDate
+{
+    
+    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *d=[date dateFromString:theDate];
+    
+    NSTimeInterval late=[d timeIntervalSince1970]*1;
+    
+    
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval now=[dat timeIntervalSince1970]*1;
+    NSString *timeString=@"";
+    
+    NSTimeInterval cha=now-late;
+    
+    if (cha/86400>1)
+    {
+        timeString = [NSString stringWithFormat:@"%f", cha/86400];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        return [timeString intValue];
+    }
+    return -1;
+}
 @end

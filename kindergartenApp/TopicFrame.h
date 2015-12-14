@@ -31,6 +31,7 @@
 
 /** 帖子互动视图 */
 @property (nonatomic,assign) CGRect topicInteractionViewF;
+
 @property (nonatomic,strong) TopicInteractionFrame * topicInteractionFrame;
 
 /** 分割线 */

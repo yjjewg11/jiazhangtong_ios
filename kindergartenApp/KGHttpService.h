@@ -125,7 +125,7 @@
 //学生相关 begin
 
 - (void)saveStudentInfo:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
-
+- (void)addStudentInfo:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 //学生相关 end
 

@@ -119,6 +119,9 @@
             interactArray = pageInfo.data;
             
             reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
+            
+            NSLog(@"%d",reFreshView.tableParam.dataSourceMArray.count);
+            
             [reFreshView reloadRefreshTable];
             
         } faild:^(NSString *errorMsg) {
@@ -151,6 +154,7 @@
         
         reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
         [reFreshView reloadRefreshTable];
+        NSLog(@"aaaa");
     }
     faild:^(NSString *errorMsg)
     {
@@ -186,6 +190,7 @@
     else
     {
         TopicTableViewCell * cell = [TopicTableViewCell cellWithTableView:tableView];
+        
         cell.topicFrame = reFreshView.dataSource[indexPath.row - 1];
         return cell;
     }

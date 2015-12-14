@@ -144,11 +144,6 @@
 {
     if (self.dataSourceType == 0)
     {
-        if (self.mappoint == nil)
-        {
-            self.mappoint = @"";
-        }
-        
         [[KGHttpService sharedService] getSPCourseList:self.groupuuid map_point:self.mappoint type:@"" sort:@"" teacheruuid:@"" pageNo:[NSString stringWithFormat:@"%ld",(long)self.pageNo] success:^(SPDataListVO *spCourseList)
          {
              NSMutableArray * marr = [NSMutableArray array];

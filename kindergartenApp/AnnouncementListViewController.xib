@@ -17,16 +17,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ph5-tR-ZIp">
-                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Ph5-tR-ZIp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="1D8-kT-4jh"/>
-                <constraint firstAttribute="trailing" secondItem="Ph5-tR-ZIp" secondAttribute="trailing" id="4SM-0P-NKa"/>
-                <constraint firstItem="Ph5-tR-ZIp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TjA-Xx-qv7"/>
-                <constraint firstAttribute="bottom" secondItem="Ph5-tR-ZIp" secondAttribute="bottom" id="sIy-BQ-QBl"/>
+                <constraint firstItem="Ph5-tR-ZIp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AST-JP-bqd"/>
+                <constraint firstAttribute="bottom" secondItem="Ph5-tR-ZIp" secondAttribute="bottom" id="JIK-nw-Aqt"/>
+                <constraint firstItem="Ph5-tR-ZIp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SVk-xO-Oei"/>
+                <constraint firstAttribute="trailing" secondItem="Ph5-tR-ZIp" secondAttribute="trailing" id="wr9-BZ-P0T"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

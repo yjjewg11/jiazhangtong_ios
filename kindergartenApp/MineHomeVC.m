@@ -10,27 +10,36 @@
 #import "MineHomeChildrenCell.h"
 #import "MineHomeLayout.h"
 #import "UIColor+flat.h"
-#import "MineHomeNormalCell.h"
+
+#import "MineHomeFunCell.h"
 #import "MyCollectionViewController.h"
 #import "MySPCourseVC.h"
 #import "StudentInfoViewController.h"
 #import "SettingViewController.h"
+#import "StudentBaseInfoViewController.h"
 
-@interface MineHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,MineHomeChildrenCellDelegate>
+@interface MineHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,MineHomeChildrenCellDelegate,StudentBaseInfoViewControllerDelegate>
 {
     UICollectionView * _collectionView;
+    
+    NSMutableArray * _studentArr;
 }
 
 @end
 
 @implementation MineHomeVC
 
-static NSString *const StuColl = @"stucoll";
-static NSString *const NormalColl = @"normalcoll";
+static NSString *const StuColl = @"stucolle";
+static NSString *const NormalColle = @"normalcolle";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tianjiaxiaohai"] style:UIBarButtonItemStylePlain target:self action:@selector(addStudentBaseInfo)];
+    
+    [rightBarItem setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = rightBarItem;
     
     UINavigationBar * bar = self.navigationController.navigationBar;
     NSMutableDictionary * textAttrs = [NSMutableDictionary dictionary];
@@ -40,9 +49,19 @@ static NSString *const NormalColl = @"normalcoll";
     
     self.navigationController.navigationBar.backgroundColor = [UIColor colorWithHexCode:@"#FF6666"];
     
+    _studentArr = [NSMutableArray arrayWithArray:[KGHttpService sharedService].loginRespDomain.list];
+    
     [self initCollectionView];
     
     [self.view addSubview:_collectionView];
+}
+
+#pragma mark - 添加孩子方法
+- (void)addStudentBaseInfo
+{
+    StudentBaseInfoViewController * vc = [[StudentBaseInfoViewController alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 初始化collectionview
@@ -59,7 +78,7 @@ static NSString *const NormalColl = @"normalcoll";
     
     [_collectionView registerNib:[UINib nibWithNibName:@"MineHomeChildrenCell" bundle:nil] forCellWithReuseIdentifier:StuColl];
     
-    [_collectionView registerNib:[UINib nibWithNibName:@"MineHomeNormalCell" bundle:nil] forCellWithReuseIdentifier:NormalColl];
+    [_collectionView registerNib:[UINib nibWithNibName:@"MineHomeFunCell" bundle:nil] forCellWithReuseIdentifier:NormalColle];
     
     _collectionView.dataSource = self;
     _collectionView.delegate = self;
@@ -79,11 +98,13 @@ static NSString *const NormalColl = @"normalcoll";
         
         cell.delegate = self;
         
+        [cell setUpStudentsItem:_studentArr];
+        
         return cell;
     }
     else if (indexPath.row == 1)
     {
-        MineHomeNormalCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColl forIndexPath:indexPath];
+        MineHomeFunCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColle forIndexPath:indexPath];
         
         [cell setImageAndTitle:[UIImage imageNamed:@"shoucang"] title:@"我的收藏"];
         
@@ -91,7 +112,7 @@ static NSString *const NormalColl = @"normalcoll";
     }
     else if (indexPath.row == 2)
     {
-        MineHomeNormalCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColl forIndexPath:indexPath];
+        MineHomeFunCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColle forIndexPath:indexPath];
         
         [cell setImageAndTitle:[UIImage imageNamed:@"my_kechen"] title:@"我的特长课程"];
         
@@ -99,7 +120,7 @@ static NSString *const NormalColl = @"normalcoll";
     }
     else if (indexPath.row == 3)
     {
-        MineHomeNormalCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColl forIndexPath:indexPath];
+        MineHomeFunCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColle forIndexPath:indexPath];
         
         [cell setImageAndTitle:[UIImage imageNamed:@"shezhi"] title:@"设置"];
         
@@ -128,6 +149,7 @@ static NSString *const NormalColl = @"normalcoll";
     }
 }
 
+#pragma mark - 跳转
 - (void)pushToEditStudentInfo:(UIButton *)btn
 {
     StudentInfoViewController * vc = [[StudentInfoViewController alloc] init];
@@ -137,4 +159,15 @@ static NSString *const NormalColl = @"normalcoll";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)pushToAddStudentInfo
+{
+    StudentBaseInfoViewController * baseInfoVC = [[StudentBaseInfoViewController alloc] init];
+    
+    [self.navigationController pushViewController:baseInfoVC animated:YES];
+}
+
+- (void)addStudentReloadData:(KGUser *)addUser
+{
+    NSLog(@"aaa");
+}
 @end

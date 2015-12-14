@@ -11,11 +11,16 @@
 @protocol MineHomeChildrenCellDelegate <NSObject>
 
 - (void)pushToEditStudentInfo:(UIButton *)btn;
+- (void)pushToAddStudentInfo;
 
 @end
 
 @interface MineHomeChildrenCell : UICollectionViewCell
 
 @property (weak, nonatomic) id<MineHomeChildrenCellDelegate> delegate;
+
+@property (strong, nonatomic) NSMutableArray * studentArr;
+
+- (void)setUpStudentsItem:(NSMutableArray *)studentArr;
 
 @end

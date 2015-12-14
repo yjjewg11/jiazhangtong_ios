@@ -44,6 +44,14 @@
     
     UITextField * currentOperationField;
     __weak IBOutlet UITextField *roleTextField;
+    
+    __weak IBOutlet UIView *nameView; //10
+    __weak IBOutlet UIView *nickNameView; //11
+    __weak IBOutlet UIView *idCardView; //12
+    
+    BOOL isAddStudent; //是否是添加学生
+    
+    __weak IBOutlet UILabel *headImgTitle;
 }
 
 @end
@@ -76,56 +84,78 @@
 }
 
 //初始化页面值
-- (void)initViewData {
-    [headImageView sd_setImageWithURL:[NSURL URLWithString:_studentInfo.headimg] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:headImageView.width / Number_Two];
-    }];
-
-    nameTextField.text = _studentInfo.name;
+- (void)initViewData
+{
+    nameTextField.tag = 10;
+    nickTextField.tag = 11;
+    peopleCardTextField.tag = 12;
     nameTextField.delegate = self;
-    nickTextField.text = _studentInfo.nickname;
     nickTextField.delegate = self;
-    birthdayTextField.text = _studentInfo.birthday;
     birthdayTextField.delegate = self;
-    peopleCardTextField.text = _studentInfo.idcard;
     peopleCardTextField.delegate = self;
-    sexTextField.text = _studentInfo.sex == YES ? @"女" : @"男";
     sexTextField.delegate = self;
     
-    if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ma_tel])
+    if (_studentInfo.uuid != nil && ![_studentInfo.uuid isEqualToString:@""])
     {
-        roleTextField.text = @"妈妈";
-        currentRole = 1;
-    }
-    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ba_name])
-    {
-        roleTextField.text = @"爸爸";
-        currentRole = 2;
-    }
-    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ye_tel])
-    {
-        roleTextField.text = @"爷爷";
-                currentRole = 3;
-    }
-    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.nai_tel])
-    {
-        roleTextField.text = @"奶奶";
-                currentRole = 4;
-    }
-    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waigong_tel])
-    {
-        roleTextField.text = @"外公";
-                currentRole = 5;
-    }
-    else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waipo_tel])
-    {
-        roleTextField.text = @"外婆";
-                currentRole = 6;
+        isAddStudent = NO;
+        
+        [headImageView sd_setImageWithURL:[NSURL URLWithString:_studentInfo.headimg] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:headImageView.width / Number_Two];
+        }];
+        
+        nameTextField.text = _studentInfo.name;
+        nickTextField.text = _studentInfo.nickname;
+        birthdayTextField.text = _studentInfo.birthday;
+        peopleCardTextField.text = _studentInfo.idcard;
+        sexTextField.text = _studentInfo.sex == YES ? @"女" : @"男";
+        
+        if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ma_tel])
+        {
+            roleTextField.text = @"妈妈";
+            currentRole = 1;
+        }
+        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ba_name])
+        {
+            roleTextField.text = @"爸爸";
+            currentRole = 2;
+        }
+        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ye_tel])
+        {
+            roleTextField.text = @"爷爷";
+            currentRole = 3;
+        }
+        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.nai_tel])
+        {
+            roleTextField.text = @"奶奶";
+            currentRole = 4;
+        }
+        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waigong_tel])
+        {
+            roleTextField.text = @"外公";
+            currentRole = 5;
+        }
+        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waipo_tel])
+        {
+            roleTextField.text = @"外婆";
+            currentRole = 6;
+        }
+        else
+        {
+            roleTextField.text = @"妈妈";
+            currentRole = 1;
+        }
     }
     else
     {
-        roleTextField.text = @"妈妈";
-                currentRole = 1;
+        _studentInfo = [[KGUser alloc] init];
+        
+        _studentInfo.ma_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+        
+        isAddStudent = YES;
+
+        headImageView.image = [UIImage imageNamed:@"head_def"];
+        
+        headImgTitle.text = @"添加宝宝头像";
     }
 }
 
@@ -164,7 +194,8 @@
         _studentInfo.birthday = [KGNSStringUtil trimString:birthdayTextField.text];
         _studentInfo.idcard = [KGNSStringUtil trimString:peopleCardTextField.text];
         //提交数据
-        if(isSetHeadImg) {
+        if(isSetHeadImg)
+        {
             [[KGHUD sharedHud] show:self.contentView msg:@"上传头像中..."];
             
             [self uploadImg:^(BOOL isSuccess, NSString *msgStr) {
@@ -172,17 +203,34 @@
                 _studentInfo.headimg = msgStr;
                 [[KGHUD sharedHud] changeText:self.contentView text:@"上传成功"];
                 
-                if(isSuccess) {
-                    [self saveStudentInfo];
-                    
-                } else {
+                if(isSuccess)
+                {
+                    if (isAddStudent == YES)
+                    {
+                        [self addStudentInfo];
+                    }
+                    else
+                    {
+                        [self saveStudentInfo];
+                    }
+                }
+                else
+                {
                     [[KGHUD sharedHud] hide:self.contentView];
                 }
             }];
-        } else {
-            [self saveStudentInfo];
         }
-        
+        else
+        {
+            if (isAddStudent == YES)
+            {
+                [self addStudentInfo];
+            }
+            else
+            {
+                [self saveStudentInfo];
+            }
+        }
     }
 }
 
@@ -197,23 +245,48 @@
     }];
 }
 
+
+
 //提交基本信息
-- (void)saveStudentInfo {
+- (void)saveStudentInfo
+{
     [[KGHUD sharedHud] changeText:self.contentView text:@"提交信息中..."];
     [[KGHttpService sharedService] saveStudentInfo:_studentInfo success:^(NSString *msgStr) {
         
         [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
         
-        if(_StudentUpdateBlock) {
+        if(_StudentUpdateBlock)
+        {
             _StudentUpdateBlock(_studentInfo);
         }
+        
         [self.navigationController popViewControllerAnimated:YES];
         
-    } faild:^(NSString *errorMsg) {
+    }
+    faild:^(NSString *errorMsg)
+    {
          [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
     }];
 }
 
+- (void)addStudentInfo
+{
+    [[KGHUD sharedHud] changeText:self.contentView text:@"提交信息中..."];
+    
+    [[KGHttpService sharedService] addStudentInfo:_studentInfo success:^(NSString *msgStr)
+    {
+//        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+    
+        [self.delegate addStudentReloadData:_studentInfo];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+     
+    faild:^(NSString *errorMsg)
+    {
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
+}
 
 
 - (IBAction)changeHeadImgBtnClicked:(UIButton *)sender {
@@ -457,7 +530,6 @@
     [av show];
 }
 
-
 #pragma mark - 提示框
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -482,36 +554,83 @@
         {
             case 1:
             {
-                _studentInfo.ma_tel = _studentInfo.tel_verify;
+                if (isAddStudent == YES)
+                {
+                    _studentInfo.ma_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+                }
+                else
+                {
+                    _studentInfo.ma_tel = _studentInfo.tel_verify;
+                }
+                
                 roleTextField.text = @"妈妈";
             }
                 break;
             case 2:
             {
-                _studentInfo.ba_tel = _studentInfo.tel_verify;
+                if (isAddStudent == YES)
+                {
+                    _studentInfo.ba_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+                }
+                else
+                {
+                    _studentInfo.ba_tel = _studentInfo.tel_verify;
+                }
                 roleTextField.text = @"爸爸";
             }
                 break;
             case 3:
             {
+                if (isAddStudent == YES)
+                {
+                    _studentInfo.ye_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+                }
+                else
+                {
+                    _studentInfo.ye_tel = _studentInfo.tel_verify;
+                }
                 _studentInfo.ye_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"爷爷";
             }
                 break;
             case 4:
             {
+                if (isAddStudent == YES)
+                {
+                    _studentInfo.nai_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+                }
+                else
+                {
+                    _studentInfo.nai_tel = _studentInfo.tel_verify;
+                }
                 _studentInfo.nai_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"奶奶";
             }
                 break;
             case 5:
             {
+                if (isAddStudent == YES)
+                {
+                    _studentInfo.waigong_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+                }
+                else
+                {
+                    _studentInfo.waigong_tel = _studentInfo.tel_verify;
+                }
                 _studentInfo.waigong_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"外公";
             }
                 break;
             case 6:
             {
+                if (isAddStudent == YES)
+                {
+                    _studentInfo.waipo_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+                }
+                else
+                {
+                    _studentInfo.waipo_tel = _studentInfo.tel_verify;
+                }
                 _studentInfo.waipo_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"外婆";
             }
@@ -616,7 +735,28 @@
 {
     if (keyboardOn == NO)
     {
-        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - (100 + 5))];
+        switch (currentOperationField.tag)
+        {
+            case 10:
+            {
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - 10)];
+            }
+                break;
+            case 11:
+            {
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - 50)];
+            }
+                break;
+                
+            case 12:
+            {
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - 200)];
+            }
+                break;
+            default:
+                break;
+        }
+        
         keyboardOn = YES;
     }
 }
@@ -625,7 +765,27 @@
 {
     if (keyboardOn == YES)
     {
-        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + (100 + 5))];
+        switch (currentOperationField.tag)
+        {
+            case 10:
+            {
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + 10)];
+            }
+                break;
+            case 11:
+            {
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + 50)];
+            }
+                break;
+                
+            case 12:
+            {
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + 200)];
+            }
+                break;
+            default:
+                break;
+        }
         keyboardOn = NO;
     }
     

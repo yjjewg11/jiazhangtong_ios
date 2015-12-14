@@ -90,7 +90,7 @@
     }else {
         [self.tableView reloadData];
     }
-    dataCount = [_dataSource count];
+    dataCount = _dataSource.count;
 }
 
 

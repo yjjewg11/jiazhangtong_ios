@@ -70,7 +70,7 @@
     contentScrollView.showsVerticalScrollIndicator = NO;
     [self.contentView addSubview:contentScrollView];
     contentScrollView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT- APPWINDOWTOPHEIGHTIOS7);
-    contentScrollView.origin = CGPointMake(0, APPWINDOWTOPHEIGHTIOS7);
+    contentScrollView.origin = CGPointMake(0, 0);
     contentScrollView.contentSize = CGSizeMake(APPWINDOWWIDTH * totalCount, contentScrollView.height);
 }
 

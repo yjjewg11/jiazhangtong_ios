@@ -75,7 +75,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
     [_adCell.adView addSubview:_adView];
     
     [_adCell bringSubviewToFront:_adView];
-
 }
 
 - (void)viewDidLoad
@@ -89,7 +88,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
     //读取坐标
      NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
      _mappoint = [defu objectForKey:@"map_point"];
-     
+
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.title = @"特长课程";
@@ -102,9 +101,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
     
     //初始化视图
     [self initCollectionView];
-    
-    _courseTypes = [NSMutableArray array];
-    _hotCourseData = [NSMutableArray array];
     
 }
 

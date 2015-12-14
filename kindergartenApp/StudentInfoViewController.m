@@ -24,7 +24,8 @@
 #define StudentInfoCellIdentifier @"StudentInfoCellIdentifier"
 #define StudentOtherInfoCellIdentifier @"StudentOtherInfoCellIdentifier"
 
-@interface StudentInfoViewController () <UITableViewDataSource, UITableViewDelegate>  {
+@interface StudentInfoViewController () <UITableViewDataSource, UITableViewDelegate>
+{
     NSMutableArray * tableDataSource;
     IBOutlet UITableView * studentInfoTableView;
     NSArray * buildCardArray;
@@ -38,6 +39,7 @@
     [super viewDidLoad];
     
     self.title = @"详细信息";
+    
     studentInfoTableView.backgroundColor = KGColorFrom16(0xE7E7EE);
     studentInfoTableView.delegate   = self;
     studentInfoTableView.dataSource = self;
@@ -276,7 +278,8 @@
     StudentBaseInfoViewController * baseInfoVC = [[StudentBaseInfoViewController alloc] init];
     baseInfoVC.studentInfo = _studentInfo;
     
-    baseInfoVC.StudentUpdateBlock = ^(KGUser * studentObj){
+    baseInfoVC.StudentUpdateBlock = ^(KGUser * studentObj)
+    {
         self.studentInfo = studentObj;
         
         NSMutableArray * tempArray = [[NSMutableArray alloc] initWithArray:[KGHttpService sharedService].loginRespDomain.list];

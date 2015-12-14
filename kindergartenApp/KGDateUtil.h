@@ -35,7 +35,6 @@
 //时间格式的字符串转日期对象
 + (NSDate *)getDateByDateStr:(NSString *)str format:(NSString *)formatStr;
 
-
 //获取指定日期的周一
 + (NSString *)getBeginWeek:(NSString *)dateStr;
 
@@ -47,5 +46,8 @@
 
 //输入参数是日期字符串，输出结果是星期几。
 + (NSString *)weekdayFromDate:(NSString *)inputDateStr;
+
+//计算相差几天
++ (NSInteger)intervalSinceNow: (NSString *) theDate;
 
 @end
