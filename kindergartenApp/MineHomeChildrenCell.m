@@ -59,16 +59,19 @@
         
         [_scrollView addSubview:item];
         
+        _scrollView.scrollEnabled = NO;
+        
         return;
     }
-    
     if (self.studentArr.count <= 3)
     {
         padding=  (KGSCREEN.size.width - (91 * self.studentArr.count) ) / (self.studentArr.count + 1);
+        _scrollView.scrollEnabled = NO;
     }
     else
     {
         padding = ((KGSCREEN.size.width - (91 * 3) ) / (3 + 1) ) + 20;
+        _scrollView.scrollEnabled = YES;
     }
     
     for (NSInteger i=0; i<self.studentArr.count; i++)

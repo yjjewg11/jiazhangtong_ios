@@ -257,7 +257,8 @@
 }
 
 //加载底部有表情，发送，文本框的视图
-- (void)loadEmojiAndText{
+- (void)loadEmojiAndText
+{
     _emojiAndTextView = [[[NSBundle mainBundle] loadNibNamed:@"EmojiAndTextView" owner:nil options:nil] lastObject];
     _emojiAndTextView.width = APPWINDOWWIDTH;
     _emojiAndTextView.y = KGSCREEN.size.height;;
@@ -265,8 +266,10 @@
 }
 
 //加载底部只有表情的视图
-- (void)loadOnlyEnojiInputView{
-    if (!_faceBoard) {
+- (void)loadOnlyEnojiInputView
+{
+    if (!_faceBoard)
+    {
         _faceBoard = [[FaceBoard alloc] init];
         _faceBoard.inputTextView = self.weakTextView;
     }

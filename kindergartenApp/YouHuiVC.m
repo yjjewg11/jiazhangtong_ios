@@ -23,8 +23,6 @@
 
 @property (strong, nonatomic) YouHuiTableVC * tableVC;
 
-@property (strong, nonatomic) CLLocationManager * mgr;
-
 @property (strong, nonatomic) NSString * mappoint;
 
 @property (assign, nonatomic) NSInteger pageNo;
@@ -32,15 +30,6 @@
 @end
 
 @implementation YouHuiVC
-
-- (CLLocationManager *)mgr
-{
-    if (_mgr == nil)
-    {
-        _mgr = [[CLLocationManager alloc] init];
-    }
-    return _mgr;
-}
 
 - (YouHuiTableVC *)tableVC
 {
@@ -61,33 +50,31 @@
     
     self.pageNo = 2;
     
-    //创建tableview
-    [self.view addSubview:self.tableVC.tableView];
-    
     //集成刷新控件
     [self setupRefresh];
     
     //获取当前经纬度
-    [self getLocationData];
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    self.mappoint = [defu objectForKey:@"map_point"];
     
     //请求数据，刷新表格
     [self getYouHuiData];
-    
+}
+
+- (void)tryBtnClicked
+{
+    [self getYouHuiData];
 }
 
 #pragma mark - 请求优惠活动数据
 - (void)getYouHuiData
 {
-    [[KGHUD sharedHud] show:self.view];
-    
-    if (self.mappoint == nil)
-    {
-        self.mappoint = @"";
-    }
+    [self showLoadView];
+    [self hidenNoNetView];
     
     [[KGHttpService sharedService] getYouHuiList:self.mappoint pageNo:1 success:^(YouHuiDataListVO *teacherDomain)
     {
-        [[KGHUD sharedHud] hide:self.view];
+        [self hidenLoadView];
         
         NSMutableArray * marr = [NSMutableArray array];
         
@@ -115,46 +102,17 @@
             self.tableVC.tableView.scrollEnabled = YES;
             
             self.tableVC.dataArr = marr;  //设置数据
+        
+            [self.view addSubview:self.tableVC.tableView];
             
             [self.tableVC.tableView reloadData];
         }
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        [self hidenLoadView];
+        [self showNoNetView];
     }];
-}
-
-- (void)getLocationData
-{
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] > 8.0)
-    {
-        [self.mgr requestWhenInUseAuthorization];
-    }
-    
-    self.mgr.delegate = self;
-    
-    self.mgr.desiredAccuracy = kCLLocationAccuracyBest;
-    
-    self.mgr.distanceFilter = 5.0;
-    
-    [self.mgr startUpdatingLocation];
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-    CLLocation *loc = [locations firstObject];
-
-    self.mappoint = [NSString stringWithFormat:@"%lf,%lf",loc.coordinate.longitude,loc.coordinate.latitude];
-    
-    //请求数据，刷新表格
-    [self getYouHuiData];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"%@",error);
 }
 
 #pragma mark - 跳转代理

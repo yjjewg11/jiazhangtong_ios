@@ -11,12 +11,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "VPImageCropperViewController.h"
-
-@protocol StudentBaseInfoViewControllerDelegate <NSObject>
-
-- (void)addStudentReloadData:(KGUser *)addUser;
-
-@end
+#import "MineHomeVC.h"
 
 @interface StudentBaseInfoViewController : BaseViewController <VPImageCropperDelegate>
 
@@ -30,7 +25,6 @@
 
 - (IBAction)birthdayBtnClicked:(UIButton *)sender;
 
-@property (weak, nonatomic) id<StudentBaseInfoViewControllerDelegate> delegate;
-
+@property (strong, nonatomic) MineHomeVC * oriVC;
 
 @end

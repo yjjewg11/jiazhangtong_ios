@@ -10,7 +10,6 @@
 #import "MineHomeChildrenCell.h"
 #import "MineHomeLayout.h"
 #import "UIColor+flat.h"
-
 #import "MineHomeFunCell.h"
 #import "MyCollectionViewController.h"
 #import "MySPCourseVC.h"
@@ -18,7 +17,7 @@
 #import "SettingViewController.h"
 #import "StudentBaseInfoViewController.h"
 
-@interface MineHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,MineHomeChildrenCellDelegate,StudentBaseInfoViewControllerDelegate>
+@interface MineHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,MineHomeChildrenCellDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -49,11 +48,23 @@ static NSString *const NormalColle = @"normalcolle";
     
     self.navigationController.navigationBar.backgroundColor = [UIColor colorWithHexCode:@"#FF6666"];
     
-    _studentArr = [NSMutableArray arrayWithArray:[KGHttpService sharedService].loginRespDomain.list];
+    if (_studentArr == nil)
+    {
+        _studentArr = [NSMutableArray arrayWithArray:[KGHttpService sharedService].loginRespDomain.list];
+    }
     
     [self initCollectionView];
     
     [self.view addSubview:_collectionView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [_collectionView reloadData];
+    
+    _studentArr = [NSMutableArray arrayWithArray:[KGHttpService sharedService].loginRespDomain.list];
 }
 
 #pragma mark - 添加孩子方法
@@ -166,8 +177,5 @@ static NSString *const NormalColle = @"normalcolle";
     [self.navigationController pushViewController:baseInfoVC animated:YES];
 }
 
-- (void)addStudentReloadData:(KGUser *)addUser
-{
-    NSLog(@"aaa");
-}
+
 @end

@@ -20,6 +20,8 @@
 #import "CardInfoDomain.h"
 #import "StudentOtherInfoViewController.h"
 #import "EnrolStudentMySchoolVC.h"
+#import "MBProgressHUD+HM.h"
+#import "SDRotationLoopProgressView.h"
 
 #define StudentInfoCellIdentifier @"StudentInfoCellIdentifier"
 #define StudentOtherInfoCellIdentifier @"StudentOtherInfoCellIdentifier"
@@ -29,6 +31,8 @@
     NSMutableArray * tableDataSource;
     IBOutlet UITableView * studentInfoTableView;
     NSArray * buildCardArray;
+    
+    SDRotationLoopProgressView * _loadingView;
 }
 
 @end
@@ -45,6 +49,8 @@
     studentInfoTableView.dataSource = self;
     
     tableDataSource = [[NSMutableArray alloc] init];
+    
+    [self showLoadView];
     [self getBuildCardInfo];
 }
 
@@ -52,16 +58,18 @@
     [super didReceiveMemoryWarning];
 }
 
+
 //获取绑定的卡号列表
 - (void)getBuildCardInfo
 {
-    [[KGHUD sharedHud] show:self.contentView];
-    
-    [[KGHttpService sharedService] getBuildCardList:_studentInfo.uuid success:^(NSArray *cardArray) {
+    [[KGHttpService sharedService] getBuildCardList:_studentInfo.uuid success:^(NSArray *cardArray)
+    {
         buildCardArray = cardArray;
         [self packageTableDataSource];
-        [[KGHUD sharedHud] hide:self.view];
-    } faild:^(NSString *errorMsg) {
+        [self hidenLoadView];
+    }
+    faild:^(NSString *errorMsg)
+    {
         [self packageTableDataSource];
         [[KGHUD sharedHud] hide:self.view];
     }];
@@ -95,26 +103,26 @@
     StudentInfoItemVO * item3 = [[StudentInfoItemVO alloc] init];
     item3.head = @"爸爸";
     item3.contentMArray = [[NSMutableArray alloc] initWithObjects:
-                          [NSString stringWithFormat:@"姓名:%@", _studentInfo.ba_name],
-                          [NSString stringWithFormat:@"电话:%@", _studentInfo.ba_tel],
-                          [NSString stringWithFormat:@"工作单位:%@", _studentInfo.ba_work], nil];
+                          [NSString stringWithFormat:@"姓名:%@", _studentInfo.ba_name==nil?@"":_studentInfo.ba_name],
+                          [NSString stringWithFormat:@"电话:%@", _studentInfo.ba_tel==nil?@"":_studentInfo.ba_tel],
+                          [NSString stringWithFormat:@"工作单位:%@", _studentInfo.ba_work==nil?@"":_studentInfo.ba_work], nil];
     [tableDataSource addObject:item3];
     
     StudentInfoItemVO * item4 = [[StudentInfoItemVO alloc] init];
     item4.head = @"妈妈";
     item4.contentMArray = [[NSMutableArray alloc] initWithObjects:
-                           [NSString stringWithFormat:@"姓名:%@", _studentInfo.ma_name],
-                           [NSString stringWithFormat:@"电话:%@", _studentInfo.ma_tel],
-                           [NSString stringWithFormat:@"工作单位:%@", _studentInfo.ma_work], nil];
+                           [NSString stringWithFormat:@"姓名:%@", _studentInfo.ma_name==nil?@"":_studentInfo.ma_name],
+                           [NSString stringWithFormat:@"电话:%@", _studentInfo.ma_tel==nil?@"":_studentInfo.ma_tel],
+                           [NSString stringWithFormat:@"工作单位:%@", _studentInfo.ma_work==nil?@"":_studentInfo.ma_work], nil];
     [tableDataSource addObject:item4];
     
     StudentInfoItemVO * item5 = [[StudentInfoItemVO alloc] init];
     item5.head = @"其他联系人";
     item5.contentMArray = [[NSMutableArray alloc] initWithObjects:
-                           [NSString stringWithFormat:@"爷爷:%@", _studentInfo.ye_tel],
-                           [NSString stringWithFormat:@"奶奶:%@", _studentInfo.nai_tel],
-                           [NSString stringWithFormat:@"外公:%@", _studentInfo.waigong_tel],
-                           [NSString stringWithFormat:@"外婆:%@", _studentInfo.waipo_tel], nil];
+                           [NSString stringWithFormat:@"爷爷:%@", _studentInfo.ye_tel==nil?@"":_studentInfo.ye_tel],
+                           [NSString stringWithFormat:@"奶奶:%@", _studentInfo.nai_tel==nil?@"":_studentInfo.nai_tel],
+                           [NSString stringWithFormat:@"外公:%@", _studentInfo.waigong_tel==nil?@"":_studentInfo.waigong_tel],
+                           [NSString stringWithFormat:@"外婆:%@", _studentInfo.waipo_tel==nil?@"":_studentInfo.waipo_tel], nil];
     [tableDataSource addObject:item5];
     
     if(buildCardArray && [buildCardArray count]>Number_Zero) {
@@ -218,7 +226,8 @@
 }
 
 
-- (UITableViewCell *)loadFunCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)loadFunCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:StudentOtherInfoCellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:StudentOtherInfoCellIdentifier];
@@ -227,6 +236,16 @@
     
     StudentInfoItemVO * itemVO = [tableDataSource objectAtIndex:indexPath.section];
     cell.textLabel.text = [itemVO.contentMArray objectAtIndex:indexPath.row];
+    
+    if (indexPath.section == 1 && indexPath.row == 0)
+    {
+        itemVO.isArrow = YES;
+    }
+    else if (indexPath.section == 1 && indexPath.row == 1)
+    {
+        itemVO.isArrow = NO;
+    }
+    
     if(itemVO.isArrow) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
@@ -266,9 +285,15 @@
     {
         EnrolStudentMySchoolVC * vc = [[EnrolStudentMySchoolVC alloc] init];
         
-        vc.uuid = self.studentInfo.groupuuid;
-        
-        [self.navigationController pushViewController:vc animated:YES];
+        if (self.studentInfo.groupuuid == nil || [self.studentInfo.groupuuid isEqualToString:@"0"] || [self.studentInfo.groupuuid isEqualToString:@""])
+        {
+            [MBProgressHUD showError:@"宝贝暂时没有关联学校啦"];
+        }
+        else
+        {
+            vc.uuid = self.studentInfo.groupuuid;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
@@ -287,7 +312,7 @@
             KGUser * model = tempArray[i];
             if ([model.uuid isEqualToString:studentObj.uuid]) {
                 [tempArray replaceObjectAtIndex:i withObject:studentObj];
-                [KGHttpService sharedService].loginRespDomain.list = [NSArray arrayWithArray:tempArray];
+                [KGHttpService sharedService].loginRespDomain.list = [NSMutableArray arrayWithArray:tempArray];
                 break;
             }
         }

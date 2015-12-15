@@ -38,7 +38,6 @@
 @property (strong, nonatomic) NSString * groupuuid;
 @property (strong, nonatomic) NSString * classuuid;
 
-
 @property (strong, nonatomic) NSString * ma_name;
 @property (strong, nonatomic) NSString * ba_name;
 @property (strong, nonatomic) NSString * ye_name;

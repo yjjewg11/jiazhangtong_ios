@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "UIColor+Extension.h"
 #import "MobClick.h"
-#import "SDRotationLoopProgressView.h"
 #import "NoNetView.h"
+#import "UIColor+flat.h"
+#import "SDRotationLoopProgressView.h"
 
-@interface BaseViewController : UIViewController
+@interface BaseViewController : UIViewController <NoNetViewDelegate>
 
 @property (assign, nonatomic) BOOL animating;
 

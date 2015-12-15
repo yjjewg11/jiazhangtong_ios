@@ -22,7 +22,7 @@
 #import "DiscorveryJingXuanCell.h"
 #import "DiscorveryWebVC.h"
 
-@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate>
+@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate,DiscorveryWebVCDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -77,6 +77,13 @@ static NSString *const Nodata = @"nodata";
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 }
 
+- (void)tryBtnClicked
+{
+    [self getTuiJianData];
+    
+    [self initCollectionView];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -103,6 +110,7 @@ static NSString *const Nodata = @"nodata";
 - (void)getTuiJianData
 {
     [self showLoadView];
+    [self hidenNoNetView];
     
     [[KGHttpService sharedService] getMeiRiTuiJian:^(DiscorveryMeiRiTuiJianDomain *mgr)
     {
@@ -113,6 +121,7 @@ static NSString *const Nodata = @"nodata";
     }
     faild:^(NSString *errorMsg)
     {
+        [self hidenLoadView];
         [self showNoNetView];
     }];
 }
@@ -250,11 +259,15 @@ static NSString *const Nodata = @"nodata";
         
         _webVC = webvc;
         
+        webvc.delegate = self;
+        
         webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
         
         NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
         
         NSString * url = [defu objectForKey:@"sns_url"];
+        
+//        [webvc loadWithCookieSettingsUrl:@"http://kd.wenjienet.com/px-rest/kd/index.html" cookieDomain:nil path:nil];
         
         [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
         
@@ -275,6 +288,9 @@ static NSString *const Nodata = @"nodata";
     _layOut = layout;
     
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 44 - 70) collectionViewLayout:layout];
+    
+    _collectionView.showsHorizontalScrollIndicator = NO;
+    _collectionView.showsVerticalScrollIndicator = NO;
     
     _collectionView.backgroundColor = [UIColor whiteColor];
     
@@ -338,6 +354,21 @@ static NSString *const Nodata = @"nodata";
              }];
         }
     }
+}
+
+#pragma mark - webview代理
+- (void)hideWebVC:(DiscorveryWebVC *)webVC
+{
+    _collectionView.hidden = NO;
+    
+    [UIView animateWithDuration:0.4 animations:^
+    {
+        _webVC.view.transform = CGAffineTransformMakeTranslation(-APPWINDOWWIDTH, 0);
+        _webVC.view.alpha = 0;
+    }];
+    
+    self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 }
 
 #pragma mark - 上拉刷新，下拉加载数据

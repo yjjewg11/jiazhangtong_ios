@@ -353,19 +353,22 @@ static NSString *const CourseCellID = @"coursecellcoll";
 /*
  返回广告rootViewController
  */
-- (UIViewController *)viewControllerForPresentingModalView{
+- (UIViewController *)viewControllerForPresentingModalView
+{
     return self;
 }
 /**
  * 广告开始请求回调
  */
-- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView{
+- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView
+{
     NSLog(@"广告开始请求回调");
 }
 /**
  * 广告接收成功回调
  */
-- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
+- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView
+{
     NSLog(@"广告接收成功回调");
 }
 /**

@@ -454,7 +454,7 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tSg-gv-qeW" userLabel="adview">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
-                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="140" id="kHy-tg-DKW"/>
                     </constraints>

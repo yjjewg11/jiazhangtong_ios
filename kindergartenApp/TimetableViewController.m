@@ -35,6 +35,10 @@
     NSString  * endDataStr;
     NSInteger   reqIndex; //记录请求的index
     TimetableItemView * lastSelItemView; //当前选中的view
+    
+    NSInteger successCount;
+    
+    BOOL firstJoinNoChangePage;
 }
 
 @property (strong, nonatomic) NSMutableArray * studyingCourseArr;
@@ -49,11 +53,13 @@
     [super viewDidLoad];
     
     self.pageNo = 1;
-    
+    firstJoinNoChangePage = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"课程表";
     self.view.layer.masksToBounds = YES;
     self.view.clipsToBounds = YES;
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.contentView.backgroundColor = [UIColor whiteColor];
     
     self.keyBoardController.isShowKeyBoard = YES;
     self.keyboardTopType = EmojiAndTextMode;
@@ -70,11 +76,7 @@
     lastSelItemView = [itemViewArray objectAtIndex:lastIndex];
     [self getQueryDate:lastIndex];
     
-    for (UIView *v in self.view.subviews)
-    {
-        v.hidden = YES;
-    }
-    
+    [self showLoadView];
     //加载数据
     [self loadRecipesInfoByData];
     //加载特长课程表数据
@@ -98,21 +100,21 @@
     }
 }
 
-- (void)loadFlowScrollView {
+- (void)loadFlowScrollView
+{
     contentScrollView = [[UIScrollView alloc] init];
     contentScrollView.delegate = self;
     contentScrollView.pagingEnabled = YES;
     contentScrollView.clipsToBounds = NO;
     contentScrollView.showsHorizontalScrollIndicator = NO;
     contentScrollView.showsVerticalScrollIndicator = NO;
-    [self.contentView addSubview:contentScrollView];
+//    [self.contentView addSubview:contentScrollView];
     contentScrollView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT- APPWINDOWTOPHEIGHTIOS7);
     contentScrollView.origin = CGPointZero;
     contentScrollView.contentSize = CGSizeMake(APPWINDOWWIDTH * totalCount, contentScrollView.height);
 }
 
 - (void)loadRecipesInfoViewToScrollView {
-    
 
     itemViewArray = [[NSMutableArray alloc] initWithCapacity:totalCount];
     
@@ -138,7 +140,10 @@
     if(lastIndex!=currentIndex) {
         [self getQueryDate:currentIndex];
         lastSelItemView = [itemViewArray objectAtIndex:currentIndex];
-        if(!lastSelItemView.tableDataSource || [lastSelItemView.tableDataSource count]==Number_Zero) {
+        if(!lastSelItemView.tableDataSource || [lastSelItemView.tableDataSource count]==Number_Zero)
+        {
+            self.contentView.hidden = YES;
+            [self showLoadView];
             [self loadRecipesInfoByData];    //翻页的时候重新请求数据
             [self loadSPInfoDatas];          //翻页的时候重新请求数据
         }
@@ -148,27 +153,30 @@
 }
 
 #pragma mark - 加载幼儿园课程表数据
-- (void)loadRecipesInfoByData {
-    
-    if([classuuidMArray count] > Number_Zero) {
-        [[KGHUD sharedHud] show:self.view];
+- (void)loadRecipesInfoByData
+{
+    if([classuuidMArray count] > Number_Zero)
+    {
         isFirstReq = NO;
-        
         //获取课程表数据
-        [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray) {
+        [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray)
+        {
             
-            [[KGHUD sharedHud] hide:self.view];
-            
-            if(teachPlanArray && [teachPlanArray count] > Number_Zero) {
+            if(teachPlanArray && [teachPlanArray count] > Number_Zero)
+            {
                 [allTimetableMDic setObject:teachPlanArray forKey:[classuuidMArray objectAtIndex:reqIndex]];
             }
             [self responseHandler];
             
-        } faild:^(NSString *errorMsg) {
+        }
+        faild:^(NSString *errorMsg)
+        {
             [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
             [self responseHandler];
         }];
-    } else {
+    }
+    else
+    {
         [[KGHUD sharedHud] hide:self.view];
     }
 }
@@ -180,6 +188,24 @@
     {
         //加载数据到表表格中
         [lastSelItemView loadSPTimetableData:spTeachPlanArray];
+        
+        successCount++;
+        
+        if (successCount == 2)
+        {
+            [self hidenLoadView];
+            if (firstJoinNoChangePage == YES)
+            {
+                [self.contentView addSubview:contentScrollView];
+                firstJoinNoChangePage = NO;
+                successCount = 0;
+            }
+            else
+            {
+                self.contentView.hidden = NO;
+                successCount = 0;
+            }
+        }
     }
     faild:^(NSString *errorMsg)
     {
@@ -188,8 +214,10 @@
 }
 
 
-- (void)getQueryDate:(NSInteger)index {
-    if(!isFirstReq) {
+- (void)getQueryDate:(NSInteger)index
+{
+    if(!isFirstReq)
+    {
         if(index != lastIndex) {
             
             if(lastIndex > index) {
@@ -211,17 +239,36 @@
 }
 
 //请求之后的处理 需要判断是否还需要再次请求
-- (void)responseHandler {
+- (void)responseHandler
+{
     reqIndex++;
-    if(reqIndex < [classuuidMArray count]) {
+    if(reqIndex < [classuuidMArray count])
+    {
         [self loadRecipesInfoByData];
-    } else {
-        for (UIView *v in self.view.subviews){
-            v.hidden = NO;
-        }
+    }
+    else
+    {
         [lastSelItemView loadTimetableData:allTimetableMDic date:[NSString stringWithFormat:@"%@~%@", beginDataStr, endDataStr]];
         [allTimetableMDic removeAllObjects];
         reqIndex = Number_Zero;
+        
+        successCount++;
+        
+        if (successCount == 2)
+        {
+            [self hidenLoadView];
+            if (firstJoinNoChangePage == YES)
+            {
+                [self.contentView addSubview:contentScrollView];
+                firstJoinNoChangePage = NO;
+                successCount = 0;
+            }
+            else
+            {
+                self.contentView.hidden = NO;
+                successCount = 0;
+            }
+        }
     }
 }
 

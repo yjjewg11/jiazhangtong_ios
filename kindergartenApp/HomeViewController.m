@@ -37,6 +37,8 @@
 #import "EnrolStudentsHomeVC.h"
 #import <CoreLocation/CoreLocation.h>
 #import "AddressBooksViewController.h"
+#import "FeHourGlass.h"
+#import "MBProgressHUD+HM.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
@@ -59,6 +61,8 @@
     CLLocationManager *mgr;
     
     DiscorveryNewNumberDomain *numberDomain;
+    
+    FeHourGlass * _hourGlass;
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -80,7 +84,8 @@
                                   adMoGoViewDelegate:self];
     
     self.adView.adWebBrowswerDelegate = self;
-    self.adView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 150.0);
+    self.adView.backgroundColor = [UIColor whiteColor];
+    self.adView.frame = CGRectMake((APPWINDOWWIDTH - 360) / 2, 0, 360, 150.0);
     [self.view addSubview:self.adView];
 }
 
@@ -88,9 +93,22 @@
 {
     [super viewDidLoad];
     
-    self.adView.hidden = YES;
-    funiView.hidden = YES;
-    photosView.hidden = YES;
+    _hourGlass = [[FeHourGlass alloc] initWithView:photosView];
+    
+    [photosView addSubview:_hourGlass];
+    
+    [_hourGlass showWhileExecutingBlock:^
+    {
+         
+    }
+    completion:^
+    {
+         
+    }];
+    
+//    self.adView.hidden = YES;
+//    funiView.hidden = YES;
+//    photosView.hidden = YES;
     
 //    [self loadNavTitle];
     
@@ -135,6 +153,7 @@
  */
 - (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
     NSLog(@"广告接收成功回调");
+    [self.view bringSubviewToFront:self.adView];
 }
 /**
  * 广告接收失败回调
@@ -152,8 +171,18 @@
  *You can get notified when the user delete the ad
  广告关闭回调
  */
-- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView{
-    NSLog(@"广告关闭回调");
+- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
+{
+    self.adView.hidden = YES;
+    self.adView.userInteractionEnabled = NO;
+    
+    UIImageView * imgView = [[UIImageView alloc] init];
+    
+    imgView.frame = self.adView.frame;
+    
+    imgView.image = [UIImage imageNamed:@"adbanner"];
+    
+    [self.view addSubview:imgView];
 }
 
 - (void)loadNavTitle {
@@ -245,7 +274,6 @@
     [KGHttpService sharedService].groupDomain = domain;
 
     [self titleFunBtnClicked:titleBtn];
-    
 }
 
 - (void)requestGroupDate
@@ -259,15 +287,6 @@
     [self getSysConfig];
     
     [self getNewsNumber];
-
-//    [[KGHttpService sharedService] getGroupList:^(NSArray *groupArray) {
-//        
-//        groupDataArray = groupArray;
-//        [self loadNavTitle];
-//        [self loadGroupListView];
-//    } faild:^(NSString *errorMsg) {
-//        
-//    }];
 }
 
 - (void)getSysConfig
@@ -305,6 +324,7 @@
             //是时候调用了
             NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
             NSString * md5 = [defu objectForKey:@"md5"];
+            [defu setObject:[KGDateUtil getTime] forKey:@"timeofreq"];//设置当前时间
             
             if (md5 == nil || [md5 isEqualToString:@""])
             {
@@ -353,6 +373,7 @@
         }
         
         [self hidenLoadView];
+        
         self.adView.hidden = NO;
         funiView.hidden = NO;
         photosView.hidden = NO;
@@ -453,7 +474,8 @@
 #pragma mark - ImageCollectionViewDelegate
 
 //单击回调
--(void)singleTapEvent:(NSString *)pType {
+-(void)singleTapEvent:(NSString *)pType
+{
     
 }
 
@@ -557,8 +579,6 @@
 //自动登录
 - (void)autoLogin
 {
-    [self showLoadView];
-
     KGUser * account = [KGAccountTool account];
     if(account)
     {
@@ -616,7 +636,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    NSLog(@"请求地理位置失败:%@",error);
+    [MBProgressHUD showError:@"尝试获取您的位置失败,请检查是否开启定位功能!"];
 }
 
 

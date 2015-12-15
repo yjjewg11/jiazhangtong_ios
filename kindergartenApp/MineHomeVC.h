@@ -10,4 +10,6 @@
 
 @interface MineHomeVC : BaseViewController
 
+@property (strong, nonatomic) NSMutableArray * arr;
+
 @end

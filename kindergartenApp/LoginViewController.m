@@ -28,19 +28,26 @@
     IBOutlet UIButton * regBtn;
     KGUser * user;
     BOOL     isSaveUserInfo;
+    BOOL     keyboardOn;
+    
+    UITextField * currentOperationField;
 }
 
 @end
 
 @implementation LoginViewController
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    keyboardOn = NO;
+    
     [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
     NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:UserNameKey];
     NSString * password = [[NSUserDefaults standardUserDefaults] objectForKey:PasswordKey];
@@ -49,41 +56,26 @@
     _userPwdTextField.text = password;
     _userPwdTextField.delegate = self;
     
-    if (userName != nil && password != nil) {
+    if (userName != nil && password != nil)
+    {
         savePwdBtn.selected = YES;
         savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
     }
+    
+    //注册键盘事件
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
-
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField == _userNameTextField) {
-        [_userPwdTextField becomeFirstResponder];
-    }else{
-        [textField resignFirstResponder];
-    }
-    return YES;
-}
-
-/**
- *  添加输入框到array统一管理验证
- */
-- (void)addTextFieldToMArray
-{
-    [_userNameTextField setTextFielType:KGTextFielType_Phone];
-    [_userNameTextField setMessageStr:@"请输入正确的电话号码"];
-    _userNameTextField.delegate = self;
-    [textFieldMArray addObject:_userNameTextField];
-    
-    [_userPwdTextField setTextFielType:KGTextFielType_Empty];
-    [_userPwdTextField setMessageStr:@"密码不能为空"];
-    [textFieldMArray addObject:_userPwdTextField];
-}
-
 
 - (IBAction)savePwdBtnClicked:(UIButton *)sender {
     savePwdBtn.selected = !sender.selected;
@@ -102,6 +94,24 @@
     [self.navigationController pushViewController:regVC animated:YES];
 }
 
+- (BOOL)validateInputInView
+{
+    if ([_userNameTextField.text isEqualToString:@""])
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:@"啊咧,没有输入用户名哦"];
+        
+        return NO;
+    }
+    
+    if ([_userPwdTextField.text isEqualToString:@""])
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:@"啊咧,没有输入密码哦"];
+        
+        return NO;
+    }
+    
+    return YES;
+}
 
 - (IBAction)loginBtnClicked:(UIButton *)sender {
     
@@ -155,5 +165,49 @@
     });
 }
 
+#pragma mark - 监听键盘事件
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    if (keyboardOn == NO)
+    {
+        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - (100 + 5))];
+        keyboardOn = YES;
+    }
+}
+
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    if (keyboardOn == YES)
+    {
+        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + (100 + 5))];
+        keyboardOn = NO;
+    }
+}
+
+#pragma mark - textField Delegate Methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    currentOperationField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (![currentOperationField isExclusiveTouch])
+    {
+        [currentOperationField resignFirstResponder];
+    }
+}
 
 @end

@@ -10,10 +10,10 @@
 #import "BaseKeyboardViewController.h"
 #import "KGTextField.h"
 
-@interface LoginViewController : BaseKeyboardViewController
+@interface LoginViewController : BaseViewController
 
-@property(strong, nonatomic) IBOutlet KGTextField * userNameTextField;
-@property(strong, nonatomic) IBOutlet KGTextField * userPwdTextField;
+@property(strong, nonatomic) IBOutlet UITextField * userNameTextField;
+@property(strong, nonatomic) IBOutlet UITextField * userPwdTextField;
 
 - (IBAction)savePwdBtnClicked:(UIButton *)sender;
 

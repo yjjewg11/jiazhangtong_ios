@@ -22,6 +22,8 @@
     JSContext * _context;
     UIActionSheet * _myActionSheet;
     UIWebView * _webView;
+    
+    NSString * _currentURL;
 }
 
 @end
@@ -174,8 +176,18 @@
 //    };
     
     [self hidenLoadView];
+    
+    //获取当前url
+    _currentURL = webView.request.URL.absoluteString;
+    NSLog(@"--url-%@--",_currentURL);
 }
 
+- (void)finishProject:(NSString *)url
+{
+    [self.delegate hideWebVC:self];
+}
+
+#pragma mark - js调用方法
 - (void)setShareContent:(NSString *)title content:(NSString *)content pathurl:(NSString *)pathurl httpurl:(NSString *)httpurl
 {
     ShareDomain * domain = [[ShareDomain alloc] init];
@@ -202,7 +214,7 @@
     [UMSocialSnsService presentSnsController:self appKey:@"55be15a4e0f55a624c007b24" shareText:domain.content shareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:domain.pathurl]]] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil] delegate:self];
 }
 
-- (void)selectImgPic
+- (void)selectImgPic:(NSString *)groupuuid
 {
     [self uploadAllImages];
 }
@@ -283,64 +295,15 @@
         image = [self imageWithImageSimple:image scaledToSize:CGSizeMake(198.0, 198.0)];
         NSData *data;
         data = UIImageJPEGRepresentation(image, 0.5);
-        //图片保存的路径
-        //这里将图片放在沙盒的documents文件夹中
-        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         
+        //转base64
+        NSString * imgBase64Str = [data base64EncodedStringWithOptions:0];
         
-        //文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString * commitStr = [NSString stringWithFormat:@"%@%@",@"data:image/png;base64,",imgBase64Str];
         
-        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
+        NSString *imgJs = [NSString stringWithFormat:@"javascript:G_jsCallBack.selectHeadPic_callback('%@')", commitStr];
         
-        //得到选择后沙盒中图片的完整路径
-        NSString  *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
-        NSLog(@"filePath=%@",filePath);
-        //上传图片的参数
-        NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
-        
-        if ([KGHttpService sharedService].loginRespDomain.JSESSIONID != nil)
-        {
-            [parameters setObject:[KGHttpService sharedService].loginRespDomain.JSESSIONID  forKey:@"JSESSIONID"];
-        }
-        
-        [parameters setObject:[NSNumber numberWithInteger:1] forKey:@"type"];
-        //上传图片的地址
-        NSString *url = [KGHttpUrl uploadPicUrl];
-        //上传图片的方法
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:data
-                                        name:@"file"
-                                    fileName:filePath
-                                    mimeType:@"image/jpeg/file"];
-        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
-            //上传成功所处理的事情
-            if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
-                //得到imgurl的地址
-                NSString *imgUrls = [responseObject objectForKey:@"imgUrl"];
-                NSArray *imgSubuuid = [imgUrls componentsSeparatedByString:@"?uuid="];
-                
-                //得到它的uuid参数
-                NSString *uuid = [imgSubuuid lastObject];
-
-                //调用js的方法并传参数
-                NSString *headJs = [NSString stringWithFormat:@"G_jsCallBack.selectHeadPic_callback_imgUrl('%@','%@');", imgUrls, uuid];
-                [_webView stringByEvaluatingJavaScriptFromString:headJs];
-                //NSString *imgJs = [NSString stringWithFormat:@"G_jsCallBack.selectPic_callback_imgUrl('%@','%@');", imgUrls, uuid];
-                // [self.webView stringByEvaluatingJavaScriptFromString:imgJs];
-                
-            } else {
-                NSLog(@"failure:%@", baseDomain.ResMsg.message);
-            }
-            NSLog(@"Success: %@", responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
+        [_webView stringByEvaluatingJavaScriptFromString:imgJs];
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
     }
@@ -374,71 +337,15 @@
         //tempImg = [UtilMethod imageWithImageSimple:tempImg scaledToSize:CGSizeMake(120.0, 120.0)];
         NSData *data;
         data = UIImageJPEGRepresentation(tempImg, 0.1);
-        //这里将图片放在沙盒的documents文件夹中
-        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         
+        //转base64
+        NSString * imgBase64Str = [data base64EncodedStringWithOptions:0];
         
-        //文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString * commitStr = [NSString stringWithFormat:@"%@%@",@"data:image/png;base64,",imgBase64Str];
+
+        NSString *imgJs = [NSString stringWithFormat:@"javascript:G_jsCallBack.selectPic_callback('%@')", commitStr];
         
-        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
-        
-        //得到选择后沙盒中图片的完整路径
-        NSString  *filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
-        NSLog(@"filePath=%@",filePath);
-        //上传图片的参数
-        
-        NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
-        
-        if ([KGHttpService sharedService].loginRespDomain.JSESSIONID != nil)
-        {
-            [parameters setObject:[KGHttpService sharedService].loginRespDomain.JSESSIONID  forKey:@"JSESSIONID"];
-        }
-        
-        [parameters setObject:[NSNumber numberWithInteger:4] forKey:@"type"];
-        
-        if ([KGHttpService sharedService].loginRespDomain.userinfo.groupuuid != nil)
-        {
-            [parameters setObject:[KGHttpService sharedService].loginRespDomain.userinfo.groupuuid forKey:@"groupuuid"];
-        }
-        
-        //上传图片的地址
-        NSString *url = [KGHttpUrl uploadPicUrl];
-        //上传图片的方法
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-        [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:data
-                                        name:@"file"
-                                    fileName:filePath
-                                    mimeType:@"image/jpeg/file"];
-        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
-            //上传成功所处理的事情
-            if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
-                //得到imgurl的地址
-                NSString *imgUrls = [responseObject objectForKey:@"imgUrl"];
-                NSLog(@"imgurl = %@",imgUrls);
-                NSArray *imgSubuuid = [imgUrls componentsSeparatedByString:@"?uuid="];
-                
-                //得到它的uuid参数
-                NSString *uuid = [imgSubuuid lastObject];
-                NSLog(@"uuid=%@",uuid);
-                //调用js的方法并传参数
-                
-                NSString *imgJs = [NSString stringWithFormat:@"G_jsCallBack.selectPic_callback_imgUrl('%@','%@');", imgUrls, uuid];
-                [_webView stringByEvaluatingJavaScriptFromString:imgJs];
-                
-            } else {
-                NSLog(@"failure:%@", baseDomain.ResMsg.message);
-            }
-            
-            NSLog(@"Success: %@", responseObject);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
+        [_webView stringByEvaluatingJavaScriptFromString:imgJs];
     }
 }
 

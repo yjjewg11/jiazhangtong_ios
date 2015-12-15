@@ -275,9 +275,13 @@
     
     [[KGHttpService sharedService] addStudentInfo:_studentInfo success:^(NSString *msgStr)
     {
-//        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
-    
-        [self.delegate addStudentReloadData:_studentInfo];
+        NSLog(@"之前的数目:%d",[KGHttpService sharedService].loginRespDomain.list.count);
+        
+        [[KGHttpService sharedService].loginRespDomain.list addObject:_studentInfo];
+        
+        NSLog(@"新建的 %@",_studentInfo.name);
+        
+        NSLog(@"现在的数目:%d",[KGHttpService sharedService].loginRespDomain.list.count);
         
         [self.navigationController popViewControllerAnimated:YES];
     }

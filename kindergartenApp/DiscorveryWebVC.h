@@ -9,12 +9,29 @@
 #import "BaseViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
+@class DiscorveryWebVC;
+@protocol DiscorveryWebVCDelegate <NSObject>
+
+@required
+- (void)hideWebVC:(DiscorveryWebVC *)webVC;
+
+@end
+
 @protocol TestJSExport <JSExport>
 JSExportAs
 (setShareContent  /** handleFactorialCalculateWithNumber 作为js方法的别名 */,
  - (void)setShareContent:(NSString *)title content:(NSString *)content pathurl:(NSString *)pathurl httpurl:(NSString *)httpurl
  );
 
+JSExportAs
+(selectImgPic  /** handleFactorialCalculateWithNumber 作为js方法的别名 */,
+ - (void)selectImgPic:(NSString *)groupuuid
+ );
+
+JSExportAs
+(finishProject  /** handleFactorialCalculateWithNumber 作为js方法的别名 */,
+ - (void)finishProject:(NSString *)url
+ );
 
 @end
 
@@ -25,5 +42,7 @@ JSExportAs
 - (NSString *)cutUrlDomain:(NSString *)url;
 
 @property (assign, nonatomic) CGRect webViewFrame;
+
+@property (weak, nonatomic) id<DiscorveryWebVCDelegate> delegate;
 
 @end

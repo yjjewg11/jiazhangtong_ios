@@ -3027,14 +3027,14 @@
 			name = collectionviewcell;
 			sourceTree = "<group>";
 		};
-		04FB23611C16C311009B57E2 /* Discorvery */ = {
+		04FB23611C16C311009B57E2 /* Discorvery(发现) */ = {
 			isa = PBXGroup;
 			children = (
 				04FB23641C16C363009B57E2 /* View */,
 				04FB23631C16C35E009B57E2 /* Model */,
 				04FB23621C16C357009B57E2 /* Controller */,
 			);
-			name = Discorvery;
+			name = "Discorvery(发现)";
 			sourceTree = "<group>";
 		};
 		04FB23621C16C357009B57E2 /* Controller */ = {
@@ -3769,7 +3769,8 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
-				04FB23611C16C311009B57E2 /* Discorvery */,
+				F4E6B2381B6B53A60087EAEB /* SpecialtyCourses(特长课程) */,
+				04FB23611C16C311009B57E2 /* Discorvery(发现) */,
 				04F9C9821C0ECD380078A5F5 /* ZhaoSheng */,
 				04FEC5671BEDC98A00C642A6 /* Youhuihuodong */,
 				F4885C601B7C4FF000AF97CF /* Favorites */,
@@ -3834,7 +3835,6 @@
 			isa = PBXGroup;
 			children = (
 				F4885C671B7C784C00AF97CF /* URLController */,
-				F4E6B2381B6B53A60087EAEB /* SpecialtyCourses(特长课程) */,
 				2489B66F1B5AB75200039E70 /* Introduction */,
 				24C46B341B5A2A9900A58F92 /* HomeViewController.h */,
 				24C46B351B5A2A9900A58F92 /* HomeViewController.m */,

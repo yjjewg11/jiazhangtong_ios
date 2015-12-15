@@ -7,9 +7,8 @@
 //
 
 #import "BaseViewController.h"
-#import "UIColor+flat.h"
 
-@interface BaseViewController () <NoNetViewDelegate>
+@interface BaseViewController ()
 
 @end
 
@@ -98,9 +97,9 @@
 - (void)hidenNoNetView
 {
     [UIView animateWithDuration:0.3 animations:^
-     {
+    {
          [self.noNetView removeFromSuperview];
-     }];
+    }];
 }
 
 @end
