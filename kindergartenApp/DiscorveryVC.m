@@ -367,8 +367,9 @@ static NSString *const Nodata = @"nodata";
         _webVC.view.alpha = 0;
     }];
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:0];
+    
     self.navigationController.navigationBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 }
 
 #pragma mark - 上拉刷新，下拉加载数据

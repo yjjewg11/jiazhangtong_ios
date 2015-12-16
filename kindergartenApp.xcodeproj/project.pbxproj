@@ -268,7 +268,6 @@
 		04F89A3F1C101BEA00FC0FA6 /* EnrolStudentSchoolCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A3E1C101BEA00FC0FA6 /* EnrolStudentSchoolCommentDomain.m */; };
 		04F89A431C1024E000FC0FA6 /* NoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A411C1024E000FC0FA6 /* NoDataView.m */; };
 		04F89A441C1024E000FC0FA6 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F89A421C1024E000FC0FA6 /* NoDataView.xib */; };
-		04F89A4E1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */; };
 		04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6EB1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m */; };
 		04F8C6EF1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6EE1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m */; };
 		04F8C6F21C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8C6F11C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m */; };
@@ -1134,8 +1133,6 @@
 		04F89A401C1024E000FC0FA6 /* NoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataView.h; sourceTree = "<group>"; };
 		04F89A411C1024E000FC0FA6 /* NoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataView.m; sourceTree = "<group>"; };
 		04F89A421C1024E000FC0FA6 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataView.xib; sourceTree = "<group>"; };
-		04F89A4C1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentSchoolDetailFullScreenLayout.h; sourceTree = "<group>"; };
-		04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentSchoolDetailFullScreenLayout.m; sourceTree = "<group>"; };
 		04F8C6EA1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryMeiRiTuiJianDomain.h; sourceTree = "<group>"; };
 		04F8C6EB1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryMeiRiTuiJianDomain.m; sourceTree = "<group>"; };
 		04F8C6ED1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryReMenJingXuanDomain.h; sourceTree = "<group>"; };
@@ -2732,14 +2729,14 @@
 			name = CollectionCell;
 			sourceTree = "<group>";
 		};
-		04F9C9821C0ECD380078A5F5 /* ZhaoSheng */ = {
+		04F9C9821C0ECD380078A5F5 /* ZhaoSheng(招生) */ = {
 			isa = PBXGroup;
 			children = (
 				04F9C9851C0ECD510078A5F5 /* View */,
 				04F9C9841C0ECD480078A5F5 /* Model */,
 				04F9C9831C0ECD420078A5F5 /* Controller */,
 			);
-			name = ZhaoSheng;
+			name = "ZhaoSheng(招生)";
 			sourceTree = "<group>";
 		};
 		04F9C9831C0ECD420078A5F5 /* Controller */ = {
@@ -2784,8 +2781,6 @@
 				04F9C98E1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m */,
 				04FAEF651C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.h */,
 				04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */,
-				04F89A4C1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.h */,
-				04F89A4D1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m */,
 			);
 			name = layouts;
 			sourceTree = "<group>";
@@ -3771,7 +3766,7 @@
 			children = (
 				F4E6B2381B6B53A60087EAEB /* SpecialtyCourses(特长课程) */,
 				04FB23611C16C311009B57E2 /* Discorvery(发现) */,
-				04F9C9821C0ECD380078A5F5 /* ZhaoSheng */,
+				04F9C9821C0ECD380078A5F5 /* ZhaoSheng(招生) */,
 				04FEC5671BEDC98A00C642A6 /* Youhuihuodong */,
 				F4885C601B7C4FF000AF97CF /* Favorites */,
 				F4DF3B9D1B78AC40001D9DF7 /* Timetable */,
@@ -5507,7 +5502,6 @@
 				2474DFA41B6CA4840021506F /* BaseTopicInteractViewController.m in Sources */,
 				24DE91B91B67C9D400D3FFCE /* TeacherJudgeTableViewCell.m in Sources */,
 				F4E61BF41B735D5400E5851A /* PopupView.m in Sources */,
-				04F89A4E1C10372200FC0FA6 /* EnrolStudentSchoolDetailFullScreenLayout.m in Sources */,
 				04F3D46A1BF47FD3007E7AC0 /* ZipArchive.mm in Sources */,
 				04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */,
 				24DEC8221B633F2B00C55828 /* DynamicMenuDomain.m in Sources */,

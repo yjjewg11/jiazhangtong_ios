@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSMutableArray * haveSummaryInIndex;
 
+@property (strong, nonatomic) NSMutableArray * cellHeights;
+
 @end

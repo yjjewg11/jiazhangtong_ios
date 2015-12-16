@@ -50,23 +50,23 @@
 {
     CGFloat itemWidth = 0;
     CGFloat itemHeight = 0;
-    CGFloat itemX = 10;
+    CGFloat itemX = 0;
     CGFloat itemY = 10;
     
     UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
-    itemWidth = KGSCREEN.size.width - 20;
+    itemWidth = KGSCREEN.size.width;
     
     if ([self.haveSummaryInIndex[indexPath.row] isEqualToString:@"YES"])
     {
-        itemHeight = 144;
+        itemHeight = 144 + ([self.cellHeights[indexPath.row] floatValue] - 40);
     }
     else
     {
         itemHeight = 85;
     }
     
-    itemX = 10;
+    itemX = 0;
     itemY = _newMaxHeight;
     _newMaxHeight = itemY + itemHeight + 10;
     

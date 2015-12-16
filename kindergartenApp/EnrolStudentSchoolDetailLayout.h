@@ -16,6 +16,6 @@
 
 @property (assign, nonatomic) BOOL haveSummary;
 
-
+@property (assign, nonatomic) CGFloat cellHeight;
 
 @end

@@ -22,11 +22,55 @@
 
     self.webView.scrollView.delegate = self;
     
+    self.webView.scrollView.bounces = NO;
+    
     self.webView.scrollView.scrollEnabled = NO;
 
     self.webView.scalesPageToFit = YES;
     
+    self.webView.scrollView.delaysContentTouches = YES;
+    self.webView.scrollView.canCancelContentTouches = NO;
+    
     [[KGHUD sharedHud] hide:self.webView];
+    
+    //添加手势
+    UISwipeGestureRecognizer *recognizer;
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    
+    [self addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    
+    [self addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionUp)];
+    
+    [self addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
+    
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionDown)];
+    
+    [self addGestureRecognizer:recognizer];
+}
+
+#pragma mark - 手势触发方法
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
+{
+    if(recognizer.direction == UISwipeGestureRecognizerDirectionDown)
+    {
+        if (self.webView.scrollView.contentOffset.y <= 1)
+        {
+            [self.delegate pullDownTopView];
+        }
+    }
 }
 
 
@@ -49,5 +93,6 @@
         [self.delegate pullDownTopView];
     }
 }
+
 
 @end

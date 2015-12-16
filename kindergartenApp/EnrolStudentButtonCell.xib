@@ -211,7 +211,7 @@
                 <outlet property="lblPingLun" destination="Saq-MU-mK4" id="AYc-qk-0ZG"/>
                 <outlet property="lblZhaoSheng" destination="c6n-ce-ace" id="ZCq-oi-plz"/>
             </connections>
-            <point key="canvasLocation" x="117" y="259"/>
+            <point key="canvasLocation" x="214" y="266"/>
         </collectionViewCell>
     </objects>
 </document>

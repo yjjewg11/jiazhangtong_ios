@@ -12,6 +12,7 @@
 #import "EnrolStudentsHomeLayout.h"
 #import "EnrolStudentSchoolDetailVC.h"
 #import "EnrolStudentsSchoolCell.h"
+#import "KGNSStringUtil.h"
 #import "EnrolStudentsSchoolDomain.h"
 
 @interface EnrolStudentsHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate>
@@ -36,6 +37,10 @@
     NSInteger _pageNoOfDistance;
     
     EnrolStudentsHomeLayout * _layout;
+    
+    NSMutableArray * _schoolListDataOfIntelligentHaveSummary;
+    NSMutableArray * _schoolListDataOfAppraiseHaveSummary;
+    NSMutableArray * _schoolListDataOfDistanceHaveSummary;
 }
 
 
@@ -96,32 +101,90 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     [self setupRefresh];
 }
 
-#pragma mark - 判断现在列表中哪些元素没有summary 字段
+#pragma mark - 判断现在列表中哪些元素没有summary 值
 - (void)haveSummaryAtIndex
 {
     _layout.haveSummaryInIndex = [NSMutableArray array];
+    _schoolListDataOfAppraiseHaveSummary = [NSMutableArray array];
+    _schoolListDataOfDistanceHaveSummary = [NSMutableArray array];
+    _schoolListDataOfIntelligentHaveSummary = [NSMutableArray array];
+    _layout.cellHeights = [NSMutableArray array];
     
     if ([_currentSortName isEqualToString:@"intelligent"])
     {
         for (EnrolStudentsSchoolDomain * d in _schoolListDataOfIntelligent)
         {
-            [_layout.haveSummaryInIndex addObject:([d.summary isEqualToString:@""]?@"YES":@"NO")];
+            if (d.summary != nil)
+            {
+                [_schoolListDataOfIntelligentHaveSummary addObject:@"YES"];
+                [_layout.cellHeights addObject:@([self calSummaryCellHeight:d.summary])];
+            }
+            else
+            {
+                [_schoolListDataOfIntelligentHaveSummary addObject:@"NO"];
+                [_layout.cellHeights addObject:@(85)];
+            }
+            
+            _layout.haveSummaryInIndex = _schoolListDataOfIntelligentHaveSummary;
         }
     }
     else if ([_currentSortName isEqualToString:@"distance"])
     {
         for (EnrolStudentsSchoolDomain * d in _schoolListDataOfDistance)
         {
-            [_layout.haveSummaryInIndex addObject:([d.summary isEqualToString:@""]?@"YES":@"NO")];
+            if (d.summary != nil)
+            {
+                [_schoolListDataOfDistanceHaveSummary addObject:@"YES"];
+                [_layout.cellHeights addObject:@([self calSummaryCellHeight:d.summary])];
+            }
+            else
+            {
+                [_schoolListDataOfDistanceHaveSummary addObject:@"NO"];
+                [_layout.cellHeights addObject:@(85)];
+            }
+            _layout.haveSummaryInIndex = _schoolListDataOfDistanceHaveSummary;
         }
     }
     else
     {
         for (EnrolStudentsSchoolDomain * d in _schoolListDataOfAppraise)
         {
-            [_layout.haveSummaryInIndex addObject:([d.summary isEqualToString:@""]?@"YES":@"NO")];
+            if (d.summary != nil)
+            {
+                [_schoolListDataOfAppraiseHaveSummary addObject:@"YES"];
+                [_layout.cellHeights addObject:@([self calSummaryCellHeight:d.summary])];
+            }
+            else
+            {
+                [_schoolListDataOfAppraiseHaveSummary addObject:@"NO"];
+                [_layout.cellHeights addObject:@(85)];
+            }
+            _layout.haveSummaryInIndex = _schoolListDataOfAppraiseHaveSummary;
         }
     }
+}
+
+- (CGFloat)calSummaryCellHeight:(NSString *)content
+{
+    CGFloat lblW = KGSCREEN.size.width - 90 - 8;
+    
+    CGFloat itemHeight = [KGNSStringUtil heightForString:[self formatSummary:content] andWidth:lblW];
+    
+    return itemHeight;
+}
+
+- (NSString *)formatSummary:(NSString *)summary
+{
+    NSArray * arr = [summary componentsSeparatedByString:@","];
+    
+    NSMutableString * mstr = [NSMutableString string];
+    
+    for (NSString * str in arr)
+    {
+        [mstr appendString:[NSString stringWithFormat:@"%@\r\n",str]];
+    }
+    
+    return mstr;
 }
 
 #pragma mark - 获取学校列表数据 - 首次进入
@@ -248,13 +311,14 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     if (btn.tag == 0)
     {
         _currentSortName = @"intelligent";
-
+        
         if (_currentSortName == nil)
         {
             [self getSchoolLists];
         }
         else
         {
+            [self haveSummaryAtIndex];
             [_collectionView reloadData];
         }
     }
@@ -268,6 +332,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         }
         else
         {
+            [self haveSummaryAtIndex];
             [_collectionView reloadData];
         }
     }
@@ -281,6 +346,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         }
         else
         {
+            [self haveSummaryAtIndex];
             [_collectionView reloadData];
         }
         
@@ -437,7 +503,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     {
         vc.groupuuid = ((EnrolStudentsSchoolDomain *)_schoolListDataOfDistance[indexPath.row]).uuid;
     }
-    else
+    else if ([_currentSortName isEqualToString:@"appraise"])
     {
         vc.groupuuid = ((EnrolStudentsSchoolDomain *)_schoolListDataOfAppraise[indexPath.row]).uuid;
     }

@@ -21,7 +21,6 @@
 #import "EnrolStudentCommentCell.h"
 #import "KGHUD.h"
 #import "NoDataView.h"
-#import "EnrolStudentSchoolDetailFullScreenLayout.h"
 #import "SPBottomItem.h"
 #import "InteractViewController.h"
 #import "KGDateUtil.h"
@@ -45,8 +44,6 @@
     EnrolStudentsSchoolDomain * _schoolDomain;
     
     EnrolStudentSchoolDetailLayout * _oriLayout;
-    
-    EnrolStudentSchoolDetailFullScreenLayout * _newLayout;
     
     NSInteger _dataSourceType;
     
@@ -111,7 +108,7 @@ static NSString *const NoDataCell = @"nodata";
     
     //创建底部按钮
     _bottomView = [[UIView alloc] init];
-    _bottomView.backgroundColor = [UIColor redColor];
+    _bottomView.backgroundColor = [UIColor whiteColor];
     _bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame) - 48 - 64, KGSCREEN.size.width, 48);
     [self addBtn:_bottomView];
     
@@ -181,6 +178,8 @@ static NSString *const NoDataCell = @"nodata";
     _collectionView.scrollEnabled = YES;
     
     _webCell.webView.scrollView.scrollEnabled = NO;
+    
+    [_collectionView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 #pragma mark - 请求数据 - 首次进入
@@ -196,13 +195,14 @@ static NSString *const NoDataCell = @"nodata";
         _schoolDomain = [EnrolStudentsSchoolDomain objectWithKeyValues:vo.data];
         _schoolDomain.distance = vo.distance;
         
-        if (_schoolDomain.summary == nil || [_schoolDomain.summary isEqualToString:@""])
+        if (_schoolDomain.summary != nil)
         {
-            _haveSummary = NO;
+            _haveSummary = YES;
+            _oriLayout.cellHeight = [self calSummaryCellHeight:[self formatSummary:_domainData.summary]];
         }
         else
         {
-            _haveSummary = YES;
+            _haveSummary = NO;
         }
         
         _oriLayout.haveSummary = _haveSummary;
@@ -285,6 +285,29 @@ static NSString *const NoDataCell = @"nodata";
     _oriLayout.commentsCellHeights = _dataHeights;
 }
 
+- (CGFloat)calSummaryCellHeight:(NSString *)content
+{
+    CGFloat lblW = KGSCREEN.size.width - 90 - 8;
+    
+    CGFloat itemHeight = [KGNSStringUtil heightForString:[self formatSummary:content] andWidth:lblW];
+    
+    return itemHeight;
+}
+
+- (NSString *)formatSummary:(NSString *)summary
+{
+    NSArray * arr = [summary componentsSeparatedByString:@","];
+    
+    NSMutableString * mstr = [NSMutableString string];
+    
+    for (NSString * str in arr)
+    {
+        [mstr appendString:[NSString stringWithFormat:@"%@\r\n",str]];
+    }
+    
+    return mstr;
+}
+
 #pragma mark - coll datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -363,6 +386,8 @@ static NSString *const NoDataCell = @"nodata";
             else
             {
                 NoDataView * nodata = [collectionView dequeueReusableCellWithReuseIdentifier:NoDataCell forIndexPath:indexPath];
+                
+                _collectionView.bounces = NO;
                 
                 return nodata;
             }
@@ -446,6 +471,9 @@ static NSString *const NoDataCell = @"nodata";
     
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 48) collectionViewLayout:layout];
     
+    _collectionView.showsHorizontalScrollIndicator = NO;
+    _collectionView.showsVerticalScrollIndicator = NO;
+    
     _collectionView.bounces = NO;
     
     _collectionView.backgroundColor = [UIColor whiteColor];
@@ -470,20 +498,24 @@ static NSString *const NoDataCell = @"nodata";
 {
     if (_haveSummary && _dataSourceType != DataSource_PingLun)
     {
-        if (scrollView.contentOffset.y == (scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64)
+        if (ABS(((scrollView.contentOffset.y) - ((scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64))) <= 0.1)
         {
             _collectionView.scrollEnabled = NO;
             
             _webCell.webView.scrollView.scrollEnabled = YES;
+            
+            [_webCell.webView.scrollView setContentOffset:CGPointMake(0, 1) animated:NO];
         }
     }
     else if (!_haveSummary && _dataSourceType != DataSource_PingLun)
     {
-        if (scrollView.contentOffset.y == (scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64)
+        if (ABS(((scrollView.contentOffset.y) - ((scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64))) <= 0.1)
         {
             _collectionView.scrollEnabled = NO;
             
             _webCell.webView.scrollView.scrollEnabled = YES;
+            
+            [_webCell.webView.scrollView setContentOffset:CGPointMake(0, 1) animated:NO];
         }
     }
     else
@@ -498,7 +530,6 @@ static NSString *const NoDataCell = @"nodata";
         //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
         if(currentOffset >= maximumOffset)
         {
-            NSLog(@"进入了");
             if (_canReqData == YES)
             {
                 _canReqData = NO;
@@ -511,7 +542,6 @@ static NSString *const NoDataCell = @"nodata";
                          
                          if (marr.count == 0)
                          {
-                             [[KGHUD sharedHud] show:_collectionView onlyMsg:@"没有更多内容了"];
                          }
                          else
                          {
@@ -623,7 +653,6 @@ static NSString *const NoDataCell = @"nodata";
 }
 
 #pragma mark - 收藏分享相关
-#pragma mark - 收藏相关
 //保存收藏
 - (void)saveFavorites:(UIButton *)button
 {
@@ -643,7 +672,7 @@ static NSString *const NoDataCell = @"nodata";
          button.selected = !button.selected;
          button.enabled = YES;
      }
-                                           faild:^(NSString *errorMsg)
+     faild:^(NSString *errorMsg)
      {
          button.selected = !button.selected;
          button.enabled = YES;
@@ -664,7 +693,7 @@ static NSString *const NoDataCell = @"nodata";
          [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
          ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang1"];
      }
-                                         failed:^(NSString *errorMsg)
+     failed:^(NSString *errorMsg)
      {
          button.enabled = YES;
          button.selected = !button.selected;

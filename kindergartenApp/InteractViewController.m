@@ -154,7 +154,6 @@
         
         reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
         [reFreshView reloadRefreshTable];
-        NSLog(@"aaaa");
     }
     faild:^(NSString *errorMsg)
     {

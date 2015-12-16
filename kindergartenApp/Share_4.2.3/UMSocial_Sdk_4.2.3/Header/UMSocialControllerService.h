@@ -85,7 +85,7 @@
  */
 @property (nonatomic, retain) UMSocialData *socialData;
 
-/**
+/**ß
  用`UMSocialDataService`对象，可以调用发送微博、评论等数据级的方法
  */
 @property (nonatomic, readonly) UMSocialDataService *socialDataService;
