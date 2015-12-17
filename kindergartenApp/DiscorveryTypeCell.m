@@ -60,7 +60,7 @@
     }
     else
     {
-        self.numLblOfTopic.text = [NSString stringWithFormat:@"%ld",(long)domain.today_goodArticle];
+        self.numLblOfTopic.text = [NSString stringWithFormat:@"%ld",(long)domain.today_snsTopic];
     }
     
     if (domain.today_pxbenefit <= 0)
@@ -73,7 +73,7 @@
     }
     else
     {
-        self.numLblOfYouHuiHuoDong.text = [NSString stringWithFormat:@"%ld",(long)domain.today_goodArticle];
+        self.numLblOfYouHuiHuoDong.text = [NSString stringWithFormat:@"%ld",(long)domain.today_pxbenefit];
     }
 }
 

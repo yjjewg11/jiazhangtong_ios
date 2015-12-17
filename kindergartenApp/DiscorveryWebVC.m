@@ -23,7 +23,7 @@
     UIActionSheet * _myActionSheet;
     UIWebView * _webView;
     
-    NSString * _currentURL;
+    NSString * _jsessionId;
 }
 
 @end
@@ -119,7 +119,7 @@
     
     NSString * domain = nil;
     
-    if ([secondUrl containsString:@":"])
+    if ([secondUrl rangeOfString:@":"].location != NSNotFound) 
     {
         domain = [secondUrl componentsSeparatedByString:@":"][0];
     }
@@ -176,10 +176,6 @@
 //    };
     
     [self hidenLoadView];
-    
-    //获取当前url
-    _currentURL = webView.request.URL.absoluteString;
-    NSLog(@"--url-%@--",_currentURL);
 }
 
 - (void)finishProject:(NSString *)url
@@ -188,6 +184,18 @@
 }
 
 #pragma mark - js调用方法
+- (void)jsessionToPhone:(NSString *)id
+{
+    _jsessionId = id;
+}
+
+- (NSString *)getJsessionid:(NSString *)id
+{
+    NSLog(@"aaa %@",_jsessionId);
+    return [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
+}
+
+
 - (void)setShareContent:(NSString *)title content:(NSString *)content pathurl:(NSString *)pathurl httpurl:(NSString *)httpurl
 {
     ShareDomain * domain = [[ShareDomain alloc] init];

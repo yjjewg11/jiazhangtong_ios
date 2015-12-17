@@ -17,15 +17,15 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *name;
 
-@property (weak, nonatomic) IBOutlet UIView *starView;
+@property (weak, nonatomic) IBOutlet UIView * starView;
 
-@property (weak, nonatomic) IBOutlet UILabel *distance;
+@property (weak, nonatomic) IBOutlet UILabel * distance;
 
 @property (weak, nonatomic) IBOutlet UILabel *address;
 
-@property (weak, nonatomic) IBOutlet UILabel *summary;
-
 @property (weak, nonatomic) IBOutlet UILabel *studentNum;
+
+@property (weak, nonatomic) IBOutlet UITextView *summary;
 
 @end
 
@@ -50,6 +50,8 @@
     [self setUpStarts:intCount halfCount:halfCount];
 
     self.summary.text = [self formatSummary:domain.summary];
+    
+    self.summary.userInteractionEnabled = NO;
 }
 
 - (NSString *)formatSummary:(NSString *)summary

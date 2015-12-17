@@ -84,6 +84,26 @@ static NSString *const Nodata = @"nodata";
     [self initCollectionView];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSNotification * no = [[NSNotification alloc] initWithName:@"homerefreshnum" object:nil userInfo:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:no];
+}
+
+- (void)updateNumData
+{
+    //请求最新数据条数显示 红点
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    _numberDomain = [[DiscorveryNewNumberDomain alloc] init];
+    _numberDomain.today_goodArticle = [[defu objectForKey:@"jingpingwenzhangnum"] integerValue];
+    _numberDomain.today_snsTopic = [[defu objectForKey:@"huatinum"] integerValue];
+    _numberDomain.today_pxbenefit = [[defu objectForKey:@"youhuihuodongnum"] integerValue];
+    _numberDomain.today_unreadPushMsg = [[defu objectForKey:@"xiaoxinum"] integerValue];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -92,18 +112,16 @@ static NSString *const Nodata = @"nodata";
     
     _pageNo = 2;
     
-    //请求最新数据条数显示 红点
-    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
-    _numberDomain = [[DiscorveryNewNumberDomain alloc] init];
-    _numberDomain.today_goodArticle = [[defu objectForKey:@"jingpingwenzhangnum"] integerValue];
-    _numberDomain.today_snsTopic = [[defu objectForKey:@"huatinum"] integerValue];
-    _numberDomain.today_pxbenefit = [[defu objectForKey:@"youhuihuodongnum"] integerValue];
-    _numberDomain.today_unreadPushMsg = [[defu objectForKey:@"xiaoxinum"] integerValue];
+    [self updateNumData];
     
     //请求每日推荐
     [self getTuiJianData];
     
     [self initCollectionView];
+    
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(updateNumData) name:@"updateNumData" object:nil];
 }
 
 #pragma mark - 请求每日推荐
@@ -216,7 +234,6 @@ static NSString *const Nodata = @"nodata";
             return cell;
         }
     }
-    
     return nil;
 }
 
@@ -233,7 +250,7 @@ static NSString *const Nodata = @"nodata";
             break;
         case 1:
         {
-            [[KGHUD sharedHud] show:_collectionView onlyMsg:@"建设中..."];
+            [self setupWebView];
         }
             break;
         case 2:
@@ -255,28 +272,34 @@ static NSString *const Nodata = @"nodata";
 {
     if (indexPath.row >= 2)
     {
-        DiscorveryWebVC * webvc = [[DiscorveryWebVC alloc] init];
-        
-        _webVC = webvc;
-        
-        webvc.delegate = self;
-        
-        webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
-        
-        NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
-        
-        NSString * url = [defu objectForKey:@"sns_url"];
-        
-//        [webvc loadWithCookieSettingsUrl:@"http://kd.wenjienet.com/px-rest/kd/index.html" cookieDomain:nil path:nil];
-        
-        [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
-        
-        [self.view addSubview:webvc.view];
-        
-        _collectionView.hidden = YES;
-        
-        self.navigationController.navigationBarHidden = YES;
+        [self setupWebView];
     }
+}
+
+#pragma mark - 创建webview
+- (void)setupWebView
+{
+    DiscorveryWebVC * webvc = [[DiscorveryWebVC alloc] init];
+    
+    _webVC = webvc;
+    
+    webvc.delegate = self;
+    
+    webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
+    
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    
+    NSString * url = [defu objectForKey:@"sns_url"];
+    
+//    [webvc loadWithCookieSettingsUrl:@"http://120.25.212.44/px-rest/phone_Api/index.html" cookieDomain:nil path:nil];
+    
+    [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
+    
+    [self.view addSubview:webvc.view];
+    
+    _collectionView.hidden = YES;
+    
+    self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - 初始化collectionview
@@ -342,11 +365,13 @@ static NSString *const Nodata = @"nodata";
                      
                      [_remenjingxuanData addObjectsFromArray:arr];
                      
-                     [_collectionView reloadData];
-                     
-                      _canReqData = YES;
+                     dispatch_async(dispatch_get_main_queue(), ^
+                     {
+                         [_collectionView reloadData];
+                         
+                         _canReqData = YES;
+                     });
                  }
-                 
              }
              faild:^(NSString *errorMsg)
              {
@@ -359,17 +384,19 @@ static NSString *const Nodata = @"nodata";
 #pragma mark - webview代理
 - (void)hideWebVC:(DiscorveryWebVC *)webVC
 {
-    _collectionView.hidden = NO;
-    
-    [UIView animateWithDuration:0.4 animations:^
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-        _webVC.view.transform = CGAffineTransformMakeTranslation(-APPWINDOWWIDTH, 0);
-        _webVC.view.alpha = 0;
-    }];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:0];
-    
-    self.navigationController.navigationBarHidden = NO;
+        _collectionView.hidden = NO;
+        
+        [UIView animateWithDuration:0.4 animations:^
+         {
+             _webVC.view.transform = CGAffineTransformMakeTranslation(-APPWINDOWWIDTH, 0);
+             _webVC.view.alpha = 0;
+         }];
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:0];
+        self.navigationController.navigationBarHidden = NO;
+    });
 }
 
 #pragma mark - 上拉刷新，下拉加载数据

@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCt-Qu-V5V">
-                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zge-Ps-SxK">
                             <rect key="frame" x="16" y="15" width="288" height="70"/>
@@ -118,7 +118,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="lCt-Qu-V5V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="4zD-v2-nAN"/>
+                <constraint firstItem="lCt-Qu-V5V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4zD-v2-nAN"/>
                 <constraint firstAttribute="trailing" secondItem="lCt-Qu-V5V" secondAttribute="trailing" id="TA2-Wr-1nO"/>
                 <constraint firstItem="lCt-Qu-V5V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nnU-od-Agb"/>
                 <constraint firstAttribute="bottom" secondItem="lCt-Qu-V5V" secondAttribute="bottom" id="tad-dW-ekK"/>

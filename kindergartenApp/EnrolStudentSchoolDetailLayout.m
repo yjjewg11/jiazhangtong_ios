@@ -70,7 +70,7 @@
         itemWidth = KGSCREEN.size.width;
         if (self.haveSummary)
         {
-            itemHeight = self.cellHeight - 40 + 144;
+            itemHeight = self.cellHeight - 60 + 144;
         }
         else
         {

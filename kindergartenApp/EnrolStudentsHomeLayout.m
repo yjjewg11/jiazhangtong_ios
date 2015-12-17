@@ -59,7 +59,7 @@
     
     if ([self.haveSummaryInIndex[indexPath.row] isEqualToString:@"YES"])
     {
-        itemHeight = 144 + ([self.cellHeights[indexPath.row] floatValue] - 40);
+        itemHeight = 144 + ([self.cellHeights[indexPath.row] floatValue] - 60);
     }
     else
     {

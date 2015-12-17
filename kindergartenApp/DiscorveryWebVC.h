@@ -33,6 +33,16 @@ JSExportAs
  - (void)finishProject:(NSString *)url
  );
 
+JSExportAs
+(jsessionToPhone  /** handleFactorialCalculateWithNumber 作为js方法的别名 */,
+ - (void)jsessionToPhone:(NSString *)id
+ );
+
+JSExportAs
+(getJsessionid  /** handleFactorialCalculateWithNumber 作为js方法的别名 */,
+ - (NSString *)getJsessionid:(NSString *)id
+ );
+
 @end
 
 @interface DiscorveryWebVC : BaseViewController

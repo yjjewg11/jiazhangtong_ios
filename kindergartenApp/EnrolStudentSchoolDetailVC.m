@@ -118,6 +118,16 @@ static NSString *const NoDataCell = @"nodata";
     [self initCollectionView];
 }
 
+#pragma mark - 无网络重试
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    
+    [self getSchoolDetailData];
+    
+    [self initCollectionView];
+}
+
 #pragma mark - 添加底部按钮
 - (void)addBtn:(UIView *)view
 {
@@ -190,6 +200,7 @@ static NSString *const NoDataCell = @"nodata";
     [[KGHttpService sharedService] getZhaoShengSchoolDetail:self.groupuuid mappoint:_mappoint success:^(EnrolStudentDataVO *vo)
     {
         [self hidenLoadView];
+        
         _voData = vo;
         _domainData = [EnrolStudentSchoolDetailDomain objectWithKeyValues:vo.data];
         _schoolDomain = [EnrolStudentsSchoolDomain objectWithKeyValues:vo.data];
@@ -234,6 +245,7 @@ static NSString *const NoDataCell = @"nodata";
 #pragma mark - 请求评论
 - (void)getCommentData
 {
+    [[KGHUD sharedHud] hide:self.view];
     [[KGHUD sharedHud] show:self.view];
     
     [[KGHttpService sharedService] getSPCourseComment:self.groupuuid pageNo:@"" success:^(SPCommentVO *commentVO)
@@ -242,6 +254,8 @@ static NSString *const NoDataCell = @"nodata";
         
         if (_commentsData.count == 0)
         {
+            _collectionView.bounces = NO;
+            
             _haveCommentData = NO;
             
             [[KGHUD sharedHud] hide:self.view];
@@ -253,6 +267,8 @@ static NSString *const NoDataCell = @"nodata";
             _haveCommentData = YES;
             //计算所有数据的行高
             [self calCommentsDataHeight];
+            
+            _collectionView.bounces = YES;
             
             [[KGHUD sharedHud] hide:self.view];
             
@@ -405,7 +421,7 @@ static NSString *const NoDataCell = @"nodata";
         case 0:
         {
             _currentShareUrl = _voData.share_url;
-            [self isScrollAble];
+            [self resetCollectionView];
             _collectionView.bounces = NO;
             [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = DataSource_ZhaoSheng;
@@ -417,7 +433,7 @@ static NSString *const NoDataCell = @"nodata";
         case 1:
         {
             _currentShareUrl = _voData.recruit_url;
-            [self isScrollAble];
+            [self resetCollectionView];
             _collectionView.bounces = NO;
             [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = DataSource_JianJie;
@@ -429,9 +445,9 @@ static NSString *const NoDataCell = @"nodata";
             
         case 2:
         {
-            _collectionView.scrollEnabled = YES;
-            _dataSourceType = DataSource_PingLun;
+            [self resetCollectionView];
             _collectionView.bounces = YES;
+            _dataSourceType = DataSource_PingLun;
             _oriLayout.isCommentCell = YES;
             if (_commentsData == nil)
             {
@@ -451,14 +467,13 @@ static NSString *const NoDataCell = @"nodata";
 }
 
 #pragma mark - webview scrollable
-- (void)isScrollAble
+- (void)resetCollectionView
 {
-    if (_collectionView.contentOffset.y > 0)
-    {
-        _collectionView.scrollEnabled = NO;
-        
-        _webCell.webView.scrollView.scrollEnabled = YES;
-    }
+    _collectionView.scrollEnabled = YES;
+    
+    _webCell.webView.scrollView.scrollEnabled = NO;
+    
+    [_collectionView setContentOffset:CGPointMake(0, 0) animated:NO];
 }
 
 #pragma mark - 初始化collectionview

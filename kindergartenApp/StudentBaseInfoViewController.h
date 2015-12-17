@@ -25,6 +25,4 @@
 
 - (IBAction)birthdayBtnClicked:(UIButton *)sender;
 
-@property (strong, nonatomic) MineHomeVC * oriVC;
-
 @end

@@ -54,7 +54,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 {
     [super viewDidLoad];
     
-    self.title = @"招生";
+    self.title = @"宝宝入学";
     
     _canReqData = YES;
     _pageNoOfIntelligent = 2;
@@ -92,6 +92,9 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     _layout = layout;
     
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 42, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 42) collectionViewLayout:layout];
+    
+    _collectionView.hidden = YES;
+    
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     [_collectionView registerNib:[UINib nibWithNibName:@"EnrolStudentsSchoolCell" bundle:nil] forCellWithReuseIdentifier:SchoolCellID];
@@ -196,11 +199,17 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     {
         _schoolListDataOfIntelligent = [NSMutableArray arrayWithArray:listArr];
         
-        [self hidenLoadView];
-        
         [self haveSummaryAtIndex];
         
+        _collectionView.hidden = NO;
+        
+        [self hidenLoadView];
+        
         [self.view addSubview:_collectionView];
+        
+        [self.view addSubview:_buttonsView];
+        
+        ((UIView *)_redViews[0]).hidden = NO;
     }
     faild:^(NSString *errorMsg)
     {
@@ -212,6 +221,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 - (void)getSchoolLists
 {
     [self showLoadView];
+    
     _collectionView.hidden = YES;
     
     [[KGHttpService sharedService] getAllSchoolList:@"" pageNo:@"" mappoint:_mappoint sort:_currentSortName success:^(NSArray *listArr)
@@ -231,10 +241,12 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
          
          [self haveSummaryAtIndex];
          
-         [self hidenLoadView];
-         
-         _collectionView.hidden = NO;
-         [_collectionView reloadData];
+         dispatch_async(dispatch_get_main_queue(), ^
+         {
+             _collectionView.hidden = NO;
+             [_collectionView reloadData];
+             [self hidenLoadView];
+         });
      }
      faild:^(NSString *errorMsg)
      {
@@ -280,7 +292,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     
     ((UIButton *)_btns[0]).selected = YES;
     
-    [self.view addSubview:_buttonsView];
+    
 }
 
 #pragma mark - 创建按钮下面红色view
@@ -301,8 +313,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         
         [self.view addSubview:redView];
     }
-    
-    ((UIView *)_redViews[0]).hidden = NO;
 }
 
 #pragma mark - 上面按钮点击
@@ -477,10 +487,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
                      
                      [_collectionView reloadData];
                      
-                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                     {
-                         _canReqData = YES;
-                     });
+                     _canReqData = YES;
                  }
              }
              faild:^(NSString *errorMsg)

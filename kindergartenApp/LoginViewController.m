@@ -15,6 +15,7 @@
 #import "KGHttpService.h"
 #import "KGNSStringUtil.h"
 #import "KGHUD.h"
+#import "MBProgressHUD+HM.h"
 
 #define UserNameKey @"UserName"
 #define PasswordKey @"Password"
@@ -134,18 +135,21 @@
         
         [[KGHttpService sharedService] login:user success:^(NSString *msgStr) {
             
-            [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
+            [[KGHUD sharedHud] hide:self.view];
+            [MBProgressHUD showSuccess:msgStr];
             
             if(savePwdBtn.selected) {
                 [KGAccountTool saveAccount:user];
-            } else {
+            } else { 
                 [KGAccountTool delAccount];
             }
             
             [self loginSuccess];
             
-        } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        } faild:^(NSString *errorMsg)
+        {
+            [[KGHUD sharedHud] hide:self.view];
+            [MBProgressHUD showError:errorMsg];
         }];
     }
 }

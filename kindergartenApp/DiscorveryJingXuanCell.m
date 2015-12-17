@@ -68,7 +68,7 @@
     
     if ([domain.summary isEqualToString:@""] || domain.summary == nil)
     {
-        _mySummaryLbl.text = @"sorry,暂无相关内容...";
+        _mySummaryLbl.text = @"";
     }
     else
     {

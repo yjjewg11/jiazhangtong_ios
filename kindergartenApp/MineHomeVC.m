@@ -56,6 +56,12 @@ static NSString *const NormalColle = @"normalcolle";
     [self initCollectionView];
     
     [self.view addSubview:_collectionView];
+    
+    //注册通知
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(reloadStuData) name:@"minehomereloaddata" object:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -63,8 +69,6 @@ static NSString *const NormalColle = @"normalcolle";
     [super viewDidAppear:animated];
     
     [_collectionView reloadData];
-    
-    _studentArr = [NSMutableArray arrayWithArray:[KGHttpService sharedService].loginRespDomain.list];
 }
 
 #pragma mark - 添加孩子方法
@@ -175,6 +179,13 @@ static NSString *const NormalColle = @"normalcolle";
     StudentBaseInfoViewController * baseInfoVC = [[StudentBaseInfoViewController alloc] init];
     
     [self.navigationController pushViewController:baseInfoVC animated:YES];
+}
+
+- (void)reloadStuData
+{
+    _studentArr = [KGHttpService sharedService].loginRespDomain.list;
+    
+    [_collectionView reloadData];
 }
 
 

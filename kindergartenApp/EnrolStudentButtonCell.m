@@ -28,7 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnZhaoSheng;
 
-
 @end
 
 
@@ -38,8 +37,6 @@
 {
     
 }
-
-
 
 - (IBAction)btnClicked:(UIButton *)btn
 {

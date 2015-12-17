@@ -37,7 +37,7 @@
     {
         _tableVC = [[YouHuiTableVC alloc] init];
         _tableVC.delegate = self;
-        _tableVC.tableRect = CGRectMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT));
+        _tableVC.tableRect = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - (APPSTATUSBARHEIGHT + APPTABBARHEIGHT));
     }
     return _tableVC;
 }

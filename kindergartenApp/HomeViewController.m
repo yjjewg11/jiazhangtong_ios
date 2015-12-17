@@ -51,6 +51,7 @@
 @interface HomeViewController () <ImageCollectionViewDelegate, UIGestureRecognizerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,CLLocationManagerDelegate>
 {
     IBOutlet UIView * photosView;
+    
     IBOutlet UIView * funiView;
     
     PopupView * popupView;
@@ -71,29 +72,31 @@
 
 @implementation HomeViewController
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
-    
-    [self requestGroupDate];
-    
-//    if(!groupListView) {
-//        [self loadGroupListView];
-//    }
     
     self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
                                   adMoGoViewDelegate:self];
     
     self.adView.adWebBrowswerDelegate = self;
-    self.adView.backgroundColor = [UIColor whiteColor];
+    
     self.adView.frame = CGRectMake((APPWINDOWWIDTH - 360) / 2, 0, 360, 150.0);
-    [self.view addSubview:self.adView];
+    
+    [photosView addSubview:self.adView];
+    
+    [photosView bringSubviewToFront:self.adView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self requestGroupDate];
+    
     _hourGlass = [[FeHourGlass alloc] initWithView:photosView];
+    
+    _hourGlass.center = photosView.center;
     
     [photosView addSubview:_hourGlass];
     
@@ -127,6 +130,12 @@
     [defu synchronize];
     
     [self getLocationData];
+    
+    //注册通知，用于发现模块 最新数目显示
+    //注册通知
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(getNewsNumber) name:@"homerefreshnum" object:nil];
 }
 
 #pragma mark - 芒果广告相关
@@ -139,7 +148,8 @@
 /*
  返回广告rootViewController
  */
-- (UIViewController *)viewControllerForPresentingModalView{
+- (UIViewController *)viewControllerForPresentingModalView
+{
     return self;
 }
 /**
@@ -174,7 +184,7 @@
 - (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
 {
     self.adView.hidden = YES;
-    self.adView.userInteractionEnabled = NO;
+    photosView.userInteractionEnabled = NO;
     
     UIImageView * imgView = [[UIImageView alloc] init];
     
@@ -317,8 +327,6 @@
     }
     else //不是第一次进来，获取存到磁盘的时间，和当前时间做比较，如果大于一天，就调用sys方法
     {
-        NSLog(@"相差了:%d 天",[KGDateUtil intervalSinceNow:time]);
-        
         if ([KGDateUtil intervalSinceNow:time] >= 1)
         {
             //是时候调用了
@@ -370,6 +378,10 @@
             [defu setObject:@(newnum.today_pxbenefit) forKey:@"youhuihuodongnum"];
             [defu setObject:@(newnum.today_unreadPushMsg) forKey:@"xiaoxinum"];
             [defu synchronize];
+            
+            NSNotification * noti = [[NSNotification alloc] initWithName:@"updateNumData" object:nil userInfo:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotification:noti];
         }
         
         [self hidenLoadView];
@@ -636,7 +648,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    [MBProgressHUD showError:@"尝试获取您的位置失败,请检查是否开启定位功能!"];
+    NSLog(@"尝试获取您的位置失败,请检查是否开启定位功能!");
 }
 
 

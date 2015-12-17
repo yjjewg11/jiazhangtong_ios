@@ -83,6 +83,8 @@
     [self initViewData];
 }
 
+
+
 //初始化页面值
 - (void)initViewData
 {
@@ -236,8 +238,8 @@
 
 
 //上传头像
-- (void)uploadImg:(void(^)(BOOL isSuccess, NSString * msgStr))block {
-    
+- (void)uploadImg:(void(^)(BOOL isSuccess, NSString * msgStr))block
+{
     [[KGHttpService sharedService] uploadImg:headImageView.image withName:@"file" type:1 success:^(NSString *msgStr) {
         block(YES, msgStr);
     } faild:^(NSString *errorMsg) {
@@ -275,15 +277,13 @@
     
     [[KGHttpService sharedService] addStudentInfo:_studentInfo success:^(NSString *msgStr)
     {
-        NSLog(@"之前的数目:%d",[KGHttpService sharedService].loginRespDomain.list.count);
-        
         [[KGHttpService sharedService].loginRespDomain.list addObject:_studentInfo];
         
-        NSLog(@"新建的 %@",_studentInfo.name);
-        
-        NSLog(@"现在的数目:%d",[KGHttpService sharedService].loginRespDomain.list.count);
-        
         [self.navigationController popViewControllerAnimated:YES];
+        
+        NSNotification * notice = [NSNotification notificationWithName:@"minehomereloaddata" object:nil userInfo:nil];
+        //发送消息
+        [[NSNotificationCenter defaultCenter] postNotification:notice];
     }
      
     faild:^(NSString *errorMsg)
@@ -456,41 +456,8 @@
         VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.view.frame.size.width, self.view.frame.size.width) limitScaleRatio:3.0];
         imgCropperVC.delegate = self;
         [self presentViewController:imgCropperVC animated:YES completion:^{
-            // TO DO
         }];
     }];
-    
-//    NSString * type = [info objectForKey:UIImagePickerControllerMediaType];
-//    
-//    //当选择的类型是图片
-//    if ([type isEqualToString:@"public.image"])
-//    {
-//        //先把图片转成NSData
-//        UIImage * image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-//        NSData * data = UIImageJPEGRepresentation(image, 0.1);
-//        
-//        //图片保存的路径
-//        //这里将图片放在沙盒的documents文件夹中
-//        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        
-//        //文件管理器
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        
-//        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
-//        
-//        //得到选择后沙盒中图片的完整路径
-//        filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
-//        
-//        //关闭相册界面
-//        [picker dismissViewControllerAnimated:YES completion:nil];
-//        
-//        headImageView.image = image;
-//        
-//        isSetHeadImg = YES;
-//    } 
-    
 }
 
 

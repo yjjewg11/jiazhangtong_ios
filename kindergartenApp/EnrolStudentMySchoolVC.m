@@ -77,12 +77,11 @@ static NSString *const SchoolCell = @"schoolcoll";
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     self.navigationItem.rightBarButtonItem = leftBarButtonItem;
     
+    self.title = @"我的学校";
+    
     //读取坐标
     NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
     _mappoint = [defu objectForKey:@"map_point"];
-    
-    //设置顶部选择学校
-    [self requestGroupDate];
     
     //请求招生计划和学校简介数据
     [self getSchoolData];
@@ -204,7 +203,7 @@ static NSString *const SchoolCell = @"schoolcoll";
     
     _oriLayout = layout;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
     
     _collectionView.bounces = NO;
     
@@ -396,107 +395,6 @@ static NSString *const SchoolCell = @"schoolcoll";
     }
     
     return nil;
-}
-
-#pragma mark - 创建顶部学校选择
-- (void)requestGroupDate
-{
-    groupDataArray = [KGHttpService sharedService].loginRespDomain.group_list;
-    [self loadNavTitle];
-    [self loadGroupListView];
-}
-
-- (void)loadNavTitle
-{
-    titleBtn = [[ItemTitleButton alloc] initWithFrame:CGRectMake(0, 0, 200, 30)];
-    if([[KGHttpService sharedService].loginRespDomain.group_list count] > Number_Zero)
-    {
-        [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
-    }
-    
-    // 设置图片和文字
-    NSString * title = @"首页";
-    if([KGHttpService sharedService].groupDomain) {
-        title = [KGHttpService sharedService].groupDomain.brand_name;
-    }
-    
-    [titleBtn setTitle:title
-              forState:UIControlStateNormal];
-    // 监听标题点击
-    [titleBtn addTarget:self
-                 action:@selector(titleFunBtnClicked:)
-       forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.titleView = titleBtn;
-}
-
-//加载机构下拉列表
-- (void)loadGroupListView
-{
-    if(groupDataArray && [groupDataArray count]>Number_Zero) {
-        
-        groupViewHeight = [groupDataArray count] * Cell_Height2;
-        if (!groupListView) {
-            groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, 64-groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
-            groupListView.backgroundColor = KGColorFrom16(0xE64662);
-            [self.view addSubview:groupListView];
-        }else{
-            [groupListView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        }
-        
-        GroupDomain *         domain = nil;
-        UILabel     * groupNameLabel = nil;
-        UILabel     *    spliteLabel = nil;
-        UIButton    *            btn = nil;
-        CGFloat   y = Number_Zero;
-        
-        for(NSInteger i=Number_Zero; i<[groupDataArray count]; i++) {
-            
-            domain = [groupDataArray objectAtIndex:i];
-            y = Number_Fifteen + (i*Cell_Height2);
-            
-            groupNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, y, KGSCREEN.size.width, Number_Fifteen)];
-            groupNameLabel.font = [UIFont systemFontOfSize:Number_Fifteen];
-            groupNameLabel.text = domain.company_name;
-            groupNameLabel.textColor = [UIColor whiteColor];
-            groupNameLabel.textAlignment = NSTextAlignmentCenter;
-            [groupListView addSubview:groupNameLabel];
-            
-            btn = [[UIButton alloc] initWithFrame:CGRectMake(Number_Zero, y, KGSCREEN.size.width, Cell_Height2)];
-            btn.targetObj = domain;
-            [btn addTarget:self action:@selector(didSelectedGroupList:) forControlEvents:UIControlEventTouchUpInside];
-            [groupListView addSubview:btn];
-            
-            if(i < [groupDataArray count]-Number_One) {
-                spliteLabel = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, CGRectGetMaxY(groupNameLabel.frame) + Number_Fifteen, KGSCREEN.size.width, 0.5)];
-                spliteLabel.backgroundColor = [UIColor whiteColor];
-                [groupListView addSubview:spliteLabel];
-            }
-        }
-    }
-}
-
-- (void)titleFunBtnClicked:(UIButton *)sender
-{
-    sender.selected = !sender.selected;
-    
-    CGFloat y = 64;
-    if(!sender.selected) {
-        y -= groupViewHeight;
-        titleBtn.selected = NO;
-    }
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        groupListView.y = y;
-    }];
-}
-
-//选择机构
-- (void)didSelectedGroupList:(UIButton *)sender
-{
-    GroupDomain * domain = (GroupDomain *)sender.targetObj;
-    [titleBtn setText:domain.company_name];
-    [KGHttpService sharedService].groupDomain = domain;
-    [self titleFunBtnClicked:titleBtn];
 }
 
 #pragma mark - 监听键盘事件

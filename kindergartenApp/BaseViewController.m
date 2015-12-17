@@ -32,7 +32,8 @@
     return _loadingView;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = NO;
@@ -77,10 +78,7 @@
 
 - (void)hidenLoadView
 {
-    [UIView animateWithDuration:0.3 animations:^
-     {
-         [self.loadingView removeFromSuperview];
-     }];
+    [self.loadingView removeFromSuperview];
 }
 
 - (void)showNoNetView
@@ -96,10 +94,9 @@
 
 - (void)hidenNoNetView
 {
-    [UIView animateWithDuration:0.3 animations:^
-    {
-         [self.noNetView removeFromSuperview];
-    }];
+   [self.noNetView removeFromSuperview];
 }
+
+- (void)dealloc {[[NSNotificationCenter defaultCenter] removeObserver:self];}
 
 @end
