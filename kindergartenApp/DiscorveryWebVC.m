@@ -63,13 +63,6 @@
  */
 - (void)loadWithCookieSettingsUrl:(NSString *)url cookieDomain:(NSString *)cookieDomain path:(NSString *)cookiePath
 {
-    if (url == nil || [url isEqualToString:@""])
-    {
-        NSLog(@"url不能为空!");
-        
-        return;
-    }
-    
     if (cookieDomain == nil)
     {
         cookieDomain = @"";
@@ -100,6 +93,13 @@
     [self showLoadView];
     
     [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+}
+
+- (void)clearWebViewContent
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]];
+    
+    [_webView loadRequest:request];
 }
 
 #pragma mark - 获取url中的主机地址
@@ -180,7 +180,13 @@
 
 - (void)finishProject:(NSString *)url
 {
-    [self.delegate hideWebVC:self];
+    _context = nil;
+    _myActionSheet = nil;
+    _webView = nil;
+    
+    NSNotification * no = [[NSNotification alloc] initWithName:@"deallocwebview" object:nil userInfo:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:no];
 }
 
 #pragma mark - js调用方法
@@ -191,7 +197,6 @@
 
 - (NSString *)getJsessionid:(NSString *)id
 {
-    NSLog(@"aaa %@",_jsessionId);
     return [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
 }
 
@@ -385,6 +390,15 @@
     NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
     // and then we write it out
     [imageData writeToFile:fullPathToFile atomically:NO];
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc --- ");
+    _context = nil;
+    _jsessionId = nil;
+    _webView = nil;
+    _myActionSheet = nil;
 }
 
 @end

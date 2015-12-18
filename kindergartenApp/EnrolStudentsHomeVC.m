@@ -14,8 +14,9 @@
 #import "EnrolStudentsSchoolCell.h"
 #import "KGNSStringUtil.h"
 #import "EnrolStudentsSchoolDomain.h"
+#import "MXPullDownMenu.h"
 
-@interface EnrolStudentsHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface EnrolStudentsHomeVC () <UICollectionViewDataSource,UICollectionViewDelegate,MXPullDownMenuDelegate>
 {
     UICollectionView * _collectionView;
     UIView * _buttonsView;
@@ -41,6 +42,8 @@
     NSMutableArray * _schoolListDataOfIntelligentHaveSummary;
     NSMutableArray * _schoolListDataOfAppraiseHaveSummary;
     NSMutableArray * _schoolListDataOfDistanceHaveSummary;
+    
+    MXPullDownMenu * _dropMenu;
 }
 
 
@@ -71,12 +74,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    //创建上面三个按钮view
-    _buttonsView = [[UIView alloc] init];
-    _buttonsView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 40);
-    [self addSelBtns:_buttonsView];
-    [self createBtnRedView];
-    
     //请求学校列表
     [self getSchoolList];
     
@@ -91,7 +88,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     
     _layout = layout;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 42, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 42) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 35, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 35) collectionViewLayout:layout];
     
     _collectionView.hidden = YES;
     
@@ -210,6 +207,9 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         [self.view addSubview:_buttonsView];
         
         ((UIView *)_redViews[0]).hidden = NO;
+        
+        //创建下拉菜单
+        [self setUpListBtns];
     }
     faild:^(NSString *errorMsg)
     {
@@ -254,47 +254,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
      }];
 }
 
-#pragma mark - 创建上面3个选择按钮
-- (void)addSelBtns:(UIView *)view
-{
-    NSArray * titlts = @[@"智能排序",@"评价最高",@"离我最近"];
-    _btns = [NSMutableArray array];
-    
-    for (NSInteger i=0; i<3; i++)
-    {
-        MyButtonFore * btn = [[MyButtonFore alloc] initWithFrame:CGRectMake(i * (APPWINDOWWIDTH / 3), 0, (APPWINDOWWIDTH / 3), 40)];
-        
-        btn.titleLabel.font = [UIFont systemFontOfSize:15];
-        
-        [btn setTitle:titlts[i] forState:UIControlStateNormal];
-        [btn setTitle:titlts[i] forState:UIControlStateSelected];
-        
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-        [btn setBackgroundColor:[UIColor whiteColor]];
-        
-        btn.tag = i;
-        
-        [btn addTarget:self action:@selector(selBtn:) forControlEvents:UIControlEventTouchDown];
-        
-        //创建btn之间的分割线
-        if (i!=2)
-        {
-            UIView * sepView = [[UIView alloc] init];
-            sepView.frame = CGRectMake(btn.frame.size.width - 1, 10, 1, 20);
-            sepView.backgroundColor = [UIColor lightGrayColor];
-            [btn addSubview:sepView];
-        }
-        [_btns addObject:btn];
-        
-        [_buttonsView addSubview:btn];
-    }
-    
-    ((UIButton *)_btns[0]).selected = YES;
-    
-    
-}
-
 #pragma mark - 创建按钮下面红色view
 - (void)createBtnRedView
 {
@@ -314,71 +273,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         [self.view addSubview:redView];
     }
 }
-
-#pragma mark - 上面按钮点击
-- (void)selBtn:(UIButton *)btn
-{
-    if (btn.tag == 0)
-    {
-        _currentSortName = @"intelligent";
-        
-        if (_currentSortName == nil)
-        {
-            [self getSchoolLists];
-        }
-        else
-        {
-            [self haveSummaryAtIndex];
-            [_collectionView reloadData];
-        }
-    }
-    else if (btn.tag == 1)
-    {
-        _currentSortName = @"appraise";
-
-        if (_schoolListDataOfAppraise == nil)
-        {
-            [self getSchoolLists];
-        }
-        else
-        {
-            [self haveSummaryAtIndex];
-            [_collectionView reloadData];
-        }
-    }
-    else
-    {
-        _currentSortName = @"distance";
-
-        if (_schoolListDataOfDistance == nil)
-        {
-            [self getSchoolLists];
-        }
-        else
-        {
-            [self haveSummaryAtIndex];
-            [_collectionView reloadData];
-        }
-        
-    }
-    
-    btn.selected = YES;
-    
-    for (NSInteger i=0; i<_btns.count; i++)
-    {
-        if (btn.tag == i)
-        {
-            ((UIButton *)_btns[i]).selected = YES;
-            ((UIView *)_redViews[i]).hidden = NO;
-        }
-        else
-        {
-            ((UIButton *)_btns[i]).selected = NO;
-            ((UIView *)_redViews[i]).hidden = YES;
-        }
-    }
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if ([_currentSortName isEqualToString:@"intelligent"])
@@ -538,8 +432,75 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     });
 }
 
-@end
+#pragma mark - 创建顶部下拉菜单
+- (void)setUpListBtns
+{
+    NSArray *testArray;
+    
+    NSArray * cityArr = @[@"成都市"];
+    
+    NSArray * dataOfSort = @[@"智能排序",@"评价最高",@"距离最近"];
+    
+    testArray = @[cityArr, dataOfSort];
+    
+    _dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor blackColor]];
+    _dropMenu.delegate = self;
+    _dropMenu.frame = CGRectMake(0,0, APPWINDOWWIDTH, _dropMenu.frame.size.height);
+    
+    [self.view addSubview:_dropMenu];
+}
 
+#pragma mark - MXPullDownMenuDelegate
+- (void)PullDownMenu:(MXPullDownMenu *)pullDownMenu didSelectRowAtColumn:(NSInteger)column row:(NSInteger)row
+{
+    if (column == 1)
+    {
+        if (row == 0)
+        {
+            _currentSortName = @"intelligent";
+            
+            if (_currentSortName == nil)
+            {
+                [self getSchoolLists];
+            }
+            else
+            {
+                [self haveSummaryAtIndex];
+                [_collectionView reloadData];
+            }
+        }
+        else if (row == 1)
+        {
+            _currentSortName = @"appraise";
+            
+            if (_schoolListDataOfAppraise == nil)
+            {
+                [self getSchoolLists];
+            }
+            else
+            {
+                [self haveSummaryAtIndex];
+                [_collectionView reloadData];
+            }
+        }
+        else
+        {
+            _currentSortName = @"distance";
+            
+            if (_schoolListDataOfDistance == nil)
+            {
+                [self getSchoolLists];
+            }
+            else
+            {
+                [self haveSummaryAtIndex];
+                [_collectionView reloadData];
+            }
+        }
+    }
+}
+
+@end
 
 #pragma mark - 实现自定义Button
 @implementation MyButtonFore

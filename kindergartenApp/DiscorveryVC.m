@@ -5,7 +5,6 @@
 //  Created by Mac on 15/12/8.
 //  Copyright © 2015年 funi. All rights reserved.
 //
-
 #import "DiscorveryVC.h"
 #import "MJRefresh.h"
 #import "KGHttpService.h"
@@ -22,7 +21,7 @@
 #import "DiscorveryJingXuanCell.h"
 #import "DiscorveryWebVC.h"
 
-@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate,DiscorveryWebVCDelegate>
+@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate,TuiJianCellDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -39,11 +38,11 @@
     BOOL _canReqData;
     
     NSInteger _pageNo;
-    
-    DiscorveryWebVC * _webVC;
 }
 
 @property (strong, nonatomic) NSString * groupuuid;
+
+@property (strong, nonatomic) DiscorveryWebVC * webVC;
 
 @end
 
@@ -53,21 +52,6 @@ static NSString *const TypeColl = @"typecoll";
 static NSString *const TuiJianColl= @"tuijiancoll";
 static NSString *const TopicColl = @"topiccoll";
 static NSString *const Nodata = @"nodata";
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (_webVC != nil)
-    {
-        _webVC.view.hidden = YES;
-        
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        self.navigationController.navigationBarHidden = NO;
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-        _collectionView.hidden = NO;
-    }
-}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -88,9 +72,23 @@ static NSString *const Nodata = @"nodata";
 {
     [super viewDidAppear:animated];
     
+    if (_webVC != nil)
+    {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+        self.navigationController.navigationBarHidden = YES;
+    }
+    else
+    {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        self.navigationController.navigationBarHidden = NO;
+    }
+    
     NSNotification * no = [[NSNotification alloc] initWithName:@"homerefreshnum" object:nil userInfo:nil];
     
     [[NSNotificationCenter defaultCenter] postNotification:no];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideWebVC) name:@"deallocwebview" object:nil];
 }
 
 - (void)updateNumData
@@ -213,6 +211,8 @@ static NSString *const Nodata = @"nodata";
     {
         TuiJianCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:TuiJianColl forIndexPath:indexPath];
         
+        cell.delegate = self;
+        
         [cell setData:_tuijianDomain];
         
         return cell;
@@ -250,7 +250,7 @@ static NSString *const Nodata = @"nodata";
             break;
         case 1:
         {
-            [self setupWebView];
+            [self setupWebView:nil];
         }
             break;
         case 2:
@@ -272,34 +272,60 @@ static NSString *const Nodata = @"nodata";
 {
     if (indexPath.row >= 2)
     {
-        [self setupWebView];
+        [self setupWebView:((DiscorveryReMenJingXuanDomain *)_remenjingxuanData[indexPath.row-2]).webview_url];
     }
 }
 
-#pragma mark - 创建webview
-- (void)setupWebView
+- (void)openTuiJianWebView:(NSString *)url
 {
-    DiscorveryWebVC * webvc = [[DiscorveryWebVC alloc] init];
+    [self setupWebView:url];
+}
+
+#pragma mark - 创建webview
+/**
+ *  不传url默认就是话题url
+ *
+ *  @param url 需要传递的url
+ */
+- (void)setupWebView:(NSString *)otherUrl
+{
+    DiscorveryWebVC * webvc;
     
-    _webVC = webvc;
+    if (_webVC == nil)
+    {
+         webvc = [[DiscorveryWebVC alloc] init];
+        
+        _webVC = webvc;
+        
+        webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
+        
+        [self.view addSubview:webvc.view];
+    }
+    else
+    {
+        _webVC.view.alpha = 1;
+    }
     
-    webvc.delegate = self;
-    
-    webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
-    
-    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
-    
-    NSString * url = [defu objectForKey:@"sns_url"];
-    
-//    [webvc loadWithCookieSettingsUrl:@"http://120.25.212.44/px-rest/phone_Api/index.html" cookieDomain:nil path:nil];
-    
-    [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
-    
-    [self.view addSubview:webvc.view];
+    if (otherUrl == nil)
+    {
+        NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+        
+        NSString * url = [defu objectForKey:@"sns_url"];
+        
+        //    [webvc loadWithCookieSettingsUrl:@"http://120.25.212.44/px-rest/phone_Api/index.html" cookieDomain:nil path:nil];
+        
+        [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
+    }
+    else
+    {
+        [webvc loadWithCookieSettingsUrl:otherUrl cookieDomain:[webvc cutUrlDomain:otherUrl] path:nil];
+    }
     
     _collectionView.hidden = YES;
     
     self.navigationController.navigationBarHidden = YES;
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:0];
+    
 }
 
 #pragma mark - 初始化collectionview
@@ -335,69 +361,26 @@ static NSString *const Nodata = @"nodata";
     [self setupRefresh];
 }
 
-#pragma mark - 自动翻页
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    CGPoint offset = scrollView.contentOffset;
-    CGRect bounds = scrollView.bounds;
-    CGSize size = scrollView.contentSize;
-    UIEdgeInsets inset = scrollView.contentInset;
-    CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
-    CGFloat maximumOffset = size.height;
-    //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
-    if(currentOffset >= maximumOffset)
-    {
-        if (_canReqData == YES)
-        {
-            _canReqData = NO;
-            
-            [[KGHttpService sharedService] getReMenJingXuan:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(NSArray *remenjingxuanarr)
-             {
-                 NSMutableArray * arr = [NSMutableArray arrayWithArray:remenjingxuanarr];
-                 
-                 if (arr.count == 0)
-                 {
-                     
-                 }
-                 else
-                 {
-                     _pageNo ++;
-                     
-                     [_remenjingxuanData addObjectsFromArray:arr];
-                     
-                     dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                         [_collectionView reloadData];
-                         
-                         _canReqData = YES;
-                     });
-                 }
-             }
-             faild:^(NSString *errorMsg)
-             {
-                 [self showNoNetView];
-             }];
-        }
-    }
-}
-
-#pragma mark - webview代理
-- (void)hideWebVC:(DiscorveryWebVC *)webVC
+#pragma mark - webview通知
+- (void)hideWebVC
 {
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        _collectionView.hidden = NO;
+       _collectionView.hidden = NO;
+       
+       [UIView animateWithDuration:0.4 animations:^
+        {
+            _webVC.view.transform = CGAffineTransformMakeTranslation(-APPWINDOWWIDTH, 0);
+            _webVC.view.alpha = 0;
+        }];
         
-        [UIView animateWithDuration:0.4 animations:^
-         {
-             _webVC.view.transform = CGAffineTransformMakeTranslation(-APPWINDOWWIDTH, 0);
-             _webVC.view.alpha = 0;
-         }];
+        _webVC = nil;
         
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:0];
-        self.navigationController.navigationBarHidden = NO;
+       [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:0];
+       self.navigationController.navigationBarHidden = NO;
     });
 }
+
 
 #pragma mark - 上拉刷新，下拉加载数据
 - (void)setupRefresh
@@ -411,10 +394,30 @@ static NSString *const Nodata = @"nodata";
 #pragma mark 开始进入刷新状态
 - (void)footerRereshing
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    {
-        _collectionView.footerRefreshingText = @"没有更多了";
-        [_collectionView footerEndRefreshing];
-    });
+    [[KGHttpService sharedService] getReMenJingXuan:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(NSArray *remenjingxuanarr)
+     {
+         NSMutableArray * arr = [NSMutableArray arrayWithArray:remenjingxuanarr];
+         
+         if (arr.count == 0)
+         {
+             [_collectionView footerEndRefreshing];
+         }
+         else
+         {
+             _pageNo ++;
+             
+             [_remenjingxuanData addObjectsFromArray:arr];
+             
+             [self calCellHavePic];
+             
+             [_collectionView footerEndRefreshing];
+             
+             [_collectionView reloadData];
+         }
+     }
+     faild:^(NSString *errorMsg)
+     {
+        
+     }];
 }
 @end

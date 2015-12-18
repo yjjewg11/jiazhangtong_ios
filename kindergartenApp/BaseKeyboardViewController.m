@@ -89,8 +89,8 @@ typedef enum : NSInteger {
 //单击响应
 - (void)singleTap
 {
-//    [KGEmojiManage sharedManage].isSwitchEmoji = NO;
-//    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+    [KGEmojiManage sharedManage].isSwitchEmoji = NO;
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 

@@ -9,14 +9,6 @@
 #import "BaseViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
-@class DiscorveryWebVC;
-@protocol DiscorveryWebVCDelegate <NSObject>
-
-@required
-- (void)hideWebVC:(DiscorveryWebVC *)webVC;
-
-@end
-
 @protocol TestJSExport <JSExport>
 JSExportAs
 (setShareContent  /** handleFactorialCalculateWithNumber 作为js方法的别名 */,
@@ -47,12 +39,12 @@ JSExportAs
 
 @interface DiscorveryWebVC : BaseViewController
 
+- (void)clearWebViewContent;
+
 - (void)loadWithCookieSettingsUrl:(NSString *)url cookieDomain:(NSString *)cookieDomain path:(NSString *)cookiePath;
 
 - (NSString *)cutUrlDomain:(NSString *)url;
 
 @property (assign, nonatomic) CGRect webViewFrame;
-
-@property (weak, nonatomic) id<DiscorveryWebVCDelegate> delegate;
 
 @end

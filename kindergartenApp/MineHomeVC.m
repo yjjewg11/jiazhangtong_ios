@@ -35,6 +35,8 @@ static NSString *const NormalColle = @"normalcolle";
 {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.tintColor = [UIColor clearColor];
+    
     UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"tianjiaxiaohai"] style:UIBarButtonItemStylePlain target:self action:@selector(addStudentBaseInfo)];
     
     [rightBarItem setTintColor:[UIColor whiteColor]];

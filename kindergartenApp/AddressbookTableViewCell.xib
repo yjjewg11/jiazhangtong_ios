@@ -88,6 +88,7 @@
                 <outlet property="spaceWidth" destination="sr1-1T-ogl" id="djt-uv-gaf"/>
                 <outlet property="telBtn" destination="XRp-QN-7Vq" id="sH9-PD-kLH"/>
             </connections>
+            <point key="canvasLocation" x="215" y="218"/>
         </tableViewCell>
     </objects>
     <resources>

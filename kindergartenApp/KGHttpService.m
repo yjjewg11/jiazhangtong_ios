@@ -572,17 +572,33 @@
     }];
 }
 
-- (void)addStudentInfo:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+- (void)addStudentInfo:(KGUser *)user success:(void (^)(NSString * uuid))success faild:(void (^)(NSString * errorMsg))faild
 {
-    [self getServerJson:[KGHttpUrl getAddChildrenUrl] params:user.keyValues success:^(KGBaseDomain *baseDomain)
-    {
-        [self sessionTimeoutHandle:baseDomain];
-        success(baseDomain.ResMsg.message);
-    }
-    faild:^(NSString *errorMessage)
-    {
-        faild(errorMessage);
-    }];
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [mgr POST:[KGHttpUrl getAddChildrenUrl] parameters:user.keyValues success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             KGUser * user = [KGUser objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             
+             success(user.uuid);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+    
 }
 
 

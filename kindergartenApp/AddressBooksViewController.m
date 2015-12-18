@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     addressbookTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     addressbookTableView.separatorColor = [UIColor clearColor];
     addressbookTableView.delegate   = self;
@@ -104,7 +105,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AddressbookTableViewCell * cell = nil;
-
+    
     if(indexPath.section == Number_Zero) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"AddressbookTableViewCell" owner:nil options:nil] firstObject];
         [cell resetValue:[addressBookList.listKD objectAtIndex:indexPath.row] parame:nil];

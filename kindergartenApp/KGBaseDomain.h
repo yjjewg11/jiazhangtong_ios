@@ -13,7 +13,10 @@
 @interface KGBaseDomain : NSObject
 
 @property (strong, nonatomic) NSString       * uuid;
+
 @property (strong, nonatomic) ResMsgDomain   * ResMsg;
+
+@property (strong, nonatomic) id studentDomain;
 
 @property (strong, nonatomic) id  data;
 

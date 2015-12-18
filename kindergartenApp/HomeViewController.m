@@ -231,9 +231,10 @@
 }
 
 //加载机构下拉列表
-- (void)loadGroupListView {
-    if(groupDataArray && [groupDataArray count]>Number_Zero) {
-        
+- (void)loadGroupListView
+{
+    if(groupDataArray && [groupDataArray count]>Number_Zero)
+    {
         groupViewHeight = [groupDataArray count] * Cell_Height2;
         if (!groupListView) {
             groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, -groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
@@ -491,7 +492,6 @@
     
 }
 
-
 #pragma mark - 功能按钮点击
 - (IBAction)funBtnClicked:(UIButton *)sender {
     BaseViewController * baseVC = nil;
@@ -543,8 +543,8 @@
 }
 
 
-- (void)loadMoreFunMenu:(UIButton *)sender {
-    
+- (void)loadMoreFunMenu:(UIButton *)sender
+{
     if(!popupView) {
         popupView = [[PopupView alloc] initWithFrame:CGRectMake(Number_Zero, Number_Zero, KGSCREEN.size.width, KGSCREEN.size.height)];
         popupView.alpha = Number_Zero;
@@ -583,7 +583,7 @@
     if(domain) {
         BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
         vc.title = domain.name;
-        vc.url = @"http://jz.wenjienet.com/px-mobile/kd/index.html?fn=phone_myclassNews";
+        vc.url = domain.url;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

@@ -14,6 +14,18 @@
 
 @implementation BaseViewController
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
+    [MobClick beginLogPageView:cName];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
+    [MobClick endLogPageView:cName];
+}
+
 - (NoNetView *)noNetView
 {
     if (_noNetView == nil)
@@ -55,13 +67,13 @@
     bar.titleTextAttributes = textAttrs;
     
     bar.translucent = NO;
-    
+
     UIImage * img = [[UIImage alloc] init];
     
     [[UINavigationBar appearance] setBackgroundImage:img forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setShadowImage:img];
-    
+
     //设置显示的颜色
     bar.barTintColor = [UIColor colorWithHexCode:@"#FF6666"];
 }
@@ -74,6 +86,8 @@
     self.loadingView.center = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height / 2 - 64);
     
     [self.view addSubview: self.loadingView];
+
+    [self.view bringSubviewToFront:self.loadingView];
 }
 
 - (void)hidenLoadView
@@ -97,6 +111,5 @@
    [self.noNetView removeFromSuperview];
 }
 
-- (void)dealloc {[[NSNotificationCenter defaultCenter] removeObserver:self];}
 
 @end

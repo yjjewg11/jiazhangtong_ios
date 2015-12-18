@@ -26,7 +26,7 @@
 - (id)initWithSuperVC:(UIViewController *)superVC isShow:(BOOL)isShow
 {
     self.superVC = superVC;
-    CGFloat y = isShow ? Main_Screen_Height-40 : Main_Screen_Height;
+    CGFloat y = isShow ? Main_Screen_Height-40-64 : Main_Screen_Height-64;
     CGRect frame = CGRectMake(0, y, Main_Screen_Width, 40);
     
     self = [super initWithFrame:frame];

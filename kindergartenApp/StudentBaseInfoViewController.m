@@ -83,8 +83,6 @@
     [self initViewData];
 }
 
-
-
 //初始化页面值
 - (void)initViewData
 {
@@ -111,39 +109,48 @@
         peopleCardTextField.text = _studentInfo.idcard;
         sexTextField.text = _studentInfo.sex == YES ? @"女" : @"男";
         
-        if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ma_tel])
+        NSString * tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
+        
+        if ([tel isEqualToString:_studentInfo.ma_tel])
         {
             roleTextField.text = @"妈妈";
             currentRole = 1;
+            _studentInfo.ma_tel = tel;
         }
-        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ba_name])
+        else if ([tel isEqualToString:_studentInfo.ba_name])
         {
             roleTextField.text = @"爸爸";
             currentRole = 2;
+            _studentInfo.ba_tel = tel;
         }
-        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.ye_tel])
+        else if ([tel isEqualToString:_studentInfo.ye_tel])
         {
             roleTextField.text = @"爷爷";
             currentRole = 3;
+            _studentInfo.ye_tel = tel;
         }
-        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.nai_tel])
+        else if ([tel isEqualToString:_studentInfo.nai_tel])
         {
             roleTextField.text = @"奶奶";
             currentRole = 4;
+            _studentInfo.nai_tel = tel;
         }
-        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waigong_tel])
+        else if ([tel isEqualToString:_studentInfo.waigong_tel])
         {
             roleTextField.text = @"外公";
             currentRole = 5;
+            _studentInfo.waigong_tel = tel;
         }
-        else if ([_studentInfo.tel_verify isEqualToString:_studentInfo.waipo_tel])
+        else if ([tel isEqualToString:_studentInfo.waipo_tel])
         {
             roleTextField.text = @"外婆";
             currentRole = 6;
+            _studentInfo.waipo_tel = tel;
         }
         else
         {
             roleTextField.text = @"妈妈";
+            _studentInfo.ma_tel = tel;
             currentRole = 1;
         }
     }
@@ -195,6 +202,7 @@
         _studentInfo.nickname = [KGNSStringUtil trimString:nickTextField.text];
         _studentInfo.birthday = [KGNSStringUtil trimString:birthdayTextField.text];
         _studentInfo.idcard = [KGNSStringUtil trimString:peopleCardTextField.text];
+        
         //提交数据
         if(isSetHeadImg)
         {
@@ -277,6 +285,11 @@
     
     [[KGHttpService sharedService] addStudentInfo:_studentInfo success:^(NSString *msgStr)
     {
+        if (_studentInfo.uuid == nil || [_studentInfo.uuid isEqualToString:@""])
+        {
+            _studentInfo.uuid = msgStr;
+        }
+        
         [[KGHttpService sharedService].loginRespDomain.list addObject:_studentInfo];
         
         [self.navigationController popViewControllerAnimated:YES];
@@ -531,7 +544,7 @@
                 }
                 else
                 {
-                    _studentInfo.ma_tel = _studentInfo.tel_verify;
+                    _studentInfo.ma_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
                 }
                 
                 roleTextField.text = @"妈妈";
@@ -545,7 +558,7 @@
                 }
                 else
                 {
-                    _studentInfo.ba_tel = _studentInfo.tel_verify;
+                    _studentInfo.ba_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
                 }
                 roleTextField.text = @"爸爸";
             }
@@ -558,9 +571,8 @@
                 }
                 else
                 {
-                    _studentInfo.ye_tel = _studentInfo.tel_verify;
+                    _studentInfo.ye_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
                 }
-                _studentInfo.ye_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"爷爷";
             }
                 break;
@@ -572,9 +584,8 @@
                 }
                 else
                 {
-                    _studentInfo.nai_tel = _studentInfo.tel_verify;
+                    _studentInfo.nai_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
                 }
-                _studentInfo.nai_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"奶奶";
             }
                 break;
@@ -586,9 +597,8 @@
                 }
                 else
                 {
-                    _studentInfo.waigong_tel = _studentInfo.tel_verify;
+                    _studentInfo.waigong_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
                 }
-                _studentInfo.waigong_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"外公";
             }
                 break;
@@ -600,9 +610,8 @@
                 }
                 else
                 {
-                    _studentInfo.waipo_tel = _studentInfo.tel_verify;
+                    _studentInfo.waipo_tel = [KGHttpService sharedService].loginRespDomain.userinfo.loginname;
                 }
-                _studentInfo.waipo_tel = _studentInfo.tel_verify;
                 roleTextField.text = @"外婆";
             }
                 
@@ -710,7 +719,7 @@
         {
             case 10:
             {
-                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - 10)];
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - 50)];
             }
                 break;
             case 11:
@@ -740,7 +749,7 @@
         {
             case 10:
             {
-                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + 10)];
+                [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + 50)];
             }
                 break;
             case 11:

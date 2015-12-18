@@ -43,7 +43,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self loadInputFuniView];
+    //    [self loadInputFuniView];
     [self regNotification];
 }
 
@@ -114,22 +114,22 @@
 
 
 - (void)dzOperationHandler:(BOOL)isSelected {
-//    [[KGHUD sharedHud] show:self.contentView];
+    //    [[KGHUD sharedHud] show:self.contentView];
     if(isSelected) {
         //点赞
         [[KGHttpService sharedService] saveDZ:_topicInteractionDomain.topicUUID type:_topicInteractionDomain.topicType success:^(NSString *msgStr) {
-//            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+            //            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
             [topicInteractionView resetDZName:YES name:[KGHttpService sharedService].loginRespDomain.userinfo.name];
         } faild:^(NSString *errorMsg) {
-//            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+            //            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         }];
     } else {
         //取消点赞
         [[KGHttpService sharedService] delDZ:_topicInteractionDomain.topicUUID success:^(NSString *msgStr) {
-//            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+            //            [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
             [topicInteractionView resetDZName:NO name:[KGHttpService sharedService].loginRespDomain.userinfo.name];
         } faild:^(NSString *errorMsg) {
-//            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+            //            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         }];
     }
 }
@@ -137,7 +137,7 @@
 //回帖。  提交需要的回帖数据从EmojiManage中获取   aaa<img alt="惊恐" src="htt//...png" />
 //replyText只是用来界面显示     aaa[惊恐]bbb[大笑]
 - (void)postTopic:(NSString *)replyText {
-//    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
+    //    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
     ReplyDomain * replyObj = [[ReplyDomain alloc] init];
     replyObj.content = replyText;
     replyObj.newsuuid = _topicInteractionDomain.topicUUID;
@@ -249,7 +249,7 @@
                 _emojiInputY = _emojiAndTextView.y;
             }else{
                 _emojiAndTextView.y = wH;
-//                [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
+                //                [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
             }
             return;
         }
@@ -257,8 +257,7 @@
 }
 
 //加载底部有表情，发送，文本框的视图
-- (void)loadEmojiAndText
-{
+- (void)loadEmojiAndText{
     _emojiAndTextView = [[[NSBundle mainBundle] loadNibNamed:@"EmojiAndTextView" owner:nil options:nil] lastObject];
     _emojiAndTextView.width = APPWINDOWWIDTH;
     _emojiAndTextView.y = KGSCREEN.size.height;;
@@ -266,10 +265,8 @@
 }
 
 //加载底部只有表情的视图
-- (void)loadOnlyEnojiInputView
-{
-    if (!_faceBoard)
-    {
+- (void)loadOnlyEnojiInputView{
+    if (!_faceBoard) {
         _faceBoard = [[FaceBoard alloc] init];
         _faceBoard.inputTextView = self.weakTextView;
     }
