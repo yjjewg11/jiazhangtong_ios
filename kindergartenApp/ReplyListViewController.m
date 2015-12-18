@@ -59,9 +59,6 @@
     self.topicInteractionDomain.topicUUID = _topicUUID;
 }
 
-
-
-
 //获取数据加载表格
 - (void)getTableData{
     pageInfo.pageNo = reFreshView.page;

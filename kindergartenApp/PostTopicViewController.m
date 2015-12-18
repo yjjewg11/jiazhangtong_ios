@@ -148,13 +148,19 @@
     }
     
     dataMArray = [[NSMutableArray alloc] init];
-    for (GroupDomain * gmodel in [KGHttpService sharedService].loginRespDomain.group_list) {
-        for (ClassDomain * cmodel in [KGHttpService sharedService].loginRespDomain.class_list) {
-            if ([gmodel.uuid isEqualToString:cmodel.groupuuid]) {
-                NSString * name = [NSString stringWithFormat:@"%@%@",gmodel.company_name,cmodel.name];
-                [dataMArray addObject:@{@"name":name,@"id":cmodel.uuid}];
-            }
-        }
+//    for (GroupDomain * gmodel in [KGHttpService sharedService].loginRespDomain.group_list)
+//    {
+//
+//    }
+    for (ClassDomain * cmodel in [KGHttpService sharedService].loginRespDomain.class_list)
+    {
+        //            if ([gmodel.uuid isEqualToString:cmodel.groupuuid])
+        //            {
+        //                NSString * name = [NSString stringWithFormat:@"%@%@",gmodel.company_name,cmodel.name];
+        //                [dataMArray addObject:@{@"name":name,@"id":cmodel.uuid}];
+        //            }
+        NSString * name = [NSString stringWithFormat:@"%@",cmodel.name];
+        [dataMArray addObject:@{@"name":name,@"id":cmodel.uuid}];
     }
     
     if([dataMArray count] > Number_Zero) {

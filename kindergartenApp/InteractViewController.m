@@ -120,8 +120,6 @@
             
             reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
             
-            NSLog(@"%d",reFreshView.tableParam.dataSourceMArray.count);
-            
             [reFreshView reloadRefreshTable];
             
         } faild:^(NSString *errorMsg) {
