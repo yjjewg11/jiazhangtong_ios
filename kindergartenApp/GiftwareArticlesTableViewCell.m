@@ -45,7 +45,8 @@
     [self settingModel:baseDomain];
 }
 
-- (void)settingModel:(id)baseDomain{
+- (void)settingModel:(id)baseDomain
+{
     AnnouncementDomain * domain = (AnnouncementDomain *)baseDomain;
     
     teacherLabel.text = domain.create_user;

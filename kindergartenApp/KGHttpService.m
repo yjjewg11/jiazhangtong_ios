@@ -755,8 +755,10 @@
 //分页获取公告列表
 - (void)getAnnouncementList:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * announcementArray))success faild:(void (^)(NSString * errorMsg))faild {
     
+    NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageInfo.pageNo]};
+    
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getAnnouncementListUrl]
-                                  parameters:pageInfo.keyValues
+                                  parameters:dict
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
@@ -927,8 +929,10 @@
 //分页获取文章列表
 - (void)getArticlesList:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild {
     
+    NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageInfo.pageNo]};
+    
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getArticleListUrl]
-                                  parameters:pageInfo.keyValues
+                                  parameters:dict
                                      success:^(NSURLSessionDataTask* task, id responseObject) {
                                          
                                          KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
@@ -957,7 +961,7 @@
 //签到记录列表
 - (void)getStudentSignRecordList:(NSInteger)pageNo  success:(void (^)(NSArray * recordArray))success faild:(void (^)(NSString * errorMsg))faild {
     
-    NSDictionary * dic = @{@"pageNo" : [NSNumber numberWithInteger:pageNo]};
+    NSDictionary * dic = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageNo]};
     
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getStudentSignRecordUrl]
                                   parameters:dic

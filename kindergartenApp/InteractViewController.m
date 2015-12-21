@@ -21,6 +21,7 @@
 #import "MJRefresh.h"
 #import "ShareDomain.h"
 #import "UMSocial.h"
+#import "BrowseURLViewController.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
@@ -183,9 +184,6 @@
 }
 
 #pragma mark - 上拉刷新，下拉加载数据
-/**
- *  集成刷新控件
- */
 - (void)setupRefresh
 {
     [reFreshView.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
@@ -491,7 +489,10 @@
 {
     if (url != nil && ![url isEqualToString:@""])
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
+        vc.title = @"详情";
+        vc.url = url;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

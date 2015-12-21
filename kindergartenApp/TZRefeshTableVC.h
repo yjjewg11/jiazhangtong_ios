@@ -10,4 +10,8 @@
 
 @interface TZRefeshTableVC : UITableViewController
 
+@property (assign, nonatomic) CGRect tableFrame;
+
+@property (strong, nonatomic) NSMutableArray * dataSource;
+
 @end

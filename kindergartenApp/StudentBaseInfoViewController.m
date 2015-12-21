@@ -117,7 +117,7 @@
             currentRole = 1;
             _studentInfo.ma_tel = tel;
         }
-        else if ([tel isEqualToString:_studentInfo.ba_name])
+        else if ([tel isEqualToString:_studentInfo.ba_tel])
         {
             roleTextField.text = @"爸爸";
             currentRole = 2;

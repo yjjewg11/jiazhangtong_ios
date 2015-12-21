@@ -3852,7 +3852,7 @@
 				F4E61B721B73432200E5851A /* Share */,
 				2474DFB91B6CCDD80021506F /* Recipes */,
 				2474DFA81B6CB7AA0021506F /* SignRecord */,
-				F4E6B23E1B6B59100087EAEB /* GiftwareArticles */,
+				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
 				24AA0B801B692FBD00DAC03B /* CourseList */,
 				24DE91AA1B67C1FC00D3FFCE /* Teacher */,
 				F47AFEAA1B5E22C100D43F38 /* Announcement */,
@@ -3861,7 +3861,7 @@
 				24A175FA1B55505D00295997 /* Login */,
 				248B6AA41B19AD2C00FCB98F /* Home */,
 				24C46B4B1B5A2B8F00A58F92 /* Message */,
-				24C46B421B5A2B4100A58F92 /* Interact */,
+				24C46B421B5A2B4100A58F92 /* Interact(互动) */,
 				4D5CE7581B7E4308002F1088 /* Setting */,
 				4DE384511B7F726C009F12E4 /* MyCollection */,
 				24C46B391B5A2AC200A58F92 /* Me(我) */,
@@ -4202,14 +4202,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		24C46B421B5A2B4100A58F92 /* Interact */ = {
+		24C46B421B5A2B4100A58F92 /* Interact(互动) */ = {
 			isa = PBXGroup;
 			children = (
 				24C46B451B5A2B6400A58F92 /* Controller */,
 				24C46B441B5A2B5D00A58F92 /* Model */,
 				24C46B431B5A2B5700A58F92 /* View */,
 			);
-			name = Interact;
+			name = "Interact(互动)";
 			sourceTree = "<group>";
 		};
 		24C46B431B5A2B5700A58F92 /* View */ = {
@@ -4984,14 +4984,14 @@
 			name = "SpecialtyCourses(特长课程)";
 			sourceTree = "<group>";
 		};
-		F4E6B23E1B6B59100087EAEB /* GiftwareArticles */ = {
+		F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */ = {
 			isa = PBXGroup;
 			children = (
 				F4E6B2411B6B59660087EAEB /* Controller */,
 				F4E6B2401B6B595C0087EAEB /* Model */,
 				F4E6B23F1B6B59550087EAEB /* View */,
 			);
-			name = GiftwareArticles;
+			name = "GiftwareArticles(精品文章)";
 			sourceTree = "<group>";
 		};
 		F4E6B23F1B6B59550087EAEB /* View */ = {
