@@ -15,6 +15,7 @@
 #import "KGHttpService.h"
 #import "ClassDomain.h"
 #import "GroupDomain.h"
+#import "EYPopupViewHeader.h"
 #import "AssetHelper.h"
 
 #define contentTextViewDefText   @"说点什么吧..."
@@ -22,9 +23,9 @@
 #define BtnInterval (5) //图片按钮之间的间隙
 #define AddImageName @"tianjiatupian"
 
-@interface PostTopicViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UITextViewDelegate> {
-    
-    IBOutlet KGTextView * contentTextView;
+@interface PostTopicViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UITextViewDelegate>
+{
+    __weak IBOutlet UITextView *contentTextView;
     UIButton * selAddImgBtn;
     NSMutableArray * filePathMArray;
     NSMutableArray * imagesMArray;
@@ -33,17 +34,29 @@
     NSString * classuuid;//班级id
     NSMutableArray * dataMArray;//数据数组 用于构建班级信息
     //需要上传的图片集合
-    NSMutableArray        * imgMArray;
+    NSMutableArray  * imgMArray;
     UIBarButtonItem * rightBarItem;
+    __weak IBOutlet UITextField * urlTextField;
+    
+    __weak IBOutlet UITextField *placeholderView;
+    
+    BOOL isOpen;
+    
+    NSString * weburl;
+    
+    BOOL isClear;
 }
 
 @end
 
 @implementation PostTopicViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
+    weburl = @"";
+    isClear = YES;
     
     _photoScrollView.contentSize = CGSizeMake(AddBtnWidth, _photoScrollView.height);
     _addPhotoBtnMArray = [[NSMutableArray alloc] init];
@@ -52,6 +65,9 @@
     _photoContentView.width = AddBtnWidth;
     [_photoScrollView addSubview:_photoContentView];
     [self resetScrollViewPhoto];
+    
+    contentTextView.tag = 110;
+    contentTextView.delegate = self;
     
     self.weakTextView = contentTextView;
     self.keyboardTopType = OnlyEmojiMode;
@@ -66,15 +82,13 @@
     filePathMArray = [[NSMutableArray alloc] init];
     imagesMArray   = [[NSMutableArray alloc] init];
     replyContent   = [[NSMutableString alloc] init];
-    contentTextView.placeholder = contentTextViewDefText;
-    [contentTextView setContentOffset:CGPointZero];
     
     [self loadClassNameListView];
 }
 
 #pragma mark - 重置显示横向滚动图片
-- (void)resetScrollViewPhoto{
-
+- (void)resetScrollViewPhoto
+{
     for (UIButton * button in _addPhotoBtnMArray) {
         [button removeFromSuperview];
     }
@@ -109,8 +123,8 @@
 }
 
 #pragma mark - 图片点击
-- (void)photoHandle:(UIButton*)sender{
-    
+- (void)photoHandle:(UIButton*)sender
+{
     if (imagesMArray.count < 9 && sender == [_addPhotoBtnMArray lastObject]) {
         DoImagePickerController *cont = [[DoImagePickerController alloc] init];
         cont.delegate = self;
@@ -191,23 +205,35 @@
 
 //显示选择动画
 - (void)showSelectTableViewAnimation{
-    _selectTableView.height = 0;
-    _arrowImageView.image = [UIImage imageNamed:@"shangjiantou"];
-    [UIView animateWithDuration:0.3 animations:^{
-        _selectTableView.height = dataMArray.count<4?dataMArray.count*40:40*4;
-    } completion:^(BOOL finished) {
-    }];
+    
+    if (isOpen == NO)
+    {
+        _selectTableView.height = 0;
+        _arrowImageView.image = [UIImage imageNamed:@"shangjiantou"];
+        [UIView animateWithDuration:0.3 animations:^{
+            _selectTableView.height = dataMArray.count<4?dataMArray.count*40:40*4;
+        } completion:^(BOOL finished) {
+        }];
+        
+        isOpen = YES;
+    }
 }
 
 //隐藏选择动画
 - (void)hiddenSelectTableViewAnimation{
-    _arrowImageView.image = [UIImage imageNamed:@"xiajiantou-1"];
-    [UIView animateWithDuration:0.3 animations:^{
-        _selectTableView.height = 0;
-    } completion:^(BOOL finished) {
-        [_selectTableView removeFromSuperview];
-        [_selectTableView reloadData];
-    }];
+    
+    if (isOpen == YES)
+    {
+        _arrowImageView.image = [UIImage imageNamed:@"xiajiantou-1"];
+        [UIView animateWithDuration:0.3 animations:^{
+            _selectTableView.height = 0;
+        } completion:^(BOOL finished) {
+            [_selectTableView removeFromSuperview];
+            [_selectTableView reloadData];
+        }];
+        
+        isOpen = NO;
+    }
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -292,6 +318,7 @@
     domain.classuuid = classuuid;
     domain.content = [KGNSStringUtil trimString:contentTextView.text];
     domain.imgs = replyContent;
+    domain.url = weburl;
     
     [[KGHttpService sharedService] saveClassNews:domain success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
@@ -307,20 +334,32 @@
 }
 
 #pragma TextViewDelegate
-
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    contentTextView.text = @"";
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if([[KGNSStringUtil trimString:textView.text] isEqualToString:@""]) {
-        contentTextView.text = contentTextViewDefText;
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([textView.text isEqualToString:@""])
+    {
+        placeholderView.hidden = NO;
     }
+    else if ([textView.text isEqualToString:@""] && [text isEqualToString:@""])
+    {
+        placeholderView.hidden = NO;
+    }
+    else
+    {
+        placeholderView.hidden = YES;
+    }
+    
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+        
+        return NO;
+    }
+    
+    return YES;
 }
-
 
 #pragma actionSheetDelegate
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == Number_Zero) {
         //从相册
@@ -330,7 +369,6 @@
         [self openCamera];
     }
 }
-
 
 //打开本地相册
 - (void)localPhoto {
@@ -469,5 +507,74 @@
 }
 
 
+#pragma mark - textfield btn
+- (IBAction)editUrlBtnClick:(UIButton *)sender
+{
+    
+    
+    
+    [EYInputPopupView popViewWithTitle:@"编辑分享链接" contentText:weburl
+          type:EYInputPopupView_Type_multi_line
+    cancelBlock:^
+    {
+       
+    }
+    confirmBlock:^(UIView *view, NSString *text)
+    {
+        if ([weburl isEqualToString:text])
+        {
+            isClear = NO;
+        }
+        else
+        {
+            isClear = YES;
+        }
+        
+        if ([text isEqualToString:@""] || text == nil)
+        {
+            return;
+        }
+        else
+        {
+            weburl = text;
+            
+            urlTextField.text = text;
+        }
+        
+        if (isClear == YES)
+        {
+            [[KGHUD sharedHud] show:self.view msg:@"请稍候..."];
+            
+            //调用获取title接口
+            [[KGHttpService sharedService] getTitle:text success:^(NSString *data)
+             {
+                 [[KGHUD sharedHud] hide:self.view];
+                 
+                 if ([data isEqualToString:@""])
+                 {
+                     
+                 }
+                 else
+                 {
+                     NSMutableString * str = [NSMutableString stringWithString:contentTextView.text];
+                     
+                     [str appendString:data];
+                     
+                     contentTextView.text = str;
+                     
+                     isClear = NO;
+                 }
+             }
+             faild:^(NSString *errorMsg)
+             {
+                 
+             }];
+        }
+    }
+    dismissBlock:^
+    {
+       
+    }];
+}
 
 @end

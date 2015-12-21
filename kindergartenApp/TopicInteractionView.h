@@ -15,6 +15,14 @@
 #import "MLEmojiLabel.h"
 #import "TopicInteractionFrame.h"
 
+@class TopicInteractionView;
+
+@protocol TopicInteractionViewDelegate <NSObject>
+
+- (void)openShareWindow:(TopicInteractionView *)view;
+
+@end
+
 @interface TopicInteractionView : UIView 
 
 @property (strong, nonatomic) TopicInteractionFrame * topicInteractionFrame;
@@ -22,6 +30,10 @@
 @property (strong, nonatomic) ReplyPageDomain * replyPage; //帖子回复列表
 @property (strong, nonatomic) NSString        * topicUUID; //帖子UUID
 @property (assign, nonatomic) KGTopicType       topicType; //帖子类型
+
+@property (strong, nonatomic) NSString * url;
+
+@property (strong, nonatomic) NSString * title;
 
 /** 功能按钮视图 */
 @property (strong, nonatomic) UIView   * funView;
@@ -33,6 +45,10 @@
 @property (strong, nonatomic) UILabel  * browseCountLabel;
 /** 点赞按钮 */
 @property (strong, nonatomic) UIButton * dianzanBtn;
+
+/** 分享按钮 */
+@property (strong, nonatomic) UIButton * fenxiangBtn;
+
 /** 回复按钮 */
 @property (strong, nonatomic) UIButton * replyBtn;
 /** 点赞列表视图 */
@@ -51,6 +67,8 @@
 
 //重置点赞列表
 - (void)resetDZName:(BOOL)isAdd name:(NSString *)name;
+
+@property (weak, nonatomic) id<TopicInteractionViewDelegate> delegate;
 
 
 @end

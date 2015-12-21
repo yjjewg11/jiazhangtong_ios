@@ -69,6 +69,12 @@
     [_dianzanBtn addTarget:self action:@selector(topicDZBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_funView addSubview:_dianzanBtn];
     
+    _fenxiangBtn = [[UIButton alloc] init];
+    [_fenxiangBtn setBackgroundImage:@"newbtnfenxiang" selImg:@"newbtnfenxiang"];
+    _fenxiangBtn.tag = Number_Fifteen;
+    [_fenxiangBtn addTarget:self action:@selector(topicFXBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [_funView addSubview:_fenxiangBtn];
+    
     //回复按钮
     _replyBtn = [[UIButton alloc] init];
     [_replyBtn setBackgroundImage:@"pinglun" selImg:@"pinglun"];
@@ -183,6 +189,9 @@
     /** 回复按钮 */
     _replyBtn.frame = _topicInteractionFrame.replyBtnF;
     
+    /** 分享按钮 */
+    _fenxiangBtn.frame = _topicInteractionFrame.fxBtnF;
+    
     /** 点赞列表视图 */
     _dianzanView.frame = _topicInteractionFrame.dianzanViewF;
     
@@ -276,6 +285,12 @@
                           Key_TopicFunRequestType : [NSNumber numberWithBool:sender.selected],
                           Key_TopicInteractionView : self};
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_TopicDZ object:self userInfo:dic];
+}
+
+#pragma mark - 分享按钮点击
+- (void)topicFXBtnClicked:(UIButton *)btn
+{
+    [self.delegate openShareWindow:self];
 }
 
 //回复按钮点击

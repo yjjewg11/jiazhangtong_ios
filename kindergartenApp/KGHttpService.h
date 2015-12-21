@@ -320,4 +320,7 @@
 - (void)getDiscorveryNewNumber:(void(^)(DiscorveryNewNumberDomain * newnum))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getSysConfig:(NSString *)md5 success:(void(^)(SystemConfigOfTopic * sysDomain))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getTitle:(NSString *)url success:(void(^)(NSString * data))success faild:(void(^)(NSString * errorMsg))faild;
+
 @end

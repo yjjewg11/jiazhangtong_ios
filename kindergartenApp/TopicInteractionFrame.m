@@ -46,6 +46,10 @@
     _replyBtnF   = CGRectMake(replyBtnX, replyBtnY, funBtnSize.width, funBtnSize.height);
     _dianzanBtnF = CGRectMake(dzBtnX, replyBtnY, funBtnSize.width, funBtnSize.height);
     
+    //分享按钮
+    CGFloat fxBtnx = 55;
+    CGFloat fxBtnY = 0;
+    _fxBtnF = CGRectMake(fxBtnx, fxBtnY, funBtnSize.width, funBtnSize.height);
     
     /* 点赞列表 */
     _dianzanViewF = CGRectMake(Number_Zero, self.topicInteractHeight + TopicCellBorderW, CELLCONTENTWIDTH, TopicCellBorderW);

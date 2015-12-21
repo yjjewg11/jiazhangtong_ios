@@ -485,4 +485,9 @@
     return URL(baseServiceURL, @"rest/uploadFile/upload.json");
 }
 
+#pragma mark - 获取title
++ (NSString *)getTitleUrl{
+    return URL(baseServiceURL, @"rest/share/getHtmlTitle.json");
+}
+
 @end

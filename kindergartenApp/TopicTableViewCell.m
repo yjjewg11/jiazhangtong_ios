@@ -19,11 +19,12 @@
 #import "UIImageView+WebCache.h"
 #import "UUImageAvatarBrowser.h"
 #import "UIButton+Extension.h"
+
 #import <objc/runtime.h>
 
 #define TOPICTABLECELL @"topicTableCell"
 
-@interface TopicTableViewCell() 
+@interface TopicTableViewCell() <ShareBtnViewDelegate,TopicInteractionViewDelegate>
 
 @end
 @implementation TopicTableViewCell
@@ -32,9 +33,11 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView
 {
     TopicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TOPICTABLECELL];
-    if (!cell) {
+    if (!cell)
+    {
         cell = [[TopicTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:TOPICTABLECELL];
     }
+    
     return cell;
 }
 
@@ -58,8 +61,8 @@
         //分割线
         [self initLeve];
         
+        self.shareview = [[[NSBundle mainBundle] loadNibNamed:@"ShareBtnView" owner:nil options:nil] firstObject];
     }
-    
       return self;
 }
 
@@ -137,12 +140,14 @@
 }
 
 -(void)setTopicFrame:(TopicFrame *)topicFrame{
+    
     _topicFrame = topicFrame;
+    
     TopicDomain * topic = self.topicFrame.topic;
     
     [imagesMArray removeAllObjects];
     /** 用户信息 */
-    self.userView.frame =self.topicFrame.userViewF;
+    self.userView.frame = self.topicFrame.userViewF;
     //头部图片
     self.headImageView.frame = self.topicFrame.headImageViewF;
     
@@ -153,17 +158,38 @@
     //名称
     self.nameLab.frame = self.topicFrame.nameLabF;
     self.nameLab.text = topic.create_user;
-   
-    //title
-    self.titleLab.frame = self.topicFrame.titleLabF;
-    self.titleLab.text =  topic.title;
     
-    //内容表情文本混合
-    if(topic.content && [topic.content length]>Number_Zero) {
-        self.topicTextView.frame = self.topicFrame.topicTextViewF;
-        [self.topicTextView setText:topic.content];
-    } else {
-        [self.topicTextView setText:String_DefValue_Empty];
+    //title
+    if (topic.url == nil || [topic.url isEqualToString:@""])
+    {
+        self.titleLab.frame = self.topicFrame.titleLabF;
+        self.titleLab.text = topic.title;
+        
+        //内容表情文本混合
+        if(topic.content && [topic.content length]>Number_Zero) {
+            self.topicTextView.frame = self.topicFrame.topicTextViewF;
+            [self.topicTextView setText:topic.content];
+        } else {
+            [self.topicTextView setText:String_DefValue_Empty];
+        }
+        [self.shareview removeFromSuperview];
+    }
+    else
+    {
+        self.titleLab.text = @"";
+        self.topicTextView.text = @"";
+        self.shareview.delegate = self;
+        self.shareview.frame = self.topicFrame.titleLabF;
+        if([topic.content rangeOfString:@"null"].location != NSNotFound)//_roaldSearchText
+        {
+            self.shareview.contentLbl.text = @"[暂无链接]";
+        }
+        else
+        {
+            self.shareview.contentLbl.text = topic.content;
+        }
+        self.shareview.url = topic.url;
+        [self addSubview:self.shareview];
     }
     
     if(topic.imgs && topic.imgs.length > Number_Zero) {
@@ -176,6 +202,9 @@
     
     //帖子互动视图
     self.topicInteractionView.frame = self.topicFrame.topicInteractionViewF;
+    self.topicInteractionView.delegate = self;
+    self.topicInteractionView.url = topic.url;
+    self.topicInteractionView.title = topic.content;
     self.topicInteractionView.topicInteractionFrame = self.topicFrame.topicInteractionFrame;
     //分割线
     self.levelab.frame = self.topicFrame.levelabF;
@@ -248,7 +277,8 @@
 
 
 //只有一张帖子图片
-- (void)onlyOneTopicImg:(NSString *)imgUrl {
+- (void)onlyOneTopicImg:(NSString *)imgUrl
+{
     CGRect imgFrame = self.topicFrame.topicImgsViewF;
     UIImageView * imageView = [[UIImageView alloc] init];
     imageView.frame = (CGRect){Number_Zero, Number_Zero, imgFrame.size};
@@ -269,11 +299,11 @@
             CGRect frame = self.topicFrame.topicImgsViewF;
             self.topicFrame.topicImgsViewF = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.height);
         }
-        
     }];
 }
 
-- (void)showTopicImgClicked:(UIButton *)sender{
+- (void)showTopicImgClicked:(UIButton *)sender
+{
 //    UIImageView * imageView = (UIImageView *)sender.targetObj;
 //    NSString * imgUrl = objc_getAssociatedObject(sender, "imgUrl");
 //    [UUImageAvatarBrowser showImage:imageView url:imgUrl];
@@ -282,7 +312,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BrowseImages object:self userInfo:dic];
 }
 
-- (void)downloadBgImg:(NSString *)imgUrl {
+- (void)downloadBgImg:(NSString *)imgUrl
+{
     NSArray * array = [imgUrl componentsSeparatedByString:@"@"];
     if(array && [array count]>Number_Zero) {
         [SDWebImageManager.sharedManager downloadImageWithURL:[array objectAtIndex:Number_Zero] options:SDWebImageLowPriority progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
@@ -292,5 +323,13 @@
     }
 }
 
+- (void)openWeb:(NSString *)url
+{
+    [self.delegate openWebWithUrl:url];
+}
 
+- (void)openShareWindow:(TopicInteractionView *)view
+{
+    [self.delegate openShareWindow:view.url title:view.title];
+}
 @end

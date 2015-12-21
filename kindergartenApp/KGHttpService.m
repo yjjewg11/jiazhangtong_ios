@@ -495,8 +495,8 @@
 }
 
 // 新增互动
-- (void)saveClassNews:(TopicDomain *)topicDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
-    
+- (void)saveClassNews:(TopicDomain *)topicDomain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
     [self getServerJson:[KGHttpUrl getSaveClassNewsUrl] params:topicDomain.keyValues success:^(KGBaseDomain *baseDomain) {
         
         [self sessionTimeoutHandle:baseDomain];
@@ -511,8 +511,10 @@
 // 分页获取班级互动列表
 - (void)getClassNews:(PageInfoDomain *)pageObj success:(void (^)(PageInfoDomain * pageInfo))success faild:(void (^)(NSString * errorMsg))faild {
     
+    NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageObj.pageNo]};
+    
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getClassNewsMyByClassIdUrl]
-                                   parameters:pageObj.keyValues
+                                   parameters:dict
                                       success:^(NSURLSessionDataTask* task, id responseObject) {
                                           
                                           KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
@@ -532,7 +534,6 @@
                                           [self requestErrorCode:error faild:faild];
                                       }];
 }
-
 // 班级互动 end
 
 //分页获取班级 或者 学校互动列表
@@ -2101,5 +2102,38 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
+
+#pragma mark - 获取title 自动截取的
+- (void)getTitle:(NSString *)url success:(void(^)(NSString * data))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (url == nil || [url isEqualToString:@""])
+    {
+        url = @"";
+    }
+    
+    NSDictionary * dict = @{@"url":url};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getTitleUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+            success(baseDomain.data);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 
 @end

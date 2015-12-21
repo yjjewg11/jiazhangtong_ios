@@ -39,6 +39,8 @@
 
 @property (strong, nonatomic) NSString * share_url; //用于分享的全路径
 
+@property (strong, nonatomic) NSString * url;  //显示url
+
 @property (assign, nonatomic) NSInteger count; //流量次数
 
 @property (assign, nonatomic) NSInteger usertype; //

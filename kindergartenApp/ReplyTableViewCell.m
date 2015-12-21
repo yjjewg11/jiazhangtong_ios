@@ -83,4 +83,6 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
 }
 
+- (IBAction)fenxiangBtnClicked:(id)sender {
+}
 @end

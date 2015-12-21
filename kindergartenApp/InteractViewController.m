@@ -17,14 +17,24 @@
 #import "UIColor+Extension.h"
 #import "PostTopicViewController.h"
 #import "KGHttpUrl.h"
+#import "DiscorveryWebVC.h"
+#import "MJRefresh.h"
+#import "ShareDomain.h"
+#import "UMSocial.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
 
-@interface InteractViewController () <KGReFreshViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate> {
-    ReFreshTableViewController * reFreshView;
-    NSArray * interactArray;
+@interface InteractViewController () <UITableViewDataSource,UITableViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,TopicTableViewCellDelegate,UMSocialUIDelegate>
+{
+    UITableViewController * reFreshView;
+    NSMutableArray * interactArray;
+    
+    NSMutableArray * dataSource;
+    
+    PageInfoDomain * mainTypePageInfo; //主页互动使用
+    PageInfoDomain * otherTypePageInfo; //其他页面的
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -33,7 +43,8 @@
 
 @implementation InteractViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.title = @"互动";
@@ -48,8 +59,6 @@
         self.navigationItem.rightBarButtonItem = rightBarItem;
     }
     
-    [self initReFreshView];
-    
     //芒果横幅广告
     self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone
                                          adType:AdViewTypeNormalBanner                                adMoGoViewDelegate:self
@@ -60,6 +69,14 @@
     if ([[UIDevice currentDevice].systemVersion floatValue] >=7.0) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
+    
+    mainTypePageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
+    otherTypePageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
+    
+    //第一次请求数据
+    [self getTableData];
+    
+    [self initReFreshView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -67,8 +84,9 @@
 }
 
 //延迟刷新
-- (void)lazyRefresh{
-    [reFreshView beginRefreshing];
+- (void)lazyRefresh
+{
+    [reFreshView.tableView headerBeginRefreshing];
 }
 
 - (void)postNewTopic
@@ -100,7 +118,7 @@
         }
     }
 //    reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
-    reFreshView.dataSource = [[NSMutableArray alloc] initWithArray:[self topicFramesWithtopics]];
+    dataSource = [[NSMutableArray alloc] initWithArray:[self topicFramesWithtopics]];
     [reFreshView.tableView reloadData];
 }
 
@@ -110,21 +128,23 @@
 
 
 //获取数据加载表格
-- (void)getTableData{
-    
+- (void)getTableData
+{
     if (self.dataScourseType == 0)
     {
-        [[KGHttpService sharedService] getClassNews:[[PageInfoDomain alloc] initPageInfo:reFreshView.page size:reFreshView.pageSize] success:^(PageInfoDomain *pageInfo) {
+        [[KGHttpService sharedService] getClassNews:mainTypePageInfo success:^(PageInfoDomain *pageInfo) {
             
-            interactArray = pageInfo.data;
+            interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
             
-            reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
+            dataSource = [NSMutableArray arrayWithArray:[self topicFramesWithtopics]];
             
-            [reFreshView reloadRefreshTable];
+            mainTypePageInfo.pageNo++;
             
-        } faild:^(NSString *errorMsg) {
-            [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-            [reFreshView endRefreshing];
+            [self.view addSubview:reFreshView.tableView];
+        }
+        faild:^(NSString *errorMsg)
+        {
+             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         }];
     }
     else
@@ -146,32 +166,184 @@
         self.courseuuid = @"";
     }
     
-    [[KGHttpService sharedService] getClassOrSchoolNews:[[PageInfoDomain alloc] initPageInfo:reFreshView.page size:reFreshView.pageSize] groupuuid:self.groupuuid courseuuid:self.courseuuid success:^(PageInfoDomain *pageInfo)
+    [[KGHttpService sharedService] getClassOrSchoolNews:otherTypePageInfo groupuuid:self.groupuuid courseuuid:self.courseuuid success:^(PageInfoDomain *pageInfo)
     {
-        interactArray = pageInfo.data;
+        interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
         
-        reFreshView.tableParam.dataSourceMArray = [self topicFramesWithtopics];
-        [reFreshView reloadRefreshTable];
+        dataSource = [NSMutableArray arrayWithArray:[self topicFramesWithtopics]];
+        
+        otherTypePageInfo.pageNo++;
+        
+        [self.view addSubview:reFreshView.tableView];
     }
     faild:^(NSString *errorMsg)
     {
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-        [reFreshView endRefreshing];
     }];
 }
 
-//初始化列表
-- (void)initReFreshView{
-    reFreshView = [[ReFreshTableViewController alloc] initRefreshView];
-    reFreshView._delegate = self;
-    reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
-    [reFreshView appendToView:self.contentView];
-    [reFreshView beginRefreshing];
+#pragma mark - 上拉刷新，下拉加载数据
+/**
+ *  集成刷新控件
+ */
+- (void)setupRefresh
+{
+    [reFreshView.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    reFreshView.tableView.footerPullToRefreshText = @"上拉加载更多";
+    reFreshView.tableView.footerReleaseToRefreshText = @"松开立即加载";
+    reFreshView.tableView.footerRefreshingText = @"正在加载中...";
+    
+    [reFreshView.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    reFreshView.tableView.headerRefreshingText = @"正在刷新中...";
+    reFreshView.tableView.headerPullToRefreshText = @"下拉刷新";
+    reFreshView.tableView.headerReleaseToRefreshText = @"松开立即刷新";
 }
 
-#pragma reFreshView Delegate 
+#pragma mark 开始进入刷新状态
+- (void)footerRereshing
+{
+    if (self.dataScourseType == 0)
+    {
+        [[KGHttpService sharedService] getClassNews:mainTypePageInfo success:^(PageInfoDomain *pageInfo)
+        {
+            if (pageInfo.data.count != 0)
+            {
+                mainTypePageInfo.pageNo++;
+                
+                interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
+                
+                [dataSource addObjectsFromArray:[NSMutableArray arrayWithArray:[self topicFramesWithtopics]]];
+                
+                [reFreshView.tableView footerEndRefreshing];
+                
+                [reFreshView.tableView reloadData];
+            }
+            else
+            {
+                reFreshView.tableView.headerRefreshingText = @"没有更多了...";
+                [reFreshView.tableView footerEndRefreshing];
+            }
+        }
+        faild:^(NSString *errorMsg)
+        {
+             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        }];
+    }
+    else
+    {
+        if (self.groupuuid == nil)
+        {
+            self.groupuuid = @"";
+        }
+        
+        if (self.courseuuid == nil)
+        {
+            self.courseuuid = @"";
+        }
+        
+        [[KGHttpService sharedService] getClassOrSchoolNews:otherTypePageInfo groupuuid:self.groupuuid courseuuid:self.courseuuid success:^(PageInfoDomain *pageInfo)
+         {
+             if (pageInfo.data.count != 0)
+             {
+                 otherTypePageInfo.pageNo++;
+                 
+                 interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
+                 
+                 [dataSource addObjectsFromArray:[NSMutableArray arrayWithArray:[self topicFramesWithtopics]]];
+                 
+                 [reFreshView.tableView footerEndRefreshing];
+                 
+                 [reFreshView.tableView reloadData];
+             }
+             else
+             {
+                 reFreshView.tableView.headerRefreshingText = @"没有更多了...";
+                 [reFreshView.tableView footerEndRefreshing];
+             }
+         }
+         faild:^(NSString *errorMsg)
+         {
+             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+         }];
+    }
+}
 
-- (UITableViewCell *)createTableViewCell:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+- (void)headerRereshing
+{
+    [dataSource removeAllObjects];
+    [interactArray removeAllObjects];
+    
+    mainTypePageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
+    otherTypePageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
+    
+    [self refreshData];
+}
+
+- (void)refreshData
+{
+    if (self.dataScourseType == 0)
+    {
+        [[KGHttpService sharedService] getClassNews:mainTypePageInfo success:^(PageInfoDomain *pageInfo) {
+            
+            interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
+            
+            dataSource = [NSMutableArray arrayWithArray:[self topicFramesWithtopics]];
+            
+            mainTypePageInfo.pageNo++;
+            
+            [reFreshView.tableView headerEndRefreshing];
+            
+            [reFreshView.tableView reloadData];
+         }
+         faild:^(NSString *errorMsg)
+         {
+             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+         }];
+    }
+    else
+    {
+        if (self.groupuuid == nil)
+        {
+            self.groupuuid = @"";
+        }
+        
+        if (self.courseuuid == nil)
+        {
+            self.courseuuid = @"";
+        }
+        
+        [[KGHttpService sharedService] getClassOrSchoolNews:otherTypePageInfo groupuuid:self.groupuuid courseuuid:self.courseuuid success:^(PageInfoDomain *pageInfo)
+         {
+             interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
+             
+             dataSource = [NSMutableArray arrayWithArray:[self topicFramesWithtopics]];
+             
+             otherTypePageInfo.pageNo++;
+            
+             [reFreshView.tableView headerEndRefreshing];
+             
+             [reFreshView.tableView reloadData];
+         }
+         faild:^(NSString *errorMsg)
+         {
+             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+         }];
+    }
+}
+
+#pragma mark - 创建tableview
+- (void)initReFreshView
+{
+    reFreshView = [[UITableViewController alloc] init];
+    reFreshView.tableView.delegate = self;
+    reFreshView.tableView.dataSource = self;
+    reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
+    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+    [self setupRefresh];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     // 获得cell
     if(indexPath.row == 0)
     {
@@ -188,37 +360,29 @@
     {
         TopicTableViewCell * cell = [TopicTableViewCell cellWithTableView:tableView];
         
-        cell.topicFrame = reFreshView.dataSource[indexPath.row - 1];
+        cell.delegate = self;
+        
+        cell.topicFrame = dataSource[indexPath.row - 1];
+        
         return cell;
     }
-    
-
 }
 
-//选中cell
-- (void)didSelectRowCallBack:(id)baseDomain to:(NSString *)toClassName{
-    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1 + dataSource.count;
 }
 
-
-/**
- *  动态设置table cell的高
- *
- *  @param indexPath indexPath
- *
- *  @return 返回cell的高
- */
-- (CGFloat)tableViewCellHeight:(NSIndexPath *)indexPath {
-    
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (indexPath.row == 0)
     {
         return 50;
     }
     
-    TopicFrame *frame = reFreshView.dataSource[indexPath.row - 1];
+    TopicFrame *frame = dataSource[indexPath.row - 1];
     return frame.cellHeight;
 }
-
 
 //转换对象
 - (NSArray *)topicFramesWithtopics
@@ -313,14 +477,58 @@
 /**
  *直接下载类广告 是否弹出Alert确认
  */
--(BOOL)shouldAlertQAView:(UIAlertView *)alertView{
-    return NO;
+-(BOOL)shouldAlertQAView:(UIAlertView *)alertView
+{
+    return YES;
 }
 
-- (void)webBrowserShare:(NSString *)url{
+- (void)webBrowserShare:(NSString *)url
+{
     
 }
 
+- (void)openWebWithUrl:(NSString *)url
+{
+    if (url != nil && ![url isEqualToString:@""])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    }
+}
+
+- (void)openShareWindow:(NSString *)url title:(NSString *)title
+{
+    if (url == nil)
+    {
+        url = @"";
+    }
+    if (title == nil)
+    {
+        title = @"";
+    }
+    
+    ShareDomain * domain = [[ShareDomain alloc] init];
+    
+    domain.title = title;
+    
+    domain.pathurl = url;
+    
+    domain.httpurl = url;
+    
+    domain.content = title;
+    
+    //微博
+    [UMSocialData defaultData].extConfig.sinaData.urlResource.resourceType = UMSocialUrlResourceTypeImage;
+    [UMSocialData defaultData].extConfig.sinaData.shareText = domain.httpurl;
+    //微信
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeWeb;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = domain.httpurl;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = domain.httpurl;
+    //qq
+    [UMSocialData defaultData].extConfig.qqData.urlResource.resourceType = UMSocialUrlResourceTypeImage;
+    [UMSocialData defaultData].extConfig.qqData.url = domain.httpurl;
+    
+    [UMSocialSnsService presentSnsController:self appKey:@"55be15a4e0f55a624c007b24" shareText:domain.content shareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:domain.pathurl]]] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil] delegate:self];
+}
 
 
 @end

@@ -207,4 +207,6 @@
 + (NSString *)getSysConfigOfTopic;
 
 + (NSString *)uploadPicUrl;
+
++ (NSString *)getTitleUrl;
 @end

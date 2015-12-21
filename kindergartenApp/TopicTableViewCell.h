@@ -11,8 +11,17 @@
 #import "KGTextField.h"
 #import "TopicInteractionView.h"
 #import "MLEmojiLabel.h"
+#import "ShareBtnView.h"
 
 @class TopicFrame;
+
+@protocol TopicTableViewCellDelegate <NSObject>
+
+- (void)openWebWithUrl:(NSString *)url;
+
+- (void)openShareWindow:(NSString *)url title:(NSString *)title;
+
+@end
 
 @interface TopicTableViewCell : UITableViewCell {
     NSMutableArray * imagesMArray;
@@ -21,6 +30,7 @@
 + (instancetype)cellWithTableView:(UITableView *)tableView;
 
 @property(nonatomic,strong) TopicFrame * topicFrame;
+
 
 
 /** 用户信息 */
@@ -41,7 +51,11 @@
 /** 帖子互动视图 */
 @property (nonatomic, weak) TopicInteractionView  * topicInteractionView;
 
+@property (weak, nonatomic) ShareBtnView * shareview;
+
 /** 分割线 */
 @property (nonatomic,weak) UILabel * levelab;
+
+@property (weak, nonatomic) id<TopicTableViewCellDelegate> delegate;
 
 @end

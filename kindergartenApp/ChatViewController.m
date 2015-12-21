@@ -108,7 +108,8 @@
     self.chatModel.isTeacher = _addressbookDomain.type;
     [self.chatModel addChatInfosToDataSource:chatsArray];
     [self.chatTableView reloadData];
-    if (_pageNo == 1) {
+    if (_pageNo == 1)
+    {
         [self tableViewScrollToBottom];
     }
 }
@@ -146,7 +147,7 @@
     
     //adjust UUInputFunctionView's originPoint
     CGRect newFrame = IFView.frame;
-    newFrame.origin.y = keyboardEndFrame.origin.y - newFrame.size.height;
+    newFrame.origin.y = keyboardEndFrame.origin.y - newFrame.size.height - 64;
     IFView.frame = newFrame;
     
     [UIView commitAnimations];

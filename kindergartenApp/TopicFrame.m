@@ -46,17 +46,27 @@
     
     
     //title
-    if (self.topic.title && ![self.topic.title isEqualToString:String_DefValue_Empty]) {
+    if (self.topic.url == nil || [self.topic.url isEqualToString:@""])
+    {
+        if (self.topic.title && ![self.topic.title isEqualToString:String_DefValue_Empty])
+        {
+            CGFloat titleX = nameX;
+            CGFloat titleY = CGRectGetMaxY(self.nameLabF) + 0;
+            CGFloat titleH = APPUILABELFONTNO13;
+            self.titleLabF = CGRectMake(titleX, titleY, nameW, titleH);
+        }
+    }
+    else
+    {
         CGFloat titleX = nameX;
-        CGFloat titleY = CGRectGetMaxY(self.nameLabF) + 8;
-        CGFloat titleH = APPUILABELFONTNO13;
-        self.titleLabF = CGRectMake(titleX, titleY, nameW, titleH);
+        CGFloat titleY = CGRectGetMaxY(self.nameLabF) + 0;
+        self.titleLabF = CGRectMake(titleX, titleY + 15, nameW, 44);
     }
     
     //内容
     CGFloat topicContentW = cellW - nameX - CELLPADDING;
     CGFloat topicContentX = nameX;
-    CGFloat topicTextViewY = CGRectGetMaxY(self.userViewF) + TopicCellBorderW;
+    CGFloat topicTextViewY = CGRectGetMaxY(self.userViewF) + 5;
     
     if(_topic.content && ![_topic.content isEqualToString:String_DefValue_Empty]) {
         //内容 文本+表情
@@ -103,7 +113,8 @@
 }
 
 //点赞回复的rect
-- (void)setTopicInterActionRect {
+- (void)setTopicInterActionRect
+{
     TopicInteractionDomain * domain = [TopicInteractionDomain new];
     domain.dianzan = _topic.dianzan;
     domain.replyPage = _topic.replyPage;

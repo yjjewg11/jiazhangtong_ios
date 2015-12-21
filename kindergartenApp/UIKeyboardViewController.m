@@ -102,6 +102,7 @@ static CGFloat viewFrameY = 10;
 
 //输入框上移防止键盘遮挡
 - (void)animateView:(BOOL)isShow textField:(id)textField heightforkeyboard:(CGFloat)kheight {
+    
 	CGRect rect = objectView.frame;
 	
     [UIView beginAnimations:nil context:NULL];
@@ -110,9 +111,17 @@ static CGFloat viewFrameY = 10;
     UIView * window = [UIApplication sharedApplication].keyWindow;
     CGFloat  wH = window.height;
     CGFloat  emojiY = wH - kheight - viewFrameH;
-	if (isShow) {
+	if (isShow)
+    {
 		if ([textField isKindOfClass:[UITextField class]]) {
+            
 			UITextField *newText = ((UITextField *)textField);
+            
+            if (newText.tag == 110)
+            {
+                return;
+            }
+            
 			CGPoint textPoint = [newText convertPoint:CGPointMake(0, newText.frame.size.height + spacerY) toView:objectView];
             
             if (rect.size.height - textPoint.y < kheight) {
@@ -135,6 +144,10 @@ static CGFloat viewFrameY = 10;
 		}
 		else {
 			UITextView *newView = ((UITextView *)textField);
+            if (newView.tag == 110)
+            {
+                return;
+            }
 			CGPoint textPoint = [newView convertPoint:CGPointMake(0, newView.frame.size.height + spacerY) toView:objectView];
             if (rect.size.height - textPoint.y < kheight) {
 				rect.origin.y = rect.size.height - textPoint.y - kheight + viewFrameY;
@@ -142,7 +155,7 @@ static CGFloat viewFrameY = 10;
             } else rect.origin.y = viewFrameY;
 		}
     } else {
-        rect.origin.y = viewFrameY;
+        rect.origin.y = viewFrameY + 64;
     }
 	objectView.frame = rect;
     
@@ -180,7 +193,8 @@ static CGFloat viewFrameY = 10;
 }
 
 //输入框失去焦点，隐藏键盘
-- (void)resignKeyboard:(UIView *)resignView {
+- (void)resignKeyboard:(UIView *)resignView
+{
 	[[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 }
 

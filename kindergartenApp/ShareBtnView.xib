@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="tW6-a9-Ah4" customClass="ShareBtnView">
+            <rect key="frame" x="0.0" y="0.0" width="179" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fn4-Ep-gHf">
+                    <rect key="frame" x="0.0" y="0.0" width="179" height="44"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lianjie_hudong" translatesAutoresizingMaskIntoConstraints="NO" id="5mj-rR-d5R">
+                            <rect key="frame" x="0.0" y="2" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="PXW-m6-w2u"/>
+                                <constraint firstAttribute="width" constant="40" id="xX0-Tt-Mpi"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJn-CQ-9z9">
+                            <rect key="frame" x="40" y="0.0" width="119" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="IaX-zp-reB"/>
+                            </constraints>
+                            <connections>
+                                <action selector="btnClicked:" destination="tW6-a9-Ah4" eventType="touchUpInside" id="wXS-q4-ffI"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5v-Uw-Q9m">
+                            <rect key="frame" x="40" y="2" width="119" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="67w-fW-P69"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="UJn-CQ-9z9" secondAttribute="trailing" constant="20" id="49I-Cz-MKQ"/>
+                        <constraint firstItem="s5v-Uw-Q9m" firstAttribute="centerY" secondItem="Fn4-Ep-gHf" secondAttribute="centerY" id="4QD-xr-iKF"/>
+                        <constraint firstItem="s5v-Uw-Q9m" firstAttribute="leading" secondItem="5mj-rR-d5R" secondAttribute="trailing" id="9XM-HF-zy9"/>
+                        <constraint firstItem="UJn-CQ-9z9" firstAttribute="centerY" secondItem="Fn4-Ep-gHf" secondAttribute="centerY" id="EmF-59-nIq"/>
+                        <constraint firstAttribute="trailing" secondItem="s5v-Uw-Q9m" secondAttribute="trailing" constant="20" id="Iuj-mw-36z"/>
+                        <constraint firstItem="5mj-rR-d5R" firstAttribute="leading" secondItem="Fn4-Ep-gHf" secondAttribute="leading" id="QQG-dQ-oaZ"/>
+                        <constraint firstItem="UJn-CQ-9z9" firstAttribute="leading" secondItem="5mj-rR-d5R" secondAttribute="trailing" id="cXP-Eq-cOY"/>
+                        <constraint firstItem="5mj-rR-d5R" firstAttribute="centerY" secondItem="Fn4-Ep-gHf" secondAttribute="centerY" id="tE1-vL-bOy"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="Fn4-Ep-gHf" firstAttribute="leading" secondItem="tW6-a9-Ah4" secondAttribute="leading" id="B1j-AY-5Is"/>
+                <constraint firstItem="Fn4-Ep-gHf" firstAttribute="top" secondItem="tW6-a9-Ah4" secondAttribute="top" id="Zkg-VK-fBX"/>
+                <constraint firstAttribute="trailing" secondItem="Fn4-Ep-gHf" secondAttribute="trailing" id="eZn-WJ-8nv"/>
+                <constraint firstAttribute="bottom" secondItem="Fn4-Ep-gHf" secondAttribute="bottom" id="zPe-GJ-jTd"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentLbl" destination="s5v-Uw-Q9m" id="KA7-wp-41Q"/>
+            </connections>
+            <point key="canvasLocation" x="104.5" y="1"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="lianjie_hudong" width="30" height="30"/>
+    </resources>
+</document>

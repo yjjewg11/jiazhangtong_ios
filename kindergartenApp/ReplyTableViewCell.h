@@ -20,6 +20,7 @@
     ReplyDomain * replyDomain;
     IBOutlet UIButton *dzBtn;
     IBOutlet UILabel * dzCountLabel;
+    
 }
 
 

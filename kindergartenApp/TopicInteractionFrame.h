@@ -23,6 +23,10 @@
 @property (assign, nonatomic) CGRect    browseCountLabelF;
 /** 点赞按钮 */
 @property (assign, nonatomic) CGRect    dianzanBtnF;
+
+/** 分享按钮 */
+@property (assign, nonatomic) CGRect    fxBtnF;
+
 /** 回复按钮 */
 @property (assign, nonatomic) CGRect    replyBtnF;
 /** 点赞列表视图 */

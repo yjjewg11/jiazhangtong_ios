@@ -158,15 +158,19 @@
 
 
 #pragma mark 开始进入刷新状态
-
-- (void)reFreshTable:(BOOL)__isFooter{
+- (void)reFreshTable:(BOOL)__isFooter
+{
     _isFooter = __isFooter;
     if(!__isFooter) {
         _page = Number_One;
     } else {
         _page = ([_dataSource count] + _pageSize - Number_One) / _pageSize;
         _page += Number_One;
+        
+    
     }
+    
+    NSLog(@"当前:%d",_page);
     
     [self getTableData];
 }
