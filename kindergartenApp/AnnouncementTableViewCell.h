@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ReFreshBaseCell.h"
+#import "AnnouncementDomain.h"
 
-@interface AnnouncementTableViewCell : ReFreshBaseCell {
+@interface AnnouncementTableViewCell : UITableViewCell {
     
     IBOutlet UIImageView * headImageView;
     IBOutlet UILabel * titleLabel;
@@ -17,5 +17,7 @@
     IBOutlet UILabel * groupLabel;
     IBOutlet UILabel * timeLabel;
 }
+
+- (void)setData:(AnnouncementDomain *)domain;
 
 @end

@@ -15,8 +15,9 @@
 #import "AnnouncementInfoViewController.h"
 #import "MJRefresh.h"
 #import "AnnouncementTableViewCell.h"
+#import "NoDataTableViewCell.h"
 
-@interface AnnouncementListViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface AnnouncementListViewController () <UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
     UITableViewController * reFreshView;
     PageInfoDomain * pageInfo;
@@ -48,22 +49,32 @@
     }
 }
 
-
 //获取数据加载表格
 - (void)getTableData
 {
+    [self showLoadView];
+    
     [[KGHttpService sharedService] getAnnouncementList:pageInfo success:^(NSArray *announcementArray)
     {
         pageInfo.pageNo ++;
         
         dataSource = [NSMutableArray arrayWithArray:announcementArray];
         
+        [self hidenLoadView];
+        
         [self.view addSubview:reFreshView.tableView];
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        [self hidenLoadView];
+        [self showNoNetView];
     }];
+}
+
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    [self getTableData];
 }
 
 
@@ -73,7 +84,6 @@
     reFreshView = [[UITableViewController alloc] init];
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
-    reFreshView.tableView.rowHeight         = 132;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
     reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
     [self setupRefresh];
@@ -82,24 +92,44 @@
 #pragma mark - num of row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataSource.count;
+    if (dataSource.count == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return dataSource.count;
+    }
 }
 
 #pragma mark - cell for row
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * AnnouncementID = @"anounid";
-    
-    AnnouncementTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:AnnouncementID];
-    
-    if (cell == nil)
+    if (dataSource.count == 0)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"AnnouncementTableViewCell" owner:nil options:nil] firstObject];
+        NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
+        
+        reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        reFreshView.tableView.scrollEnabled = NO;
+        
+        return cell;
     }
-    
-    [cell resetValue:dataSource[indexPath.row] parame:nil];
-    
-    return cell;
+    else
+    {
+        static NSString * AnnouncementID = @"anounid";
+        
+        AnnouncementTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:AnnouncementID];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"AnnouncementTableViewCell" owner:nil options:nil] firstObject];
+        }
+        
+        [cell setData:dataSource[indexPath.row]];
+        
+        return cell;
+    }
 }
 
 #pragma mark - 上啦下拉
@@ -119,7 +149,7 @@
 - (void)footerRereshing
 {
     [[KGHttpService sharedService] getAnnouncementList:pageInfo success:^(NSArray *articlesArray)
-     {
+    {
          if (articlesArray.count != 0)
          {
              pageInfo.pageNo ++;
@@ -150,6 +180,7 @@
     pageInfo.pageNo = 1;
     
     [dataSource removeAllObjects];
+    dataSource = nil;
     
     [[KGHttpService sharedService] getAnnouncementList:pageInfo success:^(NSArray *articlesArray)
      {
@@ -168,7 +199,6 @@
      }];
 }
 
-
 #pragma reFreshView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -178,4 +208,16 @@
     [self.navigationController pushViewController:infoVC animated:YES];
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (dataSource.count == 0)
+    {
+        return 204;
+    }
+    else
+    {
+        return 132;
+    }
+}
 @end

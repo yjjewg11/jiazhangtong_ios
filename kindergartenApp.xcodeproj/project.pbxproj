@@ -368,7 +368,6 @@
 		04FA59931C27D05A009689C7 /* EYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA59911C27D05A009689C7 /* EYTextField.m */; };
 		04FA59951C27E77C009689C7 /* ShareBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA59941C27E77C009689C7 /* ShareBtnView.xib */; };
 		04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA59971C27E863009689C7 /* ShareBtnView.m */; };
-		04FA599C1C28033B009689C7 /* TZRefeshTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA599B1C28033B009689C7 /* TZRefeshTableVC.m */; };
 		04FA7D081C1E95EE0035AF18 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D071C1E95EE0035AF18 /* JavaScriptCore.framework */; };
 		04FA7D0B1C1EA4B20035AF18 /* DiscorveryWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA7D0A1C1EA4B20035AF18 /* DiscorveryWebVC.m */; };
 		04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */; };
@@ -1316,8 +1315,6 @@
 		04FA59941C27E77C009689C7 /* ShareBtnView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareBtnView.xib; sourceTree = "<group>"; };
 		04FA59961C27E863009689C7 /* ShareBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBtnView.h; sourceTree = "<group>"; };
 		04FA59971C27E863009689C7 /* ShareBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareBtnView.m; sourceTree = "<group>"; };
-		04FA599A1C28033B009689C7 /* TZRefeshTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZRefeshTableVC.h; sourceTree = "<group>"; };
-		04FA599B1C28033B009689C7 /* TZRefeshTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZRefeshTableVC.m; sourceTree = "<group>"; };
 		04FA7D071C1E95EE0035AF18 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		04FA7D091C1EA4B20035AF18 /* DiscorveryWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryWebVC.h; sourceTree = "<group>"; };
 		04FA7D0A1C1EA4B20035AF18 /* DiscorveryWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryWebVC.m; sourceTree = "<group>"; };
@@ -2759,14 +2756,14 @@
 			name = CollectionCell;
 			sourceTree = "<group>";
 		};
-		04F9C9821C0ECD380078A5F5 /* ZhaoSheng(招生) */ = {
+		04F9C9821C0ECD380078A5F5 /* ZhaoSheng(宝宝入学) */ = {
 			isa = PBXGroup;
 			children = (
 				04F9C9851C0ECD510078A5F5 /* View */,
 				04F9C9841C0ECD480078A5F5 /* Model */,
 				04F9C9831C0ECD420078A5F5 /* Controller */,
 			);
-			name = "ZhaoSheng(招生)";
+			name = "ZhaoSheng(宝宝入学)";
 			sourceTree = "<group>";
 		};
 		04F9C9831C0ECD420078A5F5 /* Controller */ = {
@@ -3089,15 +3086,6 @@
 			path = EYTagView;
 			sourceTree = "<group>";
 		};
-		04FA59991C2802F1009689C7 /* TZFramework */ = {
-			isa = PBXGroup;
-			children = (
-				04FA599A1C28033B009689C7 /* TZRefeshTableVC.h */,
-				04FA599B1C28033B009689C7 /* TZRefeshTableVC.m */,
-			);
-			name = TZFramework;
-			sourceTree = "<group>";
-		};
 		04FB23611C16C311009B57E2 /* Discorvery(发现) */ = {
 			isa = PBXGroup;
 			children = (
@@ -3176,14 +3164,14 @@
 			path = ZYQImagePicker;
 			sourceTree = "<group>";
 		};
-		04FEC5671BEDC98A00C642A6 /* Youhuihuodong */ = {
+		04FEC5671BEDC98A00C642A6 /* Youhuihuodong(优惠活动) */ = {
 			isa = PBXGroup;
 			children = (
 				04FEC56A1BEDC9B000C642A6 /* model */,
 				04FEC5691BEDC9AB00C642A6 /* controller */,
 				04FEC5681BEDC9A600C642A6 /* view */,
 			);
-			name = Youhuihuodong;
+			name = "Youhuihuodong(优惠活动)";
 			sourceTree = "<group>";
 		};
 		04FEC5681BEDC9A600C642A6 /* view */ = {
@@ -3285,14 +3273,14 @@
 			name = Bugly;
 			sourceTree = "<group>";
 		};
-		2474DFA81B6CB7AA0021506F /* SignRecord */ = {
+		2474DFA81B6CB7AA0021506F /* SignRecord(签到记录) */ = {
 			isa = PBXGroup;
 			children = (
 				2474DFAB1B6CB7BE0021506F /* Controller */,
 				2474DFAA1B6CB7B80021506F /* Model */,
 				2474DFA91B6CB7B00021506F /* View */,
 			);
-			name = SignRecord;
+			name = "SignRecord(签到记录)";
 			sourceTree = "<group>";
 		};
 		2474DFA91B6CB7B00021506F /* View */ = {
@@ -3681,7 +3669,6 @@
 		248B6A831B19A91000FCB98F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				04FA59991C2802F1009689C7 /* TZFramework */,
 				243918E11B5D1E4A00F3727E /* Controller */,
 				248B6A891B19A95600FCB98F /* Category */,
 				248B6A881B19A95000FCB98F /* Libs */,
@@ -3845,17 +3832,17 @@
 			children = (
 				F4E6B2381B6B53A60087EAEB /* SpecialtyCourses(特长课程) */,
 				04FB23611C16C311009B57E2 /* Discorvery(发现) */,
-				04F9C9821C0ECD380078A5F5 /* ZhaoSheng(招生) */,
-				04FEC5671BEDC98A00C642A6 /* Youhuihuodong */,
+				04F9C9821C0ECD380078A5F5 /* ZhaoSheng(宝宝入学) */,
+				04FEC5671BEDC98A00C642A6 /* Youhuihuodong(优惠活动) */,
 				F4885C601B7C4FF000AF97CF /* Favorites */,
 				F4DF3B9D1B78AC40001D9DF7 /* Timetable */,
 				F4E61B721B73432200E5851A /* Share */,
 				2474DFB91B6CCDD80021506F /* Recipes */,
-				2474DFA81B6CB7AA0021506F /* SignRecord */,
+				2474DFA81B6CB7AA0021506F /* SignRecord(签到记录) */,
 				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
 				24AA0B801B692FBD00DAC03B /* CourseList */,
 				24DE91AA1B67C1FC00D3FFCE /* Teacher */,
-				F47AFEAA1B5E22C100D43F38 /* Announcement */,
+				F47AFEAA1B5E22C100D43F38 /* Announcement(公告) */,
 				2489B6751B5ABA6C00039E70 /* AddressBooks */,
 				F45EABCD1B563F75003C367C /* Base */,
 				24A175FA1B55505D00295997 /* Login */,
@@ -4538,14 +4525,14 @@
 			name = HBVLinkedTextView;
 			sourceTree = "<group>";
 		};
-		F47AFEAA1B5E22C100D43F38 /* Announcement */ = {
+		F47AFEAA1B5E22C100D43F38 /* Announcement(公告) */ = {
 			isa = PBXGroup;
 			children = (
 				F4E635F81B675E0D00800924 /* Controller */,
 				F4E635FA1B675E2500800924 /* Model */,
 				F4E635F91B675E1E00800924 /* View */,
 			);
-			name = Announcement;
+			name = "Announcement(公告)";
 			sourceTree = "<group>";
 		};
 		F487830C1B58DA1700CDC1A8 /* Frameworks */ = {
@@ -5710,7 +5697,6 @@
 				24DE91B01B67C24D00D3FFCE /* TeacherVO.m in Sources */,
 				04F8C6EF1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m in Sources */,
 				F471EDF91B70ACC000EEBA1D /* AddressBookResp.m in Sources */,
-				04FA599C1C28033B009689C7 /* TZRefeshTableVC.m in Sources */,
 				2489B62B1B5A607A00039E70 /* KGAccountTool.m in Sources */,
 				248B6AAA1B19AD7A00FCB98F /* KGBaseDomain.m in Sources */,
 				04F3D45D1BF47FD3007E7AC0 /* CFilteringJSONSerializer.m in Sources */,

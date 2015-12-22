@@ -15,6 +15,7 @@
 #import "UIColor+Extension.h"
 #import "GiftwareArticlesInfoViewController.h"
 #import "GiftwareArticlesTableViewCell.h"
+#import "NoDataTableViewCell.h"
 
 @interface GiftwareArticlesViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -53,20 +54,30 @@
 //获取数据加载表格
 - (void)getTableData
 {
+    [self showLoadView];
+    
     [[KGHttpService sharedService] getArticlesList:pageInfo success:^(NSArray *articlesArray)
     {
         pageInfo.pageNo ++;
         
         dataSource = [NSMutableArray arrayWithArray:articlesArray];
         
+        [self hidenLoadView];
+        
         [self.view addSubview:reFreshView.tableView];
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        [self hidenLoadView];
+        [self showNoNetView];
     }];
 }
 
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    [self getTableData];
+}
 
 //初始化列表
 - (void)initReFreshView
@@ -74,7 +85,6 @@
     reFreshView = [[UITableViewController alloc] init];
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
-    reFreshView.tableView.rowHeight         = 132;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
     reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
     [self setupRefresh];
@@ -83,24 +93,44 @@
 #pragma mark - num of row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataSource.count;
+    if (dataSource.count != 0)
+    {
+        return dataSource.count;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 #pragma mark - cell for row
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * giftwareArticlesID = @"artid";
-    
-    GiftwareArticlesTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:giftwareArticlesID];
-    
-    if (cell == nil)
+    if (dataSource.count == 0)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"GiftwareArticlesTableViewCell" owner:nil options:nil] firstObject];
+        NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
+        
+        reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        reFreshView.tableView.scrollEnabled = NO;
+        
+        return cell;
     }
-    
-    [cell setAnnouncementDomain:dataSource[indexPath.row]];
-    
-    return cell;
+    else
+    {
+        static NSString * giftwareArticlesID = @"artid";
+        
+        GiftwareArticlesTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:giftwareArticlesID];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"GiftwareArticlesTableViewCell" owner:nil options:nil] firstObject];
+        }
+        
+        [cell setAnnouncementDomain:dataSource[indexPath.row]];
+        
+        return cell;
+    }
 }
 
 #pragma mark - 选中单元格
@@ -164,6 +194,7 @@
     pageInfo.pageNo = 1;
     
     [dataSource removeAllObjects];
+    dataSource = nil;
     
     [[KGHttpService sharedService] getArticlesList:pageInfo success:^(NSArray *articlesArray)
     {
@@ -180,6 +211,18 @@
         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         [reFreshView.tableView headerEndRefreshing];
     }];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (dataSource.count == 0)
+    {
+        return 204;
+    }
+    else
+    {
+        return 132;
+    }
 }
 
 @end

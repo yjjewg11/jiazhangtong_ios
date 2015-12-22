@@ -22,12 +22,13 @@
 #import "ShareDomain.h"
 #import "UMSocial.h"
 #import "BrowseURLViewController.h"
+#import "NoDataTableViewCell.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
 #import "AdMoGoWebBrowserControllerUserDelegate.h"
 
-@interface InteractViewController () <UITableViewDataSource,UITableViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,TopicTableViewCellDelegate,UMSocialUIDelegate>
+@interface InteractViewController () <UITableViewDataSource,UITableViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,TopicTableViewCellDelegate,UMSocialUIDelegate,UIScrollViewDelegate>
 {
     UITableViewController * reFreshView;
     NSMutableArray * interactArray;
@@ -36,6 +37,8 @@
     
     PageInfoDomain * mainTypePageInfo; //主页互动使用
     PageInfoDomain * otherTypePageInfo; //其他页面的
+    
+    BOOL rdyToRefesh;
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -49,6 +52,8 @@
     [super viewDidLoad];
     
     self.title = @"互动";
+    
+    rdyToRefesh = NO;
     
     self.keyBoardController.isShowKeyBoard = YES;
     self.keyboardTopType = EmojiAndTextMode;
@@ -79,11 +84,6 @@
     
     [self initReFreshView];
 }
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
 //延迟刷新
 - (void)lazyRefresh
 {
@@ -123,17 +123,16 @@
     [reFreshView.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-
 //获取数据加载表格
 - (void)getTableData
 {
+    [self showLoadView];
+    
     if (self.dataScourseType == 0)
     {
-        [[KGHttpService sharedService] getClassNews:mainTypePageInfo success:^(PageInfoDomain *pageInfo) {
+        [[KGHttpService sharedService] getClassNews:mainTypePageInfo success:^(PageInfoDomain *pageInfo)
+        {
+            [self hidenLoadView];
             
             interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
             
@@ -145,14 +144,20 @@
         }
         faild:^(NSString *errorMsg)
         {
-             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+            [self hidenLoadView];
+            [self showNoNetView];
         }];
     }
     else
     {
         [self getTableDataOfSchoolOrClass];
     }
+}
 
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    [self getTableData];
 }
 
 - (void)getTableDataOfSchoolOrClass
@@ -169,6 +174,8 @@
     
     [[KGHttpService sharedService] getClassOrSchoolNews:otherTypePageInfo groupuuid:self.groupuuid courseuuid:self.courseuuid success:^(PageInfoDomain *pageInfo)
     {
+        [self hidenLoadView];
+        
         interactArray = [NSMutableArray arrayWithArray:pageInfo.data];
         
         dataSource = [NSMutableArray arrayWithArray:[self topicFramesWithtopics]];
@@ -268,11 +275,13 @@
 
 - (void)headerRereshing
 {
-    [dataSource removeAllObjects];
-    [interactArray removeAllObjects];
+    rdyToRefesh = NO;
     
-    mainTypePageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
-    otherTypePageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
+    [dataSource removeAllObjects];
+    dataSource = nil;
+    
+    mainTypePageInfo.pageNo = 1;
+    otherTypePageInfo.pageNo = 1;
     
     [self refreshData];
 }
@@ -353,22 +362,48 @@
         
         return cell;
     }
-    
     else
     {
-        TopicTableViewCell * cell = [TopicTableViewCell cellWithTableView:tableView];
-        
-        cell.delegate = self;
-        
-        cell.topicFrame = dataSource[indexPath.row - 1];
-        
-        return cell;
+        if (dataSource.count == 0)
+        {
+            NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil]firstObject];
+            
+            reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+            reFreshView.tableView.scrollEnabled = NO;
+            
+            return cell;
+        }
+        else
+        {
+            static NSString * topiccellid = @"tpcid";
+            
+            TopicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:topiccellid];
+            
+            if (cell == nil)
+            {
+                cell = [[TopicTableViewCell alloc] init];
+            }
+            
+            cell.delegate = self;
+            
+            cell.topicFrame = dataSource[indexPath.row - 1];
+            
+            return cell;
+        }
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1 + dataSource.count;
+    if (dataSource.count == 0)
+    {
+        return 2;
+    }
+    else
+    {
+        return 1 + dataSource.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -377,9 +412,18 @@
     {
         return 50;
     }
-    
-    TopicFrame *frame = dataSource[indexPath.row - 1];
-    return frame.cellHeight;
+    else
+    {
+        if (dataSource.count == 0)
+        {
+            return 204;
+        }
+        else
+        {
+            TopicFrame *frame = dataSource[indexPath.row - 1];
+            return frame.cellHeight;
+        }
+    }
 }
 
 //转换对象
@@ -406,7 +450,8 @@
 /*
  返回广告rootViewController
  */
-- (UIViewController *)viewControllerForPresentingModalView{
+- (UIViewController *)viewControllerForPresentingModalView
+{
     return self;
 }
 
@@ -487,13 +532,16 @@
 
 - (void)openWebWithUrl:(NSString *)url
 {
-    if (url != nil && ![url isEqualToString:@""])
+    if (url == nil || [url isEqualToString:@""])
     {
-        BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
-        vc.title = @"详情";
-        vc.url = url;
-        [self.navigationController pushViewController:vc animated:YES];
+        url = @"http://www.wenjienet.com/";
     }
+    
+    BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
+    vc.title = @"详情";
+    vc.useCookie = NO;
+    vc.url = url;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openShareWindow:(NSString *)url title:(NSString *)title
@@ -528,7 +576,7 @@
     [UMSocialData defaultData].extConfig.qqData.urlResource.resourceType = UMSocialUrlResourceTypeImage;
     [UMSocialData defaultData].extConfig.qqData.url = domain.httpurl;
     
-    [UMSocialSnsService presentSnsController:self appKey:@"55be15a4e0f55a624c007b24" shareText:domain.content shareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:domain.pathurl]]] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil] delegate:self];
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:@"55be15a4e0f55a624c007b24" shareText:domain.content shareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:domain.pathurl]]] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil] delegate:self];
 }
 
 

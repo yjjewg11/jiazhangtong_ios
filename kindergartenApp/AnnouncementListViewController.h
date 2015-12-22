@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface AnnouncementListViewController : BaseViewController
+@interface AnnouncementListViewController : BaseViewController <UITableViewDataSource>
+
 
 @end

@@ -32,6 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="QWQ-3A-2bU" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="7qi-2B-JK2"/>
                     <constraint firstItem="ghY-35-56d" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UMQ-LA-MKF"/>
@@ -39,6 +40,7 @@
                     <constraint firstItem="ghY-35-56d" firstAttribute="top" secondItem="QWQ-3A-2bU" secondAttribute="bottom" constant="20" id="cyQ-jc-sLj"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="303" y="321.5"/>
         </tableViewCell>
     </objects>

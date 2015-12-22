@@ -531,7 +531,7 @@
 
         CGFloat height = 140;
         shareVC = [[ShareViewController alloc] init];
-        shareVC.view.frame = CGRectMake(Number_Zero,  KGSCREEN.size.height - height, KGSCREEN.size.width, height);
+        shareVC.view.frame = CGRectMake(Number_Zero,  KGSCREEN.size.height - height - 64, KGSCREEN.size.width, height);
         [popupView addSubview:shareVC.view];
         [self.view addSubview:popupView];
         [self addChildViewController:shareVC];

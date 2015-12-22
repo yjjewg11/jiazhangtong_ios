@@ -510,9 +510,6 @@
 #pragma mark - textfield btn
 - (IBAction)editUrlBtnClick:(UIButton *)sender
 {
-    
-    
-    
     [EYInputPopupView popViewWithTitle:@"编辑分享链接" contentText:weburl
           type:EYInputPopupView_Type_multi_line
     cancelBlock:^
@@ -530,16 +527,9 @@
             isClear = YES;
         }
         
-        if ([text isEqualToString:@""] || text == nil)
-        {
-            return;
-        }
-        else
-        {
-            weburl = text;
-            
-            urlTextField.text = text;
-        }
+        weburl = text;
+        
+        urlTextField.text = text;
         
         if (isClear == YES)
         {
@@ -550,24 +540,17 @@
              {
                  [[KGHUD sharedHud] hide:self.view];
                  
-                 if ([data isEqualToString:@""])
-                 {
-                     
-                 }
-                 else
-                 {
-                     NSMutableString * str = [NSMutableString stringWithString:contentTextView.text];
-                     
-                     [str appendString:data];
-                     
-                     contentTextView.text = str;
-                     
-                     isClear = NO;
-                 }
+                 NSMutableString * str = [NSMutableString stringWithString:contentTextView.text];
+                 
+                 [str appendString:data];
+                 
+                 contentTextView.text = str;
+                 
+                 isClear = NO;
              }
              faild:^(NSString *errorMsg)
              {
-                 
+                 isClear = NO;
              }];
         }
     }

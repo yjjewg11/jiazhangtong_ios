@@ -24,16 +24,8 @@
 
 }
 
-
-/**
- *  重置cell内容
- *
- *  @param baseDomain   cell需要的数据对象
- *  @param parameterDic 扩展字典
- */
-- (void)resetValue:(id)baseDomain parame:(NSMutableDictionary *)parameterDic {
-    AnnouncementDomain * domain = (AnnouncementDomain *)baseDomain;
-    
+- (void)setData:(AnnouncementDomain *)domain
+{
     titleLabel.text = domain.title;
     subTitleLabel.text = domain.message;
     groupLabel.text = [[KGHttpService sharedService] getGroupNameByUUID:domain.groupuuid];
@@ -46,7 +38,7 @@
     [headImageView sd_setImageWithURL:[NSURL URLWithString:groupImg] placeholderImage:[UIImage imageNamed:@"group_head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
     }];
-    
+
 }
 
 @end

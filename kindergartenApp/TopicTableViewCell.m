@@ -160,7 +160,7 @@
     self.nameLab.text = topic.create_user;
     
     //title
-    if (topic.url == nil || [topic.url isEqualToString:@""])
+    if (topic.url == nil)
     {
         self.titleLab.frame = self.topicFrame.titleLabF;
         self.titleLab.text = topic.title;
@@ -180,14 +180,7 @@
         self.topicTextView.text = @"";
         self.shareview.delegate = self;
         self.shareview.frame = self.topicFrame.titleLabF;
-        if([topic.content rangeOfString:@"null"].location != NSNotFound)//_roaldSearchText
-        {
-            self.shareview.contentLbl.text = @"[暂无链接]";
-        }
-        else
-        {
-            self.shareview.contentLbl.text = topic.content;
-        }
+        self.shareview.contentLbl.text = topic.content;
         self.shareview.url = topic.url;
         [self addSubview:self.shareview];
     }

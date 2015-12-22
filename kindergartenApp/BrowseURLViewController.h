@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString * url;
 
+@property (assign, nonatomic) BOOL useCookie;
+
 @end

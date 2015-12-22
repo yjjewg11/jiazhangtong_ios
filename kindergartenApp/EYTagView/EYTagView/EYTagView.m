@@ -177,7 +177,7 @@
         CGRect frame=tagButton.frame;
         
         if (tagButton.frame.size.width+_tagPaddingSize.width*2>_svContainer.contentSize.width) {
-            NSLog(@"!!!  tagButton width tooooooooo large");
+            NSLog(@"!!!  tag按钮宽度太太太大了");
         }else{
             if ((offsetX+tagButton.frame.size.width+_tagPaddingSize.width)
                 <=_svContainer.contentSize.width) {
@@ -215,7 +215,7 @@
         }
         
         if (_tfInput.frame.size.width+_tagPaddingSize.width*2>_svContainer.contentSize.width) {
-            NSLog(@"!!!  _tfInput width tooooooooo large");
+            NSLog(@"!!!  _tfInput宽度太太太大了");
             
         }else{
             CGRect frame=_tfInput.frame;
@@ -352,7 +352,7 @@
             buttonFrame.size.height-=5;
             
             UIMenuController *menuController = [UIMenuController sharedMenuController];
-            UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteItemClicked:)];
+            UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteItemClicked:)];
             
             NSAssert([self becomeFirstResponder], @"Sorry, UIMenuController will not work with %@ since it cannot become first responder", self);
             [menuController setMenuItems:[NSArray arrayWithObject:resetMenuItem]];

@@ -38,7 +38,6 @@
     NSInteger _pageNo;
 }
 
-
 @end
 
 @implementation SpTeacherDetailViewController
@@ -291,7 +290,6 @@ static NSString *const CourseCellID = @"coursecellcoll";
              {
                  [self showNoNetView];
              }];
-            
         }
     }
 }

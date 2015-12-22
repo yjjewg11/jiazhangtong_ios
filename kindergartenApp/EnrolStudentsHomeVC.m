@@ -90,8 +90,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 35, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 35) collectionViewLayout:layout];
     
-    _collectionView.hidden = YES;
-    
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
 
     [_collectionView registerNib:[UINib nibWithNibName:@"EnrolStudentsSchoolCell" bundle:nil] forCellWithReuseIdentifier:SchoolCellID];
@@ -198,15 +196,11 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         
         [self haveSummaryAtIndex];
         
-        _collectionView.hidden = NO;
-        
         [self hidenLoadView];
         
         [self.view addSubview:_collectionView];
         
         [self.view addSubview:_buttonsView];
-        
-        ((UIView *)_redViews[0]).hidden = NO;
         
         //创建下拉菜单
         [self setUpListBtns];

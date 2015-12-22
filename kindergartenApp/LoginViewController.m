@@ -89,7 +89,10 @@
 }
 
 
-- (IBAction)findPwdBtnClicked:(UIButton *)sender {
+- (IBAction)findPwdBtnClicked:(UIButton *)sender
+{
+    [currentOperationField resignFirstResponder];
+    
     RegViewController * regVC = [[RegViewController alloc] init];
     regVC.type = Number_Two;
     [self.navigationController pushViewController:regVC animated:YES];
@@ -136,7 +139,7 @@
         [[KGHttpService sharedService] login:user success:^(NSString *msgStr) {
             
             [[KGHUD sharedHud] hide:self.view];
-            [MBProgressHUD showSuccess:msgStr];
+            [MBProgressHUD showSuccess:@"登录成功"];
             
             if(savePwdBtn.selected) {
                 [KGAccountTool saveAccount:user];
@@ -174,8 +177,11 @@
 {
     if (keyboardOn == NO)
     {
-        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - (100 + 5))];
-        keyboardOn = YES;
+        [UIView animateWithDuration:0.2 animations:^
+        {
+            [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y - (100 + 5))];
+            keyboardOn = YES;
+        }];
     }
 }
 
@@ -183,8 +189,11 @@
 {
     if (keyboardOn == YES)
     {
-        [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + (100 + 5))];
-        keyboardOn = NO;
+        [UIView animateWithDuration:0.2 animations:^
+        {
+            [self.view setOrigin:CGPointMake(self.view.frame.origin.x, self.view.frame.origin.y + (100 + 5))];
+            keyboardOn = NO;
+        }];
     }
 }
 
@@ -204,14 +213,6 @@
     [textField resignFirstResponder];
     
     return YES;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    if (![currentOperationField isExclusiveTouch])
-    {
-        [currentOperationField resignFirstResponder];
-    }
 }
 
 @end

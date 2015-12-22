@@ -15,8 +15,9 @@
 #import "UIColor+Extension.h"
 #import "MJRefresh.h"
 #import "PageInfoDomain.h"
+#import "NoDataTableViewCell.h"
 
-@interface StudentSignRecordViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface StudentSignRecordViewController () <UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     UITableViewController * reFreshView;
     PageInfoDomain * pageInfo;
@@ -55,23 +56,34 @@
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
-    reFreshView.tableView.rowHeight = 97;
     reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+    [self setupRefresh];
 }
 
 //获取数据加载表格
-- (void)getTableData{
+- (void)getTableData
+{
+    [self showLoadView];
     
     [[KGHttpService sharedService] getStudentSignRecordList:pageInfo.pageNo success:^(NSArray *recordArray)
     {
+        [self hidenLoadView];
         pageInfo.pageNo++;
         dataSource = [NSMutableArray arrayWithArray:recordArray];
         [self.view addSubview:reFreshView.tableView];
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+        [self hidenLoadView];
+        [self showNoNetView];
     }];
+}
+
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    
+    [self getTableData];
 }
 
 #pragma mark - 上啦下拉
@@ -122,6 +134,7 @@
     pageInfo.pageNo = 1;
     
     [dataSource removeAllObjects];
+    dataSource = nil;
     
     [[KGHttpService sharedService] getStudentSignRecordList:pageInfo.pageNo success:^(NSArray *articlesArray)
      {
@@ -143,25 +156,56 @@
 #pragma mark - num of row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataSource.count;
+    if (dataSource.count != 0)
+    {
+        return dataSource.count;
+    }
+    else
+    {
+        return 1;
+    }
 }
 
 #pragma mark - cell for row
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * StudentSignRecordID = @"signid";
-    
-    StudentSignRecordTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:StudentSignRecordID];
-    
-    if (cell == nil)
+    if (dataSource.count == 0)
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"StudentSignRecordTableViewCell" owner:nil options:nil] firstObject];
+        NoDataTableViewCell * no = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
+        
+        reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        reFreshView.tableView.scrollEnabled = NO;
+        
+        return no;
     }
-    
-    [cell resetValue:dataSource[indexPath.row] parame:nil];
-    
-    return cell;
+    else
+    {
+        static NSString * StudentSignRecordID = @"signid";
+        
+        StudentSignRecordTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:StudentSignRecordID];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"StudentSignRecordTableViewCell" owner:nil options:nil] firstObject];
+        }
+        
+        [cell resetValue:dataSource[indexPath.row] parame:nil];
+        
+        return cell;
+    }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (dataSource.count != 0)
+    {
+        return 97;
+    }
+    else
+    {
+        return 204;
+    }
+}
 
 @end

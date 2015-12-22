@@ -501,21 +501,28 @@
 //            NSLog(@"====%@",  [array objectAtIndex:3]);
             baseVC = [[InteractViewController alloc] init];
 //            [self showChildView:sharedAdView];
+            
+            [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         } case 11:
             baseVC = [[EnrolStudentsHomeVC alloc] init];
+            [self umengEvent:@"babyJoinCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 12:
             baseVC = [[AnnouncementListViewController alloc] init];
+            [self umengEvent:@"announcementCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 13:
             baseVC = [[StudentSignRecordViewController alloc] init];
+            [self umengEvent:@"signCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 14:
             baseVC = [[TimetableViewController alloc] init];
+            [self umengEvent:@"timetableCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 15:
             baseVC = [[RecipesListViewController alloc] init];
+            [self umengEvent:@"recipesCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 16:
             baseVC = [[GiftwareArticlesViewController alloc] init];
@@ -525,12 +532,15 @@
             break;
         case 18:
             baseVC = [[TeacherJudgeViewController alloc] init];
+            [self umengEvent:@"teacherCommentCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 19:
             [self loadMoreFunMenu:sender];
+            [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 20:
             baseVC = [[AddressBooksViewController alloc] init];
+            [self umengEvent:@"messageCount" attributes:@{@"name":@"iphone"} number:@(1)];
             baseVC.title = @"通讯录";
             break;
         default:
@@ -650,6 +660,15 @@
 {
     NSLog(@"尝试获取您的位置失败,请检查是否开启定位功能!");
 }
+
+- (void)umengEvent:(NSString *)eventId attributes:(NSDictionary *)attributes number:(NSNumber *)number
+{
+    NSString * numberKey = @"__ct__";
+    NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    [mutableDictionary setObject:[number stringValue] forKey:numberKey];
+    [MobClick event:eventId attributes:mutableDictionary];
+}
+
 
 
 @end

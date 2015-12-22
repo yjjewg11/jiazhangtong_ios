@@ -56,13 +56,15 @@
     popView.layer.cornerRadius = 5.0;
     popView.backgroundColor = [UIColor whiteColor];
     popView.lbTitle = [[UILabel alloc] initWithFrame:CGRectMake((kAlertWidth - kTitleWidth) * 0.5, kTitleTopMargin, kTitleWidth, kTitleHeight)];
+    
     popView.lbTitle.font = [UIFont boldSystemFontOfSize:20.0f];
     popView.lbTitle.textColor = [UIColor colorWithRed:56.0/255.0 green:64.0/255.0 blue:71.0/255.0 alpha:1];
     popView.lbTitle.textAlignment=NSTextAlignmentCenter;
     popView.lbTitle.backgroundColor=[UIColor clearColor];
     [popView addSubview:popView.lbTitle];
     popView.lbTitle.text = title;
-    switch (type) {
+    switch (type)
+    {
         case EYInputPopupView_Type_single_line_text:
         {
             popView.tfContent = [[EYTextField alloc] initWithFrame:CGRectMake((kAlertWidth - kContentWidth) * 0.5, CGRectGetMaxY(popView.lbTitle.frame)+kContentTopMargin, kContentWidth, kContentMinHeight)];
@@ -107,11 +109,10 @@
     popView.leftBtn.frame = leftBtnFrame;
     popView.rightBtn.frame = rightBtnFrame;
     
-    
     [popView.rightBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0xfca2a5)] forState:UIControlStateNormal];
     [popView.leftBtn setBackgroundImage:[UIImage imageWithColor:COLORRGB(0x90d3fe)] forState:UIControlStateNormal];
-    [popView.rightBtn setTitle:EYLOCALSTRING(@"OK") forState:UIControlStateNormal];
-    [popView.leftBtn setTitle:EYLOCALSTRING(@"Cancel") forState:UIControlStateNormal];
+    [popView.rightBtn setTitle:EYLOCALSTRING(@"确定") forState:UIControlStateNormal];
+    [popView.leftBtn setTitle:EYLOCALSTRING(@"取消") forState:UIControlStateNormal];
     popView.leftBtn.titleLabel.font = popView.rightBtn.titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [popView.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [popView.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -167,7 +168,8 @@
 - (void)dismissAlert
 {
     [self removeFromSuperview];
-    if (self.dismissBlock) {
+    if (self.dismissBlock)
+    {
         self.dismissBlock();
     }
 }
@@ -331,8 +333,10 @@
     [self slipView:NO offset:0];
 }
 
--(void)slipView:(BOOL)isUp offset:(float)offset{
+-(void)slipView:(BOOL)isUp offset:(float)offset
+{
     UIViewController *topVC = [self appRootViewController];
+    
     if (isUp) {
         [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             self.transform = CGAffineTransformMakeRotation(0);
@@ -341,6 +345,14 @@
                                      self.frame.size.width,
                                      self.frame.size.height);
         } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^
+            {
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+            
         }];
     } else {
         [UIView animateWithDuration:0.2f delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -350,6 +362,13 @@
                                      self.frame.size.width,
                                      self.frame.size.height);
         } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^
+             {
+                 
+             } completion:^(BOOL finished) {
+                 
+             }];
         }];
     }
    
