@@ -540,6 +540,8 @@
              {
                  [[KGHUD sharedHud] hide:self.view];
                  
+                 placeholderView.hidden = YES;
+                 
                  NSMutableString * str = [NSMutableString stringWithString:contentTextView.text];
                  
                  [str appendString:data];

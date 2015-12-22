@@ -119,40 +119,44 @@ static CGFloat viewFrameY = 10;
             
             if (newText.tag == 110)
             {
-                return;
+                
             }
-            
-			CGPoint textPoint = [newText convertPoint:CGPointMake(0, newText.frame.size.height + spacerY) toView:objectView];
-            
-            if (rect.size.height - textPoint.y < kheight) {
+            else
+            {
+                CGPoint textPoint = [newText convertPoint:CGPointMake(0, newText.frame.size.height + spacerY) toView:objectView];
                 
-                
-                CGFloat height = rect.size.height;
-                CGFloat y = height - textPoint.y - kheight + viewFrameY;
-                
-                CGFloat h2 = height - (height + y);
-                if(h2 > kheight) {
-                    y -= kheight-h2;
+                if (rect.size.height - textPoint.y < kheight) {
+                    
+                    
+                    CGFloat height = rect.size.height;
+                    CGFloat y = height - textPoint.y - kheight + viewFrameY;
+                    
+                    CGFloat h2 = height - (height + y);
+                    if(h2 > kheight) {
+                        y -= kheight-h2;
+                    }
+                    
+                    rect.origin.y = y;
+                    emojiY = textPoint.y - viewFrameH;
+                } else {
+                    rect.origin.y = viewFrameY;
                 }
-                
-                rect.origin.y = y;
-                emojiY = textPoint.y - viewFrameH;
-            } else {
-                rect.origin.y = viewFrameY;
             }
-            
 		}
 		else {
 			UITextView *newView = ((UITextView *)textField);
             if (newView.tag == 110)
             {
-                return;
+                
             }
-			CGPoint textPoint = [newView convertPoint:CGPointMake(0, newView.frame.size.height + spacerY) toView:objectView];
-            if (rect.size.height - textPoint.y < kheight) {
-				rect.origin.y = rect.size.height - textPoint.y - kheight + viewFrameY;
-                emojiY = textPoint.y - viewFrameH;
-            } else rect.origin.y = viewFrameY;
+            else
+            {
+                CGPoint textPoint = [newView convertPoint:CGPointMake(0, newView.frame.size.height + spacerY) toView:objectView];
+                if (rect.size.height - textPoint.y < kheight) {
+                    rect.origin.y = rect.size.height - textPoint.y - kheight + viewFrameY;
+                    emojiY = textPoint.y - viewFrameH;
+                } else rect.origin.y = viewFrameY;
+            }
 		}
     } else {
         rect.origin.y = viewFrameY + 64;

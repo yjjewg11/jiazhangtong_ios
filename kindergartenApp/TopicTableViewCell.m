@@ -160,7 +160,7 @@
     self.nameLab.text = topic.create_user;
     
     //title
-    if (topic.url == nil)
+    if (topic.url == nil || [topic.url isEqualToString:@""])
     {
         self.titleLab.frame = self.topicFrame.titleLabF;
         self.titleLab.text = topic.title;
