@@ -104,41 +104,43 @@
     _studentInfo.waipo_tel  = [KGNSStringUtil trimString:waipoTextField.text];
 }
 
-- (BOOL)validateInputInView {
-    BOOL judgeInput = YES;
-    BOOL isAllEmpty = YES;
-    NSMutableArray * tempTextFieldMArray = [[NSMutableArray alloc] init];
-    for(NSInteger i=Number_Zero; i<Number_Four; i++) {
-        KGTextField * textField = (KGTextField *)[self.view viewWithTag:i+Number_Ten];
-        if([KGNSStringUtil trimString:textField.text].length > Number_Zero) {
-            [tempTextFieldMArray addObject:textField];
-            isAllEmpty = NO;
-        }
-    }
-    
-    if(isAllEmpty) {
-        //都为空
-        [self showMessage];
-        judgeInput = NO;
-    } else {
-        BOOL judge = YES;
-        for(KGTextField * textField in tempTextFieldMArray) {
-            judge = [KGFormVerify validateMobile:textField.text];
-            if(!judge) {
-                [textField becomeFirstResponder];
-                break;
-            }
-        }
-        
-        if(!judge) {
-            NSDictionary * dic = [NSDictionary dictionaryWithObject:phoneValMsg forKey:Key_Notification_MessageText];
-            [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
-        }
-        
-        judgeInput = judge;
-    }
-    
-    return judgeInput;
+- (BOOL)validateInputInView
+{
+//    BOOL judgeInput = YES;
+//    BOOL isAllEmpty = YES;
+//    NSMutableArray * tempTextFieldMArray = [[NSMutableArray alloc] init];
+//    for(NSInteger i=Number_Zero; i<Number_Four; i++) {
+//        KGTextField * textField = (KGTextField *)[self.view viewWithTag:i+Number_Ten];
+//        if([KGNSStringUtil trimString:textField.text].length > Number_Zero) {
+//            [tempTextFieldMArray addObject:textField];
+//            isAllEmpty = NO;
+//        }
+//    }
+//    
+//    if(isAllEmpty) {
+//        //都为空
+//        [self showMessage];
+//        judgeInput = NO;
+//    } else {
+//        BOOL judge = YES;
+//        for(KGTextField * textField in tempTextFieldMArray) {
+//            judge = [KGFormVerify validateMobile:textField.text];
+//            if(!judge) {
+//                [textField becomeFirstResponder];
+//                break;
+//            }
+//        }
+//        
+//        if(!judge) {
+//            NSDictionary * dic = [NSDictionary dictionaryWithObject:phoneValMsg forKey:Key_Notification_MessageText];
+//            [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
+//        }
+//        
+//        judgeInput = judge;
+//    }
+//    
+//    return judgeInput;
+    return YES;
 }
 
 //提示都为空

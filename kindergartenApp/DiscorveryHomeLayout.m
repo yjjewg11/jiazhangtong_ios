@@ -129,7 +129,7 @@
 #pragma mark - contentSize
 - (CGSize)collectionViewContentSize
 {
-    return CGSizeMake(0, _newMaxHeight);
+    return CGSizeMake(0, _newMaxHeight + 40);
 }
 
 - (void)prepareLayout
@@ -137,7 +137,6 @@
     [super prepareLayout];
     
     //计算所有cell的属性
-    _newMaxHeight = 0;
     [self.attrsArray removeAllObjects];
     NSInteger count = [self.collectionView numberOfItemsInSection:0];
     for (NSInteger i=0; i<count; i++)

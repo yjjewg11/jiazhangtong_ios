@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmn-g9-mer">
-                            <rect key="frame" x="16" y="15" width="288" height="70"/>
+                            <rect key="frame" x="16" y="79" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="6bI-h4-9Ly">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -51,7 +51,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SMM-B1-01o">
-                            <rect key="frame" x="16" y="85" width="288" height="70"/>
+                            <rect key="frame" x="16" y="149" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="otx-O1-FBi">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -78,7 +78,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8uJ-gK-NGC">
-                            <rect key="frame" x="16" y="155" width="288" height="70"/>
+                            <rect key="frame" x="16" y="219" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="dO3-9U-Fb7">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -105,7 +105,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="snB-bW-VUy">
-                            <rect key="frame" x="16" y="225" width="288" height="70"/>
+                            <rect key="frame" x="16" y="289" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="Dpk-9d-fnq">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -137,7 +137,7 @@
                         <constraint firstItem="snB-bW-VUy" firstAttribute="top" secondItem="8uJ-gK-NGC" secondAttribute="bottom" id="9y4-cv-5td"/>
                         <constraint firstItem="SMM-B1-01o" firstAttribute="top" secondItem="hmn-g9-mer" secondAttribute="bottom" id="C2R-Lx-BP8"/>
                         <constraint firstAttribute="centerX" secondItem="SMM-B1-01o" secondAttribute="centerX" id="C2i-Ho-flh"/>
-                        <constraint firstItem="hmn-g9-mer" firstAttribute="top" secondItem="JdB-4q-2op" secondAttribute="top" constant="15" id="Ien-n3-jGD"/>
+                        <constraint firstItem="hmn-g9-mer" firstAttribute="top" secondItem="JdB-4q-2op" secondAttribute="top" constant="79" id="Ien-n3-jGD"/>
                         <constraint firstAttribute="centerX" secondItem="snB-bW-VUy" secondAttribute="centerX" id="NAV-G2-lND"/>
                         <constraint firstAttribute="centerX" secondItem="8uJ-gK-NGC" secondAttribute="centerX" id="OcK-Pj-Eo5"/>
                         <constraint firstItem="8uJ-gK-NGC" firstAttribute="top" secondItem="SMM-B1-01o" secondAttribute="bottom" id="Uaw-8e-AZD"/>
@@ -145,7 +145,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="JdB-4q-2op" secondAttribute="bottom" id="3Tj-9h-1xz"/>
                 <constraint firstItem="JdB-4q-2op" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PML-Wx-uuD"/>

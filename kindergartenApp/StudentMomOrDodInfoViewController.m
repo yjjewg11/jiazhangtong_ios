@@ -46,13 +46,13 @@
  */
 - (void)addTextFieldToMArray
 {
-    [nameTextField setTextFielType:KGTextFielType_Empty];
-    [nameTextField setMessageStr:@"姓名不能为空"];
-    [textFieldMArray addObject:nameTextField];
-    
-    [telTextField setTextFielType:KGTextFielType_Empty];
-    [telTextField setMessageStr:@"电话不能为空"];
-    [textFieldMArray addObject:telTextField];
+//    [nameTextField setTextFielType:KGTextFielType_Empty];
+//    [nameTextField setMessageStr:@"姓名不能为空"];
+//    [textFieldMArray addObject:nameTextField];
+//    
+//    [telTextField setTextFielType:KGTextFielType_Empty];
+//    [telTextField setMessageStr:@"电话不能为空"];
+//    [textFieldMArray addObject:telTextField];
 }
 
 
@@ -67,9 +67,10 @@
 
 
 //保存按钮点击
-- (void)saveStudentBaseInfo {
-    if([self validateInputInView]) {
-        
+- (void)saveStudentBaseInfo
+{
+    if([self validateInputInView])
+    {
         [self packageData];
         
         //提交数据

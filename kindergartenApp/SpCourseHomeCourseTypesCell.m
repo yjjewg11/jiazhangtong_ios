@@ -59,7 +59,7 @@
         CGFloat itemY = 0;
         CGFloat itemX = 0;
         
-        if (i<=4)
+        if (i<4)
         {
             itemX = margin4 + (margin4 * i) + ItemWidth * i;
         }

@@ -22,6 +22,7 @@
 #import "MineHomeVC.h"
 
 @interface KGTabBarViewController ()
+
 @end
 
 @implementation KGTabBarViewController
@@ -29,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     // 1.初始化子控制器
     // 1.初始化子控制器
     HomeViewController * home = [[HomeViewController alloc] init];
@@ -51,6 +51,7 @@
     
     // 2.更换系统自带的tabbar
     [KGHttpService sharedService].tabBarViewController = self;
+    
 }
 
 /**
@@ -86,6 +87,5 @@
     // 添加为子控制器
     [self addChildViewController:nav];
 }
-
 
 @end

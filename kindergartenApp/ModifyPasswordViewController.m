@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"修改密码";
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithTitle:@"保存" style:UIBarButtonItemStylePlain target:self action:@selector(handleSavePwd)];
     [rightItem setTintColor:[UIColor whiteColor]];

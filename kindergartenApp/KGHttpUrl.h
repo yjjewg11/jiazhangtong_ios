@@ -209,4 +209,7 @@
 + (NSString *)uploadPicUrl;
 
 + (NSString *)getTitleUrl;
+
+
++ (NSString *)meiRiHuiDiaoUrl;
 @end

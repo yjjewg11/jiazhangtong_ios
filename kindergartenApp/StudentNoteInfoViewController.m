@@ -65,15 +65,16 @@
 
 //验证输入框
 - (BOOL)validateInputInView {
-    BOOL judge = YES;
-    NSString * noteStr = [KGNSStringUtil trimString:noteTextView.text];
-    if(noteStr.length == Number_Zero) {
-        judge = NO;
-        NSDictionary * dic = [NSDictionary dictionaryWithObject:@"备注不能为空" forKey:Key_Notification_MessageText];
-        [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
-    }
-    
-    return judge;
+//    BOOL judge = YES;
+//    NSString * noteStr = [KGNSStringUtil trimString:noteTextView.text];
+//    if(noteStr.length == Number_Zero) {
+//        judge = NO;
+//        NSDictionary * dic = [NSDictionary dictionaryWithObject:@"备注不能为空" forKey:Key_Notification_MessageText];
+//        [[NSNotificationCenter defaultCenter]postNotificationName:Key_Notification_Message object:self userInfo:dic];
+//    }
+//    
+//    return judge;
+    return YES;
 }
 
 #pragma UITextViewDelegate

@@ -45,7 +45,7 @@
     [_myTitleLbl setVerticalAlignment:VerticalAlignmentTop];
     [self addSubview:_myTitleLbl];
     
-    _mySummaryLbl = [[MyUILabel alloc] initWithFrame:CGRectMake(70, 70, KGSCREEN.size.width - 70 - 15, 50)];
+    _mySummaryLbl = [[MyUILabel alloc] initWithFrame:CGRectMake(70, 50, KGSCREEN.size.width - 70 - 15, 50)];
     _mySummaryLbl.backgroundColor = [UIColor whiteColor];
     _mySummaryLbl.textAlignment = UITextAlignmentLeft;
     _mySummaryLbl.numberOfLines = 3;
@@ -59,7 +59,7 @@
 
 - (void)setData:(DiscorveryReMenJingXuanDomain *)domain
 {
-    _myTitleLbl.text = domain.title;
+    _myTitleLbl.text = [domain.title stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     self.dzLbl.text = [NSString stringWithFormat:@"%ld",(long)domain.yes_count];
     self.dzLbl.layer.cornerRadius = 5;
@@ -72,7 +72,7 @@
     }
     else
     {
-        _mySummaryLbl.text = domain.summary;
+        _mySummaryLbl.text = [domain.summary stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     }
 
     

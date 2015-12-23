@@ -428,7 +428,7 @@
         </view>
     </objects>
     <resources>
-        <image name="head_def" width="45" height="45"/>
+        <image name="head_def" width="5" height="13"/>
         <image name="youjiantou" width="7" height="12"/>
     </resources>
 </document>

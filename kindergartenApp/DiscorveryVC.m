@@ -19,11 +19,22 @@
 #import "DiscorveryMeiRiTuiJianDomain.h"
 #import "DiscorveryNewNumberDomain.h"
 #import "DiscorveryJingXuanCell.h"
-#import "DiscorveryWebVC.h"
+#import "KGNavigationController.h"
+#import "ZYQAssetPickerController.h"
+#import "UMSocial.h"
+#import "ShareDomain.h"
 
-@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate,TuiJianCellDelegate>
+@interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate,TuiJianCellDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UMSocialUIDelegate,TestJSExport,UIImagePickerControllerDelegate,ZYQAssetPickerControllerDelegate>
 {
+    NSString * _jsessionId;
+    
+    UIActionSheet * _myActionSheet;
+    
+    JSContext * _context;
+    
     UICollectionView * _collectionView;
+    
+    UIWebView * _webview;
     
     DiscorveryMeiRiTuiJianDomain * _tuijianDomain;
     
@@ -42,8 +53,6 @@
 
 @property (strong, nonatomic) NSString * groupuuid;
 
-@property (strong, nonatomic) DiscorveryWebVC * webVC;
-
 @end
 
 @implementation DiscorveryVC
@@ -53,42 +62,73 @@ static NSString *const TuiJianColl= @"tuijiancoll";
 static NSString *const TopicColl = @"topiccoll";
 static NSString *const Nodata = @"nodata";
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    self.navigationController.navigationBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
-}
-
 - (void)tryBtnClicked
 {
     [self getTuiJianData];
     
     [self initCollectionView];
+    
+    [self initWebView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    NSNotification * no = [[NSNotification alloc] initWithName:@"homerefreshnum" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:no];
     
-    if (_webVC != nil)
+    if (_webview.hidden == NO)
     {
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
         self.navigationController.navigationBarHidden = YES;
     }
-    else
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    self.navigationController.navigationBarHidden = NO;
+}
+
+- (void)initWebView
+{
+    _webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64)];
+    
+    _webview.delegate = self;
+    
+    _webview.scrollView.bounces = NO;
+    
+    _webview.scrollView.showsHorizontalScrollIndicator = NO;
+    
+    _webview.scrollView.showsVerticalScrollIndicator = NO;
+    
+    [self.view addSubview:_webview];
+    
+    _webview.hidden = YES;
+}
+
+#pragma mark - webview dele
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    _context = [[JSContext alloc] init];
+    
+    _context = [webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    //打印异常
+    _context.exceptionHandler =
+    ^(JSContext *context, JSValue *exceptionValue)
     {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        self.navigationController.navigationBarHidden = NO;
-    }
+        context.exception = exceptionValue;
+        NSLog(@"异常:%@", exceptionValue);
+    };
     
-    NSNotification * no = [[NSNotification alloc] initWithName:@"homerefreshnum" object:nil userInfo:nil];
+    //以 JSExport 协议关联 native 的方法
+    _context[@"JavaScriptCall"] = self;
     
-    [[NSNotificationCenter defaultCenter] postNotification:no];
+    [self hidenLoadView];
+    _webview.hidden = NO;
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideWebVC) name:@"deallocwebview" object:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)updateNumData
@@ -117,8 +157,9 @@ static NSString *const Nodata = @"nodata";
     
     [self initCollectionView];
     
+    [self initWebView];
+    
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(updateNumData) name:@"updateNumData" object:nil];
 }
 
@@ -250,7 +291,21 @@ static NSString *const Nodata = @"nodata";
             break;
         case 1:
         {
-            [self setupWebView:nil];
+             NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+             NSString * url = [defu objectForKey:@"sns_url"];
+            
+            if ([url isEqualToString:@""])
+            {
+                return;
+            }
+            else
+            {
+                _collectionView.hidden = YES;
+                
+                [self showLoadView];
+                
+                [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+            }
         }
             break;
         case 2:
@@ -267,65 +322,71 @@ static NSString *const Nodata = @"nodata";
     }
 }
 
+#pragma mark - 每日推荐代理
+- (void)openTuiJianWebView:(NSString *)url
+{
+    if (_tuijianDomain.url == nil || [_tuijianDomain.url isEqualToString:@""])
+    {
+        return;
+    }
+    else
+    {
+        _collectionView.hidden = YES;
+        
+        [self showLoadView];
+        
+        [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        
+        [[KGHttpService sharedService] meiRiJingXuanHuiDiao:^(NSString *data)
+        {
+            
+        }
+        faild:^(NSString *errorMsg)
+        {
+            NSLog(@"每日推荐回调失败 + %@",errorMsg);
+        }];
+    }
+}
+
 #pragma mark - 点击跳转
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row >= 2)
     {
-        [self setupWebView:((DiscorveryReMenJingXuanDomain *)_remenjingxuanData[indexPath.row-2]).webview_url];
+        DiscorveryReMenJingXuanDomain * domain = _remenjingxuanData[indexPath.row - 2];
+        
+        NSString * url = domain.webview_url;
+        
+        if (url == nil || [url isEqualToString:@""])
+        {
+            return;
+        }
+        else
+        {
+            _collectionView.hidden = YES;
+            
+            NSArray * nCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
+            
+            // 设置header，通过遍历cookies来一个一个的设置header
+            for (NSHTTPCookie *cookie in nCookies)
+            {
+                NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:cookie.properties];
+                
+                [dict setValue:@"/" forKey:@"Path"];
+                [dict setValue:[self cutUrlDomain:url] forKey:@"Domain"];
+                
+                NSHTTPCookie * ck = [NSHTTPCookie cookieWithProperties:dict];
+                
+                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:@[ck]
+                                                                   forURL:[NSURL URLWithString:url]
+                                                          mainDocumentURL:nil];
+            }
+            
+            [self showLoadView];
+            
+            [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        }
     }
-}
-
-- (void)openTuiJianWebView:(NSString *)url
-{
-    [self setupWebView:url];
-}
-
-#pragma mark - 创建webview
-/**
- *  不传url默认就是话题url
- *
- *  @param url 需要传递的url
- */
-- (void)setupWebView:(NSString *)otherUrl
-{
-    DiscorveryWebVC * webvc;
-    
-    if (_webVC == nil)
-    {
-         webvc = [[DiscorveryWebVC alloc] init];
-        
-        _webVC = webvc;
-        
-        webvc.webViewFrame = CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64);
-        
-        [self.view addSubview:webvc.view];
-    }
-    else
-    {
-        _webVC.view.alpha = 1;
-    }
-    
-    if (otherUrl == nil)
-    {
-        NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
-        
-        NSString * url = [defu objectForKey:@"sns_url"];
-        
-        //    [webvc loadWithCookieSettingsUrl:@"http://120.25.212.44/px-rest/phone_Api/index.html" cookieDomain:nil path:nil];
-        
-        [webvc loadWithCookieSettingsUrl:url cookieDomain:[webvc cutUrlDomain:url] path:nil];
-    }
-    else
-    {
-        [webvc loadWithCookieSettingsUrl:otherUrl cookieDomain:[webvc cutUrlDomain:otherUrl] path:nil];
-    }
-    
-    _collectionView.hidden = YES;
-    
-    self.navigationController.navigationBarHidden = YES;
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:0];
-    
 }
 
 #pragma mark - 初始化collectionview
@@ -336,7 +397,7 @@ static NSString *const Nodata = @"nodata";
     
     _layOut = layout;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 44 - 70) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
     
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.showsVerticalScrollIndicator = NO;
@@ -361,27 +422,6 @@ static NSString *const Nodata = @"nodata";
     [self setupRefresh];
 }
 
-#pragma mark - webview通知
-- (void)hideWebVC
-{
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-       _collectionView.hidden = NO;
-       
-       [UIView animateWithDuration:0.4 animations:^
-        {
-            _webVC.view.transform = CGAffineTransformMakeTranslation(-APPWINDOWWIDTH, 0);
-            _webVC.view.alpha = 0;
-        }];
-        
-        _webVC = nil;
-        
-       [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:0];
-       self.navigationController.navigationBarHidden = NO;
-    });
-}
-
-
 #pragma mark - 上拉刷新，下拉加载数据
 - (void)setupRefresh
 {
@@ -400,6 +440,7 @@ static NSString *const Nodata = @"nodata";
          
          if (arr.count == 0)
          {
+             _collectionView.footerRefreshingText = @"没有更多了...";
              [_collectionView footerEndRefreshing];
          }
          else
@@ -420,4 +461,240 @@ static NSString *const Nodata = @"nodata";
         
      }];
 }
+
+- (NSString *)cutUrlDomain:(NSString *)url
+{
+    NSMutableString * tempurl = [[NSMutableString alloc] initWithString:url];
+    
+    NSString * myUrl = [tempurl componentsSeparatedByString:@"//"][1];
+    NSString * secondUrl = [myUrl componentsSeparatedByString:@"/"][0];
+    
+    NSString * domain = nil;
+    
+    if ([secondUrl rangeOfString:@":"].location != NSNotFound)
+    {
+        domain = [secondUrl componentsSeparatedByString:@":"][0];
+    }
+    else
+    {
+        domain = secondUrl;
+    }
+    
+    return domain;
+}
+
+#pragma mark - 网页使用的方法
+- (void)finishProject:(NSString *)url
+{
+    _collectionView.hidden = NO;
+    _webview.hidden = YES;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    self.navigationController.navigationBarHidden = NO;
+}
+
+#pragma mark - js调用方法
+- (void)jsessionToPhone:(NSString *)id
+{
+    _jsessionId = id;
+}
+
+- (NSString *)getJsessionid:(NSString *)id
+{
+    return [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
+}
+
+
+- (void)setShareContent:(NSString *)title content:(NSString *)content pathurl:(NSString *)pathurl httpurl:(NSString *)httpurl
+{
+    ShareDomain * domain = [[ShareDomain alloc] init];
+    
+    domain.title = title;
+    
+    domain.pathurl = pathurl;
+    
+    domain.httpurl = httpurl;
+    
+    domain.content = title;
+    
+    //微博
+    [UMSocialData defaultData].extConfig.sinaData.urlResource.resourceType = UMSocialUrlResourceTypeImage;
+    [UMSocialData defaultData].extConfig.sinaData.shareText = domain.httpurl;
+    //微信
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeWeb;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = domain.httpurl;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = domain.httpurl;
+    //qq
+    [UMSocialData defaultData].extConfig.qqData.urlResource.resourceType = UMSocialUrlResourceTypeImage;
+    [UMSocialData defaultData].extConfig.qqData.url = domain.httpurl;
+    
+    [UMSocialSnsService presentSnsIconSheetView:self appKey:@"55be15a4e0f55a624c007b24" shareText:domain.content shareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:domain.pathurl]]] shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToWechatSession,UMShareToWechatTimeline,UMShareToQQ,nil] delegate:self];
+}
+
+- (void)selectImgPic:(NSString *)groupuuid
+{
+    [self uploadAllImages];
+}
+
+- (void)selectHeadPic
+{
+    _myActionSheet = [[UIActionSheet alloc]
+                      initWithTitle:nil
+                      delegate:self
+                      cancelButtonTitle:@"取消"
+                      destructiveButtonTitle:nil
+                      otherButtonTitles: @"打开照相机", @"从手机相册获取",nil];
+    
+    [_myActionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //呼出的菜单按钮点击后的响应
+    if (buttonIndex == _myActionSheet.cancelButtonIndex)
+    {
+        NSLog(@"取消");
+    }
+    
+    switch (buttonIndex)
+    {
+        case 0:  //打开照相机拍照
+            [self takePhoto];
+            break;
+            
+        case 1:  //打开本地相册
+            [self LocalPhoto];
+            break;
+    }
+}
+
+//开始拍照
+-(void)takePhoto
+{
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        //设置拍照后的图片可被编辑
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        
+        [self presentViewController:picker animated:YES completion:nil];
+    }else
+    {
+        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
+    }
+}
+
+//打开本地相册
+-(void)LocalPhoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    //设置选择后的图片可被编辑
+    picker.allowsEditing = YES;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+//上传头像
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage * image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        image = [self imageWithImageSimple:image scaledToSize:CGSizeMake(198.0, 198.0)];
+        NSData *data;
+        data = UIImageJPEGRepresentation(image, 0.5);
+        
+        //转base64
+        NSString * imgBase64Str = [data base64EncodedStringWithOptions:0];
+        
+        NSString * commitStr = [NSString stringWithFormat:@"%@%@",@"data:image/png;base64,",imgBase64Str];
+        
+        NSString *imgJs = [NSString stringWithFormat:@"javascript:G_jsCallBack.selectHeadPic_callback('%@')", commitStr];
+        
+        [_webview stringByEvaluatingJavaScriptFromString:imgJs];
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (void)uploadAllImages
+{
+    ZYQAssetPickerController *picker = [[ZYQAssetPickerController alloc] init];
+    picker.maximumNumberOfSelection = 9;
+    picker.assetsFilter = [ALAssetsFilter allPhotos];
+    picker.showEmptyGroups = NO;
+    picker.delegate = self;
+    picker.selectionFilter = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        if ([[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyType] isEqual:ALAssetTypeVideo]) {
+            NSTimeInterval duration = [[(ALAsset*)evaluatedObject valueForProperty:ALAssetPropertyDuration] doubleValue];
+            return duration >= 5;
+        } else {
+            return YES;
+        }
+    }];
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void)assetPickerController:(ZYQAssetPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    for (int i=0; i<assets.count; i++)
+    {
+        ALAsset *asset=assets[i];
+        UIImage *tempImg=[UIImage imageWithCGImage:asset.defaultRepresentation.fullScreenImage];
+        //tempImg = [UtilMethod imageWithImageSimple:tempImg scaledToSize:CGSizeMake(120.0, 120.0)];
+        NSData *data;
+        data = UIImageJPEGRepresentation(tempImg, 0.1);
+        
+        //转base64
+        NSString * imgBase64Str = [data base64EncodedStringWithOptions:0];
+        
+        NSString * commitStr = [NSString stringWithFormat:@"%@%@",@"data:image/png;base64,",imgBase64Str];
+        
+        NSString *imgJs = [NSString stringWithFormat:@"javascript:G_jsCallBack.selectPic_callback('%@')", commitStr];
+        
+        [_webview stringByEvaluatingJavaScriptFromString:imgJs];
+    }
+}
+
+- (UIImage *)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // End the context
+    UIGraphicsEndImageContext();
+    
+    // Return the new image.
+    return newImage;
+}
+
+- (void)saveImage:(UIImage *)tempImage WithName:(NSString *)imageName
+{
+    NSData* imageData = UIImagePNGRepresentation(tempImage);
+    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentsDirectory = [paths objectAtIndex:0];
+    // Now we get the full path to the file
+    NSString* fullPathToFile = [documentsDirectory stringByAppendingPathComponent:imageName];
+    // and then we write it out
+    [imageData writeToFile:fullPathToFile atomically:NO];
+}
+
+
 @end

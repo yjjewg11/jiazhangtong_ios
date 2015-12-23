@@ -369,7 +369,6 @@
 		04FA59951C27E77C009689C7 /* ShareBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA59941C27E77C009689C7 /* ShareBtnView.xib */; };
 		04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA59971C27E863009689C7 /* ShareBtnView.m */; };
 		04FA7D081C1E95EE0035AF18 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D071C1E95EE0035AF18 /* JavaScriptCore.framework */; };
-		04FA7D0B1C1EA4B20035AF18 /* DiscorveryWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA7D0A1C1EA4B20035AF18 /* DiscorveryWebVC.m */; };
 		04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */; };
 		04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */; };
 		04FA7D141C1ECB040035AF18 /* MineHomeFunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA7D121C1ECB040035AF18 /* MineHomeFunCell.xib */; };
@@ -538,8 +537,6 @@
 		24AA0B4C1B690FA800DAC03B /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AA0B4A1B690FA800DAC03B /* ChatViewController.m */; };
 		24AA0B501B69112C00DAC03B /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AA0B4F1B69112C00DAC03B /* ChatModel.m */; };
 		24AA0B531B69134400DAC03B /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AA0B521B69134400DAC03B /* NSDate+Utils.m */; };
-		24AA0B881B692FFD00DAC03B /* CourseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AA0B861B692FFD00DAC03B /* CourseListViewController.m */; };
-		24AA0B891B692FFD00DAC03B /* CourseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24AA0B871B692FFD00DAC03B /* CourseListViewController.xib */; };
 		24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B0D9DD1B763B790030B73C /* RecipesInfoView.m */; };
 		24C46B281B5A28CF00A58F92 /* BaseKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C46B271B5A28CF00A58F92 /* BaseKeyboardViewController.m */; };
 		24C46B371B5A2A9900A58F92 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C46B351B5A2A9900A58F92 /* HomeViewController.m */; };
@@ -1316,8 +1313,6 @@
 		04FA59961C27E863009689C7 /* ShareBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareBtnView.h; sourceTree = "<group>"; };
 		04FA59971C27E863009689C7 /* ShareBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareBtnView.m; sourceTree = "<group>"; };
 		04FA7D071C1E95EE0035AF18 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		04FA7D091C1EA4B20035AF18 /* DiscorveryWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscorveryWebVC.h; sourceTree = "<group>"; };
-		04FA7D0A1C1EA4B20035AF18 /* DiscorveryWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscorveryWebVC.m; sourceTree = "<group>"; };
 		04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		04FA7D101C1ECB040035AF18 /* MineHomeFunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineHomeFunCell.h; sourceTree = "<group>"; };
 		04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineHomeFunCell.m; sourceTree = "<group>"; };
@@ -1634,9 +1629,6 @@
 		24AA0B511B69134400DAC03B /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
 		24AA0B521B69134400DAC03B /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
 		24AA0B541B69138F00DAC03B /* ACMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACMacros.h; sourceTree = "<group>"; };
-		24AA0B851B692FFD00DAC03B /* CourseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseListViewController.h; sourceTree = "<group>"; };
-		24AA0B861B692FFD00DAC03B /* CourseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseListViewController.m; sourceTree = "<group>"; };
-		24AA0B871B692FFD00DAC03B /* CourseListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseListViewController.xib; sourceTree = "<group>"; };
 		24B0D9DC1B763B790030B73C /* RecipesInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipesInfoView.h; sourceTree = "<group>"; };
 		24B0D9DD1B763B790030B73C /* RecipesInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipesInfoView.m; sourceTree = "<group>"; };
 		24C46B261B5A28CF00A58F92 /* BaseKeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseKeyboardViewController.h; sourceTree = "<group>"; };
@@ -3101,8 +3093,6 @@
 			children = (
 				04FB23651C16C37A009B57E2 /* DiscorveryVC.h */,
 				04FB23661C16C37A009B57E2 /* DiscorveryVC.m */,
-				04FA7D091C1EA4B20035AF18 /* DiscorveryWebVC.h */,
-				04FA7D0A1C1EA4B20035AF18 /* DiscorveryWebVC.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -3312,14 +3302,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		2474DFB91B6CCDD80021506F /* Recipes */ = {
+		2474DFB91B6CCDD80021506F /* Recipes(食谱) */ = {
 			isa = PBXGroup;
 			children = (
 				2474DFBC1B6CCE240021506F /* Controller */,
 				2474DFBB1B6CCE1D0021506F /* Model */,
 				2474DFBA1B6CCE150021506F /* View */,
 			);
-			name = Recipes;
+			name = "Recipes(食谱)";
 			sourceTree = "<group>";
 		};
 		2474DFBA1B6CCE150021506F /* View */ = {
@@ -3546,14 +3536,14 @@
 			name = Introduction;
 			sourceTree = "<group>";
 		};
-		2489B6751B5ABA6C00039E70 /* AddressBooks */ = {
+		2489B6751B5ABA6C00039E70 /* AddressBooks(通讯录) */ = {
 			isa = PBXGroup;
 			children = (
 				2489B6781B5ABA9900039E70 /* Controller */,
 				2489B6771B5ABA8E00039E70 /* Model */,
 				2489B6761B5ABA8000039E70 /* View */,
 			);
-			name = AddressBooks;
+			name = "AddressBooks(通讯录)";
 			sourceTree = "<group>";
 		};
 		2489B6761B5ABA8000039E70 /* View */ = {
@@ -3834,35 +3824,34 @@
 				04FB23611C16C311009B57E2 /* Discorvery(发现) */,
 				04F9C9821C0ECD380078A5F5 /* ZhaoSheng(宝宝入学) */,
 				04FEC5671BEDC98A00C642A6 /* Youhuihuodong(优惠活动) */,
-				F4885C601B7C4FF000AF97CF /* Favorites */,
-				F4DF3B9D1B78AC40001D9DF7 /* Timetable */,
-				F4E61B721B73432200E5851A /* Share */,
-				2474DFB91B6CCDD80021506F /* Recipes */,
+				F4885C601B7C4FF000AF97CF /* Favorites(收藏) */,
+				F4DF3B9D1B78AC40001D9DF7 /* Timetable(课程表) */,
+				F4E61B721B73432200E5851A /* Share(分享) */,
+				2474DFB91B6CCDD80021506F /* Recipes(食谱) */,
 				2474DFA81B6CB7AA0021506F /* SignRecord(签到记录) */,
 				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
-				24AA0B801B692FBD00DAC03B /* CourseList */,
-				24DE91AA1B67C1FC00D3FFCE /* Teacher */,
+				24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */,
 				F47AFEAA1B5E22C100D43F38 /* Announcement(公告) */,
-				2489B6751B5ABA6C00039E70 /* AddressBooks */,
+				2489B6751B5ABA6C00039E70 /* AddressBooks(通讯录) */,
 				F45EABCD1B563F75003C367C /* Base */,
-				24A175FA1B55505D00295997 /* Login */,
-				248B6AA41B19AD2C00FCB98F /* Home */,
-				24C46B4B1B5A2B8F00A58F92 /* Message */,
+				24A175FA1B55505D00295997 /* Login(登录) */,
+				248B6AA41B19AD2C00FCB98F /* Home(主页) */,
+				24C46B4B1B5A2B8F00A58F92 /* Message(消息) */,
 				24C46B421B5A2B4100A58F92 /* Interact(互动) */,
-				4D5CE7581B7E4308002F1088 /* Setting */,
-				4DE384511B7F726C009F12E4 /* MyCollection */,
+				4D5CE7581B7E4308002F1088 /* Setting(设置) */,
+				4DE384511B7F726C009F12E4 /* MyCollection(我的收藏) */,
 				24C46B391B5A2AC200A58F92 /* Me(我) */,
 			);
 			name = Module;
 			sourceTree = "<group>";
 		};
-		248B6AA41B19AD2C00FCB98F /* Home */ = {
+		248B6AA41B19AD2C00FCB98F /* Home(主页) */ = {
 			isa = PBXGroup;
 			children = (
 				248B6AA71B19AD4700FCB98F /* Controller */,
 				248B6AA61B19AD4000FCB98F /* Model */,
 			);
-			name = Home;
+			name = "Home(主页)";
 			sourceTree = "<group>";
 		};
 		248B6AA51B19AD3800FCB98F /* View */ = {
@@ -3977,7 +3966,7 @@
 			name = HUD;
 			sourceTree = "<group>";
 		};
-		24A175FA1B55505D00295997 /* Login */ = {
+		24A175FA1B55505D00295997 /* Login(登录) */ = {
 			isa = PBXGroup;
 			children = (
 				2489B61F1B5A39B900039E70 /* Coontroller */,
@@ -3985,7 +3974,7 @@
 				2489B6281B5A606A00039E70 /* Tool */,
 				2489B61D1B5A39AB00039E70 /* View */,
 			);
-			name = Login;
+			name = "Login(登录)";
 			sourceTree = "<group>";
 		};
 		24A3D3731B5E870E00D4C212 /* ItemBtn */ = {
@@ -4018,40 +4007,6 @@
 				24AA0B401B690F4300DAC03B /* UUProgressHUD.m */,
 			);
 			name = UUChat;
-			sourceTree = "<group>";
-		};
-		24AA0B801B692FBD00DAC03B /* CourseList */ = {
-			isa = PBXGroup;
-			children = (
-				24AA0B831B692FDA00DAC03B /* Controller */,
-				24AA0B821B692FD100DAC03B /* Model */,
-				24AA0B811B692FC900DAC03B /* View */,
-			);
-			name = CourseList;
-			sourceTree = "<group>";
-		};
-		24AA0B811B692FC900DAC03B /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		24AA0B821B692FD100DAC03B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		24AA0B831B692FDA00DAC03B /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				24AA0B851B692FFD00DAC03B /* CourseListViewController.h */,
-				24AA0B861B692FFD00DAC03B /* CourseListViewController.m */,
-				24AA0B871B692FFD00DAC03B /* CourseListViewController.xib */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		24C46B2A1B5A29F700A58F92 /* MessageView */ = {
@@ -4250,14 +4205,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		24C46B4B1B5A2B8F00A58F92 /* Message */ = {
+		24C46B4B1B5A2B8F00A58F92 /* Message(消息) */ = {
 			isa = PBXGroup;
 			children = (
 				24C46B4E1B5A2BB000A58F92 /* Controller */,
 				24C46B4D1B5A2BA500A58F92 /* Model */,
 				24C46B4C1B5A2B9800A58F92 /* View */,
 			);
-			name = Message;
+			name = "Message(消息)";
 			sourceTree = "<group>";
 		};
 		24C46B4C1B5A2B9800A58F92 /* View */ = {
@@ -4289,14 +4244,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		24DE91AA1B67C1FC00D3FFCE /* Teacher */ = {
+		24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */ = {
 			isa = PBXGroup;
 			children = (
 				24DE91AD1B67C22200D3FFCE /* Controller */,
 				24DE91AC1B67C21800D3FFCE /* Model */,
 				24DE91AB1B67C21100D3FFCE /* View */,
 			);
-			name = Teacher;
+			name = "Teacher(评价老师)";
 			sourceTree = "<group>";
 		};
 		24DE91AB1B67C21100D3FFCE /* View */ = {
@@ -4346,14 +4301,14 @@
 			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
-		4D5CE7581B7E4308002F1088 /* Setting */ = {
+		4D5CE7581B7E4308002F1088 /* Setting(设置) */ = {
 			isa = PBXGroup;
 			children = (
 				4D5CE7591B7E431B002F1088 /* Controller */,
 				4D5CE7731B7E434A002F1088 /* Model */,
 				4D5CE7741B7E4354002F1088 /* View */,
 			);
-			name = Setting;
+			name = "Setting(设置)";
 			sourceTree = "<group>";
 		};
 		4D5CE7591B7E431B002F1088 /* Controller */ = {
@@ -4401,14 +4356,14 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		4DE384511B7F726C009F12E4 /* MyCollection */ = {
+		4DE384511B7F726C009F12E4 /* MyCollection(我的收藏) */ = {
 			isa = PBXGroup;
 			children = (
 				4DE384571B7F7558009F12E4 /* Controller */,
 				4DE384581B7F7566009F12E4 /* Model */,
 				4DE384591B7F756C009F12E4 /* View */,
 			);
-			name = MyCollection;
+			name = "MyCollection(我的收藏)";
 			sourceTree = "<group>";
 		};
 		4DE384571B7F7558009F12E4 /* Controller */ = {
@@ -4699,14 +4654,14 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
-		F4885C601B7C4FF000AF97CF /* Favorites */ = {
+		F4885C601B7C4FF000AF97CF /* Favorites(收藏) */ = {
 			isa = PBXGroup;
 			children = (
 				F4885C631B7C500500AF97CF /* Controller */,
 				F4885C621B7C4FFF00AF97CF /* Model */,
 				F4885C611B7C4FF900AF97CF /* View */,
 			);
-			name = Favorites;
+			name = "Favorites(收藏)";
 			sourceTree = "<group>";
 		};
 		F4885C611B7C4FF900AF97CF /* View */ = {
@@ -4805,14 +4760,14 @@
 			name = MLEmojiLabel;
 			sourceTree = "<group>";
 		};
-		F4DF3B9D1B78AC40001D9DF7 /* Timetable */ = {
+		F4DF3B9D1B78AC40001D9DF7 /* Timetable(课程表) */ = {
 			isa = PBXGroup;
 			children = (
 				F4DF3BA01B78AC55001D9DF7 /* Controller */,
 				F4DF3B9F1B78AC4E001D9DF7 /* Model */,
 				F4DF3B9E1B78AC46001D9DF7 /* View */,
 			);
-			name = Timetable;
+			name = "Timetable(课程表)";
 			sourceTree = "<group>";
 		};
 		F4DF3B9E1B78AC46001D9DF7 /* View */ = {
@@ -4876,14 +4831,14 @@
 			name = DoImagePicker;
 			sourceTree = "<group>";
 		};
-		F4E61B721B73432200E5851A /* Share */ = {
+		F4E61B721B73432200E5851A /* Share(分享) */ = {
 			isa = PBXGroup;
 			children = (
 				F4E61B751B73434100E5851A /* Controller */,
 				F4E61B741B73433B00E5851A /* Model */,
 				F4E61B731B73433300E5851A /* View */,
 			);
-			name = Share;
+			name = "Share(分享)";
 			sourceTree = "<group>";
 		};
 		F4E61B731B73433300E5851A /* View */ = {
@@ -5396,7 +5351,6 @@
 				04A4DE201BF484DF002ABBB1 /* admogoVideo_5.png in Resources */,
 				04A4DE941BF484DF002ABBB1 /* webview_bar_close.png in Resources */,
 				04F9FBA31BF1A77E00AEFB88 /* UMSCommentInputControlleriPad.xib in Resources */,
-				24AA0B891B692FFD00DAC03B /* CourseListViewController.xib in Resources */,
 				04A4DE331BF484DF002ABBB1 /* adsmogo_button_share_default@2x.png in Resources */,
 				04A4DE991BF484DF002ABBB1 /* webview_bar_refresh.png in Resources */,
 			);
@@ -5450,7 +5404,6 @@
 				F487839A1B58DA1700CDC1A8 /* UIImageView+AFNetworking.m in Sources */,
 				F48783A31B58DA1700CDC1A8 /* MASViewAttribute.m in Sources */,
 				04A5A0901BE7591600024E21 /* SPCourseDetailVC.m in Sources */,
-				24AA0B881B692FFD00DAC03B /* CourseListViewController.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
 				04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */,
@@ -5716,7 +5669,6 @@
 				4D5CE6C81B7E3F76002F1088 /* FavoritesListViewController.m in Sources */,
 				2489B6601B5AB49E00039E70 /* MKAnnotationView+WebCache.m in Sources */,
 				2489B65F1B5AB49E00039E70 /* SDImageCache.m in Sources */,
-				04FA7D0B1C1EA4B20035AF18 /* DiscorveryWebVC.m in Sources */,
 				F4DF3BA81B78AC97001D9DF7 /* TimetableDomain.m in Sources */,
 				F4E636071B67939D00800924 /* MessageDomain.m in Sources */,
 				24A175E71B5541BF00295997 /* KGDBHelper.m in Sources */,

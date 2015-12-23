@@ -82,9 +82,6 @@
                saturation:0.67
                brightness:0.93
                     alpha:1];
-    
-    
-    
     // 启动tag页面
     [self.window switchRootViewController];
     

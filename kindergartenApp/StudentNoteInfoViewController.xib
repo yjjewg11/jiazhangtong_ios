@@ -21,7 +21,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UxS-jn-JLb">
-                            <rect key="frame" x="16" y="15" width="288" height="150"/>
+                            <rect key="frame" x="16" y="65" width="288" height="150"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="cfY-hW-FPb">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -65,11 +65,10 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="UxS-jn-JLb" secondAttribute="centerX" id="Onv-i5-RXL"/>
-                        <constraint firstItem="UxS-jn-JLb" firstAttribute="top" secondItem="dp1-yb-4gX" secondAttribute="top" constant="15" id="r4P-8D-G3L"/>
+                        <constraint firstItem="UxS-jn-JLb" firstAttribute="top" secondItem="dp1-yb-4gX" secondAttribute="top" constant="65" id="r4P-8D-G3L"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="dp1-yb-4gX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1SH-Ck-ean"/>
                 <constraint firstAttribute="bottom" secondItem="dp1-yb-4gX" secondAttribute="bottom" id="QYR-6L-tAJ"/>

@@ -323,4 +323,6 @@
 
 - (void)getTitle:(NSString *)url success:(void(^)(NSString * data))success faild:(void(^)(NSString * errorMsg))faild;
 
+
+- (void)meiRiJingXuanHuiDiao:(void(^)(NSString * data))success faild:(void(^)(NSString * errorMsg))faild;
 @end

@@ -490,4 +490,9 @@
     return URL(baseServiceURL, @"rest/share/getHtmlTitle.json");
 }
 
+#pragma mark - 每日精选回调
++ (NSString *)meiRiHuiDiaoUrl{
+    return URL(baseServiceURL, @"rest/userinfo/getMainTopic.json");
+}
+
 @end

@@ -24,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zge-Ps-SxK">
-                            <rect key="frame" x="16" y="15" width="288" height="70"/>
+                            <rect key="frame" x="16" y="85" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="YO3-td-eG0">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -51,7 +51,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyc-mc-9Wv">
-                            <rect key="frame" x="16" y="85" width="288" height="70"/>
+                            <rect key="frame" x="16" y="155" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="Lqz-m3-QQy">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -78,7 +78,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izN-ox-agg">
-                            <rect key="frame" x="16" y="155" width="288" height="70"/>
+                            <rect key="frame" x="16" y="225" width="288" height="70"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hongtiao" translatesAutoresizingMaskIntoConstraints="NO" id="wbb-V7-JPx">
                                     <rect key="frame" x="16" y="15" width="5" height="13"/>
@@ -110,13 +110,13 @@
                         <constraint firstItem="izN-ox-agg" firstAttribute="top" secondItem="tyc-mc-9Wv" secondAttribute="bottom" id="9do-Tn-1R6"/>
                         <constraint firstAttribute="centerX" secondItem="izN-ox-agg" secondAttribute="centerX" id="PJI-Ov-b4b"/>
                         <constraint firstAttribute="centerX" secondItem="zge-Ps-SxK" secondAttribute="centerX" id="UGb-O8-tGH"/>
-                        <constraint firstItem="zge-Ps-SxK" firstAttribute="top" secondItem="lCt-Qu-V5V" secondAttribute="top" constant="15" id="V6N-zD-63e"/>
+                        <constraint firstItem="zge-Ps-SxK" firstAttribute="top" secondItem="lCt-Qu-V5V" secondAttribute="top" constant="85" id="V6N-zD-63e"/>
                         <constraint firstAttribute="centerX" secondItem="tyc-mc-9Wv" secondAttribute="centerX" id="rIp-c6-XPK"/>
                         <constraint firstItem="tyc-mc-9Wv" firstAttribute="top" secondItem="zge-Ps-SxK" secondAttribute="bottom" id="xsa-cs-0ld"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="lCt-Qu-V5V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4zD-v2-nAN"/>
                 <constraint firstAttribute="trailing" secondItem="lCt-Qu-V5V" secondAttribute="trailing" id="TA2-Wr-1nO"/>
@@ -124,6 +124,7 @@
                 <constraint firstAttribute="bottom" secondItem="lCt-Qu-V5V" secondAttribute="bottom" id="tad-dW-ekK"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="242" y="249"/>
         </view>
     </objects>
     <resources>

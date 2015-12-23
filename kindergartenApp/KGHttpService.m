@@ -2139,5 +2139,21 @@
      }];
 }
 
+#pragma mark - 话题点击回调
+- (void)meiRiJingXuanHuiDiao:(void(^)(NSString * data))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl meiRiHuiDiaoUrl] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+
 
 @end

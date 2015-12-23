@@ -71,8 +71,8 @@
 //创建 tableview
 - (void)createTableView{
     _tableView = [[UITableView alloc] init];;
-    _tableView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT);
-    _tableView.origin = CGPointMake(0, APPSTATUSBARHEIGHT + APPTABBARHEIGHT - 65);
+    _tableView.size = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+    _tableView.origin = CGPointMake(0, 0);
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

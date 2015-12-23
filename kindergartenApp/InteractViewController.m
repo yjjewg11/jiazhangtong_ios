@@ -17,7 +17,6 @@
 #import "UIColor+Extension.h"
 #import "PostTopicViewController.h"
 #import "KGHttpUrl.h"
-#import "DiscorveryWebVC.h"
 #import "MJRefresh.h"
 #import "ShareDomain.h"
 #import "UMSocial.h"
