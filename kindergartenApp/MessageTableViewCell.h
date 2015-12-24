@@ -18,4 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel * subTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel * timeLabel;
 
+- (void)resetValue:(id)baseDomain parame:(NSMutableDictionary *)parameterDic;
+
 @end

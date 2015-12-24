@@ -262,6 +262,10 @@ static NSString *const CourseCellID = @"coursecellcoll";
     SpCourseHomeWFLayout *layout = [[SpCourseHomeWFLayout alloc] init];
     
     _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 44) collectionViewLayout:layout];
+    
+    _collectionView.showsHorizontalScrollIndicator = NO;
+    _collectionView.showsVerticalScrollIndicator = NO;
+    
     _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"SpCourseHomeAdCell" bundle:nil] forCellWithReuseIdentifier:@"adcellcoll"];

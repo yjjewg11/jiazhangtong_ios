@@ -81,7 +81,7 @@
 //初始化列表
 - (void)initReFreshView
 {
-    reFreshView = [[UITableViewController alloc] init];
+    reFreshView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
@@ -110,8 +110,6 @@
         NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
         
         reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
-        reFreshView.tableView.scrollEnabled = NO;
         
         return cell;
     }

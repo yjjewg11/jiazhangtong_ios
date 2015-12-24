@@ -7,7 +7,6 @@
 //
 
 #import "MessageViewController.h"
-#import "ReFreshTableViewController.h"
 #import "KGHttpService.h"
 #import "MessageDomain.h"
 #import "KGHUD.h"
@@ -25,28 +24,25 @@
 #import "ChatViewController.h"
 #import "StudentSignRecordViewController.h"
 #import "AppDelegate.h"
+#import "MJRefresh.h"
+#import "NoDataTableViewCell.h"
+#import "MessageTableViewCell.h"
 
-@interface MessageViewController () <KGReFreshViewDelegate> {
-    ReFreshTableViewController * reFreshView;
+@interface MessageViewController () <UITableViewDataSource,UITableViewDelegate>
+{
+    UITableViewController * reFreshView;
     PageInfoDomain * pageInfo;
+    NSMutableArray * dataSource;
 }
 
 @end
 
 @implementation MessageViewController
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-//    __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)[AppDelegate appDelegate].window.rootViewController;
-//    UIViewController * vc = [tabVC.childViewControllers objectAtIndex:Number_Two];
-//    vc.tabBarItem.image = [[UIImage imageNamed:@"xiaoxi2q"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//    [self performSelector:@selector(lazyRefresh) withObject:self afterDelay:0.5];
-}
-
 //延迟刷新
-- (void)lazyRefresh{
-    [reFreshView beginRefreshing];
+- (void)lazyRefresh\
+{
+    [reFreshView.tableView headerBeginRefreshing];
 }
 
 - (void)viewDidLoad {
@@ -55,58 +51,175 @@
     self.title = @"消息";
     
     [self initPageInfo];
+    
+    [self getTableData];
+    
     [self initReFreshView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (void)initPageInfo {
     if(!pageInfo) {
-        pageInfo = [[PageInfoDomain alloc] init];
+        pageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
     }
 }
 
-
 //获取数据加载表格
-- (void)getTableData{
-    pageInfo.pageNo = reFreshView.page;
-    pageInfo.pageSize = reFreshView.pageSize;
+- (void)getTableData
+{
+    [self showLoadView];
     
-    [[KGHttpService sharedService] getMessageList:pageInfo success:^(NSArray *messageArray) {
-        reFreshView.tableParam.dataSourceMArray = messageArray;
-        [reFreshView reloadRefreshTable];
-    } faild:^(NSString *errorMsg) {
-        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-        [reFreshView endRefreshing];
+    [[KGHttpService sharedService] getMessageList:pageInfo success:^(NSArray *messageArray)
+    {
+        pageInfo.pageNo++;
+        
+        [self hidenLoadView];
+        
+        dataSource = [NSMutableArray arrayWithArray:messageArray];
+        
+        [self.view addSubview:reFreshView.tableView];
+    }
+    faild:^(NSString *errorMsg)
+    {
+        [self hidenLoadView];
+        [self showNoNetView];
     }];
 }
 
 
 //初始化列表
-- (void)initReFreshView{
-    reFreshView = [[ReFreshTableViewController alloc] initRefreshView];
-    reFreshView._delegate = self;
-    reFreshView.tableParam.cellHeight       = 78;
-    reFreshView.tableParam.cellClassNameStr = @"MessageTableViewCell";
+- (void)initReFreshView
+{
+    reFreshView = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
+    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+    reFreshView.tableView.delegate = self;
+    reFreshView.tableView.dataSource = self;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
-    [reFreshView appendToView:self.contentView];
-    [reFreshView beginRefreshing];
+    reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self setupRefresh];
 }
 
-#pragma reFreshView Delegate
-
-/**
- *  选中cell
- *
- *  @param baseDomain  选中cell绑定的数据对象
- *  @param tableView   tableView
- *  @param indexPath   indexPath
- */
-- (void)didSelectRowCallBack:(id)baseDomain tableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+#pragma mark - 上啦下拉
+- (void)setupRefresh
+{
+    [reFreshView.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    reFreshView.tableView.footerPullToRefreshText = @"上拉加载更多";
+    reFreshView.tableView.footerReleaseToRefreshText = @"松开立即加载";
+    reFreshView.tableView.footerRefreshingText = @"正在加载中...";
     
-    MessageDomain * domain = (MessageDomain *)baseDomain;
+    [reFreshView.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    reFreshView.tableView.headerRefreshingText = @"正在刷新中...";
+    reFreshView.tableView.headerPullToRefreshText = @"下拉刷新";
+    reFreshView.tableView.headerReleaseToRefreshText = @"松开立即刷新";
+}
+
+- (void)footerRereshing
+{
+    [[KGHttpService sharedService] getMessageList:pageInfo success:^(NSArray *articlesArray)
+     {
+         if (articlesArray.count != 0)
+         {
+             pageInfo.pageNo ++;
+             
+             [dataSource addObjectsFromArray:articlesArray];
+             
+             [reFreshView.tableView footerEndRefreshing];
+             
+             [reFreshView.tableView reloadData];
+         }
+         else
+         {
+             reFreshView.tableView.footerRefreshingText = @"没有更多了...";
+             
+             [reFreshView.tableView footerEndRefreshing];
+         }
+         
+     }
+     faild:^(NSString *errorMsg)
+     {
+         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+         [reFreshView.tableView footerEndRefreshing];
+     }];
+}
+
+- (void)headerRereshing
+{
+    pageInfo.pageNo = 1;
+    
+    [dataSource removeAllObjects];
+    dataSource = nil;
+    
+    [[KGHttpService sharedService] getMessageList:pageInfo success:^(NSArray *articlesArray)
+     {
+         pageInfo.pageNo ++;
+         
+         dataSource = [NSMutableArray arrayWithArray:articlesArray];
+         
+         [reFreshView.tableView headerEndRefreshing];
+         
+         [reFreshView.tableView reloadData];
+     }
+     faild:^(NSString *errorMsg)
+     {
+         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+         [reFreshView.tableView headerEndRefreshing];
+     }];
+}
+
+#pragma mark - tableview delegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (dataSource.count == 0)
+    {
+        return 1;
+    }
+    else
+    {
+        return dataSource.count;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (dataSource.count == 0)
+    {
+        return 204;
+    }
+    else
+    {
+        return 78;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (dataSource.count == 0)
+    {
+        NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
+        
+        reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return cell;
+    }
+    else
+    {
+        static NSString * bbID = @"messageid";
+        
+        MessageTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:bbID];
+    
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"MessageTableViewCell" owner:nil options:nil] firstObject];
+        }
+        
+        [cell resetValue:dataSource[indexPath.row] parame:nil];
+        
+        return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MessageDomain * domain = dataSource[indexPath.row];
     
     BaseViewController * vc = nil;
     

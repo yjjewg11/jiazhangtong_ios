@@ -53,8 +53,8 @@
     }];
 }
 
-- (IBAction)dzBtnClicked:(UIButton *)sender {
-    
+- (IBAction)dzBtnClicked:(UIButton *)sender
+{
     if(sender.selected) {
         [[KGHttpService sharedService] delDZ:replyDomain.uuid success:^(NSString *msgStr) {
             sender.selected = NO;

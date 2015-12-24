@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIColor+flat.h"
 #import "MyUILabel.h"
+#import "KGNSStringUtil.h"
 
 @interface EnrolStudentsSchoolCell()
 
@@ -25,7 +26,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *studentNum;
 
-@property (weak, nonatomic) IBOutlet UITextView *summary;
+@property (strong, nonatomic) UITextView *summary;
+
+@property (strong, nonatomic) UIImageView *cupImgView;
+
+@property (weak, nonatomic) IBOutlet UIView *sepView;
 
 @end
 
@@ -48,10 +53,58 @@
     NSInteger halfCount = domain.ct_stars - intCount * 10;
     
     [self setUpStarts:intCount halfCount:halfCount];
-
-    self.summary.text = [self formatSummary:domain.summary];
     
-    self.summary.userInteractionEnabled = NO;
+    if (domain.summary == nil || [domain.summary isEqualToString:@""])
+    {
+        self.sepView.hidden = YES;
+        
+        self.height = 85;
+        
+        return;
+    }
+    else
+    {
+        self.sepView.hidden = NO;
+        
+        CGFloat padding = 10;
+        
+        self.cupImgView = [[UIImageView alloc] init];
+        self.cupImgView.frame = CGRectMake(padding + (self.img.width - 25), 90, 25, 25);
+        self.cupImgView.image = [UIImage imageNamed:@"newjiangbei"];
+        [self addSubview:self.cupImgView];
+        
+        self.summary = [[UITextView alloc] init];
+        
+        CGFloat summaryX = CGRectGetMaxX(self.cupImgView.frame) + 10;
+        CGFloat summaryW = (APPWINDOWWIDTH - CGRectGetMaxX(self.cupImgView.frame));
+        
+        self.summary.text = [self formatSummary:domain.summary];
+        
+        self.summary.textColor = [UIColor colorWithHexCode:@"#59bb3e"];
+        
+        self.summary.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+        
+        self.summary.userInteractionEnabled = NO;
+        
+        self.summary.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+        CGFloat summaryViewHeight = [self heightForString:[self formatSummary:domain.summary] fontSize:14 andWidth:summaryW];
+        
+        self.summary.frame = CGRectMake(summaryX, 90, summaryW, summaryViewHeight - 20);
+        
+        self.height = 85 + summaryViewHeight;
+        
+        [self addSubview:self.summary];
+    }
+}
+
+- (CGFloat) heightForString:(NSString *)value fontSize:(float)fontSize andWidth:(float)width
+{
+    UITextView *detailTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 0)];
+    detailTextView.font = [UIFont systemFontOfSize:fontSize];
+    detailTextView.text = value;
+    CGSize deSize = [detailTextView sizeThatFits:CGSizeMake(width,CGFLOAT_MAX)];
+    return deSize.height;
 }
 
 - (NSString *)formatSummary:(NSString *)summary

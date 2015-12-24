@@ -34,11 +34,11 @@
 #import "KGNavigationController.h"
 #import "LoginViewController.h"
 #import "YouHuiVC.h"
-#import "EnrolStudentsHomeVC.h"
 #import <CoreLocation/CoreLocation.h>
 #import "AddressBooksViewController.h"
 #import "FeHourGlass.h"
 #import "MBProgressHUD+HM.h"
+#import "EnrolStudentHomeVC.h"
 
 #import "AdMoGoDelegateProtocol.h"
 #import "AdMoGoView.h"
@@ -505,7 +505,7 @@
             [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         } case 11:
-            baseVC = [[EnrolStudentsHomeVC alloc] init];
+            baseVC = [[EnrolStudentHomeVC alloc] init];
             [self umengEvent:@"babyJoinCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 12:

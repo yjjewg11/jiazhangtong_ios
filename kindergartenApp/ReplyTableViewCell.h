@@ -23,7 +23,7 @@
     
 }
 
-
+- (void)resetValue:(id)baseDomain parame:(NSMutableDictionary *)parameterDic;
 - (IBAction)dzBtnClicked:(UIButton *)sender;
 
 @end

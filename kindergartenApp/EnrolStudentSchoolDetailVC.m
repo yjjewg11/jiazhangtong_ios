@@ -367,7 +367,6 @@ static NSString *const NoDataCell = @"nodata";
     }
     else
     {
-        
         EnrolStudentWebViewCell * webcell = [collectionView dequeueReusableCellWithReuseIdentifier:WebCellID forIndexPath:indexPath];
         
         webcell.delegate = self;
