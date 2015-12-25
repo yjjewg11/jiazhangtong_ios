@@ -8,6 +8,7 @@
 //
 
 #import "EnrolStudentSchoolDetailLayout.h"
+#import "KGNSStringUtil.h"
 
 @interface EnrolStudentSchoolDetailLayout()
 {
@@ -68,17 +69,23 @@
     if (indexPath.row == 0)
     {
         itemWidth = KGSCREEN.size.width;
-        if (self.haveSummary)
-        {
-            itemHeight = self.cellHeight - 60 + 144;
-        }
-        else
+        
+        if (self.domain.summary == nil || [self.domain.summary isEqualToString:@""])
         {
             itemHeight = 85;
         }
+        else
+        {
+            CGFloat padding = 10;
+            //计算cell高度
+            CGFloat summaryW = (APPWINDOWWIDTH - (10 + 70));
+            CGFloat summaryViewHeight = [self heightForString:self.domain.summary fontSize:14 andWidth:summaryW] - 10;
+            
+            itemHeight = 85 + padding * 2 + summaryViewHeight;
+        }
         
         itemX = 0;
-        itemY = 0;
+        itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;
         
         attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
@@ -142,6 +149,38 @@
     }
     
     return nil;
+}
+
+- (CGFloat) heightForString:(NSString *)value fontSize:(float)fontSize andWidth:(float)width
+{
+    UITextView *detailTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, width, 0)];
+    detailTextView.font = [UIFont systemFontOfSize:fontSize];
+    detailTextView.text = value;
+    CGSize deSize = [detailTextView sizeThatFits:CGSizeMake(width,CGFLOAT_MAX)];
+    return deSize.height;
+}
+
+- (CGFloat)calSummaryCellHeight:(NSString *)content
+{
+    CGFloat lblW = KGSCREEN.size.width - 90 - 8;
+    
+    CGFloat itemHeight = [KGNSStringUtil heightForString:[self formatSummary:content] andWidth:lblW];
+    
+    return itemHeight;
+}
+
+- (NSString *)formatSummary:(NSString *)summary
+{
+    NSArray * arr = [summary componentsSeparatedByString:@","];
+    
+    NSMutableString * mstr = [NSMutableString string];
+    
+    for (NSString * str in arr)
+    {
+        [mstr appendString:[NSString stringWithFormat:@"%@\r\n",str]];
+    }
+    
+    return mstr;
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect

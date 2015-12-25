@@ -57,8 +57,10 @@
     [self initReFreshView];
 }
 
-- (void)initPageInfo {
-    if(!pageInfo) {
+- (void)initPageInfo
+{
+    if(!pageInfo)
+    {
         pageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:99999];
     }
 }
@@ -85,6 +87,12 @@
     }];
 }
 
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    [self getTableData];
+    [self initReFreshView];
+}
 
 //初始化列表
 - (void)initReFreshView

@@ -112,8 +112,6 @@
         
         reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-        reFreshView.tableView.scrollEnabled = NO;
-        
         return cell;
     }
     else

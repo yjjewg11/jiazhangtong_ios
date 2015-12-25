@@ -76,7 +76,7 @@
     lastSelItemView = [itemViewArray objectAtIndex:lastIndex];
     [self getQueryDate:lastIndex];
     
-    [self showLoadView];
+    
     //加载数据
     [self loadRecipesInfoByData];
     //加载特长课程表数据
@@ -84,9 +84,6 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 //需要请求的次数
 - (void)reqTotal {
@@ -155,6 +152,8 @@
 #pragma mark - 加载幼儿园课程表数据
 - (void)loadRecipesInfoByData
 {
+    [self showLoadView];
+    
     if([classuuidMArray count] > Number_Zero)
     {
         isFirstReq = NO;
@@ -171,13 +170,13 @@
         }
         faild:^(NSString *errorMsg)
         {
-            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
-            [self responseHandler];
+            [self hidenLoadView];
+            [self showNoNetView];
         }];
     }
     else
     {
-        [[KGHUD sharedHud] hide:self.view];
+        
     }
 }
 
@@ -209,10 +208,19 @@
     }
     faild:^(NSString *errorMsg)
     {
-        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+        [self hidenLoadView];
+        [self showNoNetView];
     }];
 }
 
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    
+    [self loadRecipesInfoByData];
+    //加载特长课程表数据
+    [self loadSPInfoDatas];
+}
 
 - (void)getQueryDate:(NSInteger)index
 {

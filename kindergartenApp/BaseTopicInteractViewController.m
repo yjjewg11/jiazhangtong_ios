@@ -20,6 +20,8 @@
 @interface BaseTopicInteractViewController () <UUInputFunctionViewDelegate, UIGestureRecognizerDelegate> {
     TopicInteractionView * topicInteractionView; //点赞回复视图
     UUInputFunctionView  * IFView;
+    
+    BOOL _canSend;
 }
 
 @end
@@ -41,10 +43,12 @@
     [[UIApplication sharedApplication].keyWindow endEditing:YES];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     //    [self loadInputFuniView];
     [self regNotification];
+    _canSend = YES;
 }
 
 - (void)regNotification {
@@ -136,32 +140,40 @@
 
 //回帖。  提交需要的回帖数据从EmojiManage中获取   aaa<img alt="惊恐" src="htt//...png" />
 //replyText只是用来界面显示     aaa[惊恐]bbb[大笑]
-- (void)postTopic:(NSString *)replyText {
-    //    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
-    ReplyDomain * replyObj = [[ReplyDomain alloc] init];
-    replyObj.content = replyText;
-    replyObj.newsuuid = _topicInteractionDomain.topicUUID;
-    replyObj.type = _topicInteractionDomain.topicType;
+- (void)postTopic:(NSString *)replyText
+{
+    if (_canSend)
+    {
+        _canSend = NO;
+        //    NSString * requestReplyStr = [KGEmojiManage sharedManage].chatHTMLInfo;
+        ReplyDomain * replyObj = [[ReplyDomain alloc] init];
+        replyObj.content = replyText;
+        replyObj.newsuuid = _topicInteractionDomain.topicUUID;
+        replyObj.type = _topicInteractionDomain.topicType;
+        
+        [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
+            [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
+            
+            ReplyDomain * domain = [[ReplyDomain alloc] init];
+            domain.content = replyText;
+            domain.newsuuid = _topicInteractionDomain.topicUUID;
+            domain.type = _topicInteractionDomain.topicType;
+            domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
+            domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
+            
+            [self resetTopicReplyContent:domain];
+            [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
+            [_emojiAndTextView.contentTextView resignFirstResponder];
+            _canSend = YES;
+            
+        } faild:^(NSString *errorMsg) {
+            _canSend = YES;
+            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+            [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
+            [_emojiAndTextView.contentTextView resignFirstResponder];
+        }];
+    }
     
-    [[KGHttpService sharedService] saveReply:replyObj success:^(NSString *msgStr) {
-        [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
-        
-        ReplyDomain * domain = [[ReplyDomain alloc] init];
-        domain.content = replyText;
-        domain.newsuuid = _topicInteractionDomain.topicUUID;
-        domain.type = _topicInteractionDomain.topicType;
-        domain.create_user = [KGHttpService sharedService].loginRespDomain.userinfo.name;;
-        domain.create_useruuid = [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
-        
-        [self resetTopicReplyContent:domain];
-        [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
-        [_emojiAndTextView.contentTextView resignFirstResponder];
-        
-    } faild:^(NSString *errorMsg) {
-        [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
-        [_emojiAndTextView.contentTextView setText:String_DefValue_Empty];
-        [_emojiAndTextView.contentTextView resignFirstResponder];
-    }];
 }
 
 //重置回复内容

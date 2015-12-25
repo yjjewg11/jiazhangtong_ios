@@ -92,7 +92,7 @@
         
         self.summary.frame = CGRectMake(summaryX, 90, summaryW, summaryViewHeight - 20);
         
-        self.height = 85 + summaryViewHeight;
+        self.height = 85 + summaryViewHeight - 18 - 5;
         
         [self addSubview:self.summary];
     }
@@ -113,9 +113,19 @@
     
     NSMutableString * mstr = [NSMutableString string];
     
-    for (NSString * str in arr)
+    if (self.summaryCount == 3)
     {
-        [mstr appendString:[NSString stringWithFormat:@"%@\r\n",str]];
+        for (NSInteger i=0; i<3; i++)
+        {
+            [mstr appendString:[NSString stringWithFormat:@"%@\r\n",arr[i]]];
+        }
+    }
+    else
+    {
+        for (NSString * str in arr)
+        {
+            [mstr appendString:[NSString stringWithFormat:@"%@\r\n",str]];
+        }
     }
     
     return mstr;

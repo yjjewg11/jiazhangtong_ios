@@ -169,20 +169,6 @@ static NSString *const NoDataCell = @"nodata";
 
 }
 
-#pragma mark - 手势触发方法
-- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer
-{
-//    if(recognizer.direction == UISwipeGestureRecognizerDirectionLeft)
-//    {
-//        NSLog(@"swipe left");
-//    }
-//    
-//    if(recognizer.direction == UISwipeGestureRecognizerDirectionRight)
-//    {
-//        NSLog(@"swipe right");
-//    }
-}
-
 - (void)pullDownTopView
 {
     _collectionView.scrollEnabled = YES;
@@ -206,17 +192,7 @@ static NSString *const NoDataCell = @"nodata";
         _schoolDomain = [EnrolStudentsSchoolDomain objectWithKeyValues:vo.data];
         _schoolDomain.distance = vo.distance;
         
-        if (_schoolDomain.summary != nil)
-        {
-            _haveSummary = YES;
-            _oriLayout.cellHeight = [self calSummaryCellHeight:[self formatSummary:_domainData.summary]];
-        }
-        else
-        {
-            _haveSummary = NO;
-        }
-        
-        _oriLayout.haveSummary = _haveSummary;
+        _oriLayout.domain = _schoolDomain;
         
         isFavor = vo.isFavor;
         
@@ -351,6 +327,8 @@ static NSString *const NoDataCell = @"nodata";
     if (indexPath.row == 0)
     {
         EnrolStudentsSchoolCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SchoolCellID forIndexPath:indexPath];
+        
+        cell.summaryCount = 0;
         
         [cell setData:_schoolDomain];
         

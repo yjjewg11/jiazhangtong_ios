@@ -21,7 +21,5 @@
 
 @interface MyCollectionViewController : BaseViewController
 
-@property (strong, nonatomic) UITableView * tableView;
-@property (assign, nonatomic) NSInteger pageIndex;//数据页数
 
 @end

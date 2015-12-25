@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EnrolStudentsSchoolDomain.h"
 
 @interface EnrolStudentSchoolDetailLayout : UICollectionViewFlowLayout
 
@@ -16,6 +17,6 @@
 
 @property (assign, nonatomic) BOOL haveSummary;
 
-@property (assign, nonatomic) CGFloat cellHeight;
+@property (strong, nonatomic) EnrolStudentsSchoolDomain * domain;
 
 @end

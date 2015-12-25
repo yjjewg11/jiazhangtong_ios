@@ -209,7 +209,7 @@
 //    if (self.isAbleToSendTextMessage) {
         NSString *resultStr = [self.TextViewInput.text stringByReplacingOccurrencesOfString:@"   " withString:@""];
         [self.delegate UUInputFunctionView:self sendMessage:resultStr];
-    [self.TextViewInput resignFirstResponder];
+        [self.TextViewInput resignFirstResponder];
 //    }
 //    else{
 //        [self.TextViewInput resignFirstResponder];

@@ -13,5 +13,6 @@
 
 - (void)setData:(EnrolStudentsSchoolDomain *)domain;
 
+@property (assign, nonatomic) NSInteger summaryCount;
 
 @end

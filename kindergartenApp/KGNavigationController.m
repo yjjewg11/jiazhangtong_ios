@@ -18,12 +18,6 @@
 
 @implementation KGNavigationController
 
-
-/**
- *  重写这个方法目的：能够拦截所有push进来的控制器
- *
- *  @param viewController 即将push进来的控制器
- */
 - (void)pushViewController:(BaseViewController *)viewController animated:(BOOL)animated
 {
     //登陆页面排除

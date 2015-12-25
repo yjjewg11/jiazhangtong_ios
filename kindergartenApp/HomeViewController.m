@@ -374,6 +374,13 @@
         
         if (newnum != nil)
         {
+            if (newnum.today_unreadPushMsg>0)
+            {
+                UITabBarItem * item = self.tabBarController.tabBar.items[2];
+                
+                item.image = [UIImage imageNamed:@"hxiaoxi3"];
+            }
+            
             [defu setObject:@(newnum.today_goodArticle) forKey:@"jingpingwenzhangnum"];
             [defu setObject:@(newnum.today_snsTopic) forKey:@"huatinum"];
             [defu setObject:@(newnum.today_pxbenefit) forKey:@"youhuihuodongnum"];

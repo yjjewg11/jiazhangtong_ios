@@ -30,6 +30,8 @@
     MXPullDownMenu * _dropMenu;
     
     NSInteger _pageNo;
+    
+    NSString * _currentSortName;
 }
 
 @end
@@ -37,12 +39,17 @@
 @implementation EnrolStudentHomeVC
 
 static NSString *const SchoolCellID = @"schoolcellcoll";
+static NSString *const NoDataID = @"nodatacoll";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.title = @"宝宝入学";
+    
+    _pageNo = 2;
+    
+    _currentSortName = @"intelligent";
     
     NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
     _mappoint = [defu objectForKey:@"map_point"];
@@ -54,7 +61,6 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     [self getSchoolList];
     
     [self initCollectionView];
-    
 }
 
 #pragma mark - 获取学校列表数据 - 首次进入
@@ -107,6 +113,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     
     [_collectionView registerNib:[UINib nibWithNibName:@"EnrolStudentsSchoolCell" bundle:nil] forCellWithReuseIdentifier:SchoolCellID];
     
+    [_collectionView registerNib:[UINib nibWithNibName:@"NoDataView" bundle:nil] forCellWithReuseIdentifier:NoDataID];
+    
     _collectionView.dataSource = self;
     
     _collectionView.delegate = self;
@@ -157,13 +165,15 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 {
     if (dataSource.count == 0)
     {
-        NoDataView * nodata = [[[NSBundle mainBundle] loadNibNamed:@"NoDataView" owner:nil options:nil] firstObject];
+        NoDataView * nodata = [collectionView dequeueReusableCellWithReuseIdentifier:NoDataID forIndexPath:indexPath];
         
         return nodata;
     }
     else
     {
         EnrolStudentsSchoolCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SchoolCellID forIndexPath:indexPath];
+        
+        cell.summaryCount = 3;
         
         [cell setData:dataSource[indexPath.row]];
         
@@ -174,18 +184,23 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 #pragma mark - MXPullDownMenuDelegate
 - (void)PullDownMenu:(MXPullDownMenu *)pullDownMenu didSelectRowAtColumn:(NSInteger)column row:(NSInteger)row
 {
+    _pageNo = 2;
+    
     if (column == 1)
     {
         if (row == 0)
         {
+            _currentSortName = @"intelligent";
             [self getSchoolListBySort:@"intelligent"];
         }
         else if (row == 1)
         {
+            _currentSortName = @"appraise";
             [self getSchoolListBySort:@"appraise"];
         }
         else if (row == 2)
         {
+            _currentSortName = @"distance";
             [self getSchoolListBySort:@"distance"];
         }
     }
@@ -197,6 +212,8 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     [dataSource removeAllObjects];
     dataSource = nil;
     
+    [_layout.datas removeAllObjects];
+    
     _collectionView.hidden = YES;
     [self showLoadView];
     
@@ -204,13 +221,12 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
      {
          dataSource = [NSMutableArray arrayWithArray:listArr];
          
+         _layout.datas = [NSMutableArray arrayWithArray:listArr];
+         
          [self hidenLoadView];
          
-         [_layout.datas removeAllObjects];
-         _layout = nil;
-         _layout.datas = [NSMutableArray arrayWithArray:dataSource];
-         
          _collectionView.hidden = NO;
+         
          [_collectionView reloadData];
      }
      faild:^(NSString *errorMsg)
@@ -230,6 +246,35 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
     vc.groupuuid = ((EnrolStudentsSchoolDomain *)dataSource[indexPath.row]).uuid;
     
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)footerRereshing
+{
+    [[KGHttpService sharedService] getAllSchoolList:@"" pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] mappoint:_mappoint sort:_currentSortName success:^(NSArray *listArr)
+     {
+         if (listArr.count == 0)
+         {
+             _collectionView.footerRefreshingText = @"没有更多了";
+             [_collectionView footerEndRefreshing];
+         }
+         else
+         {
+             _pageNo ++;
+             
+             [dataSource addObjectsFromArray:listArr];
+             
+             [_layout.datas addObjectsFromArray:listArr];
+             
+             [_collectionView footerEndRefreshing];
+             
+             [_collectionView reloadData];
+         }
+     }
+     faild:^(NSString *errorMsg)
+     {
+         [MBProgressHUD showError:errorMsg];
+         [_collectionView footerEndRefreshing];
+     }];
 }
 
 @end

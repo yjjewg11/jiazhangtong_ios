@@ -15,7 +15,8 @@
 }
 
 //设置数据更新界面
-- (void)setData:(FavoritesDomain *)data{
+- (void)setData:(FavoritesDomain *)data
+{
     _data = data;
     
     _myTitleLabel.text = data.title;

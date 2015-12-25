@@ -13,7 +13,6 @@
 @interface EnrolStudentsHomeLayout()
 {
     CGFloat _newMaxHeight;
-    CGFloat _bbb;
 }
 
 @property (strong, nonatomic) NSMutableArray *attrsArray;         //存储所有布局属性的数组
@@ -28,8 +27,6 @@
     if (self = [super init])
     {
         self.scrollDirection = UICollectionViewScrollDirectionVertical;
-        _newMaxHeight = 10;
-        _bbb = 10;
     }
     
     return self;
@@ -79,7 +76,7 @@
             CGFloat padding = 10;
             //计算cell高度
             CGFloat summaryW = (APPWINDOWWIDTH - (10 + 70));
-            CGFloat summaryViewHeight = [self heightForString:domain.summary fontSize:14 andWidth:summaryW] - 20;
+            CGFloat summaryViewHeight = [self heightForString:domain.summary fontSize:14 andWidth:summaryW] - 10;
             
             itemHeight = 85 + padding * 2 + summaryViewHeight;
         }
@@ -87,8 +84,7 @@
     
     itemX = 0;
     itemY = _newMaxHeight;
-    _newMaxHeight = itemY + itemHeight + 20 + _bbb + 10;
-    _bbb = -10;
+    _newMaxHeight = itemY + itemHeight;
     
     attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
     
@@ -119,13 +115,13 @@
     
     NSMutableString * mstr = [NSMutableString string];
     
-    for (NSString * str in arr)
+    for (NSInteger i=0; i<3; i++)
     {
-        [mstr appendString:[NSString stringWithFormat:@"%@\r\n",str]];
+        [mstr appendString:[NSString stringWithFormat:@"%@\r\n",arr[i]]];
     }
-    
     return mstr;
 }
+
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
 {

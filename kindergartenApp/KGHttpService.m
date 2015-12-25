@@ -1171,9 +1171,9 @@
 #pragma 收藏 begin
 
 //收藏列表
-- (void)getFavoritesList:(NSInteger)pageNo success:(void (^)(NSArray * favoritesArray))success faild:(void (^)(NSString * errorMsg))faild {
-    
-    NSDictionary * dic = @{@"PageNo" : [NSNumber numberWithInteger:pageNo]};
+- (void)getFavoritesList:(NSInteger)pageNo success:(void (^)(NSArray * favoritesArray))success faild:(void (^)(NSString * errorMsg))faild
+{
+    NSDictionary * dic = @{@"pageNo" : [NSNumber numberWithInteger:pageNo]};
     
     [[AFAppDotNetAPIClient sharedClient] GET:[KGHttpUrl getFavoritesListUrl]
                                   parameters:dic
