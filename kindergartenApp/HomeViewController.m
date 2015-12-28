@@ -109,12 +109,6 @@
          
     }];
     
-//    self.adView.hidden = YES;
-//    funiView.hidden = YES;
-//    photosView.hidden = YES;
-    
-//    [self loadNavTitle];
-    
     [self autoLogin];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;

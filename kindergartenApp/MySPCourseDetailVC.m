@@ -241,7 +241,7 @@
     
     web.scalesPageToFit = NO;
     
-    web.frame = CGRectMake(APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    web.frame = CGRectMake(APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame) - 64);
     
     web.scrollView.contentSize = CGSizeMake(0, web.scrollView.contentSize.height);
     
@@ -257,7 +257,7 @@
     
     comment.courseuuid = self.domain.courseuuid;
     
-    comment.tableFrame = CGRectMake(APPWINDOWWIDTH + APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame));
+    comment.tableFrame = CGRectMake(APPWINDOWWIDTH + APPWINDOWWIDTH ,0, APPWINDOWWIDTH, APPWINDOWHEIGHT - CGRectGetMaxY(_buttonsView.frame) - 64);
     
     [_contentView addSubview:comment.tableView];
     
