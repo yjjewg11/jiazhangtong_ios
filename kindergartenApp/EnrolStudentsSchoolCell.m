@@ -92,7 +92,7 @@
         
         self.summary.frame = CGRectMake(summaryX, 90, summaryW, summaryViewHeight - 20);
         
-        self.height = 85 + summaryViewHeight - 18 - 5;
+        self.height = 85 + summaryViewHeight - 10;
         
         [self addSubview:self.summary];
     }

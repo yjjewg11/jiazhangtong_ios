@@ -84,7 +84,7 @@
     
     itemX = 0;
     itemY = _newMaxHeight;
-    _newMaxHeight = itemY + itemHeight;
+    _newMaxHeight = itemY + itemHeight + 10;
     
     attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
     

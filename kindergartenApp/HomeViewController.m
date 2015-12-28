@@ -96,7 +96,7 @@
     
     _hourGlass = [[FeHourGlass alloc] initWithView:photosView];
     
-    _hourGlass.center = photosView.center;
+    _hourGlass.center = CGPointMake(APPWINDOWWIDTH / 2, 70);
     
     [photosView addSubview:_hourGlass];
     
