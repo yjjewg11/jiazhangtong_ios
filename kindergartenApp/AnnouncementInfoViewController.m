@@ -128,8 +128,6 @@
 
 #pragma mark - 延迟执行
 - (void)lazyEx{
-    NSLog(@"%lf,%lf",contentScrollView.contentSize.width,contentScrollView.contentSize.height);
-    NSLog(@"%lf,%lf",myWebView.frame.size.width,myWebView.frame.size.height);
     [[KGHUD sharedHud] hide:self.view];
     
     //获取页面高度（像素）

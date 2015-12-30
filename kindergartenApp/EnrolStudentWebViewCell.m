@@ -25,13 +25,14 @@
     self.webView.scrollView.bounces = NO;
     
     self.webView.scrollView.scrollEnabled = NO;
+    
+    self.webView.scrollView.showsVerticalScrollIndicator = NO;
 
     self.webView.scalesPageToFit = YES;
     
     self.webView.scrollView.delaysContentTouches = YES;
-    self.webView.scrollView.canCancelContentTouches = NO;
     
-    [[KGHUD sharedHud] hide:self.webView];
+    self.webView.scrollView.canCancelContentTouches = NO;
     
     //添加手势
     UISwipeGestureRecognizer *recognizer;
@@ -76,13 +77,12 @@
 
 - (void)setData:(NSString *)url
 {
-    [[KGHUD sharedHud] show:self.webView];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [[KGHUD sharedHud] hide:self.webView];
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

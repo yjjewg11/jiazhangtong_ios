@@ -483,17 +483,19 @@ static NSString *const Nodata = @"nodata";
     return domain;
 }
 
-#pragma mark - 网页使用的方法
+#pragma mark - js调用方法
 - (void)finishProject:(NSString *)url
 {
-    _collectionView.hidden = NO;
-    _webview.hidden = YES;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.navigationController.navigationBarHidden = NO;
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        _collectionView.hidden = NO;
+        _webview.hidden = YES;
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        self.navigationController.navigationBarHidden = NO;
+    });
 }
 
-#pragma mark - js调用方法
 - (void)jsessionToPhone:(NSString *)id
 {
     _jsessionId = id;
@@ -581,9 +583,9 @@ static NSString *const Nodata = @"nodata";
         picker.sourceType = sourceType;
         
         [self presentViewController:picker animated:YES completion:nil];
-    }else
+    }
+    else
     {
-        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
     }
 }
 

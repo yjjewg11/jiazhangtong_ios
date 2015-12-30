@@ -70,7 +70,9 @@
     NSString * _currentShareUrl;
     
     BOOL isFavor;
+    
     PopupView * popupView;
+    
     ShareViewController * shareVC;
     
     NSString * _tels;
@@ -166,7 +168,11 @@ static NSString *const NoDataCell = @"nodata";
         
         [_bottomView addSubview:item];
     }
-
+    
+    UIView * sepView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _bottomView.frame.size.width, 1)];
+    sepView.backgroundColor = [UIColor lightGrayColor];
+    sepView.alpha = 0.5;
+    [_bottomView addSubview:sepView];
 }
 
 - (void)pullDownTopView
@@ -221,9 +227,6 @@ static NSString *const NoDataCell = @"nodata";
 #pragma mark - 请求评论
 - (void)getCommentData
 {
-    [[KGHUD sharedHud] hide:self.view];
-    [[KGHUD sharedHud] show:self.view];
-    
     [[KGHttpService sharedService] getSPCourseComment:self.groupuuid pageNo:@"" success:^(SPCommentVO *commentVO)
     {
         _commentsData = [NSMutableArray arrayWithArray:[EnrolStudentSchoolCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
@@ -234,8 +237,6 @@ static NSString *const NoDataCell = @"nodata";
             
             _haveCommentData = NO;
             
-            [[KGHUD sharedHud] hide:self.view];
-            
             [_collectionView reloadData];
         }
         else
@@ -245,8 +246,6 @@ static NSString *const NoDataCell = @"nodata";
             [self calCommentsDataHeight];
             
             _collectionView.bounces = YES;
-            
-            [[KGHUD sharedHud] hide:self.view];
             
             [_collectionView reloadData];
         }
@@ -400,7 +399,6 @@ static NSString *const NoDataCell = @"nodata";
             _currentShareUrl = _voData.share_url;
             [self resetCollectionView];
             _collectionView.bounces = NO;
-            [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = DataSource_ZhaoSheng;
             _oriLayout.isCommentCell = NO;
             
@@ -412,7 +410,6 @@ static NSString *const NoDataCell = @"nodata";
             _currentShareUrl = _voData.recruit_url;
             [self resetCollectionView];
             _collectionView.bounces = NO;
-            [[KGHUD sharedHud] hide:self.view];
             _dataSourceType = DataSource_JianJie;
             _oriLayout.isCommentCell = NO;
             

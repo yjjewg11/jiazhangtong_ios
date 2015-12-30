@@ -81,7 +81,7 @@
             CGFloat summaryW = (APPWINDOWWIDTH - (10 + 70));
             CGFloat summaryViewHeight = [self heightForString:self.domain.summary fontSize:14 andWidth:summaryW] - 10;
             
-            itemHeight = 85 + padding * 2 + summaryViewHeight;
+            itemHeight = 85 + padding * 2 + summaryViewHeight ;
         }
         
         itemX = 0;
