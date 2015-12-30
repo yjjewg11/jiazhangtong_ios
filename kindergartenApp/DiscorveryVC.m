@@ -304,6 +304,14 @@ static NSString *const Nodata = @"nodata";
                 
                 [self showLoadView];
                 
+                NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
+                [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+                [cookieDic setObject:[KGHttpService sharedService].loginRespDomain.JSESSIONID forKey:NSHTTPCookieValue];
+                [cookieDic setObject:@"/" forKey:NSHTTPCookiePath];
+                [cookieDic setObject:[self cutUrlDomain:url] forKey:NSHTTPCookieDomain];
+                NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
+                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
+                
                 [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
             }
         }
@@ -334,6 +342,14 @@ static NSString *const Nodata = @"nodata";
         _collectionView.hidden = YES;
         
         [self showLoadView];
+        
+        NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
+        [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+        [cookieDic setObject:[KGHttpService sharedService].loginRespDomain.JSESSIONID forKey:NSHTTPCookieValue];
+        [cookieDic setObject:@"/" forKey:NSHTTPCookiePath];
+        [cookieDic setObject:[self cutUrlDomain:url] forKey:NSHTTPCookieDomain];
+        NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
         
         [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
         
