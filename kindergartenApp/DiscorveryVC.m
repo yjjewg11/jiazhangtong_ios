@@ -483,7 +483,7 @@ static NSString *const Nodata = @"nodata";
     return domain;
 }
 
-#pragma mark - 网页使用的方法
+#pragma mark - js调用方法
 - (void)finishProject:(NSString *)url
 {
     // 这段代码要放倒gcd中去 否则会出现This application is modifying the autolayout engine from a background thread
@@ -497,7 +497,6 @@ static NSString *const Nodata = @"nodata";
     });
 }
 
-#pragma mark - js调用方法
 - (void)jsessionToPhone:(NSString *)id
 {
     _jsessionId = id;
@@ -585,9 +584,9 @@ static NSString *const Nodata = @"nodata";
         picker.sourceType = sourceType;
         
         [self presentViewController:picker animated:YES completion:nil];
-    }else
+    }
+    else
     {
-        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
     }
 }
 

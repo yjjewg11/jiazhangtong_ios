@@ -304,8 +304,6 @@
             ((MyButtonTwo *)_btns[i]).selected = NO;
         }
     }
-    
-    NSLog(@"%f",scrollView.contentOffset.x);
 }
 
 #pragma mark - 监听键盘事件

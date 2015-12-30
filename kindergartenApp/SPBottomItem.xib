@@ -12,10 +12,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdS-CI-y96">
-                    <rect key="frame" x="22" y="0.0" width="35" height="35"/>
+                    <rect key="frame" x="28" y="5" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="35" id="4xF-HN-Gq3"/>
-                        <constraint firstAttribute="height" constant="35" id="eyJ-Tl-rfo"/>
+                        <constraint firstAttribute="height" constant="25" id="oSl-OG-XJT"/>
+                        <constraint firstAttribute="width" constant="25" id="vMd-xt-V0G"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="赞" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bp0-K0-cCs">
@@ -27,8 +27,9 @@
                     <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR8-dK-WfU">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR8-dK-WfU">
                     <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,8 +41,8 @@
                 <constraint firstAttribute="trailing" secondItem="Bp0-K0-cCs" secondAttribute="trailing" id="IEe-au-fXX"/>
                 <constraint firstAttribute="bottom" secondItem="dR8-dK-WfU" secondAttribute="bottom" id="Kby-tn-i3b"/>
                 <constraint firstItem="dR8-dK-WfU" firstAttribute="leading" secondItem="qp0-b2-DCe" secondAttribute="leading" id="NB9-ul-M1d"/>
-                <constraint firstItem="vdS-CI-y96" firstAttribute="top" secondItem="qp0-b2-DCe" secondAttribute="top" id="nDu-kY-muh"/>
-                <constraint firstItem="vdS-CI-y96" firstAttribute="centerX" secondItem="qp0-b2-DCe" secondAttribute="centerX" id="rQc-cr-KlE"/>
+                <constraint firstItem="vdS-CI-y96" firstAttribute="top" secondItem="qp0-b2-DCe" secondAttribute="top" constant="5" id="YUz-zL-evQ"/>
+                <constraint firstItem="vdS-CI-y96" firstAttribute="centerX" secondItem="qp0-b2-DCe" secondAttribute="centerX" id="hJf-Gj-mCW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -50,7 +51,7 @@
                 <outlet property="imgView" destination="vdS-CI-y96" id="cKP-VQ-LoE"/>
                 <outlet property="titleLbl" destination="Bp0-K0-cCs" id="rNZ-jL-W4U"/>
             </connections>
-            <point key="canvasLocation" x="251" y="8"/>
+            <point key="canvasLocation" x="162" y="123"/>
         </view>
     </objects>
 </document>
