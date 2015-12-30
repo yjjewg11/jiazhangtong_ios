@@ -486,11 +486,15 @@ static NSString *const Nodata = @"nodata";
 #pragma mark - 网页使用的方法
 - (void)finishProject:(NSString *)url
 {
-    _collectionView.hidden = NO;
-    _webview.hidden = YES;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    self.navigationController.navigationBarHidden = NO;
+    // 这段代码要放倒gcd中去 否则会出现This application is modifying the autolayout engine from a background thread
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        _collectionView.hidden = NO;
+        _webview.hidden = YES;
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        self.navigationController.navigationBarHidden = NO;
+    });
 }
 
 #pragma mark - js调用方法
