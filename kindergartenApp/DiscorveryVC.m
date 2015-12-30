@@ -365,23 +365,13 @@ static NSString *const Nodata = @"nodata";
         {
             _collectionView.hidden = YES;
             
-            NSArray * nCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-            
-            // 设置header，通过遍历cookies来一个一个的设置header
-            for (NSHTTPCookie *cookie in nCookies)
-            {
-                NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:cookie.properties];
-                
-                [dict setValue:@"/" forKey:@"Path"];
-                [dict setValue:[self cutUrlDomain:url] forKey:@"Domain"];
-                
-                NSHTTPCookie * ck = [NSHTTPCookie cookieWithProperties:dict];
-                
-                [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:@[ck]
-                                                                   forURL:[NSURL URLWithString:url]
-                                                          mainDocumentURL:nil];
-            }
-            
+            NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
+            [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+            [cookieDic setObject:[KGHttpService sharedService].loginRespDomain.JSESSIONID forKey:NSHTTPCookieValue];
+            [cookieDic setObject:@"/" forKey:NSHTTPCookiePath];
+            [cookieDic setObject:[self cutUrlDomain:url] forKey:NSHTTPCookieDomain];
+            NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
             [self showLoadView];
             
             [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
