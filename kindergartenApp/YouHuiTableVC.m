@@ -50,7 +50,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate pushToDetailVC:self data:((YouHuiDomain *)self.dataArr[indexPath.row]).uuid];
+    [self.delegate pushToDetailVC:self uuid:((YouHuiDomain *)self.dataArr[indexPath.row]).uuid title:((YouHuiDomain *)self.dataArr[indexPath.row]).title];
 }
 
 

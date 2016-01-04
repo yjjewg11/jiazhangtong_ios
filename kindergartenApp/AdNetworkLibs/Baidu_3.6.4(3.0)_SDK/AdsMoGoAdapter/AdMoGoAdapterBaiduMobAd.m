@@ -31,13 +31,13 @@
     [self performSelectorOnMainThread:@selector(baidugetAd) withObject:nil waitUntilDone:NO];
 }
 
-- (void)baidugetAd{
+- (void)baidugetAd
+{
     isStop = NO;
     isLoad = NO;
     isShow = NO;
     [adMoGoCore adDidStartRequestAd];
-    
-    
+
     AdMoGoConfigDataCenter *configDataCenter = [AdMoGoConfigDataCenter singleton];
     
     AdMoGoConfigData *configData = [configDataCenter.config_dict objectForKey:adMoGoCore.config_key];

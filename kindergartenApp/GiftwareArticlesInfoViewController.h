@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) NSString * annuuid;
 
+@property (strong, nonatomic) NSString * title;
+
 - (IBAction)articlesFunBtnClicked:(UIButton *)sender;
 
 @end

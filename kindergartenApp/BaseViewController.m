@@ -92,6 +92,7 @@
 
 - (void)hidenLoadView
 {
+    
     [self.loadingView removeFromSuperview];
 }
 

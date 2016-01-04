@@ -139,6 +139,8 @@
     GiftwareArticlesInfoViewController * infoVC = [[GiftwareArticlesInfoViewController alloc] init];
     
     infoVC.annuuid = annDomain.uuid;
+
+    infoVC.title = annDomain.title;
     
     [self.navigationController pushViewController:infoVC animated:YES];
 }

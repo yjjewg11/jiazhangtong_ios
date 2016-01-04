@@ -322,7 +322,7 @@
     }
     else //不是第一次进来，获取存到磁盘的时间，和当前时间做比较，如果大于一天，就调用sys方法
     {
-        if ([KGDateUtil intervalSinceNow:time] >= 1)
+        if ([KGDateUtil intervalSinceNow:time] >= 0) //这里可以改天数
         {
             //是时候调用了
             NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];

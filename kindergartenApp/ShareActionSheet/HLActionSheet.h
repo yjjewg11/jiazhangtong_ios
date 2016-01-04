@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UMSocialWechatHandler.h"
 
-typedef void(^ClickBlock)(int btnIndex);
+typedef void(^ClickBlock)(NSInteger btnIndex);
 typedef void(^CancelBlock)(void);
 
 @interface HLActionSheet : UIWindow
@@ -16,5 +17,7 @@ typedef void(^CancelBlock)(void);
 - (instancetype)initWithTitles:(NSArray *)titles iconNames:(NSArray *)iconNames;
 
 - (void)showActionSheetWithClickBlock:(ClickBlock)clickBlock cancelBlock:(CancelBlock)cancelBlock;
+
+
 
 @end

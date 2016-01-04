@@ -255,7 +255,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Mus-M1-bcr" firstAttribute="leading" secondItem="LIq-oL-k6J" secondAttribute="trailing" id="5we-NB-k56"/>
                         <constraint firstItem="IDg-uc-gop" firstAttribute="top" secondItem="ndF-uA-jgP" secondAttribute="top" id="5yD-2j-fTV"/>

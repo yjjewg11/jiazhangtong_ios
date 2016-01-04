@@ -100,14 +100,14 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ip-Vd-oVI" userLabel="View2">
                                     <rect key="frame" x="80" y="0.0" width="80" height="48"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fengxiang1" translatesAutoresizingMaskIntoConstraints="NO" id="xQ7-US-5Uq">
-                                            <rect key="frame" x="28" y="5" width="24" height="24"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fenxiang" translatesAutoresizingMaskIntoConstraints="NO" id="xQ7-US-5Uq">
+                                            <rect key="frame" x="28" y="5" width="25" height="25"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="分享" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g31-ft-fFO">
-                                            <rect key="frame" x="28" y="34" width="24" height="10"/>
+                                            <rect key="frame" x="28" y="35" width="24" height="12"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="Bcf-uB-2Mj"/>
-                                                <constraint firstAttribute="height" constant="10" id="bsE-s0-oEU"/>
+                                                <constraint firstAttribute="height" constant="12" id="bsE-s0-oEU"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,9 +147,9 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收藏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mnd-g6-Wg0">
-                                            <rect key="frame" x="0.0" y="34" width="80" height="10"/>
+                                            <rect key="frame" x="0.0" y="34" width="80" height="12"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="10" id="b6P-4v-wWK"/>
+                                                <constraint firstAttribute="height" constant="12" id="b6P-4v-wWK"/>
                                                 <constraint firstAttribute="width" constant="80" id="xic-U6-J1Y"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -224,7 +224,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="aaZ-NJ-RAV" firstAttribute="width" secondItem="bj4-1P-tLi" secondAttribute="width" id="0lq-s8-nYd"/>
                                 <constraint firstItem="5ip-Vd-oVI" firstAttribute="top" secondItem="k3R-ZI-PAP" secondAttribute="top" id="1jj-WD-2g6"/>
@@ -288,7 +288,7 @@
         </view>
     </objects>
     <resources>
-        <image name="fengxiang1" width="24" height="24"/>
+        <image name="fenxiang" width="25" height="25"/>
         <image name="pinglun1" width="24" height="24"/>
         <image name="shoucang1" width="24" height="24"/>
         <image name="zan1" width="24" height="24"/>

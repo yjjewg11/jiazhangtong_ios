@@ -40,6 +40,8 @@ typedef enum {
     Topic_PXJS        = 83, //培训教师
     Topic_YHHD        = 85, //优惠活动
     
+    Topic_FX          = 71,
+    
     Topic_Interact    = 99, //班级互动
     Topic_TeacherChat = 11, //与老师的写信列表
     Topic_LeaderChat  = 12, //与幼儿园园长的写信列表

@@ -1,2 +1,3 @@
-platform :ios, '7.0'
-pod 'KINWebBrowser'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '6.0'
+pod 'LBXScan'

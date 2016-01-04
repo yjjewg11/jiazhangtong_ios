@@ -10,6 +10,7 @@
 #import "SPCourseDetailVC.h"
 #import "YouHuiDetailVC.h"
 #import "NoDataTableViewCell.h"
+#import "BrowseURLViewController.h"
 
 @interface MyCollectionViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -236,6 +237,13 @@
         case Topic_YHHD:{
             YouHuiDetailVC * vc = [[YouHuiDetailVC alloc] init];
             vc.uuid = data.reluuid;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case Topic_FX:{
+            BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
+            vc.url = data.url;
+            vc.useCookie = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

@@ -116,11 +116,13 @@
 }
 
 #pragma mark - 跳转代理
-- (void)pushToDetailVC:(YouHuiTableVC *)tableVC data:(NSString *)uuid
+- (void)pushToDetailVC:(YouHuiTableVC *)tableVC uuid:(NSString *)uuid title:(NSString *)title
 {
     YouHuiDetailVC * detailVC = [[YouHuiDetailVC alloc] init];
     
     detailVC.uuid = uuid;
+    
+    detailVC.title = title;
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }

@@ -12,7 +12,7 @@
 
 @protocol YouHuiTableVCDelegate <NSObject>
 
-- (void)pushToDetailVC:(YouHuiTableVC *)tableVC data:(NSString *)uuid;
+- (void)pushToDetailVC:(YouHuiTableVC *)tableVC uuid:(NSString *)uuid title:(NSString *)title;
 
 @end
 

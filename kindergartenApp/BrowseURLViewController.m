@@ -7,10 +7,10 @@
 //
 
 #import "BrowseURLViewController.h"
+#import "KGHttpService.h"
 
 @interface BrowseURLViewController () <UIWebViewDelegate>
 {
-    
     IBOutlet UIWebView *myWebView;
 }
 
@@ -22,29 +22,26 @@
 {
     [super viewDidLoad];
     
-    myWebView.delegate = self;
-    myWebView.backgroundColor = [UIColor clearColor];
-    myWebView.opaque = NO;
+    if (self.url == nil)
+    {
+        self.url = @"http://www.wenjienet.com";
+    }
     
+    self.title = @"我的收藏";
+    
+    myWebView.hidden = YES;
+    [self showLoadView];
+    
+    myWebView.delegate = self;
     if (self.useCookie)
     {
-        // 寻找URL为HOST的相关cookie，不用担心，步骤2已经自动为cookie设置好了相关的URL信息
-        NSArray * nCookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
-        
-        // 设置header，通过遍历cookies来一个一个的设置header
-        for (NSHTTPCookie *cookie in nCookies)
-        {
-            NSMutableDictionary * dict = [NSMutableDictionary dictionaryWithDictionary:cookie.properties];
-            
-            [dict setValue:@"/" forKey:@"Path"];
-            [dict setValue:@".wenjienet.com" forKey:@"Domain"];
-            
-            NSHTTPCookie * ck = [NSHTTPCookie cookieWithProperties:dict];
-            
-            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookies:@[ck]
-                                                               forURL:[NSURL URLWithString:_url]
-                                                      mainDocumentURL:nil];
-        }
+        NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
+        [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+        [cookieDic setObject:[KGHttpService sharedService].loginRespDomain.JSESSIONID forKey:NSHTTPCookieValue];
+        [cookieDic setObject:@"/" forKey:NSHTTPCookiePath];
+        [cookieDic setObject:[self cutUrlDomain:self.url] forKey:NSHTTPCookieDomain];
+        NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
         
         [myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
     }
@@ -52,7 +49,37 @@
     {
         [myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_url]]];
     }
+}
+
+- (NSString *)cutUrlDomain:(NSString *)url
+{
+    NSMutableString * tempurl = [[NSMutableString alloc] initWithString:url];
     
+    NSString * myUrl = [tempurl componentsSeparatedByString:@"//"][1];
+    NSString * secondUrl = [myUrl componentsSeparatedByString:@"/"][0];
+    
+    NSString * domain = nil;
+    
+    if ([secondUrl rangeOfString:@":"].location != NSNotFound)
+    {
+        domain = [secondUrl componentsSeparatedByString:@":"][0];
+    }
+    else
+    {
+        domain = secondUrl;
+    }
+    
+    return domain;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self hidenLoadView];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        myWebView.hidden = NO;
+    });
 }
 
 @end

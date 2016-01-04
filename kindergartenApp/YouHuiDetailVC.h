@@ -10,6 +10,8 @@
 
 @interface YouHuiDetailVC : BaseViewController
 
+@property (strong, nonatomic) NSString * title;
+
 @property (strong, nonatomic) NSString * uuid;
 
 @end

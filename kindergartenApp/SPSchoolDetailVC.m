@@ -59,6 +59,7 @@
 @end
 
 @implementation SPSchoolDetailVC
+
 - (SPSchoolCell *)cell
 {
     if (_cell == nil)

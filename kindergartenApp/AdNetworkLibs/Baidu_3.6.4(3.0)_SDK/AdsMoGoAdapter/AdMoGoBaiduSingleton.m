@@ -66,7 +66,6 @@ static BOOL isFirst = YES;
     return self;
 }
 
-
 - (void)dealloc{
     [super dealloc];
 }
@@ -192,37 +191,45 @@ static BOOL isFirst = YES;
         [adview removeFromSuperview];
     }
     adview.hidden = NO;
-    if ([self.delegate respondsToSelector:@selector(willDisplayAd:)]) {
-        [self.delegate willDisplayAd:adview];
-    }
+//    if ([self.delegate respondsToSelector:@selector(willDisplayAd:)])
+//    {
+//        [self.delegate willDisplayAd:adview];
+//    }
 }
 
 
--(void) didAdImpressed {
-    if ([self.delegate respondsToSelector:@selector(didAdImpressed)]) {
-        [self.delegate didAdImpressed];
-    }
+-(void) didAdImpressed
+{
+//    if ([self.delegate respondsToSelector:@selector(didAdImpressed)])
+//    {
+//        [self.delegate didAdImpressed];
+//    }
 }
 
 
--(void) didAdClicked{
+-(void) didAdClicked
+{
     if ([self.delegate respondsToSelector:@selector(clickAd)]) {
         [self.delegate clickAd];
     }
 }
 
--(void) didDismissLandingPage {
+-(void) didDismissLandingPage
+{
     
 }
 
--(void) failedDisplayAd:(BaiduMobFailReason) reason {
-    if ([_baiduBanner superview] != NULL) {
+-(void) failedDisplayAd:(BaiduMobFailReason) reason
+{
+    if ([_baiduBanner superview] != NULL)
+    {
         [_baiduBanner removeFromSuperview];
     }
     
-    if ([self.delegate respondsToSelector:@selector(failDisplayAd)]) {
-        [self.delegate failDisplayAd];
-    }
+//    if ([self.delegate respondsToSelector:@selector(failDisplayAd)])
+//    {
+//        [self.delegate failDisplayAd];
+//    }
 }
 
 @end

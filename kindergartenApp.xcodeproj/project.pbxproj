@@ -14,6 +14,7 @@
 		0403DCE41BF5C5980089E463 /* MySPCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */; };
 		0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403DCE61BF5C84D0089E463 /* MySPCourseView.m */; };
 		0403DCE91BF5C85D0089E463 /* MySPCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */; };
+		040468051C34F951001DC5CA /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 040468041C34F951001DC5CA /* test1.txt */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
 		040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A27431BEB664C00620876 /* SPBottomItem.xib */; };
 		04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04595CB81BE8718D008DD54A /* SPCommentVO.m */; };
@@ -408,6 +409,8 @@
 		04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9F9E1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m */; };
 		04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */; };
 		04FB9FA41C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */; };
+		04FBC9E61C34CD8E00F49DB0 /* libLBXScan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FBC9E41C34CD8E00F49DB0 /* libLBXScan.a */; };
+		04FBC9E71C34CD8E00F49DB0 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */; };
 		04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */; };
 		04FC2A001BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */; };
 		04FC31DE1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC31DD1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m */; };
@@ -582,8 +585,6 @@
 		4D0A91861B81088700373E5C /* EmojiAndTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0A91851B81088700373E5C /* EmojiAndTextView.m */; };
 		4D0A91881B81089000373E5C /* EmojiAndTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A91871B81089000373E5C /* EmojiAndTextView.xib */; };
 		4D1CDE9F1B8CB24700165B9A /* VPImageCropperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1CDE9E1B8CB24700165B9A /* VPImageCropperViewController.m */; };
-		4D5CE6C81B7E3F76002F1088 /* FavoritesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */; };
-		4D5CE6C91B7E3F76002F1088 /* FavoritesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */; };
 		4D5CE7691B7E4333002F1088 /* AboutWeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CE75B1B7E4333002F1088 /* AboutWeViewController.m */; };
 		4D5CE76A1B7E4333002F1088 /* AboutWeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D5CE75C1B7E4333002F1088 /* AboutWeViewController.xib */; };
 		4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D5CE75E1B7E4333002F1088 /* AdvanceViewController.m */; };
@@ -616,6 +617,7 @@
 		4DF056D01B877F0200ED3840 /* KGAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056CF1B877F0200ED3840 /* KGAttachment.m */; };
 		4DF056D51B877F3A00ED3840 /* KGImageBrowseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056D21B877F3A00ED3840 /* KGImageBrowseView.m */; };
 		4DF056D61B877F3A00ED3840 /* KGPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056D41B877F3A00ED3840 /* KGPhotoScrollView.m */; };
+		A742F4034A934795F95B21F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE98BB1CDE9A04A59474C9E1 /* libPods.a */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -755,6 +757,7 @@
 		0403DCE51BF5C84D0089E463 /* MySPCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseView.h; sourceTree = "<group>"; };
 		0403DCE61BF5C84D0089E463 /* MySPCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseView.m; sourceTree = "<group>"; };
 		0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseView.xib; sourceTree = "<group>"; };
+		040468041C34F951001DC5CA /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
 		040A27401BEB663300620876 /* SPBottomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBottomItem.h; sourceTree = "<group>"; };
 		040A27411BEB663300620876 /* SPBottomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItem.m; sourceTree = "<group>"; };
 		040A27431BEB664C00620876 /* SPBottomItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPBottomItem.xib; sourceTree = "<group>"; };
@@ -1379,6 +1382,8 @@
 		04FB9FA01C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseAndSchoolListSchoolCell.h; sourceTree = "<group>"; };
 		04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseAndSchoolListSchoolCell.m; sourceTree = "<group>"; };
 		04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseAndSchoolListSchoolCell.xib; sourceTree = "<group>"; };
+		04FBC9E41C34CD8E00F49DB0 /* libLBXScan.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLBXScan.a; path = "Pods/../build/Debug-iphoneos/libLBXScan.a"; sourceTree = "<group>"; };
+		04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
 		04FC29FC1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseListCourseDetailCell.h; sourceTree = "<group>"; };
 		04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseListCourseDetailCell.m; sourceTree = "<group>"; };
 		04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseListCourseDetailCell.xib; sourceTree = "<group>"; };
@@ -1442,6 +1447,7 @@
 		04FF475B1C046D97004DC45D /* GDTNativeAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTNativeAd.h; sourceTree = "<group>"; };
 		04FF475C1C046D97004DC45D /* GDTSDKConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDTSDKConfig.h; sourceTree = "<group>"; };
 		04FF475D1C046D97004DC45D /* libGDTMobSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGDTMobSDK.a; sourceTree = "<group>"; };
+		05151135B4F680BF0B2EC7CB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		243918E21B5D1E5800F3727E /* KGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGNavigationController.h; sourceTree = "<group>"; };
 		243918E31B5D1E5800F3727E /* KGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGNavigationController.m; sourceTree = "<group>"; };
 		244F748F1B62A4630078D30D /* PostTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostTopicViewController.h; sourceTree = "<group>"; };
@@ -1704,9 +1710,6 @@
 		4D0A91871B81089000373E5C /* EmojiAndTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmojiAndTextView.xib; sourceTree = "<group>"; };
 		4D1CDE9D1B8CB24700165B9A /* VPImageCropperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VPImageCropperViewController.h; sourceTree = "<group>"; };
 		4D1CDE9E1B8CB24700165B9A /* VPImageCropperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VPImageCropperViewController.m; sourceTree = "<group>"; };
-		4D5CE6C51B7E3F76002F1088 /* FavoritesListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesListViewController.h; sourceTree = "<group>"; };
-		4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesListViewController.m; sourceTree = "<group>"; };
-		4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavoritesListViewController.xib; sourceTree = "<group>"; };
 		4D5CE75A1B7E4333002F1088 /* AboutWeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutWeViewController.h; sourceTree = "<group>"; };
 		4D5CE75B1B7E4333002F1088 /* AboutWeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutWeViewController.m; sourceTree = "<group>"; };
 		4D5CE75C1B7E4333002F1088 /* AboutWeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutWeViewController.xib; sourceTree = "<group>"; };
@@ -1753,6 +1756,7 @@
 		4DF056D21B877F3A00ED3840 /* KGImageBrowseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGImageBrowseView.m; sourceTree = "<group>"; };
 		4DF056D31B877F3A00ED3840 /* KGPhotoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGPhotoScrollView.h; sourceTree = "<group>"; };
 		4DF056D41B877F3A00ED3840 /* KGPhotoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGPhotoScrollView.m; sourceTree = "<group>"; };
+		B2BE578489F7695DFCD5A04E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F463E6431B66106D00AB92B9 /* DianZanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianZanDomain.h; sourceTree = "<group>"; };
@@ -1980,6 +1984,7 @@
 		F4EC98901B62305700F5721F /* TopicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicTableViewCell.m; sourceTree = "<group>"; };
 		F4EC98961B62306800F5721F /* TopicFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopicFrame.h; sourceTree = "<group>"; };
 		F4EC98971B62306800F5721F /* TopicFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopicFrame.m; sourceTree = "<group>"; };
+		FE98BB1CDE9A04A59474C9E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1987,6 +1992,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FBC9E61C34CD8E00F49DB0 /* libLBXScan.a in Frameworks */,
+				04FBC9E71C34CD8E00F49DB0 /* libZXingObjC.a in Frameworks */,
 				04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */,
 				04FA7D081C1E95EE0035AF18 /* JavaScriptCore.framework in Frameworks */,
 				04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */,
@@ -2035,6 +2042,7 @@
 				04F3D4591BF47FD2007E7AC0 /* libBaiduMobAdSdk64bit.a in Frameworks */,
 				04A4DE9D1BF484DF002ABBB1 /* libAdsMogo.a in Frameworks */,
 				04FF47611C046D97004DC45D /* libGDTMobSDK.a in Frameworks */,
+				A742F4034A934795F95B21F9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2688,6 +2696,7 @@
 				04FB7CBD1C0DA86800FD3E31 /* SpCourseItem.h */,
 				04FB7CBE1C0DA86800FD3E31 /* SpCourseItem.m */,
 				04FB7CBF1C0DA86800FD3E31 /* SpCourseItem.xib */,
+				040468041C34F951001DC5CA /* test1.txt */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3627,6 +3636,7 @@
 				248B6A751B19A39200FCB98F /* kindergartenAppTests */,
 				C925B64CB131B415E0126F11 /* Frameworks */,
 				248B6A5A1B19A39200FCB98F /* Products */,
+				89CE2BF3E3E37C7CE9F0B75B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3849,11 +3859,11 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				F4885C671B7C784C00AF97CF /* URLController(浏览器) */,
 				F4E6B2381B6B53A60087EAEB /* SpecialtyCourses(特长课程) */,
 				04FB23611C16C311009B57E2 /* Discorvery(发现) */,
 				04F9C9821C0ECD380078A5F5 /* ZhaoSheng(宝宝入学) */,
 				04FEC5671BEDC98A00C642A6 /* Youhuihuodong(优惠活动) */,
-				F4885C601B7C4FF000AF97CF /* Favorites(收藏) */,
 				F4DF3B9D1B78AC40001D9DF7 /* Timetable(课程表) */,
 				F4E61B721B73432200E5851A /* Share(分享) */,
 				2474DFB91B6CCDD80021506F /* Recipes(食谱) */,
@@ -3913,7 +3923,6 @@
 		248B6AA71B19AD4700FCB98F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F4885C671B7C784C00AF97CF /* URLController */,
 				2489B66F1B5AB75200039E70 /* Introduction */,
 				24C46B341B5A2A9900A58F92 /* HomeViewController.h */,
 				24C46B351B5A2A9900A58F92 /* HomeViewController.m */,
@@ -4408,6 +4417,8 @@
 		4DE384581B7F7566009F12E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F4885C641B7C508600AF97CF /* FavoritesDomain.h */,
+				F4885C651B7C508600AF97CF /* FavoritesDomain.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4438,9 +4449,20 @@
 			name = PhotoVC;
 			sourceTree = "<group>";
 		};
+		89CE2BF3E3E37C7CE9F0B75B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				05151135B4F680BF0B2EC7CB /* Pods.debug.xcconfig */,
+				B2BE578489F7695DFCD5A04E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C925B64CB131B415E0126F11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04FBC9E41C34CD8E00F49DB0 /* libLBXScan.a */,
+				04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */,
 				04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */,
 				04FA7D071C1E95EE0035AF18 /* JavaScriptCore.framework */,
 				04FB88A51BFB04380094AC68 /* SafariServices.framework */,
@@ -4473,6 +4495,7 @@
 				2487E63E1B6166700030320A /* Foundation.framework */,
 				2487E63C1B6166660030320A /* UIKit.framework */,
 				2487E63A1B61663E0030320A /* QuartzCore.framework */,
+				FE98BB1CDE9A04A59474C9E1 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -4683,50 +4706,14 @@
 			path = MJExtension;
 			sourceTree = "<group>";
 		};
-		F4885C601B7C4FF000AF97CF /* Favorites(收藏) */ = {
-			isa = PBXGroup;
-			children = (
-				F4885C631B7C500500AF97CF /* Controller */,
-				F4885C621B7C4FFF00AF97CF /* Model */,
-				F4885C611B7C4FF900AF97CF /* View */,
-			);
-			name = "Favorites(收藏)";
-			sourceTree = "<group>";
-		};
-		F4885C611B7C4FF900AF97CF /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		F4885C621B7C4FFF00AF97CF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F4885C641B7C508600AF97CF /* FavoritesDomain.h */,
-				F4885C651B7C508600AF97CF /* FavoritesDomain.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		F4885C631B7C500500AF97CF /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				4D5CE6C51B7E3F76002F1088 /* FavoritesListViewController.h */,
-				4D5CE6C61B7E3F76002F1088 /* FavoritesListViewController.m */,
-				4D5CE6C71B7E3F76002F1088 /* FavoritesListViewController.xib */,
-			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		F4885C671B7C784C00AF97CF /* URLController */ = {
+		F4885C671B7C784C00AF97CF /* URLController(浏览器) */ = {
 			isa = PBXGroup;
 			children = (
 				F4885C681B7C78C400AF97CF /* BrowseURLViewController.h */,
 				F4885C691B7C78C400AF97CF /* BrowseURLViewController.m */,
 				F4885C6A1B7C78C400AF97CF /* BrowseURLViewController.xib */,
 			);
-			name = URLController;
+			name = "URLController(浏览器)";
 			sourceTree = "<group>";
 		};
 		F4C0AB8D1B1C3B1C007B0E35 /* Sandbox */ = {
@@ -5002,10 +4989,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 248B6A7C1B19A39200FCB98F /* Build configuration list for PBXNativeTarget "kindergartenApp" */;
 			buildPhases = (
+				2923AADCB6275B937ECC04EB /* Check Pods Manifest.lock */,
 				248B6A551B19A39200FCB98F /* Sources */,
 				248B6A561B19A39200FCB98F /* Frameworks */,
 				248B6A571B19A39200FCB98F /* Resources */,
 				246187F31BB98D2C00D7DDA8 /* ShellScript */,
+				BEFB7A12D326C1EA46B57DE9 /* Embed Pods Frameworks */,
+				BDB81DBC9807EB532F08FE73 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -5353,6 +5343,7 @@
 				04A4DE631BF484DF002ABBB1 /* mail@2x.png in Resources */,
 				4D5CE76A1B7E4333002F1088 /* AboutWeViewController.xib in Resources */,
 				04F8894B1C058FE9002FBE6D /* HZQDatePickerView.xib in Resources */,
+				040468051C34F951001DC5CA /* test1.txt in Resources */,
 				04A4DE611BF484DF002ABBB1 /* bg@2x.png in Resources */,
 				4D077B2B1B80B16100FFD5CB /* OnlyEmojiView.xib in Resources */,
 				24C46B381B5A2A9900A58F92 /* HomeViewController.xib in Resources */,
@@ -5369,7 +5360,6 @@
 				F4E36D5F1B85B49D009BD909 /* DoPhotoCell.xib in Resources */,
 				04A4DE291BF484DF002ABBB1 /* adsmenuVoice_on@2x.png in Resources */,
 				04F8D36F1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib in Resources */,
-				4D5CE6C91B7E3F76002F1088 /* FavoritesListViewController.xib in Resources */,
 				F4EA53871B60BD390044BE7A /* MeTableViewCell.xib in Resources */,
 				04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */,
 				04A4DE741BF484DF002ABBB1 /* webview_bar_refresh_hover@2x.png in Resources */,
@@ -5402,6 +5392,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/sh\n# Copyright 2014-2015 Bugly @Tencent. All rights reserved.\n#\n# V 1.1\n#\n################################################################################\n# 注意: 请配置下面的信息\n################################################################################\nBUGLY_APP_ID=\"900009876\"\nBUGLY_APP_KEY=\"luA78mUDPTxIG0QQ\"\nBUNDLE_IDENTIFIER=\"com.wenjie.jiazhangtong\"\n################################################################################\n# 自定义配置\n################################################################################\n# Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\nUPLOAD_DEBUG_SYMBOLS=0\n#\n# 模拟器编译是否上传，1=上传 0=不上传，默认不上传\nUPLOAD_SIMULATOR_SYMBOLS=1\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n#\n#\n# This script will extract symbols from the .dSYM and generate .symbol file(Bugly supported) and upload to server.\n# You could visit http://bugly.qq.com to get more details about Bugly.\n#\n# Usage:\n#   * The instructions assume you have copyed this script into your project int Xcode.\n#   * Copy the \"buglySymbolIOS.jar\" file into the \"~/bin\" folder.\n#   * Open the project editor, select your build target.\n#   * Click \"Build Phases\" at the top of the project editor.\n#   * Click \"+\" button in the top left corner and select \"New Run Script Phase\".\n#   * Click \"Run Script\".\n#   * Paste the following script into the dark text box. You will have to uncomment the lines (remove the #) of course.\n#\n# --- SCRIPT BEGINS ON NEXT LINE, COPY AND EDIT FROM THERE ---\n#\n#\n#\n# --- END OF SCRIPT ---\n\n\n################################################################################\n# 注意: 如果你不知道此脚本的执行流程和用法，请不要随便修改！\n################################################################################\n\n# 退出执行并打印提示信息\nexitWithMessage() {\n    echo \"--------------------------------\"\n    echo -e \"${1}\"\n    echo \"--------------------------------\"\n    echo \"No upload and exit.\"\n    echo \"----------------------------------------------------------------\"\n    exit ${2}\n}\n\necho \"----------------------------------------------------------------\"\necho \"Copyright 2014-2015 Bugly @Tencent. All rights reserved.\"\n\necho \"This script will extract symbols from the .dSYM file and generate .symbol file(Bugly supported) and upload to server.\"\necho \"You could visit http://bugly.qq.com to get more details about Bugly.\"\necho \"----------------------------------------------------------------\"\n\necho \"Uploading dSYM to Bugly.\"\necho \"\"\n\n# Bugly服务域名\nDSYM_UPLOAD_DOMAIN=\"bugly.qq.com\"\n\n# 读取Info.plist文件中的版本信息\necho \"Info.Plist : ${INFOPLIST_FILE}\"\n\nBUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\nBUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n\n# 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\nif [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\nBUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\nelse\nBUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\nfi\n\n# Bugly符号提取工具路径, 请确保已经把对应的buglySymboliOS.jar拷贝到目录~/bin\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\n\necho \"--------------------------------\"\necho \"Step 1: Prepare application information.\"\necho \"--------------------------------\"\n\necho \"Product Name: ${PRODUCT_NAME}\"\necho \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\necho \"Version: ${BUNDLE_SHORT_VERSION}\"\necho \"Build: ${BUNDLE_VERSION}\"\n\necho \"Bugly App ID: ${BUGLY_APP_ID}\"\necho \"Bugly App key: ${BUGLY_APP_KEY}\"\necho \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n\necho \"--------------------------------\"\necho \"Step 2: Check the arguments ...\"\n\n# 检查模拟器编译是否允许上传符号\nif [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\nif [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\nexitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\nfi\nfi\n\nif [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\nif [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\nexitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\nfi\nfi\n\n# 检查必须参数是否设置\nif [ ! \"${BUGLY_APP_ID}\" ]; then\nexitWithMessage \"Error: Bugly App ID not defined.\" 1\nfi\n\nif [ ! \"${BUGLY_APP_KEY}\" ]; then\nexitWithMessage \"Error: Bugly APP Key not defined.\" 1\nfi\n\nif [ ! \"${BUNDLE_IDENTIFIER}\" ]; then\nexitWithMessage \"Error: Bundle Identifier not defined.\" 1\nfi\n\nfunction uploadDSYM {\n    DSYM_SRC=\"$1\"\n    echo \".dSYM file: ${DSYM_SRC}\"\n    if [ ! -d \"$DSYM_SRC\" ]; then\n    exitWithMessage \"dSYM source not found: ${DSYM_SRC}\" 1\n    fi\n    DSYM_FILE_NAME=${DSYM_SRC##*/}\n        DSYM_SYMBOL_OUT_ZIP_NAME=\"${DSYM_FILE_NAME}.bSymbol.zip\"\n        # 替换空格\n        DSYM_SYMBOL_OUT_ZIP_NAME=\"${DSYM_SYMBOL_OUT_ZIP_NAME// /_}\"\n        DSYM_ZIP_FPATH=\"${BUILT_PRODUCTS_DIR}/${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n        \n        DSYM_SYMBOL_BACKUP_DIR=${BUILD_DIR}/Symbols\n        \n        if [ ! -e \"${DSYM_SYMBOL_BACKUP_DIR}\" ]; then\n        mkdir ${DSYM_SYMBOL_BACKUP_DIR}\n        fi\n        \n        # 备份并清理\n        find ${BUILT_PRODUCTS_DIR} -name \"*.zip\" -print0 | xargs -0 -I {} mv {} ${DSYM_SYMBOL_BACKUP_DIR}\n        /bin/rm -rf \"${BUILT_PRODUCTS_DIR}/*.zip\"\n        \n        echo \"Extract symbols from dSYM to ${DSYM_ZIP_FPATH}.\"\n        \n        echo \"--------------------------------\"\n        (/usr/bin/java -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_SRC}\" -o \"${DSYM_ZIP_FPATH}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n        echo \"--------------------------------\"\n        \n        if [ ! -e \"${DSYM_ZIP_FPATH}\" ]; then\n        DSYM_SYMBOL_OUT_ZIP_NAME=$(ls ${BUILT_PRODUCTS_DIR} | grep \".zip\")\n        DSYM_ZIP_FPATH=\"${BUILT_PRODUCTS_DIR}/${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n        DSYM_SYMBOL_OUT_ZIP_NAME=${DSYM_SYMBOL_OUT_ZIP_NAME//&/_}\n            fi\n            \n            if [ ! -e \"${DSYM_ZIP_FPATH}\" ] ; then\n            exitWithMessage \"no symbol file zip archive generated: ${DSYM_ZIP_FPATH}\" 1\n            fi\n            \n            # 提取符号信息\n            echo \"--------------------------------\"\n            echo \"Step 3: Extract symbol info from .dSYM file.\"\n            \n            if [ ! -e \"$BUGLY_SYMBOL_JAR_PATH\" ]; then\n            exitWithMessage \"Error: Jar file '${BUGLY_SYMBOL_JAR_PATH}' was not found. \\nPlease copy the jar file into ~/bin folder.\" 1\n            fi\n            \n            echo \"Step 4: Upload the symbols of dSYM.\"\n            echo \"--------------------------------\"\n            echo \"zip : ${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n            echo \"dir : ${DSYM_ZIP_FPATH}\"\n            \n            echo \"dSYM upload domain: ${DSYM_UPLOAD_DOMAIN}\"\n            DSYM_UPLOAD_URL=\"http://${DSYM_UPLOAD_DOMAIN}/upload/dsym?app=${BUGLY_APP_ID}&pid=2&ver=${BUGLY_APP_VERSION}&n=${DSYM_SYMBOL_OUT_ZIP_NAME}&key=${BUGLY_APP_KEY}&bid=${BUNDLE_IDENTIFIER}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            # Upload dSYM to Bugly\n            echo \"curl --header \"Content-Type:application/zip\" --data-binary \"@${DSYM_ZIP_FPATH}\" \"${DSYM_UPLOAD_URL}\" --verbose\"\n            \n            echo \"--------------------------------\"\n            STATUS=$(/usr/bin/curl --header \"Content-Type:application/zip\" --data-binary \"@${DSYM_ZIP_FPATH}\" \"${DSYM_UPLOAD_URL}\" --verbose)\n            echo \"--------------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\":true\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 1\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n            \n            echo \"----------------------------------------------------------------\"\n        }\n        \n        # .dSYM文件信息\n        \n        echo \"DSYM FOLDER ${DWARF_DSYM_FOLDER_PATH}\"\n        \n        DSYM_FOLDER=\"${DWARF_DSYM_FOLDER_PATH}\"\n        \n        IFS=$'\\n'\n        \n        for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n        echo \"Found dSYM file: $dsymFile\"\n        uploadDSYM $dsymFile\n        done\n        \n";
+		};
+		2923AADCB6275B937ECC04EB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BDB81DBC9807EB532F08FE73 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEFB7A12D326C1EA46B57DE9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -5699,7 +5734,6 @@
 				04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */,
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
 				24AA0B501B69112C00DAC03B /* ChatModel.m in Sources */,
-				4D5CE6C81B7E3F76002F1088 /* FavoritesListViewController.m in Sources */,
 				2489B6601B5AB49E00039E70 /* MKAnnotationView+WebCache.m in Sources */,
 				2489B65F1B5AB49E00039E70 /* SDImageCache.m in Sources */,
 				F4DF3BA81B78AC97001D9DF7 /* TimetableDomain.m in Sources */,
@@ -5865,9 +5899,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = wjhdjy;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -5904,21 +5939,25 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = wjhdjy;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;
 		};
 		248B6A7D1B19A39200FCB98F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05151135B4F680BF0B2EC7CB /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5931,6 +5970,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/libc++",
 				);
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
+				HEADER_SEARCH_PATHS = "$(inherited)/**";
 				INFOPLIST_FILE = kindergartenApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5962,12 +6002,13 @@
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/UMengFeedback_SDK/UMOpus",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/Baidu_3.6.4(3.0)_SDK/lib",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_350/libs",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = " $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -5975,13 +6016,15 @@
 		};
 		248B6A7E1B19A39200FCB98F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2BE578489F7695DFCD5A04E /* Pods.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5994,6 +6037,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/libc++",
 				);
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
+				HEADER_SEARCH_PATHS = "$(inherited)/**";
 				INFOPLIST_FILE = kindergartenApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -6025,11 +6069,12 @@
 					"$(PROJECT_DIR)/kindergartenApp/kindergartenApp/UMengFeedback_SDK/UMOpus",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/Baidu_3.6.4(3.0)_SDK/lib",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_350/libs",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = " $(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};
