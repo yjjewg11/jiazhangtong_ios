@@ -461,7 +461,7 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
 {
     if (_dataSourceType == 0)
     {
-        SPCourseDetailVC * detailVC = [[SPCourseDetailVC alloc] init];
+        SpCourseDetailVC * detailVC = [[SpCourseDetailVC alloc] init];
         
         SPCourseDomain * d = _courseListData[indexPath.row];
         

@@ -16,7 +16,7 @@
 #import "SpCourseHomeCourseCell.h"
 #import "SpTeacherInfoCell.h"
 #import "SpTeacherDetailWebViewCell.h"
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 
 @interface SpTeacherDetailViewController () <UIWebViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 {
@@ -298,7 +298,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
 {
     if (indexPath.row >= 2)
     {
-        SPCourseDetailVC * vc = [[SPCourseDetailVC alloc] init];
+        SpCourseDetailVC * vc = [[SpCourseDetailVC alloc] init];
         
         SPCourseDomain * domain = _courseList[indexPath.row - 2];
         

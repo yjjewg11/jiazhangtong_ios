@@ -252,7 +252,6 @@ static NSString *const NoDataCell = @"nodata";
             
             [_collectionView reloadData];
         }
-
     }
     faild:^(NSString *errorMsg)
     {
@@ -491,7 +490,7 @@ static NSString *const NoDataCell = @"nodata";
 {
     if (_haveSummary && _dataSourceType != DataSource_PingLun)
     {
-        if (ABS(((scrollView.contentOffset.y) - ((scrollView.contentSize.height+48 - KGSCREEN.size.height) + 64))) <= 0.1)
+        if (ABS(((scrollView.contentOffset.y) - ((scrollView.contentSize.height + 48 - KGSCREEN.size.height) + 64))) <= 0.1)
         {
             _collectionView.scrollEnabled = NO;
             
@@ -535,6 +534,7 @@ static NSString *const NoDataCell = @"nodata";
                          
                          if (marr.count == 0)
                          {
+                             
                          }
                          else
                          {

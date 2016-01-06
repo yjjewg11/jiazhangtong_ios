@@ -246,7 +246,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
         return;
     }
     
-    SPCourseDetailVC * detailVC = [[SPCourseDetailVC alloc] init];
+    SpCourseDetailVC * detailVC = [[SpCourseDetailVC alloc] init];
     
     SPCourseDomain * domain = _hotCourseData[indexPath.row - 2];
     

@@ -27,4 +27,6 @@
 @property (strong, nonatomic) NSString * age_min_max;
 @property (strong, nonatomic) NSString * obj_url;
 
+@property (strong, nonatomic) NSString * commentNum;
+
 @end

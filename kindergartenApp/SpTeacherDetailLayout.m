@@ -122,7 +122,6 @@
         UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
         [self.attrsArray addObject:attrs];
     }
-    
 }
 
 

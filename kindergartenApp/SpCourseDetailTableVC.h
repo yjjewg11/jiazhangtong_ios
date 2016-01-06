@@ -17,7 +17,6 @@
 
 @end
 
-
 @interface SpCourseDetailTableVC : UITableViewController
 
 @property (strong, nonatomic) NSString * uuid;

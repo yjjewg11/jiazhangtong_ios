@@ -56,6 +56,7 @@
 @property (strong, nonatomic) NSString * share_url;
 @property (strong, nonatomic) NSString * tels;
 @property (strong, nonatomic) NSArray * telsNum;
+
 @end
 
 @implementation SPSchoolDetailVC
@@ -601,7 +602,7 @@
 {
     if (type == 0)  //跳转到课程详情
     {
-        SPCourseDetailVC * detailVC = [[SPCourseDetailVC alloc] init];
+        SpCourseDetailVC * detailVC = [[SpCourseDetailVC alloc] init];
         
         SPCourseDomain * domain = self.courseList[indexPath.row];
         

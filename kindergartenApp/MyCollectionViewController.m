@@ -229,7 +229,7 @@
         }
             break;
         case Topic_PXKC:{
-            SPCourseDetailVC * vc = [[SPCourseDetailVC alloc] init];
+            SpCourseDetailVC * vc = [[SpCourseDetailVC alloc] init];
             vc.uuid = data.reluuid;
             [self.navigationController pushViewController:vc animated:YES];
         }

@@ -14,7 +14,6 @@
 		0403DCE41BF5C5980089E463 /* MySPCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */; };
 		0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403DCE61BF5C84D0089E463 /* MySPCourseView.m */; };
 		0403DCE91BF5C85D0089E463 /* MySPCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */; };
-		040468051C34F951001DC5CA /* test1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 040468041C34F951001DC5CA /* test1.txt */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
 		040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A27431BEB664C00620876 /* SPBottomItem.xib */; };
 		04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04595CB81BE8718D008DD54A /* SPCommentVO.m */; };
@@ -213,7 +212,6 @@
 		04A4DE9D1BF484DF002ABBB1 /* libAdsMogo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A4DDFB1BF484DF002ABBB1 /* libAdsMogo.a */; };
 		04A4DE9E1BF484DF002ABBB1 /* libAdsMogo_i386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A4DDFC1BF484DF002ABBB1 /* libAdsMogo_i386.a */; };
 		04A4DE9F1BF484DF002ABBB1 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A4DDFE1BF484DF002ABBB1 /* UTDID.framework */; };
-		04A5A0901BE7591600024E21 /* SPCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A5A08E1BE7591600024E21 /* SPCourseDetailVC.m */; };
 		04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */; };
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
@@ -256,6 +254,8 @@
 		04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F84EBA1C0851E800A51140 /* NoNetView.m */; };
 		04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F84EBC1C08522700A51140 /* NoNetView.xib */; };
 		04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F84EBF1C085F3400A51140 /* Bugly.framework */; };
+		04F8731A1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F873181C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m */; };
+		04F8731B1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F873191C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib */; };
 		04F8894A1C058FE9002FBE6D /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889461C058FE9002FBE6D /* HZQDatePickerView.m */; };
 		04F8894B1C058FE9002FBE6D /* HZQDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F889471C058FE9002FBE6D /* HZQDatePickerView.xib */; };
 		04F8894C1C058FE9002FBE6D /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889491C058FE9002FBE6D /* UIColor+HexString.m */; };
@@ -378,6 +378,8 @@
 		04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */; };
 		04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */; };
 		04FA7D141C1ECB040035AF18 /* MineHomeFunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA7D121C1ECB040035AF18 /* MineHomeFunCell.xib */; };
+		04FADC551C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */; };
+		04FADC561C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */; };
 		04FAEF671C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */; };
 		04FAEF6C1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAEF6A1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.m */; };
 		04FAEF6D1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FAEF6B1C0FDE9D00BCBE5E /* EnrolStudentButtonCell.xib */; };
@@ -413,8 +415,8 @@
 		04FBC9E71C34CD8E00F49DB0 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */; };
 		04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */; };
 		04FC2A001BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */; };
-		04FC31DE1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC31DD1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m */; };
-		04FC31E01BFEFEC700C331A7 /* SPCourseDetailScrollInfoWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC31DF1BFEFEC700C331A7 /* SPCourseDetailScrollInfoWebView.xib */; };
+		04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD8DED1C3A6B0B00BB186A /* SpCourseDetailVC.m */; };
+		04FD8DF01C3A6B0B00BB186A /* SpCourseDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD8DEE1C3A6B0B00BB186A /* SpCourseDetailVC.xib */; };
 		04FDB4DD1C1AD8D700EF0D68 /* ShareDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDB4DC1C1AD8D700EF0D68 /* ShareDomain.m */; };
 		04FDB4DE1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FDB4DC1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m */; };
 		04FDB4DF1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FDB4DD1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib */; };
@@ -757,7 +759,6 @@
 		0403DCE51BF5C84D0089E463 /* MySPCourseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseView.h; sourceTree = "<group>"; };
 		0403DCE61BF5C84D0089E463 /* MySPCourseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseView.m; sourceTree = "<group>"; };
 		0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseView.xib; sourceTree = "<group>"; };
-		040468041C34F951001DC5CA /* test1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test1.txt; sourceTree = "<group>"; };
 		040A27401BEB663300620876 /* SPBottomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBottomItem.h; sourceTree = "<group>"; };
 		040A27411BEB663300620876 /* SPBottomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItem.m; sourceTree = "<group>"; };
 		040A27431BEB664C00620876 /* SPBottomItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPBottomItem.xib; sourceTree = "<group>"; };
@@ -1033,8 +1034,6 @@
 		04A4DDFC1BF484DF002ABBB1 /* libAdsMogo_i386.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdsMogo_i386.a; sourceTree = "<group>"; };
 		04A4DDFD1BF484DF002ABBB1 /* NSMutableDictionary+AdsMogoDic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+AdsMogoDic.h"; sourceTree = "<group>"; };
 		04A4DDFE1BF484DF002ABBB1 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
-		04A5A08D1BE7591600024E21 /* SPCourseDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailVC.h; sourceTree = "<group>"; };
-		04A5A08E1BE7591600024E21 /* SPCourseDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailVC.m; sourceTree = "<group>"; };
 		04AA3CBB1BE5EAA200DCC290 /* SPCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCommentDomain.h; sourceTree = "<group>"; };
 		04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCommentDomain.m; sourceTree = "<group>"; };
 		04AA3CC11BE5F24D00DCC290 /* SpCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseCommentCell.h; sourceTree = "<group>"; };
@@ -1123,6 +1122,9 @@
 		04F84EBA1C0851E800A51140 /* NoNetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetView.m; sourceTree = "<group>"; };
 		04F84EBC1C08522700A51140 /* NoNetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetView.xib; sourceTree = "<group>"; };
 		04F84EBF1C085F3400A51140 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
+		04F873171C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailCourseInfo.h; sourceTree = "<group>"; };
+		04F873181C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseDetailCourseInfo.m; sourceTree = "<group>"; };
+		04F873191C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseDetailCourseInfo.xib; sourceTree = "<group>"; };
 		04F889451C058FE9002FBE6D /* HZQDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZQDatePickerView.h; sourceTree = "<group>"; };
 		04F889461C058FE9002FBE6D /* HZQDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZQDatePickerView.m; sourceTree = "<group>"; };
 		04F889471C058FE9002FBE6D /* HZQDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HZQDatePickerView.xib; sourceTree = "<group>"; };
@@ -1332,6 +1334,9 @@
 		04FA7D101C1ECB040035AF18 /* MineHomeFunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineHomeFunCell.h; sourceTree = "<group>"; };
 		04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineHomeFunCell.m; sourceTree = "<group>"; };
 		04FA7D121C1ECB040035AF18 /* MineHomeFunCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineHomeFunCell.xib; sourceTree = "<group>"; };
+		04FADC521C3CE44B009D71F1 /* SpCourseDetailInfoWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailInfoWeb.h; sourceTree = "<group>"; };
+		04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseDetailInfoWeb.m; sourceTree = "<group>"; };
+		04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseDetailInfoWeb.xib; sourceTree = "<group>"; };
 		04FAEF651C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentSchoolDetailLayout.h; sourceTree = "<group>"; };
 		04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentSchoolDetailLayout.m; sourceTree = "<group>"; };
 		04FAEF691C0FDE9D00BCBE5E /* EnrolStudentButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentButtonCell.h; sourceTree = "<group>"; };
@@ -1387,9 +1392,9 @@
 		04FC29FC1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseListCourseDetailCell.h; sourceTree = "<group>"; };
 		04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseListCourseDetailCell.m; sourceTree = "<group>"; };
 		04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseListCourseDetailCell.xib; sourceTree = "<group>"; };
-		04FC31DC1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailScrollInfoWebView.h; sourceTree = "<group>"; };
-		04FC31DD1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailScrollInfoWebView.m; sourceTree = "<group>"; };
-		04FC31DF1BFEFEC700C331A7 /* SPCourseDetailScrollInfoWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPCourseDetailScrollInfoWebView.xib; sourceTree = "<group>"; };
+		04FD8DEC1C3A6B0B00BB186A /* SpCourseDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailVC.h; sourceTree = "<group>"; };
+		04FD8DED1C3A6B0B00BB186A /* SpCourseDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseDetailVC.m; sourceTree = "<group>"; };
+		04FD8DEE1C3A6B0B00BB186A /* SpCourseDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseDetailVC.xib; sourceTree = "<group>"; };
 		04FDB4DB1BFC1C7E00A73E2E /* MySPTeacherCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPTeacherCommentCell.h; sourceTree = "<group>"; };
 		04FDB4DB1C1AD8D700EF0D68 /* ShareDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDomain.h; sourceTree = "<group>"; };
 		04FDB4DC1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPTeacherCommentCell.m; sourceTree = "<group>"; };
@@ -2095,8 +2100,6 @@
 		046195361BD7718300C68344 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04A5A08D1BE7591600024E21 /* SPCourseDetailVC.h */,
-				04A5A08E1BE7591600024E21 /* SPCourseDetailVC.m */,
 				048400981BE7C54A009A689B /* SpCourseDetailTableVC.h */,
 				04FB7CBB1C0DA84000FD3E31 /* SpCourseDetailTableVC.m */,
 				04FEC8821BEBAADD00D3D8A5 /* SPSchoolDetailVC.h */,
@@ -2109,6 +2112,9 @@
 				04FB9F9B1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.m */,
 				04FB7CA61C0D869700FD3E31 /* SpTeacherDetailViewController.h */,
 				04FB7CA71C0D869700FD3E31 /* SpTeacherDetailViewController.m */,
+				04FD8DEC1C3A6B0B00BB186A /* SpCourseDetailVC.h */,
+				04FD8DED1C3A6B0B00BB186A /* SpCourseDetailVC.m */,
+				04FD8DEE1C3A6B0B00BB186A /* SpCourseDetailVC.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2512,6 +2518,12 @@
 				04F72AB91BEC562900623E33 /* SPTeacherCell.h */,
 				04F72ABA1BEC562900623E33 /* SPTeacherCell.m */,
 				04F72ABB1BEC562900623E33 /* SPTeacherCell.xib */,
+				04F873171C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.h */,
+				04F873181C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m */,
+				04F873191C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib */,
+				04FADC521C3CE44B009D71F1 /* SpCourseDetailInfoWeb.h */,
+				04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */,
+				04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */,
 			);
 			name = tableviewcell;
 			sourceTree = "<group>";
@@ -2690,13 +2702,9 @@
 				04F9364A1BFEBAC0002D7621 /* SPCourseDetailWebView.h */,
 				04F9364B1BFEBAC0002D7621 /* SPCourseDetailWebView.m */,
 				04F9364D1BFEBAD3002D7621 /* SPCourseDetailWebView.xib */,
-				04FC31DC1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.h */,
-				04FC31DD1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m */,
-				04FC31DF1BFEFEC700C331A7 /* SPCourseDetailScrollInfoWebView.xib */,
 				04FB7CBD1C0DA86800FD3E31 /* SpCourseItem.h */,
 				04FB7CBE1C0DA86800FD3E31 /* SpCourseItem.m */,
 				04FB7CBF1C0DA86800FD3E31 /* SpCourseItem.xib */,
-				040468041C34F951001DC5CA /* test1.txt */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -5174,6 +5182,7 @@
 				04A4DE1F1BF484DF002ABBB1 /* admogoVideo_4.png in Resources */,
 				04A4DE501BF484DF002ABBB1 /* adsmogo_bannerface50.png in Resources */,
 				04A4DE471BF484DF002ABBB1 /* adsmogo_bannerface305.png in Resources */,
+				04F8731B1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib in Resources */,
 				04F89A3C1C1018D800FC0FA6 /* EnrolStudentCommentCell.xib in Resources */,
 				04F724091BD451400008A9A8 /* SPTimetableItemCell.xib in Resources */,
 				04A4DE6A1BF484DF002ABBB1 /* webview_bar_back_grey@2x.png in Resources */,
@@ -5274,6 +5283,7 @@
 				04F8D3651C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib in Resources */,
 				04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */,
 				04FA59951C27E77C009689C7 /* ShareBtnView.xib in Resources */,
+				04FADC561C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib in Resources */,
 				04A4DE171BF484DF002ABBB1 /* admogoVideo_23.png in Resources */,
 				048CF1391C23FB08001A7CB2 /* ChatViewController.xib in Resources */,
 				04A4DE1B1BF484DF002ABBB1 /* admogoVideo_27.png in Resources */,
@@ -5310,6 +5320,7 @@
 				04F89A361C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib in Resources */,
 				4D5CE76E1B7E4333002F1088 /* ModifyPasswordViewController.xib in Resources */,
 				24DE91B51B67C78700D3FFCE /* TeacherJudgeViewController.xib in Resources */,
+				04FD8DF01C3A6B0B00BB186A /* SpCourseDetailVC.xib in Resources */,
 				04A4DE9A1BF484DF002ABBB1 /* webview_bar_share.png in Resources */,
 				F487839E1B58DA1700CDC1A8 /* LICENSE in Resources */,
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
@@ -5343,7 +5354,6 @@
 				04A4DE631BF484DF002ABBB1 /* mail@2x.png in Resources */,
 				4D5CE76A1B7E4333002F1088 /* AboutWeViewController.xib in Resources */,
 				04F8894B1C058FE9002FBE6D /* HZQDatePickerView.xib in Resources */,
-				040468051C34F951001DC5CA /* test1.txt in Resources */,
 				04A4DE611BF484DF002ABBB1 /* bg@2x.png in Resources */,
 				4D077B2B1B80B16100FFD5CB /* OnlyEmojiView.xib in Resources */,
 				24C46B381B5A2A9900A58F92 /* HomeViewController.xib in Resources */,
@@ -5354,7 +5364,6 @@
 				04F9FB651BF1A67400AEFB88 /* umeng_fb_audio_play_02@2x.png in Resources */,
 				4D077B1E1B8038BE00FFD5CB /* CollectNoticeTableViewCell.xib in Resources */,
 				04A4DE3E1BF484DF002ABBB1 /* adsmogo_fsclosebtn.png in Resources */,
-				04FC31E01BFEFEC700C331A7 /* SPCourseDetailScrollInfoWebView.xib in Resources */,
 				F4E36D5D1B85B49D009BD909 /* DoImagePickerController.xib in Resources */,
 				04F9FB5F1BF1A67400AEFB88 /* ToolViewInputVoice@2x.png in Resources */,
 				F4E36D5F1B85B49D009BD909 /* DoPhotoCell.xib in Resources */,
@@ -5469,7 +5478,6 @@
 				F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */,
 				F487839A1B58DA1700CDC1A8 /* UIImageView+AFNetworking.m in Sources */,
 				F48783A31B58DA1700CDC1A8 /* MASViewAttribute.m in Sources */,
-				04A5A0901BE7591600024E21 /* SPCourseDetailVC.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
 				04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */,
@@ -5607,7 +5615,6 @@
 				04FB23771C16CD62009B57E2 /* TuiJianCell.m in Sources */,
 				2457FD0B1B712C13006A3AB7 /* FaceBoard.m in Sources */,
 				04FA598A1C27C68A009689C7 /* EYTagPopupView.m in Sources */,
-				04FC31DE1BFEFEB500C331A7 /* SPCourseDetailScrollInfoWebView.m in Sources */,
 				04FDB4E31C1AD9A900EF0D68 /* ZYQAssetPickerController.m in Sources */,
 				04FB7CAF1C0D9A9D00FD3E31 /* SpTeacherInfoCell.m in Sources */,
 				24A3D3761B5E874600D4C212 /* KGHomeItemButton.m in Sources */,
@@ -5625,6 +5632,7 @@
 				F48783B31B58DA1700CDC1A8 /* NSObject+MJProperty.m in Sources */,
 				F4E635FE1B675EB700800924 /* AnnouncementTableViewCell.m in Sources */,
 				F46CBD0A1B7449AB00380EC3 /* RecipesListViewController.m in Sources */,
+				04F8731A1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m in Sources */,
 				F4E36D5E1B85B49D009BD909 /* DoPhotoCell.m in Sources */,
 				04F3D45A1BF47FD3007E7AC0 /* mongoose.c in Sources */,
 				2489B6231B5A40E200039E70 /* RegViewController.m in Sources */,
@@ -5664,6 +5672,7 @@
 				F48783A81B58DA1700CDC1A8 /* README.md in Sources */,
 				04FA598B1C27C68A009689C7 /* EYTextPopupView.m in Sources */,
 				0494F47F1BDF777500F39865 /* UIScrollView+MJRefresh.m in Sources */,
+				04FADC551C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m in Sources */,
 				04F9FB6C1BF1A67400AEFB88 /* UMFullScreenPhotoView.m in Sources */,
 				2474DFCF1B6CD43C0021506F /* CookbookDomain.m in Sources */,
 				2489B66A1B5AB49E00039E70 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -5714,6 +5723,7 @@
 				F4EA53861B60BD390044BE7A /* MeTableViewCell.m in Sources */,
 				04F8C6F91C18235100EF5E57 /* DiscorveryJingXuanCell.m in Sources */,
 				24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */,
+				04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */,
 				2489B6611B5AB49E00039E70 /* NSData+ImageContentType.m in Sources */,
 				24DE91B01B67C24D00D3FFCE /* TeacherVO.m in Sources */,
 				04F8C6EF1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m in Sources */,

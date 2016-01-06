@@ -7,17 +7,13 @@
 //
 
 #import "SpCourseDetailTableVC.h"
-
 #import "SPCommentDomain.h"
-
 #import "KGHttpService.h"
 #import "KGHUD.h"
 #import "StudentInfoHeaderView.h"
-
 #import "MJRefresh.h"
 #import "SpCourseCommentCell.h"
 #import "MJExtension.h"
-
 #import "NoDataTableViewCell.h"
 
 @interface SpCourseDetailTableVC () <UITableViewDataSource,UITableViewDelegate>
@@ -65,7 +61,6 @@
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     self.tableView.frame = self.tableFrame;
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
