@@ -252,6 +252,12 @@ static NSString *const CourseCellID = @"coursecellcoll";
     
     detailVC.uuid = domain.uuid;
     
+    detailVC.map_point = domain.map_point;
+    
+    detailVC.schoolName = domain.group_name;
+    
+    detailVC.locationName = domain.address;
+    
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 

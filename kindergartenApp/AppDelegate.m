@@ -30,7 +30,8 @@
 
 #define NewMessageKey @"newMessage"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<BMKGeneralDelegate>
+
 
 @end
 
@@ -112,6 +113,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionTimeoutNotification:) name:Key_Notification_SessionTimeout object:nil];
     
     [self loadMessageList:launchOptions];
+    
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"IoiA8xNOSEe2EuMR49NDjYKp"  generalDelegate:self];
+    if (!ret)
+    {
+        NSLog(@"百度地图 manager start failed!");
+    }
     
     return YES;
 }
@@ -384,5 +393,22 @@ static int exception_callback_handler() {
     [UMessage setLogEnabled:NO];
 }
 
+/**
+ *返回网络错误
+ *@param iError 错误号
+ */
+- (void)onGetNetworkState:(int)iError
+{
+    
+}
+
+/**
+ *返回授权验证错误
+ *@param iError 错误号 : 为0时验证通过，具体参加BMKPermissionCheckResultCode
+ */
+- (void)onGetPermissionState:(int)iError
+{
+    
+}
 
 @end

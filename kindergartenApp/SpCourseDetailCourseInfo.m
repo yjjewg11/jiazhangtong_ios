@@ -33,7 +33,13 @@
 
 - (void)awakeFromNib
 {
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setCommentNums:) name:@"setcomment" object:nil
+     ];
+}
+
+- (void)setCommentNums:(NSNotification *)obj
+{
+    commentNum.text = [NSString stringWithFormat:@"%@人评价",obj.object];
 }
 
 - (void)setData:(SPCourseDetailDomain *)domain
@@ -44,7 +50,6 @@
     courseDuringTime.text = [NSString stringWithFormat:@"课程学时:%@",domain.schedule];
     courseAge.text = [NSString stringWithFormat:@"适合年龄:%@",domain.age_min_max];
     scoreLbl.text = [NSString stringWithFormat:@"%.1f",(domain.ct_stars / 10.00)];
-    commentNum.text = [NSString stringWithFormat:@"%@人评价",domain.commentNum];
     
     NSInteger intCount = (NSInteger)(domain.ct_stars / 10);
     
@@ -56,6 +61,7 @@
 - (IBAction)mapClicked:(id)sender
 {
     NSLog(@"aa");
+    [self.delegate pushToMapVC];
 }
 
 - (void)setUpStarts:(NSInteger)intCount halfCount:(NSInteger)halfCount

@@ -467,6 +467,10 @@ static NSString *const SchoolCellID = @"schoolcellcoll";
         
         detailVC.uuid = d.uuid;
         
+        detailVC.schoolName = d.group_name;
+        
+        detailVC.locationName = d.address;
+        
         [self.navigationController pushViewController:detailVC animated:YES];
     }
     else if (_dataSourceType == 1)

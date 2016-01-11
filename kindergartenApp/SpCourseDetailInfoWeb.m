@@ -27,12 +27,6 @@
     
     self.webview.scrollView.showsVerticalScrollIndicator = NO;
     
-    self.webview.scalesPageToFit = YES;
-    
-    self.webview.scrollView.delaysContentTouches = YES;
-    
-    self.webview.scrollView.canCancelContentTouches = NO;
-    
     self.height = APPWINDOWHEIGHT - 64 - 30 - 48;
 }
 

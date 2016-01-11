@@ -21,10 +21,11 @@
 #import "SPCommentDomain.h"
 #import "SpCourseDetailCourseInfo.h"
 #import "SpCourseDetailInfoWeb.h"
-
+#import "SpCourseDetailCommentVC.h"
 #import "UIColor+flat.h"
+#import "MapVC.h"
 
-@interface SpCourseDetailVC () <UMSocialUIDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SpCourseDetailInfoWebDelegate>
+@interface SpCourseDetailVC () <UMSocialUIDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SpCourseDetailInfoWebDelegate,SpCourseDetailCourseInfoDelegate>
 {
     
     __weak IBOutlet UIButton *kechengxiangqing;
@@ -51,7 +52,7 @@
     
     SpCourseDetailInfoWeb * _webCell;
     
-    NSString * _objurl;
+    SpCourseDetailCourseInfo * _infoCell;
     
     NSString * _commentNum;
     
@@ -59,6 +60,10 @@
     BOOL _haveCourseDiscountPrice;
     
     UIScrollView * _scrollView;
+    
+    UIWebView * _webView;
+    
+    SpCourseDetailCommentVC * _commentTableVC;
 }
 
 @property (strong, nonatomic) NSString * tels;
@@ -86,10 +91,19 @@
     //请求课程详情数据
     [self getData];
     
+    //创建scrollview
     [self initScrollView];
     
     //创建table
     [self initTableView];
+    
+    //创建第二栏的webview
+    [self initWebView];
+    
+    //创建第三栏的tableview
+    [self initCommentTableView];
+    
+    [self getCommentData];
     
     //创建底部view
     [self initBottomView];
@@ -101,14 +115,20 @@
     
     //请求课程详情数据
     [self getData];
+}
+
+- (void)initCommentTableView
+{
+    _commentTableVC = [[SpCourseDetailCommentVC alloc] init];
     
-    //请求评论数据
-    [self getCommentData];
+    _commentTableVC.uuid = self.uuid;
+    
+    _commentTableVC.tableFrame = CGRectMake(APPWINDOWWIDTH * 2, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 48 - 64 - 30);
 }
 
 - (void)initScrollView
 {
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 30, APPWINDOWWIDTH * 3, APPWINDOWHEIGHT - 48 - 64 - 30)];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - 48 - 64 - 30)];
     
     _scrollView.scrollEnabled = NO;
     
@@ -128,7 +148,10 @@
         _courseDetailDomain = [SPCourseDetailDomain objectWithKeyValues:vo.data];
         
         self.infoUrl = vo.share_url;
+        
         self.detailUrl = vo.obj_url;
+        
+        [self getSchoolWebUrl:_courseDetailDomain.groupuuid];
         
         if (_courseDetailDomain.fees == 0)
         {
@@ -152,8 +175,6 @@
         
         self.tels = vo.link_tel;
         
-        _objurl = vo.obj_url;
-        
         if(!isFavor)
         {
             ((SPBottomItem *)_buttonItems[0]).btn.selected = YES;
@@ -163,8 +184,6 @@
         [_scrollView addSubview:_tableView];
         
         [self.view addSubview:_scrollView];
-        
-        [self.view addSubview:_tableView];
         
         [self.view addSubview:_bottomView];
         
@@ -177,52 +196,21 @@
     }];
 }
 
-- (void)getCommentData
+- (void)getSchoolWebUrl:(NSString *)uuid
 {
-    [[KGHttpService sharedService] getSPCourseComment:self.uuid pageNo:@"1" success:^(SPCommentVO *commentVO)
+    [[KGHttpService sharedService] getSPSchoolInfoShareUrl:uuid success:^(NSString *url)
     {
-         _commentDatas = [NSMutableArray arrayWithArray:[SPCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            [self calCommentCellHeight];
-        });
-     }
-     faild:^(NSString *errorMsg)
-     {
-         
-     }];
-}
-
-#pragma mark - 计算所有评论单元格的高度
-- (void)calCommentCellHeight
-{
-    //计算行高
-    NSMutableArray * rowHeights = [NSMutableArray array];
-    
-    if (_commentDatas.count != 0)
-    {
-        for (SPCommentDomain * domain in _commentDatas)
-        {
-            NSString * text = domain.content;
-            
-            CGFloat textHeight = [KGNSStringUtil heightForString:text andWidth:KGSCREEN.size.width - 20];
-            
-            CGFloat height = 139 + ABS(67 - textHeight);
-            
-            [rowHeights addObject:@(height)];
-        }
+        [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^
+    faild:^(NSString *errorMsg)
     {
-        [_tableView reloadData];
-    });
+         
+    }];
 }
 
 - (void)initTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 30, KGSCREEN.size.width, APPWINDOWHEIGHT - 48 - 64 - 30) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, APPWINDOWHEIGHT - 48 - 64 - 30) style:UITableViewStylePlain];
 
     _tableView.backgroundColor = [UIColor whiteColor];
     
@@ -235,6 +223,39 @@
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
+}
+
+- (void)initWebView
+{
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(APPWINDOWWIDTH, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 48 - 64 - 30)];
+    
+    _webView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    
+    _webView.scrollView.bounces = NO;
+    
+    [_scrollView addSubview:_webView];
+}
+
+- (void)getCommentData
+{
+    [[KGHttpService sharedService] getSPCourseComment:self.uuid pageNo:@"1" success:^(SPCommentVO *commentVO)
+     {
+         _commentDatas = [NSMutableArray arrayWithArray:[SPCommentDomain objectArrayWithKeyValuesArray:commentVO.data]];
+         
+         NSNotification * no = [[NSNotification alloc] initWithName:@"setcomment" object:@(_commentDatas.count) userInfo:nil];
+         
+         [[NSNotificationCenter defaultCenter] postNotification:no];
+         
+         _commentTableVC.dataSource = _commentDatas;
+         
+         [_commentTableVC calCommentCellHeight];
+         
+         [_scrollView addSubview:_commentTableVC.tableView];
+     }
+     faild:^(NSString *errorMsg)
+     {
+         
+     }];
 }
 
 - (void)initBottomView
@@ -295,6 +316,8 @@
             [kechengxiangqing setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             [xuexiaojianjie setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [jiazhangpingjia setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
+            [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         }
             break;
         case 1:
@@ -302,6 +325,8 @@
             [kechengxiangqing setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [xuexiaojianjie setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             [jiazhangpingjia setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            
+            [_scrollView setContentOffset:CGPointMake(APPWINDOWWIDTH, 0) animated:YES];
         }
             break;
         case 2:
@@ -309,6 +334,8 @@
             [kechengxiangqing setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [xuexiaojianjie setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [jiazhangpingjia setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+            
+            [_scrollView setContentOffset:CGPointMake(APPWINDOWWIDTH * 2, 0) animated:YES];
         }
             break;
         default:
@@ -641,6 +668,10 @@
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"SpCourseDetailCourseInfo" owner:nil options:nil] firstObject];
         }
+
+        _infoCell = cell;
+        
+        cell.delegate = self;
         
         _courseDetailDomain.commentNum = _commentNum;
         
@@ -741,6 +772,19 @@
     _tableView.scrollEnabled = YES;
     
     _webCell.webview.scrollView.scrollEnabled = NO;
+}
+
+- (void)pushToMapVC
+{
+    MapVC * vc = [[MapVC alloc] init];
+    
+    vc.map_point = self.map_point;
+    
+    vc.locationName = self.locationName;
+    
+    vc.schoolName = self.schoolName;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

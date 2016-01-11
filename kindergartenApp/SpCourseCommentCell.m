@@ -9,6 +9,7 @@
 #import "SpCourseCommentCell.h"
 #import "KGNSStringUtil.h"
 #import "NSDate+Utils.h"
+#import "MJExtension.h"
 
 @interface SpCourseCommentCell()
 
@@ -28,8 +29,6 @@
 
 - (void)setDomain:(SPCommentDomain *)domain
 {
-    _domain = domain;
-    
     self.create_user.text = domain.create_user;
     
     self.contentLbl.text = domain.content;
@@ -41,20 +40,6 @@
     NSInteger halfCount = [domain.score integerValue] - intCount * 10;
     
     [self setUpStarts:intCount halfCount:halfCount];
-    
-    [self calCellHeight];
-    
-}
-
-- (void)calCellHeight
-{
-    NSString * text = self.contentLbl.text;
-    
-    CGFloat textHeight = [KGNSStringUtil heightForString:text andWidth:self.contentLbl.frame.size.width];
-    
-    self.rowHeight = 139 + ABS(self.textHeight.constant - textHeight);
-    
-    self.textHeight.constant = textHeight;
 }
 
 - (void)setUpStarts:(NSInteger)intCount halfCount:(NSInteger)halfCount

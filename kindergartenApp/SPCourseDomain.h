@@ -19,5 +19,6 @@
 @property (strong, nonatomic) NSString * distance;
 @property (assign, nonatomic) NSInteger ct_stars;
 @property (assign, nonatomic) NSInteger ct_study_students;
+@property (strong, nonatomic) NSString * map_point;
 
 @end

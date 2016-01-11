@@ -1,15 +1,10 @@
 PODS:
-  - LBXScan (1.1.1):
-    - ZXingObjC (~> 3.0)
-  - ZXingObjC (3.1.0):
-    - ZXingObjC/All (= 3.1.0)
-  - ZXingObjC/All (3.1.0)
+  - BaiduMapKit (2.9.1)
 
 DEPENDENCIES:
-  - LBXScan
+  - BaiduMapKit
 
 SPEC CHECKSUMS:
-  LBXScan: dfb4d8ae8e4cff2aa0c9e1771e43954dce1469a9
-  ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a
+  BaiduMapKit: 97d2d44b41a876de2371fb91ddf78cdf84dafa05
 
 COCOAPODS: 0.39.0
