@@ -228,6 +228,7 @@
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
 		04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */; };
+		04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D5D30B1C47927D005399D9 /* libZXingObjC.a */; };
 		04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F151671C45FF1800E80B3E /* FPHomeVC.m */; };
 		04F1516A1C45FF1800E80B3E /* FPHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F151681C45FF1800E80B3E /* FPHomeVC.xib */; };
 		04F3D4541BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3E81BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -309,6 +310,7 @@
 		04F9AC581BFC58C8004DA63D /* MySPAllCourseListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9AC561BFC58C8004DA63D /* MySPAllCourseListCell.xib */; };
 		04F9AC5E1BFC82B4004DA63D /* MySPAllListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC5D1BFC82B4004DA63D /* MySPAllListHeaderView.m */; };
 		04F9AC601BFC82D3004DA63D /* MySPAllListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9AC5F1BFC82D3004DA63D /* MySPAllListHeaderView.xib */; };
+		04F9BF5F1C4791E400BBD4F5 /* libLBXScan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9BF5E1C4791E400BBD4F5 /* libLBXScan.a */; };
 		04F9C6791BEC457B000DD5CE /* SPSchoolDetailTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C6781BEC457B000DD5CE /* SPSchoolDetailTableVC.m */; };
 		04F9C98B1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C98A1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m */; };
 		04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9C98E1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m */; };
@@ -420,8 +422,6 @@
 		04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9F9E1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m */; };
 		04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */; };
 		04FB9FA41C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */; };
-		04FBC9E61C34CD8E00F49DB0 /* libLBXScan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FBC9E41C34CD8E00F49DB0 /* libLBXScan.a */; };
-		04FBC9E71C34CD8E00F49DB0 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */; };
 		04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */; };
 		04FC2A001BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */; };
 		04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD8DED1C3A6B0B00BB186A /* SpCourseDetailVC.m */; };
@@ -628,7 +628,7 @@
 		4DF056D01B877F0200ED3840 /* KGAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056CF1B877F0200ED3840 /* KGAttachment.m */; };
 		4DF056D51B877F3A00ED3840 /* KGImageBrowseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056D21B877F3A00ED3840 /* KGImageBrowseView.m */; };
 		4DF056D61B877F3A00ED3840 /* KGPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056D41B877F3A00ED3840 /* KGPhotoScrollView.m */; };
-		A742F4034A934795F95B21F9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE98BB1CDE9A04A59474C9E1 /* libPods.a */; };
+		8DFBC4EDA7E10DE2EB0D6521 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE98BB1CDE9A04A59474C9E1 /* libPods.a */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -1069,6 +1069,7 @@
 		04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseCommentCell.xib; sourceTree = "<group>"; };
 		04C5D8861BE2199800A1245C /* SPCourseDetailDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailDomain.h; sourceTree = "<group>"; };
 		04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailDomain.m; sourceTree = "<group>"; };
+		04D5D30B1C47927D005399D9 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
 		04F151661C45FF1800E80B3E /* FPHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeVC.h; sourceTree = "<group>"; };
 		04F151671C45FF1800E80B3E /* FPHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeVC.m; sourceTree = "<group>"; };
 		04F151681C45FF1800E80B3E /* FPHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeVC.xib; sourceTree = "<group>"; };
@@ -1221,6 +1222,12 @@
 		04F9AC5C1BFC82B4004DA63D /* MySPAllListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPAllListHeaderView.h; sourceTree = "<group>"; };
 		04F9AC5D1BFC82B4004DA63D /* MySPAllListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPAllListHeaderView.m; sourceTree = "<group>"; };
 		04F9AC5F1BFC82D3004DA63D /* MySPAllListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPAllListHeaderView.xib; sourceTree = "<group>"; };
+		04F9BF4D1C478C1900BBD4F5 /* libLBXScan.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLBXScan.a; path = "Pods/../build/Debug-iphoneos/libLBXScan.a"; sourceTree = "<group>"; };
+		04F9BF4F1C478C2600BBD4F5 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
+		04F9BF511C478C4100BBD4F5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		04F9BF541C47904100BBD4F5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		04F9BF5C1C47915700BBD4F5 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/../build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		04F9BF5E1C4791E400BBD4F5 /* libLBXScan.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLBXScan.a; path = "Pods/../build/Debug-iphoneos/libLBXScan.a"; sourceTree = "<group>"; };
 		04F9C6771BEC457B000DD5CE /* SPSchoolDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSchoolDetailTableVC.h; sourceTree = "<group>"; };
 		04F9C6781BEC457B000DD5CE /* SPSchoolDetailTableVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSchoolDetailTableVC.m; sourceTree = "<group>"; };
 		04F9C9891C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentsSchoolDomain.h; sourceTree = "<group>"; };
@@ -2021,8 +2028,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04FBC9E61C34CD8E00F49DB0 /* libLBXScan.a in Frameworks */,
-				04FBC9E71C34CD8E00F49DB0 /* libZXingObjC.a in Frameworks */,
+				04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */,
+				04F9BF5F1C4791E400BBD4F5 /* libLBXScan.a in Frameworks */,
 				04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */,
 				04FA7D081C1E95EE0035AF18 /* JavaScriptCore.framework in Frameworks */,
 				04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */,
@@ -2071,7 +2078,7 @@
 				04F3D4591BF47FD2007E7AC0 /* libBaiduMobAdSdk64bit.a in Frameworks */,
 				04A4DE9D1BF484DF002ABBB1 /* libAdsMogo.a in Frameworks */,
 				04FF47611C046D97004DC45D /* libGDTMobSDK.a in Frameworks */,
-				A742F4034A934795F95B21F9 /* libPods.a in Frameworks */,
+				8DFBC4EDA7E10DE2EB0D6521 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4531,6 +4538,13 @@
 		C925B64CB131B415E0126F11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04D5D30B1C47927D005399D9 /* libZXingObjC.a */,
+				04F9BF5E1C4791E400BBD4F5 /* libLBXScan.a */,
+				04F9BF5C1C47915700BBD4F5 /* libPods.a */,
+				04F9BF541C47904100BBD4F5 /* libPods.a */,
+				04F9BF511C478C4100BBD4F5 /* libPods.a */,
+				04F9BF4F1C478C2600BBD4F5 /* libZXingObjC.a */,
+				04F9BF4D1C478C1900BBD4F5 /* libLBXScan.a */,
 				04FBC9E41C34CD8E00F49DB0 /* libLBXScan.a */,
 				04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */,
 				04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */,
@@ -5952,7 +5966,7 @@
 		248B6A7A1B19A39200FCB98F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -5990,6 +6004,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = wjhdjy;
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "arm64 armv7";
@@ -5999,7 +6014,7 @@
 		248B6A7B1B19A39200FCB98F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -6030,6 +6045,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = wjhdjy;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -6094,8 +6110,8 @@
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_350/libs",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = " $(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
 				PROVISIONING_PROFILE = "";
@@ -6161,7 +6177,8 @@
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_350/libs",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
-				OTHER_LDFLAGS = " $(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
 				PROVISIONING_PROFILE = "";

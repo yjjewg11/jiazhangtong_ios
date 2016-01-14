@@ -23,8 +23,12 @@
 #import "ZYQAssetPickerController.h"
 #import "UMSocial.h"
 #import "ShareDomain.h"
-
 #import "HLActionSheet.h"
+
+#import "LBXScanView.h"
+#import "LBXScanResult.h"
+#import "LBXScanWrapper.h"
+#import <objc/message.h>
 
 @interface DiscorveryVC () <UICollectionViewDataSource,UICollectionViewDelegate,DiscorveryTypeCellDelegate,UIScrollViewDelegate,UIWebViewDelegate,TuiJianCellDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,UMSocialUIDelegate,TestJSExport,UIImagePickerControllerDelegate,ZYQAssetPickerControllerDelegate>
 {
@@ -51,13 +55,45 @@
     BOOL _canReqData;
     
     NSInteger _pageNo;
+
+    NSTimer *_timer;	// 用于UIWebView保存图片
+    int _gesState;	  // 用于UIWebView保存图片
+    NSString *_imgURL;  // 用于UIWebView保存图片
+    BOOL longPress;
 }
 
 @property (strong, nonatomic) NSString * groupuuid;
 
+@property (assign, nonatomic) NSInteger sheetType;  //标记打开的actionsheet是否可以识别二维码
+
 @end
 
 @implementation DiscorveryVC
+
+//js注入用
+static NSString* const kTouchJavaScriptString=
+@"document.ontouchstart=function(event){\
+x=event.targetTouches[0].clientX;\
+y=event.targetTouches[0].clientY;\
+document.location=\"myweb:touch:start:\"+x+\":\"+y;};\
+document.ontouchmove=function(event){\
+x=event.targetTouches[0].clientX;\
+y=event.targetTouches[0].clientY;\
+document.location=\"myweb:touch:move:\"+x+\":\"+y;};\
+document.ontouchcancel=function(event){\
+document.location=\"myweb:touch:cancel\";};\
+document.ontouchend=function(event){\
+document.location=\"myweb:touch:end\";};";
+
+// 用于UIWebView保存图片
+enum
+{
+    GESTURE_STATE_NONE = 0,
+    GESTURE_STATE_START = 1,
+    GESTURE_STATE_MOVE = 2,
+    GESTURE_STATE_END = 4,
+    GESTURE_STATE_ACTION = (GESTURE_STATE_START | GESTURE_STATE_END),
+};
 
 static NSString *const TypeColl = @"typecoll";
 static NSString *const TuiJianColl= @"tuijiancoll";
@@ -135,6 +171,17 @@ static NSString *const Nodata = @"nodata";
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     self.navigationController.navigationBarHidden = YES;
+    
+    //下面是二维码相关
+    // 当iOS版本大于7时，向下移动20dp
+    // 防止内存泄漏
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"WebKitCacheModelPreferenceKey"];
+    
+    // 响应touch事件，以及获得点击的坐标位置，用于保存图片
+    [_webview stringByEvaluatingJavaScriptFromString:kTouchJavaScriptString];
+    
+    [_webview stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    [_webview stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
 - (void)updateNumData
@@ -165,8 +212,14 @@ static NSString *const Nodata = @"nodata";
     
     [self initWebView];
     
+    //这个通知用于更新 消息数目提示
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(updateNumData) name:@"updateNumData" object:nil];
+    
+    //二维码长按手势
+    UILongPressGestureRecognizer *longtapGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longtap:)];
+    
+    [_webview addGestureRecognizer:longtapGesture];
 }
 
 #pragma mark - 请求每日推荐
@@ -470,7 +523,7 @@ static NSString *const Nodata = @"nodata";
      }
      faild:^(NSString *errorMsg)
      {
-        
+         [_collectionView footerEndRefreshing];
      }];
 }
 
@@ -498,7 +551,13 @@ static NSString *const Nodata = @"nodata";
 #pragma mark - js调用方法
 - (void)finishProject:(NSString *)url
 {
-    // 这段代码要放倒gcd中去 否则会出现This application is modifying the autolayout engine from a background thread
+    //防止键盘没有弹回就调用js导致崩溃的bug
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [_webview endEditing:YES];
+    });
+    
+    // 这段代码要放到主线程中去 否则会出现This application is modifying the autolayout engine from a background thread
     dispatch_async(dispatch_get_main_queue(), ^
     {
         _collectionView.hidden = NO;
@@ -520,9 +579,15 @@ static NSString *const Nodata = @"nodata";
     return [KGHttpService sharedService].loginRespDomain.userinfo.uuid;
 }
 
-
+#pragma mark - 分享的js
 - (void)setShareContent:(NSString *)title content:(NSString *)content pathurl:(NSString *)pathurl httpurl:(NSString *)httpurl
 {
+    //防止键盘没有弹回就调用js导致崩溃的bug
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [_webview endEditing:YES];
+    });
+    
     ShareDomain * domain = [[ShareDomain alloc] init];
     
     domain.title = title;
@@ -650,38 +715,69 @@ static NSString *const Nodata = @"nodata";
 
 - (void)selectImgPic:(NSString *)groupuuid
 {
-    [self uploadAllImages];
+    //防止键盘没有弹回就调用js导致崩溃的bug
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [_webview endEditing:YES];
+        [self uploadAllImages];
+    });
 }
 
 - (void)selectHeadPic
 {
-    _myActionSheet = [[UIActionSheet alloc]
-                      initWithTitle:nil
-                      delegate:self
-                      cancelButtonTitle:@"取消"
-                      destructiveButtonTitle:nil
-                      otherButtonTitles: @"打开照相机", @"从手机相册获取",nil];
-    
-    [_myActionSheet showInView:self.view];
+    //防止键盘没有弹回就调用js导致崩溃的bug
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        [_webview endEditing:YES];
+        
+        _myActionSheet = [[UIActionSheet alloc]
+                          initWithTitle:nil
+                          delegate:self
+                          cancelButtonTitle:@"取消"
+                          destructiveButtonTitle:nil
+                          otherButtonTitles: @"打开照相机", @"从手机相册获取",nil];
+        
+        //设置这个为不能识别二维码的方法
+        self.sheetType = 0;
+        
+        [_myActionSheet showInView:self.view];
+    });
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //呼出的菜单按钮点击后的响应
-    if (buttonIndex == _myActionSheet.cancelButtonIndex)
+    //上传头像调用的
+    if (self.sheetType == 0)
     {
-        NSLog(@"取消");
+        //呼出的菜单按钮点击后的响应
+        if (buttonIndex == _myActionSheet.cancelButtonIndex)
+        {
+            NSLog(@"取消");
+        }
+        
+        switch (buttonIndex)
+        {
+            case 0:  //打开照相机拍照
+                [self takePhoto];
+                break;
+                
+            case 1:  //打开本地相册
+                [self LocalPhoto];
+                break;
+        }
     }
-    
-    switch (buttonIndex)
+    //识别二维码调用的
+    else
     {
-        case 0:  //打开照相机拍照
-            [self takePhoto];
-            break;
-            
-        case 1:  //打开本地相册
-            [self LocalPhoto];
-            break;
+        //呼出的菜单按钮点击后的响应
+        if (buttonIndex == _myActionSheet.cancelButtonIndex)
+        {
+            NSLog(@"取消");
+        }
+        else
+        {
+            [self recognizeTwoCode];
+        }
     }
 }
 
@@ -701,6 +797,7 @@ static NSString *const Nodata = @"nodata";
     }
     else
     {
+        
     }
 }
 
@@ -812,6 +909,192 @@ static NSString *const Nodata = @"nodata";
     // and then we write it out
     [imageData writeToFile:fullPathToFile atomically:NO];
 }
+
+
+#pragma mark - 长按识别二维码功能
+
+#pragma mark - 保存图片用于识别
+- (void)recognizeTwoCode
+{
+    if (_imgURL)
+    {
+        //            NSLog(@"imgurl = %@", _imgURL);
+    }
+    
+    NSString *urlToSave = [_webview stringByEvaluatingJavaScriptFromString:_imgURL];
+    //        NSLog(@"image url = %@", urlToSave);
+    
+    NSData* data = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlToSave]];
+    UIImage* image = [UIImage imageWithData:data];
+    
+    //UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
+    //        NSLog(@"UIImageWriteToSavedPhotosAlbum = %@", urlToSave);
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+#pragma mark - 长按保存图片
+// 功能：UIWebView响应长按事件
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)_request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *requestString = [[_request URL] absoluteString];
+    NSArray *components = [requestString componentsSeparatedByString:@":"];
+    
+    if ([components count] > 1 && [(NSString *)[components objectAtIndex:0]
+                                   isEqualToString:@"myweb"])
+    {
+        if([(NSString *)[components objectAtIndex:1] isEqualToString:@"touch"])
+        {
+            NSLog(@"you are touching!");
+            //            NSTimeInterval delaytime = 2;
+            if ([(NSString *)[components objectAtIndex:2] isEqualToString:@"start"])
+            {
+                /*
+                 @需延时判断是否响应页面内的js...
+                 */
+                _gesState = GESTURE_STATE_START;
+                NSLog(@"touch start!");
+                
+                float ptX = [[components objectAtIndex:3]floatValue];
+                float ptY = [[components objectAtIndex:4]floatValue];
+                NSLog(@"touch point (%f, %f)", ptX, ptY);
+                
+                NSString *js = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).tagName", ptX, ptY];
+                NSString * tagName = [_webview stringByEvaluatingJavaScriptFromString:js];
+                _imgURL = nil;
+                
+                if ([tagName isEqualToString:@"IMG"])
+                {
+                    _imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", ptX, ptY];
+                }
+                //                if (_imgURL && longPress)
+                //                {
+                //                    _timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(handleLongTouch) userInfo:nil repeats:NO];
+                //                    longPress = NO;
+                //                }
+            }
+            else if ([(NSString *)[components objectAtIndex:2] isEqualToString:@"move"])
+            {
+                //**如果touch动作是滑动，则取消hanleLongTouch动作**//
+                _gesState = GESTURE_STATE_MOVE;
+                NSLog(@"you are move");
+            }
+        }
+        else if ([(NSString*)[components objectAtIndex:2]isEqualToString:@"end"]) {
+            [_timer invalidate];
+            _timer = nil;
+            _gesState = GESTURE_STATE_END;
+            NSLog(@"touch end");
+        }
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)handleLongTouch
+{
+    //    NSLog(@"%@", _imgURL);
+    if (_imgURL && _gesState == GESTURE_STATE_START)
+    {
+        _myActionSheet = nil;
+        _myActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"识别二维码图片", nil];
+        _myActionSheet.cancelButtonIndex = _myActionSheet.numberOfButtons - 1;
+        
+        self.sheetType = 1;
+        
+        _gesState = GESTURE_STATE_END;
+        
+        [_myActionSheet showInView:[UIApplication sharedApplication].keyWindow];
+    }
+}
+
+// 功能：显示对话框
+-(void)showAlert:(NSString *)msg
+{
+    //    NSLog(@"showAlert = %@", msg);
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"提示"
+                          message:msg
+                          delegate:self
+                          cancelButtonTitle:@"确定"
+                          otherButtonTitles: nil];
+    [alert show];
+}
+
+// 功能：显示图片保存结果
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
+{
+    if (error)
+    {
+        [self showAlert:@"出错了..."];
+    }
+    else
+    {
+        __weak __typeof(self) weakSelf = self;
+        
+        if (image)
+        {
+            [LBXScanWrapper recognizeImage:image success:^(NSArray<LBXScanResult *> *array)
+            {
+                [weakSelf scanResultWithArray:array];
+            }];
+        }
+    }
+}
+
+- (void)scanResultWithArray:(NSArray<LBXScanResult*>*)array
+{
+    if (array.count < 1)
+    {
+        [self showAlert:@"识别失败了！"];
+        
+        return;
+    }
+    
+    //经测试，可以同时识别2个二维码，不能同时识别二维码和条形码
+    for (LBXScanResult *result in array)
+    {
+        NSLog(@"scanResult:%@",result.strScanned);
+    }
+    
+    LBXScanResult *scanResult = array[0];
+    
+    //震动提醒
+    [LBXScanWrapper systemVibrate];
+    //声音提醒
+    [LBXScanWrapper systemSound];
+    
+    [self showNextVCWithScanResult:scanResult];
+}
+
+- (void)showNextVCWithScanResult:(LBXScanResult*)strResult
+{
+    if (strResult.strScanned == nil)
+    {
+        [[KGHUD sharedHud] show:self.view onlyMsg:@"识别失败"];
+    }
+    else
+    {
+        UIPasteboard * pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = strResult.strScanned;
+        //提示复制成功
+        UIAlertView * av = [[UIAlertView alloc] initWithTitle:@"提示" message:@"已复制二维码链接到剪贴板,您可以复制到浏览器中打开" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+        [av show];
+    }
+}
+
+#pragma mark - 手势长按
+- (void)longtap:(UILongPressGestureRecognizer * )longtapGes
+{
+    if (_imgURL)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            [self handleLongTouch];
+        });
+    }
+}
+
 
 
 @end
