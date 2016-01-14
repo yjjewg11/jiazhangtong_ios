@@ -30,11 +30,13 @@
 #import "HLActionSheet.h"
 #import "UMSocial.h"
 
+#import "MapVC.h"
+
 #define DataSource_ZhaoSheng 0
 #define DataSource_JianJie 1
 #define DataSource_PingLun 2
 
-@interface EnrolStudentSchoolDetailVC () <UICollectionViewDelegate,UICollectionViewDataSource,EnrolStudentButtonCellDelegate,EnrolStudentWebViewCellDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UMSocialUIDelegate>
+@interface EnrolStudentSchoolDetailVC () <UICollectionViewDelegate,UICollectionViewDataSource,EnrolStudentButtonCellDelegate,EnrolStudentWebViewCellDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UMSocialUIDelegate,EnrolStudentsSchoolCellDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -81,6 +83,8 @@
     NSString * _tels;
     
     NSMutableArray * _telsNum;
+    
+    EnrolStudentsSchoolCell * _schoolCell;
 }
 
 @end
@@ -324,11 +328,18 @@ static NSString *const NoDataCell = @"nodata";
     return 0;
 }
 
+#pragma mark - coll 代理
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
     {
         EnrolStudentsSchoolCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SchoolCellID forIndexPath:indexPath];
+        
+        _schoolCell = cell;
+        
+        cell.hideMapView = NO;
+        
+        _schoolCell.delegate = self;
         
         cell.summaryCount = 0;
         
@@ -835,6 +846,19 @@ static NSString *const NoDataCell = @"nodata";
         _collectionView.footerRefreshingText = @"没有更多了";
         [_collectionView footerEndRefreshing];
     });
+}
+
+- (void)pushToMapView:(EnrolStudentsSchoolDomain *)domain
+{
+    MapVC * vc = [[MapVC alloc] init];
+    
+    vc.map_point = domain.map_point;
+    
+    vc.locationName = domain.address;
+    
+    vc.schoolName = domain.brand_name;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

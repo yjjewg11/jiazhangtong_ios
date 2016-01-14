@@ -40,7 +40,7 @@
 @implementation MessageViewController
 
 //延迟刷新
-- (void)lazyRefresh\
+- (void)lazyRefresh
 {
     [reFreshView.tableView headerBeginRefreshing];
 }

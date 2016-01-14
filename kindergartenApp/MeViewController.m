@@ -20,6 +20,7 @@
 #import "StudentInfoViewController.h"
 #import "MySPCourseVC.h"
 #import "EnrolStudentMySchoolVC.h"
+#import "FPHomeVC.h"
 
 #define CellIdentifier @"MyCellIdentifier"
 #define CellDefIdentifier @"MyDefCellIdentifier"
@@ -27,105 +28,60 @@
 @interface MeViewController () <UITableViewDataSource, UITableViewDelegate> {
     
     IBOutlet UITableView * meTableView;
-    NSArray              * studentMArray;
-    BOOL                   switchCell;
 }
 
 @end
 
 @implementation MeViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    switchCell = NO;
-    
-    studentMArray = [KGHttpService sharedService].loginRespDomain.list;
-    
     meTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     meTableView.separatorColor = [UIColor clearColor];
     meTableView.delegate   = self;
     meTableView.dataSource = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    studentMArray = [KGHttpService sharedService].loginRespDomain.list;
-    [meTableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
 #pragma UITableView delegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [studentMArray count] + Number_Two;
-}
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ((section - [studentMArray count]) == 0)
-    {
-        return Number_Two;
-    }
-    else
-    {
-        return Number_One;
-    }
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section < [studentMArray count]) {
-        //table前几个分组显示学生基本信息
-        return [self loadStudentInfoCell:tableView cellForRowAtIndexPath:indexPath];
-    } else {
-        return [self loadFunCell:tableView cellForRowAtIndexPath:indexPath];
-    }
+    return [self loadFunCell:tableView cellForRowAtIndexPath:indexPath];
 }
-
-- (UITableViewCell *)loadStudentInfoCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    MeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeTableViewCell" owner:nil options:nil];
-        cell = [nib objectAtIndex:Number_Zero];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    }
-    [cell resetCellParam:(KGUser *)[studentMArray objectAtIndex:indexPath.section]];
-    return cell;
-}
-
 
 - (UITableViewCell *)loadFunCell:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     MeFunTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:CellDefIdentifier];
     
-    if (cell == nil) {
+    if (cell == nil)
+    {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MeFunTableViewCell" owner:nil options:nil];
         cell = [nib objectAtIndex:Number_Zero];
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    
-    switch (indexPath.section - [studentMArray count]) {
+    switch (indexPath.row)
+    {
         case Number_Zero:
-            if (switchCell == NO)
-            {
-               [cell resetCellParam:@"收藏" img:@"meshoucang"];
-                switchCell = YES;
-            }
-            else
-            {
-                [cell resetCellParam:@"我的特长课程" img:@"metechangkecheng"];
-                switchCell = NO;
-            }
+            [cell resetCellParam:@"收藏" img:@"meshoucang"];
             break;
         case Number_One:
+            [cell resetCellParam:@"我的特长课程" img:@"metechangkecheng"];
+            break;
+        case 2:
+            [cell resetCellParam:@"家庭相册" img:@"jiatingxiangce"];
+            break;
+        case 3:
             [cell resetCellParam:@"设置" img:@"meshezhi"];
             break;
     }
@@ -135,58 +91,45 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.section < [studentMArray count]){
-        return 60;
-    }else{
-        return 35;
-    }
+    return 35;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section < [studentMArray count]) {
-        //学生信息详情
-        StudentInfoViewController * studentInfoVC = [[StudentInfoViewController alloc] init];
-        studentInfoVC.studentInfo = [studentMArray objectAtIndex:indexPath.section];
-        
-        [self.navigationController pushViewController:studentInfoVC animated:YES];
-    } else {
-        [self funCellSelected:indexPath];
-    }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self funCellSelected:indexPath];
 }
 
 
 - (void)funCellSelected:(NSIndexPath *)indexPath
 {
-    NSInteger index = indexPath.section - [studentMArray count];
-    
-    switch (index) {
-        case Number_Zero:{
-            
-            if (indexPath.row == 0)
-            {
-                MyCollectionViewController * vc = [[MyCollectionViewController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            else if (indexPath.row == 1)
-            {
-                MySPCourseVC * vc = [[MySPCourseVC alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-
+    switch (indexPath.row)
+    {
+        case Number_Zero:
+        {
+            MyCollectionViewController * vc = [[MyCollectionViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case Number_One:{
+        case Number_One:
+        {
+            MySPCourseVC * vc = [[MySPCourseVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case Number_Two:
+        {
+            FPHomeVC * vc = [[FPHomeVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 3:
+        {
             SettingViewController * vc = [[SettingViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
-        case Number_Two:{
-                   }
     }
 }
-
-
-
 
 @end

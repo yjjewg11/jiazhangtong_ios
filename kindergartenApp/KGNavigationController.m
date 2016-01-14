@@ -24,7 +24,6 @@
 //    if (((BaseViewController *)self.topViewController).animating&&![self.topViewController isKindOfClass:[LoginViewController class]]) {
 //        return;
 //    }
-    
     if (
         [viewController.childViewControllers.lastObject isKindOfClass:[LoginViewController class]]
         ||

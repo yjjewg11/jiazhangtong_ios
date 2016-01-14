@@ -24,9 +24,9 @@
 #import "ShareViewController.h"
 #import "InteractViewController.h"
 #import "SPShareSaveDomain.h"
-#import <CoreLocation/CoreLocation.h>
+#import "MapVC.h"
 
-@interface SPSchoolDetailVC () <UIScrollViewDelegate,SPSchoolDetailTableVCDelegate,UIActionSheetDelegate>
+@interface SPSchoolDetailVC () <UIScrollViewDelegate,SPSchoolDetailTableVCDelegate,UIActionSheetDelegate,SPSchoolCellDelegate>
 {
     UIView * _schoolInfoView;
     UIView * _buttonsView;
@@ -66,6 +66,7 @@
     if (_cell == nil)
     {
         _cell = [[[NSBundle mainBundle] loadNibNamed:@"SPSchoolCell" owner:nil options:nil] firstObject];
+        _cell.delegate = self;
     }
     return _cell;
 }
@@ -621,6 +622,20 @@
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
+
+- (void)pushToMapVC:(SPSchoolDomain *)domain
+{
+    MapVC * vc = [[MapVC alloc] init];
+    
+    vc.map_point = domain.map_point;
+    
+    vc.locationName = domain.address;
+    
+    vc.schoolName = domain.brand_name;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 @end
 

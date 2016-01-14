@@ -58,12 +58,6 @@
     [self setUpStarts:intCount halfCount:halfCount];
 }
 
-- (IBAction)mapClicked:(id)sender
-{
-    NSLog(@"aa");
-    [self.delegate pushToMapVC];
-}
-
 - (void)setUpStarts:(NSInteger)intCount halfCount:(NSInteger)halfCount
 {
     for (NSInteger i = 0; i < 5; i++)

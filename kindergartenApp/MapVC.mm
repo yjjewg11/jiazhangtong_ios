@@ -8,6 +8,8 @@
 
 #import "MapVC.h"
 #import "ShowRouteVC.h"
+#import "MBProgressHUD+HM.h"
+#import "KGHUD.h"
 
 @interface MapVC ()
 {
@@ -16,6 +18,8 @@
     __weak IBOutlet UILabel *addressLbl;
     __weak IBOutlet UIView *showRoute;
     __weak IBOutlet UIView *ErrorRefact;
+    
+    CLLocationCoordinate2D _centerCoor;
 }
 
 @end
@@ -72,15 +76,18 @@
     
     reverseGeocodeSearchOption.reverseGeoPoint = pt;
     
+    [[KGHUD sharedHud] show:self.view msg:@"定位中,请稍等"];
+    
     BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
     
     if(flag)
     {
-        NSLog(@"反geo检索发送成功");
+        
     }
     else
     {
-        NSLog(@"反geo检索发送失败");
+        [[KGHUD sharedHud] hide:self.view];
+        [MBProgressHUD showMessage:@"网络超时，请重试!"];
     }
 }
 
@@ -108,6 +115,8 @@
 
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeResult *)result errorCode:(BMKSearchErrorCode)error
 {
+    [[KGHUD sharedHud] hide:self.view];
+    
     NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
     
     [_mapView removeAnnotations:array];
@@ -128,9 +137,25 @@
         
         _mapView.centerCoordinate = result.location;
         
+        _centerCoor = result.location;
+        
         _mapView.zoomLevel = 20;
         
-        _mapView.hidden = NO;
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            _mapView.hidden = NO;
+        });
+    }
+    else
+    {
+        NSString * errorMsg = [NSString stringWithFormat:@"定位失败:错误代码%d",error];
+        
+        UIAlertView * al = [[UIAlertView alloc] initWithTitle:@"提示" message:errorMsg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            [al show];
+        });
     }
 }
 
@@ -224,7 +249,7 @@
 #pragma mark implement BMKSearchDelegate
 - (void)onGetPoiResult:(BMKPoiSearch *)searcher result:(BMKPoiResult*)result errorCode:(BMKSearchErrorCode)error
 {
-    NSLog(@"%d",error);
+    NSLog(@"poi搜索结果: %d",error);
     
     // 清楚屏幕中所有的annotation
     NSArray* array = [NSArray arrayWithArray:_mapView.annotations];
@@ -242,6 +267,7 @@
             [annotations addObject:item];
         }
         [_mapView addAnnotations:annotations];
+        
         [_mapView showAnnotations:annotations animated:YES];
         
     }else if (error == BMK_SEARCH_AMBIGUOUS_ROURE_ADDR)
@@ -270,6 +296,12 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)backToCenterClick:(id)sender
+{
+    [_mapView setCenterCoordinate:_centerCoor animated:YES];
+}
+
 
 
 @end

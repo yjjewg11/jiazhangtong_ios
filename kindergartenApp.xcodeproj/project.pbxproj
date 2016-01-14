@@ -228,6 +228,8 @@
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
 		04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */; };
+		04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F151671C45FF1800E80B3E /* FPHomeVC.m */; };
+		04F1516A1C45FF1800E80B3E /* FPHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F151681C45FF1800E80B3E /* FPHomeVC.xib */; };
 		04F3D4541BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3E81BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04F3D4551BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3EA1BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04F3D4561BF47FD2007E7AC0 /* AdMoGoAdapterBaiduSplash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3EC1BF47FD2007E7AC0 /* AdMoGoAdapterBaiduSplash.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -275,8 +277,6 @@
 		04F8895A1C05ABD8002FBE6D /* SDRotationLoopProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889581C05ABD8002FBE6D /* SDRotationLoopProgressView.m */; };
 		04F889601C05BD6A002FBE6D /* SpCourseHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8895E1C05BD6A002FBE6D /* SpCourseHomeVC.m */; };
 		04F889651C05BE4C002FBE6D /* SpCourseHomeWFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889641C05BE4C002FBE6D /* SpCourseHomeWFLayout.m */; };
-		04F8896A1C05C1A5002FBE6D /* SpCourseHomeAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889681C05C1A5002FBE6D /* SpCourseHomeAdCell.m */; };
-		04F8896B1C05C1A5002FBE6D /* SpCourseHomeAdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F889691C05C1A5002FBE6D /* SpCourseHomeAdCell.xib */; };
 		04F89A351C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A331C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m */; };
 		04F89A361C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F89A341C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib */; };
 		04F89A3B1C1018D800FC0FA6 /* EnrolStudentCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A391C1018D800FC0FA6 /* EnrolStudentCommentCell.m */; };
@@ -372,8 +372,6 @@
 		04FA14D11C3E080A008D0BF8 /* SpCourseDetailCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA14D01C3E080A008D0BF8 /* SpCourseDetailCommentVC.m */; };
 		04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */; };
 		04FA22211C114045002A88F1 /* EnrolStudentMySchoolLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA22201C114045002A88F1 /* EnrolStudentMySchoolLayout.m */; };
-		04FA29C11C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA29BF1C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.m */; };
-		04FA29C21C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA29C01C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.xib */; };
 		04FA408B1C337F8400E5D606 /* HLActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA40881C337F8400E5D606 /* HLActionSheet.m */; };
 		04FA408C1C337F8400E5D606 /* HLActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA408A1C337F8400E5D606 /* HLActionSheetItem.m */; };
 		04FA59871C27C68A009689C7 /* EYInputPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA597D1C27C68A009689C7 /* EYInputPopupView.m */; };
@@ -1071,6 +1069,9 @@
 		04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseCommentCell.xib; sourceTree = "<group>"; };
 		04C5D8861BE2199800A1245C /* SPCourseDetailDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailDomain.h; sourceTree = "<group>"; };
 		04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailDomain.m; sourceTree = "<group>"; };
+		04F151661C45FF1800E80B3E /* FPHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeVC.h; sourceTree = "<group>"; };
+		04F151671C45FF1800E80B3E /* FPHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeVC.m; sourceTree = "<group>"; };
+		04F151681C45FF1800E80B3E /* FPHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeVC.xib; sourceTree = "<group>"; };
 		04F3D3E71BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduFullAds.h; sourceTree = "<group>"; };
 		04F3D3E81BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterBaiduFullAds.m; sourceTree = "<group>"; };
 		04F3D3E91BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduMobAd.h; sourceTree = "<group>"; };
@@ -1168,9 +1169,6 @@
 		04F8895E1C05BD6A002FBE6D /* SpCourseHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeVC.m; sourceTree = "<group>"; };
 		04F889631C05BE4C002FBE6D /* SpCourseHomeWFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeWFLayout.h; sourceTree = "<group>"; };
 		04F889641C05BE4C002FBE6D /* SpCourseHomeWFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeWFLayout.m; sourceTree = "<group>"; };
-		04F889671C05C1A5002FBE6D /* SpCourseHomeAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeAdCell.h; sourceTree = "<group>"; };
-		04F889681C05C1A5002FBE6D /* SpCourseHomeAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeAdCell.m; sourceTree = "<group>"; };
-		04F889691C05C1A5002FBE6D /* SpCourseHomeAdCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeAdCell.xib; sourceTree = "<group>"; };
 		04F89A321C1011CC00FC0FA6 /* EnrolStudentWebViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentWebViewCell.h; sourceTree = "<group>"; };
 		04F89A331C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentWebViewCell.m; sourceTree = "<group>"; };
 		04F89A341C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentWebViewCell.xib; sourceTree = "<group>"; };
@@ -1333,9 +1331,6 @@
 		04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolVC.m; sourceTree = "<group>"; };
 		04FA221F1C114045002A88F1 /* EnrolStudentMySchoolLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolLayout.h; sourceTree = "<group>"; };
 		04FA22201C114045002A88F1 /* EnrolStudentMySchoolLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolLayout.m; sourceTree = "<group>"; };
-		04FA29BE1C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentHeaderCell.h; sourceTree = "<group>"; };
-		04FA29BF1C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentHeaderCell.m; sourceTree = "<group>"; };
-		04FA29C01C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentHeaderCell.xib; sourceTree = "<group>"; };
 		04FA40871C337F8400E5D606 /* HLActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLActionSheet.h; sourceTree = "<group>"; };
 		04FA40881C337F8400E5D606 /* HLActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLActionSheet.m; sourceTree = "<group>"; };
 		04FA40891C337F8400E5D606 /* HLActionSheetItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLActionSheetItem.h; sourceTree = "<group>"; };
@@ -2559,6 +2554,69 @@
 			name = tableviewcell;
 			sourceTree = "<group>";
 		};
+		04F151631C45FE8B00E80B3E /* Student */ = {
+			isa = PBXGroup;
+			children = (
+				04FA221A1C113B2F002A88F1 /* EnrolStudentMySchoolVC.h */,
+				04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */,
+				245474D61B5FDD6C00D49D40 /* StudentInfoViewController.h */,
+				245474D71B5FDD6C00D49D40 /* StudentInfoViewController.m */,
+				245474D81B5FDD6C00D49D40 /* StudentInfoViewController.xib */,
+				24C46B3D1B5A2B1100A58F92 /* MeViewController.h */,
+				24C46B3E1B5A2B1100A58F92 /* MeViewController.m */,
+				24C46B3F1B5A2B1100A58F92 /* MeViewController.xib */,
+				F4EA53951B60EF800044BE7A /* StudentBaseInfoViewController.h */,
+				F4EA53961B60EF800044BE7A /* StudentBaseInfoViewController.m */,
+				F4EA53971B60EF800044BE7A /* StudentBaseInfoViewController.xib */,
+				F4EC98851B61F64400F5721F /* StudentMomOrDodInfoViewController.h */,
+				F4EC98861B61F64400F5721F /* StudentMomOrDodInfoViewController.m */,
+				F4EC98871B61F64400F5721F /* StudentMomOrDodInfoViewController.xib */,
+				F4EC988A1B6211AC00F5721F /* StudentNoteInfoViewController.h */,
+				F4EC988B1B6211AC00F5721F /* StudentNoteInfoViewController.m */,
+				F4EC988C1B6211AC00F5721F /* StudentNoteInfoViewController.xib */,
+				24DED4F91B7CCFD1005BC46E /* StudentOtherInfoViewController.h */,
+				24DED4FA1B7CCFD1005BC46E /* StudentOtherInfoViewController.m */,
+				24DED4FB1B7CCFD1005BC46E /* StudentOtherInfoViewController.xib */,
+			);
+			name = Student;
+			sourceTree = "<group>";
+		};
+		04F151641C45FEAB00E80B3E /* MySPCourse */ = {
+			isa = PBXGroup;
+			children = (
+				04FE04211BF1CCE70069CF9A /* MySPCourseVC.h */,
+				04FE04221BF1CCE70069CF9A /* MySPCourseVC.m */,
+				04FE04241BF1DD1E0069CF9A /* MYSPCourseTableVC.h */,
+				04FE04251BF1DD1E0069CF9A /* MYSPCourseTableVC.m */,
+				0403DCE21BF5C5980089E463 /* MySPCourseDetailVC.h */,
+				0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */,
+				04F946EB1BF5ECD200F8B31F /* MySPCourseCommentVC.h */,
+				04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */,
+				04FDB4E01BFC265300A73E2E /* MySPCourseTimeListVC.h */,
+				04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */,
+			);
+			name = MySPCourse;
+			sourceTree = "<group>";
+		};
+		04F151651C45FECD00E80B3E /* FamilyPhoto */ = {
+			isa = PBXGroup;
+			children = (
+				04F151661C45FF1800E80B3E /* FPHomeVC.h */,
+				04F151671C45FF1800E80B3E /* FPHomeVC.m */,
+				04F151681C45FF1800E80B3E /* FPHomeVC.xib */,
+			);
+			name = FamilyPhoto;
+			sourceTree = "<group>";
+		};
+		04F1516B1C460A3900E80B3E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				04FB23791C16D91C009B57E2 /* MineHomeVC.h */,
+				04FB237A1C16D91C009B57E2 /* MineHomeVC.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 		04F3D3B01BF47FD2007E7AC0 /* AdNetworkLibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2784,9 +2842,6 @@
 		04F889661C05C152002FBE6D /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				04F889671C05C1A5002FBE6D /* SpCourseHomeAdCell.h */,
-				04F889681C05C1A5002FBE6D /* SpCourseHomeAdCell.m */,
-				04F889691C05C1A5002FBE6D /* SpCourseHomeAdCell.xib */,
 				04F75E1B1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.h */,
 				04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */,
 				04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */,
@@ -2877,9 +2932,6 @@
 				04F89A381C1018D800FC0FA6 /* EnrolStudentCommentCell.h */,
 				04F89A391C1018D800FC0FA6 /* EnrolStudentCommentCell.m */,
 				04F89A3A1C1018D800FC0FA6 /* EnrolStudentCommentCell.xib */,
-				04FA29BE1C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.h */,
-				04FA29BF1C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.m */,
-				04FA29C01C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.xib */,
 			);
 			name = collcells;
 			sourceTree = "<group>";
@@ -4116,38 +4168,10 @@
 		24C46B3A1B5A2AD100A58F92 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				245474D61B5FDD6C00D49D40 /* StudentInfoViewController.h */,
-				245474D71B5FDD6C00D49D40 /* StudentInfoViewController.m */,
-				245474D81B5FDD6C00D49D40 /* StudentInfoViewController.xib */,
-				24C46B3D1B5A2B1100A58F92 /* MeViewController.h */,
-				24C46B3E1B5A2B1100A58F92 /* MeViewController.m */,
-				24C46B3F1B5A2B1100A58F92 /* MeViewController.xib */,
-				F4EA53951B60EF800044BE7A /* StudentBaseInfoViewController.h */,
-				F4EA53961B60EF800044BE7A /* StudentBaseInfoViewController.m */,
-				F4EA53971B60EF800044BE7A /* StudentBaseInfoViewController.xib */,
-				F4EC98851B61F64400F5721F /* StudentMomOrDodInfoViewController.h */,
-				F4EC98861B61F64400F5721F /* StudentMomOrDodInfoViewController.m */,
-				F4EC98871B61F64400F5721F /* StudentMomOrDodInfoViewController.xib */,
-				F4EC988A1B6211AC00F5721F /* StudentNoteInfoViewController.h */,
-				F4EC988B1B6211AC00F5721F /* StudentNoteInfoViewController.m */,
-				F4EC988C1B6211AC00F5721F /* StudentNoteInfoViewController.xib */,
-				24DED4F91B7CCFD1005BC46E /* StudentOtherInfoViewController.h */,
-				24DED4FA1B7CCFD1005BC46E /* StudentOtherInfoViewController.m */,
-				24DED4FB1B7CCFD1005BC46E /* StudentOtherInfoViewController.xib */,
-				04FE04211BF1CCE70069CF9A /* MySPCourseVC.h */,
-				04FE04221BF1CCE70069CF9A /* MySPCourseVC.m */,
-				04FE04241BF1DD1E0069CF9A /* MYSPCourseTableVC.h */,
-				04FE04251BF1DD1E0069CF9A /* MYSPCourseTableVC.m */,
-				0403DCE21BF5C5980089E463 /* MySPCourseDetailVC.h */,
-				0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */,
-				04F946EB1BF5ECD200F8B31F /* MySPCourseCommentVC.h */,
-				04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */,
-				04FDB4E01BFC265300A73E2E /* MySPCourseTimeListVC.h */,
-				04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */,
-				04FA221A1C113B2F002A88F1 /* EnrolStudentMySchoolVC.h */,
-				04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */,
-				04FB23791C16D91C009B57E2 /* MineHomeVC.h */,
-				04FB237A1C16D91C009B57E2 /* MineHomeVC.m */,
+				04F1516B1C460A3900E80B3E /* Home */,
+				04F151651C45FECD00E80B3E /* FamilyPhoto */,
+				04F151641C45FEAB00E80B3E /* MySPCourse */,
+				04F151631C45FE8B00E80B3E /* Student */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -5255,7 +5279,6 @@
 				04FB23731C16C7D0009B57E2 /* DiscorveryTypeCell.xib in Resources */,
 				04F9FB9F1BF1A77E00AEFB88 /* UMSocialLocalizable.strings in Resources */,
 				04A4DE111BF484DF002ABBB1 /* admogoVideo_18.png in Resources */,
-				04FA29C21C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.xib in Resources */,
 				04A4DE8E1BF484DF002ABBB1 /* shareviewfoot_bg.png in Resources */,
 				04A4DE4F1BF484DF002ABBB1 /* adsmogo_bannerbg.png in Resources */,
 				F4E61B6C1B7335A900E5851A /* ReplyListViewController.xib in Resources */,
@@ -5310,7 +5333,6 @@
 				04A4DE841BF484DF002ABBB1 /* webview_bar_close_ipad.png in Resources */,
 				04FB7CC61C0DAA7A00FD3E31 /* SpCourseCell.xib in Resources */,
 				04A4DE251BF484DF002ABBB1 /* admogoVideoButton_off@2x.png in Resources */,
-				04F8896B1C05C1A5002FBE6D /* SpCourseHomeAdCell.xib in Resources */,
 				04A4DE3D1BF484DF002ABBB1 /* ads_alert_right_button.png in Resources */,
 				04A4DE7E1BF484DF002ABBB1 /* webview_bar_refresh_ipad@2x.png in Resources */,
 				F4E6B24B1B6B5D440087EAEB /* GiftwareArticlesTableViewCell.xib in Resources */,
@@ -5424,6 +5446,7 @@
 				04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */,
 				04A4DE741BF484DF002ABBB1 /* webview_bar_refresh_hover@2x.png in Resources */,
 				04A4DE2D1BF484DF002ABBB1 /* adsmogo_button_left_default@2x.png in Resources */,
+				04F1516A1C45FF1800E80B3E /* FPHomeVC.xib in Resources */,
 				04F9FB611BF1A67400AEFB88 /* umeng_add_photo@2x.png in Resources */,
 				0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */,
 				04A4DE8F1BF484DF002ABBB1 /* shareviewhead_bg.png in Resources */,
@@ -5517,7 +5540,6 @@
 				2489B66E1B5AB49E00039E70 /* SDWebImagePrefetcher.m in Sources */,
 				2489B6731B5AB77600039E70 /* IntroductionViewController.m in Sources */,
 				F487838B1B58DA1700CDC1A8 /* AFHTTPRequestOperation.m in Sources */,
-				04F8896A1C05C1A5002FBE6D /* SpCourseHomeAdCell.m in Sources */,
 				F471EDED1B70A3A700EEBA1D /* AddressBookDomain.m in Sources */,
 				248B6A941B19A9D900FCB98F /* UIView+Extension.m in Sources */,
 				04F3D4541BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m in Sources */,
@@ -5606,6 +5628,7 @@
 				04FE3DDB1C2BD6C2000CE445 /* EnrolStudentHomeVC.m in Sources */,
 				248B6A981B19AA7100FCB98F /* KGBaseView.m in Sources */,
 				F48783B01B58DA1700CDC1A8 /* MJType.m in Sources */,
+				04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */,
 				F4DDEBBD1B7DFD7C00470D76 /* TTTAttributedLabel.m in Sources */,
 				F4DCD0F21B1C2E87007D61CA /* UIButton+Extension.m in Sources */,
 				2489B6631B5AB49E00039E70 /* UIImage+GIF.m in Sources */,
@@ -5843,7 +5866,6 @@
 				04F3D45C1BF47FD3007E7AC0 /* CDataScanner.m in Sources */,
 				F4CF7A921B79C5B400BFAA1E /* TimetableItemTableViewCell.m in Sources */,
 				04F9F2F21BF9B55500470F0C /* MySPCommentDomain.m in Sources */,
-				04FA29C11C2CF2B500B3C8A9 /* EnrolStudentHeaderCell.m in Sources */,
 				248B6A5F1B19A39200FCB98F /* main.m in Sources */,
 				2457FD021B711A65006A3AB7 /* AddressbookTableViewCell.m in Sources */,
 				04F3D4651BF47FD3007E7AC0 /* CJSONSerializer.m in Sources */,

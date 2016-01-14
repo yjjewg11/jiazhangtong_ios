@@ -14,18 +14,6 @@
 
 @implementation BaseViewController
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    NSString* cName = [NSString stringWithFormat:@"%@",  self.title, nil];
-    [MobClick beginLogPageView:cName];
-}
-
--(void) viewDidDisappear:(BOOL)animated
-{
-    NSString* cName = [NSString stringWithFormat:@"%@", self.title, nil];
-    [MobClick endLogPageView:cName];
-}
-
 - (NoNetView *)noNetView
 {
     if (_noNetView == nil)
@@ -59,7 +47,8 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)setNavColor {
+- (void)setNavColor
+{
     UINavigationBar * bar = self.navigationController.navigationBar;
     NSMutableDictionary * textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
@@ -92,7 +81,6 @@
 
 - (void)hidenLoadView
 {
-    
     [self.loadingView removeFromSuperview];
 }
 

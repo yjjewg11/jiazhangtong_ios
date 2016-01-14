@@ -13,6 +13,9 @@
 #import "KGNSStringUtil.h"
 
 @interface EnrolStudentsSchoolCell()
+{
+    EnrolStudentsSchoolDomain * _schoolDomain;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 
@@ -38,6 +41,8 @@
 
 - (void)setData:(EnrolStudentsSchoolDomain *)domain
 {
+    _schoolDomain = domain;
+    
     [self.img sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.studentNum.text = [NSString stringWithFormat:@"%ld",(long)domain.ct_study_students];
@@ -95,6 +100,15 @@
         self.height = 85 + summaryViewHeight - 10;
         
         [self addSubview:self.summary];
+    }
+    
+    if (self.hideMapView == YES)
+    {
+        self.mapView.hidden = YES;
+        
+    }else
+    {
+        self.mapView.hidden = NO;
     }
 }
 
@@ -167,12 +181,17 @@
     }
 }
 
-
 - (void)awakeFromNib
 {
     self.layer.borderColor = [[UIColor colorWithHexCode:@"#e5e5e5"] CGColor];
     self.layer.borderWidth = 1;
     self.layer.cornerRadius = 5;
 }
+
+- (IBAction)mapClick:(id)sender
+{
+    [self.delegate pushToMapView:_schoolDomain];
+}
+
 
 @end

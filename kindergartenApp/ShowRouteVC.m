@@ -50,6 +50,8 @@
     //启用查看路径
     _routesearch = [[BMKRouteSearch alloc]init];
     
+    
+    
     //启用定位
     _locService = [[BMKLocationService alloc]init];
     [_locService startUserLocationService];
@@ -136,14 +138,17 @@
 - (void)calBusRoute
 {
     //开始算路
-    BMKTransitRoutePlanOption *transitRoutePlanOption = [[BMKTransitRoutePlanOption alloc]init];
+    BMKTransitRoutePlanOption *transitRoutePlanOption = [[BMKTransitRoutePlanOption alloc] init];
     transitRoutePlanOption.from = start;
     transitRoutePlanOption.to = end;
+    transitRoutePlanOption.transitPolicy = BMK_TRANSIT_TIME_FIRST;
+    
     BOOL flag = [_routesearch transitSearch:transitRoutePlanOption];
     
     if(flag)
     {
         NSLog(@"公交检索发送成功");
+        
     }else
     {
         NSLog(@"公交检索发送失败");
@@ -176,12 +181,14 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     _locService.delegate = self;
     _routesearch.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     _locService.delegate = nil;
     _routesearch.delegate = nil; // 不用时，置nil
 }
@@ -383,6 +390,13 @@
     }
 }
 
+- (void)didFailToLocateUserWithError:(NSError *)error
+{
+    UIAlertView * al = [[UIAlertView alloc] initWithTitle:@"提示" message:@"定位失败,请检查网络环境或在设置-隐私中找到定位服务并打开" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    
+    [al show];
+}
+
 #pragma mark - 点击线路跳转
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -392,5 +406,7 @@
     
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+
 
 @end

@@ -59,22 +59,9 @@
     if (indexPath.row == 0)
     {
         itemWidth = KGSCREEN.size.width;
-        itemHeight = 150;
+        itemHeight = 210;
         itemX = 0;
         itemY = 0;
-        _newMaxHeight = itemY + itemHeight;
-        
-        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
-        
-        return attrs;
-    }
-    
-    else if (indexPath.row == 1)
-    {
-        itemWidth = KGSCREEN.size.width;
-        itemHeight = 200;
-        itemX = 0;
-        itemY = _newMaxHeight;
         _newMaxHeight = itemY + itemHeight;
         
         attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);

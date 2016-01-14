@@ -215,8 +215,8 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zixunbtn" translatesAutoresizingMaskIntoConstraints="NO" id="XbN-WH-y9T">
                                     <rect key="frame" x="23" y="5" width="24" height="24"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="24" id="RHG-ar-aLl"/>
-                                        <constraint firstAttribute="width" constant="24" id="U9i-Zo-UdG"/>
+                                        <constraint firstAttribute="width" constant="24" id="4hj-3y-U4x"/>
+                                        <constraint firstAttribute="height" constant="24" id="JWz-TY-mRd"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="咨询" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jp3-T3-NS2">
@@ -241,17 +241,15 @@
                             </subviews>
                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="XbN-WH-y9T" firstAttribute="leading" secondItem="IDg-uc-gop" secondAttribute="leading" constant="23" id="9dp-o4-3nr"/>
+                                <constraint firstAttribute="bottom" secondItem="gWR-cd-X6i" secondAttribute="bottom" id="0BH-7a-cSA"/>
+                                <constraint firstItem="jp3-T3-NS2" firstAttribute="top" secondItem="XbN-WH-y9T" secondAttribute="bottom" constant="5" id="4bn-Vv-sfU"/>
+                                <constraint firstItem="gWR-cd-X6i" firstAttribute="top" secondItem="IDg-uc-gop" secondAttribute="top" id="B9V-RZ-R4T"/>
                                 <constraint firstItem="jp3-T3-NS2" firstAttribute="leading" secondItem="IDg-uc-gop" secondAttribute="leading" id="DFz-xk-P0S"/>
+                                <constraint firstItem="XbN-WH-y9T" firstAttribute="centerX" secondItem="IDg-uc-gop" secondAttribute="centerX" id="JnN-bL-ShN"/>
                                 <constraint firstAttribute="trailing" secondItem="jp3-T3-NS2" secondAttribute="trailing" id="SL8-Ja-Bih"/>
+                                <constraint firstItem="gWR-cd-X6i" firstAttribute="leading" secondItem="IDg-uc-gop" secondAttribute="leading" id="SsD-Oe-g9U"/>
                                 <constraint firstAttribute="bottom" secondItem="jp3-T3-NS2" secondAttribute="bottom" constant="4" id="UOZ-7O-NRH"/>
-                                <constraint firstItem="XbN-WH-y9T" firstAttribute="top" secondItem="IDg-uc-gop" secondAttribute="top" constant="5" id="ZP8-QS-Cbf"/>
-                                <constraint firstItem="gWR-cd-X6i" firstAttribute="top" secondItem="IDg-uc-gop" secondAttribute="top" id="bEC-kn-Op0"/>
-                                <constraint firstItem="jp3-T3-NS2" firstAttribute="top" secondItem="XbN-WH-y9T" secondAttribute="bottom" constant="5" id="c2W-nL-54b"/>
-                                <constraint firstItem="gWR-cd-X6i" firstAttribute="leading" secondItem="IDg-uc-gop" secondAttribute="leading" id="iZB-aE-KKT"/>
-                                <constraint firstAttribute="trailing" secondItem="XbN-WH-y9T" secondAttribute="trailing" constant="23" id="qDV-eQ-8bT"/>
-                                <constraint firstAttribute="bottom" secondItem="gWR-cd-X6i" secondAttribute="bottom" id="wUt-MY-16R"/>
-                                <constraint firstAttribute="trailing" secondItem="gWR-cd-X6i" secondAttribute="trailing" id="ylS-OE-nLH"/>
+                                <constraint firstAttribute="trailing" secondItem="gWR-cd-X6i" secondAttribute="trailing" id="xFf-iL-PP8"/>
                             </constraints>
                         </view>
                     </subviews>

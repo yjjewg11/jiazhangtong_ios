@@ -26,4 +26,6 @@
 
 @property (assign, nonatomic) NSInteger ct_study_students;
 
+@property (strong, nonatomic) NSString * map_point;
+
 @end

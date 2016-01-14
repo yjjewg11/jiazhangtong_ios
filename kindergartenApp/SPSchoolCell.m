@@ -10,6 +10,9 @@
 #import "UIImageView+WebCache.h"
 
 @interface SPSchoolCell()
+{
+    SPSchoolDomain * _schoolDomain;
+}
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
@@ -28,6 +31,8 @@
 
 - (void)setData:(SPSchoolDomain *)domain
 {
+    _schoolDomain = domain;
+    
     [self.imgView sd_setImageWithURL:[NSURL URLWithString:domain.img] placeholderImage:[UIImage imageNamed:@"zhanweitu"]];
     
     self.schoolNameLbl.text = domain.brand_name;
@@ -79,5 +84,11 @@
         }
     }
 }
+
+- (IBAction)mapBtnClick:(id)sender
+{
+    [self.delegate pushToMapVC:_schoolDomain];
+}
+
 
 @end

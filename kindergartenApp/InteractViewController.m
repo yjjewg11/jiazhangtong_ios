@@ -32,6 +32,7 @@
 @interface InteractViewController () <UITableViewDataSource,UITableViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,TopicTableViewCellDelegate,UMSocialUIDelegate,UIScrollViewDelegate>
 {
     UITableViewController * reFreshView;
+    
     NSMutableArray * interactArray;
     
     NSMutableArray * dataSource;
@@ -40,9 +41,9 @@
     PageInfoDomain * otherTypePageInfo; //其他页面的
     
     BOOL rdyToRefesh;
+    
+    AdMoGoView * _adView;
 }
-
-@property (strong, nonatomic) AdMoGoView * adView;
 
 @end
 
@@ -60,19 +61,21 @@
     self.keyboardTopType = EmojiAndTextMode;
     
     NSArray * classArray = [KGHttpService sharedService].loginRespDomain.class_list;
-    if(classArray && [classArray count] >Number_Zero) {
+    if(classArray && [classArray count] >Number_Zero)
+    {
         UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"xiangji"] style:UIBarButtonItemStyleDone target:self action:@selector(postNewTopic)];
         [rightBarItem setTintColor:[UIColor whiteColor]];
         self.navigationItem.rightBarButtonItem = rightBarItem;
     }
     
     //芒果横幅广告
-    self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone
+    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone
                                          adType:AdViewTypeNormalBanner                                adMoGoViewDelegate:self
                                       autoScale:YES];
-    self.adView.adWebBrowswerDelegate = self;
-    self.adView.frame = CGRectMake(0.0, 0.0, APPWINDOWWIDTH, 50.0);
-
+    _adView.adWebBrowswerDelegate = self;
+    _adView.frame = CGRectMake((APPWINDOWWIDTH - 320)/2, 0.0, APPWINDOWWIDTH, 50.0);
+    [self.view addSubview:_adView];
+    
     if ([[UIDevice currentDevice].systemVersion floatValue] >=7.0) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -85,6 +88,19 @@
     
     [self initReFreshView];
 }
+
+- (void)dealloc
+{
+    _adView.adWebBrowswerDelegate = nil;
+    _adView.delegate = nil;
+    _adView = nil;//清除掉
+    reFreshView = nil;
+    interactArray = nil;
+    dataSource = nil;
+    mainTypePageInfo = nil;
+    otherTypePageInfo = nil;
+}
+
 //延迟刷新
 - (void)lazyRefresh
 {
@@ -111,8 +127,10 @@
 - (void)resetTopicReplyContent:(ReplyDomain *)domain {
     
     for (TopicDomain * topic in interactArray) {
-        if([topic.uuid isEqualToString:self.topicInteractionDomain.topicUUID]) {
-            if(!topic.replyPage) {
+        if([topic.uuid isEqualToString:self.topicInteractionDomain.topicUUID])
+        {
+            if(!topic.replyPage)
+            {
                 topic.replyPage = [[ReplyPageDomain alloc] init];
             }
             [topic.replyPage.data insertObject:domain atIndex:Number_Zero];
@@ -346,50 +364,36 @@
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
-    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+    reFreshView.tableView.frame = CGRectMake(0, 50, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 50);
     [self setupRefresh];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // 获得cell
-    if(indexPath.row == 0)
+    if (dataSource.count == 0)
     {
-        UITableViewCell * cell = [[UITableViewCell alloc] init];
+        NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil]firstObject];
         
-        cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        
-        [cell addSubview:self.adView];
+        reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         return cell;
     }
     else
     {
-        if (dataSource.count == 0)
+        static NSString * topiccellid = @"tpcid";
+        
+        TopicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:topiccellid];
+        
+        if (cell == nil)
         {
-            NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil]firstObject];
-            
-            reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            
-            return cell;
+            cell = [[TopicTableViewCell alloc] init];
         }
-        else
-        {
-            static NSString * topiccellid = @"tpcid";
-            
-            TopicTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:topiccellid];
-            
-            if (cell == nil)
-            {
-                cell = [[TopicTableViewCell alloc] init];
-            }
-            
-            cell.delegate = self;
-            
-            cell.topicFrame = dataSource[indexPath.row - 1];
-            
-            return cell;
-        }
+        
+        cell.delegate = self;
+        
+        cell.topicFrame = dataSource[indexPath.row];
+        
+        return cell;
     }
 }
 
@@ -397,31 +401,24 @@
 {
     if (dataSource.count == 0)
     {
-        return 2;
+        return 1;
     }
     else
     {
-        return 1 + dataSource.count;
+        return dataSource.count;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
+    if (dataSource.count == 0)
     {
-        return 50;
+        return 204;
     }
     else
     {
-        if (dataSource.count == 0)
-        {
-            return 204;
-        }
-        else
-        {
-            TopicFrame *frame = dataSource[indexPath.row - 1];
-            return frame.cellHeight;
-        }
+        TopicFrame *frame = dataSource[indexPath.row];
+        return frame.cellHeight;
     }
 }
 
@@ -437,11 +434,9 @@
     return frames;
 }
 
-#pragma mark - 芒果
 #pragma mark - 芒果ad
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -482,52 +477,12 @@
  *You can get notified when the user delete the ad
  广告关闭回调
  */
-- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView{
-    NSLog(@"广告关闭回调");
-}
-
-#pragma mark -
-#pragma mark AdMoGoWebBrowserControllerUserDelegate delegate
-
-/*
- 浏览器将要展示
- */
-- (void)webBrowserWillAppear{
-    NSLog(@"浏览器将要展示");
-}
-
-/*
- 浏览器已经展示
- */
-- (void)webBrowserDidAppear{
-    NSLog(@"浏览器已经展示");
-}
-
-/*
- 浏览器将要关闭
- */
-- (void)webBrowserWillClosed{
-    NSLog(@"浏览器将要关闭");
-}
-
-/*
- 浏览器已经关闭
- */
-- (void)webBrowserDidClosed{
-    NSLog(@"浏览器已经关闭");
-}
-/**
- *直接下载类广告 是否弹出Alert确认
- */
--(BOOL)shouldAlertQAView:(UIAlertView *)alertView
+- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
 {
-    return YES;
+    _adView.hidden = YES;
+    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
 }
 
-- (void)webBrowserShare:(NSString *)url
-{
-    
-}
 
 - (void)openWebWithUrl:(NSString *)url
 {
@@ -672,6 +627,51 @@
         alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:string delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alertView show];
     }
+}
+
+#pragma mark AdMoGoWebBrowserControllerUserDelegate delegate
+/*
+ 浏览器将要展示
+ */
+- (void)webBrowserWillAppear
+{
+    NSLog(@"浏览器将要展示");
+}
+
+/*
+ 浏览器已经展示
+ */
+- (void)webBrowserDidAppear
+{
+    NSLog(@"浏览器已经展示");
+}
+
+/*
+ 浏览器将要关闭
+ */
+- (void)webBrowserWillClosed
+{
+    NSLog(@"浏览器将要关闭");
+}
+
+/*
+ 浏览器已经关闭
+ */
+- (void)webBrowserDidClosed
+{
+    NSLog(@"浏览器已经关闭");
+}
+/**
+ *直接下载类广告 是否弹出Alert确认
+ */
+- (BOOL)shouldAlertQAView:(UIAlertView *)alertView
+{
+    return YES;
+}
+
+- (void)webBrowserShare:(NSString *)url
+{
+    
 }
 
 @end

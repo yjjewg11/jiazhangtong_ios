@@ -409,7 +409,7 @@ static NSString *const Nodata = @"nodata";
     
     _layOut = layout;
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 49) collectionViewLayout:layout];
     
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.showsVerticalScrollIndicator = NO;
@@ -503,6 +503,7 @@ static NSString *const Nodata = @"nodata";
     {
         _collectionView.hidden = NO;
         _webview.hidden = YES;
+        _context = nil;
         
         [[UIApplication sharedApplication] setStatusBarHidden:NO];
         self.navigationController.navigationBarHidden = NO;

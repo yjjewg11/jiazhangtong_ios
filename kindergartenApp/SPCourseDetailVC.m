@@ -25,7 +25,7 @@
 #import "UIColor+flat.h"
 #import "MapVC.h"
 
-@interface SpCourseDetailVC () <UMSocialUIDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SpCourseDetailInfoWebDelegate,SpCourseDetailCourseInfoDelegate>
+@interface SpCourseDetailVC () <UMSocialUIDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,SpCourseDetailInfoWebDelegate>
 {
     
     __weak IBOutlet UIButton *kechengxiangqing;
@@ -107,6 +107,13 @@
     
     //创建底部view
     [self initBottomView];
+
+    UIBarButtonItem *barbtn=[[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(pushToMapVC)];
+    
+    barbtn.title = @"地图";
+    barbtn.tintColor = [UIColor whiteColor];
+    
+    self.navigationItem.rightBarButtonItem=barbtn;
 }
 
 - (void)tryBtnClicked
@@ -670,8 +677,6 @@
         }
 
         _infoCell = cell;
-        
-        cell.delegate = self;
         
         _courseDetailDomain.commentNum = _commentNum;
         

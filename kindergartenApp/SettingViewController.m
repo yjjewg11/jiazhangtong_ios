@@ -7,6 +7,9 @@
 //
 
 #import "SettingViewController.h"
+#import "KGDateUtil.h"
+#import "KGHttpService.h"
+#import "SDWebImageManager.h"
 
 #import "MobClick.h"
 
@@ -27,7 +30,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"SettingViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SettingViewCell"];
-    _dataArray = @[@[@"修改密码",@"推送通知"],@[@"意见反馈",@"关于我们"],@[@"退出"]];
+    _dataArray = @[@[@"修改密码",@"推送通知",@"清除缓存"],@[@"意见反馈",@"关于我们"],@[@"退出"]];
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -59,6 +62,22 @@
                 vc = [[PushNotificationViewController alloc] init];
             }
                 break;
+            case 2:{
+                NSInteger i = [[SDImageCache sharedImageCache] getSize];
+                //重新获取网页地址
+                [self getSysConfig];
+                //清除web缓存
+                NSURLCache * cache = [NSURLCache sharedURLCache];
+                [cache removeAllCachedResponses];
+                [cache setDiskCapacity:0];
+                [cache setMemoryCapacity:0];
+                //清除缓存的图片
+                [[SDImageCache sharedImageCache] clearDisk];
+                NSString * msg = [NSString stringWithFormat:@"清除了%.2lfMB的缓存",(((long)i / 1024.00)/1024.00)];
+                
+                UIAlertView * al = [[UIAlertView alloc] initWithTitle:@"成功" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+                [al show];
+            }
         }
     }else if (indexPath.section == 1){
         switch (indexPath.row) {
@@ -120,6 +139,66 @@
     [super didReceiveMemoryWarning];
 }
 
-
+- (void)getSysConfig
+{
+    NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+    NSString * time = [defu objectForKey:@"timeofreq"];
+    NSString * sns_url = [defu objectForKey:@"sns_url"];
+    NSLog(@"磁盘存放的时间:%@ , 最新话题地址:%@",time,sns_url);
+    
+    if (time == nil || [time isEqualToString:@""])  //第一次进来，请求一个md5,并设置时间
+    {
+        [defu setObject:[KGDateUtil getTime] forKey:@"timeofreq"];//设置当前时间
+        
+        [[KGHttpService sharedService] getSysConfig:@"" success:^(SystemConfigOfTopic *sysDomain)
+         {
+             [defu setObject:sysDomain.md5 forKey:@"md5"]; //设置md5
+             if (sysDomain.sns_url == nil)
+             {
+                 sysDomain.sns_url = @"";
+             }
+             [defu setObject:sysDomain.sns_url forKey:@"sns_url"]; //设置话题url
+             [defu synchronize];
+         }
+                                              faild:^(NSString *errorMsg)
+         {
+             
+         }];
+    }
+    else //不是第一次进来，获取存到磁盘的时间，和当前时间做比较，如果大于一天，就调用sys方法
+    {
+        if ([KGDateUtil intervalSinceNow:time] >= 0) //这里可以改天数
+        {
+            //是时候调用了
+            NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
+            NSString * md5 = [defu objectForKey:@"md5"];
+            [defu setObject:[KGDateUtil getTime] forKey:@"timeofreq"];//设置当前时间
+            
+            if (md5 == nil || [md5 isEqualToString:@""])
+            {
+                md5 = @"";
+            }
+            
+            [[KGHttpService sharedService] getSysConfig:md5 success:^(SystemConfigOfTopic *sysDomain)
+             {
+                 [defu setObject:sysDomain.md5 forKey:@"md5"]; //设置md5
+                 if (sysDomain.sns_url == nil)
+                 {
+                     sysDomain.sns_url = @"";
+                 }
+                 [defu setObject:sysDomain.sns_url forKey:@"sns_url"]; //设置话题url
+                 [defu synchronize];
+             }
+                                                  faild:^(NSString *errorMsg)
+             {
+                 
+             }];
+        }
+        else
+        {
+            NSLog(@"还没到时候调用这个方法");
+        }
+    }
+}
 
 @end

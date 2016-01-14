@@ -173,6 +173,10 @@ static NSString *const NoDataID = @"nodatacoll";
     {
         EnrolStudentsSchoolCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:SchoolCellID forIndexPath:indexPath];
         
+        cell.hideMapView = YES;
+        
+        cell.mapView.hidden = YES;
+        
         cell.summaryCount = 3;
         
         [cell setData:dataSource[indexPath.row]];

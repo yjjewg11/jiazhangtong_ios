@@ -32,4 +32,16 @@
     return [[UIBarButtonItem alloc] initWithCustomView:btn];
 }
 
++ (UIBarButtonItem *)itemWithTarget:(id)target action:(SEL)action title:(NSString *)title
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    // 设置图片
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitle:title forState:UIControlStateHighlighted];
+    // 设置尺寸
+    btn.size = btn.currentBackgroundImage.size;
+    return [[UIBarButtonItem alloc] initWithCustomView:btn];
+}
+
 @end

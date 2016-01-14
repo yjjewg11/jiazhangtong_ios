@@ -13,7 +13,6 @@
 #import "SpCourseHomeWFLayout.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
-#import "SpCourseHomeAdCell.h"
 #import "SpCourseHomeCourseTypesCell.h"
 #import "SpCourseHomeCourseCell.h"
 #import "SPCourseDetailVC.h"
@@ -38,8 +37,6 @@
     
     AdMoGoView * _adView;
     
-    SpCourseHomeAdCell * _adCell;
-    
     NSInteger _reqSuccessCount;
     
     NSInteger _reqFailedCount;
@@ -57,25 +54,8 @@
 
 @implementation SpCourseHomeVC
 
-static NSString *const ADCellID = @"adcellcoll";
 static NSString *const TypeCellID = @"typecellcoll";
 static NSString *const CourseCellID = @"coursecellcoll";
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
-                                  adMoGoViewDelegate:self];
-    
-    _adView.adWebBrowswerDelegate = self;
-    
-    _adView.frame = CGRectMake(0.0, 0, APPWINDOWWIDTH, 150.0);
-    
-    [_adCell.adView addSubview:_adView];
-    
-    [_adCell bringSubviewToFront:_adView];
-}
 
 - (void)viewDidLoad
 {
@@ -99,9 +79,38 @@ static NSString *const CourseCellID = @"coursecellcoll";
     //加载热门课程
     [self loadHotCourseData];
     
+    //初始化scrollview
+    [self initScrollView];
+    
     //初始化视图
     [self initCollectionView];
     
+    //加载广告
+    [self initAD];
+    
+}
+
+- (void)initScrollView
+{
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 49)];
+    
+    _scrollView.bounces = NO;
+    
+    _scrollView.contentSize = CGSizeMake(0, APPWINDOWHEIGHT - 64 - 49 + 151);
+    
+    [self.view addSubview:_scrollView];
+}
+
+- (void)initAD
+{
+    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
+                              adMoGoViewDelegate:self];
+    
+    _adView.adWebBrowswerDelegate = self;
+    
+    _adView.frame = CGRectMake((APPWINDOWWIDTH - 320) / 2, 0, APPWINDOWWIDTH, 150.0);
+    
+    [_scrollView addSubview:_adView];
 }
 
 #pragma mark - 加载课程分类数据
@@ -123,7 +132,9 @@ static NSString *const CourseCellID = @"coursecellcoll";
         if (_reqSuccessCount == FinishReqCount)
         {
             [self hidenLoadView];
-            [self.view addSubview:_collectionView];
+            [_scrollView addSubview:_collectionView];
+            _collectionView.scrollEnabled = NO;
+            _scrollView.delegate = self;
         }
     }
     faild:^(NSString *errorMsg)
@@ -147,7 +158,9 @@ static NSString *const CourseCellID = @"coursecellcoll";
         if (_reqSuccessCount == FinishReqCount)
         {
             [self hidenLoadView];
-            [self.view addSubview:_collectionView];
+            [_scrollView addSubview:_collectionView];
+            _collectionView.scrollEnabled = NO;
+            _scrollView.delegate = self;
         }
     }
     faild:^(NSString *errorMsg)
@@ -181,22 +194,12 @@ static NSString *const CourseCellID = @"coursecellcoll";
 #pragma mark - collection的数据源 & 代理
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 2 + _hotCourseData.count;
+    return 1 + _hotCourseData.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0)
-    {
-        SpCourseHomeAdCell * adCell = [collectionView dequeueReusableCellWithReuseIdentifier:ADCellID forIndexPath:indexPath];
-        
-        _adCell = adCell;
-        
-        _adCell.backgroundColor = [UIColor whiteColor];
-        
-        return adCell;
-    }
-    else if (indexPath.row == 1)
     {
         SpCourseHomeCourseTypesCell * typesCell = [collectionView dequeueReusableCellWithReuseIdentifier:TypeCellID forIndexPath:indexPath];
         
@@ -210,7 +213,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
     {
         SpCourseHomeCourseCell * courseCell = [collectionView dequeueReusableCellWithReuseIdentifier:CourseCellID forIndexPath:indexPath];
         
-        [courseCell setCourseCellData:_hotCourseData[indexPath.row-2]];
+        [courseCell setCourseCellData:_hotCourseData[indexPath.row-1]];
         
         return courseCell;
     }
@@ -241,14 +244,14 @@ static NSString *const CourseCellID = @"coursecellcoll";
 #pragma mark - 选中item后调转
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0 || indexPath.row == 1)
+    if (indexPath.row == 0)
     {
         return;
     }
     
     SpCourseDetailVC * detailVC = [[SpCourseDetailVC alloc] init];
     
-    SPCourseDomain * domain = _hotCourseData[indexPath.row - 2];
+    SPCourseDomain * domain = _hotCourseData[indexPath.row - 1];
     
     detailVC.uuid = domain.uuid;
     
@@ -267,14 +270,14 @@ static NSString *const CourseCellID = @"coursecellcoll";
     //创建coll布局
     SpCourseHomeWFLayout *layout = [[SpCourseHomeWFLayout alloc] init];
     
-    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 44) collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 150, KGSCREEN.size.width, KGSCREEN.size.height - 64 - 44) collectionViewLayout:layout];
     
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.showsVerticalScrollIndicator = NO;
     
-    _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    _collectionView.bounces = NO;
     
-    [_collectionView registerNib:[UINib nibWithNibName:@"SpCourseHomeAdCell" bundle:nil] forCellWithReuseIdentifier:@"adcellcoll"];
+    _collectionView.backgroundColor = [UIColor groupTableViewBackgroundColor];
     
     [_collectionView registerNib:[UINib nibWithNibName:@"SpCourseHomeCourseTypesCell" bundle:nil] forCellWithReuseIdentifier:@"typecellcoll"];
     
@@ -286,9 +289,44 @@ static NSString *const CourseCellID = @"coursecellcoll";
     [self setupRefresh];
 }
 
-
-#pragma mark - 自动翻页
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 150 && _collectionView.contentOffset.y == 0)
+    {
+        [scrollView setContentOffset:CGPointMake(0, 150)];
+        
+        _scrollView.scrollEnabled = NO;
+        
+        _collectionView.scrollEnabled = YES;
+        
+        _scrollView.delegate = nil;
+        
+        [_collectionView setContentOffset:CGPointMake(0, 1)];
+        
+        _collectionView.bounces = YES;
+        
+        return;
+    }
+    
+    if (scrollView.contentOffset.y <= 0)
+    {
+        _scrollView.scrollEnabled = YES;
+        
+        _collectionView.scrollEnabled = NO;
+        
+        _scrollView.delegate = self;
+        
+        _collectionView.bounces = NO;
+        
+        return;
+    }
+    else
+    {
+        [self loadMoreData:(scrollView)];
+    }
+}
+
+- (void)loadMoreData:(UIScrollView *)scrollView
 {
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
@@ -297,6 +335,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
     CGFloat currentOffset = offset.y + bounds.size.height - inset.bottom;
     CGFloat maximumOffset = size.height;
     //当currentOffset与maximumOffset的值相等时，说明scrollview已经滑到底部了。也可以根据这两个值的差来让他做点其他的什么事情
+    
     if(currentOffset >= maximumOffset)
     {
         if (_canReqData == YES)
@@ -304,33 +343,28 @@ static NSString *const CourseCellID = @"coursecellcoll";
             _canReqData = NO;
             
             [[KGHttpService sharedService] getSPHotCourse:_mappoint pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(SPDataListVO *hotCourseList)
-            {
-                NSArray * data = [NSMutableArray arrayWithArray:[SPCourseDomain objectArrayWithKeyValuesArray:hotCourseList.data]];
-                if (data == nil || data.count == 0)
-                {
-                    
-                }
-                else
-                {
-                    _pageNo++;
-                    [_hotCourseData addObjectsFromArray:data];
-                    [_collectionView reloadData];
-                    
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                    {
-                        _canReqData = YES;
-                    });
-                }
-            }
-            faild:^(NSString *errorMsg)
-            {
-                 
-            }];
-
+             {
+                 NSArray * data = [NSMutableArray arrayWithArray:[SPCourseDomain objectArrayWithKeyValuesArray:hotCourseList.data]];
+                 if (data == nil || data.count == 0)
+                 {
+                     _canReqData = YES;
+                 }
+                 else
+                 {
+                     _pageNo++;
+                     [_hotCourseData addObjectsFromArray:data];
+                     [_collectionView reloadData];
+                     
+                     _canReqData = YES;
+                 }
+             }
+             faild:^(NSString *errorMsg)
+             {
+                 _canReqData = YES;
+             }];
         }
     }
 }
-
 
 #pragma mark - 上拉刷新，下拉加载数据
 - (void)setupRefresh
@@ -401,17 +435,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
  */
 - (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
 {
-    NSLog(@"广告关闭回调");
     
-    _adCell.adView.hidden = YES;
-    
-    UIImageView * imgView = [[UIImageView alloc] init];
-    
-    imgView.frame = _adCell.frame;
-    
-    imgView.image = [UIImage imageNamed:@"adbanner"];
-    
-    [_adCell addSubview:imgView];
 }
 
 @end

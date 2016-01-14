@@ -36,7 +36,6 @@
 #import "YouHuiVC.h"
 #import <CoreLocation/CoreLocation.h>
 #import "AddressBooksViewController.h"
-#import "FeHourGlass.h"
 #import "MBProgressHUD+HM.h"
 #import "EnrolStudentHomeVC.h"
 
@@ -62,8 +61,6 @@
     CLLocationManager *mgr;
     
     DiscorveryNewNumberDomain *numberDomain;
-    
-    FeHourGlass * _hourGlass;
 }
 
 @property (strong, nonatomic) AdMoGoView * adView;
@@ -72,9 +69,13 @@
 
 @implementation HomeViewController
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewDidAppear:animated];
+    [super viewDidLoad];
+    
+    [self autoLogin];
+    
+    [self requestGroupDate];
     
     self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
                                   adMoGoViewDelegate:self];
@@ -86,30 +87,6 @@
     [photosView addSubview:self.adView];
     
     [photosView bringSubviewToFront:self.adView];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self requestGroupDate];
-    
-    _hourGlass = [[FeHourGlass alloc] initWithView:photosView];
-    
-    _hourGlass.center = CGPointMake(APPWINDOWWIDTH / 2, 70);
-    
-    [photosView addSubview:_hourGlass];
-    
-    [_hourGlass showWhileExecutingBlock:^
-    {
-         
-    }
-    completion:^
-    {
-         
-    }];
-    
-    [self autoLogin];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -130,6 +107,11 @@
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(getNewsNumber) name:@"homerefreshnum" object:nil];
+}
+
+- (void)dealloc
+{
+    NSLog(@"主页delloc");
 }
 
 #pragma mark - 芒果广告相关
@@ -225,50 +207,50 @@
 }
 
 //加载机构下拉列表
-- (void)loadGroupListView
-{
-    if(groupDataArray && [groupDataArray count]>Number_Zero)
-    {
-        groupViewHeight = [groupDataArray count] * Cell_Height2;
-        if (!groupListView) {
-            groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, -groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
-            groupListView.backgroundColor = KGColorFrom16(0xE64662);
-            [self.view addSubview:groupListView];
-        }else{
-            [groupListView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        }
-        
-        GroupDomain *         domain = nil;
-        UILabel     * groupNameLabel = nil;
-        UILabel     *    spliteLabel = nil;
-        UIButton    *            btn = nil;
-        CGFloat   y = Number_Zero;
-        
-        for(NSInteger i=Number_Zero; i<[groupDataArray count]; i++) {
-            
-            domain = [groupDataArray objectAtIndex:i];
-            y = Number_Fifteen + (i*Cell_Height2);
-            
-            groupNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, y, KGSCREEN.size.width, Number_Fifteen)];
-            groupNameLabel.font = [UIFont systemFontOfSize:Number_Fifteen];
-            groupNameLabel.text = domain.company_name;
-            groupNameLabel.textColor = [UIColor whiteColor];
-            groupNameLabel.textAlignment = NSTextAlignmentCenter;
-            [groupListView addSubview:groupNameLabel];
-            
-            btn = [[UIButton alloc] initWithFrame:CGRectMake(Number_Zero, y, KGSCREEN.size.width, Cell_Height2)];
-            btn.targetObj = domain;
-            [btn addTarget:self action:@selector(didSelectedGroupList:) forControlEvents:UIControlEventTouchUpInside];
-            [groupListView addSubview:btn];
-            
-            if(i < [groupDataArray count]-Number_One) {
-                spliteLabel = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, CGRectGetMaxY(groupNameLabel.frame) + Number_Fifteen, KGSCREEN.size.width, 0.5)];
-                spliteLabel.backgroundColor = [UIColor whiteColor];
-                [groupListView addSubview:spliteLabel];
-            }
-        }
-    }
-}
+//- (void)loadGroupListView
+//{
+//    if(groupDataArray && [groupDataArray count]>Number_Zero)
+//    {
+//        groupViewHeight = [groupDataArray count] * Cell_Height2;
+//        if (!groupListView) {
+//            groupListView = [[UIView alloc] initWithFrame:CGRectMake(Number_Zero, -groupViewHeight, KGSCREEN.size.width, groupViewHeight)];
+//            groupListView.backgroundColor = KGColorFrom16(0xE64662);
+//            [self.view addSubview:groupListView];
+//        }else{
+//            [groupListView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+//        }
+//        
+//        GroupDomain *         domain = nil;
+//        UILabel     * groupNameLabel = nil;
+//        UILabel     *    spliteLabel = nil;
+//        UIButton    *            btn = nil;
+//        CGFloat   y = Number_Zero;
+//        
+//        for(NSInteger i=Number_Zero; i<[groupDataArray count]; i++) {
+//            
+//            domain = [groupDataArray objectAtIndex:i];
+//            y = Number_Fifteen + (i*Cell_Height2);
+//            
+//            groupNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, y, KGSCREEN.size.width, Number_Fifteen)];
+//            groupNameLabel.font = [UIFont systemFontOfSize:Number_Fifteen];
+//            groupNameLabel.text = domain.company_name;
+//            groupNameLabel.textColor = [UIColor whiteColor];
+//            groupNameLabel.textAlignment = NSTextAlignmentCenter;
+//            [groupListView addSubview:groupNameLabel];
+//            
+//            btn = [[UIButton alloc] initWithFrame:CGRectMake(Number_Zero, y, KGSCREEN.size.width, Cell_Height2)];
+//            btn.targetObj = domain;
+//            [btn addTarget:self action:@selector(didSelectedGroupList:) forControlEvents:UIControlEventTouchUpInside];
+//            [groupListView addSubview:btn];
+//            
+//            if(i < [groupDataArray count]-Number_One) {
+//                spliteLabel = [[UILabel alloc] initWithFrame:CGRectMake(Number_Zero, CGRectGetMaxY(groupNameLabel.frame) + Number_Fifteen, KGSCREEN.size.width, 0.5)];
+//                spliteLabel.backgroundColor = [UIColor whiteColor];
+//                [groupListView addSubview:spliteLabel];
+//            }
+//        }
+//    }
+//}
 
 
 //选择机构
@@ -287,7 +269,7 @@
     
     [self loadNavTitle];
     
-    [self loadGroupListView];
+//    [self loadGroupListView];
     
     [self getSysConfig];
     

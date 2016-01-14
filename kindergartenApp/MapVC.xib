@@ -24,10 +24,38 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIm-Zz-mce">
+                    <rect key="frame" x="15" y="325" width="30" height="30"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhongxindian" translatesAutoresizingMaskIntoConstraints="NO" id="kUj-OV-kt4">
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1Y-tH-rTG">
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                            <connections>
+                                <action selector="backToCenterClick:" destination="-1" eventType="touchUpInside" id="7dF-3h-wK5"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="kUj-OV-kt4" firstAttribute="top" secondItem="yIm-Zz-mce" secondAttribute="top" id="9VQ-Tc-gCO"/>
+                        <constraint firstAttribute="trailing" secondItem="kUj-OV-kt4" secondAttribute="trailing" id="GCx-h2-oIL"/>
+                        <constraint firstAttribute="bottom" secondItem="T1Y-tH-rTG" secondAttribute="bottom" id="J2d-xk-PdD"/>
+                        <constraint firstItem="kUj-OV-kt4" firstAttribute="leading" secondItem="yIm-Zz-mce" secondAttribute="leading" id="Pkb-48-Nyr"/>
+                        <constraint firstItem="T1Y-tH-rTG" firstAttribute="leading" secondItem="yIm-Zz-mce" secondAttribute="leading" id="XcW-gP-Kaw"/>
+                        <constraint firstItem="T1Y-tH-rTG" firstAttribute="top" secondItem="yIm-Zz-mce" secondAttribute="top" id="Ztf-B7-EEg"/>
+                        <constraint firstAttribute="trailing" secondItem="T1Y-tH-rTG" secondAttribute="trailing" id="fu0-Lv-Hh3"/>
+                        <constraint firstAttribute="bottom" secondItem="kUj-OV-kt4" secondAttribute="bottom" id="iCr-Yo-zAc"/>
+                        <constraint firstAttribute="width" constant="30" id="rEU-3G-O56"/>
+                        <constraint firstAttribute="height" constant="30" id="xQn-cd-x0X"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJX-4b-Rrm">
                     <rect key="frame" x="15" y="15" width="30" height="30"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-St-WOn">
+                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zuojiantou" translatesAutoresizingMaskIntoConstraints="NO" id="qzp-St-WOn">
                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         </imageView>
@@ -156,9 +184,11 @@
                 <constraint firstItem="CY5-39-mXC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9tR-kS-T5v"/>
                 <constraint firstAttribute="trailing" secondItem="CY5-39-mXC" secondAttribute="trailing" id="Lpe-pe-XpN"/>
                 <constraint firstAttribute="trailing" secondItem="XLQ-qf-jhV" secondAttribute="trailing" id="Nsg-cJ-1Tm"/>
+                <constraint firstItem="CY5-39-mXC" firstAttribute="top" secondItem="yIm-Zz-mce" secondAttribute="bottom" constant="25" id="dL9-WA-cWn"/>
                 <constraint firstAttribute="bottom" secondItem="CY5-39-mXC" secondAttribute="bottom" id="f5I-7k-Y1o"/>
                 <constraint firstItem="CY5-39-mXC" firstAttribute="top" secondItem="XLQ-qf-jhV" secondAttribute="bottom" id="ff0-rN-JKU"/>
                 <constraint firstItem="uJX-4b-Rrm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="td0-iC-9b8"/>
+                <constraint firstItem="yIm-Zz-mce" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="yan-cb-Zho"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
@@ -166,6 +196,7 @@
         </view>
     </objects>
     <resources>
-        <image name="youjiantou" width="7" height="12"/>
+        <image name="zhongxindian" width="30" height="30"/>
+        <image name="zuojiantou" width="7" height="12"/>
     </resources>
 </document>
