@@ -142,6 +142,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
         _reqFailedCount++;
         if (_reqFailedCount == 2)
         {
+            [self hidenLoadView];
             [self showNoNetView];
         }
     }];
@@ -168,6 +169,7 @@ static NSString *const CourseCellID = @"coursecellcoll";
         _reqFailedCount++;
         if (_reqFailedCount == 2)
         {
+            [self hidenLoadView];
             [self showNoNetView];
         }
     }];

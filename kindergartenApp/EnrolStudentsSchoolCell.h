@@ -9,12 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "EnrolStudentsSchoolDomain.h"
 
-@protocol EnrolStudentsSchoolCellDelegate <NSObject>
-
-- (void)pushToMapView:(EnrolStudentsSchoolDomain *)domain;
-
-@end
-
 @interface EnrolStudentsSchoolCell : UICollectionViewCell
 
 - (void)setData:(EnrolStudentsSchoolDomain *)domain;
@@ -22,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIView *mapView;
 
 @property (assign, nonatomic) NSInteger summaryCount;
-
-@property (weak, nonatomic) id<EnrolStudentsSchoolCellDelegate> delegate;
 
 @property (assign, nonatomic) BOOL hideMapView;
 

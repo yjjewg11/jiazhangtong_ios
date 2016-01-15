@@ -103,15 +103,9 @@
     [self getLocationData];
     
     //注册通知，用于发现模块 最新数目显示
-    //注册通知
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(getNewsNumber) name:@"homerefreshnum" object:nil];
-}
-
-- (void)dealloc
-{
-    NSLog(@"主页delloc");
 }
 
 #pragma mark - 芒果广告相关
@@ -119,8 +113,6 @@
 {
     return CGSizeMake(360, 150);
 }
-
-#pragma mark AdMoGoDelegate delegate
 /*
  返回广告rootViewController
  */
@@ -159,16 +151,7 @@
  */
 - (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
 {
-    self.adView.hidden = YES;
-    photosView.userInteractionEnabled = NO;
-    
-    UIImageView * imgView = [[UIImageView alloc] init];
-    
-    imgView.frame = self.adView.frame;
-    
-    imgView.image = [UIImage imageNamed:@"adbanner"];
-    
-    [self.view addSubview:imgView];
+
 }
 
 - (void)loadNavTitle {
@@ -298,9 +281,7 @@
             [defu synchronize];
         }
         faild:^(NSString *errorMsg)
-        {
-            
-        }];
+        {}];
     }
     else //不是第一次进来，获取存到磁盘的时间，和当前时间做比较，如果大于一天，就调用sys方法
     {
@@ -327,9 +308,7 @@
                 [defu synchronize];
             }
             faild:^(NSString *errorMsg)
-            {
-                
-            }];
+            {}];
         }
         else
         {
@@ -560,7 +539,6 @@
     [UIView viewAnimate:^{
         popupView.alpha = Number_One;
     } time:Number_AnimationTime_Five];
-    
 }
 
 
@@ -589,8 +567,7 @@
     {
         [[KGHttpService sharedService] login:account success:^(NSString *msgStr)
         {
-            [self requestGroupDate];
-//            [titleBtn setImage:@"xiajiantou" selImg:@"sjiantou"];
+            
         }
         faild:^(NSString *errorMsg)
         {

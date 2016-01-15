@@ -188,10 +188,4 @@
     self.layer.cornerRadius = 5;
 }
 
-- (IBAction)mapClick:(id)sender
-{
-    [self.delegate pushToMapView:_schoolDomain];
-}
-
-
 @end

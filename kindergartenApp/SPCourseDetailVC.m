@@ -113,7 +113,7 @@
     barbtn.title = @"地图";
     barbtn.tintColor = [UIColor whiteColor];
     
-    self.navigationItem.rightBarButtonItem=barbtn;
+    self.navigationItem.rightBarButtonItem = barbtn;
 }
 
 - (void)tryBtnClicked

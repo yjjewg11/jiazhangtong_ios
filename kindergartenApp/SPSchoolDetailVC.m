@@ -26,7 +26,7 @@
 #import "SPShareSaveDomain.h"
 #import "MapVC.h"
 
-@interface SPSchoolDetailVC () <UIScrollViewDelegate,SPSchoolDetailTableVCDelegate,UIActionSheetDelegate,SPSchoolCellDelegate>
+@interface SPSchoolDetailVC () <UIScrollViewDelegate,SPSchoolDetailTableVCDelegate,UIActionSheetDelegate>
 {
     UIView * _schoolInfoView;
     UIView * _buttonsView;
@@ -66,7 +66,6 @@
     if (_cell == nil)
     {
         _cell = [[[NSBundle mainBundle] loadNibNamed:@"SPSchoolCell" owner:nil options:nil] firstObject];
-        _cell.delegate = self;
     }
     return _cell;
 }
@@ -124,12 +123,12 @@
     
     //创建顶部学校信息view
     _schoolInfoView = [[UIView alloc] init];
-    _schoolInfoView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 150);
+    _schoolInfoView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, 87);
     [self addInfoCell:_schoolInfoView];
     
     //创建上面三个按钮view
     _buttonsView = [[UIView alloc] init];
-    _buttonsView.frame = CGRectMake(0, 0 + 120, APPWINDOWWIDTH, 30);
+    _buttonsView.frame = CGRectMake(0, 0 + 87, APPWINDOWWIDTH, 30);
     [self addSelBtns:_buttonsView];
     
     //创建scrollView
@@ -565,12 +564,16 @@
         
         self.schoolDomain = spSchoolDetail;
         
+        UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(pushToMapVC)];
+        barbtn.title = @"地图";
+        barbtn.tintColor = [UIColor whiteColor];
+        self.navigationItem.rightBarButtonItem = barbtn;
+        
         [self.cell setData:self.schoolDomain];
         
         [_schoolInfoView addSubview:self.cell];
 
         [_webView loadHTMLString:spSchoolDetail.groupDescription baseURL:nil];
-        
     }
     faild:^(NSString *errorMsg)
     {
@@ -623,22 +626,20 @@
     }
 }
 
-- (void)pushToMapVC:(SPSchoolDomain *)domain
+- (void)pushToMapVC
 {
     MapVC * vc = [[MapVC alloc] init];
     
-    vc.map_point = domain.map_point;
+    vc.map_point = self.schoolDomain.map_point;
     
-    vc.locationName = domain.address;
+    vc.locationName = self.schoolDomain.address;
     
-    vc.schoolName = domain.brand_name;
+    vc.schoolName = self.schoolDomain.brand_name;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
 @end
-
 
 #pragma mark - 实现自定义Button
 @implementation MyButton

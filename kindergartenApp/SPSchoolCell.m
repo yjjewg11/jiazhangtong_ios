@@ -84,11 +84,4 @@
         }
     }
 }
-
-- (IBAction)mapBtnClick:(id)sender
-{
-    [self.delegate pushToMapVC:_schoolDomain];
-}
-
-
 @end

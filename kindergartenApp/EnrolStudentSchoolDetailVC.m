@@ -36,7 +36,7 @@
 #define DataSource_JianJie 1
 #define DataSource_PingLun 2
 
-@interface EnrolStudentSchoolDetailVC () <UICollectionViewDelegate,UICollectionViewDataSource,EnrolStudentButtonCellDelegate,EnrolStudentWebViewCellDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UMSocialUIDelegate,EnrolStudentsSchoolCellDelegate>
+@interface EnrolStudentSchoolDetailVC () <UICollectionViewDelegate,UICollectionViewDataSource,EnrolStudentButtonCellDelegate,EnrolStudentWebViewCellDelegate,UIScrollViewDelegate,UIActionSheetDelegate,UMSocialUIDelegate>
 {
     UICollectionView * _collectionView;
     
@@ -219,10 +219,13 @@ static NSString *const NoDataCell = @"nodata";
             ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang2"];
         }
         
+        UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(pushToMapVC)];
+        barbtn.title = @"地图";
+        barbtn.tintColor = [UIColor whiteColor];
+        self.navigationItem.rightBarButtonItem = barbtn;
+        
         [self.view addSubview:_collectionView];
-        
         [self.view addSubview:_bottomView];
-        
         [self.view bringSubviewToFront:_bottomView];
     }
     faild:^(NSString *errorMsg)
@@ -338,8 +341,6 @@ static NSString *const NoDataCell = @"nodata";
         _schoolCell = cell;
         
         cell.hideMapView = NO;
-        
-        _schoolCell.delegate = self;
         
         cell.summaryCount = 0;
         
@@ -848,15 +849,15 @@ static NSString *const NoDataCell = @"nodata";
     });
 }
 
-- (void)pushToMapView:(EnrolStudentsSchoolDomain *)domain
+- (void)pushToMapVC
 {
     MapVC * vc = [[MapVC alloc] init];
     
-    vc.map_point = domain.map_point;
+    vc.map_point = _schoolDomain.map_point;
     
-    vc.locationName = domain.address;
+    vc.locationName = _schoolDomain.address;
     
-    vc.schoolName = domain.brand_name;
+    vc.schoolName = _schoolDomain.brand_name;
     
     [self.navigationController pushViewController:vc animated:YES];
 }

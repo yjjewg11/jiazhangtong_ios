@@ -21,6 +21,8 @@
 #import "DiscorveryVC.h"
 #import "MineHomeVC.h"
 
+#import "HomeVC.h"
+
 @interface KGTabBarViewController ()
 
 @end
@@ -34,6 +36,9 @@
     // 1.初始化子控制器
     HomeViewController * home = [[HomeViewController alloc] init];
     [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
+    
+//    HomeVC * home = [[HomeVC alloc] init];
+//    [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
     
     DiscorveryVC * vc = [[DiscorveryVC alloc] init];
     [self addChildVc:vc title:@"发现" image:@"hfaxian" selectedImage:@"hfaxian2"];

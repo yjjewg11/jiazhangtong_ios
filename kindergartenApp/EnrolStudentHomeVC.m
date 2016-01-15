@@ -90,6 +90,7 @@ static NSString *const NoDataID = @"nodatacoll";
      }];
 }
 
+#pragma mark - 重新加载
 - (void)tryBtnClicked
 {
     [self hidenNoNetView];
