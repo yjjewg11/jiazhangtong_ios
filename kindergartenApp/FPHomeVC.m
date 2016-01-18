@@ -7,10 +7,12 @@
 //
 
 #import "FPHomeVC.h"
+#import "FPHomeTopView.h"
+
 
 @interface FPHomeVC ()
 
-@property (weak, nonatomic) IBOutlet UIScrollView * scrollView;
+@property (strong, nonatomic) UITableView * tableView;
 
 @end
 
@@ -20,9 +22,21 @@
 {
     [super viewDidLoad];
     
-    
-    
+    [self initTableView];
 }
+
+- (void)initTableView
+{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT)];
+    
+    FPHomeTopView * stretchView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
+    
+    
+    
+    [self.view addSubview:self.tableView];
+}
+
+
 
 
 @end

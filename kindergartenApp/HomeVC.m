@@ -29,7 +29,8 @@
 #import "MoreMenuView.h"
 #import "BrowseURLViewController.h"
 #import "AddressBooksViewController.h"
-#import "HomeFunView.h"
+
+#import "Masonry.h"
 
 #define FunItemH 60.00;
 #define FunItemW 50.00;
@@ -37,15 +38,11 @@
 @interface HomeVC () <CLLocationManagerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate>
 {
     PopupView * popupView;
-
-    DiscorveryNewNumberDomain *numberDomain;
+    DiscorveryNewNumberDomain * numberDomain;
+    UIScrollView * scrollView;
 }
 
-@property (weak, nonatomic) IBOutlet UIScrollView * scrollView;  //容器scrollview
-
 @property (strong, nonatomic) CLLocationManager * mgr;
-
-@property (strong, nonatomic) AdMoGoView * adView;
 
 @end
 
@@ -94,20 +91,123 @@
 #pragma mark - 初始化view
 - (void)initHomeView
 {
-    //创建adview
-    [self createAD];
+    NSArray * imgSrcArr = @[@"hudong",@"kechenbiao",@"shipu",@"gonggao",@"qiandao",@"pingjialaoshi",@"baobaoruxue",@"tongxunlu",@"techang1",@"gengduo"];
     
-    //创建funview
-    [self initFunView];
-}
+    NSArray * nameTitleArr = @[@"班级互动",@"课程表",@"每日食谱",@"校园公告",@"签到记录",@"评价老师",@"宝宝入学",@"通讯录",@"特长课程",@"更多"];
+    
+    //创建scrollview
+    scrollView = [[UIScrollView alloc] init];
+    scrollView.showsHorizontalScrollIndicator = NO;
+    [self.view addSubview:scrollView];
+    [scrollView mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+         make.edges.equalTo(self.view);//此处替代了cgrectmake
+    }];
+    
+    //创建一个container好让scrollview自动计算出contentsize
+    UIView *container = [UIView new];
+    [scrollView addSubview:container];
+    [container mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+         make.edges.equalTo(scrollView);
+         make.width.equalTo(scrollView);
+    }];
+    
+    //先把广告view加进去
+    AdMoGoView * adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
+                                          adMoGoViewDelegate:self];
+    adView.adWebBrowswerDelegate = self;
+    adView.frame = CGRectMake((APPWINDOWWIDTH - 320)/2 , 0, 320, 150);
+    [container addSubview:adView];
+    
+    //再创建一个funview
+    UIView * funContainer = [UIView new];
+    [container addSubview:funContainer];
+    [funContainer mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.edges.equalTo(container).with.insets(UIEdgeInsetsMake(150, 0, 0, 0));
+    }];
+    
+    //分割线view
+    UIView * sepView = [UIView new];
+    sepView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [funContainer addSubview:sepView];
+    [sepView mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.height.mas_equalTo(@2);
+        make.top.equalTo(funContainer.mas_top);
+        make.left.equalTo(funContainer.mas_left);
+        make.right.equalTo(funContainer.mas_right);
+    }];
+    
+    //接下来创建每个功能view
+    NSInteger count = 10;
+    CGFloat padding = 20;//每个功能view的间距
+    UIView * lastView = nil;
+    
+    for ( NSInteger i = 0 ; i < count ; ++i )
+    {
+        UIView *subv = [UIView new];
+        [funContainer addSubview:subv];
+        
+        //创建title lbl
+        UILabel *lable = [[UILabel alloc] init];
+        lable.text = nameTitleArr[i];
+        lable.font = [UIFont systemFontOfSize:14];
+        lable.textAlignment = NSTextAlignmentCenter;
+        [subv addSubview:lable];
+        [lable mas_makeConstraints:^(MASConstraintMaker *make)
+        {
+            make.left.equalTo(subv.mas_left);
+            make.right.equalTo(subv.mas_right);
+            make.bottom.equalTo(subv.mas_bottom);
+            make.height.mas_equalTo(@15);
+        }];
+        
+        //创建image view
+        UIImageView *imgView = [[UIImageView alloc] init];
+        imgView.image = [UIImage imageNamed:imgSrcArr[i]];
+        [subv addSubview:imgView];
+        [imgView mas_makeConstraints:^(MASConstraintMaker *make)
+        {
+            make.top.equalTo(subv.mas_top).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+            make.right.equalTo(subv.mas_right).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+            make.left.equalTo(subv.mas_left).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+            make.bottom.equalTo(lable.mas_top).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+        }];
+        
+        //创建button
+        UIButton * btn = [[UIButton alloc] init];
+        btn.tag = 10+i;
+        [btn addTarget:self action:@selector(funBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [subv addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make)
+        {
+            make.edges.equalTo(subv);
+        }];
+        
+        NSInteger row = (NSInteger)(i / 3) + 1;
+        NSInteger col = (i % 3) + 1;
 
-- (void)initFunView
-{
-    HomeFunView * funView = [[[NSBundle mainBundle] loadNibNamed:@"HomeFunView" owner:nil options:nil] firstObject];
+        CGFloat cellW = (APPWINDOWWIDTH - 4 * 20) / 3;
+        CGFloat cellH = (APPWINDOWWIDTH - 4 * 20) / 3 + 15;
+        CGFloat cellX = padding + (col - 1) * cellW + (col - 1) * padding;
+        CGFloat cellY = padding + (row - 1) * cellW + (row - 1) * padding;
+        
+        subv.frame = CGRectMake(cellX, cellY, cellW, cellH);
+        
+        lastView = subv;
+    }
     
-    funView.frame = CGRectMake(0, 150, APPWINDOWWIDTH, APPWINDOWHEIGHT - 150 - 64 - 49);
+    [funContainer mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.bottom.equalTo(lastView.mas_bottom);
+    }];
     
-    [self.scrollView addSubview:funView];
+    [container mas_makeConstraints:^(MASConstraintMaker *make)
+    {
+        make.bottom.equalTo(funContainer.mas_bottom);
+    }];
 }
 
 #pragma mark - 获取地理坐标
@@ -146,21 +246,9 @@
 }
 
 #pragma mark - 芒果广告相关
-- (void)createAD
-{
-    self.adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
-                                  adMoGoViewDelegate:self];
-    
-    self.adView.adWebBrowswerDelegate = self;
-    
-    self.adView.frame = CGRectMake((APPWINDOWWIDTH - 360) / 2, 0, 360, 150.0);
-    
-    [self.scrollView addSubview:self.adView];
-}
-
 - (CGSize)adMoGoCustomSize
 {
-    return CGSizeMake(360, 150);
+    return CGSizeMake(320, 150);
 }
 - (UIViewController *)viewControllerForPresentingModalView
 {
@@ -274,49 +362,46 @@
     switch (sender.tag)
     {
         case 10:
-        {
             baseVC = [[InteractViewController alloc] init];
             [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-        } case 11:
-            baseVC = [[EnrolStudentHomeVC alloc] init];
-            [self umengEvent:@"babyJoinCount" attributes:@{@"name":@"iphone"} number:@(1)];
-            break;
-        case 12:
-            baseVC = [[AnnouncementListViewController alloc] init];
-            [self umengEvent:@"announcementCount" attributes:@{@"name":@"iphone"} number:@(1)];
-            break;
-        case 13:
-            baseVC = [[StudentSignRecordViewController alloc] init];
-            [self umengEvent:@"signCount" attributes:@{@"name":@"iphone"} number:@(1)];
-            break;
-        case 14:
+        case 11:
             baseVC = [[TimetableViewController alloc] init];
             [self umengEvent:@"timetableCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-        case 15:
+        case 12:
             baseVC = [[RecipesListViewController alloc] init];
             [self umengEvent:@"recipesCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-        case 16:
-            baseVC = [[GiftwareArticlesViewController alloc] init];
+        case 13:
+            baseVC = [[AnnouncementListViewController alloc] init];
+            [self umengEvent:@"announcementCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-        case 17:
-            baseVC = [[SpCourseHomeVC alloc] init];
+        case 14:
+            baseVC = [[StudentSignRecordViewController alloc] init];
+            [self umengEvent:@"signCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-        case 18:
+        case 15:
             baseVC = [[TeacherJudgeViewController alloc] init];
             [self umengEvent:@"teacherCommentCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        case 16:
+            baseVC = [[EnrolStudentHomeVC alloc] init];
+            [self umengEvent:@"babyJoinCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        case 17:
+            baseVC = [[AddressBooksViewController alloc] init];
+            [self umengEvent:@"messageCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            baseVC.title = @"通讯录";
+            break;
+        case 18:
+            baseVC = [[SpCourseHomeVC alloc] init];
             break;
         case 19:
             [self loadMoreFunMenu:sender];
             [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-        case 20:
-            baseVC = [[AddressBooksViewController alloc] init];
-            [self umengEvent:@"messageCount" attributes:@{@"name":@"iphone"} number:@(1)];
-            baseVC.title = @"通讯录";
-            break;
+            
         default:
             break;
     }

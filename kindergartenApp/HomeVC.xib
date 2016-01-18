@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeVC">
             <connections>
-                <outlet property="scrollView" destination="pvQ-6r-78r" id="8Lg-20-3gz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,21 +14,10 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvQ-6r-78r">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                </scrollView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="pvQ-6r-78r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1tP-AK-Jme"/>
-                <constraint firstAttribute="trailing" secondItem="pvQ-6r-78r" secondAttribute="trailing" id="Cgr-BI-gSb"/>
-                <constraint firstAttribute="bottom" secondItem="pvQ-6r-78r" secondAttribute="bottom" id="Yl6-d4-a5H"/>
-                <constraint firstItem="pvQ-6r-78r" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="uWk-KM-dix"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="147" y="256"/>
+            <point key="canvasLocation" x="176" y="217"/>
         </view>
     </objects>
 </document>

@@ -227,6 +227,10 @@
 		04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */; };
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
+		04BDD68B1C4CC84600FA0C3A /* SpCourseHomeFuncCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDD6891C4CC84600FA0C3A /* SpCourseHomeFuncCell.m */; };
+		04BDD68C1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BDD68A1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib */; };
+		04BDD6901C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BDD68E1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib */; };
+		04BDD6911C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDD68F1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m */; };
 		04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */; };
 		04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D5D30B1C47927D005399D9 /* libZXingObjC.a */; };
 		04E606351C4897E100AEE9DD /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E606331C4897E100AEE9DD /* HomeVC.m */; };
@@ -264,8 +268,6 @@
 		04F72ABD1BEC562900623E33 /* SPTeacherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F72ABB1BEC562900623E33 /* SPTeacherCell.xib */; };
 		04F72AC01BEC7E1E00623E33 /* SPTeacherDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F72ABF1BEC7E1E00623E33 /* SPTeacherDomain.m */; };
 		04F72AC61BEC994500623E33 /* SPTeacherDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F72AC51BEC994500623E33 /* SPTeacherDetailDomain.m */; };
-		04F75E1E1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */; };
-		04F75E1F1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */; };
 		04F81C241C158F6A00EE24FF /* NoDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */; };
 		04F81C251C158F6A00EE24FF /* NoDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */; };
 		04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F84EBA1C0851E800A51140 /* NoNetView.m */; };
@@ -279,7 +281,6 @@
 		04F889591C05ABD8002FBE6D /* SDBaseProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889561C05ABD8002FBE6D /* SDBaseProgressView.m */; };
 		04F8895A1C05ABD8002FBE6D /* SDRotationLoopProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889581C05ABD8002FBE6D /* SDRotationLoopProgressView.m */; };
 		04F889601C05BD6A002FBE6D /* SpCourseHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8895E1C05BD6A002FBE6D /* SpCourseHomeVC.m */; };
-		04F889651C05BE4C002FBE6D /* SpCourseHomeWFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889641C05BE4C002FBE6D /* SpCourseHomeWFLayout.m */; };
 		04F89A351C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A331C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m */; };
 		04F89A361C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F89A341C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib */; };
 		04F89A3B1C1018D800FC0FA6 /* EnrolStudentCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F89A391C1018D800FC0FA6 /* EnrolStudentCommentCell.m */; };
@@ -301,11 +302,12 @@
 		04F8D36F1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D36D1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib */; };
 		04F90F631C3284C000243CDC /* ShareBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F90F621C3284C000243CDC /* ShareBottomView.xib */; };
 		04F936511BFEC8D7002D7621 /* SPCourseDetailVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936501BFEC8D7002D7621 /* SPCourseDetailVO.m */; };
+		04F936D01C4CE74100116D86 /* FPHomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936CF1C4CE74100116D86 /* FPHomeTopView.m */; };
+		04F936D21C4CE74F00116D86 /* FPHomeTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */; };
+		04F936D51C4CF4BE00116D86 /* TZN4Table.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936D41C4CF4BE00116D86 /* TZN4Table.m */; };
 		04F939BE1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F939BD1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m */; };
 		04F939C01C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F939BF1C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib */; };
 		04F946ED1BF5ECD200F8B31F /* MySPCourseCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */; };
-		04F969BE1C06F24F00F3B4CB /* SpCourseHomeCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F969BC1C06F24F00F3B4CB /* SpCourseHomeCourseCell.m */; };
-		04F969BF1C06F24F00F3B4CB /* SpCourseHomeCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F969BD1C06F24F00F3B4CB /* SpCourseHomeCourseCell.xib */; };
 		04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC4F1BFC5412004DA63D /* MySPAllCourseListVO.m */; };
 		04F9AC531BFC54B9004DA63D /* MySPAllCouseListDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC521BFC54B9004DA63D /* MySPAllCouseListDomain.m */; };
 		04F9AC571BFC58C8004DA63D /* MySPAllCourseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC551BFC58C8004DA63D /* MySPAllCourseListCell.m */; };
@@ -420,8 +422,6 @@
 		04FB7CC51C0DAA7A00FD3E31 /* SpCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB7CC31C0DAA7A00FD3E31 /* SpCourseCell.m */; };
 		04FB7CC61C0DAA7A00FD3E31 /* SpCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB7CC41C0DAA7A00FD3E31 /* SpCourseCell.xib */; };
 		04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FB88A51BFB04380094AC68 /* SafariServices.framework */; };
-		04FB9DCC1C48C8D30020D48E /* HomeFunView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9DCB1C48C8D30020D48E /* HomeFunView.m */; };
-		04FB9DCE1C48C8E10020D48E /* HomeFunView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB9DCD1C48C8E10020D48E /* HomeFunView.xib */; };
 		04FB9F9C1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9F9B1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.m */; };
 		04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9F9E1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m */; };
 		04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */; };
@@ -563,8 +563,6 @@
 		24AA0B531B69134400DAC03B /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AA0B521B69134400DAC03B /* NSDate+Utils.m */; };
 		24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B0D9DD1B763B790030B73C /* RecipesInfoView.m */; };
 		24C46B281B5A28CF00A58F92 /* BaseKeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C46B271B5A28CF00A58F92 /* BaseKeyboardViewController.m */; };
-		24C46B371B5A2A9900A58F92 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C46B351B5A2A9900A58F92 /* HomeViewController.m */; };
-		24C46B381B5A2A9900A58F92 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24C46B361B5A2A9900A58F92 /* HomeViewController.xib */; };
 		24C46B401B5A2B1100A58F92 /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C46B3E1B5A2B1100A58F92 /* MeViewController.m */; };
 		24C46B411B5A2B1100A58F92 /* MeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24C46B3F1B5A2B1100A58F92 /* MeViewController.xib */; };
 		24C46B491B5A2B7A00A58F92 /* InteractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C46B471B5A2B7A00A58F92 /* InteractViewController.m */; };
@@ -669,17 +667,6 @@
 		F487839B1B58DA1700CDC1A8 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783311B58DA1700CDC1A8 /* UIProgressView+AFNetworking.m */; };
 		F487839C1B58DA1700CDC1A8 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783331B58DA1700CDC1A8 /* UIRefreshControl+AFNetworking.m */; };
 		F487839D1B58DA1700CDC1A8 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783351B58DA1700CDC1A8 /* UIWebView+AFNetworking.m */; };
-		F487839E1B58DA1700CDC1A8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F48783371B58DA1700CDC1A8 /* LICENSE */; };
-		F487839F1B58DA1700CDC1A8 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F487833A1B58DA1700CDC1A8 /* MASCompositeConstraint.m */; };
-		F48783A01B58DA1700CDC1A8 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F487833D1B58DA1700CDC1A8 /* MASConstraint.m */; };
-		F48783A11B58DA1700CDC1A8 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = F487833F1B58DA1700CDC1A8 /* MASConstraintMaker.m */; };
-		F48783A21B58DA1700CDC1A8 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783411B58DA1700CDC1A8 /* MASLayoutConstraint.m */; };
-		F48783A31B58DA1700CDC1A8 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783451B58DA1700CDC1A8 /* MASViewAttribute.m */; };
-		F48783A41B58DA1700CDC1A8 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783471B58DA1700CDC1A8 /* MASViewConstraint.m */; };
-		F48783A51B58DA1700CDC1A8 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F48783491B58DA1700CDC1A8 /* NSArray+MASAdditions.m */; };
-		F48783A61B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F487834C1B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		F48783A71B58DA1700CDC1A8 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F487834E1B58DA1700CDC1A8 /* View+MASAdditions.m */; };
-		F48783A81B58DA1700CDC1A8 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F48783501B58DA1700CDC1A8 /* README.md */; };
 		F48783AC1B58DA1700CDC1A8 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F48783571B58DA1700CDC1A8 /* LICENSE */; };
 		F48783AD1B58DA1700CDC1A8 /* MJConst.m in Sources */ = {isa = PBXBuildFile; fileRef = F487835C1B58DA1700CDC1A8 /* MJConst.m */; };
 		F48783AE1B58DA1700CDC1A8 /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = F487835F1B58DA1700CDC1A8 /* MJFoundation.m */; };
@@ -1071,6 +1058,12 @@
 		04AA3CC11BE5F24D00DCC290 /* SpCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseCommentCell.h; sourceTree = "<group>"; };
 		04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseCommentCell.m; sourceTree = "<group>"; };
 		04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseCommentCell.xib; sourceTree = "<group>"; };
+		04BDD6881C4CC84600FA0C3A /* SpCourseHomeFuncCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeFuncCell.h; sourceTree = "<group>"; };
+		04BDD6891C4CC84600FA0C3A /* SpCourseHomeFuncCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeFuncCell.m; sourceTree = "<group>"; };
+		04BDD68A1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeFuncCell.xib; sourceTree = "<group>"; };
+		04BDD68D1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeCourseCell.h; sourceTree = "<group>"; };
+		04BDD68E1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeCourseCell.xib; sourceTree = "<group>"; };
+		04BDD68F1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeCourseCell.m; sourceTree = "<group>"; };
 		04C5D8861BE2199800A1245C /* SPCourseDetailDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailDomain.h; sourceTree = "<group>"; };
 		04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailDomain.m; sourceTree = "<group>"; };
 		04D5D30B1C47927D005399D9 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
@@ -1151,9 +1144,6 @@
 		04F72ABF1BEC7E1E00623E33 /* SPTeacherDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTeacherDomain.m; sourceTree = "<group>"; };
 		04F72AC41BEC994500623E33 /* SPTeacherDetailDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTeacherDetailDomain.h; sourceTree = "<group>"; };
 		04F72AC51BEC994500623E33 /* SPTeacherDetailDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTeacherDetailDomain.m; sourceTree = "<group>"; };
-		04F75E1B1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeCourseTypesCell.h; sourceTree = "<group>"; };
-		04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeCourseTypesCell.m; sourceTree = "<group>"; };
-		04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeCourseTypesCell.xib; sourceTree = "<group>"; };
 		04F81C211C158F6A00EE24FF /* NoDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataTableViewCell.h; sourceTree = "<group>"; };
 		04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataTableViewCell.m; sourceTree = "<group>"; };
 		04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataTableViewCell.xib; sourceTree = "<group>"; };
@@ -1175,8 +1165,6 @@
 		04F889581C05ABD8002FBE6D /* SDRotationLoopProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRotationLoopProgressView.m; sourceTree = "<group>"; };
 		04F8895D1C05BD6A002FBE6D /* SpCourseHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeVC.h; sourceTree = "<group>"; };
 		04F8895E1C05BD6A002FBE6D /* SpCourseHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeVC.m; sourceTree = "<group>"; };
-		04F889631C05BE4C002FBE6D /* SpCourseHomeWFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeWFLayout.h; sourceTree = "<group>"; };
-		04F889641C05BE4C002FBE6D /* SpCourseHomeWFLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeWFLayout.m; sourceTree = "<group>"; };
 		04F89A321C1011CC00FC0FA6 /* EnrolStudentWebViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentWebViewCell.h; sourceTree = "<group>"; };
 		04F89A331C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentWebViewCell.m; sourceTree = "<group>"; };
 		04F89A341C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentWebViewCell.xib; sourceTree = "<group>"; };
@@ -1211,14 +1199,16 @@
 		04F90F621C3284C000243CDC /* ShareBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareBottomView.xib; sourceTree = "<group>"; };
 		04F9364F1BFEC8D7002D7621 /* SPCourseDetailVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailVO.h; sourceTree = "<group>"; };
 		04F936501BFEC8D7002D7621 /* SPCourseDetailVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailVO.m; sourceTree = "<group>"; };
+		04F936CE1C4CE74100116D86 /* FPHomeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeTopView.h; sourceTree = "<group>"; };
+		04F936CF1C4CE74100116D86 /* FPHomeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTopView.m; sourceTree = "<group>"; };
+		04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeTopView.xib; sourceTree = "<group>"; };
+		04F936D31C4CF4BE00116D86 /* TZN4Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZN4Table.h; sourceTree = "<group>"; };
+		04F936D41C4CF4BE00116D86 /* TZN4Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZN4Table.m; sourceTree = "<group>"; };
 		04F939BC1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseSchoolDetailWebView.h; sourceTree = "<group>"; };
 		04F939BD1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseSchoolDetailWebView.m; sourceTree = "<group>"; };
 		04F939BF1C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseSchoolDetailWebView.xib; sourceTree = "<group>"; };
 		04F946EB1BF5ECD200F8B31F /* MySPCourseCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseCommentVC.h; sourceTree = "<group>"; };
 		04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseCommentVC.m; sourceTree = "<group>"; };
-		04F969BB1C06F24F00F3B4CB /* SpCourseHomeCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeCourseCell.h; sourceTree = "<group>"; };
-		04F969BC1C06F24F00F3B4CB /* SpCourseHomeCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeCourseCell.m; sourceTree = "<group>"; };
-		04F969BD1C06F24F00F3B4CB /* SpCourseHomeCourseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeCourseCell.xib; sourceTree = "<group>"; };
 		04F9AC4E1BFC5412004DA63D /* MySPAllCourseListVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPAllCourseListVO.h; sourceTree = "<group>"; };
 		04F9AC4F1BFC5412004DA63D /* MySPAllCourseListVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPAllCourseListVO.m; sourceTree = "<group>"; };
 		04F9AC511BFC54B9004DA63D /* MySPAllCouseListDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPAllCouseListDomain.h; sourceTree = "<group>"; };
@@ -1418,9 +1408,6 @@
 		04FB7CC31C0DAA7A00FD3E31 /* SpCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseCell.m; sourceTree = "<group>"; };
 		04FB7CC41C0DAA7A00FD3E31 /* SpCourseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseCell.xib; sourceTree = "<group>"; };
 		04FB88A51BFB04380094AC68 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		04FB9DCA1C48C8D30020D48E /* HomeFunView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFunView.h; sourceTree = "<group>"; };
-		04FB9DCB1C48C8D30020D48E /* HomeFunView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFunView.m; sourceTree = "<group>"; };
-		04FB9DCD1C48C8E10020D48E /* HomeFunView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFunView.xib; sourceTree = "<group>"; };
 		04FB9F9A1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseAndSchoolListVC.h; sourceTree = "<group>"; };
 		04FB9F9B1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseAndSchoolListVC.m; sourceTree = "<group>"; };
 		04FB9F9D1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseAndSchoolListLayout.h; sourceTree = "<group>"; };
@@ -1699,9 +1686,6 @@
 		24B0D9DD1B763B790030B73C /* RecipesInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipesInfoView.m; sourceTree = "<group>"; };
 		24C46B261B5A28CF00A58F92 /* BaseKeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseKeyboardViewController.h; sourceTree = "<group>"; };
 		24C46B271B5A28CF00A58F92 /* BaseKeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseKeyboardViewController.m; sourceTree = "<group>"; };
-		24C46B341B5A2A9900A58F92 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		24C46B351B5A2A9900A58F92 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		24C46B361B5A2A9900A58F92 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		24C46B3D1B5A2B1100A58F92 /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		24C46B3E1B5A2B1100A58F92 /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		24C46B3F1B5A2B1100A58F92 /* MeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeViewController.xib; sourceTree = "<group>"; };
@@ -1873,31 +1857,6 @@
 		F48783331B58DA1700CDC1A8 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		F48783341B58DA1700CDC1A8 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		F48783351B58DA1700CDC1A8 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		F48783371B58DA1700CDC1A8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		F48783391B58DA1700CDC1A8 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
-		F487833A1B58DA1700CDC1A8 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
-		F487833B1B58DA1700CDC1A8 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
-		F487833C1B58DA1700CDC1A8 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
-		F487833D1B58DA1700CDC1A8 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
-		F487833E1B58DA1700CDC1A8 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
-		F487833F1B58DA1700CDC1A8 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
-		F48783401B58DA1700CDC1A8 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
-		F48783411B58DA1700CDC1A8 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
-		F48783421B58DA1700CDC1A8 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
-		F48783431B58DA1700CDC1A8 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
-		F48783441B58DA1700CDC1A8 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
-		F48783451B58DA1700CDC1A8 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
-		F48783461B58DA1700CDC1A8 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
-		F48783471B58DA1700CDC1A8 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
-		F48783481B58DA1700CDC1A8 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
-		F48783491B58DA1700CDC1A8 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		F487834A1B58DA1700CDC1A8 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		F487834B1B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
-		F487834C1B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
-		F487834D1B58DA1700CDC1A8 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
-		F487834E1B58DA1700CDC1A8 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
-		F487834F1B58DA1700CDC1A8 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		F48783501B58DA1700CDC1A8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F48783571B58DA1700CDC1A8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F487835B1B58DA1700CDC1A8 /* MJConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJConst.h; sourceTree = "<group>"; };
 		F487835C1B58DA1700CDC1A8 /* MJConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJConst.m; sourceTree = "<group>"; };
@@ -2567,6 +2526,9 @@
 				04FADC521C3CE44B009D71F1 /* SpCourseDetailInfoWeb.h */,
 				04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */,
 				04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */,
+				04BDD6881C4CC84600FA0C3A /* SpCourseHomeFuncCell.h */,
+				04BDD6891C4CC84600FA0C3A /* SpCourseHomeFuncCell.m */,
+				04BDD68A1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib */,
 			);
 			name = tableviewcell;
 			sourceTree = "<group>";
@@ -2584,26 +2546,9 @@
 		04F151631C45FE8B00E80B3E /* Student */ = {
 			isa = PBXGroup;
 			children = (
-				04FA221A1C113B2F002A88F1 /* EnrolStudentMySchoolVC.h */,
-				04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */,
-				245474D61B5FDD6C00D49D40 /* StudentInfoViewController.h */,
-				245474D71B5FDD6C00D49D40 /* StudentInfoViewController.m */,
-				245474D81B5FDD6C00D49D40 /* StudentInfoViewController.xib */,
-				24C46B3D1B5A2B1100A58F92 /* MeViewController.h */,
-				24C46B3E1B5A2B1100A58F92 /* MeViewController.m */,
-				24C46B3F1B5A2B1100A58F92 /* MeViewController.xib */,
-				F4EA53951B60EF800044BE7A /* StudentBaseInfoViewController.h */,
-				F4EA53961B60EF800044BE7A /* StudentBaseInfoViewController.m */,
-				F4EA53971B60EF800044BE7A /* StudentBaseInfoViewController.xib */,
-				F4EC98851B61F64400F5721F /* StudentMomOrDodInfoViewController.h */,
-				F4EC98861B61F64400F5721F /* StudentMomOrDodInfoViewController.m */,
-				F4EC98871B61F64400F5721F /* StudentMomOrDodInfoViewController.xib */,
-				F4EC988A1B6211AC00F5721F /* StudentNoteInfoViewController.h */,
-				F4EC988B1B6211AC00F5721F /* StudentNoteInfoViewController.m */,
-				F4EC988C1B6211AC00F5721F /* StudentNoteInfoViewController.xib */,
-				24DED4F91B7CCFD1005BC46E /* StudentOtherInfoViewController.h */,
-				24DED4FA1B7CCFD1005BC46E /* StudentOtherInfoViewController.m */,
-				24DED4FB1B7CCFD1005BC46E /* StudentOtherInfoViewController.xib */,
+				04F936C91C4CE63C00116D86 /* view */,
+				04F936C71C4CE60A00116D86 /* model */,
+				04F936C61C4CE5F900116D86 /* controller */,
 			);
 			name = Student;
 			sourceTree = "<group>";
@@ -2611,33 +2556,27 @@
 		04F151641C45FEAB00E80B3E /* MySPCourse */ = {
 			isa = PBXGroup;
 			children = (
-				04FE04211BF1CCE70069CF9A /* MySPCourseVC.h */,
-				04FE04221BF1CCE70069CF9A /* MySPCourseVC.m */,
-				04FE04241BF1DD1E0069CF9A /* MYSPCourseTableVC.h */,
-				04FE04251BF1DD1E0069CF9A /* MYSPCourseTableVC.m */,
-				0403DCE21BF5C5980089E463 /* MySPCourseDetailVC.h */,
-				0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */,
-				04F946EB1BF5ECD200F8B31F /* MySPCourseCommentVC.h */,
-				04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */,
-				04FDB4E01BFC265300A73E2E /* MySPCourseTimeListVC.h */,
-				04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */,
+				04F936CA1C4CE65D00116D86 /* view */,
+				04F936C81C4CE62000116D86 /* controller */,
+				24C46B3B1B5A2AE600A58F92 /* Model */,
 			);
 			name = MySPCourse;
 			sourceTree = "<group>";
 		};
-		04F151651C45FECD00E80B3E /* FamilyPhoto */ = {
+		04F151651C45FECD00E80B3E /* FamilyPhoto(家庭相册) */ = {
 			isa = PBXGroup;
 			children = (
-				04F151661C45FF1800E80B3E /* FPHomeVC.h */,
-				04F151671C45FF1800E80B3E /* FPHomeVC.m */,
-				04F151681C45FF1800E80B3E /* FPHomeVC.xib */,
+				04F936CD1C4CE72300116D86 /* model */,
+				04F936CC1C4CE71F00116D86 /* view */,
+				04F936CB1C4CE71900116D86 /* controller */,
 			);
-			name = FamilyPhoto;
+			name = "FamilyPhoto(家庭相册)";
 			sourceTree = "<group>";
 		};
 		04F1516B1C460A3900E80B3E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				24C46B3C1B5A2AF300A58F92 /* View */,
 				04FB23791C16D91C009B57E2 /* MineHomeVC.h */,
 				04FB237A1C16D91C009B57E2 /* MineHomeVC.m */,
 			);
@@ -2856,8 +2795,6 @@
 		04F889621C05BDF9002FBE6D /* layouts */ = {
 			isa = PBXGroup;
 			children = (
-				04F889631C05BE4C002FBE6D /* SpCourseHomeWFLayout.h */,
-				04F889641C05BE4C002FBE6D /* SpCourseHomeWFLayout.m */,
 				04FB9F9D1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.h */,
 				04FB9F9E1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m */,
 				04FB7CA91C0D95D900FD3E31 /* SpTeacherDetailLayout.h */,
@@ -2869,12 +2806,9 @@
 		04F889661C05C152002FBE6D /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
-				04F75E1B1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.h */,
-				04F75E1C1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m */,
-				04F75E1D1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib */,
-				04F969BB1C06F24F00F3B4CB /* SpCourseHomeCourseCell.h */,
-				04F969BC1C06F24F00F3B4CB /* SpCourseHomeCourseCell.m */,
-				04F969BD1C06F24F00F3B4CB /* SpCourseHomeCourseCell.xib */,
+				04BDD68D1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.h */,
+				04BDD68E1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib */,
+				04BDD68F1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m */,
 				04FB9FA01C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.h */,
 				04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */,
 				04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */,
@@ -2886,6 +2820,145 @@
 				04FB7CB81C0DA49000FD3E31 /* SpTeacherDetailWebViewCell.xib */,
 			);
 			name = CollectionCell;
+			sourceTree = "<group>";
+		};
+		04F936C61C4CE5F900116D86 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				04FA221A1C113B2F002A88F1 /* EnrolStudentMySchoolVC.h */,
+				04FA221B1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m */,
+				245474D61B5FDD6C00D49D40 /* StudentInfoViewController.h */,
+				245474D71B5FDD6C00D49D40 /* StudentInfoViewController.m */,
+				245474D81B5FDD6C00D49D40 /* StudentInfoViewController.xib */,
+				24C46B3D1B5A2B1100A58F92 /* MeViewController.h */,
+				24C46B3E1B5A2B1100A58F92 /* MeViewController.m */,
+				24C46B3F1B5A2B1100A58F92 /* MeViewController.xib */,
+				F4EA53951B60EF800044BE7A /* StudentBaseInfoViewController.h */,
+				F4EA53961B60EF800044BE7A /* StudentBaseInfoViewController.m */,
+				F4EA53971B60EF800044BE7A /* StudentBaseInfoViewController.xib */,
+				F4EC98851B61F64400F5721F /* StudentMomOrDodInfoViewController.h */,
+				F4EC98861B61F64400F5721F /* StudentMomOrDodInfoViewController.m */,
+				F4EC98871B61F64400F5721F /* StudentMomOrDodInfoViewController.xib */,
+				F4EC988A1B6211AC00F5721F /* StudentNoteInfoViewController.h */,
+				F4EC988B1B6211AC00F5721F /* StudentNoteInfoViewController.m */,
+				F4EC988C1B6211AC00F5721F /* StudentNoteInfoViewController.xib */,
+				24DED4F91B7CCFD1005BC46E /* StudentOtherInfoViewController.h */,
+				24DED4FA1B7CCFD1005BC46E /* StudentOtherInfoViewController.m */,
+				24DED4FB1B7CCFD1005BC46E /* StudentOtherInfoViewController.xib */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		04F936C71C4CE60A00116D86 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				F4EA538D1B60D8390044BE7A /* StudentInfoItemVO.h */,
+				F4EA538E1B60D8390044BE7A /* StudentInfoItemVO.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		04F936C81C4CE62000116D86 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				04FE04211BF1CCE70069CF9A /* MySPCourseVC.h */,
+				04FE04221BF1CCE70069CF9A /* MySPCourseVC.m */,
+				04FE04241BF1DD1E0069CF9A /* MYSPCourseTableVC.h */,
+				04FE04251BF1DD1E0069CF9A /* MYSPCourseTableVC.m */,
+				0403DCE21BF5C5980089E463 /* MySPCourseDetailVC.h */,
+				0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */,
+				04F946EB1BF5ECD200F8B31F /* MySPCourseCommentVC.h */,
+				04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */,
+				04FDB4E01BFC265300A73E2E /* MySPCourseTimeListVC.h */,
+				04FDB4E11BFC265300A73E2E /* MySPCourseTimeListVC.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		04F936C91C4CE63C00116D86 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F4EA53831B60BD390044BE7A /* MeTableViewCell.h */,
+				F4EA53841B60BD390044BE7A /* MeTableViewCell.m */,
+				F4EA53851B60BD390044BE7A /* MeTableViewCell.xib */,
+				F4EA53881B60C6DF0044BE7A /* MeFunTableViewCell.h */,
+				F4EA53891B60C6DF0044BE7A /* MeFunTableViewCell.m */,
+				F4EA538A1B60C6DF0044BE7A /* MeFunTableViewCell.xib */,
+				F4EA53901B60EAD20044BE7A /* StudentInfoHeaderView.h */,
+				F4EA53911B60EAD20044BE7A /* StudentInfoHeaderView.m */,
+				F4EA53931B60EAE30044BE7A /* StudentInfoHeaderView.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		04F936CA1C4CE65D00116D86 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				0403DCDD1BF5B9CD0089E463 /* MYSPCourseTableViewCell.h */,
+				0403DCDE1BF5B9CD0089E463 /* MYSPCourseTableViewCell.m */,
+				0403DCDF1BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib */,
+				0403DCE51BF5C84D0089E463 /* MySPCourseView.h */,
+				0403DCE61BF5C84D0089E463 /* MySPCourseView.m */,
+				0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */,
+				04F9F2F31BF9BF4500470F0C /* MySPCourseCommentCell.h */,
+				04F9F2F41BF9BF4500470F0C /* MySPCourseCommentCell.m */,
+				04F9F2F51BF9BF4500470F0C /* MySPCourseCommentCell.xib */,
+				04F9F2F81BF9C38700470F0C /* MySPNormalCell.h */,
+				04F9F2F91BF9C38700470F0C /* MySPNormalCell.m */,
+				04F9F2FA1BF9C38700470F0C /* MySPNormalCell.xib */,
+				04F9F2FD1BF9C67500470F0C /* MySPButtonCell.h */,
+				04F9F2FE1BF9C67500470F0C /* MySPButtonCell.m */,
+				04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */,
+				04FDB4DB1BFC1C7E00A73E2E /* MySPTeacherCommentCell.h */,
+				04FDB4DC1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m */,
+				04FDB4DD1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib */,
+				04F9AC541BFC58C8004DA63D /* MySPAllCourseListCell.h */,
+				04F9AC551BFC58C8004DA63D /* MySPAllCourseListCell.m */,
+				04F9AC561BFC58C8004DA63D /* MySPAllCourseListCell.xib */,
+				04F9AC5C1BFC82B4004DA63D /* MySPAllListHeaderView.h */,
+				04F9AC5D1BFC82B4004DA63D /* MySPAllListHeaderView.m */,
+				04F9AC5F1BFC82D3004DA63D /* MySPAllListHeaderView.xib */,
+				04FC29FC1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.h */,
+				04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */,
+				04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */,
+				04F939BC1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.h */,
+				04F939BD1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m */,
+				04F939BF1C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib */,
+				04FEDD441C03542700921AC1 /* MySPEndCourseView.h */,
+				04FEDD451C03542700921AC1 /* MySPEndCourseView.m */,
+				04FEDD461C03542700921AC1 /* MySPEndCourseView.xib */,
+				04FEDD491C0359FC00921AC1 /* MySPCourseEndedView.h */,
+				04FEDD4A1C0359FC00921AC1 /* MySPCourseEndedView.m */,
+				04FEDD4C1C035A0D00921AC1 /* MySPCourseEndedView.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		04F936CB1C4CE71900116D86 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				04F151661C45FF1800E80B3E /* FPHomeVC.h */,
+				04F151671C45FF1800E80B3E /* FPHomeVC.m */,
+				04F151681C45FF1800E80B3E /* FPHomeVC.xib */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		04F936CC1C4CE71F00116D86 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				04F936CE1C4CE74100116D86 /* FPHomeTopView.h */,
+				04F936CF1C4CE74100116D86 /* FPHomeTopView.m */,
+				04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		04F936CD1C4CE72300116D86 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		04F9C9821C0ECD380078A5F5 /* ZhaoSheng(宝宝入学) */ = {
@@ -3540,6 +3613,8 @@
 				040466C31C438FDB00C9EE5C /* RouteDetailInfoCell.h */,
 				040466C41C438FDB00C9EE5C /* RouteDetailInfoCell.m */,
 				040466C51C438FDB00C9EE5C /* RouteDetailInfoCell.xib */,
+				04F936D31C4CF4BE00116D86 /* TZN4Table.h */,
+				04F936D41C4CF4BE00116D86 /* TZN4Table.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3984,6 +4059,8 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				248B6AA41B19AD2C00FCB98F /* Home(主页) */,
+				04F151651C45FECD00E80B3E /* FamilyPhoto(家庭相册) */,
 				F4885C671B7C784C00AF97CF /* URLController(浏览器) */,
 				F4E6B2381B6B53A60087EAEB /* SpecialtyCourses(特长课程) */,
 				04FB23611C16C311009B57E2 /* Discorvery(发现) */,
@@ -3997,14 +4074,13 @@
 				24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */,
 				F47AFEAA1B5E22C100D43F38 /* Announcement(公告) */,
 				2489B6751B5ABA6C00039E70 /* AddressBooks(通讯录) */,
-				F45EABCD1B563F75003C367C /* Base */,
 				24A175FA1B55505D00295997 /* Login(登录) */,
-				248B6AA41B19AD2C00FCB98F /* Home(主页) */,
 				24C46B4B1B5A2B8F00A58F92 /* Message(消息) */,
 				24C46B421B5A2B4100A58F92 /* Interact(互动) */,
 				4D5CE7581B7E4308002F1088 /* Setting(设置) */,
 				4DE384511B7F726C009F12E4 /* MyCollection(我的收藏) */,
 				24C46B391B5A2AC200A58F92 /* Me(我) */,
+				F45EABCD1B563F75003C367C /* Base */,
 			);
 			name = Module;
 			sourceTree = "<group>";
@@ -4025,9 +4101,6 @@
 				24E1F5611B726BAE00057C44 /* MoreView */,
 				24A3D3731B5E870E00D4C212 /* ItemBtn */,
 				2489B6321B5AB31800039E70 /* ImageCollectionView */,
-				04FB9DCA1C48C8D30020D48E /* HomeFunView.h */,
-				04FB9DCB1C48C8D30020D48E /* HomeFunView.m */,
-				04FB9DCD1C48C8E10020D48E /* HomeFunView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -4054,9 +4127,6 @@
 			children = (
 				04E606311C4897B900AEE9DD /* Home */,
 				2489B66F1B5AB75200039E70 /* Introduction */,
-				24C46B341B5A2A9900A58F92 /* HomeViewController.h */,
-				24C46B351B5A2A9900A58F92 /* HomeViewController.m */,
-				24C46B361B5A2A9900A58F92 /* HomeViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -4189,29 +4259,16 @@
 		24C46B391B5A2AC200A58F92 /* Me(我) */ = {
 			isa = PBXGroup;
 			children = (
-				24C46B3A1B5A2AD100A58F92 /* Controller */,
-				24C46B3B1B5A2AE600A58F92 /* Model */,
-				24C46B3C1B5A2AF300A58F92 /* View */,
+				04F151631C45FE8B00E80B3E /* Student */,
+				04F151641C45FEAB00E80B3E /* MySPCourse */,
+				04F1516B1C460A3900E80B3E /* Home */,
 			);
 			name = "Me(我)";
-			sourceTree = "<group>";
-		};
-		24C46B3A1B5A2AD100A58F92 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				04F1516B1C460A3900E80B3E /* Home */,
-				04F151651C45FECD00E80B3E /* FamilyPhoto */,
-				04F151641C45FEAB00E80B3E /* MySPCourse */,
-				04F151631C45FE8B00E80B3E /* Student */,
-			);
-			name = Controller;
 			sourceTree = "<group>";
 		};
 		24C46B3B1B5A2AE600A58F92 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F4EA538D1B60D8390044BE7A /* StudentInfoItemVO.h */,
-				F4EA538E1B60D8390044BE7A /* StudentInfoItemVO.m */,
 				040109B21BF1F8CB00A18622 /* MySPCourseDomain.h */,
 				040109B31BF1F8CB00A18622 /* MySPCourseDomain.m */,
 				04F9F2F01BF9B55500470F0C /* MySPCommentDomain.h */,
@@ -4231,51 +4288,6 @@
 			children = (
 				04FA221E1C114029002A88F1 /* collectionviewcell */,
 				04FA221D1C114022002A88F1 /* layouts */,
-				F4EA53831B60BD390044BE7A /* MeTableViewCell.h */,
-				F4EA53841B60BD390044BE7A /* MeTableViewCell.m */,
-				F4EA53851B60BD390044BE7A /* MeTableViewCell.xib */,
-				F4EA53881B60C6DF0044BE7A /* MeFunTableViewCell.h */,
-				F4EA53891B60C6DF0044BE7A /* MeFunTableViewCell.m */,
-				F4EA538A1B60C6DF0044BE7A /* MeFunTableViewCell.xib */,
-				F4EA53901B60EAD20044BE7A /* StudentInfoHeaderView.h */,
-				F4EA53911B60EAD20044BE7A /* StudentInfoHeaderView.m */,
-				F4EA53931B60EAE30044BE7A /* StudentInfoHeaderView.xib */,
-				0403DCDD1BF5B9CD0089E463 /* MYSPCourseTableViewCell.h */,
-				0403DCDE1BF5B9CD0089E463 /* MYSPCourseTableViewCell.m */,
-				0403DCDF1BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib */,
-				0403DCE51BF5C84D0089E463 /* MySPCourseView.h */,
-				0403DCE61BF5C84D0089E463 /* MySPCourseView.m */,
-				0403DCE81BF5C85D0089E463 /* MySPCourseView.xib */,
-				04F9F2F31BF9BF4500470F0C /* MySPCourseCommentCell.h */,
-				04F9F2F41BF9BF4500470F0C /* MySPCourseCommentCell.m */,
-				04F9F2F51BF9BF4500470F0C /* MySPCourseCommentCell.xib */,
-				04F9F2F81BF9C38700470F0C /* MySPNormalCell.h */,
-				04F9F2F91BF9C38700470F0C /* MySPNormalCell.m */,
-				04F9F2FA1BF9C38700470F0C /* MySPNormalCell.xib */,
-				04F9F2FD1BF9C67500470F0C /* MySPButtonCell.h */,
-				04F9F2FE1BF9C67500470F0C /* MySPButtonCell.m */,
-				04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */,
-				04FDB4DB1BFC1C7E00A73E2E /* MySPTeacherCommentCell.h */,
-				04FDB4DC1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m */,
-				04FDB4DD1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib */,
-				04F9AC541BFC58C8004DA63D /* MySPAllCourseListCell.h */,
-				04F9AC551BFC58C8004DA63D /* MySPAllCourseListCell.m */,
-				04F9AC561BFC58C8004DA63D /* MySPAllCourseListCell.xib */,
-				04F9AC5C1BFC82B4004DA63D /* MySPAllListHeaderView.h */,
-				04F9AC5D1BFC82B4004DA63D /* MySPAllListHeaderView.m */,
-				04F9AC5F1BFC82D3004DA63D /* MySPAllListHeaderView.xib */,
-				04FC29FC1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.h */,
-				04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */,
-				04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */,
-				04F939BC1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.h */,
-				04F939BD1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m */,
-				04F939BF1C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib */,
-				04FEDD441C03542700921AC1 /* MySPEndCourseView.h */,
-				04FEDD451C03542700921AC1 /* MySPEndCourseView.m */,
-				04FEDD461C03542700921AC1 /* MySPEndCourseView.xib */,
-				04FEDD491C0359FC00921AC1 /* MySPCourseEndedView.h */,
-				04FEDD4A1C0359FC00921AC1 /* MySPCourseEndedView.m */,
-				04FEDD4C1C035A0D00921AC1 /* MySPCourseEndedView.xib */,
 				04FB23811C16E1B8009B57E2 /* MineHomeStudentHeadItem.h */,
 				04FB23821C16E1B8009B57E2 /* MineHomeStudentHeadItem.m */,
 				04FB23841C16E1DA009B57E2 /* MineHomeStudentHeadItem.xib */,
@@ -4666,7 +4678,6 @@
 				046063411BD8D82600CBC881 /* MBProgessHUD */,
 				2489B6391B5AB49D00039E70 /* SDWebImage */,
 				F487830D1B58DA1700CDC1A8 /* AFNetworking */,
-				F48783361B58DA1700CDC1A8 /* Masonry */,
 				F48783561B58DA1700CDC1A8 /* MJExtension */,
 			);
 			path = Frameworks;
@@ -4731,46 +4742,6 @@
 				F48783351B58DA1700CDC1A8 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
-			sourceTree = "<group>";
-		};
-		F48783361B58DA1700CDC1A8 /* Masonry */ = {
-			isa = PBXGroup;
-			children = (
-				F48783371B58DA1700CDC1A8 /* LICENSE */,
-				F48783381B58DA1700CDC1A8 /* Masonry */,
-				F48783501B58DA1700CDC1A8 /* README.md */,
-			);
-			path = Masonry;
-			sourceTree = "<group>";
-		};
-		F48783381B58DA1700CDC1A8 /* Masonry */ = {
-			isa = PBXGroup;
-			children = (
-				F48783391B58DA1700CDC1A8 /* MASCompositeConstraint.h */,
-				F487833A1B58DA1700CDC1A8 /* MASCompositeConstraint.m */,
-				F487833B1B58DA1700CDC1A8 /* MASConstraint+Private.h */,
-				F487833C1B58DA1700CDC1A8 /* MASConstraint.h */,
-				F487833D1B58DA1700CDC1A8 /* MASConstraint.m */,
-				F487833E1B58DA1700CDC1A8 /* MASConstraintMaker.h */,
-				F487833F1B58DA1700CDC1A8 /* MASConstraintMaker.m */,
-				F48783401B58DA1700CDC1A8 /* MASLayoutConstraint.h */,
-				F48783411B58DA1700CDC1A8 /* MASLayoutConstraint.m */,
-				F48783421B58DA1700CDC1A8 /* Masonry.h */,
-				F48783431B58DA1700CDC1A8 /* MASUtilities.h */,
-				F48783441B58DA1700CDC1A8 /* MASViewAttribute.h */,
-				F48783451B58DA1700CDC1A8 /* MASViewAttribute.m */,
-				F48783461B58DA1700CDC1A8 /* MASViewConstraint.h */,
-				F48783471B58DA1700CDC1A8 /* MASViewConstraint.m */,
-				F48783481B58DA1700CDC1A8 /* NSArray+MASAdditions.h */,
-				F48783491B58DA1700CDC1A8 /* NSArray+MASAdditions.m */,
-				F487834A1B58DA1700CDC1A8 /* NSArray+MASShorthandAdditions.h */,
-				F487834B1B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.h */,
-				F487834C1B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.m */,
-				F487834D1B58DA1700CDC1A8 /* View+MASAdditions.h */,
-				F487834E1B58DA1700CDC1A8 /* View+MASAdditions.m */,
-				F487834F1B58DA1700CDC1A8 /* View+MASShorthandAdditions.h */,
-			);
-			path = Masonry;
 			sourceTree = "<group>";
 		};
 		F48783561B58DA1700CDC1A8 /* MJExtension */ = {
@@ -5202,7 +5173,6 @@
 				04A4DE691BF484DF002ABBB1 /* webview_bar_back@2x.png in Resources */,
 				04A4DE5E1BF484DF002ABBB1 /* adsmogo_close.png in Resources */,
 				04A4DE5F1BF484DF002ABBB1 /* adsmogo_corner.png in Resources */,
-				04F75E1F1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.xib in Resources */,
 				04A4DE561BF484DF002ABBB1 /* download-728x90.gif in Resources */,
 				04A4DE751BF484DF002ABBB1 /* webview_bar_share@2x.png in Resources */,
 				04F9FB5E1BF1A67400AEFB88 /* ToolViewInputTextHL@2x.png in Resources */,
@@ -5231,6 +5201,7 @@
 				0400211D1C3FA16D005F1D82 /* RouteCell.xib in Resources */,
 				04F89A441C1024E000FC0FA6 /* NoDataView.xib in Resources */,
 				04A4DE351BF484DF002ABBB1 /* adsmogo_mail_iphone@2x.png in Resources */,
+				04BDD6901C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib in Resources */,
 				04F9C9951C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib in Resources */,
 				04F9FBA61BF1A77E00AEFB88 /* UMSLoginViewController.xib in Resources */,
 				04F90F631C3284C000243CDC /* ShareBottomView.xib in Resources */,
@@ -5329,7 +5300,6 @@
 				04F9FB621BF1A67400AEFB88 /* umeng_fb_audio_dialog_cancel@2x.png in Resources */,
 				2474DFB51B6CBB1C0021506F /* StudentSignRecordTableViewCell.xib in Resources */,
 				04E606361C4897E100AEE9DD /* HomeVC.xib in Resources */,
-				04F969BF1C06F24F00F3B4CB /* SpCourseHomeCourseCell.xib in Resources */,
 				04F9FB5C1BF1A67400AEFB88 /* save@2x.png in Resources */,
 				04F8C6FA1C18235100EF5E57 /* DiscorveryJingXuanCell.xib in Resources */,
 				04A4DE721BF484DF002ABBB1 /* webview_bar_pause_hover@2x.png in Resources */,
@@ -5423,6 +5393,7 @@
 				04F3D4581BF47FD2007E7AC0 /* baidumobadsdk.bundle in Resources */,
 				F4C4D1C21B69CDDF00335443 /* chat_cell_0.jpeg in Resources */,
 				04A4DE7B1BF484DF002ABBB1 /* webview_bar_next_grey_ipad@2x.png in Resources */,
+				04BDD68C1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib in Resources */,
 				04F9FB5A1BF1A67400AEFB88 /* cancel@2x.png in Resources */,
 				04F72ABD1BEC562900623E33 /* SPTeacherCell.xib in Resources */,
 				4DE384561B7F728A009F12E4 /* MyCollectionViewController.xib in Resources */,
@@ -5434,7 +5405,7 @@
 				24DE91B51B67C78700D3FFCE /* TeacherJudgeViewController.xib in Resources */,
 				04FD8DF01C3A6B0B00BB186A /* SpCourseDetailVC.xib in Resources */,
 				04A4DE9A1BF484DF002ABBB1 /* webview_bar_share.png in Resources */,
-				F487839E1B58DA1700CDC1A8 /* LICENSE in Resources */,
+				04F936D21C4CE74F00116D86 /* FPHomeTopView.xib in Resources */,
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
 				04A4DE8B1BF484DF002ABBB1 /* hengtiao.png in Resources */,
 				04F9F3011BF9C67500470F0C /* MySPButtonCell.xib in Resources */,
@@ -5468,7 +5439,6 @@
 				04F8894B1C058FE9002FBE6D /* HZQDatePickerView.xib in Resources */,
 				04A4DE611BF484DF002ABBB1 /* bg@2x.png in Resources */,
 				4D077B2B1B80B16100FFD5CB /* OnlyEmojiView.xib in Resources */,
-				24C46B381B5A2A9900A58F92 /* HomeViewController.xib in Resources */,
 				04A4DE411BF484DF002ABBB1 /* adsMoGoInterstitial.html in Resources */,
 				04A4DE051BF484DF002ABBB1 /* adchina_stoploading@2x.png in Resources */,
 				F4EC988E1B6211AC00F5721F /* StudentNoteInfoViewController.xib in Resources */,
@@ -5486,7 +5456,6 @@
 				04A4DE741BF484DF002ABBB1 /* webview_bar_refresh_hover@2x.png in Resources */,
 				04A4DE2D1BF484DF002ABBB1 /* adsmogo_button_left_default@2x.png in Resources */,
 				04F1516A1C45FF1800E80B3E /* FPHomeVC.xib in Resources */,
-				04FB9DCE1C48C8E10020D48E /* HomeFunView.xib in Resources */,
 				04F9FB611BF1A67400AEFB88 /* umeng_add_photo@2x.png in Resources */,
 				0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */,
 				04A4DE8F1BF484DF002ABBB1 /* shareviewhead_bg.png in Resources */,
@@ -5590,7 +5559,6 @@
 				04FB237F1C16DC67009B57E2 /* MineHomeChildrenCell.m in Sources */,
 				F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */,
 				F487839A1B58DA1700CDC1A8 /* UIImageView+AFNetworking.m in Sources */,
-				F48783A31B58DA1700CDC1A8 /* MASViewAttribute.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
 				04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */,
@@ -5603,7 +5571,6 @@
 				F47AFEB21B5E24BD00D43F38 /* AnnouncementDomain.m in Sources */,
 				F4CF7A961B79F80C00BFAA1E /* TimetableItemVO.m in Sources */,
 				04FB7CC51C0DAA7A00FD3E31 /* SpCourseCell.m in Sources */,
-				F48783A71B58DA1700CDC1A8 /* View+MASAdditions.m in Sources */,
 				04FA59891C27C68A009689C7 /* EYPopupView.m in Sources */,
 				F487839C1B58DA1700CDC1A8 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0494F4801BDF777500F39865 /* UIView+MJExtension.m in Sources */,
@@ -5637,9 +5604,7 @@
 				4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */,
 				24A175F71B55433300295997 /* KGHUD.m in Sources */,
 				04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */,
-				F48783A51B58DA1700CDC1A8 /* NSArray+MASAdditions.m in Sources */,
 				04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */,
-				F48783A11B58DA1700CDC1A8 /* MASConstraintMaker.m in Sources */,
 				24C46B491B5A2B7A00A58F92 /* InteractViewController.m in Sources */,
 				F4C0AB941B1C3BB6007B0E35 /* KGHttpUrl.m in Sources */,
 				F4C0AB8B1B1C39D4007B0E35 /* KGDateUtil.m in Sources */,
@@ -5662,9 +5627,7 @@
 				F471EDFC1B70B40100EEBA1D /* KGEmojiManage.m in Sources */,
 				248B6ABF1B19B53000FCB98F /* QCSlideSwitchView.m in Sources */,
 				04F3D4641BF47FD3007E7AC0 /* CJSONScanner.m in Sources */,
-				F48783A61B58DA1700CDC1A8 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */,
-				04F889651C05BE4C002FBE6D /* SpCourseHomeWFLayout.m in Sources */,
 				04FE3DDB1C2BD6C2000CE445 /* EnrolStudentHomeVC.m in Sources */,
 				248B6A981B19AA7100FCB98F /* KGBaseView.m in Sources */,
 				F48783B01B58DA1700CDC1A8 /* MJType.m in Sources */,
@@ -5673,7 +5636,6 @@
 				F4DCD0F21B1C2E87007D61CA /* UIButton+Extension.m in Sources */,
 				2489B6631B5AB49E00039E70 /* UIImage+GIF.m in Sources */,
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
-				04F75E1E1C06A9B8008D0AB3 /* SpCourseHomeCourseTypesCell.m in Sources */,
 				24AA0B481B690F4300DAC03B /* UUProgressHUD.m in Sources */,
 				04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */,
 				04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */,
@@ -5692,8 +5654,8 @@
 				04F9FB6D1BF1A67400AEFB88 /* UMPostTableViewCell.m in Sources */,
 				F4EC98911B62305700F5721F /* TopicTableViewCell.m in Sources */,
 				04F9C98B1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m in Sources */,
-				F48783A01B58DA1700CDC1A8 /* MASConstraint.m in Sources */,
 				04FB23831C16E1B8009B57E2 /* MineHomeStudentHeadItem.m in Sources */,
+				04F936D01C4CE74100116D86 /* FPHomeTopView.m in Sources */,
 				249926E01B80545A0071DFB3 /* KGRange.m in Sources */,
 				F48783961B58DA1700CDC1A8 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2489B62E1B5A62A900039E70 /* KGTabBarViewController.m in Sources */,
@@ -5705,7 +5667,6 @@
 				04F8894C1C058FE9002FBE6D /* UIColor+HexString.m in Sources */,
 				04FEC5661BED943E00C642A6 /* SPShareSaveDomain.m in Sources */,
 				04F9AC5E1BFC82B4004DA63D /* MySPAllListHeaderView.m in Sources */,
-				24C46B371B5A2A9900A58F92 /* HomeViewController.m in Sources */,
 				04F498181C0BEF2800C1E2DA /* FeHourGlass.m in Sources */,
 				04FB7CC01C0DA86800FD3E31 /* SpCourseItem.m in Sources */,
 				04FA408B1C337F8400E5D606 /* HLActionSheet.m in Sources */,
@@ -5737,6 +5698,7 @@
 				2489B67C1B5ABAAB00039E70 /* AddressBooksViewController.m in Sources */,
 				F4C0AB971B1C3C54007B0E35 /* KGHttpService.m in Sources */,
 				04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */,
+				04F936D51C4CF4BE00116D86 /* TZN4Table.m in Sources */,
 				0467A9221BE2653E00FE888C /* MXPullDownMenu.m in Sources */,
 				04F9C99E1C0EFDBF0078A5F5 /* EnrolStudentSchoolDetailDomain.m in Sources */,
 				248B6AC61B19B54500FCB98F /* KGFormVerify.m in Sources */,
@@ -5760,6 +5722,7 @@
 				F48783AD1B58DA1700CDC1A8 /* MJConst.m in Sources */,
 				04F9FB6B1BF1A67400AEFB88 /* UMChatToolBar.m in Sources */,
 				F471EDF61B70AA0E00EEBA1D /* QueryChatsVO.m in Sources */,
+				04BDD68B1C4CC84600FA0C3A /* SpCourseHomeFuncCell.m in Sources */,
 				248B6AD61B19B5CF00FCB98F /* Reachability.m in Sources */,
 				040021201C3FA79A005F1D82 /* RouteDomain.m in Sources */,
 				04FA59921C27D05A009689C7 /* EYTagView.m in Sources */,
@@ -5787,7 +5750,6 @@
 				04F3D4691BF47FD3007E7AC0 /* zip.c in Sources */,
 				F4EC988D1B6211AC00F5721F /* StudentNoteInfoViewController.m in Sources */,
 				F48783911B58DA1700CDC1A8 /* AFURLRequestSerialization.m in Sources */,
-				F48783A81B58DA1700CDC1A8 /* README.md in Sources */,
 				04FA598B1C27C68A009689C7 /* EYTextPopupView.m in Sources */,
 				0494F47F1BDF777500F39865 /* UIScrollView+MJRefresh.m in Sources */,
 				04FADC551C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m in Sources */,
@@ -5795,7 +5757,6 @@
 				2474DFCF1B6CD43C0021506F /* CookbookDomain.m in Sources */,
 				2489B66A1B5AB49E00039E70 /* SDWebImageDownloaderOperation.m in Sources */,
 				04F8D3691C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m in Sources */,
-				04F969BE1C06F24F00F3B4CB /* SpCourseHomeCourseCell.m in Sources */,
 				04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */,
 				040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */,
 				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
@@ -5809,7 +5770,6 @@
 				04FEDD471C03542700921AC1 /* MySPEndCourseView.m in Sources */,
 				04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */,
 				24850B201B7BA499003C442E /* ItemTitleButton.m in Sources */,
-				04FB9DCC1C48C8D30020D48E /* HomeFunView.m in Sources */,
 				04FDB4DD1C1AD8D700EF0D68 /* ShareDomain.m in Sources */,
 				F4E61B701B73372500E5851A /* ReplyTableViewCell.m in Sources */,
 				046063471BD8D82600CBC881 /* MBProgressHUD+HM.m in Sources */,
@@ -5850,7 +5810,6 @@
 				2489B62B1B5A607A00039E70 /* KGAccountTool.m in Sources */,
 				248B6AAA1B19AD7A00FCB98F /* KGBaseDomain.m in Sources */,
 				04F3D45D1BF47FD3007E7AC0 /* CFilteringJSONSerializer.m in Sources */,
-				F487839F1B58DA1700CDC1A8 /* MASCompositeConstraint.m in Sources */,
 				0403DCE01BF5B9CD0089E463 /* MYSPCourseTableViewCell.m in Sources */,
 				0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */,
 				04FDB4E21BFC265300A73E2E /* MySPCourseTimeListVC.m in Sources */,
@@ -5880,6 +5839,7 @@
 				0494F47C1BDF777500F39865 /* MJRefreshFooterView.m in Sources */,
 				248B6A9B1B19AAD200FCB98F /* KGMessageView.m in Sources */,
 				0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */,
+				04BDD6911C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m in Sources */,
 				04FDB4DE1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m in Sources */,
 				F48783931B58DA1700CDC1A8 /* AFURLSessionManager.m in Sources */,
 				0400211C1C3FA16D005F1D82 /* RouteCell.m in Sources */,
@@ -5890,7 +5850,6 @@
 				F487838D1B58DA1700CDC1A8 /* AFHTTPSessionManager.m in Sources */,
 				248B6ACF1B19B57400FCB98F /* KeychainItemWrapper.m in Sources */,
 				2474DFB81B6CBB8D0021506F /* StudentSignRecordDomain.m in Sources */,
-				F48783A21B58DA1700CDC1A8 /* MASLayoutConstraint.m in Sources */,
 				04F72AC01BEC7E1E00623E33 /* SPTeacherDomain.m in Sources */,
 				F48783AF1B58DA1700CDC1A8 /* MJProperty.m in Sources */,
 				F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */,
@@ -5931,7 +5890,6 @@
 				F463E64C1B6639B800AB92B9 /* HBVLinkedTextView.m in Sources */,
 				0498AED31BDE17A3001E653C /* SPCourseDomain.m in Sources */,
 				2489B66B1B5AB49E00039E70 /* SDWebImageCompat.m in Sources */,
-				F48783A41B58DA1700CDC1A8 /* MASViewConstraint.m in Sources */,
 				F487839D1B58DA1700CDC1A8 /* UIWebView+AFNetworking.m in Sources */,
 				2489B6671B5AB49E00039E70 /* UIImageView+WebCache.m in Sources */,
 				048ADD331BD611D600E6E6D0 /* SPTimetableDomain.m in Sources */,

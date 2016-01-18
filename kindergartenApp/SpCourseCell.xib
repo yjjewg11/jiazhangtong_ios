@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -28,7 +28,7 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <state key="normal" title="晨钟幼儿英语">
-                            <color key="titleColor" red="0.17864214019999999" green="0.43226712839999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="晨钟教育中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTt-ON-qag">
@@ -170,7 +170,7 @@
                 <outlet property="studyPersonNum" destination="dUU-Y1-K5a" id="7ML-eg-HWx"/>
                 <outlet property="titleLbl" destination="eTu-qr-Po1" id="80L-gy-wuY"/>
             </connections>
-            <point key="canvasLocation" x="221" y="244.5"/>
+            <point key="canvasLocation" x="329" y="209.5"/>
         </tableViewCell>
     </objects>
     <resources>

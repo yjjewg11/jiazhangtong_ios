@@ -9,7 +9,6 @@
 
 #import "KGTabBarViewController.h"
 #import "LoginViewController.h"
-#import "HomeViewController.h"
 #import "AddressBooksViewController.h"
 #import "MessageViewController.h"
 #import "MeViewController.h"
@@ -20,6 +19,7 @@
 #import "SpCourseHomeVC.h"
 #import "DiscorveryVC.h"
 #import "MineHomeVC.h"
+#import "FPHomeVC.h"
 
 #import "HomeVC.h"
 
@@ -32,13 +32,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // 1.初始化子控制器
-    // 1.初始化子控制器
-    HomeViewController * home = [[HomeViewController alloc] init];
-    [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
     
-//    HomeVC * home = [[HomeVC alloc] init];
-//    [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
+    HomeVC * home = [[HomeVC alloc] init];
+    [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
     
     DiscorveryVC * vc = [[DiscorveryVC alloc] init];
     [self addChildVc:vc title:@"发现" image:@"hfaxian" selectedImage:@"hfaxian2"];
@@ -46,12 +42,10 @@
     MessageViewController * messageController = [[MessageViewController alloc] init];
     [self addChildVc:messageController title:@"消息" image:@"hxiaoxi" selectedImage:@"hxiaoxi2"];
     
-    SpCourseHomeVC * spcourseVC = [[SpCourseHomeVC alloc] init];
-    [self addChildVc:spcourseVC title:@"特长课程" image:@"htechangkechen" selectedImage:@"htechangkechen2"];
+    FPHomeVC * fpVC = [[FPHomeVC alloc] init];
+    [self addChildVc:fpVC title:@"家庭相册" image:@"jiatingxiangce1" selectedImage:@"jiatingxiangce2"];
     
     MineHomeVC * homeVC = [[MineHomeVC alloc] init];
-    
-//    MeViewController * meController = [[MeViewController alloc] init];
     [self addChildVc:homeVC title:@"我的" image:@"hwode" selectedImage:@"hwode3"];
     
     // 2.更换系统自带的tabbar

@@ -169,9 +169,6 @@ static NSString *const Nodata = @"nodata";
     [self hidenLoadView];
     _webview.hidden = NO;
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    self.navigationController.navigationBarHidden = YES;
-    
     //下面是二维码相关
     // 当iOS版本大于7时，向下移动20dp
     // 防止内存泄漏
@@ -350,6 +347,9 @@ static NSString *const Nodata = @"nodata";
             break;
         case 1:
         {
+            [[UIApplication sharedApplication] setStatusBarHidden:YES];
+            self.navigationController.navigationBarHidden = YES;
+            
              NSUserDefaults *defu = [NSUserDefaults standardUserDefaults];
              NSString * url = [defu objectForKey:@"sns_url"];
             
@@ -426,6 +426,9 @@ static NSString *const Nodata = @"nodata";
 #pragma mark - 点击跳转
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    self.navigationController.navigationBarHidden = YES;
+    
     if (indexPath.row >= 2)
     {
         DiscorveryReMenJingXuanDomain * domain = _remenjingxuanData[indexPath.row - 2];
