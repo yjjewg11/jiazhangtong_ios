@@ -1,5 +1,6 @@
 PODS:
   - BaiduMapKit (2.9.1)
+  - JFImagePicker (1.0.0)
   - LBXScan (1.1.1):
     - ZXingObjC (~> 3.0)
   - Masonry (0.6.4)
@@ -9,11 +10,13 @@ PODS:
 
 DEPENDENCIES:
   - BaiduMapKit
+  - JFImagePicker
   - LBXScan
   - Masonry
 
 SPEC CHECKSUMS:
   BaiduMapKit: 97d2d44b41a876de2371fb91ddf78cdf84dafa05
+  JFImagePicker: 2914c69dac80767a98664e768ac50118664e9f04
   LBXScan: dfb4d8ae8e4cff2aa0c9e1771e43954dce1469a9
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   ZXingObjC: bf15b3814f7a105b6d99f47da2333c93a063650a

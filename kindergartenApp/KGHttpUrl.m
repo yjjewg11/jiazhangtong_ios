@@ -16,11 +16,12 @@
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单
 #define loginURL             @"rest/userinfo/login.json"             //登录
 #define logoutURL            @"rest/userinfo/logout.json"            //登出
+#define checkUserJessionID   @"rest/userinfo/getUserinfo.json"       //自动登录时先验证getUserInfo获取信息
 #define regURL               @"rest/userinfo/reg.json"               //注册
-//#define updatepasswordURL    @"rest/userinfo/updatepassword.json"    //修改密码
-#define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"  //修改密码
-#define getTeacherInfo       @"rest/userinfo/getTeacherInfo.json"        //获取用户信息
-#define KDInfoURL            @"rest/share/getKDInfo.html" //校园相关
+//#define updatepasswordURL    @"rest/userinfo/updatepassword.json"   //修改密码
+#define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"//修改密码
+#define getTeacherInfo       @"rest/userinfo/getTeacherInfo.json"     //获取用户信息
+#define KDInfoURL            @"rest/share/getKDInfo.html"             //校园相关
 #define ZSJHInfoURL          @"rest/share/getRecruitBygroupuuid.html" //招生计划
 
 #define teacherPhoneBookURL  @"rest/userinfo/getTeacherPhoneBook.json" //老师和园长通讯录
@@ -28,7 +29,7 @@
 #define queryByTeacherURL    @"rest/message/queryByTeacher.json" //查询和老师的信件
 #define saveToLeaderURL      @"rest/message/saveToLeader.json"   //给园长写信
 #define queryByLeaderURL     @"rest/message/queryByLeader.json"  //查询和园长的信件
-#define readMsgURL           @"rest/pushMessage/read.json"  //阅读信件
+#define readMsgURL           @"rest/pushMessage/read.json"       //阅读信件
 
 
 #define phoneCodeURL           @"rest/sms/sendCode.json"               //短信验证码
@@ -97,6 +98,10 @@
     return URL(baseServiceURL, dynamicMenuURL);
 }
 
++ (NSString *)getUserInfoWithJessionID:(NSString *)jid
+{
+    return URL(baseServiceURL, checkUserJessionID);
+}
 
 //获取机构列表
 + (NSString *)getGroupUrl {

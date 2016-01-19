@@ -65,19 +65,51 @@
     
     //注册通知，用于发现模块 最新数目显示
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
     [center addObserver:self selector:@selector(getNewsNumber) name:@"homerefreshnum" object:nil];
 }
 
 #pragma mark - 自动登录
 - (void)autoLogin
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * jid =  [defaults objectForKey:@"loginJessionID"];
+    NSLog(@"bbb %@",jid);
+    
+    if(jid)
+    {
+        [[KGHttpService sharedService] cheakUserJessionID:jid success:^(NSString *msgStr)
+        {
+            NSLog(@"自动登录 ==  %@",msgStr);
+            if ([msgStr isEqualToString:@"success"])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^
+                {
+                    [self initHomeView];
+                });
+            }
+            else
+            {
+                [self checkUserLogin];
+            }
+            
+        }faild:^(NSString *errorMsg)
+        {
+            [self checkUserLogin];
+        }];
+    }
+}
+
+- (void)checkUserLogin
+{
     KGUser * account = [KGAccountTool account];
     if(account)
     {
         [[KGHttpService sharedService] login:account success:^(NSString *msgStr)
         {
-            [self initHomeView];
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [self initHomeView];
+            });
         }
         faild:^(NSString *errorMsg)
         {

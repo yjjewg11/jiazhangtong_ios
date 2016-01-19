@@ -1,0 +1,1 @@
+../../../JFImagePicker/JFImagePickerController/JFImagePickerController/JFImageManager.h

@@ -64,6 +64,7 @@
                 break;
             case 2:{
                 NSInteger i = [[SDImageCache sharedImageCache] getSize];
+                
                 //重新获取网页地址
                 [self getSysConfig];
                 //清除web缓存

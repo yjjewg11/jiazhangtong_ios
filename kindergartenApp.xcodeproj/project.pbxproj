@@ -304,10 +304,13 @@
 		04F936511BFEC8D7002D7621 /* SPCourseDetailVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936501BFEC8D7002D7621 /* SPCourseDetailVO.m */; };
 		04F936D01C4CE74100116D86 /* FPHomeTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936CF1C4CE74100116D86 /* FPHomeTopView.m */; };
 		04F936D21C4CE74F00116D86 /* FPHomeTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */; };
-		04F936D51C4CF4BE00116D86 /* TZN4Table.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F936D41C4CF4BE00116D86 /* TZN4Table.m */; };
 		04F939BE1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F939BD1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m */; };
 		04F939C01C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F939BF1C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib */; };
 		04F946ED1BF5ECD200F8B31F /* MySPCourseCommentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */; };
+		04F95F5B1C4E2E37000909B1 /* FPHomeSonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F95F5A1C4E2E37000909B1 /* FPHomeSonView.m */; };
+		04F95F5D1C4E2E45000909B1 /* FPHomeSonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F95F5C1C4E2E45000909B1 /* FPHomeSonView.xib */; };
+		04F95F601C4E42D5000909B1 /* FPHomeSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F95F5F1C4E42D5000909B1 /* FPHomeSelectView.m */; };
+		04F95F621C4E42E5000909B1 /* FPHomeSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F95F611C4E42E5000909B1 /* FPHomeSelectView.xib */; };
 		04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC4F1BFC5412004DA63D /* MySPAllCourseListVO.m */; };
 		04F9AC531BFC54B9004DA63D /* MySPAllCouseListDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC521BFC54B9004DA63D /* MySPAllCouseListDomain.m */; };
 		04F9AC571BFC58C8004DA63D /* MySPAllCourseListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9AC551BFC58C8004DA63D /* MySPAllCourseListCell.m */; };
@@ -393,6 +396,9 @@
 		04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */; };
 		04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */; };
 		04FA7D141C1ECB040035AF18 /* MineHomeFunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA7D121C1ECB040035AF18 /* MineHomeFunCell.xib */; };
+		04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA92811C4DDCE800010DAE /* Accelerate.framework */; };
+		04FA92881C4DE6E600010DAE /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA92851C4DE6E600010DAE /* ParallaxHeaderView.m */; };
+		04FA92891C4DE6E600010DAE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA92871C4DE6E600010DAE /* UIImage+ImageEffects.m */; };
 		04FADC551C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */; };
 		04FADC561C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */; };
 		04FAEF671C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */; };
@@ -1202,13 +1208,17 @@
 		04F936CE1C4CE74100116D86 /* FPHomeTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeTopView.h; sourceTree = "<group>"; };
 		04F936CF1C4CE74100116D86 /* FPHomeTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTopView.m; sourceTree = "<group>"; };
 		04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeTopView.xib; sourceTree = "<group>"; };
-		04F936D31C4CF4BE00116D86 /* TZN4Table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZN4Table.h; sourceTree = "<group>"; };
-		04F936D41C4CF4BE00116D86 /* TZN4Table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZN4Table.m; sourceTree = "<group>"; };
 		04F939BC1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseSchoolDetailWebView.h; sourceTree = "<group>"; };
 		04F939BD1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseSchoolDetailWebView.m; sourceTree = "<group>"; };
 		04F939BF1C00702D00C9E0E8 /* MySPCourseSchoolDetailWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseSchoolDetailWebView.xib; sourceTree = "<group>"; };
 		04F946EB1BF5ECD200F8B31F /* MySPCourseCommentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseCommentVC.h; sourceTree = "<group>"; };
 		04F946EC1BF5ECD200F8B31F /* MySPCourseCommentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseCommentVC.m; sourceTree = "<group>"; };
+		04F95F591C4E2E37000909B1 /* FPHomeSonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeSonView.h; sourceTree = "<group>"; };
+		04F95F5A1C4E2E37000909B1 /* FPHomeSonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeSonView.m; sourceTree = "<group>"; };
+		04F95F5C1C4E2E45000909B1 /* FPHomeSonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeSonView.xib; sourceTree = "<group>"; };
+		04F95F5E1C4E42D5000909B1 /* FPHomeSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeSelectView.h; sourceTree = "<group>"; };
+		04F95F5F1C4E42D5000909B1 /* FPHomeSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeSelectView.m; sourceTree = "<group>"; };
+		04F95F611C4E42E5000909B1 /* FPHomeSelectView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeSelectView.xib; sourceTree = "<group>"; };
 		04F9AC4E1BFC5412004DA63D /* MySPAllCourseListVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPAllCourseListVO.h; sourceTree = "<group>"; };
 		04F9AC4F1BFC5412004DA63D /* MySPAllCourseListVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPAllCourseListVO.m; sourceTree = "<group>"; };
 		04F9AC511BFC54B9004DA63D /* MySPAllCouseListDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPAllCouseListDomain.h; sourceTree = "<group>"; };
@@ -1362,6 +1372,11 @@
 		04FA7D101C1ECB040035AF18 /* MineHomeFunCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineHomeFunCell.h; sourceTree = "<group>"; };
 		04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineHomeFunCell.m; sourceTree = "<group>"; };
 		04FA7D121C1ECB040035AF18 /* MineHomeFunCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineHomeFunCell.xib; sourceTree = "<group>"; };
+		04FA92811C4DDCE800010DAE /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		04FA92841C4DE6E600010DAE /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
+		04FA92851C4DE6E600010DAE /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
+		04FA92861C4DE6E600010DAE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		04FA92871C4DE6E600010DAE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		04FADC521C3CE44B009D71F1 /* SpCourseDetailInfoWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailInfoWeb.h; sourceTree = "<group>"; };
 		04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseDetailInfoWeb.m; sourceTree = "<group>"; };
 		04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseDetailInfoWeb.xib; sourceTree = "<group>"; };
@@ -1997,6 +2012,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */,
 				04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */,
 				04F9BF5F1C4791E400BBD4F5 /* libLBXScan.a in Frameworks */,
 				04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */,
@@ -2950,6 +2966,12 @@
 				04F936CE1C4CE74100116D86 /* FPHomeTopView.h */,
 				04F936CF1C4CE74100116D86 /* FPHomeTopView.m */,
 				04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */,
+				04F95F591C4E2E37000909B1 /* FPHomeSonView.h */,
+				04F95F5A1C4E2E37000909B1 /* FPHomeSonView.m */,
+				04F95F5C1C4E2E45000909B1 /* FPHomeSonView.xib */,
+				04F95F5E1C4E42D5000909B1 /* FPHomeSelectView.h */,
+				04F95F5F1C4E42D5000909B1 /* FPHomeSelectView.m */,
+				04F95F611C4E42E5000909B1 /* FPHomeSelectView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3302,6 +3324,17 @@
 			path = EYTagView;
 			sourceTree = "<group>";
 		};
+		04FA92831C4DE6E600010DAE /* TZN4Header */ = {
+			isa = PBXGroup;
+			children = (
+				04FA92841C4DE6E600010DAE /* ParallaxHeaderView.h */,
+				04FA92851C4DE6E600010DAE /* ParallaxHeaderView.m */,
+				04FA92861C4DE6E600010DAE /* UIImage+ImageEffects.h */,
+				04FA92871C4DE6E600010DAE /* UIImage+ImageEffects.m */,
+			);
+			path = TZN4Header;
+			sourceTree = "<group>";
+		};
 		04FB23611C16C311009B57E2 /* Discorvery(发现) */ = {
 			isa = PBXGroup;
 			children = (
@@ -3613,8 +3646,6 @@
 				040466C31C438FDB00C9EE5C /* RouteDetailInfoCell.h */,
 				040466C41C438FDB00C9EE5C /* RouteDetailInfoCell.m */,
 				040466C51C438FDB00C9EE5C /* RouteDetailInfoCell.xib */,
-				04F936D31C4CF4BE00116D86 /* TZN4Table.h */,
-				04F936D41C4CF4BE00116D86 /* TZN4Table.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3958,6 +3989,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				04FA92831C4DE6E600010DAE /* TZN4Header */,
 				04FA40861C337F8400E5D606 /* ShareActionSheet */,
 				04FA598C1C27D05A009689C7 /* EYTagView */,
 				04FA597B1C27C68A009689C7 /* EYPopupView */,
@@ -4574,6 +4606,7 @@
 		C925B64CB131B415E0126F11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04FA92811C4DDCE800010DAE /* Accelerate.framework */,
 				04D5D30B1C47927D005399D9 /* libZXingObjC.a */,
 				04F9BF5E1C4791E400BBD4F5 /* libLBXScan.a */,
 				04F9BF5C1C47915700BBD4F5 /* libPods.a */,
@@ -5289,6 +5322,7 @@
 				04F9FB9F1BF1A77E00AEFB88 /* UMSocialLocalizable.strings in Resources */,
 				04A4DE111BF484DF002ABBB1 /* admogoVideo_18.png in Resources */,
 				04A4DE8E1BF484DF002ABBB1 /* shareviewfoot_bg.png in Resources */,
+				04F95F5D1C4E2E45000909B1 /* FPHomeSonView.xib in Resources */,
 				04A4DE4F1BF484DF002ABBB1 /* adsmogo_bannerbg.png in Resources */,
 				F4E61B6C1B7335A900E5851A /* ReplyListViewController.xib in Resources */,
 				04A4DE5B1BF484DF002ABBB1 /* website-640x100.gif in Resources */,
@@ -5386,6 +5420,7 @@
 				04A4DE461BF484DF002ABBB1 /* adsmogo_bannerbg@2x.png in Resources */,
 				04A4DE771BF484DF002ABBB1 /* webview_bar_back_grey_ipad@2x.png in Resources */,
 				F4C4D1C41B69CDE600335443 /* chat_cell_1.jpeg in Resources */,
+				04F95F621C4E42E5000909B1 /* FPHomeSelectView.xib in Resources */,
 				04A4DE8D1BF484DF002ABBB1 /* safari.png in Resources */,
 				04A4DE891BF484DF002ABBB1 /* webview_bar_share_ipad.png in Resources */,
 				04A4DE131BF484DF002ABBB1 /* admogoVideo_2.png in Resources */,
@@ -5595,6 +5630,7 @@
 				F4E36D5A1B85B49D009BD909 /* DoAlbumCell.m in Sources */,
 				F47AFEB51B5E2BF800D43F38 /* PageInfoDomain.m in Sources */,
 				04F3D4621BF47FD3007E7AC0 /* NSDictionary_JSONExtensions.m in Sources */,
+				04F95F5B1C4E2E37000909B1 /* FPHomeSonView.m in Sources */,
 				24AA0B421B690F4300DAC03B /* UUImageAvatarBrowser.m in Sources */,
 				04FB7CBC1C0DA84000FD3E31 /* SpCourseDetailTableVC.m in Sources */,
 				4D5CE7711B7E4333002F1088 /* SettingViewController.m in Sources */,
@@ -5623,6 +5659,7 @@
 				F4EA538F1B60D8390044BE7A /* StudentInfoItemVO.m in Sources */,
 				04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */,
 				248B6AB91B19B51A00FCB98F /* PagedFlowView.m in Sources */,
+				04FA92891C4DE6E600010DAE /* UIImage+ImageEffects.m in Sources */,
 				F48783B41B58DA1700CDC1A8 /* NSString+MJExtension.m in Sources */,
 				F471EDFC1B70B40100EEBA1D /* KGEmojiManage.m in Sources */,
 				248B6ABF1B19B53000FCB98F /* QCSlideSwitchView.m in Sources */,
@@ -5698,7 +5735,6 @@
 				2489B67C1B5ABAAB00039E70 /* AddressBooksViewController.m in Sources */,
 				F4C0AB971B1C3C54007B0E35 /* KGHttpService.m in Sources */,
 				04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */,
-				04F936D51C4CF4BE00116D86 /* TZN4Table.m in Sources */,
 				0467A9221BE2653E00FE888C /* MXPullDownMenu.m in Sources */,
 				04F9C99E1C0EFDBF0078A5F5 /* EnrolStudentSchoolDetailDomain.m in Sources */,
 				248B6AC61B19B54500FCB98F /* KGFormVerify.m in Sources */,
@@ -5789,6 +5825,7 @@
 				04FEC57A1BEDD84A00C642A6 /* YouHuiCell.m in Sources */,
 				4DF056D51B877F3A00ED3840 /* KGImageBrowseView.m in Sources */,
 				2489B6371B5AB32F00039E70 /* ImageCollectionView.m in Sources */,
+				04FA92881C4DE6E600010DAE /* ParallaxHeaderView.m in Sources */,
 				04FE04231BF1CCE70069CF9A /* MySPCourseVC.m in Sources */,
 				F471EDEA1B709E6300EEBA1D /* EmojiDomain.m in Sources */,
 				4DF056CC1B877E5000ED3840 /* PhotoVC.m in Sources */,
@@ -5802,6 +5839,7 @@
 				F4EA53861B60BD390044BE7A /* MeTableViewCell.m in Sources */,
 				04F8C6F91C18235100EF5E57 /* DiscorveryJingXuanCell.m in Sources */,
 				24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */,
+				04F95F601C4E42D5000909B1 /* FPHomeSelectView.m in Sources */,
 				04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */,
 				2489B6611B5AB49E00039E70 /* NSData+ImageContentType.m in Sources */,
 				24DE91B01B67C24D00D3FFCE /* TeacherVO.m in Sources */,

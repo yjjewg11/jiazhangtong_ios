@@ -5,3 +5,6 @@ platform :ios, '6.0'
 pod 'LBXScan'
 
 pod 'Masonry'
+
+platform :ios, '7.0'
+pod 'JFImagePicker'

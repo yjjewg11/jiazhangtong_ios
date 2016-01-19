@@ -25,6 +25,8 @@
 //reg
 + (NSString *)getRegUrl;
 
+//获取用户登陆信息 自动登录使用
++ (NSString *)getUserInfoWithJessionID:(NSString *)jid;
 
 //updatepassword
 + (NSString *)getUpdatepasswordUrl;

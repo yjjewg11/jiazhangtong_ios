@@ -327,6 +327,67 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
 }
 
+- (NSString *)cutUrlDomain:(NSString *)url
+{
+    NSMutableString * tempurl = [[NSMutableString alloc] initWithString:url];
+    
+    NSString * myUrl = [tempurl componentsSeparatedByString:@"//"][1];
+    NSString * secondUrl = [myUrl componentsSeparatedByString:@"/"][0];
+    
+    NSString * domain = nil;
+    
+    if ([secondUrl rangeOfString:@":"].location != NSNotFound)
+    {
+        domain = [secondUrl componentsSeparatedByString:@":"][0];
+    }
+    else
+    {
+        domain = secondUrl;
+    }
+    
+    return domain;
+}
+
+#pragma mark - 自动登陆调用
+- (void)cheakUserJessionID:(NSString *)jid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    NSLog(@"aa  %@",[self cutUrlDomain:[KGHttpUrl getUserInfoWithJessionID:jid]]);
+    
+    NSMutableDictionary * cookieDic = [NSMutableDictionary dictionary];
+    [cookieDic setObject:@"JSESSIONID" forKey:NSHTTPCookieName];
+    [cookieDic setObject:jid forKey:NSHTTPCookieValue];
+    [cookieDic setObject:@"/" forKey:NSHTTPCookiePath];
+    [cookieDic setObject:[self cutUrlDomain:[KGHttpUrl getUserInfoWithJessionID:jid]] forKey:NSHTTPCookieDomain];
+    NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
+    
+    AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getUserInfoWithJessionID:jid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
+             
+             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+             [defaults setObject:_loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
+             [defaults synchronize];
+             
+             success(baseDomain.ResMsg.status);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.status);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+//         [self requestErrorCode:error faild:faild];
+     }];
+}
 
 #pragma mark 账号相关 begin
 
@@ -337,6 +398,13 @@
                                       success:^(NSURLSessionDataTask* task, id responseObject) {
                                           
                                           _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
+                                          
+                                          
+                                          
+                                          NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                          [defaults setObject:_loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
+                                          [defaults synchronize];
+                                          
                                           if([_loginRespDomain.ResMsg.status isEqualToString:String_Success]) {
                                               
                                               //取到服务器返回的cookies
@@ -389,12 +457,14 @@
 }
 
 
-- (void)reg:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
-    
-    [self getServerJson:[KGHttpUrl getRegUrl] params:user.keyValues success:^(KGBaseDomain * baseDomain) {
-       
+- (void)reg:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    [self getServerJson:[KGHttpUrl getRegUrl] params:user.keyValues success:^(KGBaseDomain * baseDomain)
+    {
         success(baseDomain.ResMsg.message);
-    } faild:^(NSString *errorMessage) {
+        
+    } faild:^(NSString *errorMessage)
+    {
         faild(errorMessage);
     }];
 }
@@ -447,6 +517,7 @@
                                          
                                          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
                                          [self sessionTimeoutHandle:baseDomain];
+                                         
                                          if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
                                              
                                              KGUser * user = [KGUser objectWithKeyValues:baseDomain.data];
