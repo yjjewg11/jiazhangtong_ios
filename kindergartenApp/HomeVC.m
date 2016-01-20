@@ -210,7 +210,7 @@
         
         //创建button
         UIButton * btn = [[UIButton alloc] init];
-        btn.tag = 10+i;
+        btn.tag = 10 + i;
         [btn addTarget:self action:@selector(funBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [subv addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make)

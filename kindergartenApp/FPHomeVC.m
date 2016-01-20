@@ -10,13 +10,16 @@
 #import "ParallaxHeaderView.h"
 #import "FPHomeTopView.h"
 #import "FPHomeSonView.h"
-#import "JFImagePickerController.h"
 #import "FPHomeSelectView.h"
+#import "UzysAssetsPickerController.h"
+#import "FPHomeBtnCell.h"
+#import "FPGifrwarePickerVC.h"
 
-@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,JFImagePickerDelegate,FPHomeSelectViewDelegate>
+@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate,UzysAssetsPickerControllerDelegate>
 {
-    UITableView * tableView;
+    UITableView * _tableView;
     FPHomeSonView * sonView;
+    FPHomeSelectView * selView;
 }
 
 
@@ -43,11 +46,11 @@
     
     //弄到tableviewheader里面去
     ParallaxHeaderView * headerView = [ParallaxHeaderView parallaxHeaderViewWithSubView:view];
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 49)];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    [tableView setTableHeaderView:headerView];
-    [self.view addSubview:tableView];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 49)];
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+    [_tableView setTableHeaderView:headerView];
+    [self.view addSubview:_tableView];
     
     sonView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSonView" owner:nil options:nil] firstObject];
     sonView.origin = CGPointMake(0, -132);
@@ -63,15 +66,45 @@
 #pragma mark UISCrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == tableView)
+    if (scrollView == _tableView)
     {
         // pass the current offset of the UITableView so that the ParallaxHeaderView layouts the subViews.
-        [(ParallaxHeaderView *)tableView.tableHeaderView layoutHeaderViewForScrollViewOffset:scrollView.contentOffset];
+        [(ParallaxHeaderView *)_tableView.tableHeaderView layoutHeaderViewForScrollViewOffset:scrollView.contentOffset];
+        sonView.origin = CGPointMake(0, -132);
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        static NSString * btnCell = @"btn_cell";
+        
+        FPHomeBtnCell * cell = [tableView dequeueReusableCellWithIdentifier:btnCell];
+        
+        if (cell == nil)
+        {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeBtnCell" owner:nil options:nil] firstObject];
+        }
+        
+        return cell;
+    }
+    
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        return 44;
+    }
+    
     return 0;
 }
 
@@ -93,7 +126,8 @@
 
 - (void)pushToUpLoadVC
 {
-    FPHomeSelectView * selView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSelectView" owner:nil options:nil] firstObject];
+    sonView.origin = CGPointMake(0, -132);
+    selView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSelectView" owner:nil options:nil] firstObject];
     selView.delegate = self;
     selView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
     
@@ -103,7 +137,6 @@
     [applicationLoadViewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
     [[selView layer]addAnimation:applicationLoadViewIn forKey:kCATransitionReveal];
     [self.view addSubview:selView];
-
 }
 
 - (void)showSonView
@@ -117,25 +150,56 @@
     }];
 }
 
-#pragma mark - 图片选择器代理
-- (void)imagePickerDidFinished:(JFImagePickerController *)picker
-{
-    //    [JFImagePickerController clear];  //clear datas 要清除调用这个
-    //picker.assets is all choices photo
-    
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)imagePickerDidCancel:(JFImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)pushToImagePickerVC
 {
-    JFImagePickerController *picker = [[JFImagePickerController alloc] initWithRootViewController:self];
-    picker.pickerDelegate = self;
+    UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
+    picker.delegate = self;
+    //设置最大选择图片数量
+    picker.maximumNumberOfSelectionPhoto = 999;
     [self presentViewController:picker animated:YES completion:nil];
 }
+
+- (void)pushToCreateGiftwareShopVC
+{
+    
+}
+
+#pragma mark - UzysAssetsPickerControllerDelegate methods 
+//本框架支持选择视频文件
+- (void)uzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    [selView removeFromSuperview];
+    
+    if([[assets[0] valueForProperty:@"ALAssetPropertyType"] isEqualToString:@"ALAssetTypePhoto"]) //Photo
+    {
+        [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+        {
+            ALAsset *representation = obj;
+            
+            UIImage *img = [UIImage imageWithCGImage:representation.defaultRepresentation.fullResolutionImage
+                                               scale:representation.defaultRepresentation.scale
+                                         orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
+        }];
+        
+        //从本机相册获取到图片,复制一份到本地沙盒，然后进行上传
+        
+        
+        //若下一次进来，比较两个UIImage的data，看看是否相同。直接上关键代码了。
+        
+        
+    }
+}
+
+- (void)uzysAssetsPickerControllerDidExceedMaximumNumberOfSelection:(UzysAssetsPickerController *)picker
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:NSLocalizedStringFromTable(@"只能选择999张图片哦", @"UzysAssetsPickerController", nil)
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+
 
 @end

@@ -28,6 +28,28 @@
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
 		040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A27431BEB664C00620876 /* SPBottomItem.xib */; };
+		0449A32A1C4F5C960066ABBB /* UIImage+UzysExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A31A1C4F5C960066ABBB /* UIImage+UzysExtension.m */; };
+		0449A32B1C4F5C960066ABBB /* UzysAppearanceConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A31C1C4F5C960066ABBB /* UzysAppearanceConfig.m */; };
+		0449A32C1C4F5C960066ABBB /* UzysAssetPickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0449A31D1C4F5C960066ABBB /* UzysAssetPickerController.bundle */; };
+		0449A32D1C4F5C960066ABBB /* UzysAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A31F1C4F5C960066ABBB /* UzysAssetsPickerController.m */; };
+		0449A32E1C4F5C960066ABBB /* UzysAssetsPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A3201C4F5C960066ABBB /* UzysAssetsPickerController.xib */; };
+		0449A32F1C4F5C960066ABBB /* UzysAssetsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3231C4F5C960066ABBB /* UzysAssetsViewCell.m */; };
+		0449A3301C4F5C960066ABBB /* UzysGroupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3251C4F5C960066ABBB /* UzysGroupPickerView.m */; };
+		0449A3311C4F5C960066ABBB /* UzysGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3271C4F5C960066ABBB /* UzysGroupViewCell.m */; };
+		0449A3321C4F5C960066ABBB /* UzysWrapperPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3291C4F5C960066ABBB /* UzysWrapperPickerController.m */; };
+		0449A3351C4F5E0F0066ABBB /* FPUploadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3341C4F5E0F0066ABBB /* FPUploadVC.m */; };
+		0449A33A1C4F5FD60066ABBB /* FPUploadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3381C4F5FD60066ABBB /* FPUploadCell.m */; };
+		0449A33B1C4F5FD60066ABBB /* FPUploadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A3391C4F5FD60066ABBB /* FPUploadCell.xib */; };
+		0449A33F1C4F5FE40066ABBB /* FPHomeBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A33D1C4F5FE40066ABBB /* FPHomeBtnCell.m */; };
+		0449A3401C4F5FE40066ABBB /* FPHomeBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A33E1C4F5FE40066ABBB /* FPHomeBtnCell.xib */; };
+		0449A3461C4F71D40066ABBB /* FPGifrwarePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3451C4F71D40066ABBB /* FPGifrwarePickerVC.m */; };
+		0449A34B1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A34A1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m */; };
+		0449A3501C4F77C40066ABBB /* FPGiftwarePickerImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A34E1C4F77C40066ABBB /* FPGiftwarePickerImageCell.m */; };
+		0449A3511C4F77C40066ABBB /* FPGiftwarePickerImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A34F1C4F77C40066ABBB /* FPGiftwarePickerImageCell.xib */; };
+		0449A3551C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3531C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m */; };
+		0449A3561C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A3541C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.xib */; };
+		0449A35A1C4F98430066ABBB /* FPCreateGiftwareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3581C4F98430066ABBB /* FPCreateGiftwareVC.m */; };
+		0449A35B1C4F98430066ABBB /* FPCreateGiftwareVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A3591C4F98430066ABBB /* FPCreateGiftwareVC.xib */; };
 		04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04595CB81BE8718D008DD54A /* SPCommentVO.m */; };
 		045CF51B1BE0A26200FA7EF7 /* SPSchoolDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CF51A1BE0A26200FA7EF7 /* SPSchoolDomain.m */; };
 		046063331BD8BE3B00CBC881 /* SPCourseTypeDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 046063321BD8BE3B00CBC881 /* SPCourseTypeDomain.m */; };
@@ -787,6 +809,44 @@
 		040A27401BEB663300620876 /* SPBottomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBottomItem.h; sourceTree = "<group>"; };
 		040A27411BEB663300620876 /* SPBottomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItem.m; sourceTree = "<group>"; };
 		040A27431BEB664C00620876 /* SPBottomItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPBottomItem.xib; sourceTree = "<group>"; };
+		0449A3191C4F5C960066ABBB /* UIImage+UzysExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UzysExtension.h"; sourceTree = "<group>"; };
+		0449A31A1C4F5C960066ABBB /* UIImage+UzysExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UzysExtension.m"; sourceTree = "<group>"; };
+		0449A31B1C4F5C960066ABBB /* UzysAppearanceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAppearanceConfig.h; sourceTree = "<group>"; };
+		0449A31C1C4F5C960066ABBB /* UzysAppearanceConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAppearanceConfig.m; sourceTree = "<group>"; };
+		0449A31D1C4F5C960066ABBB /* UzysAssetPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UzysAssetPickerController.bundle; sourceTree = "<group>"; };
+		0449A31E1C4F5C960066ABBB /* UzysAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController.h; sourceTree = "<group>"; };
+		0449A31F1C4F5C960066ABBB /* UzysAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAssetsPickerController.m; sourceTree = "<group>"; };
+		0449A3201C4F5C960066ABBB /* UzysAssetsPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UzysAssetsPickerController.xib; sourceTree = "<group>"; };
+		0449A3211C4F5C960066ABBB /* UzysAssetsPickerController_Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController_Configuration.h; sourceTree = "<group>"; };
+		0449A3221C4F5C960066ABBB /* UzysAssetsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsViewCell.h; sourceTree = "<group>"; };
+		0449A3231C4F5C960066ABBB /* UzysAssetsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAssetsViewCell.m; sourceTree = "<group>"; };
+		0449A3241C4F5C960066ABBB /* UzysGroupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupPickerView.h; sourceTree = "<group>"; };
+		0449A3251C4F5C960066ABBB /* UzysGroupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupPickerView.m; sourceTree = "<group>"; };
+		0449A3261C4F5C960066ABBB /* UzysGroupViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupViewCell.h; sourceTree = "<group>"; };
+		0449A3271C4F5C960066ABBB /* UzysGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupViewCell.m; sourceTree = "<group>"; };
+		0449A3281C4F5C960066ABBB /* UzysWrapperPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysWrapperPickerController.h; sourceTree = "<group>"; };
+		0449A3291C4F5C960066ABBB /* UzysWrapperPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysWrapperPickerController.m; sourceTree = "<group>"; };
+		0449A3331C4F5E0F0066ABBB /* FPUploadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadVC.h; sourceTree = "<group>"; };
+		0449A3341C4F5E0F0066ABBB /* FPUploadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadVC.m; sourceTree = "<group>"; };
+		0449A3371C4F5FD60066ABBB /* FPUploadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadCell.h; sourceTree = "<group>"; };
+		0449A3381C4F5FD60066ABBB /* FPUploadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadCell.m; sourceTree = "<group>"; };
+		0449A3391C4F5FD60066ABBB /* FPUploadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPUploadCell.xib; sourceTree = "<group>"; };
+		0449A33C1C4F5FE40066ABBB /* FPHomeBtnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeBtnCell.h; sourceTree = "<group>"; };
+		0449A33D1C4F5FE40066ABBB /* FPHomeBtnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeBtnCell.m; sourceTree = "<group>"; };
+		0449A33E1C4F5FE40066ABBB /* FPHomeBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeBtnCell.xib; sourceTree = "<group>"; };
+		0449A3441C4F71D40066ABBB /* FPGifrwarePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPGifrwarePickerVC.h; sourceTree = "<group>"; };
+		0449A3451C4F71D40066ABBB /* FPGifrwarePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPGifrwarePickerVC.m; sourceTree = "<group>"; };
+		0449A3491C4F73FC0066ABBB /* FPGiftwarePickerLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPGiftwarePickerLayout.h; sourceTree = "<group>"; };
+		0449A34A1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPGiftwarePickerLayout.m; sourceTree = "<group>"; };
+		0449A34D1C4F77C40066ABBB /* FPGiftwarePickerImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPGiftwarePickerImageCell.h; sourceTree = "<group>"; };
+		0449A34E1C4F77C40066ABBB /* FPGiftwarePickerImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPGiftwarePickerImageCell.m; sourceTree = "<group>"; };
+		0449A34F1C4F77C40066ABBB /* FPGiftwarePickerImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPGiftwarePickerImageCell.xib; sourceTree = "<group>"; };
+		0449A3521C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPGiftwarePickerTakePhotoCell.h; sourceTree = "<group>"; };
+		0449A3531C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPGiftwarePickerTakePhotoCell.m; sourceTree = "<group>"; };
+		0449A3541C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPGiftwarePickerTakePhotoCell.xib; sourceTree = "<group>"; };
+		0449A3571C4F98430066ABBB /* FPCreateGiftwareVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCreateGiftwareVC.h; sourceTree = "<group>"; };
+		0449A3581C4F98430066ABBB /* FPCreateGiftwareVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCreateGiftwareVC.m; sourceTree = "<group>"; };
+		0449A3591C4F98430066ABBB /* FPCreateGiftwareVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPCreateGiftwareVC.xib; sourceTree = "<group>"; };
 		04595CB71BE8718D008DD54A /* SPCommentVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCommentVO.h; sourceTree = "<group>"; };
 		04595CB81BE8718D008DD54A /* SPCommentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCommentVO.m; sourceTree = "<group>"; };
 		045CF5191BE0A26200FA7EF7 /* SPSchoolDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSchoolDomain.h; sourceTree = "<group>"; };
@@ -2070,6 +2130,81 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0449A3181C4F5C960066ABBB /* UzyImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				0449A3191C4F5C960066ABBB /* UIImage+UzysExtension.h */,
+				0449A31A1C4F5C960066ABBB /* UIImage+UzysExtension.m */,
+				0449A31B1C4F5C960066ABBB /* UzysAppearanceConfig.h */,
+				0449A31C1C4F5C960066ABBB /* UzysAppearanceConfig.m */,
+				0449A31D1C4F5C960066ABBB /* UzysAssetPickerController.bundle */,
+				0449A31E1C4F5C960066ABBB /* UzysAssetsPickerController.h */,
+				0449A31F1C4F5C960066ABBB /* UzysAssetsPickerController.m */,
+				0449A3201C4F5C960066ABBB /* UzysAssetsPickerController.xib */,
+				0449A3211C4F5C960066ABBB /* UzysAssetsPickerController_Configuration.h */,
+				0449A3221C4F5C960066ABBB /* UzysAssetsViewCell.h */,
+				0449A3231C4F5C960066ABBB /* UzysAssetsViewCell.m */,
+				0449A3241C4F5C960066ABBB /* UzysGroupPickerView.h */,
+				0449A3251C4F5C960066ABBB /* UzysGroupPickerView.m */,
+				0449A3261C4F5C960066ABBB /* UzysGroupViewCell.h */,
+				0449A3271C4F5C960066ABBB /* UzysGroupViewCell.m */,
+				0449A3281C4F5C960066ABBB /* UzysWrapperPickerController.h */,
+				0449A3291C4F5C960066ABBB /* UzysWrapperPickerController.m */,
+			);
+			path = UzyImagePicker;
+			sourceTree = "<group>";
+		};
+		0449A3361C4F5FBE0066ABBB /* tableviewcell */ = {
+			isa = PBXGroup;
+			children = (
+				0449A3371C4F5FD60066ABBB /* FPUploadCell.h */,
+				0449A3381C4F5FD60066ABBB /* FPUploadCell.m */,
+				0449A3391C4F5FD60066ABBB /* FPUploadCell.xib */,
+				0449A33C1C4F5FE40066ABBB /* FPHomeBtnCell.h */,
+				0449A33D1C4F5FE40066ABBB /* FPHomeBtnCell.m */,
+				0449A33E1C4F5FE40066ABBB /* FPHomeBtnCell.xib */,
+			);
+			name = tableviewcell;
+			sourceTree = "<group>";
+		};
+		0449A3471C4F73410066ABBB /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				04F936CE1C4CE74100116D86 /* FPHomeTopView.h */,
+				04F936CF1C4CE74100116D86 /* FPHomeTopView.m */,
+				04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */,
+				04F95F591C4E2E37000909B1 /* FPHomeSonView.h */,
+				04F95F5A1C4E2E37000909B1 /* FPHomeSonView.m */,
+				04F95F5C1C4E2E45000909B1 /* FPHomeSonView.xib */,
+				04F95F5E1C4E42D5000909B1 /* FPHomeSelectView.h */,
+				04F95F5F1C4E42D5000909B1 /* FPHomeSelectView.m */,
+				04F95F611C4E42E5000909B1 /* FPHomeSelectView.xib */,
+			);
+			name = HomeView;
+			sourceTree = "<group>";
+		};
+		0449A3481C4F73DA0066ABBB /* layout */ = {
+			isa = PBXGroup;
+			children = (
+				0449A3491C4F73FC0066ABBB /* FPGiftwarePickerLayout.h */,
+				0449A34A1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m */,
+			);
+			name = layout;
+			sourceTree = "<group>";
+		};
+		0449A34C1C4F77AA0066ABBB /* collCell */ = {
+			isa = PBXGroup;
+			children = (
+				0449A34D1C4F77C40066ABBB /* FPGiftwarePickerImageCell.h */,
+				0449A34E1C4F77C40066ABBB /* FPGiftwarePickerImageCell.m */,
+				0449A34F1C4F77C40066ABBB /* FPGiftwarePickerImageCell.xib */,
+				0449A3521C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.h */,
+				0449A3531C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m */,
+				0449A3541C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.xib */,
+			);
+			name = collCell;
+			sourceTree = "<group>";
+		};
 		046063301BD8BC0200CBC881 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -2956,6 +3091,13 @@
 				04F151661C45FF1800E80B3E /* FPHomeVC.h */,
 				04F151671C45FF1800E80B3E /* FPHomeVC.m */,
 				04F151681C45FF1800E80B3E /* FPHomeVC.xib */,
+				0449A3331C4F5E0F0066ABBB /* FPUploadVC.h */,
+				0449A3341C4F5E0F0066ABBB /* FPUploadVC.m */,
+				0449A3441C4F71D40066ABBB /* FPGifrwarePickerVC.h */,
+				0449A3451C4F71D40066ABBB /* FPGifrwarePickerVC.m */,
+				0449A3571C4F98430066ABBB /* FPCreateGiftwareVC.h */,
+				0449A3581C4F98430066ABBB /* FPCreateGiftwareVC.m */,
+				0449A3591C4F98430066ABBB /* FPCreateGiftwareVC.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2963,15 +3105,10 @@
 		04F936CC1C4CE71F00116D86 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				04F936CE1C4CE74100116D86 /* FPHomeTopView.h */,
-				04F936CF1C4CE74100116D86 /* FPHomeTopView.m */,
-				04F936D11C4CE74F00116D86 /* FPHomeTopView.xib */,
-				04F95F591C4E2E37000909B1 /* FPHomeSonView.h */,
-				04F95F5A1C4E2E37000909B1 /* FPHomeSonView.m */,
-				04F95F5C1C4E2E45000909B1 /* FPHomeSonView.xib */,
-				04F95F5E1C4E42D5000909B1 /* FPHomeSelectView.h */,
-				04F95F5F1C4E42D5000909B1 /* FPHomeSelectView.m */,
-				04F95F611C4E42E5000909B1 /* FPHomeSelectView.xib */,
+				0449A34C1C4F77AA0066ABBB /* collCell */,
+				0449A3481C4F73DA0066ABBB /* layout */,
+				0449A3471C4F73410066ABBB /* HomeView */,
+				0449A3361C4F5FBE0066ABBB /* tableviewcell */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3989,6 +4126,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				0449A3181C4F5C960066ABBB /* UzyImagePicker */,
 				04FA92831C4DE6E600010DAE /* TZN4Header */,
 				04FA40861C337F8400E5D606 /* ShareActionSheet */,
 				04FA598C1C27D05A009689C7 /* EYTagView */,
@@ -5246,6 +5384,7 @@
 				04A4DE361BF484DF002ABBB1 /* adsmogo_safair_iphone@2x.png in Resources */,
 				04A4DE551BF484DF002ABBB1 /* download-640x100.gif in Resources */,
 				04A4DE4E1BF484DF002ABBB1 /* adsmogo_adclose.png in Resources */,
+				0449A32E1C4F5C960066ABBB /* UzysAssetsPickerController.xib in Resources */,
 				04A4DE1E1BF484DF002ABBB1 /* admogoVideo_3.png in Resources */,
 				04A4DE061BF484DF002ABBB1 /* adchina_toolbar.png in Resources */,
 				F4E6B2461B6B59960087EAEB /* GiftwareArticlesViewController.xib in Resources */,
@@ -5258,6 +5397,7 @@
 				4D5CE7701B7E4333002F1088 /* PushNotificationViewController.xib in Resources */,
 				04A4DE531BF484DF002ABBB1 /* download-320x50.gif in Resources */,
 				04A4DE921BF484DF002ABBB1 /* webview_bar_back.png in Resources */,
+				0449A33B1C4F5FD60066ABBB /* FPUploadCell.xib in Resources */,
 				F4EA538C1B60C6DF0044BE7A /* MeFunTableViewCell.xib in Resources */,
 				F4E61B7A1B73438F00E5851A /* ShareViewController.xib in Resources */,
 				04FC2A001BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib in Resources */,
@@ -5312,6 +5452,7 @@
 				04A4DE011BF484DF002ABBB1 /* adchina_closeButton.png in Resources */,
 				04A4DE221BF484DF002ABBB1 /* admogoVideo_7.png in Resources */,
 				04A4DE001BF484DF002ABBB1 /* adchina_btnconfirm2.png in Resources */,
+				0449A35B1C4F98430066ABBB /* FPCreateGiftwareVC.xib in Resources */,
 				04FA59881C27C68A009689C7 /* EYPopupView.bundle in Resources */,
 				2489B6241B5A40E200039E70 /* RegViewController.xib in Resources */,
 				4D5CE77F1B7E4368002F1088 /* ModifyPasswordTableViewCell.xib in Resources */,
@@ -5370,6 +5511,7 @@
 				04A4DE281BF484DF002ABBB1 /* adsmenuVoice_off@2x.png in Resources */,
 				04A4DE781BF484DF002ABBB1 /* webview_bar_back_ipad@2x.png in Resources */,
 				04FDB4DF1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib in Resources */,
+				0449A3511C4F77C40066ABBB /* FPGiftwarePickerImageCell.xib in Resources */,
 				04A4DE651BF484DF002ABBB1 /* shareviewfoot_bg@2x.png in Resources */,
 				04A4DE311BF484DF002ABBB1 /* adsmogo_button_right_default@2x.png in Resources */,
 				04A4DE0F1BF484DF002ABBB1 /* admogoVideo_16.png in Resources */,
@@ -5396,6 +5538,7 @@
 				0400E4A51C2B94A70098A336 /* ReplyTableViewCell.xib in Resources */,
 				04FEC8891BEBADDB00D3D8A5 /* SPSchoolCell.xib in Resources */,
 				04A4DE1D1BF484DF002ABBB1 /* admogoVideo_29.png in Resources */,
+				0449A3401C4F5FE40066ABBB /* FPHomeBtnCell.xib in Resources */,
 				04F8D3651C1167040098FBAB /* EnrolStudentMySchoolWebCell.xib in Resources */,
 				04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */,
 				04FA59951C27E77C009689C7 /* ShareBtnView.xib in Resources */,
@@ -5444,6 +5587,7 @@
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
 				04A4DE8B1BF484DF002ABBB1 /* hengtiao.png in Resources */,
 				04F9F3011BF9C67500470F0C /* MySPButtonCell.xib in Resources */,
+				0449A32C1C4F5C960066ABBB /* UzysAssetPickerController.bundle in Resources */,
 				24C46B531B5A2BC800A58F92 /* MessageViewController.xib in Resources */,
 				04FB23781C16CD62009B57E2 /* TuiJianCell.xib in Resources */,
 				04A4DE2F1BF484DF002ABBB1 /* adsmogo_button_pressed@2x.png in Resources */,
@@ -5464,6 +5608,7 @@
 				04F9FB631BF1A67400AEFB88 /* umeng_fb_audio_dialog_content@2x.png in Resources */,
 				04A4DE431BF484DF002ABBB1 /* mogoVideo.html in Resources */,
 				04A4DE451BF484DF002ABBB1 /* adsmogo_adclose@3x.png in Resources */,
+				0449A3561C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.xib in Resources */,
 				04F9F2FC1BF9C38700470F0C /* MySPNormalCell.xib in Resources */,
 				F4E635FF1B675EB700800924 /* AnnouncementTableViewCell.xib in Resources */,
 				04A4DE3C1BF484DF002ABBB1 /* ads_alert_left_button.png in Resources */,
@@ -5593,6 +5738,7 @@
 				24E036921B750502003381D5 /* ReplyPageDomain.m in Sources */,
 				04FB237F1C16DC67009B57E2 /* MineHomeChildrenCell.m in Sources */,
 				F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */,
+				0449A3321C4F5C960066ABBB /* UzysWrapperPickerController.m in Sources */,
 				F487839A1B58DA1700CDC1A8 /* UIImageView+AFNetworking.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
@@ -5617,6 +5763,7 @@
 				4D5CE7801B7E4368002F1088 /* PushNotificationTableViewCell.m in Sources */,
 				F48783951B58DA1700CDC1A8 /* README.md in Sources */,
 				04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */,
+				0449A34B1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m in Sources */,
 				F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */,
 				248B6A951B19A9D900FCB98F /* UIWindow+Extension.m in Sources */,
 				4D5CE7691B7E4333002F1088 /* AboutWeViewController.m in Sources */,
@@ -5638,6 +5785,7 @@
 				248B6ABE1B19B53000FCB98F /* QCSlideSwitchDto.m in Sources */,
 				F48783981B58DA1700CDC1A8 /* UIAlertView+AFNetworking.m in Sources */,
 				4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */,
+				0449A35A1C4F98430066ABBB /* FPCreateGiftwareVC.m in Sources */,
 				24A175F71B55433300295997 /* KGHUD.m in Sources */,
 				04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */,
 				04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */,
@@ -5655,6 +5803,7 @@
 				040021171C3F9A9B005F1D82 /* ShowRouteVC.m in Sources */,
 				04F3D4681BF47FD3007E7AC0 /* unzip.c in Sources */,
 				F4E61B6B1B7335A900E5851A /* ReplyListViewController.m in Sources */,
+				0449A3311C4F5C960066ABBB /* UzysGroupViewCell.m in Sources */,
 				2474DFC91B6CD2070021506F /* RecipesItemVO.m in Sources */,
 				F4EA538F1B60D8390044BE7A /* StudentInfoItemVO.m in Sources */,
 				04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */,
@@ -5689,6 +5838,7 @@
 				2489B6381B5AB32F00039E70 /* ImageCollectionViewCell.m in Sources */,
 				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
 				04F9FB6D1BF1A67400AEFB88 /* UMPostTableViewCell.m in Sources */,
+				0449A3551C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m in Sources */,
 				F4EC98911B62305700F5721F /* TopicTableViewCell.m in Sources */,
 				04F9C98B1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m in Sources */,
 				04FB23831C16E1B8009B57E2 /* MineHomeStudentHeadItem.m in Sources */,
@@ -5709,6 +5859,7 @@
 				04FA408B1C337F8400E5D606 /* HLActionSheet.m in Sources */,
 				24C46B521B5A2BC800A58F92 /* MessageViewController.m in Sources */,
 				0498AED01BDE160F001E653C /* SPDataListVO.m in Sources */,
+				0449A32D1C4F5C960066ABBB /* UzysAssetsPickerController.m in Sources */,
 				4D077B291B80B14800FFD5CB /* OnlyEmojiView.m in Sources */,
 				F4DDEBBC1B7DFD7C00470D76 /* MLEmojiLabel.m in Sources */,
 				248B6ACE1B19B57400FCB98F /* FuniKeyChain.m in Sources */,
@@ -5721,6 +5872,7 @@
 				04F3D46A1BF47FD3007E7AC0 /* ZipArchive.mm in Sources */,
 				04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */,
 				24DEC8221B633F2B00C55828 /* DynamicMenuDomain.m in Sources */,
+				0449A3501C4F77C40066ABBB /* FPGiftwarePickerImageCell.m in Sources */,
 				040109B41BF1F8CB00A18622 /* MySPCourseDomain.m in Sources */,
 				04FB236E1C16C649009B57E2 /* DiscorveryHomeLayout.m in Sources */,
 				F4DF3BA41B78AC75001D9DF7 /* TimetableViewController.m in Sources */,
@@ -5768,6 +5920,7 @@
 				04F889591C05ABD8002FBE6D /* SDBaseProgressView.m in Sources */,
 				04F72AC61BEC994500623E33 /* SPTeacherDetailDomain.m in Sources */,
 				04F9FB6E1BF1A67400AEFB88 /* UMRadialView.m in Sources */,
+				0449A33F1C4F5FE40066ABBB /* FPHomeBtnCell.m in Sources */,
 				F4C0AB8C1B1C39D4007B0E35 /* KGNSStringUtil.m in Sources */,
 				04F8C6F21C180D1B00EF5E57 /* DiscorveryNewNumberDomain.m in Sources */,
 				0403DCE41BF5C5980089E463 /* MySPCourseDetailVC.m in Sources */,
@@ -5788,11 +5941,13 @@
 				F48783911B58DA1700CDC1A8 /* AFURLRequestSerialization.m in Sources */,
 				04FA598B1C27C68A009689C7 /* EYTextPopupView.m in Sources */,
 				0494F47F1BDF777500F39865 /* UIScrollView+MJRefresh.m in Sources */,
+				0449A32B1C4F5C960066ABBB /* UzysAppearanceConfig.m in Sources */,
 				04FADC551C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m in Sources */,
 				04F9FB6C1BF1A67400AEFB88 /* UMFullScreenPhotoView.m in Sources */,
 				2474DFCF1B6CD43C0021506F /* CookbookDomain.m in Sources */,
 				2489B66A1B5AB49E00039E70 /* SDWebImageDownloaderOperation.m in Sources */,
 				04F8D3691C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m in Sources */,
+				0449A33A1C4F5FD60066ABBB /* FPUploadCell.m in Sources */,
 				04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */,
 				040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */,
 				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
@@ -5847,6 +6002,8 @@
 				F471EDF91B70ACC000EEBA1D /* AddressBookResp.m in Sources */,
 				2489B62B1B5A607A00039E70 /* KGAccountTool.m in Sources */,
 				248B6AAA1B19AD7A00FCB98F /* KGBaseDomain.m in Sources */,
+				0449A3351C4F5E0F0066ABBB /* FPUploadVC.m in Sources */,
+				0449A3301C4F5C960066ABBB /* UzysGroupPickerView.m in Sources */,
 				04F3D45D1BF47FD3007E7AC0 /* CFilteringJSONSerializer.m in Sources */,
 				0403DCE01BF5B9CD0089E463 /* MYSPCourseTableViewCell.m in Sources */,
 				0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */,
@@ -5861,6 +6018,7 @@
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
 				040021131C3F9263005F1D82 /* UIImage+Rotate.m in Sources */,
 				24AA0B501B69112C00DAC03B /* ChatModel.m in Sources */,
+				0449A32A1C4F5C960066ABBB /* UIImage+UzysExtension.m in Sources */,
 				2489B6601B5AB49E00039E70 /* MKAnnotationView+WebCache.m in Sources */,
 				2489B65F1B5AB49E00039E70 /* SDImageCache.m in Sources */,
 				F4DF3BA81B78AC97001D9DF7 /* TimetableDomain.m in Sources */,
@@ -5901,6 +6059,7 @@
 				04F3D4661BF47FD3007E7AC0 /* ioapi.c in Sources */,
 				045CF51B1BE0A26200FA7EF7 /* SPSchoolDomain.m in Sources */,
 				24A175E81B5541BF00295997 /* KGDBHelperHandle.m in Sources */,
+				0449A3461C4F71D40066ABBB /* FPGifrwarePickerVC.m in Sources */,
 				04F939BE1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m in Sources */,
 				04F3D45C1BF47FD3007E7AC0 /* CDataScanner.m in Sources */,
 				F4CF7A921B79C5B400BFAA1E /* TimetableItemTableViewCell.m in Sources */,
@@ -5945,6 +6104,7 @@
 				24C46B401B5A2B1100A58F92 /* MeViewController.m in Sources */,
 				248B6AC71B19B54500FCB98F /* KGTextField.m in Sources */,
 				04F9AC531BFC54B9004DA63D /* MySPAllCouseListDomain.m in Sources */,
+				0449A32F1C4F5C960066ABBB /* UzysAssetsViewCell.m in Sources */,
 				04FB7CAB1C0D95D900FD3E31 /* SpTeacherDetailLayout.m in Sources */,
 				F4885C661B7C508600AF97CF /* FavoritesDomain.m in Sources */,
 				4D0A91861B81088700373E5C /* EmojiAndTextView.m in Sources */,
