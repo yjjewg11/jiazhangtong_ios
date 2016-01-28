@@ -32,7 +32,6 @@
 
 @implementation KGHttpService
 
-
 + (KGHttpService *)sharedService {
     static KGHttpService *_sharedService = nil;
     static dispatch_once_t onceToken;
@@ -390,7 +389,6 @@
 }
 
 #pragma mark 账号相关 begin
-
 - (void)login:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getLoginUrl]
@@ -398,7 +396,6 @@
                                       success:^(NSURLSessionDataTask* task, id responseObject) {
                                           
                                           _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
-                                          
                                           
                                           
                                           NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -2223,8 +2220,153 @@
      {
          [self requestErrorCode:error faild:faild];
      }];
+    
 }
 
+#pragma mark - 家庭相册模块
+//获取我的家庭相册
+- (void)getMyPhotoCollection:(void(^)(FPMyFamilyPhotoCollectionDomain * domain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getMyFamilyPhotoUrl] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+//         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             NSArray * datas = [FPMyFamilyPhotoCollectionDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
+             
+             FPMyFamilyPhotoCollectionDomain * domain = datas[0];
+             
+             success(domain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
 
+//查指定家庭的相片 type:0 是minTime , 1是maxTime;
+- (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild
+{
+    NSLog(@"familyUUID是:%@",familyUUID);
+    
+    if (familyUUID == nil)
+    {
+        return;
+    }
+    
+    NSDictionary * dict;
+    
+    if (type == 0)
+    {
+        dict = @{@"family_uuid":familyUUID,@"minTime":time,@"pageNo":pageNo};
+        
+    }else if(type == 1)
+    {
+        dict = @{@"family_uuid":familyUUID,@"maxTime":time,@"pageNo":pageNo};
+    }
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getFamilyPhotoUseFamilyUUIDAndTimeUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             FPFamilyPhotoLastTimeVO * tempResp = [FPFamilyPhotoLastTimeVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             tempResp.lastTime = [responseObject objectForKey:@"lastTime"];
+             
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+//查询根据时间范围查询，新数据总数和变化数据总数
+- (void)getFPPhotoUpdateCountWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime success:(void(^)(FPFamilyPhotoUpdateCount * domain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (familyUUID == nil)
+    {
+        familyUUID = @"";
+    }
+    
+    NSDictionary * dict = @{@"family_uuid":familyUUID,@"maxTime":maxTime};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getFamilyPhotoUpdateCountUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             FPFamilyPhotoUpdateCount * tempResp = [FPFamilyPhotoUpdateCount objectWithKeyValues:responseObject];
+             success(tempResp);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+// 查询增量更新数据（缓存本地）
+- (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime updateTime:(NSString *)updateTime success:(void(^)(NSArray * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (familyUUID == nil)
+    {
+        familyUUID = @"";
+    }
+    
+    NSDictionary * dict = @{@"family_uuid":familyUUID,@"maxTime":maxTime,@"updateTime":updateTime};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getFamilyPhotoUpdateDataUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             //借用一下
+             FPFamilyPhotoLastTimeVO * tempResp = [FPFamilyPhotoLastTimeVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             success([FPFamilyPhotoStatusDomain objectArrayWithKeyValuesArray:tempResp.data]);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
 
 @end

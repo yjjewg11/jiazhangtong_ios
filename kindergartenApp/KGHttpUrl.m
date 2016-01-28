@@ -9,7 +9,6 @@
 #import "KGHttpUrl.h"
 
 #define URL(baseURL, businessURL) [NSString stringWithFormat:@"%@%@", baseURL, businessURL];
-
 //#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
 #define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
 
@@ -498,6 +497,23 @@
 #pragma mark - 每日精选回调
 + (NSString *)meiRiHuiDiaoUrl{
     return URL(baseServiceURL, @"rest/userinfo/getMainTopic.json");
+}
+
+#pragma mark - 家庭相册模块
++ (NSString *)getMyFamilyPhotoUrl{
+    return URL(baseServiceURL, @"rest/fpFamilyPhotoCollection/queryMy.json");
+}
+
++ (NSString *)getFamilyPhotoUseFamilyUUIDAndTimeUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfIncrement.json");
+}
+
++ (NSString *)getFamilyPhotoUpdateCountUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfNewDataCount.json");
+}
+
++ (NSString *)getFamilyPhotoUpdateDataUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfUpdate.json");
 }
 
 @end

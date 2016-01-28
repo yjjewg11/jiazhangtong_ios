@@ -7,10 +7,13 @@
 //
 
 #import "FPUploadVC.h"
+#import "FPImagePickerVC.h"
 
 @interface FPUploadVC () <UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView * uploadTable;
+
+@property (nonatomic , strong) NSArray * assets;
 
 @end
 
@@ -20,7 +23,13 @@
 {
     [super viewDidLoad];
     
-    [self initTableView];
+//    [self initTableView];
+    
+    //在右上角添加一个按钮来选择图片
+    UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(openSelectImageView)];
+    barbtn.title = @"选择图片";
+    barbtn.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = barbtn;
 }
 
 - (void)initTableView
@@ -42,6 +51,18 @@
 {
     [super didReceiveMemoryWarning];
     
+}
+
+- (void)openSelectImageView
+{
+    FPImagePickerVC * vc = [[FPImagePickerVC alloc] init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)dealloc
+{
+    NSLog(@"upload delloc ---");
 }
 
 @end

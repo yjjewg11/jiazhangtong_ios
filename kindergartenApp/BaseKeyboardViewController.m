@@ -21,7 +21,7 @@ typedef enum : NSInteger {
     kCameraMoveDirectionLeft
 } CameraMoveDirection;
 
-@interface BaseKeyboardViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>  {
+@interface BaseKeyboardViewController () <UIGestureRecognizerDelegate, UITextFieldDelegate>{
     CameraMoveDirection direction;
 }
 

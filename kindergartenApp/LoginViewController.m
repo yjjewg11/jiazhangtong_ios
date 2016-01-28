@@ -78,7 +78,8 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)savePwdBtnClicked:(UIButton *)sender {
+- (IBAction)savePwdBtnClicked:(UIButton *)sender
+{
     savePwdBtn.selected = !sender.selected;
     savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
     if (!savePwdBtn.selected) {
@@ -119,11 +120,12 @@
 
 - (IBAction)loginBtnClicked:(UIButton *)sender {
     
-    if([self validateInputInView]) {
+    if([self validateInputInView])
+    {
         //不勾选保存密码 也需要保存用户名
         [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:UserNameKey];
-        if (savePwdBtn.selected) {
-            
+        if (savePwdBtn.selected)
+        {
             [[NSUserDefaults standardUserDefaults] setObject:_userPwdTextField.text forKey:PasswordKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
@@ -141,9 +143,12 @@
             [[KGHUD sharedHud] hide:self.view];
             [MBProgressHUD showSuccess:@"登录成功"];
             
-            if(savePwdBtn.selected) {
+            if(savePwdBtn.selected)
+            {
                 [KGAccountTool saveAccount:user];
-            } else { 
+            }
+            else
+            {
                 [KGAccountTool delAccount];
             }
             

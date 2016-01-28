@@ -27,6 +27,11 @@
 //当前时间
 + (NSString *)presentTime;
 
+//获取家庭相册所用时间字符串格式
++ (NSString *)getFPFormatSringWithDate:(NSDate *)date;
+
++ (NSDate *)getDateWithFPFormatString:(NSString *)string;
+
 /**
  * 计算指定时间是否大雨指定分钟数
  */
@@ -49,5 +54,10 @@
 
 //计算相差几天
 + (NSInteger)intervalSinceNow: (NSString *) theDate;
+
+//获取当前时区时间
++ (NSDate *)getLocalDate;
+
++ (NSString *)getLocalDateStr;
 
 @end

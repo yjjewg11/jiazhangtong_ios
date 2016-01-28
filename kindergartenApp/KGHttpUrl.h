@@ -214,4 +214,14 @@
 
 
 + (NSString *)meiRiHuiDiaoUrl;
+
+#pragma mark - 家庭相册模块
++ (NSString *)getMyFamilyPhotoUrl;
+
++ (NSString *)getFamilyPhotoUseFamilyUUIDAndTimeUrl;
+
++ (NSString *)getFamilyPhotoUpdateCountUrl;
+
++ (NSString *)getFamilyPhotoUpdateDataUrl;
+
 @end

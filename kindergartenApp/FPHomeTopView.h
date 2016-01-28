@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FPMyFamilyPhotoCollectionDomain.h"
 
 @interface FPHomeTopView : UIView
+
+- (void)setData:(FPMyFamilyPhotoCollectionDomain *)domain;
 
 @end

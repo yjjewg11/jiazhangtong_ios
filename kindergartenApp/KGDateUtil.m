@@ -119,7 +119,8 @@
 }
 
 //获取指定日期的周五
-+ (NSString *)getEndWeek:(NSString *)dateStr {
++ (NSString *)getEndWeek:(NSString *)dateStr
+{
     //Week End Date
     NSDateFormatter * dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:dateFormatStr1];
@@ -212,4 +213,70 @@
     }
     return -1;
 }
+
++ (NSString *)getFPFormatSringWithDate:(NSDate *)date;
+{
+    if (date == nil)
+    {
+        return nil;
+    }
+    //2016-01-20-10-11-22
+    NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    [format setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSString * oriDateStr = [format stringFromDate:date];
+    //把:换成-
+    NSString * oriDateStr1 = [oriDateStr stringByReplacingOccurrencesOfString:@":" withString:@"-"];
+    //把@" " 换成 -
+    NSString * oriDateStr2 = [oriDateStr1 stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    
+//    NSLog(@"FP:转换后的日期字符串:%@",oriDateStr2);
+    
+    return oriDateStr2;
+}
+
++ (NSDate *)getDateWithFPFormatString:(NSString *)string
+{
+    if (string == NULL || string == nil || string == Nil)
+    {
+        return nil;
+    }
+    
+    if ([string isEqual:[NSNull null]])
+    {
+        return nil;
+    }
+    
+    NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    [format setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//    NSLog(@"%@",string);
+//    NSLog(@"FP:转换后的Date:%@",[format dateFromString:string]);
+    
+    return [format dateFromString:string];
+}
+
++ (NSDate *)getLocalDate
+{
+    NSDate *date = [NSDate date];
+    
+    NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
+    
+    NSInteger interval = [zone secondsFromGMTForDate:date];
+    
+    return [date dateByAddingTimeInterval: interval];
+}
+
++ (NSString *)getLocalDateStr
+{
+    NSDate *date = [NSDate date];
+    NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
+    NSInteger interval = [zone secondsFromGMTForDate: date];
+    
+    NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    
+    return [format stringFromDate:[date dateByAddingTimeInterval: interval]];
+}
+
 @end
