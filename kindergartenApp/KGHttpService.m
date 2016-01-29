@@ -199,6 +199,7 @@
     [parameters setObject:[NSNumber numberWithInteger:imgType] forKey:@"type"];
     [parameters setObject:_loginRespDomain.JSESSIONID forKey:@"JSESSIONID"];
     
+    
     [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getUploadImgUrl] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         [formData appendPartWithFileData:imageData name:imgName fileName:imgName mimeType:@"image/jpeg"];
@@ -2368,5 +2369,12 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
+
+#pragma mark - 上传图片 
+- (void)uploadFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID img:(UIImage *)img success:(void(^)(NSString * str))success faild:(void(^)(NSString * errorMsg))faild
+{
+
+}
+
 
 @end

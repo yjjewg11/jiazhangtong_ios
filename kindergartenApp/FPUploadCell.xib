@@ -13,7 +13,65 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kxE-Vk-CJE">
+                        <rect key="frame" x="10" y="4" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="HJE-Ep-4q6"/>
+                            <constraint firstAttribute="width" constant="35" id="uXq-A2-urm"/>
+                        </constraints>
+                    </imageView>
+                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6X6-go-3f6">
+                        <rect key="frame" x="85" y="21" width="150" height="2"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="Jui-a1-90o"/>
+                        </constraints>
+                    </progressView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y5m-6g-cdH">
+                        <rect key="frame" x="280" y="0.0" width="40" height="43"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ukF-Cz-Kby">
+                                <rect key="frame" x="10" y="12" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="Xvl-2j-UJX"/>
+                                    <constraint firstAttribute="height" constant="20" id="uyv-Iu-QxH"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCI-Qo-a5m">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="43"/>
+                                <connections>
+                                    <action selector="btnClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="leI-QA-j3m"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RCI-Qo-a5m" secondAttribute="trailing" id="5yF-wv-8Ia"/>
+                            <constraint firstAttribute="width" constant="40" id="DFa-5f-Ft3"/>
+                            <constraint firstItem="ukF-Cz-Kby" firstAttribute="centerY" secondItem="Y5m-6g-cdH" secondAttribute="centerY" id="W40-cA-yRc"/>
+                            <constraint firstItem="ukF-Cz-Kby" firstAttribute="centerX" secondItem="Y5m-6g-cdH" secondAttribute="centerX" id="fEb-0X-8oD"/>
+                            <constraint firstItem="RCI-Qo-a5m" firstAttribute="top" secondItem="Y5m-6g-cdH" secondAttribute="top" id="fU6-Aw-ELs"/>
+                            <constraint firstAttribute="bottom" secondItem="RCI-Qo-a5m" secondAttribute="bottom" id="rvr-a6-dAb"/>
+                            <constraint firstItem="RCI-Qo-a5m" firstAttribute="leading" secondItem="Y5m-6g-cdH" secondAttribute="leading" id="rwK-Uw-wta"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Y5m-6g-cdH" secondAttribute="trailing" id="2zM-nH-Ttu"/>
+                    <constraint firstItem="6X6-go-3f6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YiS-VX-iUg"/>
+                    <constraint firstItem="kxE-Vk-CJE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ZRT-sE-jmt"/>
+                    <constraint firstAttribute="bottom" secondItem="Y5m-6g-cdH" secondAttribute="bottom" id="aOz-3k-Ald"/>
+                    <constraint firstItem="kxE-Vk-CJE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="d4j-80-XrZ"/>
+                    <constraint firstItem="Y5m-6g-cdH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vB8-GF-uaX"/>
+                    <constraint firstItem="6X6-go-3f6" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vk8-VK-k98"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="progress" destination="6X6-go-3f6" id="bxI-dY-ggf"/>
+                <outlet property="statusView" destination="ukF-Cz-Kby" id="Qx8-42-QeV"/>
+                <outlet property="suoluetu" destination="kxE-Vk-CJE" id="bxO-eA-6ro"/>
+            </connections>
+            <point key="canvasLocation" x="241" y="225"/>
         </tableViewCell>
     </objects>
 </document>

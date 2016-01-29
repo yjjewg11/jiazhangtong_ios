@@ -224,4 +224,5 @@
 
 + (NSString *)getFamilyPhotoUpdateDataUrl;
 
++ (NSString *)getFPUploadImgUrl;
 @end

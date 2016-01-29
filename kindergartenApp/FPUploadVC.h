@@ -7,10 +7,14 @@
 //
 
 #import "BaseViewController.h"
-
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface FPUploadVC : BaseViewController
 
+@property (nonatomic , strong) ALAssetsLibrary * library;
 
++ (ALAssetsLibrary *)defaultAssetsLibrary;
+
+@property (strong, nonatomic) NSString * family_uuid;
 
 @end

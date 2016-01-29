@@ -9,6 +9,7 @@
 #import "FPImagePickerVC.h"
 #import "FPImagePickerGroupTableCell.h"
 #import "FPImagePickerSelectVC.h"
+#import "FPUploadVC.h"
 
 @interface FPImagePickerVC () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -18,26 +19,6 @@
 @end
 
 @implementation FPImagePickerVC
-
-+ (ALAssetsLibrary *)defaultAssetsLibrary
-{
-    static dispatch_once_t pred = 0;
-    static ALAssetsLibrary *library = nil;
-    dispatch_once(&pred,^
-    {
-        library = [[ALAssetsLibrary alloc] init];
-    });
-    return library;
-}
-
-- (ALAssetsLibrary *)library
-{
-    if (nil == _library)
-    {
-        _library = [self.class defaultAssetsLibrary];
-    }
-    return _library;
-}
 
 - (NSMutableArray *)groups
 {
@@ -52,8 +33,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    _library = [[ALAssetsLibrary alloc] init];
     
     // 获取所有组
     [self getAllGroupData];
@@ -126,7 +105,7 @@
 
 - (void)getAllGroupData
 {
-    [self.library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop)
+    [[FPUploadVC defaultAssetsLibrary] enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop)
     {
         if (group != nil)
         {

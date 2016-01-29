@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FPFamilyPhotoUploadDomain.h"
 
 @interface FPUploadCell : UITableViewCell
+
+@property (assign, nonatomic) NSInteger index;
+
+- (void)setData:(FPFamilyPhotoUploadDomain *)domain;
 
 @end

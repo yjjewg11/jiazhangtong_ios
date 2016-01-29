@@ -208,6 +208,8 @@
 {
     FPUploadVC * vc = [[FPUploadVC alloc] init];
     
+    vc.family_uuid = _myCollectionDomain.uuid;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -272,6 +274,14 @@
             [self showNoNetView];
         });
     }];
+}
+
+#pragma mark - 网络重试按钮
+- (void)tryBtnClicked
+{
+    [self hidenNoNetView];
+    //获取我的家庭相册信息
+    [self getMyPhotoCollectionInfo];
 }
 
 #pragma mark - 获取数据库照片数据

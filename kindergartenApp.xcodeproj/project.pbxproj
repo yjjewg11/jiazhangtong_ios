@@ -486,6 +486,12 @@
 		04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9F9E1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m */; };
 		04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */; };
 		04FB9FA41C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */; };
+		04FBAEBF1C5B137F0094DC6B /* PhotoLargerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBAEBC1C5B137F0094DC6B /* PhotoLargerViewController.m */; };
+		04FBAEC01C5B137F0094DC6B /* UploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBAEBE1C5B137F0094DC6B /* UploadImage.m */; };
+		04FBAEC91C5B34B80094DC6B /* FPImagePickerSelectBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBAEC81C5B34B80094DC6B /* FPImagePickerSelectBottomView.m */; };
+		04FBAECB1C5B34CE0094DC6B /* FPImagePickerSelectBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FBAECA1C5B34CE0094DC6B /* FPImagePickerSelectBottomView.xib */; };
+		04FBAECE1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBAECD1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m */; };
+		04FBAED11C5B3D280094DC6B /* FPUploadBaseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FBAED01C5B3D280094DC6B /* FPUploadBaseDomain.m */; };
 		04FC29FF1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FC29FD1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.m */; };
 		04FC2A001BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FC29FE1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.xib */; };
 		04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FD8DED1C3A6B0B00BB186A /* SpCourseDetailVC.m */; };
@@ -1564,6 +1570,17 @@
 		04FB9FA01C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseAndSchoolListSchoolCell.h; sourceTree = "<group>"; };
 		04FB9FA11C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseAndSchoolListSchoolCell.m; sourceTree = "<group>"; };
 		04FB9FA21C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseAndSchoolListSchoolCell.xib; sourceTree = "<group>"; };
+		04FBAEBB1C5B137F0094DC6B /* PhotoLargerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoLargerViewController.h; sourceTree = "<group>"; };
+		04FBAEBC1C5B137F0094DC6B /* PhotoLargerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoLargerViewController.m; sourceTree = "<group>"; };
+		04FBAEBD1C5B137F0094DC6B /* UploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImage.h; sourceTree = "<group>"; };
+		04FBAEBE1C5B137F0094DC6B /* UploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImage.m; sourceTree = "<group>"; };
+		04FBAEC71C5B34B80094DC6B /* FPImagePickerSelectBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPImagePickerSelectBottomView.h; sourceTree = "<group>"; };
+		04FBAEC81C5B34B80094DC6B /* FPImagePickerSelectBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPImagePickerSelectBottomView.m; sourceTree = "<group>"; };
+		04FBAECA1C5B34CE0094DC6B /* FPImagePickerSelectBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPImagePickerSelectBottomView.xib; sourceTree = "<group>"; };
+		04FBAECC1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFamilyPhotoUploadDomain.h; sourceTree = "<group>"; };
+		04FBAECD1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFamilyPhotoUploadDomain.m; sourceTree = "<group>"; };
+		04FBAECF1C5B3D280094DC6B /* FPUploadBaseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadBaseDomain.h; sourceTree = "<group>"; };
+		04FBAED01C5B3D280094DC6B /* FPUploadBaseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadBaseDomain.m; sourceTree = "<group>"; };
 		04FBC9E41C34CD8E00F49DB0 /* libLBXScan.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libLBXScan.a; path = "Pods/../build/Debug-iphoneos/libLBXScan.a"; sourceTree = "<group>"; };
 		04FBC9E51C34CD8E00F49DB0 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
 		04FC29FC1BFDB3AF009F8663 /* MySPCourseListCourseDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseListCourseDetailCell.h; sourceTree = "<group>"; };
@@ -2913,7 +2930,6 @@
 			isa = PBXGroup;
 			children = (
 				04F410F41C5A101700407C10 /* view */,
-				04F410F31C5A100D00407C10 /* service */,
 				04F410F21C5A100500407C10 /* domain */,
 				04F410F11C5A0FF800407C10 /* controller */,
 			);
@@ -2942,19 +2958,15 @@
 			name = domain;
 			sourceTree = "<group>";
 		};
-		04F410F31C5A100D00407C10 /* service */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = service;
-			sourceTree = "<group>";
-		};
 		04F410F41C5A101700407C10 /* view */ = {
 			isa = PBXGroup;
 			children = (
 				04F410FF1C5A1E9700407C10 /* tableviewcell */,
 				04F410F91C5A11B000407C10 /* item */,
 				04F410F51C5A113F00407C10 /* layout */,
+				04FBAEC71C5B34B80094DC6B /* FPImagePickerSelectBottomView.h */,
+				04FBAEC81C5B34B80094DC6B /* FPImagePickerSelectBottomView.m */,
+				04FBAECA1C5B34CE0094DC6B /* FPImagePickerSelectBottomView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3295,6 +3307,10 @@
 				04F9943A1C522F8800CD5818 /* FPFamilyPhotoNormalDomain.m */,
 				04F688D01C57453F008C2E8E /* FPFamilyInfoDomain.h */,
 				04F688D11C57453F008C2E8E /* FPFamilyInfoDomain.m */,
+				04FBAECC1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.h */,
+				04FBAECD1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m */,
+				04FBAECF1C5B3D280094DC6B /* FPUploadBaseDomain.h */,
+				04FBAED01C5B3D280094DC6B /* FPUploadBaseDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -3715,6 +3731,17 @@
 				04F8C6F81C18235100EF5E57 /* DiscorveryJingXuanCell.xib */,
 			);
 			name = collectionviewcell;
+			sourceTree = "<group>";
+		};
+		04FBAEBA1C5B137F0094DC6B /* 图片浏览器 */ = {
+			isa = PBXGroup;
+			children = (
+				04FBAEBB1C5B137F0094DC6B /* PhotoLargerViewController.h */,
+				04FBAEBC1C5B137F0094DC6B /* PhotoLargerViewController.m */,
+				04FBAEBD1C5B137F0094DC6B /* UploadImage.h */,
+				04FBAEBE1C5B137F0094DC6B /* UploadImage.m */,
+			);
+			path = "图片浏览器";
 			sourceTree = "<group>";
 		};
 		04FDB4DE1C1AD9A900EF0D68 /* ZYQImagePicker */ = {
@@ -4314,6 +4341,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				04FBAEBA1C5B137F0094DC6B /* 图片浏览器 */,
 				04F9037C1C56795C0040629F /* AFNetworking */,
 				04FA92831C4DE6E600010DAE /* TZN4Header */,
 				04FA40861C337F8400E5D606 /* ShareActionSheet */,
@@ -5582,6 +5610,7 @@
 				04A4DE001BF484DF002ABBB1 /* adchina_btnconfirm2.png in Resources */,
 				0449A35B1C4F98430066ABBB /* FPCreateGiftwareVC.xib in Resources */,
 				04FA59881C27C68A009689C7 /* EYPopupView.bundle in Resources */,
+				04FBAECB1C5B34CE0094DC6B /* FPImagePickerSelectBottomView.xib in Resources */,
 				2489B6241B5A40E200039E70 /* RegViewController.xib in Resources */,
 				4D5CE77F1B7E4368002F1088 /* ModifyPasswordTableViewCell.xib in Resources */,
 				04A4DE851BF484DF002ABBB1 /* webview_bar_next_grey_ipad.png in Resources */,
@@ -5963,6 +5992,7 @@
 				F48783B51B58DA1700CDC1A8 /* README.md in Sources */,
 				2469E2161B5B6039004888A4 /* ResMsgDomain.m in Sources */,
 				04F3D45B1BF47FD3007E7AC0 /* OpenUDID.m in Sources */,
+				04FBAECE1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m in Sources */,
 				249926E31B8093BD0071DFB3 /* TopicInteractionDomain.m in Sources */,
 				2489B6381B5AB32F00039E70 /* ImageCollectionViewCell.m in Sources */,
 				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
@@ -6042,6 +6072,7 @@
 				248B6AD61B19B5CF00FCB98F /* Reachability.m in Sources */,
 				040021201C3FA79A005F1D82 /* RouteDomain.m in Sources */,
 				04FA59921C27D05A009689C7 /* EYTagView.m in Sources */,
+				04FBAEBF1C5B137F0094DC6B /* PhotoLargerViewController.m in Sources */,
 				04F89A351C1011CC00FC0FA6 /* EnrolStudentWebViewCell.m in Sources */,
 				04FEC8841BEBAADD00D3D8A5 /* SPSchoolDetailVC.m in Sources */,
 				04F889591C05ABD8002FBE6D /* SDBaseProgressView.m in Sources */,
@@ -6122,6 +6153,7 @@
 				04FEB7121C50800700DABA93 /* DBNetDaoService.m in Sources */,
 				4DF056CC1B877E5000ED3840 /* PhotoVC.m in Sources */,
 				F4EC989A1B62306800F5721F /* TopicFrame.m in Sources */,
+				04FBAEC91C5B34B80094DC6B /* FPImagePickerSelectBottomView.m in Sources */,
 				F4C4D1C81B69F05C00335443 /* TopicInteractionView.m in Sources */,
 				2489B6311B5A683E00039E70 /* AFAppDotNetAPIClient.m in Sources */,
 				04FB7CA81C0D869700FD3E31 /* SpTeacherDetailViewController.m in Sources */,
@@ -6133,6 +6165,7 @@
 				24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */,
 				04F95F601C4E42D5000909B1 /* FPHomeSelectView.m in Sources */,
 				04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */,
+				04FBAEC01C5B137F0094DC6B /* UploadImage.m in Sources */,
 				2489B6611B5AB49E00039E70 /* NSData+ImageContentType.m in Sources */,
 				24DE91B01B67C24D00D3FFCE /* TeacherVO.m in Sources */,
 				04F8C6EF1C18094E00EF5E57 /* DiscorveryReMenJingXuanDomain.m in Sources */,
@@ -6224,6 +6257,7 @@
 				04F410EC1C5A0FC200407C10 /* FPImagePickerGroupDomain.m in Sources */,
 				F4E636031B676AD400800924 /* AnnouncementInfoViewController.m in Sources */,
 				24AA0B441B690F4300DAC03B /* UUMessage.m in Sources */,
+				04FBAED11C5B3D280094DC6B /* FPUploadBaseDomain.m in Sources */,
 				04F8894A1C058FE9002FBE6D /* HZQDatePickerView.m in Sources */,
 				F463E64C1B6639B800AB92B9 /* HBVLinkedTextView.m in Sources */,
 				0498AED31BDE17A3001E653C /* SPCourseDomain.m in Sources */,

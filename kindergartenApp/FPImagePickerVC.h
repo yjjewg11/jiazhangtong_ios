@@ -7,14 +7,11 @@
 //
 
 #import "BaseViewController.h"
-#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface FPImagePickerVC : BaseViewController
 
 @property (nonatomic , strong) NSMutableArray * groups;
 
-@property (nonatomic , strong) ALAssetsLibrary * library;
 
-+ (ALAssetsLibrary *)defaultAssetsLibrary;
 
 @end

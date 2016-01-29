@@ -142,7 +142,7 @@
     if (sqlite3_exec(db, [sqlQuery UTF8String], NULL, NULL, &err) != SQLITE_OK)
     {
         fprintf( stderr , " SQL error : %s\n " , err);
-        return NO;
+        return nil;
     }
     else
     {
@@ -155,13 +155,37 @@
                 NSString *familyuuidStr = [[NSString alloc] initWithUTF8String:familyuuid];
                 
                 char * maxTime = (char *)sqlite3_column_text(statement, 1);
-                NSString * maxTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                NSString * maxTimeStr;
+                if (maxTime != NULL)
+                {
+                     maxTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                }
+                else
+                {
+                    maxTimeStr = nil;
+                }
                 
                 char * minTime = (char *)sqlite3_column_text(statement, 2);
-                NSString * minTimeStr = [[NSString alloc] initWithUTF8String:minTime];
+                NSString * minTimeStr;
+                if (minTime != NULL)
+                {
+                    minTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                }
+                else
+                {
+                    minTimeStr = nil;
+                }
                 
                 char * updateTime = (char *)sqlite3_column_text(statement, 3);
-                NSString * updateTimeStr = [[NSString alloc] initWithUTF8String:updateTime];
+                NSString * updateTimeStr;
+                if (updateTime != NULL)
+                {
+                    updateTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                }
+                else
+                {
+                    updateTimeStr = nil;
+                }
                 
                 NSLog(@"uuid:%@  maxTime:%@  minTime:%@  updateTime:%@",familyuuidStr,maxTimeStr, minTimeStr,updateTimeStr);
                 

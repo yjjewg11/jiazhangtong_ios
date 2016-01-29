@@ -10,6 +10,11 @@
 #import "FPImagePickerSelectLayout.h"
 #import "FPImagePickerImageCell.h"
 #import "FPImagePickerImageDomain.h"
+#import "UploadImage.h"
+#import "PhotoLargerViewController.h"
+#import "FPImagePickerSelectBottomView.h"
+#import "FPUploadVC.h"
+#import "MJExtension.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface FPImagePickerSelectVC () <UICollectionViewDataSource,UICollectionViewDelegate>
@@ -19,6 +24,8 @@
     NSMutableArray * _domains;
     
     NSMutableDictionary * _selectIndexPath;
+    
+    FPImagePickerSelectBottomView * _bottomView;
 }
 
 @end
@@ -35,6 +42,8 @@ static NSString *const ImageCell = @"ImageCellID";
     
     _selectIndexPath = [NSMutableDictionary dictionary];
     
+    [self createBottomView];
+    
     //处理数据
     [self execDatas];
     
@@ -44,6 +53,7 @@ static NSString *const ImageCell = @"ImageCellID";
     [center addObserver:self selector:@selector(selectPhoto:) name:@"selectphoto" object:nil];
     [center addObserver:self selector:@selector(deSelectPhoto:) name:@"deselectphoto" object:nil];
     [center addObserver:self selector:@selector(showBigPhoto:) name:@"showbigphoto" object:nil];
+    [center addObserver:self selector:@selector(popSelf) name:@"endselect" object:nil];
 }
 
 - (void)initCollectionView
@@ -76,11 +86,6 @@ static NSString *const ImageCell = @"ImageCellID";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return _domains.count;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
 }
 
 - (void)execDatas
@@ -122,16 +127,33 @@ static NSString *const ImageCell = @"ImageCellID";
     }];
 }
 
-#pragma mark - 通知方法
+#pragma mark - 创建下面确定view
+- (void)createBottomView
+{
+    _bottomView = [[[NSBundle mainBundle] loadNibNamed:@"FPImagePickerSelectBottomView" owner:nil options:nil] firstObject];
+    
+    _bottomView.frame = CGRectMake(0, APPWINDOWHEIGHT-49-64, APPWINDOWWIDTH, 49);
+    
+    _bottomView.infoLbl.text = @"选择了:0 张";
+    
+    [self.view addSubview:_bottomView];
+}
 
+#pragma mark - 通知方法
 - (void)selectPhoto:(NSNotification *)noti
 {
     NSInteger index = [noti.object integerValue];
     
     ((FPImagePickerImageDomain *)_domains[index]).isSelect = YES;
     
-    [_selectIndexPath setObject:@"1" forKey:[NSString stringWithFormat:@"%d",index]];
-    NSLog(@"%@",_selectIndexPath);
+    FPImagePickerImageDomain * d = _domains[index];
+    
+    [_selectIndexPath setObject:d.localUrl forKey:[NSString stringWithFormat:@"%ld",(long)index]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
+    });
 }
 
 - (void)deSelectPhoto:(NSNotification *)noti
@@ -140,9 +162,12 @@ static NSString *const ImageCell = @"ImageCellID";
     
     ((FPImagePickerImageDomain *)_domains[index]).isSelect = NO;
     
-    [_selectIndexPath removeObjectForKey:[NSString stringWithFormat:@"%d",index]];
+    [_selectIndexPath removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)index]];
     
-    NSLog(@"%@",_selectIndexPath);
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
+    });
 }
 
 - (void)showBigPhoto:(NSNotification *)noti
@@ -152,22 +177,54 @@ static NSString *const ImageCell = @"ImageCellID";
     
     __weak typeof(self) wkself = self;
     
-    [[FPImagePickerVC defaultAssetsLibrary] assetForURL:d.localUrl resultBlock:^(ALAsset *asset)
+    [[FPUploadVC defaultAssetsLibrary] assetForURL:d.localUrl resultBlock:^(ALAsset *asset)
     {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-            UIImageView * img = [[UIImageView alloc] init];
-            img.backgroundColor = [UIColor blackColor];
-            img.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
-            img.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
-            [wkself.view addSubview:img];
-            [wkself.view bringSubviewToFront:img];
+            NSMutableArray *array = [NSMutableArray array];
+            UploadImage *upload1 = [[UploadImage alloc] init];
+            upload1.image = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+            [array addObject:upload1];
+            PhotoLargerViewController *photo = [[PhotoLargerViewController alloc] init];
+            //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:photo];
+            [photo setUploadImages:array selectedIndex:0];
+            [wkself presentViewController:photo animated:YES completion:^
+            {
+                
+            }];
         });
     }
     failureBlock:^(NSError *error)
     {
         NSLog(@"大图失败拉");
     }];
+}
+
+- (void)popSelf
+{
+    //得到词典中所有value值
+    NSEnumerator * enumeratorKey = [_selectIndexPath objectEnumerator];
+    
+    NSMutableArray * arr = [NSMutableArray array];
+    //快速枚举遍历所有KEY的值
+    for (NSURL *urls in enumeratorKey)
+    {
+        [arr addObject:urls];
+    }
+   
+    NSNotification * noti = [[NSNotification alloc] initWithName:@"didgetphotodata" object:[arr copy] userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:noti];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+        for (UIViewController *temp in self.navigationController.viewControllers)
+        {
+            if ([temp isKindOfClass:[FPUploadVC class]])
+            {
+                [self.navigationController popToViewController:temp animated:YES];
+            }
+        }
+    });
 }
 
 - (void)dealloc

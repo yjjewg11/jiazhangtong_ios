@@ -31,6 +31,7 @@
 #define readMsgURL           @"rest/pushMessage/read.json"       //阅读信件
 
 
+
 #define phoneCodeURL           @"rest/sms/sendCode.json"               //短信验证码
 #define classNewsMyURL         @"rest/classnews/getClassNewsByMy.json"   //我的孩子班级互动列表
 #define classNewsByClassIdURL  @"rest/classnews/getClassNewsByClassuuid.json"   //班级互动列表
@@ -51,6 +52,7 @@
 #define replyListURL          @"rest/reply/getReplyByNewsuuid.json" //回复列表
 
 #define uploadImgURL          @"rest/uploadFile/upload.json"  //上传图片
+#define fpUploadImgURL        @"rest/fPPhotoItem/upload.json"
 
 #define messageListURL        @"rest/pushMessage/queryMy.json" //消息列表
 
@@ -261,6 +263,10 @@
 + (NSString *)getUploadImgUrl {
     return URL(baseServiceURL, uploadImgURL);
 //    return @"http://120.25.127.141/runman-rest/rest/uploadFile/upload.json";
+}
+
++ (NSString *)getFPUploadImgUrl {
+    return URL(baseServiceURL, fpUploadImgURL);
 }
 
 //消息列表
