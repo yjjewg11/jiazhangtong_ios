@@ -2259,8 +2259,6 @@
 //查指定家庭的相片 type:0 是minTime , 1是maxTime;
 - (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild
 {
-    NSLog(@"familyUUID是:%@",familyUUID);
-    
     if (familyUUID == nil)
     {
         return;
@@ -2373,7 +2371,7 @@
 #pragma mark - 上传图片 
 - (void)uploadFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID img:(UIImage *)img success:(void(^)(NSString * str))success faild:(void(^)(NSString * errorMsg))faild
 {
-
+    
 }
 
 

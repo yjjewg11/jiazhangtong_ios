@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="width" constant="89" id="v5T-jv-wIk"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共8张" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dqd-TP-Wko">
@@ -161,7 +161,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="gOu-RF-vnG" firstAttribute="leading" secondItem="eeT-YH-mtD" secondAttribute="leading" id="28T-9I-Wak"/>
                             <constraint firstAttribute="trailing" secondItem="gOu-RF-vnG" secondAttribute="trailing" id="5us-qF-cfn"/>
@@ -193,7 +193,7 @@
                 <outlet property="img6" destination="ZyV-zx-Fcx" id="yHW-Tc-iH2"/>
                 <outlet property="total" destination="Dqd-TP-Wko" id="I25-Aa-XUG"/>
             </connections>
-            <point key="canvasLocation" x="308" y="262.5"/>
+            <point key="canvasLocation" x="297" y="259.5"/>
         </tableViewCell>
     </objects>
 </document>

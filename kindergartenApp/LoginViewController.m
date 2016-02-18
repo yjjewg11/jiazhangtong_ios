@@ -20,8 +20,8 @@
 #define UserNameKey @"UserName"
 #define PasswordKey @"Password"
 
-@interface LoginViewController () <UITextFieldDelegate> {
-    
+@interface LoginViewController () <UITextFieldDelegate>
+{
     IBOutlet UIImageView * headImageView;
     IBOutlet UIImageView * savePwdImageView;
     IBOutlet UIButton * savePwdBtn;

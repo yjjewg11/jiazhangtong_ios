@@ -271,12 +271,13 @@
 {
     NSDate *date = [NSDate date];
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
-    NSInteger interval = [zone secondsFromGMTForDate: date];
+    NSInteger interval = [zone secondsFromGMTForDate:date];
     
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
+    format.timeZone = zone;
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     
-    return [format stringFromDate:[date dateByAddingTimeInterval: interval]];
+    return [format stringFromDate:[date dateByAddingTimeInterval:interval]];
 }
 
 @end

@@ -173,7 +173,7 @@
         </view>
     </objects>
     <resources>
-        <image name="fpshouye" width="16" height="16"/>
+        <image name="fpshouye" width="20" height="18"/>
         <image name="xiangcetubiao" width="87" height="87"/>
     </resources>
 </document>

@@ -15,6 +15,7 @@
 #import "FPImagePickerSelectBottomView.h"
 #import "FPUploadVC.h"
 #import "MJExtension.h"
+#import "DBNetDaoService.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface FPImagePickerSelectVC () <UICollectionViewDataSource,UICollectionViewDelegate>
@@ -26,6 +27,8 @@
     NSMutableDictionary * _selectIndexPath;
     
     FPImagePickerSelectBottomView * _bottomView;
+    
+    DBNetDaoService * _service;
 }
 
 @end
@@ -37,6 +40,8 @@ static NSString *const ImageCell = @"ImageCellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _service = [DBNetDaoService defaulService];
     
     self.title = @"选择图片";
     
@@ -103,8 +108,6 @@ static NSString *const ImageCell = @"ImageCellID";
             if ([type isEqualToString:ALAssetTypePhoto])
             {
                 NSURL * localUrl = [[result defaultRepresentation] url];
-                
-                //根据localUrl 去数据库找，看有没有已经上传了的，如果有标记一下
                 FPImagePickerImageDomain * imgDomain = [[FPImagePickerImageDomain alloc] init];
                 imgDomain.localUrl = localUrl;
                 imgDomain.suoluetu = [UIImage imageWithCGImage:[result thumbnail]];
@@ -116,15 +119,25 @@ static NSString *const ImageCell = @"ImageCellID";
                 if (index + 1 == self.totalCount)
                 {
                     *stop = YES;
-                    dispatch_async(dispatch_get_main_queue(), ^
-                    {
-                       [_collectionView reloadData];
-                    });
                 }
             }
-
         }
     }];
+    
+    //从数据库获取数据，判断是否有已导入图片
+    NSMutableArray * marr = [_service queryLocalImg];
+    
+    for (FPImagePickerImageDomain * domain in _domains)
+    {
+        if ([marr containsObject:[domain.localUrl absoluteString]])
+        {
+            domain.isUpload = YES;
+        }
+        else
+        {
+            domain.isUpload = NO;
+        }
+    }
 }
 
 #pragma mark - 创建下面确定view
@@ -200,21 +213,27 @@ static NSString *const ImageCell = @"ImageCellID";
     }];
 }
 
+#pragma mark - 确定选择
 - (void)popSelf
 {
     //得到词典中所有value值
-    NSEnumerator * enumeratorKey = [_selectIndexPath objectEnumerator];
+    NSEnumerator * enumeratorObject = [_selectIndexPath objectEnumerator];
     
-    NSMutableArray * arr = [NSMutableArray array];
-    //快速枚举遍历所有KEY的值
-    for (NSURL *urls in enumeratorKey)
+    NSMutableArray * urlArr = [NSMutableArray array];
+    NSMutableArray * urlStrArr = [NSMutableArray array];
+    
+    for (NSURL *urls in enumeratorObject)
     {
-        [arr addObject:urls];
+        [urlArr addObject:urls];
+        [urlStrArr addObject:[urls absoluteString]];
     }
-   
-    NSNotification * noti = [[NSNotification alloc] initWithName:@"didgetphotodata" object:[arr copy] userInfo:nil];
+    
+    NSNotification * noti = [[NSNotification alloc] initWithName:@"didgetphotodata" object:[urlArr copy] userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:noti];
     
+    //存入数据库
+    [_service saveUploadImgListPath:urlStrArr];
+
     dispatch_async(dispatch_get_main_queue(), ^
     {
         for (UIViewController *temp in self.navigationController.viewControllers)

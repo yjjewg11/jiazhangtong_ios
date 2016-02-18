@@ -29,6 +29,17 @@
 
 @implementation DBNetDaoService
 
++ (DBNetDaoService *)defaulService
+{
+    static dispatch_once_t pred = 0;
+    static DBNetDaoService * service = nil;
+    dispatch_once(&pred,^
+    {
+        service = [[DBNetDaoService alloc] init];
+    });
+    return service;
+}
+
 - (instancetype)init
 {
     if (self = [super init])
@@ -52,11 +63,11 @@
             NSString * fp_familyinfo_Table = @"CREATE TABLE IF NOT EXISTS fp_familyinfo (family_uuid CHAR(45) PRIMARY KEY NOT NULL,'maxtime' datetime,'mintime' datetime,'updatetime' datetime);";
             
             //上传用 上传队列信息
-            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload (localpath CHAR(1024) PRIMARY KEY NOT NULL,'status' CHAR(2),'success_time' datetime);";
-
+            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload (localurl CHAR(1024) PRIMARY KEY NOT NULL,'status' CHAR(4),'success_time' datetime,'user_uuid' CHAR(1024) NOT NULL);";
             
             [self execSql:fp_photo_item_Table];
             [self execSql:fp_familyinfo_Table];
+            [self execSql:fp_upload_Table];
         }
     }
     return self;
@@ -69,31 +80,33 @@
     //从数据库查询 familyUUID 所对应的 maxTime 和 minTime 如果没有相应数据 则自动创建一条，且把maxTime和minTime设置为空
     FPFamilyInfoDomain * domain = [self queryTimeByFamilyUUID:familyUUID];
     
-    if (domain.maxTime == nil && domain.minTime == nil && domain.updateTime == nil)
+    if ([domain.maxTime isEqualToString:@""] || [domain.minTime isEqualToString:@""] || [domain.updateTime isEqualToString:@""] || domain.maxTime == nil || domain.minTime == nil || domain.updateTime == nil)
     {
-        NSDate *localeDate = [KGDateUtil getLocalDate];
-        NSString * nowTime = [KGDateUtil getFPFormatSringWithDate:localeDate];
-
+        NSString * timestr = [KGDateUtil getLocalDateStr];
+        timestr = [timestr stringByReplacingOccurrencesOfString:@":" withString:@"-"];
+        timestr = [timestr stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+        
         //从服务器请求数据
-        [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:familyUUID withTime:nowTime timeType:1 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
-        {
-            NSLog(@"请求第一次进入数据成功");
-            NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
-            
-            //把数据缓存到本地
-            NSLog(@"缓存初次进入相片数据到数据库中");
-            [self addPhotoToDatabase:(datas)];
-            
-            //设置maxTime 和 minTime到这个familyUUID
-            NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
-            [self updateMaxTime:familyUUID maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
-            
-            [self notiVC];
-        }
-        faild:^(NSString *errorMsg)
-        {
-            NSLog(@"请求照片数据失败");
-        }];
+        [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:familyUUID withTime:timestr timeType:1 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
+         {
+             NSLog(@"请求第一次进入数据成功");
+             NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
+             
+             //把数据缓存到本地
+             NSLog(@"缓存初次进入相片数据到数据库中");
+             [self addPhotoToDatabase:(datas)];
+             
+             //设置maxTime 和 minTime到这个familyUUID
+             NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
+             [self updateMaxTime:familyUUID maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
+             
+             NSNotification * noti = [[NSNotification alloc] initWithName:@"canLoadData" object:nil userInfo:nil];
+             [[NSNotificationCenter defaultCenter] postNotification:noti];
+         }
+         faild:^(NSString *errorMsg)
+         {
+             NSLog(@"请求照片数据失败");
+         }];
     }
     else if (domain == nil)
     {
@@ -101,8 +114,6 @@
     }
     else
     {
-        [self notiVC];
-        
         //调用接口10，根据这个时间范围查询新数据总数和变化数据总数
         NSString * maxTimeStr = domain.maxTime;
         NSString * minTimeStr = domain.minTime;
@@ -115,11 +126,18 @@
         [[KGHttpService sharedService] getFPPhotoUpdateCountWithFamilyUUID:familyUUID maxTime:maxTimeStr success:^(FPFamilyPhotoUpdateCount *domain)
          {
              NSLog(@"新数据的条数是:%d",domain.newDataCount);
+             NSNotification * noti1 = [[NSNotification alloc] initWithName:@"updateInfo" object:[KGDateUtil getLocalDateStr] userInfo:nil];
+             [[NSNotificationCenter defaultCenter] postNotification:noti1];
              
              if (domain.newDataCount > 0)
              {
                  //调用接口9 查询最新相片
                  [self queryNewPhotos:familyUUID minTime:maxTimeStr];
+             }
+             else
+             {
+                 NSNotification * noti = [[NSNotification alloc] initWithName:@"canLoadData" object:nil userInfo:nil];
+                 [[NSNotificationCenter defaultCenter] postNotification:noti];
              }
          }
          faild:^(NSString *errorMsg)
@@ -155,36 +173,39 @@
                 NSString *familyuuidStr = [[NSString alloc] initWithUTF8String:familyuuid];
                 
                 char * maxTime = (char *)sqlite3_column_text(statement, 1);
+                
+                printf("%d",strcmp(maxTime,"(null)"));
+                
                 NSString * maxTimeStr;
-                if (maxTime != NULL)
+                if (maxTime == NULL || strcmp(maxTime,"(null)") == 0)
                 {
-                     maxTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                    maxTimeStr = @"";
                 }
                 else
                 {
-                    maxTimeStr = nil;
+                    maxTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
                 }
                 
                 char * minTime = (char *)sqlite3_column_text(statement, 2);
                 NSString * minTimeStr;
-                if (minTime != NULL)
+                if (minTime == NULL || strcmp(minTime,"(null)") == 0)
                 {
-                    minTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                    minTimeStr = @"";
                 }
                 else
                 {
-                    minTimeStr = nil;
+                    minTimeStr = [[NSString alloc] initWithUTF8String:minTime];
                 }
                 
                 char * updateTime = (char *)sqlite3_column_text(statement, 3);
                 NSString * updateTimeStr;
-                if (updateTime != NULL)
+                if (updateTime == NULL || strcmp(updateTime,"(null)") == 0)
                 {
-                    updateTimeStr = [[NSString alloc] initWithUTF8String:maxTime];
+                    updateTimeStr = @"";
                 }
                 else
                 {
-                    updateTimeStr = nil;
+                    updateTimeStr = [[NSString alloc] initWithUTF8String:updateTime];
                 }
                 
                 NSLog(@"uuid:%@  maxTime:%@  minTime:%@  updateTime:%@",familyuuidStr,maxTimeStr, minTimeStr,updateTimeStr);
@@ -252,14 +273,15 @@
 {
     [[KGHttpService sharedService] getFPPhotoUpdateDataWithFamilyUUID:familyUUID maxTime:maxTime minTime:minTime updateTime:updateTime success:^(NSArray *needUpDateDatas)
     {
+        //这里更新updatetime
+        [self updateUpdateTime:familyUUID updatetime:[KGDateUtil getLocalDateStr]];
+        
         if (needUpDateDatas.count > 0)
         {
             [self updatePhotoStatus:needUpDateDatas];
-            //这里更新updatetime
-            [self updateUpdateTime:familyUUID updatetime:[KGDateUtil getLocalDateStr]];
         }
-        
-    } faild:^(NSString *errorMsg)
+    }
+    faild:^(NSString *errorMsg)
     {
         
     }];
@@ -296,10 +318,9 @@
         NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
         //更新数据库
         [self addPhotoToDatabase:datas];
-        
         NSLog(@"通知vc有新数据了!");
         //通知VC可以更新数据了
-        NSNotification * noti = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:datas userInfo:nil];
+        NSNotification * noti = [[NSNotification alloc] initWithName:@"canLoadData" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti];
     }
     faild:^(NSString *errorMsg)
@@ -388,7 +409,7 @@
 }
 
 #pragma mark - 查询列表数据用于时光轴表头显示
-- (NSArray *)getListTimeHeadData:(NSString *)familyuuid
+- (NSMutableArray *)getListTimeHeadData:(NSString *)familyuuid
 {
     NSString * sql = [NSString stringWithFormat:@"SELECT strftime('%%Y-%%m-%%d',create_time),count(1) from fp_photo_item WHERE family_uuid ='%@' GROUP BY strftime('%%Y-%%m-%%d',create_time)",familyuuid];
     
@@ -397,7 +418,7 @@
     sqlite3_stmt *stmt;
     if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
     {
-        while (sqlite3_step(stmt)==SQLITE_ROW)
+        while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             char *time = (char *)sqlite3_column_text(stmt, 0);
             NSString *timeStr = [[NSString alloc] initWithUTF8String:time];
@@ -405,9 +426,7 @@
             int count = sqlite3_column_int(stmt, 1);
             NSString *countStr = [NSString stringWithFormat:@"%d",count];
             
-            NSString * result = [NSString stringWithFormat:@"%@,%@",timeStr,countStr];
-            
-            [marr addObject:result];
+            [marr addObject:[NSString stringWithFormat:@"%@,%@",timeStr,countStr]];
         }
     }
     
@@ -417,7 +436,6 @@
 }
 
 #pragma mark - 查询相片数据用于单元格显示 (6 limit)
-
 - (NSArray *)getListTimePhotoData:(NSString *)date familyUUID:(NSString *)familyUUID
 {
     NSString * sql = [NSString stringWithFormat:@"SELECT path from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 6",date,familyUUID];
@@ -439,17 +457,180 @@
     return [marr copy];
 }
 
-- (void)notiVC
+#pragma mark - 保存上传的图片路径
+- (void)saveUploadImgPath:(NSString *)localurl status:(NSString *)status
 {
-    NSNotification * noti = [[NSNotification alloc] initWithName:@"canLoadData" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:noti];
+    //1.先根据这个localurl去查，看有没有记录
+    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+    
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE localurl='%@' AND user_uuid='%@'",localurl,useruuid];
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            char *localurl = (char *)sqlite3_column_text(stmt, 0);
+            NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
+            
+            //如果有，update它的状态为4:成功
+            NSString * sqlupdate = [NSString stringWithFormat:@"update fp_upload set status='%@' WHERE localurl='%@' AND user_uuid='%@'",@"4",localurlStr,useruuid];
+            [self execSql:sqlupdate];
+        }
+    }
+    else
+    {
+        //如果没有，插入，并标记成功
+        NSString * date = [KGDateUtil getLocalDateStr];
+        NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+        
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (localurl,status,success_time,user_uuid) values ('%@','%@','%@','%@')",localurl,status,date,useruuid];
+        [self execSql:sql];
+    }
 }
 
-#pragma mark - 
-- (void)saveUploadPicsUrl:(NSArray *)imgsurl
+#pragma mark - 查询失败、成功的图片
+- (NSMutableArray *)queryLocalImg
 {
-    //根据url 去数据库里面查,如果有,则不存，没有则存
+    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"4",@"1"];
     
+    NSMutableArray * marr = [NSMutableArray array];
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            char *localurl = (char *)sqlite3_column_text(stmt, 0);
+            NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
+            [marr addObject:localurlStr];
+        }
+    }
+    
+    return marr;
+}
+
+#pragma mark - 查询等待，失败的图片
+- (NSMutableArray *)queryUploadListLocalImg
+{
+    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+    
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@');",useruuid,@"1",@"3"];
+    
+    NSMutableArray * marr = [NSMutableArray array];
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            char *localurl = (char *)sqlite3_column_text(stmt, 0);
+            NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
+            [marr addObject:localurlStr];
+        }
+    }
+    
+    return marr;
+}
+
+#pragma mark - 批量导入的时候，保存列表数据
+- (void)saveUploadImgListPath:(NSMutableArray *)localurls
+{
+    NSString * date = [KGDateUtil getLocalDateStr];
+    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+    NSMutableArray * transactionSql = [[NSMutableArray alloc] init];
+    
+    for (NSString * url in localurls)
+    {
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (localurl,status,success_time,user_uuid) values ('%@','%@','%@','%@')",url,@"1",date,useruuid];
+        
+        [transactionSql addObject:sql];
+    }
+    
+    [self execInsertTransactionSql:transactionSql];
+}
+
+#pragma mark - 删除上传列表中的数据
+- (void)deleteUploadImg:(NSString *)localurl
+{
+    NSString * sql = [NSString stringWithFormat:@"DELETE FROM fp_upload WHERE localurl='%@'",localurl];
+    
+    [self execSql:sql];
+}
+
+#pragma mark - 刷新，查询最新数据并且保存到数据库
+- (void)queryNewestDataAndSave
+{
+    
+}
+
+#pragma mark - 查查查询maxtime以后的数据，首页刷新用
+- (void)queryRefreshNewestData:(NSString *)familyUUID
+{
+    
+}
+
+#pragma mark - 根据具体某一天日期分页查询图片详情
+- (NSArray *)queryPicDetailByDate:(NSString *)date pageNo:(NSString *)pageNo familyUUID:(NSString *)familyUUID
+{
+    NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 20 offset %ld",date,familyUUID,([pageNo integerValue]-1) * 20];
+    
+    NSMutableArray * marr = [NSMutableArray array];
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            FPFamilyPhotoNormalDomain * domain = [[FPFamilyPhotoNormalDomain alloc] init];
+            
+            char *uuid = (char *)sqlite3_column_text(stmt, 0);
+            NSString *uuidStr = [[NSString alloc] initWithUTF8String:uuid];
+            domain.uuid = uuidStr;
+            
+            char *status = (char *)sqlite3_column_text(stmt, 1);
+            NSString *statusStr = [[NSString alloc] initWithUTF8String:status];
+            domain.status = statusStr;
+            
+            char *family_uuid = (char *)sqlite3_column_text(stmt, 2);
+            NSString *family_uuidStr = [[NSString alloc] initWithUTF8String:family_uuid];
+            domain.family_uuid = family_uuidStr;
+            
+            char *create_time = (char *)sqlite3_column_text(stmt, 3);
+            NSString *create_timeStr = [[NSString alloc] initWithUTF8String:create_time];
+            domain.create_time = create_timeStr;
+            
+            char *photo_time = (char *)sqlite3_column_text(stmt, 4);
+            NSString *photo_timeStr = [[NSString alloc] initWithUTF8String:photo_time];
+            domain.photo_time = photo_timeStr;
+            
+            char *create_useruuid = (char *)sqlite3_column_text(stmt, 5);
+            NSString *create_useruuidStr = [[NSString alloc] initWithUTF8String:create_useruuid];
+            domain.create_useruuid = create_useruuidStr;
+            
+            char *path = (char *)sqlite3_column_text(stmt, 6);
+            NSString *pathStr = [[NSString alloc] initWithUTF8String:path];
+            domain.path = pathStr;
+            
+            char *address = (char *)sqlite3_column_text(stmt, 7);
+            NSString *addressStr = [[NSString alloc] initWithUTF8String:address];
+            domain.address = addressStr;
+            
+            char *note = (char *)sqlite3_column_text(stmt, 8);
+            NSString *noteStr = [[NSString alloc] initWithUTF8String:note];
+            domain.note = noteStr;
+            
+            char *md5 = (char *)sqlite3_column_text(stmt, 9);
+            NSString *md5Str = [[NSString alloc] initWithUTF8String:md5];
+            domain.md5 = md5Str;
+            
+            [marr addObject:domain];
+        }
+    }
+    
+    return [marr copy];
 }
 
 @end

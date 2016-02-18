@@ -10,4 +10,7 @@
 
 @interface FPTimeLineDetailVC : BaseViewController
 
+@property (strong, nonatomic) NSString * daytimeStr;
+@property (strong, nonatomic) NSString * familyUUID;
+
 @end

@@ -13,6 +13,5 @@
 @property (strong, nonatomic) NSString * title;
 @property (strong, nonatomic) NSString * herald;
 @property (strong, nonatomic) NSString * photo_count;
-@property (strong, nonatomic) NSString * status;
 
 @end

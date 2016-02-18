@@ -12,6 +12,8 @@
 @interface FPUploadCell : UITableViewCell
 
 @property (assign, nonatomic) NSInteger index;
+@property (assign, nonatomic) NSInteger status;
+@property (assign, nonatomic) float percent;
 
 - (void)setData:(FPFamilyPhotoUploadDomain *)domain;
 

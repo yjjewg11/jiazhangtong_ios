@@ -14,6 +14,8 @@
 
 - (void)pushToCreateGiftwareShopVC;
 
+- (void)hidenSelf;
+
 @end
 
 @interface FPHomeSelectView : UIView

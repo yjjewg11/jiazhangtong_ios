@@ -67,6 +67,12 @@ static CGFloat kLabelPaddingDist = 8.0f;
     }
     else
     {
+        if (offset.y <= -50)
+        {
+            //发通知，通知vc获取新数据
+            NSNotification * noti = [[NSNotification alloc] initWithName:@"refreshtimelinedata" object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotification:noti];
+        }
         CGFloat delta = 0.0f;
         CGRect rect = kDefaultHeaderFrame;
         delta = fabs(MIN(0.0f, offset.y));
@@ -76,6 +82,8 @@ static CGFloat kLabelPaddingDist = 8.0f;
         self.clipsToBounds = NO;
         self.headerTitleLabel.alpha = 1 - (delta) * 1 / kMaxTitleAlphaOffset;
     }
+    
+    
 }
 
 - (void)refreshBlurViewForNewImage

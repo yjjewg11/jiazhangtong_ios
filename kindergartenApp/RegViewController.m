@@ -214,7 +214,8 @@
 
 
 //注册提交按钮不可用
-- (void)registerBtnEnable:(BOOL)enable alpha:(CGFloat)alpha{
+- (void)registerBtnEnable:(BOOL)enable alpha:(CGFloat)alpha
+{
     [submitBtn setEnabled:enable];
     [submitBtn setAlpha:alpha];
 }

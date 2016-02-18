@@ -292,6 +292,8 @@
 		04F72AC61BEC994500623E33 /* SPTeacherDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F72AC51BEC994500623E33 /* SPTeacherDetailDomain.m */; };
 		04F780151C58ABBD00806A98 /* FPHomeTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F780131C58ABBD00806A98 /* FPHomeTimeLineCell.m */; };
 		04F780161C58ABBD00806A98 /* FPHomeTimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F780141C58ABBD00806A98 /* FPHomeTimeLineCell.xib */; };
+		04F7D6E51C5F0561006B5591 /* FPUploadSaveUrlDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D6E41C5F0561006B5591 /* FPUploadSaveUrlDomain.m */; };
+		04F7D6E91C5F2D0F006B5591 /* CHKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D6E71C5F2D0F006B5591 /* CHKeychain.m */; };
 		04F81C241C158F6A00EE24FF /* NoDataTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */; };
 		04F81C251C158F6A00EE24FF /* NoDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */; };
 		04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F84EBA1C0851E800A51140 /* NoNetView.m */; };
@@ -451,6 +453,10 @@
 		04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA92811C4DDCE800010DAE /* Accelerate.framework */; };
 		04FA92881C4DE6E600010DAE /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA92851C4DE6E600010DAE /* ParallaxHeaderView.m */; };
 		04FA92891C4DE6E600010DAE /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA92871C4DE6E600010DAE /* UIImage+ImageEffects.m */; };
+		04FABBF61C757D7A001D4BC9 /* FPTimeLineDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FABBF51C757D7A001D4BC9 /* FPTimeLineDetailLayout.m */; };
+		04FABBFA1C757E8C001D4BC9 /* FPTimeLineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FABBF81C757E8C001D4BC9 /* FPTimeLineDetailCell.m */; };
+		04FABBFB1C757E8C001D4BC9 /* FPTimeLineDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FABBF91C757E8C001D4BC9 /* FPTimeLineDetailCell.xib */; };
+		04FABBFE1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FABBFD1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m */; };
 		04FADC551C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */; };
 		04FADC561C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */; };
 		04FAEF671C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAEF661C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m */; };
@@ -1232,6 +1238,10 @@
 		04F780121C58ABBD00806A98 /* FPHomeTimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeTimeLineCell.h; sourceTree = "<group>"; };
 		04F780131C58ABBD00806A98 /* FPHomeTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTimeLineCell.m; sourceTree = "<group>"; };
 		04F780141C58ABBD00806A98 /* FPHomeTimeLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeTimeLineCell.xib; sourceTree = "<group>"; };
+		04F7D6E31C5F0561006B5591 /* FPUploadSaveUrlDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadSaveUrlDomain.h; sourceTree = "<group>"; };
+		04F7D6E41C5F0561006B5591 /* FPUploadSaveUrlDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadSaveUrlDomain.m; sourceTree = "<group>"; };
+		04F7D6E71C5F2D0F006B5591 /* CHKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHKeychain.m; sourceTree = "<group>"; };
+		04F7D6E81C5F2D0F006B5591 /* CHKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHKeychain.h; sourceTree = "<group>"; };
 		04F81C211C158F6A00EE24FF /* NoDataTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoDataTableViewCell.h; sourceTree = "<group>"; };
 		04F81C221C158F6A00EE24FF /* NoDataTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoDataTableViewCell.m; sourceTree = "<group>"; };
 		04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoDataTableViewCell.xib; sourceTree = "<group>"; };
@@ -1514,6 +1524,13 @@
 		04FA92851C4DE6E600010DAE /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
 		04FA92861C4DE6E600010DAE /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		04FA92871C4DE6E600010DAE /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		04FABBF41C757D7A001D4BC9 /* FPTimeLineDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineDetailLayout.h; sourceTree = "<group>"; };
+		04FABBF51C757D7A001D4BC9 /* FPTimeLineDetailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineDetailLayout.m; sourceTree = "<group>"; };
+		04FABBF71C757E8C001D4BC9 /* FPTimeLineDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineDetailCell.h; sourceTree = "<group>"; };
+		04FABBF81C757E8C001D4BC9 /* FPTimeLineDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineDetailCell.m; sourceTree = "<group>"; };
+		04FABBF91C757E8C001D4BC9 /* FPTimeLineDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPTimeLineDetailCell.xib; sourceTree = "<group>"; };
+		04FABBFC1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineDetailCommentDomain.h; sourceTree = "<group>"; };
+		04FABBFD1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineDetailCommentDomain.m; sourceTree = "<group>"; };
 		04FADC521C3CE44B009D71F1 /* SpCourseDetailInfoWeb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailInfoWeb.h; sourceTree = "<group>"; };
 		04FADC531C3CE44B009D71F1 /* SpCourseDetailInfoWeb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseDetailInfoWeb.m; sourceTree = "<group>"; };
 		04FADC541C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseDetailInfoWeb.xib; sourceTree = "<group>"; };
@@ -2225,6 +2242,8 @@
 			children = (
 				0449A3491C4F73FC0066ABBB /* FPGiftwarePickerLayout.h */,
 				0449A34A1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m */,
+				04FABBF41C757D7A001D4BC9 /* FPTimeLineDetailLayout.h */,
+				04FABBF51C757D7A001D4BC9 /* FPTimeLineDetailLayout.m */,
 			);
 			name = layout;
 			sourceTree = "<group>";
@@ -2238,6 +2257,9 @@
 				0449A3521C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.h */,
 				0449A3531C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m */,
 				0449A3541C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.xib */,
+				04FABBF71C757E8C001D4BC9 /* FPTimeLineDetailCell.h */,
+				04FABBF81C757E8C001D4BC9 /* FPTimeLineDetailCell.m */,
+				04FABBF91C757E8C001D4BC9 /* FPTimeLineDetailCell.xib */,
 			);
 			name = collCell;
 			sourceTree = "<group>";
@@ -3025,6 +3047,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		04F7D6E61C5F2CF7006B5591 /* KeyChain */ = {
+			isa = PBXGroup;
+			children = (
+				04F7D6E71C5F2D0F006B5591 /* CHKeychain.m */,
+				04F7D6E81C5F2D0F006B5591 /* CHKeychain.h */,
+			);
+			name = KeyChain;
+			sourceTree = "<group>";
+		};
 		04F84EBE1C085F3400A51140 /* libc++ */ = {
 			isa = PBXGroup;
 			children = (
@@ -3311,6 +3342,10 @@
 				04FBAECD1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m */,
 				04FBAECF1C5B3D280094DC6B /* FPUploadBaseDomain.h */,
 				04FBAED01C5B3D280094DC6B /* FPUploadBaseDomain.m */,
+				04F7D6E31C5F0561006B5591 /* FPUploadSaveUrlDomain.h */,
+				04F7D6E41C5F0561006B5591 /* FPUploadSaveUrlDomain.m */,
+				04FABBFC1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.h */,
+				04FABBFD1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -4341,6 +4376,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				04F7D6E61C5F2CF7006B5591 /* KeyChain */,
 				04FBAEBA1C5B137F0094DC6B /* 图片浏览器 */,
 				04F9037C1C56795C0040629F /* AFNetworking */,
 				04FA92831C4DE6E600010DAE /* TZN4Header */,
@@ -5742,6 +5778,7 @@
 				04A4DE9A1BF484DF002ABBB1 /* webview_bar_share.png in Resources */,
 				04F936D21C4CE74F00116D86 /* FPHomeTopView.xib in Resources */,
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
+				04FABBFB1C757E8C001D4BC9 /* FPTimeLineDetailCell.xib in Resources */,
 				04A4DE8B1BF484DF002ABBB1 /* hengtiao.png in Resources */,
 				04F9F3011BF9C67500470F0C /* MySPButtonCell.xib in Resources */,
 				24C46B531B5A2BC800A58F92 /* MessageViewController.xib in Resources */,
@@ -5880,6 +5917,7 @@
 				2489B6641B5AB49E00039E70 /* UIImage+MultiFormat.m in Sources */,
 				24759EB01B5FC89900A3087D /* KGListBaseDomain.m in Sources */,
 				2489B6621B5AB49E00039E70 /* UIButton+WebCache.m in Sources */,
+				04FABBFE1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m in Sources */,
 				0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */,
 				F4E6B2451B6B59960087EAEB /* GiftwareArticlesViewController.m in Sources */,
 				24AA0B461B690F4300DAC03B /* UUMessageContentButton.m in Sources */,
@@ -5934,6 +5972,7 @@
 				F4E36D5A1B85B49D009BD909 /* DoAlbumCell.m in Sources */,
 				F47AFEB51B5E2BF800D43F38 /* PageInfoDomain.m in Sources */,
 				04F3D4621BF47FD3007E7AC0 /* NSDictionary_JSONExtensions.m in Sources */,
+				04F7D6E91C5F2D0F006B5591 /* CHKeychain.m in Sources */,
 				04F95F5B1C4E2E37000909B1 /* FPHomeSonView.m in Sources */,
 				24AA0B421B690F4300DAC03B /* UUImageAvatarBrowser.m in Sources */,
 				04FB7CBC1C0DA84000FD3E31 /* SpCourseDetailTableVC.m in Sources */,
@@ -6023,6 +6062,7 @@
 				248B6ACE1B19B57400FCB98F /* FuniKeyChain.m in Sources */,
 				040A27421BEB663300620876 /* SPBottomItem.m in Sources */,
 				248B6A921B19A9D900FCB98F /* UIBarButtonItem+Extension.m in Sources */,
+				04FABBF61C757D7A001D4BC9 /* FPTimeLineDetailLayout.m in Sources */,
 				04F89A431C1024E000FC0FA6 /* NoDataView.m in Sources */,
 				2474DFA41B6CA4840021506F /* BaseTopicInteractViewController.m in Sources */,
 				24DE91B91B67C9D400D3FFCE /* TeacherJudgeTableViewCell.m in Sources */,
@@ -6110,6 +6150,7 @@
 				04FB44DB1C59B68900094E67 /* FPTimeLineDetailVC.m in Sources */,
 				04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */,
 				040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */,
+				04FABBFA1C757E8C001D4BC9 /* FPTimeLineDetailCell.m in Sources */,
 				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
 				046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */,
 				04FB23881C16E761009B57E2 /* MineHomeLayout.m in Sources */,
@@ -6218,6 +6259,7 @@
 				2474DFB81B6CBB8D0021506F /* StudentSignRecordDomain.m in Sources */,
 				04F72AC01BEC7E1E00623E33 /* SPTeacherDomain.m in Sources */,
 				F48783AF1B58DA1700CDC1A8 /* MJProperty.m in Sources */,
+				04F7D6E51C5F0561006B5591 /* FPUploadSaveUrlDomain.m in Sources */,
 				F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */,
 				04F903A51C56795C0040629F /* AFHTTPRequestOperation.m in Sources */,
 				4D5CE76F1B7E4333002F1088 /* PushNotificationViewController.m in Sources */,

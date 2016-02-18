@@ -29,7 +29,7 @@
 
 - (IBAction)cancelBtn:(id)sender
 {
-    [self removeFromSuperview];
+    [self.delegate hidenSelf];
 }
 
 - (IBAction)selectImage:(id)sender
