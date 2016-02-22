@@ -42,6 +42,9 @@
 #import "FPFamilyPhotoLastTimeVO.h"
 #import "FPFamilyPhotoUpdateCount.h"
 #import "FPFamilyPhotoStatusDomain.h"
+#import "FPTimeLineDZDomain.h"
+#import "FPTimeLineCommentDomain.h"
+#import "FPFamilyPhotoNormalDomain.h"
 
 @interface KGHttpService : NSObject
 
@@ -342,4 +345,20 @@
 - (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime updateTime:(NSString *)updateTime success:(void(^)(NSArray * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)uploadFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID img:(UIImage *)img success:(void(^)(NSString * str))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)modifyFPItemInfo:(NSString *)address note:(NSString *)note success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPItemExtraInfo:(NSString *)uuid success:(void(^)(FPTimeLineDZDomain * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)saveFPItemReply:(NSString *)content rel_uuid:(NSString *)rel_uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)deleteFPTimeLineItem:(NSString *)uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPItemCommentList:(NSString *)uuid pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(NSArray * arr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPTimeLineItem:(NSString *)uuid success:(void(^)(FPFamilyPhotoNormalDomain * item))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)saveFPDZ:(NSString *)newsuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)delFPDZ:(NSString *)newsuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 @end

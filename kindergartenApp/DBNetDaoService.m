@@ -57,7 +57,7 @@
         {
             NSLog(@"数据库打开成功");
             //创建表 图片信息
-            NSString * fp_photo_item_Table = @"CREATE TABLE IF NOT EXISTS fp_photo_item (uuid CHAR(45) PRIMARY KEY NOT NULL,status INT,family_uuid  CHAR(45),'create_time' datetime,'photo_time' datetime,'create_useruuid' CHAR (45),'path' CHAR (512),'address' CHAR (45),'note' CHAR (300),'md5' CHAR (512));CREATE INDEX IF NOT EXISTS index_1 ON fp_photo_item (create_time);CREATE INDEX IF NOT EXISTS index_2 ON fp_photo_item (photo_time);CREATE INDEX IF NOT EXISTS index_3 ON fp_photo_item (family_uuid);";
+            NSString * fp_photo_item_Table = @"CREATE TABLE IF NOT EXISTS fp_photo_item (uuid CHAR(45) PRIMARY KEY NOT NULL,status INT,family_uuid  CHAR(45),'create_time' datetime,'photo_time' datetime,'create_useruuid' CHAR (45),'path' CHAR (512),'address' CHAR (45),'note' CHAR (300),'md5' CHAR (512),'create_user' CHAR (45));CREATE INDEX IF NOT EXISTS index_1 ON fp_photo_item (create_time);CREATE INDEX IF NOT EXISTS index_2 ON fp_photo_item (photo_time);CREATE INDEX IF NOT EXISTS index_3 ON fp_photo_item (family_uuid);";
             
             //保存家庭相册时间信息
             NSString * fp_familyinfo_Table = @"CREATE TABLE IF NOT EXISTS fp_familyinfo (family_uuid CHAR(45) PRIMARY KEY NOT NULL,'maxtime' datetime,'mintime' datetime,'updatetime' datetime);";
@@ -260,7 +260,7 @@
     {
         FPFamilyPhotoNormalDomain * dataDomain = photos[i];
         
-        NSString * sql = [NSString stringWithFormat:@"insert into fp_photo_item (uuid,status,family_uuid,create_time,photo_time,create_useruuid,path,address,note,md5) values ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",dataDomain.uuid,dataDomain.status,dataDomain.family_uuid,dataDomain.create_time,dataDomain.photo_time,dataDomain.create_useruuid,dataDomain.path,dataDomain.address,dataDomain.note,dataDomain.md5];
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_photo_item (uuid,status,family_uuid,create_time,photo_time,create_useruuid,path,address,note,md5,create_user) values ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",dataDomain.uuid,dataDomain.status,dataDomain.family_uuid,dataDomain.create_time,dataDomain.photo_time,dataDomain.create_useruuid,dataDomain.path,dataDomain.address,dataDomain.note,dataDomain.md5,dataDomain.create_user];
         
         [transactionSql addObject:sql];
     }
@@ -575,7 +575,7 @@
 #pragma mark - 根据具体某一天日期分页查询图片详情
 - (NSArray *)queryPicDetailByDate:(NSString *)date pageNo:(NSString *)pageNo familyUUID:(NSString *)familyUUID
 {
-    NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 20 offset %ld",date,familyUUID,([pageNo integerValue]-1) * 20];
+    NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 20 offset %ld",date,familyUUID,(long)(([pageNo integerValue]-1) * 20)];
     
     NSMutableArray * marr = [NSMutableArray array];
     
@@ -626,11 +626,31 @@
             NSString *md5Str = [[NSString alloc] initWithUTF8String:md5];
             domain.md5 = md5Str;
             
+            char *create_user = (char *)sqlite3_column_text(stmt, 10);
+            NSString *create_userStr = [[NSString alloc] initWithUTF8String:create_user];
+            domain.create_user = create_userStr;
+            
             [marr addObject:domain];
         }
     }
     
     return [marr copy];
+}
+
+#pragma mark - 更新相片信息 note address create_time
+- (void)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain
+{
+    NSString * sqlupdate = [NSString stringWithFormat:@"update fp_photo_item set note='%@',address='%@' WHERE uuid='%@'",domain.note,domain.address,domain.uuid];
+    
+    [self execSql:sqlupdate];
+}
+
+#pragma mark - 删除时光轴相片
+- (void)deletePhotoItem:(NSString *)uuid
+{
+    NSString * sql = [NSString stringWithFormat:@"DELETE FROM fp_photo_item WHERE uuid='%@'",uuid];
+    
+    [self execSql:sql];
 }
 
 @end

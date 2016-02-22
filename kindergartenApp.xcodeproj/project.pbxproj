@@ -15,6 +15,7 @@
 		040021201C3FA79A005F1D82 /* RouteDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0400211F1C3FA79A005F1D82 /* RouteDomain.m */; };
 		0400E4A51C2B94A70098A336 /* ReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0400E4A41C2B94A70098A336 /* ReplyTableViewCell.xib */; };
 		040109B41BF1F8CB00A18622 /* MySPCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 040109B31BF1F8CB00A18622 /* MySPCourseDomain.m */; };
+		0401B2D51C76EF6B0014886F /* FPTimeLineDZDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401B2D41C76EF6B0014886F /* FPTimeLineDZDomain.m */; };
 		0403DCE01BF5B9CD0089E463 /* MYSPCourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403DCDE1BF5B9CD0089E463 /* MYSPCourseTableViewCell.m */; };
 		0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0403DCDF1BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib */; };
 		0403DCE41BF5C5980089E463 /* MySPCourseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0403DCE31BF5C5980089E463 /* MySPCourseDetailVC.m */; };
@@ -326,6 +327,9 @@
 		04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D3681C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib */; };
 		04F8D36E1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D36C1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m */; };
 		04F8D36F1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D36D1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib */; };
+		04F8F62C1C7AAF94006929F2 /* FPTimeLineCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8F62B1C7AAF94006929F2 /* FPTimeLineCommentDomain.m */; };
+		04F8F6301C7AB410006929F2 /* FPTimeLineCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8F62E1C7AB410006929F2 /* FPTimeLineCommentCell.m */; };
+		04F8F6311C7AB410006929F2 /* FPTimeLineCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8F62F1C7AB410006929F2 /* FPTimeLineCommentCell.xib */; };
 		04F903A51C56795C0040629F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9037F1C56795C0040629F /* AFHTTPRequestOperation.m */; };
 		04F903A61C56795C0040629F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F903811C56795C0040629F /* AFHTTPRequestOperationManager.m */; };
 		04F903A71C56795C0040629F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F903831C56795C0040629F /* AFHTTPSessionManager.m */; };
@@ -530,6 +534,10 @@
 		04FEDD481C03542700921AC1 /* MySPEndCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FEDD461C03542700921AC1 /* MySPEndCourseView.xib */; };
 		04FEDD4B1C0359FC00921AC1 /* MySPCourseEndedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEDD4A1C0359FC00921AC1 /* MySPCourseEndedView.m */; };
 		04FEDD4D1C035A0D00921AC1 /* MySPCourseEndedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FEDD4C1C035A0D00921AC1 /* MySPCourseEndedView.xib */; };
+		04FEEC801C76B7670024FEAF /* FPTimeLineEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEEC7E1C76B7670024FEAF /* FPTimeLineEditVC.m */; };
+		04FEEC811C76B7670024FEAF /* FPTimeLineEditVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FEEC7F1C76B7670024FEAF /* FPTimeLineEditVC.xib */; };
+		04FF07261C771B5000B891D6 /* FPTimeLineDetailMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF07251C771B5000B891D6 /* FPTimeLineDetailMoreView.m */; };
+		04FF07281C771B5F00B891D6 /* FPTimeLineDetailMoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FF07271C771B5F00B891D6 /* FPTimeLineDetailMoreView.xib */; };
 		04FF475E1C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF47531C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04FF475F1C046D97004DC45D /* AdMoGoAdapterDGTMob.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF47551C046D97004DC45D /* AdMoGoAdapterDGTMob.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FF47571C046D97004DC45D /* GDTMobNativeAdapter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -815,6 +823,8 @@
 		0400E4A41C2B94A70098A336 /* ReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReplyTableViewCell.xib; sourceTree = "<group>"; };
 		040109B21BF1F8CB00A18622 /* MySPCourseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseDomain.h; sourceTree = "<group>"; };
 		040109B31BF1F8CB00A18622 /* MySPCourseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseDomain.m; sourceTree = "<group>"; };
+		0401B2D31C76EF6B0014886F /* FPTimeLineDZDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineDZDomain.h; sourceTree = "<group>"; };
+		0401B2D41C76EF6B0014886F /* FPTimeLineDZDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineDZDomain.m; sourceTree = "<group>"; };
 		0403DCDD1BF5B9CD0089E463 /* MYSPCourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYSPCourseTableViewCell.h; sourceTree = "<group>"; };
 		0403DCDE1BF5B9CD0089E463 /* MYSPCourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYSPCourseTableViewCell.m; sourceTree = "<group>"; };
 		0403DCDF1BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYSPCourseTableViewCell.xib; sourceTree = "<group>"; };
@@ -1294,6 +1304,11 @@
 		04F8D36B1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolBtnCell.h; sourceTree = "<group>"; };
 		04F8D36C1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolBtnCell.m; sourceTree = "<group>"; };
 		04F8D36D1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnrolStudentMySchoolBtnCell.xib; sourceTree = "<group>"; };
+		04F8F62A1C7AAF94006929F2 /* FPTimeLineCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineCommentDomain.h; sourceTree = "<group>"; };
+		04F8F62B1C7AAF94006929F2 /* FPTimeLineCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineCommentDomain.m; sourceTree = "<group>"; };
+		04F8F62D1C7AB410006929F2 /* FPTimeLineCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineCommentCell.h; sourceTree = "<group>"; };
+		04F8F62E1C7AB410006929F2 /* FPTimeLineCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineCommentCell.m; sourceTree = "<group>"; };
+		04F8F62F1C7AB410006929F2 /* FPTimeLineCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPTimeLineCommentCell.xib; sourceTree = "<group>"; };
 		04F9037E1C56795C0040629F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		04F9037F1C56795C0040629F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		04F903801C56795C0040629F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1654,6 +1669,12 @@
 		04FEDD491C0359FC00921AC1 /* MySPCourseEndedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseEndedView.h; sourceTree = "<group>"; };
 		04FEDD4A1C0359FC00921AC1 /* MySPCourseEndedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseEndedView.m; sourceTree = "<group>"; };
 		04FEDD4C1C035A0D00921AC1 /* MySPCourseEndedView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPCourseEndedView.xib; sourceTree = "<group>"; };
+		04FEEC7D1C76B7670024FEAF /* FPTimeLineEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineEditVC.h; sourceTree = "<group>"; };
+		04FEEC7E1C76B7670024FEAF /* FPTimeLineEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineEditVC.m; sourceTree = "<group>"; };
+		04FEEC7F1C76B7670024FEAF /* FPTimeLineEditVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPTimeLineEditVC.xib; sourceTree = "<group>"; };
+		04FF07241C771B5000B891D6 /* FPTimeLineDetailMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineDetailMoreView.h; sourceTree = "<group>"; };
+		04FF07251C771B5000B891D6 /* FPTimeLineDetailMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineDetailMoreView.m; sourceTree = "<group>"; };
+		04FF07271C771B5F00B891D6 /* FPTimeLineDetailMoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPTimeLineDetailMoreView.xib; sourceTree = "<group>"; };
 		04FF47521C046D97004DC45D /* AdMoGoAdapterDGTFullAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterDGTFullAd.h; sourceTree = "<group>"; };
 		04FF47531C046D97004DC45D /* AdMoGoAdapterDGTFullAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterDGTFullAd.m; sourceTree = "<group>"; };
 		04FF47541C046D97004DC45D /* AdMoGoAdapterDGTMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterDGTMob.h; sourceTree = "<group>"; };
@@ -2217,6 +2238,9 @@
 				04F780121C58ABBD00806A98 /* FPHomeTimeLineCell.h */,
 				04F780131C58ABBD00806A98 /* FPHomeTimeLineCell.m */,
 				04F780141C58ABBD00806A98 /* FPHomeTimeLineCell.xib */,
+				04F8F62D1C7AB410006929F2 /* FPTimeLineCommentCell.h */,
+				04F8F62E1C7AB410006929F2 /* FPTimeLineCommentCell.m */,
+				04F8F62F1C7AB410006929F2 /* FPTimeLineCommentCell.xib */,
 			);
 			name = tableviewcell;
 			sourceTree = "<group>";
@@ -3306,6 +3330,9 @@
 				04FB44D81C59B68900094E67 /* FPTimeLineDetailVC.h */,
 				04FB44D91C59B68900094E67 /* FPTimeLineDetailVC.m */,
 				04FB44DA1C59B68900094E67 /* FPTimeLineDetailVC.xib */,
+				04FEEC7D1C76B7670024FEAF /* FPTimeLineEditVC.h */,
+				04FEEC7E1C76B7670024FEAF /* FPTimeLineEditVC.m */,
+				04FEEC7F1C76B7670024FEAF /* FPTimeLineEditVC.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3317,6 +3344,9 @@
 				0449A3481C4F73DA0066ABBB /* layout */,
 				0449A3471C4F73410066ABBB /* HomeView */,
 				0449A3361C4F5FBE0066ABBB /* tableviewcell */,
+				04FF07241C771B5000B891D6 /* FPTimeLineDetailMoreView.h */,
+				04FF07251C771B5000B891D6 /* FPTimeLineDetailMoreView.m */,
+				04FF07271C771B5F00B891D6 /* FPTimeLineDetailMoreView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -3346,6 +3376,10 @@
 				04F7D6E41C5F0561006B5591 /* FPUploadSaveUrlDomain.m */,
 				04FABBFC1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.h */,
 				04FABBFD1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m */,
+				0401B2D31C76EF6B0014886F /* FPTimeLineDZDomain.h */,
+				0401B2D41C76EF6B0014886F /* FPTimeLineDZDomain.m */,
+				04F8F62A1C7AAF94006929F2 /* FPTimeLineCommentDomain.h */,
+				04F8F62B1C7AAF94006929F2 /* FPTimeLineCommentDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -5555,6 +5589,7 @@
 				04F9AC581BFC58C8004DA63D /* MySPAllCourseListCell.xib in Resources */,
 				04A4DE641BF484DF002ABBB1 /* safari@2x.png in Resources */,
 				04A4DE481BF484DF002ABBB1 /* adsmogo_bannerface95.png in Resources */,
+				04F8F6311C7AB410006929F2 /* FPTimeLineCommentCell.xib in Resources */,
 				04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */,
 				244F74931B62A4630078D30D /* PostTopicViewController.xib in Resources */,
 				04A4DE3A1BF484DF002ABBB1 /* adsmogo_star.png in Resources */,
@@ -5713,6 +5748,7 @@
 				04A4DE3D1BF484DF002ABBB1 /* ads_alert_right_button.png in Resources */,
 				04A4DE7E1BF484DF002ABBB1 /* webview_bar_refresh_ipad@2x.png in Resources */,
 				F4E6B24B1B6B5D440087EAEB /* GiftwareArticlesTableViewCell.xib in Resources */,
+				04FEEC811C76B7670024FEAF /* FPTimeLineEditVC.xib in Resources */,
 				04A4DE711BF484DF002ABBB1 /* webview_bar_pause@2x.png in Resources */,
 				04A4DE571BF484DF002ABBB1 /* download-960x150.gif in Resources */,
 				04F9AC601BFC82D3004DA63D /* MySPAllListHeaderView.xib in Resources */,
@@ -5751,6 +5787,7 @@
 				04A4DE301BF484DF002ABBB1 /* adsmogo_button_refresh_default@2x.png in Resources */,
 				04FEDD4D1C035A0D00921AC1 /* MySPCourseEndedView.xib in Resources */,
 				2489B6741B5AB77600039E70 /* IntroductionViewController.xib in Resources */,
+				04FF07281C771B5F00B891D6 /* FPTimeLineDetailMoreView.xib in Resources */,
 				04A4DE591BF484DF002ABBB1 /* website-320x50.gif in Resources */,
 				248B6A6D1B19A39200FCB98F /* LaunchScreen.xib in Resources */,
 				04A4DE461BF484DF002ABBB1 /* adsmogo_bannerbg@2x.png in Resources */,
@@ -6032,6 +6069,7 @@
 				2469E2161B5B6039004888A4 /* ResMsgDomain.m in Sources */,
 				04F3D45B1BF47FD3007E7AC0 /* OpenUDID.m in Sources */,
 				04FBAECE1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m in Sources */,
+				04F8F62C1C7AAF94006929F2 /* FPTimeLineCommentDomain.m in Sources */,
 				249926E31B8093BD0071DFB3 /* TopicInteractionDomain.m in Sources */,
 				2489B6381B5AB32F00039E70 /* ImageCollectionViewCell.m in Sources */,
 				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
@@ -6150,6 +6188,7 @@
 				04FB44DB1C59B68900094E67 /* FPTimeLineDetailVC.m in Sources */,
 				04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */,
 				040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */,
+				0401B2D51C76EF6B0014886F /* FPTimeLineDZDomain.m in Sources */,
 				04FABBFA1C757E8C001D4BC9 /* FPTimeLineDetailCell.m in Sources */,
 				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
 				046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */,
@@ -6224,11 +6263,13 @@
 				24AA0B411B690F4300DAC03B /* UUAVAudioPlayer.m in Sources */,
 				04F903B11C56795C0040629F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				04F9C99B1C0EFD550078A5F5 /* EnrolStudentDataVO.m in Sources */,
+				04FF07261C771B5000B891D6 /* FPTimeLineDetailMoreView.m in Sources */,
 				04F89A3B1C1018D800FC0FA6 /* EnrolStudentCommentCell.m in Sources */,
 				04F411031C5A1EC200407C10 /* FPImagePickerGroupTableCell.m in Sources */,
 				24759EAD1B5FC48500A3087D /* TopicDomain.m in Sources */,
 				04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */,
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
+				04FEEC801C76B7670024FEAF /* FPTimeLineEditVC.m in Sources */,
 				040021131C3F9263005F1D82 /* UIImage+Rotate.m in Sources */,
 				24AA0B501B69112C00DAC03B /* ChatModel.m in Sources */,
 				2489B6601B5AB49E00039E70 /* MKAnnotationView+WebCache.m in Sources */,
@@ -6243,6 +6284,7 @@
 				04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */,
 				F4DCD0EF1B1C2C50007D61CA /* KGDeviceUtil.m in Sources */,
 				04FEC57F1BEDDE7200C642A6 /* YouHuiDetailVC.m in Sources */,
+				04F8F6301C7AB410006929F2 /* FPTimeLineCommentCell.m in Sources */,
 				F4EA53981B60EF800044BE7A /* StudentBaseInfoViewController.m in Sources */,
 				0494F47C1BDF777500F39865 /* MJRefreshFooterView.m in Sources */,
 				248B6A9B1B19AAD200FCB98F /* KGMessageView.m in Sources */,

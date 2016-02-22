@@ -12,6 +12,6 @@
 
 @interface FPTimeLineDetailCell : UICollectionViewCell
 
-- (void)setData:(FPFamilyPhotoNormalDomain *)domain;
+- (void)setData:(FPFamilyPhotoNormalDomain *)domain hideInfo:(BOOL)hideInfoView;
 
 @end

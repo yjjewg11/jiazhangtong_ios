@@ -14,22 +14,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="426"/>
                 <subviews>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXn-TF-HV7">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="426"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="377"/>
                     </scrollView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nk1-98-H3C">
+                        <rect key="frame" x="0.0" y="377" width="320" height="49"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="49" id="kTB-21-Rfv"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="eXn-TF-HV7" secondAttribute="trailing" id="1RS-zE-Zae"/>
-                <constraint firstItem="eXn-TF-HV7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8aE-yh-GgN"/>
-                <constraint firstAttribute="bottom" secondItem="eXn-TF-HV7" secondAttribute="bottom" id="UqB-f6-AdQ"/>
-                <constraint firstItem="eXn-TF-HV7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="d0t-Tk-z03"/>
+                <constraint firstAttribute="trailing" secondItem="eXn-TF-HV7" secondAttribute="trailing" id="2gT-ne-1TR"/>
+                <constraint firstItem="Nk1-98-H3C" firstAttribute="top" secondItem="eXn-TF-HV7" secondAttribute="bottom" id="H0w-23-ozX"/>
+                <constraint firstAttribute="bottom" secondItem="Nk1-98-H3C" secondAttribute="bottom" id="JVj-9M-hyg"/>
+                <constraint firstItem="eXn-TF-HV7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bsC-rs-29s"/>
+                <constraint firstAttribute="trailing" secondItem="Nk1-98-H3C" secondAttribute="trailing" id="f6G-tY-dbW"/>
+                <constraint firstItem="Nk1-98-H3C" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="fMk-hN-reK"/>
+                <constraint firstItem="eXn-TF-HV7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zkm-gt-0CY"/>
             </constraints>
             <size key="customSize" width="386" height="426"/>
             <connections>
+                <outlet property="bottomView" destination="Nk1-98-H3C" id="L8I-Xe-wjS"/>
                 <outlet property="scrollView" destination="eXn-TF-HV7" id="YSq-pt-N79"/>
             </connections>
-            <point key="canvasLocation" x="264" y="247"/>
+            <point key="canvasLocation" x="233" y="245"/>
         </collectionViewCell>
     </objects>
 </document>

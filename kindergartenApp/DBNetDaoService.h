@@ -10,6 +10,7 @@
 #import "FPMyFamilyPhotoCollectionDomain.h"
 #import "KGHttpService.h"
 #import "FPFamilyInfoDomain.h"
+#import "FPFamilyPhotoNormalDomain.h"
 
 @interface DBNetDaoService : NSObject
 
@@ -38,5 +39,9 @@
 - (void)updateMaxTime:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime uptime:(NSString *)updateTime;
 
 - (NSArray *)queryPicDetailByDate:(NSString *)date pageNo:(NSString *)pageNo familyUUID:(NSString *)familyUUID;
+
+- (void)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain;
+
+- (void)deletePhotoItem:(NSString *)uuid;
 
 @end

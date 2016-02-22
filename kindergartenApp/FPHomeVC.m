@@ -90,6 +90,7 @@
     [center addObserver:self selector:@selector(saveUploadImgPath:) name:@"saveuploadimg" object:nil];
     [center addObserver:self selector:@selector(headerRefreshing) name:@"refreshtimelinedata" object:nil];
     [center addObserver:self selector:@selector(showEndUpDatePhotoDataView:) name:@"updateInfo" object:nil];
+    [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
 }
 
 - (void)initTableView
@@ -209,6 +210,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0)
+    {
+        return;
+    }
+    
     FPTimeLineDetailVC * vc = [[FPTimeLineDetailVC alloc] init];
     
     //传递点击的日期过去
@@ -516,6 +522,11 @@
             _aiv.hidden = YES;
         }];
     }
+}
+
+- (void)reloadData
+{
+    
 }
 
 @end

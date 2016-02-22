@@ -99,7 +99,7 @@
     [super prepareLayout];
     
     //初始化每个cell的尺寸
-    self.itemSize = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT - 64 - 49);
+    self.itemSize = CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
     //设置水平滚动
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     

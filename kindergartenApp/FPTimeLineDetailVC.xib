@@ -14,33 +14,8 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IRP-dL-Ug4">
-                    <rect key="frame" x="0.0" y="431" width="320" height="49"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <items>
-                        <tabBarItem title="收藏" image="fp_shoucang1" id="smv-Ni-ofw"/>
-                        <tabBarItem title="评论" image="fp_hudong" id="urC-yc-RtP"/>
-                        <tabBarItem title="分享" image="fp_fenxiang" id="Wh2-4h-wG5"/>
-                        <tabBarItem title="下载" image="fp_xiazai" id="7hb-os-9lg"/>
-                        <tabBarItem title="删除" image="fp_delete" id="egh-RR-XiX"/>
-                    </items>
-                </tabBar>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="IRP-dL-Ug4" secondAttribute="bottom" id="iGi-pQ-YCz"/>
-                <constraint firstAttribute="trailing" secondItem="IRP-dL-Ug4" secondAttribute="trailing" id="nGx-cR-EX6"/>
-                <constraint firstItem="IRP-dL-Ug4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="qOV-ku-Qff"/>
-            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="fp_delete" width="25" height="25"/>
-        <image name="fp_fenxiang" width="25" height="25"/>
-        <image name="fp_hudong" width="25" height="25"/>
-        <image name="fp_shoucang1" width="25" height="25"/>
-        <image name="fp_xiazai" width="25" height="25"/>
-    </resources>
 </document>

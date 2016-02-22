@@ -225,6 +225,8 @@
 {
     NSInteger index = [noti.object integerValue];
     
+    NSLog(@"第几号:%d",index);
+    
     FPFamilyPhotoUploadDomain * domain = _dataArrs[index];
 
     NSURL * localUrl = domain.localurl;
@@ -247,14 +249,11 @@
 {
     NSData *data;
     data = UIImageJPEGRepresentation(img, 0.1);
-    NSLog(@"%@,%@,%@",[[NSUUID UUID] UUIDString],[[NSUUID UUID] UUIDString],[[NSUUID UUID] UUIDString]);
     
     NSString * phoneType = [UIDevice currentDevice].model;
     //这里传入一个 uuid
     
     NSDictionary * dict = @{@"JSESSIONID":[KGHttpService sharedService].loginRespDomain.JSESSIONID,@"family_uuid":self.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType};
-    
-    NSLog(@"%@",dict);
     
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
     
@@ -271,7 +270,6 @@
     AFHTTPRequestOperation *operation =
     [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSLog(@"上传成功返回值:%@",responseObject);
         //从列表移除
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         
@@ -279,12 +277,12 @@
         {
             [_dataArrs removeObjectAtIndex:index];
             [self.uploadTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [self.uploadTable reloadData];
         });
         
         FPUploadSaveUrlDomain * domain = [[FPUploadSaveUrlDomain alloc] init];
         domain.localUrl = [((FPFamilyPhotoUploadDomain *)_dataArrs[index]).localurl absoluteString];
         domain.status = 4;//成功
-        
         
         //存入数据库
         NSNotification * noti0 = [[NSNotification alloc] initWithName:@"saveuploadimg" object:domain userInfo:nil];

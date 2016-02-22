@@ -225,4 +225,21 @@
 + (NSString *)getFamilyPhotoUpdateDataUrl;
 
 + (NSString *)getFPUploadImgUrl;
+
++ (NSString *)modifyFPItemUrl;
+
++ (NSString *)getFPItemExtraInfoUrl:(NSString *)uuid;
+
++ (NSString *)saveFPItemCommentUrl;
+
++ (NSString *)deleteFPTimeLineItem:(NSString *)uuid;
+
++ (NSString *)getTimeLineItemCommentListUrl;
+
++ (NSString *)getTimeLineItemUrl;
+
++ (NSString *)getFPSaveDZUrl:(NSString *)uuid;
+
++ (NSString *)getFPDelDZUrl:(NSString *)uuid;
+
 @end

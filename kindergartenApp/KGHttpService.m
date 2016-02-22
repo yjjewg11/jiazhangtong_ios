@@ -30,6 +30,7 @@
 #import "SPSchoolDomain.h"
 #import "EnrolStudentsSchoolDomain.h"
 
+
 @implementation KGHttpService
 
 + (KGHttpService *)sharedService {
@@ -2372,6 +2373,249 @@
 - (void)uploadFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID img:(UIImage *)img success:(void(^)(NSString * str))success faild:(void(^)(NSString * errorMsg))faild
 {
     
+}
+
+#pragma mark - 修改照片属性
+- (void)modifyFPItemInfo:(NSString *)address note:(NSString *)note success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (address == nil) address=@"";
+    if (note == nil) note=@"";
+    
+    NSDictionary * dict = @{
+                            @"address":address,
+                            @"note":note,
+                            };
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [mgr POST:[KGHttpUrl modifyFPItemUrl] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             success(baseDomain.ResMsg.message);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+#pragma mark - 获取一张照片信息的额外信息
+- (void)getFPItemExtraInfo:(NSString *)uuid success:(void(^)(FPTimeLineDZDomain * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (uuid == nil)
+    {
+        uuid = @"";
+    }
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getFPItemExtraInfoUrl:uuid] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+//         NSLog(@"%@,%@",uuid,responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             FPTimeLineDZDomain * domain = [[FPTimeLineDZDomain alloc] init];
+             domain.isFavor = [[responseObject valueForKey:@"isFavor"] integerValue];
+             domain.dianzan_count = [[[responseObject valueForKey:@"dianZan"] objectForKey:@"dianzan_count"] integerValue];
+             domain.yidianzan = [[[responseObject valueForKey:@"dianZan"] objectForKey:@"yidianzan"] integerValue];
+             success(domain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+#pragma mark - 发送时光轴相片评论
+- (void)saveFPItemReply:(NSString *)content rel_uuid:(NSString *)rel_uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (content == nil) content=@"";
+    if (rel_uuid == nil) rel_uuid=@"";
+    
+    NSDictionary * dict = @{
+                            @"content":content,
+                            @"rel_uuid":rel_uuid,
+                            @"type":@"21"
+                            };
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [mgr POST:[KGHttpUrl saveFPItemCommentUrl] parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             success(baseDomain.ResMsg.message);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+#pragma mark - 删除时光轴相册接口
+- (void)deleteFPTimeLineItem:(NSString *)uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (uuid == nil) uuid=@"";
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    mgr.requestSerializer = [AFJSONRequestSerializer serializer];
+    
+    [mgr POST:[KGHttpUrl deleteFPTimeLineItem:uuid] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             success(baseDomain.ResMsg.message);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+#pragma mark - 请求时光轴相片评论列表 '2016-01-20-10-11-22','%Y-%m-%d-%H-%i-%s'
+- (void)getFPItemCommentList:(NSString *)uuid pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(NSArray * arr))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (uuid == nil)
+    {
+        uuid = @"";
+    }
+    NSDictionary * dict = @{@"rel_uuid":uuid,@"pageNo":pageNo,@"type":@"21",@"maxTime":time};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getTimeLineItemCommentListUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             MySPAllCourseListVO * vo = [MySPAllCourseListVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             
+             NSArray * arr = [FPTimeLineCommentDomain objectArrayWithKeyValuesArray:vo.data];
+             
+             success(arr);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+#pragma mark - 获取一张照片信息
+- (void)getFPTimeLineItem:(NSString *)uuid success:(void(^)(FPFamilyPhotoNormalDomain * item))success faild:(void(^)(NSString * errorMsg))faild
+{
+    if (uuid == nil)
+    {
+        uuid = @"";
+    }
+    NSDictionary * dict = @{@"uuid":uuid};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getTimeLineItemUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             FPFamilyPhotoNormalDomain * domain = [FPFamilyPhotoNormalDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             
+             success(domain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+#pragma mark - 点赞
+//保存点赞
+- (void)saveFPDZ:(NSString *)newsuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    if (newsuid == nil)
+    {
+        newsuid = @"";
+    }
+    NSDictionary * dict = @{@"rel_uuid":newsuid,@"type":@"21"};
+    
+    NSLog(@"%@",dict);
+    
+    [self getServerJson:[KGHttpUrl getFPSaveDZUrl:newsuid] params:dict success:^(KGBaseDomain *baseDomain)
+    {
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+        
+    } faild:^(NSString *errorMessage)
+    {
+        faild(errorMessage);
+    }];
+}
+
+//取消点赞
+- (void)delFPDZ:(NSString *)newsuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    [self getServerJson:[KGHttpUrl getFPDelDZUrl:newsuid] params:nil success:^(KGBaseDomain *baseDomain)
+    {
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+        
+    } faild:^(NSString *errorMessage)
+    {
+        faild(errorMessage);
+    }];
 }
 
 

@@ -232,7 +232,6 @@
     return URL(baseServiceURL, saveDZURL);
 }
 
-
 //取消点赞
 + (NSString *)getDelDZUrl {
     return URL(baseServiceURL, delDZURL);
@@ -520,6 +519,46 @@
 
 + (NSString *)getFamilyPhotoUpdateDataUrl{
     return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfUpdate.json");
+}
+
+#pragma mark - 修改照片属性
++ (NSString *)modifyFPItemUrl{
+    return URL(baseServiceURL, @"rest/fpFamilyPhotoCollection/save.json");
+}
+
+#pragma mark - 获取一张照片信息额外信息（收藏，点赞）. 
++ (NSString *)getFPItemExtraInfoUrl:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/extra.json?uuid=%@",baseServiceURL,uuid];
+}
+
+#pragma mark - 评论
++ (NSString *)saveFPItemCommentUrl{
+    return URL(baseServiceURL, @"rest/baseReply/save.json");
+}
+
+#pragma mark - 删除时光轴相片
++ (NSString *)deleteFPTimeLineItem:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/delete.json?uuid=%@",baseServiceURL,uuid];
+}
+
+#pragma mark - 时光轴相片评论列表
++ (NSString *)getTimeLineItemCommentListUrl{
+    return URL(baseServiceURL,@"rest/baseReply/queryByRel_uuid.json");
+}
+
+#pragma mark - 获取一张照片信息
++ (NSString *)getTimeLineItemUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/get.json");
+}
+
+//点赞
++ (NSString *)getFPSaveDZUrl:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/baseDianzan/save.json",baseServiceURL];
+}
+
+//取消点赞
++ (NSString *)getFPDelDZUrl:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/baseDianzan/delete.json?type=21&rel_uuid=%@",baseServiceURL,uuid];
 }
 
 @end

@@ -42,6 +42,9 @@ typedef enum {
     
     Topic_FX          = 71,
     
+    Topic_FPTimeLine  = 21,
+    Topic_FPGiftware  = 22,
+    
     Topic_Interact    = 99, //班级互动
     Topic_TeacherChat = 11, //与老师的写信列表
     Topic_LeaderChat  = 12, //与幼儿园园长的写信列表

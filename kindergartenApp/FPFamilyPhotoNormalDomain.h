@@ -18,5 +18,7 @@
 @property (nullable, nonatomic, retain) NSString * address;
 @property (nullable, nonatomic, retain) NSString * note;
 @property (nullable, nonatomic, retain) NSString * md5;
+@property (nullable, nonatomic, retain) NSString * create_user;
+@property (nullable, nonatomic, retain) NSString * phone_type;
 
 @end
