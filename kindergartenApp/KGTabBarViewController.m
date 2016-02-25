@@ -36,6 +36,7 @@
     HomeVC * home = [[HomeVC alloc] init];
     [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
     
+    
     DiscorveryVC * vc = [[DiscorveryVC alloc] init];
     [self addChildVc:vc title:@"发现" image:@"hfaxian" selectedImage:@"hfaxian2"];
     
@@ -50,7 +51,40 @@
     
     // 2.更换系统自带的tabbar
     [KGHttpService sharedService].tabBarViewController = self;
-    
+//    self.tabBar.delegate = self;
+}
+
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
+//    统计点击事件
+    switch (item.tag) {
+        case 100:
+            [self umengEvent:@"schoolCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        case 101:
+            [self umengEvent:@"findCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        case 102:
+            [self umengEvent:@"informationCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        case 103:
+            [self umengEvent:@"familyAlbum" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        case 104:
+            [self umengEvent:@"myInfo" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+        default:
+            break;
+    }
+}
+#pragma mark - UM 点击统计
+
+- (void)umengEvent:(NSString *)eventId attributes:(NSDictionary *)attributes number:(NSNumber *)number
+{
+    NSString * numberKey = @"__ct__";
+    NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithDictionary:attributes];
+    [mutableDictionary setObject:[number stringValue] forKey:numberKey];
+    [MobClick event:eventId attributes:mutableDictionary];
 }
 
 /**
@@ -65,7 +99,27 @@
 {
     // 设置子控制器的文字
     childVc.title = title; // 同时设置tabbar和navigationBar的文字
-    
+    //设置item的tag
+   
+    if ([title isEqualToString:@"学校"]) {
+        childVc.tabBarItem.tag = 100;
+    }
+    else if([title isEqualToString:@"发现"])
+    {
+        childVc.tabBarItem.tag = 101;
+    }
+    else if([title isEqualToString:@"消息"])
+    {
+        childVc.tabBarItem.tag = 102;
+    }
+    else if([title isEqualToString:@"家庭相册"])
+    {
+        childVc.tabBarItem.tag = 103;
+    }
+    else if([title isEqualToString:@"我的"])
+    {
+        childVc.tabBarItem.tag = 104;
+    }
     // 设置子控制器的图片
     childVc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     if (bIsIos7) {

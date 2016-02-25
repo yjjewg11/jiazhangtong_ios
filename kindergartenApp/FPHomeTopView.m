@@ -17,6 +17,8 @@
     __weak IBOutlet UILabel *guanzhuwoNum;
     
     __weak IBOutlet UILabel *totalPhotoNumLbl;
+    __weak IBOutlet UIImageView *topBackImage;
+    
 }
 
 @end
@@ -32,8 +34,24 @@
     totalPhotoNumLbl.layer.shadowOpacity = 0.5f;
     totalPhotoNumLbl.layer.shadowPath = shadowPath.CGPath;
     totalPhotoNumLbl.layer.cornerRadius = 5;
+//    [self addTopBackImageBlurred];
 }
-
+//设置背景图片的高斯模糊
+//-(void)addTopBackImageBlurred{
+//
+//    CIContext *context = [CIContext contextWithOptions:nil];
+//    CIImage *inputImage = [[CIImage alloc] initWithImage:[UIImage imageNamed:@"fpshouye"]];
+//    // create gaussian blur filter
+//    CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
+//    [filter setValue:inputImage forKey:kCIInputImageKey];
+//    [filter setValue:[NSNumber numberWithFloat:10.0] forKey:@"inputRadius"];
+//    // blur image
+//    CIImage *result = [filter valueForKey:kCIOutputImageKey];
+//    CGImageRef cgImage = [context createCGImage:result fromRect:[result extent]];
+//    UIImage *image = [UIImage imageWithCGImage:cgImage];
+//    CGImageRelease(cgImage);
+//    topBackImage.image = image;
+//}
 - (void)setData:(FPMyFamilyPhotoCollectionDomain *)domain
 {
     if ([titleLbl.text isEqualToString:@""] || titleLbl.text == nil)

@@ -48,7 +48,7 @@ static NSString *const PicID = @"camaracoll";
     _imgDatas = [NSMutableArray array];
     _pageNo = 1;
     _selectPicNum = 0;
-    _isHideInfo = NO;
+    _isHideInfo = YES;
     
     //创建视图
     [self initView];

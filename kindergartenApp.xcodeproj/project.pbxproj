@@ -241,6 +241,10 @@
 		04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */; };
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
+		04B434661C7EF85E0009EB47 /* CommitHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B434651C7EF85E0009EB47 /* CommitHeaderView.m */; };
+		04B434681C7EF89D0009EB47 /* CommitHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B434671C7EF89D0009EB47 /* CommitHeaderView.xib */; };
+		04B4346B1C7F06270009EB47 /* CommitTextFild.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4346A1C7F06270009EB47 /* CommitTextFild.m */; };
+		04B4346D1C7F064F0009EB47 /* CommitTextFild.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4346C1C7F064F0009EB47 /* CommitTextFild.xib */; };
 		04BDD68B1C4CC84600FA0C3A /* SpCourseHomeFuncCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDD6891C4CC84600FA0C3A /* SpCourseHomeFuncCell.m */; };
 		04BDD68C1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BDD68A1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib */; };
 		04BDD6901C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BDD68E1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib */; };
@@ -1143,6 +1147,12 @@
 		04AA3CC11BE5F24D00DCC290 /* SpCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseCommentCell.h; sourceTree = "<group>"; };
 		04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseCommentCell.m; sourceTree = "<group>"; };
 		04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseCommentCell.xib; sourceTree = "<group>"; };
+		04B434641C7EF85E0009EB47 /* CommitHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitHeaderView.h; sourceTree = "<group>"; };
+		04B434651C7EF85E0009EB47 /* CommitHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitHeaderView.m; sourceTree = "<group>"; };
+		04B434671C7EF89D0009EB47 /* CommitHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommitHeaderView.xib; sourceTree = "<group>"; };
+		04B434691C7F06270009EB47 /* CommitTextFild.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitTextFild.h; sourceTree = "<group>"; };
+		04B4346A1C7F06270009EB47 /* CommitTextFild.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitTextFild.m; sourceTree = "<group>"; };
+		04B4346C1C7F064F0009EB47 /* CommitTextFild.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommitTextFild.xib; sourceTree = "<group>"; };
 		04BDD6881C4CC84600FA0C3A /* SpCourseHomeFuncCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseHomeFuncCell.h; sourceTree = "<group>"; };
 		04BDD6891C4CC84600FA0C3A /* SpCourseHomeFuncCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeFuncCell.m; sourceTree = "<group>"; };
 		04BDD68A1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseHomeFuncCell.xib; sourceTree = "<group>"; };
@@ -2284,6 +2294,12 @@
 				04FABBF71C757E8C001D4BC9 /* FPTimeLineDetailCell.h */,
 				04FABBF81C757E8C001D4BC9 /* FPTimeLineDetailCell.m */,
 				04FABBF91C757E8C001D4BC9 /* FPTimeLineDetailCell.xib */,
+				04B434641C7EF85E0009EB47 /* CommitHeaderView.h */,
+				04B434651C7EF85E0009EB47 /* CommitHeaderView.m */,
+				04B434671C7EF89D0009EB47 /* CommitHeaderView.xib */,
+				04B434691C7F06270009EB47 /* CommitTextFild.h */,
+				04B4346A1C7F06270009EB47 /* CommitTextFild.m */,
+				04B4346C1C7F064F0009EB47 /* CommitTextFild.xib */,
 			);
 			name = collCell;
 			sourceTree = "<group>";
@@ -5802,6 +5818,7 @@
 				F4C4D1C21B69CDDF00335443 /* chat_cell_0.jpeg in Resources */,
 				04A4DE7B1BF484DF002ABBB1 /* webview_bar_next_grey_ipad@2x.png in Resources */,
 				04BDD68C1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib in Resources */,
+				04B4346D1C7F064F0009EB47 /* CommitTextFild.xib in Resources */,
 				04F9FB5A1BF1A67400AEFB88 /* cancel@2x.png in Resources */,
 				04F72ABD1BEC562900623E33 /* SPTeacherCell.xib in Resources */,
 				4DE384561B7F728A009F12E4 /* MyCollectionViewController.xib in Resources */,
@@ -5825,6 +5842,7 @@
 				040687181C3E588D002C2196 /* MapVC.xib in Resources */,
 				04F9FBA41BF1A77E00AEFB88 /* UMShareEditViewController.xib in Resources */,
 				04F9F2F71BF9BF4500470F0C /* MySPCourseCommentCell.xib in Resources */,
+				04B434681C7EF89D0009EB47 /* CommitHeaderView.xib in Resources */,
 				04F9FBA21BF1A77E00AEFB88 /* UMSCommentInputController.xib in Resources */,
 				04FB23851C16E1DA009B57E2 /* MineHomeStudentHeadItem.xib in Resources */,
 				04A4DE971BF484DF002ABBB1 /* webview_bar_next_grey.png in Resources */,
@@ -6140,6 +6158,7 @@
 				04F3D45A1BF47FD3007E7AC0 /* mongoose.c in Sources */,
 				2489B6231B5A40E200039E70 /* RegViewController.m in Sources */,
 				04F89A3F1C101BEA00FC0FA6 /* EnrolStudentSchoolCommentDomain.m in Sources */,
+				04B4346B1C7F06270009EB47 /* CommitTextFild.m in Sources */,
 				4DC018CF1B88D9390097984E /* PromptView.m in Sources */,
 				040687171C3E588D002C2196 /* MapVC.mm in Sources */,
 				4D077B251B80A00300FFD5CB /* SelectClassCell.m in Sources */,
@@ -6309,6 +6328,7 @@
 				2457FD0D1B712C13006A3AB7 /* GrayPageControl.m in Sources */,
 				F4E6B24A1B6B5D440087EAEB /* GiftwareArticlesTableViewCell.m in Sources */,
 				04FF475F1C046D97004DC45D /* AdMoGoAdapterDGTMob.m in Sources */,
+				04B434661C7EF85E0009EB47 /* CommitHeaderView.m in Sources */,
 				F4EA538B1B60C6DF0044BE7A /* MeFunTableViewCell.m in Sources */,
 				243918E41B5D1E5800F3727E /* KGNavigationController.m in Sources */,
 				04F3D4661BF47FD3007E7AC0 /* ioapi.c in Sources */,

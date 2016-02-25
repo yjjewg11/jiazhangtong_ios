@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -169,11 +169,11 @@
                 <outlet property="totalPhotoNumLbl" destination="tdR-WD-ysx" id="K0u-9C-CCg"/>
                 <outlet property="woguanzhuNum" destination="jMh-DX-lef" id="soN-rk-ZQa"/>
             </connections>
-            <point key="canvasLocation" x="296" y="165"/>
+            <point key="canvasLocation" x="350" y="208"/>
         </view>
     </objects>
     <resources>
-        <image name="fpshouye" width="25" height="25"/>
+        <image name="fpshouye" width="20" height="18"/>
         <image name="xiangcetubiao" width="87" height="87"/>
     </resources>
 </document>

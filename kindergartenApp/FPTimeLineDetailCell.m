@@ -21,12 +21,18 @@
 #import "UMSocial.h"
 #import "FPTimeLineDetailMoreView.h"
 #import "FPTimeLineDZDomain.h"
+#import "CommitHeaderView.h"
+#import "CommitTextFild.h"
 
 @interface FPTimeLineDetailCell() <UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
 {
     NSMutableArray * _buttonItems;
     FPTimeLineDetailMoreView * _moreView;
     BOOL _moreViewOpen;
+    BOOL _isCommit;
+    BOOL _isFirstCommit;
+    BOOL _useTF;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -36,6 +42,7 @@
 @property (strong, nonatomic) UILabel * deviceLbl;
 @property (strong, nonatomic) UILabel * nameLbl;
 
+@property (strong, nonatomic) CommitTextFild * commitTextFD;
 @property (strong, nonatomic) UIImageView * imageView;
 
 @property (strong, nonatomic) UIView * sepView;
@@ -49,6 +56,8 @@
 @property (strong, nonatomic) FPFamilyPhotoNormalDomain * domain;
 
 @property (weak, nonatomic) IBOutlet UIView * bottomView;
+
+@property (nonatomic, strong)UILabel *imageDetailLable;
 
 @end
 
@@ -98,18 +107,19 @@
     
     //创建imageView
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.infoView.frame), APPWINDOWWIDTH, 500)];
-    
-    //创建最新评论view
-    self.commentTableView = [[UITableView alloc] init];
-    self.commentTableView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + 10, APPWINDOWWIDTH,5);
-    self.commentTableView.delegate = self;
-    self.commentTableView.dataSource = self;
-    
+    //创建image描述的Lable
+    self.imageDetailLable = [[UILabel alloc] init];
+    [self.imageView addSubview:self.imageDetailLable];
+    self.imageDetailLable.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    self.imageDetailLable.numberOfLines = 0;
+    self.imageDetailLable.textColor = [UIColor whiteColor];
+    self.imageDetailLable.font = [UIFont systemFontOfSize:30];
+    self.imageDetailLable.text = @"today is a fun day";
+
     //添加到scrollview
     self.scrollView.showsVerticalScrollIndicator = NO;
     [self.scrollView addSubview:self.imageView];
     [self.scrollView addSubview:self.infoView];
-    [self.scrollView addSubview:self.commentTableView];
     [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.imageView.frame))];
     
     //创建底部按钮
@@ -120,6 +130,16 @@
     [_moreView setOrigin:CGPointMake(APPWINDOWWIDTH - 44, APPWINDOWHEIGHT)];
     [self addSubview:_moreView];
     [self bringSubviewToFront:self.bottomView];
+    
+    
+    self.commentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, APPWINDOWHEIGHT, APPWINDOWWIDTH, (APPWINDOWHEIGHT) / 2)];
+    self.commentTableView.delegate = self;
+    self.commentTableView.dataSource = self;
+    self.commentTableView.rowHeight = 80;
+    self.commentTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+
+    
+
 }
 
 - (void)getDZData
@@ -164,10 +184,17 @@
 {
     self.scrollView.hidden = YES;
     
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.domain.path] placeholderImage:nil];
+    
+    //请求点赞数据
+    [self getDZData];
+    
     [self calImageViewHeight:self.domain success:^(CGFloat height)
     {
          //设置图片、图片高度
          self.imageView.height = height;
+        self.imageDetailLable.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) - 44, APPWINDOWWIDTH, 44);
+        
          [self.imageView sd_setImageWithURL:[NSURL URLWithString:[[self.domain.path componentsSeparatedByString:@"@"] firstObject]]];
          
          self.timeLbl.text = [NSString stringWithFormat:@"拍摄时间:%@",self.domain.photo_time];
@@ -188,15 +215,8 @@
              [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
          }
         
-         //请求点赞数据
-         [self getDZData];
-        
          [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.imageView.frame)+49)];
-         
-         //请求评论数据
-         self.currentTime = [KGDateUtil getFPFormatSringWithDate:[NSDate date]];
-         [self getCommentData:self.domain.uuid];
-         
+
          self.scrollView.hidden = NO;
      }
      faild:^(NSString *errorMsg)
@@ -328,6 +348,10 @@
 }
 
 #pragma mark - tableview D&D
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataArr.count;
@@ -354,6 +378,16 @@
     return 80;
 }
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+    CommitHeaderView * headerView = [[[NSBundle mainBundle] loadNibNamed:@"CommitHeaderView" owner:nil options:nil] firstObject];
+    if (_useTF == YES) {
+        headerView.addButton = YES;
+    }
+    return headerView;
+}
 #pragma mark - 下面按钮点击
 - (void)bottomBtnClicked:(UIButton *)btn
 {
@@ -373,28 +407,48 @@
         }
         case 1:
         {
-            [EYInputPopupView popViewWithTitle:@"编辑评论内容" contentText:@"" type:EYInputPopupView_Type_multi_line cancelBlock:^
-             {
-                 
-                 
-             } confirmBlock:^(UIView *view, NSString *text)
-             {
-                 //保存评论
-                 
-                 [[KGHttpService sharedService] saveFPItemReply:text rel_uuid:self.domain.uuid success:^(NSString *mgr)
-                  {
-                      [MBProgressHUD showSuccess:@"评论成功!"];
-                      [self.commentTableView reloadData];
-                  }
-                  faild:^(NSString *errorMsg)
-                  {
-                      [MBProgressHUD showError:@"评论失败"];
-                  }];
-                 
-             } dismissBlock:^
-             {
-                 
-             }];
+            if (_isFirstCommit == NO)
+            {
+                __weak typeof(self) weakSelf = self;
+                
+                [[KGHttpService sharedService] getFPItemCommentList:self.domain.uuid pageNo:@"1" time:[KGDateUtil getFPFormatSringWithDate:[NSDate date]] success:^(NSArray *arr)
+                 {
+                     _isFirstCommit = YES;
+                     weakSelf.dataArr = [NSMutableArray arrayWithArray:arr];
+                     
+                     [self.contentView addSubview:self.commentTableView];
+                     
+                     _useTF = YES;
+                     self.commitTextFD = [[[NSBundle mainBundle] loadNibNamed:@"CommitTextFild" owner:nil options:nil] firstObject];
+                     self.commitTextFD.frame = CGRectMake(0, CGRectGetMaxY(self.commentTableView.frame), APPWINDOWWIDTH, 48);
+                     [self.contentView addSubview:self.commitTextFD];
+                     UIViewController * vc = [[UIViewController alloc] init];
+                        UIBarButtonItem * completeCommit = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:nil action:@selector(completeCommit:)];
+                     vc.navigationItem.rightBarButtonItem = completeCommit;
+                     
+                     
+                     
+                 } faild:^(NSString *errorMsg) {
+                     
+                 }];
+                
+            }
+            //加载textfiled
+            //            self.bottomView.hidden = YES;
+            
+            
+            if (_isCommit == NO)
+            {
+                self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT / 2 - 49- 64, APPWINDOWWIDTH, APPWINDOWHEIGHT / 2);
+                _isCommit = YES;
+            }
+            else
+            {
+                self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT, APPWINDOWWIDTH, (APPWINDOWHEIGHT) / 2);
+                _isCommit = NO;
+                
+            }
+            
         }
             break;
         case 2:
@@ -425,6 +479,10 @@
         default:
             break;
     }
+}
+
+-(void)completeCommit:(UIBarButtonItem *)sender{
+
 }
 
 #pragma mark - 收藏相关
@@ -560,4 +618,11 @@
     [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
 
+
+
 @end
+
+
+
+
+
