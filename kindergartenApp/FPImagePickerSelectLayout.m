@@ -77,14 +77,18 @@
 - (void)prepareLayout
 {
     [super prepareLayout];
+    
     //计算所有cell的属性
     _newMaxHeight = 10;
+    
     [self.attrsArray removeAllObjects];
     NSInteger count = [self.collectionView numberOfItemsInSection:0];
     for (NSInteger i=0; i<count; i++)
     {
         UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        
         [self.attrsArray addObject:attrs];
     }
 }
+
 @end

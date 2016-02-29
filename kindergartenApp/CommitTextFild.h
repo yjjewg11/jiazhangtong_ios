@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^CompleteCommite)();
+
 @interface CommitTextFild : UIView
+- (IBAction)completeBtn:(UIButton *)sender;
+
+@property (weak, nonatomic) IBOutlet UITextField *TF;
+
+@property (strong, nonatomic)CompleteCommite completeCommite;
 
 @end

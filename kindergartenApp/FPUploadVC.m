@@ -55,6 +55,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (self.isJumpTwoPages == YES) {
+        [self.navigationController pushViewController:[[FPImagePickerVC alloc] init] animated:YES];
+        self.isJumpTwoPages = NO;
+    }
+    
+    if (self.pushToSelectImageVC == YES)
+    {
+        [self openSelectImageView];
+    }
     
     _dataArrs = [NSMutableArray array];
     _cells = [NSMutableArray array];
@@ -167,7 +176,7 @@
     {
         //把数据库里面的也给栓了
         FPFamilyPhotoUploadDomain * domain = _dataArrs[indexPath.row];
-        if (domain.status != 4)
+        if (domain.status != 0)
         {
             [_service deleteUploadImg:[domain.localurl absoluteString]];
             [_dataArrs removeObjectAtIndex:indexPath.row];
@@ -270,19 +279,9 @@
     AFHTTPRequestOperation *operation =
     [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        //从列表移除
-        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-        
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            [_dataArrs removeObjectAtIndex:index];
-            [self.uploadTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            [self.uploadTable reloadData];
-        });
-        
         FPUploadSaveUrlDomain * domain = [[FPUploadSaveUrlDomain alloc] init];
         domain.localUrl = [((FPFamilyPhotoUploadDomain *)_dataArrs[index]).localurl absoluteString];
-        domain.status = 4;//成功
+        domain.status = 0;//成功
         
         //存入数据库
         NSNotification * noti0 = [[NSNotification alloc] initWithName:@"saveuploadimg" object:domain userInfo:nil];
@@ -290,6 +289,16 @@
         
         NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti1];
+        
+        //从列表移除
+        NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+           [_dataArrs removeObjectAtIndex:index];
+           [self.uploadTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+           [self.uploadTable reloadData];
+        });
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {

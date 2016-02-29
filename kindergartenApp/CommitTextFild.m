@@ -8,14 +8,15 @@
 
 #import "CommitTextFild.h"
 
-@implementation CommitTextFild
+@implementation CommitTextFild 
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+
+
+- (IBAction)completeBtn:(UIButton *)sender {
+    self.completeCommite();
+    
 }
-*/
-
 @end
+
+
+

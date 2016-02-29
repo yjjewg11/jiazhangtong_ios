@@ -26,7 +26,7 @@
 #import "KGDateUtil.h"
 #import "MBProgressHUD+HM.h"
 #import "FPTimeLineDetailVC.h"
-
+#import "FPCollectionVC.h"
 @interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate>
 {
     UITableView * _tableView;
@@ -99,6 +99,12 @@
     FPHomeTopView * view = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
     [view setData:_myCollectionDomain];
     view.size = CGSizeMake(APPWINDOWWIDTH, 192);
+    //回调
+    view.pushToMyAlbum = ^{
+//        [self.navigationController pushViewController:nil animated:YES];
+        NSLog(@"push到我的家庭相册");
+    };
+    
     
     //弄到tableviewheader里面去
     ParallaxHeaderView * headerView = [ParallaxHeaderView parallaxHeaderViewWithSubView:view];
@@ -110,6 +116,17 @@
     
     
     sonView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSonView" owner:nil options:nil] firstObject];
+    __weak typeof(self) weakSelf = self;
+    sonView.origin = CGPointMake(0, -132);
+    //回调
+    sonView.pushUpLoad = ^{
+        [weakSelf.navigationController pushViewController:[[FPUploadVC alloc]init]  animated:YES];
+    };
+    sonView.pushCollege = ^{
+        [weakSelf.navigationController pushViewController:[[FPCollectionVC alloc]init] animated:YES];
+    };
+    
+    
     sonView.origin = CGPointMake(0, -132);
     sonView.size = CGSizeMake(140, 132);
     UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:sonView.bounds];
@@ -246,7 +263,6 @@
     {
         if (sonView)
         {
-            sonView.origin = CGPointMake(0, -132);
             [sonView removeFromSuperview];
         }
         
@@ -289,10 +305,11 @@
     _selectViewOpen = NO;
     
     FPUploadVC * vc = [[FPUploadVC alloc] init];
+    vc.isJumpTwoPages = YES;
     
     vc.family_uuid = _myCollectionDomain.uuid;
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)pushToCreateGiftwareShopVC
@@ -381,17 +398,10 @@
 
 - (NSArray *)queryImgs:(NSIndexPath *)indexPath
 {
-    if ( (indexPath.row - 1) < _photoDatas.count)
-    {
-        return _photoDatas[indexPath.row - 1];
-    }
-    else
-    {
-        NSString * strs = _timeDatas[indexPath.row - 1];
-        NSArray * imgs = [_service getListTimePhotoData:[[strs componentsSeparatedByString:@","] firstObject] familyUUID:_myCollectionDomain.uuid];
-        [_photoDatas addObject:imgs];
-        return imgs;
-    }
+    NSString * strs = _timeDatas[indexPath.row - 1];
+    NSArray * imgs = [_service getListTimePhotoData:[[strs componentsSeparatedByString:@","] firstObject] familyUUID:_myCollectionDomain.uuid];
+    [_photoDatas addObject:imgs];
+    return imgs;
 }
 
 #pragma mark - 保存上传图片列表

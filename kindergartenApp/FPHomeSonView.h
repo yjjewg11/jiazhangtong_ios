@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^upLoadBtn)();
+typedef void(^collegeBtn)();
+typedef void(^albumIfonBtn)();
+
+
 @interface FPHomeSonView : UIView
+
+@property(nonatomic, strong) upLoadBtn pushUpLoad;
+@property(nonatomic, strong) collegeBtn pushCollege;
+@property(nonatomic, strong) albumIfonBtn pushAlbunInfo;
+
 
 @end

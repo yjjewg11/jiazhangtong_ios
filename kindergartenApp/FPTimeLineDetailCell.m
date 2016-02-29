@@ -23,6 +23,8 @@
 #import "FPTimeLineDZDomain.h"
 #import "CommitHeaderView.h"
 #import "CommitTextFild.h"
+#import "MJRefresh.h"
+
 
 @interface FPTimeLineDetailCell() <UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
 {
@@ -32,6 +34,8 @@
     BOOL _isCommit;
     BOOL _isFirstCommit;
     BOOL _useTF;
+    UIButton * _completeBtn;
+    NSInteger pageNum;
     
 }
 
@@ -74,6 +78,19 @@
 
 - (void)awakeFromNib
 {
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWasShown:)
+     
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+     
+                                             selector:@selector(keyboardWillBeHidden:)
+     
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
     _moreViewOpen = NO;
     self.pageNo = 1;
     
@@ -137,9 +154,7 @@
     self.commentTableView.dataSource = self;
     self.commentTableView.rowHeight = 80;
     self.commentTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
-
-    
-
+    [self setupRefresh];
 }
 
 - (void)getDZData
@@ -359,6 +374,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.dataArr.count == 0)
+    {
+        UITableViewCell * newCell = [[UITableViewCell alloc]init];
+        return newCell;
+    }
+    
     static NSString * cellid = @"comment_id";
     
     FPTimeLineCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:cellid];
@@ -383,9 +404,6 @@
 {
     
     CommitHeaderView * headerView = [[[NSBundle mainBundle] loadNibNamed:@"CommitHeaderView" owner:nil options:nil] firstObject];
-    if (_useTF == YES) {
-        headerView.addButton = YES;
-    }
     return headerView;
 }
 #pragma mark - 下面按钮点击
@@ -415,32 +433,31 @@
                  {
                      _isFirstCommit = YES;
                      weakSelf.dataArr = [NSMutableArray arrayWithArray:arr];
-                     
                      [self.contentView addSubview:self.commentTableView];
-                     
-                     _useTF = YES;
-                     self.commitTextFD = [[[NSBundle mainBundle] loadNibNamed:@"CommitTextFild" owner:nil options:nil] firstObject];
-                     self.commitTextFD.frame = CGRectMake(0, CGRectGetMaxY(self.commentTableView.frame), APPWINDOWWIDTH, 48);
-                     [self.contentView addSubview:self.commitTextFD];
-                     UIViewController * vc = [[UIViewController alloc] init];
-                        UIBarButtonItem * completeCommit = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:nil action:@selector(completeCommit:)];
-                     vc.navigationItem.rightBarButtonItem = completeCommit;
-                     
-                     
                      
                  } faild:^(NSString *errorMsg) {
                      
                  }];
                 
             }
-            //加载textfiled
-            //            self.bottomView.hidden = YES;
-            
             
             if (_isCommit == NO)
             {
                 self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT / 2 - 49- 64, APPWINDOWWIDTH, APPWINDOWHEIGHT / 2);
+                _useTF = YES;
+                
+                self.commitTextFD = [[[NSBundle mainBundle] loadNibNamed:@"CommitTextFild" owner:nil options:nil] firstObject];
+                __weak typeof(self) weakSelf = self;
+                //点击完成之后回调的block
+                self.commitTextFD.completeCommite = ^{
+                    [weakSelf completeCommit:nil];
+                };
+                
+                self.commitTextFD.frame = CGRectMake(0, CGRectGetMaxY(self.commentTableView.frame), APPWINDOWWIDTH, 48);
+                [self.contentView addSubview:self.commitTextFD];
+                self.commitTextFD.hidden = NO;
                 _isCommit = YES;
+                _completeBtn.hidden = NO;
             }
             else
             {
@@ -475,14 +492,24 @@
             [self showMoreView];
         }
             break;
-            
         default:
             break;
     }
 }
-
+#pragma mark - 完成按钮
 -(void)completeCommit:(UIBarButtonItem *)sender{
-
+    
+    _useTF = NO;
+    _completeBtn.hidden = YES;
+    [[KGHttpService sharedService] saveFPItemReply:self.commitTextFD.TF.text rel_uuid:self.domain.uuid success:^(NSString *mgr) {
+        [MBProgressHUD showSuccess:@"评论成功"];
+    } faild:^(NSString *errorMsg) {
+        [MBProgressHUD showError:errorMsg];
+    }];
+    [self.commentTableView headerBeginRefreshing];
+    _isCommit = NO;
+    self.commitTextFD.TF.text = @"";
+    [self.commitTextFD.TF resignFirstResponder];
 }
 
 #pragma mark - 收藏相关
@@ -618,6 +645,83 @@
     [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
 
+-(void)changeFreamsWithHeight:(CGFloat)height{
+    self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT / 2 - 49- 64 - height, APPWINDOWWIDTH, APPWINDOWHEIGHT / 2);
+    self.commitTextFD.frame = CGRectMake(0, CGRectGetMaxY(self.commentTableView.frame), APPWINDOWWIDTH, 49);
+}
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    //kbSize即為鍵盤尺寸 (有width, height)
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;//得到鍵盤的高度
+    [self changeFreamsWithHeight:kbSize.height];
+}
+-(void)keyboardWillBeHidden:(NSNotification*)aNotification
+
+{
+    [self changeFreamsWithHeight:0];
+}
+
+#pragma mark - 上拉下拉
+- (void)setupRefresh
+{
+    [self.commentTableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    self.commentTableView.footerPullToRefreshText = @"上拉加载更多";
+    self.commentTableView.footerReleaseToRefreshText = @"松开立即加载";
+    self.commentTableView.footerRefreshingText = @"正在加载中...";
+    
+    [self.commentTableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    self.commentTableView.headerRefreshingText = @"正在刷新中...";
+   self.commentTableView.headerPullToRefreshText = @"下拉刷新";
+    self.commentTableView.headerReleaseToRefreshText = @"松开立即刷新";
+}
+
+- (void)footerRereshing
+{
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [[KGHttpService sharedService] getFPItemCommentList:self.domain.uuid pageNo:[NSString stringWithFormat:@"%ld",(long)self.pageNo] time:[KGDateUtil getFPFormatSringWithDate:[NSDate date]] success:^(NSArray *arr)
+     {
+         if (arr.count == 0 || arr == nil)
+         {
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 weakSelf.commentTableView.footerRefreshingText = @"没有更多了";
+                 [weakSelf.commentTableView footerEndRefreshing];
+             });
+             
+         }else
+         {
+             weakSelf.pageNo++;
+             [weakSelf.dataArr addObjectsFromArray:arr];
+             [weakSelf.commentTableView reloadData];
+             [weakSelf.commentTableView footerEndRefreshing];
+         }
+         
+     } faild:^(NSString *errorMsg) {
+         [MBProgressHUD showError:@"请求失败"];
+         [weakSelf.commentTableView headerEndRefreshing];
+     }];
+    
+}
+- (void)headerRereshing
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [self.dataArr removeAllObjects];
+    
+    [[KGHttpService sharedService] getFPItemCommentList:self.domain.uuid pageNo:@"1" time:[KGDateUtil getFPFormatSringWithDate:[NSDate date]] success:^(NSArray *arr)
+     {
+         weakSelf.dataArr = [NSMutableArray arrayWithArray:arr];
+         [self.commentTableView reloadData];
+         [self.commentTableView headerEndRefreshing];
+         
+     } faild:^(NSString *errorMsg) {
+         [MBProgressHUD showError:@"请求失败"];
+         [self.commentTableView headerEndRefreshing];
+     }];
+
+}
 
 
 @end

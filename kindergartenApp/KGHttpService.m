@@ -29,7 +29,8 @@
 #import "SPCourseDetailDomain.h"
 #import "SPSchoolDomain.h"
 #import "EnrolStudentsSchoolDomain.h"
-
+#import "FPCollegeListDomin.h"
+#import "FPCollegePhotoDetailDomin.h"
 
 @implementation KGHttpService
 
@@ -2226,6 +2227,40 @@
 }
 
 #pragma mark - 家庭相册模块
+
+//获取收藏页面
+-(void)getCollegePhotoListWithPageNo:(NSString *)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild{
+    AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary * dic = @{@"pageNo":pageNo};
+    [mgr GET:[KGHttpUrl getCollegePhotoUrl] parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        FPCollegeListDomin * model = [FPCollegeListDomin alloc];
+        
+        KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
+        if([baseDomain.ResMsg.status isEqualToString:String_Success])
+        {
+            NSArray * arr = [FPCollegePhotoDetailDomin objectArrayWithKeyValuesArray:[[responseObject objectForKey:@"list"]objectForKey:@"data"]];
+            model.data = [NSArray arrayWithArray:arr];
+            model = [FPCollegeListDomin objectWithKeyValues:[responseObject objectForKey:@"list"]];
+            
+            success(model);
+            
+        }
+        
+        else
+        {
+            faild(baseDomain.ResMsg.message);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestErrorCode:error faild:faild];
+    }];
+    
+}
 //获取我的家庭相册
 - (void)getMyPhotoCollection:(void(^)(FPMyFamilyPhotoCollectionDomain * domain))success faild:(void(^)(NSString * errorMsg))faild
 {
@@ -2240,6 +2275,7 @@
          
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
+             
              NSArray * datas = [FPMyFamilyPhotoCollectionDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
              
              FPMyFamilyPhotoCollectionDomain * domain = datas[0];
@@ -2256,6 +2292,33 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
+//获取家庭相册列表
+-(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    [mgr GET:[KGHttpUrl getMyFamilyPhotoUrl] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        [self sessionTimeoutHandle:baseDomain];
+        
+        //         NSLog(@"%@",responseObject);
+        
+        if([baseDomain.ResMsg.status isEqualToString:String_Success])
+        {
+        NSLog(@"%@", responseObject);
+        FPMyFamilyPhotoListColletion * model = [FPMyFamilyPhotoListColletion new];
+        
+        NSArray * arr = [FPMyFamilyPhotoCollectionDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
+        model.list = [arr copy];
+            success(model);
+        }else
+        {
+            faild(baseDomain.ResMsg.message);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self requestErrorCode:error faild:faild];
+    }];
+}
+
 
 //查指定家庭的相片 type:0 是minTime , 1是maxTime;
 - (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild
@@ -2447,7 +2510,7 @@
 }
 
 #pragma mark - 发送时光轴相片评论
-- (void)saveFPItemReply:(NSString *)content rel_uuid:(NSString *)rel_uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
+- (void)saveFPItem :(NSString *)content rel_uuid:(NSString *)rel_uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild
 {
     if (content == nil) content=@"";
     if (rel_uuid == nil) rel_uuid=@"";

@@ -36,7 +36,6 @@
     HomeVC * home = [[HomeVC alloc] init];
     [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
     
-    
     DiscorveryVC * vc = [[DiscorveryVC alloc] init];
     [self addChildVc:vc title:@"发现" image:@"hfaxian" selectedImage:@"hfaxian2"];
     
@@ -54,7 +53,7 @@
 //    self.tabBar.delegate = self;
 }
 
-
+#pragma mark - tabBar  D&D
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item{
 //    统计点击事件
     switch (item.tag) {

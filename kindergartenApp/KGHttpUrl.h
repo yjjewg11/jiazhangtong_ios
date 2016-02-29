@@ -218,6 +218,8 @@
 #pragma mark - 家庭相册模块
 + (NSString *)getMyFamilyPhotoUrl;
 
++ (NSString *)getCollegePhotoUrl;
+
 + (NSString *)getFamilyPhotoUseFamilyUUIDAndTimeUrl;
 
 + (NSString *)getFamilyPhotoUpdateCountUrl;
@@ -241,5 +243,8 @@
 + (NSString *)getFPSaveDZUrl:(NSString *)uuid;
 
 + (NSString *)getFPDelDZUrl:(NSString *)uuid;
+
++ (NSString *)getFPCollegeUrl;
+
 
 @end

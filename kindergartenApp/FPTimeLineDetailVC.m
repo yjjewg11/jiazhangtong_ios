@@ -157,6 +157,20 @@ static NSString *const PicID = @"camaracoll";
 {
     FPFamilyPhotoNormalDomain * domain = _imgDatas[_selectPicNum];
     
+    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString: domain.path] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        if (error)
+        {
+            [MBProgressHUD showSuccess:@"图片下载失败!"];
+        }
+        if (image)
+        {
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+        }
+        
+    }];
+    
     NSString * path = [[domain.path componentsSeparatedByString:@"@"] firstObject];
     
     [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:path] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)

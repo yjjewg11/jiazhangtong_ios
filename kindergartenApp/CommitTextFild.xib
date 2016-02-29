@@ -12,20 +12,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入评论内容..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="s9f-Bm-kOc">
-                    <rect key="frame" x="10" y="0.0" width="355" height="50"/>
+                    <rect key="frame" x="10" y="0.0" width="305" height="50"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7l-ai-MSj">
+                    <rect key="frame" x="315" y="0.0" width="55" height="50"/>
+                    <state key="normal" title="完成"/>
+                    <connections>
+                        <action selector="completeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="EaX-d1-FN4"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="s9f-Bm-kOc" secondAttribute="bottom" id="9Xt-ZM-gjo"/>
-                <constraint firstAttribute="trailing" secondItem="s9f-Bm-kOc" secondAttribute="trailing" constant="10" id="G3C-6a-FOD"/>
+                <constraint firstAttribute="trailing" secondItem="s9f-Bm-kOc" secondAttribute="trailing" constant="60" id="G3C-6a-FOD"/>
+                <constraint firstItem="C7l-ai-MSj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H7Q-Jr-BOo"/>
+                <constraint firstItem="C7l-ai-MSj" firstAttribute="leading" secondItem="s9f-Bm-kOc" secondAttribute="trailing" id="Rj6-cm-54B"/>
                 <constraint firstItem="s9f-Bm-kOc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="XDL-Wv-UON"/>
+                <constraint firstAttribute="bottom" secondItem="C7l-ai-MSj" secondAttribute="bottom" id="YMk-ju-eos"/>
                 <constraint firstItem="s9f-Bm-kOc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="pCQ-3J-sDV"/>
+                <constraint firstAttribute="trailing" secondItem="C7l-ai-MSj" secondAttribute="trailing" constant="5" id="sb6-af-WPI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="214.5" y="267"/>
+            <connections>
+                <outlet property="TF" destination="s9f-Bm-kOc" id="N5Y-Pd-mUH"/>
+            </connections>
+            <point key="canvasLocation" x="451.5" y="306"/>
         </view>
     </objects>
 </document>

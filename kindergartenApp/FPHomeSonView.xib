@@ -39,6 +39,9 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJl-VO-6T7">
                             <rect key="frame" x="0.0" y="0.0" width="140" height="43"/>
+                            <connections>
+                                <action selector="myCollection:" destination="e7R-xW-scz" eventType="touchUpInside" id="AjW-y9-t3M"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -86,6 +89,9 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fj2-g9-6jc">
                             <rect key="frame" x="0.0" y="0.0" width="140" height="43"/>
+                            <connections>
+                                <action selector="upLoadBtn:" destination="e7R-xW-scz" eventType="touchUpInside" id="0Zc-32-5Bj"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,6 +139,9 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l03-XM-fAZ">
                             <rect key="frame" x="0.0" y="0.0" width="140" height="43"/>
+                            <connections>
+                                <action selector="photoAlbumInfo:" destination="e7R-xW-scz" eventType="touchUpInside" id="hSk-QF-IbB"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -45,7 +45,8 @@
 #import "FPTimeLineDZDomain.h"
 #import "FPTimeLineCommentDomain.h"
 #import "FPFamilyPhotoNormalDomain.h"
-
+#import "FPMyFamilyPhotoListColletion.h"
+#import "FPCollegeListDomin.h"
 @interface KGHttpService : NSObject
 
 @property (strong, nonatomic) NSString * pushToken;
@@ -336,6 +337,10 @@
 - (void)cheakUserJessionID:(NSString *)jid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 #pragma mark - 家庭相册模块
+-(void)getCollegePhotoListWithPageNo:(NSString *)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild;
+
+-(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild;
+
 - (void)getMyPhotoCollection:(void(^)(FPMyFamilyPhotoCollectionDomain * domain))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild;

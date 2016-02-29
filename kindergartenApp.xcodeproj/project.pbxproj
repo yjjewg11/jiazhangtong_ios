@@ -29,7 +29,6 @@
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
 		040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A27431BEB664C00620876 /* SPBottomItem.xib */; };
-		0449A3351C4F5E0F0066ABBB /* FPUploadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3341C4F5E0F0066ABBB /* FPUploadVC.m */; };
 		0449A33A1C4F5FD60066ABBB /* FPUploadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3381C4F5FD60066ABBB /* FPUploadCell.m */; };
 		0449A33B1C4F5FD60066ABBB /* FPUploadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A3391C4F5FD60066ABBB /* FPUploadCell.xib */; };
 		0449A33F1C4F5FE40066ABBB /* FPHomeBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A33D1C4F5FE40066ABBB /* FPHomeBtnCell.m */; };
@@ -43,6 +42,14 @@
 		0449A35A1C4F98430066ABBB /* FPCreateGiftwareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449A3581C4F98430066ABBB /* FPCreateGiftwareVC.m */; };
 		0449A35B1C4F98430066ABBB /* FPCreateGiftwareVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0449A3591C4F98430066ABBB /* FPCreateGiftwareVC.xib */; };
 		04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 04595CB81BE8718D008DD54A /* SPCommentVO.m */; };
+		045C5B8E1C8409580097AF4F /* FPMyFamilyAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C5B8C1C8409580097AF4F /* FPMyFamilyAlbum.m */; };
+		045C5B8F1C8409580097AF4F /* FPMyFamilyAlbum.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045C5B8D1C8409580097AF4F /* FPMyFamilyAlbum.xib */; };
+		045C5B981C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C5B971C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m */; };
+		045C5B9B1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C5B9A1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m */; };
+		045C5B9F1C842A040097AF4F /* FPFamilyListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C5B9D1C842A040097AF4F /* FPFamilyListCollectionViewCell.m */; };
+		045C5BA01C842A040097AF4F /* FPFamilyListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045C5B9E1C842A040097AF4F /* FPFamilyListCollectionViewCell.xib */; };
+		045C5BA31C8434610097AF4F /* FPCollegeListDomin.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C5BA21C8434610097AF4F /* FPCollegeListDomin.m */; };
+		045C5BA61C8435900097AF4F /* FPCollegePhotoDetailDomin.m in Sources */ = {isa = PBXBuildFile; fileRef = 045C5BA51C8435900097AF4F /* FPCollegePhotoDetailDomin.m */; };
 		045CF51B1BE0A26200FA7EF7 /* SPSchoolDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 045CF51A1BE0A26200FA7EF7 /* SPSchoolDomain.m */; };
 		046063331BD8BE3B00CBC881 /* SPCourseTypeDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 046063321BD8BE3B00CBC881 /* SPCourseTypeDomain.m */; };
 		046063471BD8D82600CBC881 /* MBProgressHUD+HM.m in Sources */ = {isa = PBXBuildFile; fileRef = 046063431BD8D82600CBC881 /* MBProgressHUD+HM.m */; };
@@ -58,6 +65,11 @@
 		04663DA91BE71BD30033C436 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04663DA81BE71BD30033C436 /* CoreMedia.framework */; };
 		04663DAB1BE71D2C0033C436 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04663DAA1BE71D2C0033C436 /* EventKitUI.framework */; };
 		0467A9221BE2653E00FE888C /* MXPullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467A9201BE2653E00FE888C /* MXPullDownMenu.m */; };
+		046998A51C801F8100664359 /* FPHomeTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998A41C801F8100664359 /* FPHomeTimeLineCell.m */; };
+		046998A71C80349600664359 /* DBNetDaoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998A61C80349600664359 /* DBNetDaoService.m */; };
+		046998A91C8038A300664359 /* FPUploadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998A81C8038A300664359 /* FPUploadVC.m */; };
+		046998AB1C8039DD00664359 /* FPImagePickerSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */; };
+		046998C11C80580900664359 /* FPCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998BF1C80580900664359 /* FPCollectionVC.m */; };
 		046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */; };
 		0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */; };
 		048524CD1BEE322D00DA97BB /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524CC1BEE322D00DA97BB /* libiconv.2.4.0.tbd */; };
@@ -280,7 +292,6 @@
 		04F3D46A1BF47FD3007E7AC0 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D4281BF47FD2007E7AC0 /* ZipArchive.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04F410EC1C5A0FC200407C10 /* FPImagePickerGroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F410E21C5A0FC200407C10 /* FPImagePickerGroupDomain.m */; };
 		04F410ED1C5A0FC200407C10 /* FPImagePickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F410E41C5A0FC200407C10 /* FPImagePickerVC.m */; };
-		04F410EE1C5A0FC200407C10 /* FPImagePickerSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F410E51C5A0FC200407C10 /* FPImagePickerSelectVC.m */; };
 		04F410F81C5A116200407C10 /* FPImagePickerSelectLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F410F71C5A116200407C10 /* FPImagePickerSelectLayout.m */; };
 		04F410FD1C5A11D400407C10 /* FPImagePickerImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F410FB1C5A11D400407C10 /* FPImagePickerImageCell.m */; };
 		04F410FE1C5A11D400407C10 /* FPImagePickerImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F410FC1C5A11D400407C10 /* FPImagePickerImageCell.xib */; };
@@ -295,7 +306,6 @@
 		04F72ABD1BEC562900623E33 /* SPTeacherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F72ABB1BEC562900623E33 /* SPTeacherCell.xib */; };
 		04F72AC01BEC7E1E00623E33 /* SPTeacherDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F72ABF1BEC7E1E00623E33 /* SPTeacherDomain.m */; };
 		04F72AC61BEC994500623E33 /* SPTeacherDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F72AC51BEC994500623E33 /* SPTeacherDetailDomain.m */; };
-		04F780151C58ABBD00806A98 /* FPHomeTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F780131C58ABBD00806A98 /* FPHomeTimeLineCell.m */; };
 		04F780161C58ABBD00806A98 /* FPHomeTimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F780141C58ABBD00806A98 /* FPHomeTimeLineCell.xib */; };
 		04F7D6E51C5F0561006B5591 /* FPUploadSaveUrlDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D6E41C5F0561006B5591 /* FPUploadSaveUrlDomain.m */; };
 		04F7D6E91C5F2D0F006B5591 /* CHKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F7D6E71C5F2D0F006B5591 /* CHKeychain.m */; };
@@ -521,7 +531,6 @@
 		04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE04251BF1DD1E0069CF9A /* MYSPCourseTableVC.m */; };
 		04FE3DDB1C2BD6C2000CE445 /* EnrolStudentHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FE3DDA1C2BD6C2000CE445 /* EnrolStudentHomeVC.m */; };
 		04FE6D251BF5838200181134 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE6D241BF5838200181134 /* AddressBookUI.framework */; };
-		04FEB7121C50800700DABA93 /* DBNetDaoService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEB7111C50800700DABA93 /* DBNetDaoService.m */; };
 		04FEC5661BED943E00C642A6 /* SPShareSaveDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC5651BED943E00C642A6 /* SPShareSaveDomain.m */; };
 		04FEC56D1BEDC9D100C642A6 /* YouHuiVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC56C1BEDC9D100C642A6 /* YouHuiVC.m */; };
 		04FEC5701BEDCA3B00C642A6 /* YouHuiTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FEC56F1BEDCA3B00C642A6 /* YouHuiTableVC.m */; };
@@ -850,7 +859,6 @@
 		040A27411BEB663300620876 /* SPBottomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItem.m; sourceTree = "<group>"; };
 		040A27431BEB664C00620876 /* SPBottomItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPBottomItem.xib; sourceTree = "<group>"; };
 		0449A3331C4F5E0F0066ABBB /* FPUploadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadVC.h; sourceTree = "<group>"; };
-		0449A3341C4F5E0F0066ABBB /* FPUploadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadVC.m; sourceTree = "<group>"; };
 		0449A3371C4F5FD60066ABBB /* FPUploadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadCell.h; sourceTree = "<group>"; };
 		0449A3381C4F5FD60066ABBB /* FPUploadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadCell.m; sourceTree = "<group>"; };
 		0449A3391C4F5FD60066ABBB /* FPUploadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPUploadCell.xib; sourceTree = "<group>"; };
@@ -872,6 +880,20 @@
 		0449A3591C4F98430066ABBB /* FPCreateGiftwareVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPCreateGiftwareVC.xib; sourceTree = "<group>"; };
 		04595CB71BE8718D008DD54A /* SPCommentVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCommentVO.h; sourceTree = "<group>"; };
 		04595CB81BE8718D008DD54A /* SPCommentVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCommentVO.m; sourceTree = "<group>"; };
+		045C5B8B1C8409580097AF4F /* FPMyFamilyAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMyFamilyAlbum.h; sourceTree = "<group>"; };
+		045C5B8C1C8409580097AF4F /* FPMyFamilyAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMyFamilyAlbum.m; sourceTree = "<group>"; };
+		045C5B8D1C8409580097AF4F /* FPMyFamilyAlbum.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPMyFamilyAlbum.xib; sourceTree = "<group>"; };
+		045C5B961C8411BB0097AF4F /* UIFamilyPhotoViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFamilyPhotoViewLayout.h; sourceTree = "<group>"; };
+		045C5B971C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIFamilyPhotoViewLayout.m; sourceTree = "<group>"; };
+		045C5B991C84190D0097AF4F /* FPMyFamilyPhotoListColletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMyFamilyPhotoListColletion.h; sourceTree = "<group>"; };
+		045C5B9A1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMyFamilyPhotoListColletion.m; sourceTree = "<group>"; };
+		045C5B9C1C842A040097AF4F /* FPFamilyListCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFamilyListCollectionViewCell.h; sourceTree = "<group>"; };
+		045C5B9D1C842A040097AF4F /* FPFamilyListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFamilyListCollectionViewCell.m; sourceTree = "<group>"; };
+		045C5B9E1C842A040097AF4F /* FPFamilyListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPFamilyListCollectionViewCell.xib; sourceTree = "<group>"; };
+		045C5BA11C8434610097AF4F /* FPCollegeListDomin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCollegeListDomin.h; sourceTree = "<group>"; };
+		045C5BA21C8434610097AF4F /* FPCollegeListDomin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCollegeListDomin.m; sourceTree = "<group>"; };
+		045C5BA41C8435900097AF4F /* FPCollegePhotoDetailDomin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCollegePhotoDetailDomin.h; sourceTree = "<group>"; };
+		045C5BA51C8435900097AF4F /* FPCollegePhotoDetailDomin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCollegePhotoDetailDomin.m; sourceTree = "<group>"; };
 		045CF5191BE0A26200FA7EF7 /* SPSchoolDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSchoolDomain.h; sourceTree = "<group>"; };
 		045CF51A1BE0A26200FA7EF7 /* SPSchoolDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSchoolDomain.m; sourceTree = "<group>"; };
 		046063311BD8BE3B00CBC881 /* SPCourseTypeDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseTypeDomain.h; sourceTree = "<group>"; };
@@ -892,6 +914,12 @@
 		04663DAA1BE71D2C0033C436 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		0467A9201BE2653E00FE888C /* MXPullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXPullDownMenu.m; sourceTree = "<group>"; };
 		0467A9211BE2653E00FE888C /* MXPullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXPullDownMenu.h; sourceTree = "<group>"; };
+		046998A41C801F8100664359 /* FPHomeTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTimeLineCell.m; sourceTree = "<group>"; };
+		046998A61C80349600664359 /* DBNetDaoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBNetDaoService.m; sourceTree = "<group>"; };
+		046998A81C8038A300664359 /* FPUploadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadVC.m; sourceTree = "<group>"; };
+		046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPImagePickerSelectVC.m; sourceTree = "<group>"; };
+		046998BE1C80580900664359 /* FPCollectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPCollectionVC.h; sourceTree = "<group>"; };
+		046998BF1C80580900664359 /* FPCollectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPCollectionVC.m; sourceTree = "<group>"; };
 		046DC9611BDA05A300C9452D /* SPHotCourseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPHotCourseDomain.h; sourceTree = "<group>"; };
 		046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPHotCourseDomain.m; sourceTree = "<group>"; };
 		0477C97D1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolFullScreenLayout.h; sourceTree = "<group>"; };
@@ -1228,7 +1256,6 @@
 		04F410E21C5A0FC200407C10 /* FPImagePickerGroupDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPImagePickerGroupDomain.m; sourceTree = "<group>"; };
 		04F410E31C5A0FC200407C10 /* FPImagePickerGroupDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPImagePickerGroupDomain.h; sourceTree = "<group>"; };
 		04F410E41C5A0FC200407C10 /* FPImagePickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPImagePickerVC.m; sourceTree = "<group>"; };
-		04F410E51C5A0FC200407C10 /* FPImagePickerSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPImagePickerSelectVC.m; sourceTree = "<group>"; };
 		04F410E61C5A0FC200407C10 /* FPImagePickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPImagePickerVC.h; sourceTree = "<group>"; };
 		04F410E71C5A0FC200407C10 /* FPImagePickerSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPImagePickerSelectVC.h; sourceTree = "<group>"; };
 		04F410F61C5A116200407C10 /* FPImagePickerSelectLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPImagePickerSelectLayout.h; sourceTree = "<group>"; };
@@ -1256,7 +1283,6 @@
 		04F72AC41BEC994500623E33 /* SPTeacherDetailDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTeacherDetailDomain.h; sourceTree = "<group>"; };
 		04F72AC51BEC994500623E33 /* SPTeacherDetailDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTeacherDetailDomain.m; sourceTree = "<group>"; };
 		04F780121C58ABBD00806A98 /* FPHomeTimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeTimeLineCell.h; sourceTree = "<group>"; };
-		04F780131C58ABBD00806A98 /* FPHomeTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTimeLineCell.m; sourceTree = "<group>"; };
 		04F780141C58ABBD00806A98 /* FPHomeTimeLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeTimeLineCell.xib; sourceTree = "<group>"; };
 		04F7D6E31C5F0561006B5591 /* FPUploadSaveUrlDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPUploadSaveUrlDomain.h; sourceTree = "<group>"; };
 		04F7D6E41C5F0561006B5591 /* FPUploadSaveUrlDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPUploadSaveUrlDomain.m; sourceTree = "<group>"; };
@@ -1651,7 +1677,6 @@
 		04FE3DDA1C2BD6C2000CE445 /* EnrolStudentHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentHomeVC.m; sourceTree = "<group>"; };
 		04FE6D241BF5838200181134 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		04FEB7101C50800700DABA93 /* DBNetDaoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBNetDaoService.h; sourceTree = "<group>"; };
-		04FEB7111C50800700DABA93 /* DBNetDaoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBNetDaoService.m; sourceTree = "<group>"; };
 		04FEC5641BED943E00C642A6 /* SPShareSaveDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPShareSaveDomain.h; sourceTree = "<group>"; };
 		04FEC5651BED943E00C642A6 /* SPShareSaveDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPShareSaveDomain.m; sourceTree = "<group>"; };
 		04FEC56B1BEDC9D100C642A6 /* YouHuiVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouHuiVC.h; sourceTree = "<group>"; };
@@ -2246,7 +2271,7 @@
 				04F994321C51DC0900CD5818 /* FPHomeWarningCell.m */,
 				04F994331C51DC0900CD5818 /* FPHomeWarningCell.xib */,
 				04F780121C58ABBD00806A98 /* FPHomeTimeLineCell.h */,
-				04F780131C58ABBD00806A98 /* FPHomeTimeLineCell.m */,
+				046998A41C801F8100664359 /* FPHomeTimeLineCell.m */,
 				04F780141C58ABBD00806A98 /* FPHomeTimeLineCell.xib */,
 				04F8F62D1C7AB410006929F2 /* FPTimeLineCommentCell.h */,
 				04F8F62E1C7AB410006929F2 /* FPTimeLineCommentCell.m */,
@@ -2278,6 +2303,8 @@
 				0449A34A1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m */,
 				04FABBF41C757D7A001D4BC9 /* FPTimeLineDetailLayout.h */,
 				04FABBF51C757D7A001D4BC9 /* FPTimeLineDetailLayout.m */,
+				045C5B961C8411BB0097AF4F /* UIFamilyPhotoViewLayout.h */,
+				045C5B971C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m */,
 			);
 			name = layout;
 			sourceTree = "<group>";
@@ -2300,6 +2327,9 @@
 				04B434691C7F06270009EB47 /* CommitTextFild.h */,
 				04B4346A1C7F06270009EB47 /* CommitTextFild.m */,
 				04B4346C1C7F064F0009EB47 /* CommitTextFild.xib */,
+				045C5B9C1C842A040097AF4F /* FPFamilyListCollectionViewCell.h */,
+				045C5B9D1C842A040097AF4F /* FPFamilyListCollectionViewCell.m */,
+				045C5B9E1C842A040097AF4F /* FPFamilyListCollectionViewCell.xib */,
 			);
 			name = collCell;
 			sourceTree = "<group>";
@@ -3004,7 +3034,7 @@
 				04F410E61C5A0FC200407C10 /* FPImagePickerVC.h */,
 				04F410E41C5A0FC200407C10 /* FPImagePickerVC.m */,
 				04F410E71C5A0FC200407C10 /* FPImagePickerSelectVC.h */,
-				04F410E51C5A0FC200407C10 /* FPImagePickerSelectVC.m */,
+				046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3337,7 +3367,7 @@
 				04F151671C45FF1800E80B3E /* FPHomeVC.m */,
 				04F151681C45FF1800E80B3E /* FPHomeVC.xib */,
 				0449A3331C4F5E0F0066ABBB /* FPUploadVC.h */,
-				0449A3341C4F5E0F0066ABBB /* FPUploadVC.m */,
+				046998A81C8038A300664359 /* FPUploadVC.m */,
 				0449A3441C4F71D40066ABBB /* FPGifrwarePickerVC.h */,
 				0449A3451C4F71D40066ABBB /* FPGifrwarePickerVC.m */,
 				0449A3571C4F98430066ABBB /* FPCreateGiftwareVC.h */,
@@ -3349,6 +3379,11 @@
 				04FEEC7D1C76B7670024FEAF /* FPTimeLineEditVC.h */,
 				04FEEC7E1C76B7670024FEAF /* FPTimeLineEditVC.m */,
 				04FEEC7F1C76B7670024FEAF /* FPTimeLineEditVC.xib */,
+				046998BE1C80580900664359 /* FPCollectionVC.h */,
+				046998BF1C80580900664359 /* FPCollectionVC.m */,
+				045C5B8B1C8409580097AF4F /* FPMyFamilyAlbum.h */,
+				045C5B8C1C8409580097AF4F /* FPMyFamilyAlbum.m */,
+				045C5B8D1C8409580097AF4F /* FPMyFamilyAlbum.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3396,6 +3431,12 @@
 				0401B2D41C76EF6B0014886F /* FPTimeLineDZDomain.m */,
 				04F8F62A1C7AAF94006929F2 /* FPTimeLineCommentDomain.h */,
 				04F8F62B1C7AAF94006929F2 /* FPTimeLineCommentDomain.m */,
+				045C5B991C84190D0097AF4F /* FPMyFamilyPhotoListColletion.h */,
+				045C5B9A1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m */,
+				045C5BA11C8434610097AF4F /* FPCollegeListDomin.h */,
+				045C5BA21C8434610097AF4F /* FPCollegeListDomin.m */,
+				045C5BA41C8435900097AF4F /* FPCollegePhotoDetailDomin.h */,
+				045C5BA51C8435900097AF4F /* FPCollegePhotoDetailDomin.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -3843,7 +3884,7 @@
 			isa = PBXGroup;
 			children = (
 				04FEB7101C50800700DABA93 /* DBNetDaoService.h */,
-				04FEB7111C50800700DABA93 /* DBNetDaoService.m */,
+				046998A61C80349600664359 /* DBNetDaoService.m */,
 			);
 			name = dao;
 			sourceTree = "<group>";
@@ -5698,6 +5739,7 @@
 				0449A35B1C4F98430066ABBB /* FPCreateGiftwareVC.xib in Resources */,
 				04FA59881C27C68A009689C7 /* EYPopupView.bundle in Resources */,
 				04FBAECB1C5B34CE0094DC6B /* FPImagePickerSelectBottomView.xib in Resources */,
+				045C5B8F1C8409580097AF4F /* FPMyFamilyAlbum.xib in Resources */,
 				2489B6241B5A40E200039E70 /* RegViewController.xib in Resources */,
 				4D5CE77F1B7E4368002F1088 /* ModifyPasswordTableViewCell.xib in Resources */,
 				04A4DE851BF484DF002ABBB1 /* webview_bar_next_grey_ipad.png in Resources */,
@@ -5829,6 +5871,7 @@
 				4D5CE76E1B7E4333002F1088 /* ModifyPasswordViewController.xib in Resources */,
 				24DE91B51B67C78700D3FFCE /* TeacherJudgeViewController.xib in Resources */,
 				04FD8DF01C3A6B0B00BB186A /* SpCourseDetailVC.xib in Resources */,
+				045C5BA01C842A040097AF4F /* FPFamilyListCollectionViewCell.xib in Resources */,
 				04A4DE9A1BF484DF002ABBB1 /* webview_bar_share.png in Resources */,
 				04F936D21C4CE74F00116D86 /* FPHomeTopView.xib in Resources */,
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
@@ -5972,15 +6015,18 @@
 				2489B6641B5AB49E00039E70 /* UIImage+MultiFormat.m in Sources */,
 				24759EB01B5FC89900A3087D /* KGListBaseDomain.m in Sources */,
 				2489B6621B5AB49E00039E70 /* UIButton+WebCache.m in Sources */,
+				045C5B981C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m in Sources */,
 				04FABBFE1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m in Sources */,
 				0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */,
 				F4E6B2451B6B59960087EAEB /* GiftwareArticlesViewController.m in Sources */,
 				24AA0B461B690F4300DAC03B /* UUMessageContentButton.m in Sources */,
 				2489B66E1B5AB49E00039E70 /* SDWebImagePrefetcher.m in Sources */,
 				2489B6731B5AB77600039E70 /* IntroductionViewController.m in Sources */,
+				045C5B9F1C842A040097AF4F /* FPFamilyListCollectionViewCell.m in Sources */,
 				F471EDED1B70A3A700EEBA1D /* AddressBookDomain.m in Sources */,
 				248B6A941B19A9D900FCB98F /* UIView+Extension.m in Sources */,
 				04F3D4541BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m in Sources */,
+				046998A71C80349600664359 /* DBNetDaoService.m in Sources */,
 				248B6AC81B19B54500FCB98F /* UIKeyboardViewController.m in Sources */,
 				04FB23681C16C37A009B57E2 /* DiscorveryVC.m in Sources */,
 				04F903A91C56795C0040629F /* AFSecurityPolicy.m in Sources */,
@@ -6042,6 +6088,8 @@
 				24C46B491B5A2B7A00A58F92 /* InteractViewController.m in Sources */,
 				F4C0AB941B1C3BB6007B0E35 /* KGHttpUrl.m in Sources */,
 				04F970A31C5A3B2C007CA8C7 /* FPImagePickerImageDomain.m in Sources */,
+				045C5BA31C8434610097AF4F /* FPCollegeListDomin.m in Sources */,
+				045C5BA61C8435900097AF4F /* FPCollegePhotoDetailDomin.m in Sources */,
 				F4C0AB8B1B1C39D4007B0E35 /* KGDateUtil.m in Sources */,
 				04FB237B1C16D91C009B57E2 /* MineHomeVC.m in Sources */,
 				04F903A61C56795C0040629F /* AFHTTPRequestOperationManager.m in Sources */,
@@ -6070,8 +6118,10 @@
 				04F903AB1C56795C0040629F /* AFURLRequestSerialization.m in Sources */,
 				F48783B01B58DA1700CDC1A8 /* MJType.m in Sources */,
 				04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */,
+				046998A51C801F8100664359 /* FPHomeTimeLineCell.m in Sources */,
 				F4DDEBBD1B7DFD7C00470D76 /* TTTAttributedLabel.m in Sources */,
 				F4DCD0F21B1C2E87007D61CA /* UIButton+Extension.m in Sources */,
+				046998A91C8038A300664359 /* FPUploadVC.m in Sources */,
 				2489B6631B5AB49E00039E70 /* UIImage+GIF.m in Sources */,
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
 				24AA0B481B690F4300DAC03B /* UUProgressHUD.m in Sources */,
@@ -6131,7 +6181,6 @@
 				04FB236E1C16C649009B57E2 /* DiscorveryHomeLayout.m in Sources */,
 				F4DF3BA41B78AC75001D9DF7 /* TimetableViewController.m in Sources */,
 				2489B66D1B5AB49E00039E70 /* SDWebImageManager.m in Sources */,
-				04F780151C58ABBD00806A98 /* FPHomeTimeLineCell.m in Sources */,
 				04FB23771C16CD62009B57E2 /* TuiJianCell.m in Sources */,
 				04FA14D11C3E080A008D0BF8 /* SpCourseDetailCommentVC.m in Sources */,
 				2457FD0B1B712C13006A3AB7 /* FaceBoard.m in Sources */,
@@ -6233,15 +6282,16 @@
 				0494F47D1BDF777500F39865 /* MJRefreshHeaderView.m in Sources */,
 				04FEDD4B1C0359FC00921AC1 /* MySPCourseEndedView.m in Sources */,
 				4DF056D61B877F3A00ED3840 /* KGPhotoScrollView.m in Sources */,
-				04F410EE1C5A0FC200407C10 /* FPImagePickerSelectVC.m in Sources */,
 				248B6A931B19A9D900FCB98F /* UIColor+Extension.m in Sources */,
 				24A175F31B55430600295997 /* KGTableParam.m in Sources */,
 				04F994341C51DC0900CD5818 /* FPHomeWarningCell.m in Sources */,
 				04F410ED1C5A0FC200407C10 /* FPImagePickerVC.m in Sources */,
+				045C5B9B1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m in Sources */,
 				04F9724F1C50E1AA00FECD21 /* FPFamilyPhotoLastTimeVO.m in Sources */,
 				04F9F2FB1BF9C38700470F0C /* MySPNormalCell.m in Sources */,
 				04FB9F9C1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.m in Sources */,
 				24850B141B7B860E003C442E /* ClassDomain.m in Sources */,
+				045C5B8E1C8409580097AF4F /* FPMyFamilyAlbum.m in Sources */,
 				2489B6651B5AB49E00039E70 /* UIImage+WebP.m in Sources */,
 				04FEC57A1BEDD84A00C642A6 /* YouHuiCell.m in Sources */,
 				4DF056D51B877F3A00ED3840 /* KGImageBrowseView.m in Sources */,
@@ -6249,7 +6299,6 @@
 				04FA92881C4DE6E600010DAE /* ParallaxHeaderView.m in Sources */,
 				04FE04231BF1CCE70069CF9A /* MySPCourseVC.m in Sources */,
 				F471EDEA1B709E6300EEBA1D /* EmojiDomain.m in Sources */,
-				04FEB7121C50800700DABA93 /* DBNetDaoService.m in Sources */,
 				4DF056CC1B877E5000ED3840 /* PhotoVC.m in Sources */,
 				F4EC989A1B62306800F5721F /* TopicFrame.m in Sources */,
 				04FBAEC91C5B34B80094DC6B /* FPImagePickerSelectBottomView.m in Sources */,
@@ -6272,7 +6321,6 @@
 				04F903B21C56795C0040629F /* UIAlertView+AFNetworking.m in Sources */,
 				2489B62B1B5A607A00039E70 /* KGAccountTool.m in Sources */,
 				248B6AAA1B19AD7A00FCB98F /* KGBaseDomain.m in Sources */,
-				0449A3351C4F5E0F0066ABBB /* FPUploadVC.m in Sources */,
 				04F3D45D1BF47FD3007E7AC0 /* CFilteringJSONSerializer.m in Sources */,
 				0403DCE01BF5B9CD0089E463 /* MYSPCourseTableViewCell.m in Sources */,
 				0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */,
@@ -6313,6 +6361,7 @@
 				0400211C1C3FA16D005F1D82 /* RouteCell.m in Sources */,
 				04F3D4611BF47FD3007E7AC0 /* CDataScanner_Extensions.m in Sources */,
 				04F8D36E1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m in Sources */,
+				046998C11C80580900664359 /* FPCollectionVC.m in Sources */,
 				04F9F3041BF9DD7E00470F0C /* MySPCourseTeacherList.m in Sources */,
 				04F410F81C5A116200407C10 /* FPImagePickerSelectLayout.m in Sources */,
 				F48783B21B58DA1700CDC1A8 /* NSObject+MJKeyValue.m in Sources */,
@@ -6320,6 +6369,7 @@
 				2474DFB81B6CBB8D0021506F /* StudentSignRecordDomain.m in Sources */,
 				04F72AC01BEC7E1E00623E33 /* SPTeacherDomain.m in Sources */,
 				F48783AF1B58DA1700CDC1A8 /* MJProperty.m in Sources */,
+				046998AB1C8039DD00664359 /* FPImagePickerSelectVC.m in Sources */,
 				04F7D6E51C5F0561006B5591 /* FPUploadSaveUrlDomain.m in Sources */,
 				F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */,
 				04F903A51C56795C0040629F /* AFHTTPRequestOperation.m in Sources */,

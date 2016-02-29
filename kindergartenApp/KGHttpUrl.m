@@ -508,7 +508,9 @@
 + (NSString *)getMyFamilyPhotoUrl{
     return URL(baseServiceURL, @"rest/fpFamilyPhotoCollection/queryMy.json");
 }
-
++ (NSString *)getCollegePhotoUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryMyFavorites.json")
+}
 + (NSString *)getFamilyPhotoUseFamilyUUIDAndTimeUrl{
     return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfIncrement.json");
 }
@@ -523,7 +525,7 @@
 
 #pragma mark - 修改照片属性
 + (NSString *)modifyFPItemUrl{
-    return URL(baseServiceURL, @"rest/fpFamilyPhotoCollection/save.json");
+    return URL(baseServiceURL, @"rest/fPPhotoItem/save.json");
 }
 
 #pragma mark - 获取一张照片信息额外信息（收藏，点赞）. 
@@ -561,4 +563,17 @@
     return [NSString stringWithFormat:@"%@rest/baseDianzan/delete.json?type=21&rel_uuid=%@",baseServiceURL,uuid];
 }
 
+#pragma mark - 获取收藏照片列表
++ (NSString *)getFPCollegeUrl{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/queryMy.json",baseServiceURL];
+}
+
+
+
 @end
+
+
+
+
+
+

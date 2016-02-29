@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "FPMyFamilyPhotoCollectionDomain.h"
 
+typedef void(^OnTap)();
+
 @interface FPHomeTopView : UIView
 
 - (void)setData:(FPMyFamilyPhotoCollectionDomain *)domain;
+
+@property (strong, nonatomic) OnTap pushToMyAlbum;
 
 @end

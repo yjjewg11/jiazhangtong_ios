@@ -11,6 +11,7 @@
 @protocol NoNetViewDelegate <NSObject>
 
 @required
+
 - (void)tryBtnClicked;
 
 @end

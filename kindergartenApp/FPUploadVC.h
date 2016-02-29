@@ -14,7 +14,9 @@
 @property (nonatomic , strong) ALAssetsLibrary * library;
 
 + (ALAssetsLibrary *)defaultAssetsLibrary;
+@property (assign, nonatomic) BOOL pushToSelectImageVC;
 
 @property (strong, nonatomic) NSString * family_uuid;
 
+@property (assign, nonatomic) BOOL isJumpTwoPages;
 @end

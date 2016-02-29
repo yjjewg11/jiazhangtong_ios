@@ -64,6 +64,11 @@
     }
     
     [placeholderImg sd_setImageWithURL:[NSURL URLWithString:domain.herald]];
+    //给placeimg添加点击手势
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap:)];
+    
+    [placeholderImg addGestureRecognizer:tap];
+    
     
     if (domain.photo_count == nil || [domain.photo_count isEqualToString:@""])
     {
@@ -74,5 +79,13 @@
         totalPhotoNumLbl.text = domain.photo_count;
     }
 }
+//手势的响应
+-(void)onTap:(UIGestureRecognizer *)sender{
+    
+    
+    self.pushToMyAlbum();
+}
 
 @end
+
+

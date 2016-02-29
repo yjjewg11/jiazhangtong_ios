@@ -63,7 +63,7 @@
             NSString * fp_familyinfo_Table = @"CREATE TABLE IF NOT EXISTS fp_familyinfo (family_uuid CHAR(45) PRIMARY KEY NOT NULL,'maxtime' datetime,'mintime' datetime,'updatetime' datetime);";
             
             //上传用 上传队列信息
-            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload (localurl CHAR(1024) PRIMARY KEY NOT NULL,'status' CHAR(4),'success_time' datetime,'user_uuid' CHAR(1024) NOT NULL);";
+            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload ('user_uuid' CHAR(1024) NOT NULL,'status' CHAR(4),'success_time' datetime,localurl CHAR(1024) NOT NULL);";
             
             [self execSql:fp_photo_item_Table];
             [self execSql:fp_familyinfo_Table];
@@ -460,31 +460,29 @@
 #pragma mark - 保存上传的图片路径
 - (void)saveUploadImgPath:(NSString *)localurl status:(NSString *)status
 {
-    //1.先根据这个localurl去查，看有没有记录
+    NSString * date = [KGDateUtil getLocalDateStr];
     NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
     
-    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE localurl='%@' AND user_uuid='%@'",localurl,useruuid];
-    
+    NSString * sql1 = [NSString stringWithFormat:@"SELECT localurl from fp_upload"];
+    NSInteger count = 0;
     sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    if (sqlite3_prepare_v2(db, [sql1 UTF8String], -1, &stmt, nil) == SQLITE_OK)
     {
         while (sqlite3_step(stmt)==SQLITE_ROW)
         {
-            char *localurl = (char *)sqlite3_column_text(stmt, 0);
-            NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
-            
-            //如果有，update它的状态为4:成功
-            NSString * sqlupdate = [NSString stringWithFormat:@"update fp_upload set status='%@' WHERE localurl='%@' AND user_uuid='%@'",@"4",localurlStr,useruuid];
-            [self execSql:sqlupdate];
+            count++;
         }
     }
-    else
+    if (count == 0) //没找到 插入
     {
-        //如果没有，插入，并标记成功
-        NSString * date = [KGDateUtil getLocalDateStr];
-        NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (user_uuid,status,success_time,localurl) values ('%@','%@','%@','%@')",useruuid,status,date,localurl];
         
-        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (localurl,status,success_time,user_uuid) values ('%@','%@','%@','%@')",localurl,status,date,useruuid];
+        [self execSql:sql];
+    }
+    else            //找到了，更新
+    {
+        NSString * sql = [NSString stringWithFormat:@"update fp_upload set status='%@' WHERE user_uuid='%@' AND localurl='%@'",status,useruuid,localurl];
+        
         [self execSql:sql];
     }
 }
@@ -493,8 +491,8 @@
 - (NSMutableArray *)queryLocalImg
 {
     NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
-
-    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"4",@"1"];
+    
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"0",@"1"];
     
     NSMutableArray * marr = [NSMutableArray array];
     
@@ -524,7 +522,7 @@
     sqlite3_stmt *stmt;
     if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
     {
-        while (sqlite3_step(stmt)==SQLITE_ROW)
+        while (sqlite3_step(stmt) == SQLITE_ROW)
         {
             char *localurl = (char *)sqlite3_column_text(stmt, 0);
             NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
@@ -544,8 +542,8 @@
     
     for (NSString * url in localurls)
     {
-        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (localurl,status,success_time,user_uuid) values ('%@','%@','%@','%@')",url,@"1",date,useruuid];
-        
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (user_uuid,status,success_time,localurl) values ('%@','%@','%@','%@')",useruuid,@"1",date,url];
+
         [transactionSql addObject:sql];
     }
     
