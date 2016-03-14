@@ -370,6 +370,12 @@ static NSString *const Nodata = @"nodata";
                 [cookieDic setObject:[self cutUrlDomain:url] forKey:NSHTTPCookieDomain];
                 NSHTTPCookie * cookieUser = [NSHTTPCookie cookieWithProperties:cookieDic];
                 [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookieUser];
+               
+//                 NSString * urlurl =[url stringByAppendingString:@"@JSESSIONID="];
+//                  urlurl =[urlurl stringByAppendingString:[KGHttpService sharedService].loginRespDomain.JSESSIONID];
+//                
+//                NSLog(@"huating %@",urlurl);
+                
                 
                 [_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
             }

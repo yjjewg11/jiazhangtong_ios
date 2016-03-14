@@ -31,10 +31,11 @@
         //判断是否已经登陆，如果登陆直接跳到首页，否者跳到登陆页面
         KGUser * account = [KGAccountTool account];
         
+       
         if (!account) {//没有登陆
             self.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
         }else{//直接跳转到首页
-//            [self autoLogin:account];
+            [self autoLogin:account];
             self.rootViewController = [[KGTabBarViewController alloc] init];
         }
         [self makeKeyAndVisible];
@@ -53,6 +54,10 @@
 
 
 - (void)autoLogin:(KGUser *)user {
+    
+    
+
+
     [[KGHttpService sharedService] login:user success:^(NSString *msgStr) {
         
     } faild:^(NSString *errorMsg) {

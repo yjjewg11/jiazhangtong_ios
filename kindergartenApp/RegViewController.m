@@ -53,7 +53,9 @@
     
 //    [self setViewParame];
     [valCodeBtn setBorderWithWidth:0 color:[UIColor clearColor] radian:5.0];
-    [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
+    //[self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
+    
+     [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,7 +104,7 @@
             [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
         } faild:^(NSString *errorMsg) {
             [self stopTime];
-            [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
+//            [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
             [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
         }];
     }
@@ -167,12 +169,13 @@
 
 //验证手机号
 - (BOOL)vaildPhoneAndPwd{
-    NSString * phone = [phoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if(phone.length == Number_Zero || ![KGFormVerify validateMobile:phone]){
-        [self notificationMessage:String_Verify_Phone];
-        return YES;
-    }
-    return NO;
+     return NO;
+//    NSString * phone = [phoneTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    if(phone.length == Number_Zero || ![KGFormVerify validateMobile:phone]){
+//        [self notificationMessage:String_Verify_Phone];
+//        return YES;
+//    }
+//    return NO;
 }
 
 

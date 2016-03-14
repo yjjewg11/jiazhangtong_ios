@@ -5,7 +5,7 @@
 //  Created by You on 15/6/1.
 //  Copyright (c) 2015年 funi. All rights reserved.
 //
-
+#import "KGAccountTool.h"
 #import "KGHttpService.h"
 #import "AFAppDotNetAPIClient.h"
 #import "KGHttpUrl.h"
@@ -313,7 +313,15 @@
                                          }];
     }
 }
-
+-(BOOL)setupCookieByLocalJessionid{
+    NSHTTPCookie * jessionCookie=[KGAccountTool jessionCookie];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:jessionCookie];
+    
+    if (jessionCookie) {//有session自动登录
+        return true;
+    }
+    return false;
+}
 #pragma mark - 设置cookie
 - (void)setupCookie
 {
@@ -331,7 +339,9 @@
 #pragma mark 账号相关 begin
 
 - (void)login:(KGUser *)user success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
-    
+//        if([[KGHttpService sharedService] setupCookieByLocalJessionid]){
+////            return;
+//        }
     [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getLoginUrl]
                                    parameters:user.keyValues
                                       success:^(NSURLSessionDataTask* task, id responseObject) {
@@ -339,9 +349,22 @@
                                           _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
                                           if([_loginRespDomain.ResMsg.status isEqualToString:String_Success]) {
                                               
+                                              //save cookie
+//                                              NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+//                                              for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+//                                                  if ([Key_JSESSIONID isEqualToString:cookie.name]&&[Key_CookiePxMobilePath isEqualToString:cookie.path]) {
+//                                                          
+//                                                     
+//                                                          
+//                                                      [KGAccountTool saveCookieJession:cookie   ];
+//                                                 
+//                                                  }
+//                                                  
+                                              
+//                                              }
                                               //取到服务器返回的cookies
-                                              [self setupCookie];
-                                              //[self userCookie:cookies];
+//                                              [self setupCookie];
+//                                              [self userCookie:cookies];
                                               
                                               //默热门选中第一个机构
                                               if([_loginRespDomain.group_list count] > Number_Zero) {

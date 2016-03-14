@@ -27,4 +27,25 @@
  */
 + (KGUser *)account;
 
+
+/**
+ *  存储返回登录sessionid
+
+ *
+ *  @param account 账号模型
+ */
++ (void)saveCookieJession:(NSHTTPCookie *)jessionCookie;
+
+
++ (void)delCookieJession;
+
+/**
+ *  返回返回登录sessionid
+
+ *
+ *  @return 账号模型（如果账号过期，返回nil）
+ */
++ (NSHTTPCookie *)jessionCookie;
+
+
 @end

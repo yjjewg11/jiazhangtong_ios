@@ -38,7 +38,7 @@
 #import "DiscorveryNewNumberDomain.h"
 #import "DiscorveryReMenJingXuanDomain.h"
 #import "SystemConfigOfTopic.h"
-
+#import "KGHttpUrl.h"
 @interface KGHttpService : NSObject
 
 @property (strong, nonatomic) NSString * pushToken;
@@ -186,7 +186,8 @@
 //评价老师
 - (void)saveTeacherJudge:(TeacherVO *)teacherVO success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
-
+//获取本地jessionid存到cookie，跳过登录
+-(BOOL)setupCookieByLocalJessionid;
 // 评价老师 end
 
 

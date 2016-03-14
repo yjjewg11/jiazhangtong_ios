@@ -27,6 +27,8 @@
 
 //登录账号归档路径
 #define KGAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.archive"]
+//登录成功后cookie归档路径
+#define KGCookieJSESSIONIDPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"cookieJSESSIONID.archive"]
 
 //表情路径
 //#define KGEmojiPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"emoji"]

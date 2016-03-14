@@ -38,6 +38,8 @@
 #define Key_TopicType                      @"topicType"
 #define Key_TopicTypeReplyText             @"topicReplyText"
 #define Key_TopicInteractionView           @"topicInteractionView"
+#define Key_CookiePxMobilePath       @"/px-mobile/"      //path用于session保存
+#define Key_JSESSIONID           @"JSESSIONID"
 // Key end
 
 // class Name begin

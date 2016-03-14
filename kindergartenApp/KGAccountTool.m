@@ -43,6 +43,36 @@
     KGUser *account = [NSKeyedUnarchiver unarchiveObjectWithFile:KGAccountPath];
     return account;
 }
+/**
+ *  存储返回登录sessionid
+
+ *
+ *  @param account 账号模型
+ */
++ (void)saveCookieJession:(NSHTTPCookie *)jessionCookie{
+    
+    
+    
+     NSLog(@"save cookie=%@ =%@",jessionCookie.name, jessionCookie);
+    [NSKeyedArchiver archiveRootObject:jessionCookie toFile:KGCookieJSESSIONIDPath];
+
+}
+
+
++ (void)delCookieJession{
+    [NSKeyedArchiver archiveRootObject:nil toFile:KGCookieJSESSIONIDPath];
+}
+
+/**
+ *  返回登录sessionid
+ *
+ *  @return 账号模型（如果账号过期，返回nil）
+ */
++ (NSHTTPCookie *)jessionCookie{
+    NSHTTPCookie *jessionCookie = [NSKeyedUnarchiver unarchiveObjectWithFile:KGAccountPath];
+    return jessionCookie;
+}
+
 
 
 @end
