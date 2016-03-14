@@ -9,18 +9,24 @@
 #import "KGHttpUrl.h"
 
 #define URL(baseURL, businessURL) [NSString stringWithFormat:@"%@%@", baseURL, businessURL];
+<<<<<<< HEAD
 
 #define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
 //#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
+=======
+//#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
+#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
+>>>>>>> origin/master
 
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单
 #define loginURL             @"rest/userinfo/login.json"             //登录
 #define logoutURL            @"rest/userinfo/logout.json"            //登出
+#define checkUserJessionID   @"rest/userinfo/getUserinfo.json"       //自动登录时先验证getUserInfo获取信息
 #define regURL               @"rest/userinfo/reg.json"               //注册
-//#define updatepasswordURL    @"rest/userinfo/updatepassword.json"    //修改密码
-#define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"  //修改密码
-#define getTeacherInfo       @"rest/userinfo/getTeacherInfo.json"        //获取用户信息
-#define KDInfoURL            @"rest/share/getKDInfo.html" //校园相关
+//#define updatepasswordURL    @"rest/userinfo/updatepassword.json"   //修改密码
+#define updatepasswordURL    @"rest/userinfo/updatePasswordBySms.json"//修改密码
+#define getTeacherInfo       @"rest/userinfo/getTeacherInfo.json"     //获取用户信息
+#define KDInfoURL            @"rest/share/getKDInfo.html"             //校园相关
 #define ZSJHInfoURL          @"rest/share/getRecruitBygroupuuid.html" //招生计划
 
 #define teacherPhoneBookURL  @"rest/userinfo/getTeacherPhoneBook.json" //老师和园长通讯录
@@ -28,7 +34,8 @@
 #define queryByTeacherURL    @"rest/message/queryByTeacher.json" //查询和老师的信件
 #define saveToLeaderURL      @"rest/message/saveToLeader.json"   //给园长写信
 #define queryByLeaderURL     @"rest/message/queryByLeader.json"  //查询和园长的信件
-#define readMsgURL           @"rest/pushMessage/read.json"  //阅读信件
+#define readMsgURL           @"rest/pushMessage/read.json"       //阅读信件
+
 
 
 #define phoneCodeURL           @"rest/sms/sendCode.json"               //短信验证码
@@ -51,6 +58,7 @@
 #define replyListURL          @"rest/reply/getReplyByNewsuuid.json" //回复列表
 
 #define uploadImgURL          @"rest/uploadFile/upload.json"  //上传图片
+#define fpUploadImgURL        @"rest/fPPhotoItem/upload.json"
 
 #define messageListURL        @"rest/pushMessage/queryMy.json" //消息列表
 
@@ -97,6 +105,10 @@
     return URL(baseServiceURL, dynamicMenuURL);
 }
 
++ (NSString *)getUserInfoWithJessionID:(NSString *)jid
+{
+    return URL(baseServiceURL, checkUserJessionID);
+}
 
 //获取机构列表
 + (NSString *)getGroupUrl {
@@ -226,7 +238,6 @@
     return URL(baseServiceURL, saveDZURL);
 }
 
-
 //取消点赞
 + (NSString *)getDelDZUrl {
     return URL(baseServiceURL, delDZURL);
@@ -257,6 +268,10 @@
 + (NSString *)getUploadImgUrl {
     return URL(baseServiceURL, uploadImgURL);
 //    return @"http://120.25.127.141/runman-rest/rest/uploadFile/upload.json";
+}
+
++ (NSString *)getFPUploadImgUrl {
+    return URL(baseServiceURL, fpUploadImgURL);
 }
 
 //消息列表
@@ -495,4 +510,76 @@
     return URL(baseServiceURL, @"rest/userinfo/getMainTopic.json");
 }
 
+#pragma mark - 家庭相册模块
++ (NSString *)getMyFamilyPhotoUrl{
+    return URL(baseServiceURL, @"rest/fpFamilyPhotoCollection/queryMy.json");
+}
++ (NSString *)getCollegePhotoUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryMyFavorites.json")
+}
++ (NSString *)getFamilyPhotoUseFamilyUUIDAndTimeUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfIncrement.json");
+}
+
++ (NSString *)getFamilyPhotoUpdateCountUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfNewDataCount.json");
+}
+
++ (NSString *)getFamilyPhotoUpdateDataUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/queryOfUpdate.json");
+}
+
+#pragma mark - 修改照片属性
++ (NSString *)modifyFPItemUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/save.json");
+}
+
+#pragma mark - 获取一张照片信息额外信息（收藏，点赞）. 
++ (NSString *)getFPItemExtraInfoUrl:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/extra.json?uuid=%@",baseServiceURL,uuid];
+}
+
+#pragma mark - 评论
++ (NSString *)saveFPItemCommentUrl{
+    return URL(baseServiceURL, @"rest/baseReply/save.json");
+}
+
+#pragma mark - 删除时光轴相片
++ (NSString *)deleteFPTimeLineItem:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/delete.json?uuid=%@",baseServiceURL,uuid];
+}
+
+#pragma mark - 时光轴相片评论列表
++ (NSString *)getTimeLineItemCommentListUrl{
+    return URL(baseServiceURL,@"rest/baseReply/queryByRel_uuid.json");
+}
+
+#pragma mark - 获取一张照片信息
++ (NSString *)getTimeLineItemUrl{
+    return URL(baseServiceURL, @"rest/fPPhotoItem/get.json");
+}
+
+//点赞
++ (NSString *)getFPSaveDZUrl:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/baseDianzan/save.json",baseServiceURL];
+}
+
+//取消点赞
++ (NSString *)getFPDelDZUrl:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/baseDianzan/delete.json?type=21&rel_uuid=%@",baseServiceURL,uuid];
+}
+
+#pragma mark - 获取收藏照片列表
++ (NSString *)getFPCollegeUrl{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/queryMy.json",baseServiceURL];
+}
+
+
+
 @end
+
+
+
+
+
+

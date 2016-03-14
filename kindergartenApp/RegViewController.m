@@ -38,7 +38,8 @@
 
 @implementation RegViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     if(self.type == Number_One) {
@@ -53,9 +54,14 @@
     
 //    [self setViewParame];
     [valCodeBtn setBorderWithWidth:0 color:[UIColor clearColor] radian:5.0];
+<<<<<<< HEAD
     //[self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
     
      [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
+=======
+//    [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
+    [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
+>>>>>>> origin/master
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,19 +119,22 @@
 
 - (IBAction)submitBtnClicked:(UIButton *)sender {
     
-    if([self validateInputInView]) {
+    if([self validateInputInView])
+    {
         NSString * phone = [KGNSStringUtil trimString:phoneTextField.text];
         NSString * pwd = [KGNSStringUtil trimString:pwdTextField.text];
         NSString * valPwd = [KGNSStringUtil trimString:valPwdTextField.text];
         NSString * valCode = [KGNSStringUtil trimString:valCodeTextField.text];
         
-        if(![pwd isEqualToString:valPwd]) {
+        if(![pwd isEqualToString:valPwd])
+        {
             //密码不一致
             [self notificationMessage:@"两次密码不一致"];
             return;
         }
         
-        if(!user) {
+        if(!user)
+        {
             user = [[KGUser alloc] init];
         }
         
@@ -212,7 +221,8 @@
 
 
 //注册提交按钮不可用
-- (void)registerBtnEnable:(BOOL)enable alpha:(CGFloat)alpha{
+- (void)registerBtnEnable:(BOOL)enable alpha:(CGFloat)alpha
+{
     [submitBtn setEnabled:enable];
     [submitBtn setAlpha:alpha];
 }

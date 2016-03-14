@@ -45,7 +45,8 @@
     [reFreshView.tableView headerBeginRefreshing];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.title = @"消息";
@@ -55,6 +56,13 @@
     [self getTableData];
     
     [self initReFreshView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [reFreshView.tableView headerBeginRefreshing];
 }
 
 - (void)initPageInfo
@@ -157,7 +165,7 @@
     dataSource = nil;
     
     [[KGHttpService sharedService] getMessageList:pageInfo success:^(NSArray *articlesArray)
-     {
+    {
          pageInfo.pageNo ++;
          
          dataSource = [NSMutableArray arrayWithArray:articlesArray];
@@ -281,7 +289,8 @@
     [self readMessage:domain cell:cell];
 }
 
-- (void)chatMesagePush:(MessageDomain *)domain {
+- (void)chatMesagePush:(MessageDomain *)domain
+{
     AddressBookDomain * addressbookDomain = [[AddressBookDomain alloc] init];
     addressbookDomain.teacher_uuid = domain.rel_uuid;
     addressbookDomain.type = (domain.type == Topic_TeacherChat) ? YES : NO;
@@ -292,13 +301,17 @@
 }
 
 //readMsg
-- (void)readMessage:(MessageDomain *)domain cell:(MessageTableViewCell *)cell {
-    [[KGHttpService sharedService] readMessage:domain.uuid success:^(NSString *msgStr) {
+- (void)readMessage:(MessageDomain *)domain cell:(MessageTableViewCell *)cell
+{
+    [[KGHttpService sharedService] readMessage:domain.uuid success:^(NSString *msgStr)
+    {
         domain.isread = YES;
         
         cell.unReadIconImageView.hidden = YES;
         
-    } faild:^(NSString *errorMsg) {
+    }
+    faild:^(NSString *errorMsg)
+    {
         
     }];
 }

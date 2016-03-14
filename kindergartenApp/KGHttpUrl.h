@@ -25,6 +25,8 @@
 //reg
 + (NSString *)getRegUrl;
 
+//获取用户登陆信息 自动登录使用
++ (NSString *)getUserInfoWithJessionID:(NSString *)jid;
 
 //updatepassword
 + (NSString *)getUpdatepasswordUrl;
@@ -212,4 +214,37 @@
 
 
 + (NSString *)meiRiHuiDiaoUrl;
+
+#pragma mark - 家庭相册模块
++ (NSString *)getMyFamilyPhotoUrl;
+
++ (NSString *)getCollegePhotoUrl;
+
++ (NSString *)getFamilyPhotoUseFamilyUUIDAndTimeUrl;
+
++ (NSString *)getFamilyPhotoUpdateCountUrl;
+
++ (NSString *)getFamilyPhotoUpdateDataUrl;
+
++ (NSString *)getFPUploadImgUrl;
+
++ (NSString *)modifyFPItemUrl;
+
++ (NSString *)getFPItemExtraInfoUrl:(NSString *)uuid;
+
++ (NSString *)saveFPItemCommentUrl;
+
++ (NSString *)deleteFPTimeLineItem:(NSString *)uuid;
+
++ (NSString *)getTimeLineItemCommentListUrl;
+
++ (NSString *)getTimeLineItemUrl;
+
++ (NSString *)getFPSaveDZUrl:(NSString *)uuid;
+
++ (NSString *)getFPDelDZUrl:(NSString *)uuid;
+
++ (NSString *)getFPCollegeUrl;
+
+
 @end

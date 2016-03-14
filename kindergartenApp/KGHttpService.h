@@ -38,7 +38,19 @@
 #import "DiscorveryNewNumberDomain.h"
 #import "DiscorveryReMenJingXuanDomain.h"
 #import "SystemConfigOfTopic.h"
+<<<<<<< HEAD
 #import "KGHttpUrl.h"
+=======
+#import "FPMyFamilyPhotoCollectionDomain.h"
+#import "FPFamilyPhotoLastTimeVO.h"
+#import "FPFamilyPhotoUpdateCount.h"
+#import "FPFamilyPhotoStatusDomain.h"
+#import "FPTimeLineDZDomain.h"
+#import "FPTimeLineCommentDomain.h"
+#import "FPFamilyPhotoNormalDomain.h"
+#import "FPMyFamilyPhotoListColletion.h"
+#import "FPCollegeListDomin.h"
+>>>>>>> origin/master
 @interface KGHttpService : NSObject
 
 @property (strong, nonatomic) NSString * pushToken;
@@ -326,4 +338,37 @@
 
 
 - (void)meiRiJingXuanHuiDiao:(void(^)(NSString * data))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)cheakUserJessionID:(NSString *)jid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+#pragma mark - 家庭相册模块
+-(void)getCollegePhotoListWithPageNo:(NSString *)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild;
+
+-(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getMyPhotoCollection:(void(^)(FPMyFamilyPhotoCollectionDomain * domain))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPPhotoUpdateCountWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime success:(void(^)(FPFamilyPhotoUpdateCount * domain))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime updateTime:(NSString *)updateTime success:(void(^)(NSArray * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)uploadFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID img:(UIImage *)img success:(void(^)(NSString * str))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)modifyFPItemInfo:(NSString *)address note:(NSString *)note success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPItemExtraInfo:(NSString *)uuid success:(void(^)(FPTimeLineDZDomain * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)saveFPItemReply:(NSString *)content rel_uuid:(NSString *)rel_uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)deleteFPTimeLineItem:(NSString *)uuid success:(void(^)(NSString * mgr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPItemCommentList:(NSString *)uuid pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(NSArray * arr))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)getFPTimeLineItem:(NSString *)uuid success:(void(^)(FPFamilyPhotoNormalDomain * item))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)saveFPDZ:(NSString *)newsuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)delFPDZ:(NSString *)newsuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 @end

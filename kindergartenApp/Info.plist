@@ -2,6 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<<<<<<< HEAD
+=======
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mqqwpa</string>
+		<string>weixin</string>
+		<string>wechat</string>
+		<string>mqq</string>
+	</array>
+	<key>CFBundleDisplayName</key>
+	<string>问界互动家园</string>
+>>>>>>> origin/master
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

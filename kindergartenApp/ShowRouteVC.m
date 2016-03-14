@@ -48,12 +48,12 @@
     destinationLbl.text = self.destinationName;
     
     //启用查看路径
-    _routesearch = [[BMKRouteSearch alloc]init];
+    _routesearch = [[BMKRouteSearch alloc] init];
     
     
     
     //启用定位
-    _locService = [[BMKLocationService alloc]init];
+    _locService = [[BMKLocationService alloc] init];
     [_locService startUserLocationService];
     
     self.title = @"查看路线";

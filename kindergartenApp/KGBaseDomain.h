@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) id studentDomain;
 
+@property (strong, nonatomic) NSString * status;
+
 @property (strong, nonatomic) id  data;
 
 @end

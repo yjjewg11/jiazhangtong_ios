@@ -98,12 +98,14 @@
 {
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.urlStr]]];
     
-    if(announcementDomain.dianzan && !announcementDomain.dianzan.canDianzan) {
+    if(announcementDomain.dianzan && !announcementDomain.dianzan.canDianzan)
+    {
         dianZanImg.image = [UIImage imageNamed:@"zan2"];
         dianZanBtn.selected = YES;
     }
     
-    if(!announcementDomain.isFavor) {
+    if(!announcementDomain.isFavor)
+    {
         shouCangImg.image = [UIImage imageNamed:@"shoucang2"];
         shouCangBtn.selected = YES;
     }
@@ -191,7 +193,8 @@
 }
 
 //保存点赞
-- (void)savwDZ:(UIButton *)sender {
+- (void)savwDZ:(UIButton *)sender
+{
     [[KGHUD sharedHud] show:self.view];
     sender.enabled = NO;
     [[KGHttpService sharedService] saveDZ:announcementDomain.uuid type:Topic_YHHD success:^(NSString *msgStr) {
@@ -389,6 +392,9 @@
         [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
     }];
 }
+
+#pragma mark - 点赞相关
+
 
 #pragma mark - 重新设置webview contentsize
 - (void)webViewDidFinishLoad:(UIWebView *)webView

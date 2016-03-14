@@ -838,9 +838,7 @@ static UIColor *titleColor;
                                     failureBlock:failureBlock];
 }
 
-
 #pragma mark - Reload Data
-
 - (void)reloadData
 {
     if (self.groups.count == 0)

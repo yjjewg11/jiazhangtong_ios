@@ -91,6 +91,7 @@
 
 - (void)dealloc
 {
+    NSLog(@"delloc --- ");
     _adView.adWebBrowswerDelegate = nil;
     _adView.delegate = nil;
     _adView = nil;//清除掉
@@ -673,5 +674,6 @@
 {
     
 }
+
 
 @end
