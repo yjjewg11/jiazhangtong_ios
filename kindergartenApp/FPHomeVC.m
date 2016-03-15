@@ -121,7 +121,7 @@
    MXPullDownMenu *  _dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor redColor]];
     _dropMenu.backgroundColor=[UIColor clearColor];
     _dropMenu.delegate = self;
-    _dropMenu.set
+//    _dropMenu.set
     NSLog(@"APPWINDOWWIDTH=%f",APPWINDOWWIDTH);
     _dropMenu.frame = CGRectMake(
                                  30,
