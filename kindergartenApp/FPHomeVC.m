@@ -27,10 +27,20 @@
 #import "MBProgressHUD+HM.h"
 #import "FPTimeLineDetailVC.h"
 #import "FPCollectionVC.h"
-@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate>
+#import "MXPullDownMenu.h"
+@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate,MXPullDownMenuDelegate>
 {
+    
+    //导航条下来数据内容
+    NSArray * _dataOfTopTitleBtnArray;
+    //导航条下来数据内容,我的家庭相册列表
+    NSMutableArray * _dataOfmyCollectionArray;
+
+    
+    
     UITableView * _tableView;
     FPHomeSonView * sonView;
+    //上传照片选择（上传照片，新建精品相册）
     FPHomeSelectView * selView;
     DBNetDaoService * _service;
     
@@ -52,11 +62,17 @@
 @end
 
 @implementation FPHomeVC
++(void) setFamily_uuid:(NSString *)str{
+    family_uuid=str;
+}
++(NSString *) getFamily_uuid{
+    return family_uuid;
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
+    NSLog(@"FPHomeVC.viewDidAppear()");
     //选择自己喜欢的颜色
     UIColor * color = [UIColor clearColor];
     NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:UITextAttributeTextColor];
@@ -93,8 +109,43 @@
     [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
 }
 
+
+
+- (void)initNaviationTitleBtn
+{
+    NSArray *testArray;
+    _dataOfTopTitleBtnArray = @[@"智能排序",@"评价最高",@"距离最近"];
+    
+    //UIColor * color = [UIColor clearColor];
+    testArray = @[_dataOfTopTitleBtnArray];
+   MXPullDownMenu *  _dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor redColor]];
+    _dropMenu.backgroundColor=[UIColor clearColor];
+    _dropMenu.delegate = self;
+    _dropMenu.set
+    NSLog(@"APPWINDOWWIDTH=%f",APPWINDOWWIDTH);
+    _dropMenu.frame = CGRectMake(
+                                 30,
+                                 0, APPWINDOWWIDTH, _dropMenu.frame.size.height);
+   
+   // [self.view addSubview:_dropMenu];
+      self.navigationItem.titleView = _dropMenu;
+}
 - (void)initTableView
 {
+    
+    
+    [self initNaviationTitleBtn];
+    
+    /*
+     UIButton *titleButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+     [titleButton setTitle: @"自定义title" forState: UIControlStateNormal];
+     [titleButton setBackgroundImage:[UIImage imageNamed:@"new_album"] forState:UIControlStateNormal];
+     [titleButton sizeToFit];
+     self.navigationItem.titleView = titleButton;
+     */
+  
+    
+    
     //自定义的headerview
     FPHomeTopView * view = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
     [view setData:_myCollectionDomain];
@@ -251,14 +302,18 @@
     self.navigationItem.rightBarButtonItem = rightBarBtn;
     
     UIButton* btn2 = [[UIButton alloc] initWithFrame:CGRectMake(0,0,30,27)];
-    [btn2 setBackgroundImage:[UIImage imageNamed:@"hanbao"] forState:UIControlStateNormal];
+    [btn2 setBackgroundImage:[UIImage imageNamed:@"btn_fp_home_more"] forState:UIControlStateNormal];
     [btn2 addTarget:self action:@selector(showSonView) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc] initWithCustomView:btn2];
     self.navigationItem.leftBarButtonItem = leftBarBtn;
+    
+   
 }
 
 - (void)pushToUpLoadVC
 {
+    
+  //  if(_tableView==nil)return;
     if (_selectViewOpen == NO)
     {
         if (sonView)
@@ -269,15 +324,20 @@
         selView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSelectView" owner:nil options:nil] firstObject];
         selView.delegate = self;
         selView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
-        
+       
         CATransition *applicationLoadViewIn =[CATransition animation];
         [applicationLoadViewIn setDuration:0.3];
         [applicationLoadViewIn setType:kCATransitionReveal];
         [applicationLoadViewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
         [[selView layer]addAnimation:applicationLoadViewIn forKey:kCATransitionReveal];
-        [self.view addSubview:selView];
+        //添加最上层
+       
+      //  [self.view insertSubview:selView aboveSubview:_tableView];
+       [self.view addSubview:selView];
         
         _selectViewOpen = YES;
+    }else{
+        if(selView)[self.view bringSubviewToFront:selView];
     }
 }
 
@@ -351,12 +411,42 @@
 {
     [self showLoadView];
     
-    [[KGHttpService sharedService] getMyPhotoCollection:^(FPMyFamilyPhotoCollectionDomain *domain)
+    [[KGHttpService sharedService] getMyPhotoCollection:^( NSArray *datas)
     {
         dispatch_async(dispatch_get_main_queue(), ^
         {
             [self hidenLoadView];
-            _myCollectionDomain = domain;
+            
+            _myCollectionDomain=nil;
+            if (!datas || !datas.count){
+                //array是空或nil
+                NSLog(@"MyPhotoCollection is empty!");
+                return;
+            }
+            
+
+            for(FPMyFamilyPhotoCollectionDomain* v in datas){
+                //没有初始化，则默认第一个。
+                if([FPHomeVC getFamily_uuid]==nil){
+                    _myCollectionDomain=v;
+                    [FPHomeVC setFamily_uuid:_myCollectionDomain.uuid];
+
+                    break;
+                    
+                }
+                //包含全局uuid，则设置为初始化
+                if([v.uuid isEqualToString:[FPHomeVC getFamily_uuid]]){
+                    _myCollectionDomain=v;
+                    break;
+                }
+
+            }
+            
+            if(_myCollectionDomain==nil){
+                _myCollectionDomain= datas[0];
+                  [FPHomeVC setFamily_uuid:_myCollectionDomain.uuid];
+            }
+            
             [self initTableView];
             [self getPhotoDatas];
         });
@@ -408,7 +498,7 @@
 - (void)saveUploadImgPath:(NSNotification *)noti
 {
     FPUploadSaveUrlDomain * domain = noti.object;
-    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status]];
+    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status] family_uuid:domain.family_uuid];
 }
 
 #pragma mark - 创建下拉菊花

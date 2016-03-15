@@ -73,7 +73,7 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * jid =  [defaults objectForKey:@"loginJessionID"];
-    NSLog(@"bbb %@",jid);
+    NSLog(@"local jessionid %@",jid);
     
     if(jid)
     {

@@ -40,13 +40,16 @@
     _status = status;
     
     if (status == 1) //等待上传
-    {
+    {   
         self.statusView.hidden = NO;
         self.statusView.image = [UIImage imageNamed:@"dengdai"];
     }
     else if (status == 2) //上传中
     {
-        self.statusView.hidden = YES;
+        self.statusView.hidden = NO;
+        
+         self.statusView.image = [UIImage imageNamed:@"fp_pause"];
+      
     }
     else if (status == 3) //上传失败
     {

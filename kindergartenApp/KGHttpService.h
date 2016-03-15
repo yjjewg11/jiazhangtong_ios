@@ -38,9 +38,6 @@
 #import "DiscorveryNewNumberDomain.h"
 #import "DiscorveryReMenJingXuanDomain.h"
 #import "SystemConfigOfTopic.h"
-<<<<<<< HEAD
-#import "KGHttpUrl.h"
-=======
 #import "FPMyFamilyPhotoCollectionDomain.h"
 #import "FPFamilyPhotoLastTimeVO.h"
 #import "FPFamilyPhotoUpdateCount.h"
@@ -50,7 +47,7 @@
 #import "FPFamilyPhotoNormalDomain.h"
 #import "FPMyFamilyPhotoListColletion.h"
 #import "FPCollegeListDomin.h"
->>>>>>> origin/master
+#import "KGHttpUrl.h"
 @interface KGHttpService : NSObject
 
 @property (strong, nonatomic) NSString * pushToken;
@@ -346,7 +343,7 @@
 
 -(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getMyPhotoCollection:(void(^)(FPMyFamilyPhotoCollectionDomain * domain))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getMyPhotoCollection:(void(^)(NSArray * datas))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild;
 

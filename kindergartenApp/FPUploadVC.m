@@ -5,7 +5,7 @@
 //  Created by Mac on 16/1/20.
 //  Copyright © 2016年 funi. All rights reserved.
 //
-
+#import "FPHomeVC.h"
 #import "FPUploadVC.h"
 #import "FPImagePickerVC.h"
 #import "MJExtension.h"
@@ -55,6 +55,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"FPUplodVC viewDidLoad,isJumpTwoPages=%d,pushToSelectImageVC=%d",self.isJumpTwoPages,self.pushToSelectImageVC);
     if (self.isJumpTwoPages == YES) {
         [self.navigationController pushViewController:[[FPImagePickerVC alloc] init] animated:YES];
         self.isJumpTwoPages = NO;
@@ -73,10 +75,7 @@
     self.title = @"上传列表";
     
     [self initTableView];
-    //从数据库去读取上传失败的，等待上传的数据
-    [self getDataFromDatabase];
-
-    //在右上角添加一个按钮来选择图片
+        //在右上角添加一个按钮来选择图片
     UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(openSelectImageView)];
     barbtn.title = @"添加相片";
     barbtn.tintColor = [UIColor whiteColor];
@@ -85,6 +84,12 @@
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didGetPhotoData:) name:@"didgetphotodata" object:nil];
     [center addObserver:self selector:@selector(startUpLoad:) name:@"startupload" object:nil];
+    
+    //从数据库去读取上传失败的，等待上传的数据
+    [self getDataFromDatabase];
+    
+
+    
 }
 
 - (void)initTableView
@@ -106,9 +111,10 @@
     {
         [_library assetForURL:[NSURL URLWithString:marr[i]] resultBlock:^(ALAsset *asset)
         {
-            FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
-            domain.localurl = [NSURL URLWithString:marr[i]];
-            domain.status = 1;
+            FPFamilyPhotoUploadDomain * domain=marr[i];
+//            FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
+//            domain.localurl = [NSURL URLWithString:marr[i]];
+//            domain.status = 1;
             domain.suoluetu = [UIImage imageWithCGImage:[asset thumbnail]];
             [_dataArrs addObject:domain];
              
@@ -127,6 +133,29 @@
     }
 }
 
+/**
+ 开始执行初始化上传进度表，和开始上传。
+ */
+- (void)startDoUploadTable{
+    if(_dataArrs.count>0){
+    //找到第一个等待状态的数据开始上传。
+        for (int i=0;i<_dataArrs.count;i++) {
+            FPFamilyPhotoUploadDomain * domain=_dataArrs[i];
+            if(domain.status==1){
+                NSLog(@"startDoUploadTable _dataArrs.count=@d",_dataArrs.count);
+                NSNotification * noti = [[NSNotification alloc] initWithName:@"startupload" object:@(i) userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:noti];
+                
+                break;
+            }
+        
+        }
+        
+    }else{
+        NSLog(@"startDoUploadTable _dataArrs.count==0");
+    }
+         [self.uploadTable reloadData];
+}
 #pragma mark - tableview d & d
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -197,6 +226,7 @@
         
         [_library assetForURL:urls[i] resultBlock:^(ALAsset *asset)
         {
+            domain.family_uuid=[FPHomeVC getFamily_uuid];
             domain.localurl = urls[i];
             domain.status = 1;
             domain.suoluetu = [UIImage imageWithCGImage:[asset thumbnail]];
@@ -206,7 +236,7 @@
             {
                 dispatch_async(dispatch_get_main_queue(), ^
                 {
-                    [self.uploadTable reloadData];
+                    [self startDoUploadTable];
                 });
             }
         }
@@ -261,8 +291,10 @@
     
     NSString * phoneType = [UIDevice currentDevice].model;
     //这里传入一个 uuid
-    
-    NSDictionary * dict = @{@"JSESSIONID":[KGHttpService sharedService].loginRespDomain.JSESSIONID,@"family_uuid":self.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType};
+     FPFamilyPhotoUploadDomain *uploadDmain=_dataArrs[index];
+    NSDictionary * dict = @{
+//                            @"JSESSIONID":[KGHttpService sharedService].loginRespDomain.JSESSIONID,
+                            @"family_uuid":uploadDmain.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType};
     
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
     
@@ -280,13 +312,17 @@
     [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         FPUploadSaveUrlDomain * domain = [[FPUploadSaveUrlDomain alloc] init];
-        domain.localUrl = [((FPFamilyPhotoUploadDomain *)_dataArrs[index]).localurl absoluteString];
+       
+        
+        domain.localUrl = [uploadDmain.localurl absoluteString];
+        domain.family_uuid=uploadDmain.family_uuid;
         domain.status = 0;//成功
         
         //存入数据库
         NSNotification * noti0 = [[NSNotification alloc] initWithName:@"saveuploadimg" object:domain userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti0];
         
+        //通知主页时光轴有数据更新
         NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti1];
         
@@ -297,7 +333,8 @@
         {
            [_dataArrs removeObjectAtIndex:index];
            [self.uploadTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-           [self.uploadTable reloadData];
+            
+            [self startDoUploadTable];
         });
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
@@ -307,15 +344,25 @@
         {
             FPUploadCell * cell = [_cells objectAtIndex:index];
             [cell setStatus:3];
+            
+          
         });
     
         //存入数据库
         FPUploadSaveUrlDomain * domain = [[FPUploadSaveUrlDomain alloc] init];
-        domain.localUrl = [((FPFamilyPhotoUploadDomain *)_dataArrs[index]).localurl absoluteString];
-        domain.status = 3;//失败
+        
+            domain.status = 3;//失败
+        
+        
+        domain.localUrl = [uploadDmain.localurl absoluteString];
+        domain.family_uuid=uploadDmain.family_uuid;
+       
         
         NSNotification * noti = [[NSNotification alloc] initWithName:@"saveuploadimg" object:domain userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti];
+        
+        
+          [self startDoUploadTable];
     }];
     
     // 4. Set the progress block of the operation.

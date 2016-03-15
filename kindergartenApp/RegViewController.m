@@ -54,14 +54,10 @@
     
 //    [self setViewParame];
     [valCodeBtn setBorderWithWidth:0 color:[UIColor clearColor] radian:5.0];
-<<<<<<< HEAD
-    //[self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
-    
-     [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
-=======
+
 //    [self registerBtnEnable:NO alpha:Number_ViewAlpha_Three];
     [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
->>>>>>> origin/master
+
 }
 
 - (void)didReceiveMemoryWarning {

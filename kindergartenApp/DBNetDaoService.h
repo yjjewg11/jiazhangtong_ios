@@ -20,7 +20,8 @@
 
 - (NSArray *)getListTimePhotoData:(NSString *)date familyUUID:(NSString *)familyUUID;
 
-- (void)saveUploadImgPath:(NSString *)path status:(NSString *)status;
+- (void)saveUploadImgPath:(NSString *)path status:(NSString *)status  family_uuid
+:(NSString *)family_uuid;
 
 + (DBNetDaoService *)defaulService;
 

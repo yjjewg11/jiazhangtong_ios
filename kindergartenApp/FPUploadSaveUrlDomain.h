@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface FPUploadSaveUrlDomain : NSObject
-
+@property (strong, nonatomic) NSString * family_uuid;
 @property (strong, nonatomic) NSString * localUrl;
 
 @property (assign, nonatomic) NSInteger status;

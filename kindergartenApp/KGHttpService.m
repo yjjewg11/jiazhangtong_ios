@@ -2285,7 +2285,7 @@
     
 }
 //获取我的家庭相册
-- (void)getMyPhotoCollection:(void(^)(FPMyFamilyPhotoCollectionDomain * domain))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getMyPhotoCollection:(void(^)(NSArray * datas))success faild:(void(^)(NSString * errorMsg))faild
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -2299,11 +2299,11 @@
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
              
-             NSArray * datas = [FPMyFamilyPhotoCollectionDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
-             
-             FPMyFamilyPhotoCollectionDomain * domain = datas[0];
-             
-             success(domain);
+             NSArray *datas = [FPMyFamilyPhotoCollectionDomain objectArrayWithKeyValuesArray:[responseObject objectForKey:@"list"]];
+              success(datas);
+//             FPMyFamilyPhotoCollectionDomain * domain = datas[0];
+//             
+//             success(domain);
          }
          else
          {
