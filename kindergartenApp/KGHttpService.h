@@ -339,7 +339,7 @@
 - (void)cheakUserJessionID:(NSString *)jid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 #pragma mark - 家庭相册模块
--(void)getCollegePhotoListWithPageNo:(NSString *)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild;
+-(void)getCollegePhotoListWithPageNo:(NSInteger)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild;
 
 -(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild;
 

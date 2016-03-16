@@ -2252,10 +2252,11 @@
 #pragma mark - 家庭相册模块
 
 //获取收藏页面
--(void)getCollegePhotoListWithPageNo:(NSString *)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild{
+-(void)getCollegePhotoListWithPageNo:(NSInteger)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild{
     AFHTTPRequestOperationManager * mgr = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary * dic = @{@"pageNo":pageNo};
+    NSDictionary * dic = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageNo]};
+      NSLog(@"%@",[KGHttpUrl getCollegePhotoUrl]);
     [mgr GET:[KGHttpUrl getCollegePhotoUrl] parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         

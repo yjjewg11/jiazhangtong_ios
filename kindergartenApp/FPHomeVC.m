@@ -27,15 +27,17 @@
 #import "MBProgressHUD+HM.h"
 #import "FPTimeLineDetailVC.h"
 #import "FPCollectionVC.h"
-#import "MXPullDownMenu.h"
-@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate,MXPullDownMenuDelegate>
+
+#define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"      //用户偏好存储key
+
+@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate>
 {
     
     //导航条下来数据内容
-    NSArray * _dataOfTopTitleBtnArray;
+    NSMutableArray * _dataOfTopTitleBtnArray;
     //导航条下来数据内容,我的家庭相册列表
-    NSMutableArray * _dataOfmyCollectionArray;
-
+    NSArray * _dataOfmyCollectionArray;
+    NSInteger  _PullDownMenu_myCollection_index;
     
     
     UITableView * _tableView;
@@ -44,7 +46,7 @@
     FPHomeSelectView * selView;
     DBNetDaoService * _service;
     
-    FPMyFamilyPhotoCollectionDomain * _myCollectionDomain;
+//    FPMyFamilyPhotoCollectionDomain * _myCollectionDomain;
     
     NSMutableArray * _photoDatas;
     NSMutableArray * _timeDatas;
@@ -64,8 +66,17 @@
 @implementation FPHomeVC
 +(void) setFamily_uuid:(NSString *)str{
     family_uuid=str;
+    //存沙盒
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    [userDefaults setObject:str forKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
 }
 +(NSString *) getFamily_uuid{
+    if(family_uuid==nil){
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        family_uuid= [userDefaults objectForKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
+
+    }
     return family_uuid;
 }
 
@@ -82,6 +93,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _dataOfTopTitleBtnArray=[NSMutableArray array];
+
+    _dataOfmyCollectionArray = [NSMutableArray array];
+    _photoDatas = [NSMutableArray array];
+    _timeDatas = [NSMutableArray array];
+    _selectViewOpen = NO;
+    _pageNo = 1;
+
+    
+    
     //创建服务类
     _service = [DBNetDaoService defaulService];
     
@@ -90,11 +111,6 @@
     
     //获取我的家庭相册信息
     [self getMyPhotoCollectionInfo];
-    
-    _photoDatas = [NSMutableArray array];
-    _timeDatas = [NSMutableArray array];
-    _selectViewOpen = NO;
-    _pageNo = 1;
     
     [self createBarItems];
     //注册通知,用户提示用户有新数据需要更新啦
@@ -109,26 +125,76 @@
     [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
 }
 
+//切换家庭相册
+- (void)changeMyCollection :(NSInteger)row
+{
+    FPMyFamilyPhotoCollectionDomain * domain=_dataOfmyCollectionArray[row];
+    //设置全局保存
+   [FPHomeVC setFamily_uuid:domain.uuid];
+  
 
+}
+
+
+//获取当前用户选择相册
+- (FPMyFamilyPhotoCollectionDomain *)getCurFPMyFamilyPhotoCollectionDomain
+{
+    
+    for(FPMyFamilyPhotoCollectionDomain * domain in _dataOfmyCollectionArray){
+        
+        if ([domain.uuid isEqualToString:  [FPHomeVC getFamily_uuid]] ) {
+            return domain;
+        }
+        
+    }
+    if(_dataOfmyCollectionArray.count>0){
+        return _dataOfmyCollectionArray[0];
+    }
+    return NULL;
+
+}
 
 - (void)initNaviationTitleBtn
 {
     NSArray *testArray;
-    _dataOfTopTitleBtnArray = @[@"智能排序",@"评价最高",@"距离最近"];
+//    _dataOfTopTitleBtnArray = @[@"智能排序",@"评价最高",@"距离最近"];
+//
     
-    //UIColor * color = [UIColor clearColor];
-    testArray = @[_dataOfTopTitleBtnArray];
-   MXPullDownMenu *  _dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor redColor]];
-    _dropMenu.backgroundColor=[UIColor clearColor];
-    _dropMenu.delegate = self;
-//    _dropMenu.set
-    NSLog(@"APPWINDOWWIDTH=%f",APPWINDOWWIDTH);
-    _dropMenu.frame = CGRectMake(
-                                 30,
-                                 0, APPWINDOWWIDTH, _dropMenu.frame.size.height);
-   
-   // [self.view addSubview:_dropMenu];
-      self.navigationItem.titleView = _dropMenu;
+    for(FPMyFamilyPhotoCollectionDomain * domain in _dataOfmyCollectionArray){
+        
+        [_dataOfTopTitleBtnArray addObject:domain.title];
+    }
+    
+//    if(_dataOfTopTitleBtnArray.count==0){
+//        [_dataOfTopTitleBtnArray addObject:@"没有家庭相册"];
+//    }
+//    testArray = @[_dataOfTopTitleBtnArray];
+//   _dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor redColor]];
+//    _dropMenu.backgroundColor=[UIColor clearColor];
+//    _dropMenu.delegate = self;
+////    _dropMenu.set
+//    NSLog(@"APPWINDOWWIDTH=%f",APPWINDOWWIDTH);
+//    _dropMenu.frame = CGRectMake(
+//                                 30,
+//                                 0, APPWINDOWWIDTH, _dropMenu.frame.size.height);
+//
+    
+    FPMyFamilyPhotoCollectionDomain * cDomain=[self getCurFPMyFamilyPhotoCollectionDomain];
+    NSString * title=nil;
+    if(cDomain){
+        title=[NSString stringWithFormat:@"%@(%d)",cDomain.title,_dataOfmyCollectionArray.count];
+       
+    }else{
+        title=@"无相册";
+    }
+     UIButton *titleButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
+    [titleButton setTitle: title forState: UIControlStateNormal];
+//     [titleButton setBackgroundImage:[UIImage imageNamed:@"new_album"] forState:UIControlStateNormal];
+     [titleButton sizeToFit];
+     self.navigationItem.titleView = titleButton;
+    
+    //[self.view addSubview:_dropMenu];
+//      self.navigationItem.titleView = _dropMenu;
 }
 - (void)initTableView
 {
@@ -136,19 +202,14 @@
     
     [self initNaviationTitleBtn];
     
-    /*
-     UIButton *titleButton = [UIButton buttonWithType: UIButtonTypeRoundedRect];
-     [titleButton setTitle: @"自定义title" forState: UIControlStateNormal];
-     [titleButton setBackgroundImage:[UIImage imageNamed:@"new_album"] forState:UIControlStateNormal];
-     [titleButton sizeToFit];
-     self.navigationItem.titleView = titleButton;
-     */
+   
   
     
     
     //自定义的headerview
     FPHomeTopView * view = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
-    [view setData:_myCollectionDomain];
+    
+    [view setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
     view.size = CGSizeMake(APPWINDOWWIDTH, 192);
     //回调
     view.pushToMyAlbum = ^{
@@ -176,7 +237,10 @@
     sonView.pushCollege = ^{
         [weakSelf.navigationController pushViewController:[[FPCollectionVC alloc]init] animated:YES];
     };
-    
+    //家庭相册修改
+    sonView.pushAlbunInfo = ^{
+        [weakSelf.navigationController pushViewController:[[FPCollectionVC alloc]init] animated:YES];
+    };
     
     sonView.origin = CGPointMake(0, -132);
     sonView.size = CGSizeMake(140, 132);
@@ -287,7 +351,7 @@
     
     //传递点击的日期过去
     vc.daytimeStr = _timeDatas[indexPath.row - 1];
-    vc.familyUUID = _myCollectionDomain.uuid;
+    vc.familyUUID = [FPHomeVC getFamily_uuid];
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -367,7 +431,7 @@
     FPUploadVC * vc = [[FPUploadVC alloc] init];
     vc.isJumpTwoPages = YES;
     
-    vc.family_uuid = _myCollectionDomain.uuid;
+    vc.family_uuid = [FPHomeVC getFamily_uuid];
     
     [self.navigationController pushViewController:vc animated:NO];
 }
@@ -379,7 +443,7 @@
 
 - (void)getPhotoDatas
 {
-    [_service getTimelinePhotos:_myCollectionDomain.uuid];
+    [_service getTimelinePhotos:[FPHomeVC getFamily_uuid]];
 }
 
 - (void)hidenSelf
@@ -417,34 +481,34 @@
         {
             [self hidenLoadView];
             
-            _myCollectionDomain=nil;
             if (!datas || !datas.count){
                 //array是空或nil
                 NSLog(@"MyPhotoCollection is empty!");
                 return;
             }
             
-
+            _dataOfmyCollectionArray=datas;
+            BOOL isChageFailyUuid=true;
+            
             for(FPMyFamilyPhotoCollectionDomain* v in datas){
                 //没有初始化，则默认第一个。
                 if([FPHomeVC getFamily_uuid]==nil){
-                    _myCollectionDomain=v;
-                    [FPHomeVC setFamily_uuid:_myCollectionDomain.uuid];
-
+                    [FPHomeVC setFamily_uuid:v.uuid];
+                    isChageFailyUuid=false;
                     break;
                     
                 }
                 //包含全局uuid，则设置为初始化
                 if([v.uuid isEqualToString:[FPHomeVC getFamily_uuid]]){
-                    _myCollectionDomain=v;
+                     isChageFailyUuid=false;
                     break;
                 }
 
             }
-            
-            if(_myCollectionDomain==nil){
-                _myCollectionDomain= datas[0];
-                  [FPHomeVC setFamily_uuid:_myCollectionDomain.uuid];
+            //没设置则设置为第一个
+            if(isChageFailyUuid&&_dataOfmyCollectionArray.count>0){
+                FPMyFamilyPhotoCollectionDomain * tmp=_dataOfmyCollectionArray[0];
+                  [FPHomeVC setFamily_uuid:tmp.uuid];
             }
             
             [self initTableView];
@@ -472,7 +536,7 @@
 #pragma mark - 获取数据库照片数据
 - (void)loadData
 {
-    NSMutableArray * arr = [_service getListTimeHeadData:_myCollectionDomain.uuid];
+    NSMutableArray * arr = [_service getListTimeHeadData:[FPHomeVC getFamily_uuid]];
     //反过来
     NSArray * dataArr = [[arr reverseObjectEnumerator] allObjects];
     
@@ -489,7 +553,7 @@
 - (NSArray *)queryImgs:(NSIndexPath *)indexPath
 {
     NSString * strs = _timeDatas[indexPath.row - 1];
-    NSArray * imgs = [_service getListTimePhotoData:[[strs componentsSeparatedByString:@","] firstObject] familyUUID:_myCollectionDomain.uuid];
+    NSArray * imgs = [_service getListTimePhotoData:[[strs componentsSeparatedByString:@","] firstObject] familyUUID:[FPHomeVC getFamily_uuid]];
     [_photoDatas addObject:imgs];
     return imgs;
 }
@@ -527,9 +591,9 @@
 {
     //1.去查询增量更新maxtime以后的数据并保存到本地,注意要更新时间
     //从数据库查询 familyUUID 所对应的 maxTime 和 minTime 如果没有相应数据 则自动创建一条，且把maxTime和minTime设置为空
-    FPFamilyInfoDomain * domain = [_service queryTimeByFamilyUUID:_myCollectionDomain.uuid];
+    FPFamilyInfoDomain * domain = [_service queryTimeByFamilyUUID:[FPHomeVC getFamily_uuid]];
     
-    [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:_myCollectionDomain.uuid withTime:domain.maxTime timeType:0 pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
+    [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:[FPHomeVC getFamily_uuid] withTime:domain.maxTime timeType:0 pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
     {
         NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
          
@@ -549,7 +613,7 @@
              
             //设置maxTime 和 minTime到这个familyUUID
             NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
-            [_service updateMaxTime:_myCollectionDomain.uuid maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
+            [_service updateMaxTime:[FPHomeVC getFamily_uuid] maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
              
             //2.去数据库里面查询
             [self loadData];
@@ -577,9 +641,9 @@
         
         //1.去查询增量更新maxtime以后的数据并保存到本地,注意要更新时间
         //从数据库查询 familyUUID 所对应的 maxTime 和 minTime 如果没有相应数据 则自动创建一条，且把maxTime和minTime设置为空
-        FPFamilyInfoDomain * domain = [_service queryTimeByFamilyUUID:_myCollectionDomain.uuid];
+        FPFamilyInfoDomain * domain = [_service queryTimeByFamilyUUID:[FPHomeVC getFamily_uuid]];
         
-        [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:_myCollectionDomain.uuid withTime:domain.maxTime timeType:0 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
+        [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:[FPHomeVC getFamily_uuid] withTime:domain.maxTime timeType:0 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
         {
             NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
             
@@ -601,7 +665,7 @@
                 
                 //设置maxTime 和 minTime到这个familyUUID
                 NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
-                [_service updateMaxTime:_myCollectionDomain.uuid maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
+                [_service updateMaxTime:[FPHomeVC getFamily_uuid] maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
                 
                 //2.去数据库里面查询
                 [self loadData];

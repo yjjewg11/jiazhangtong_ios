@@ -9,8 +9,8 @@
 #import "KGHttpUrl.h"
 
 #define URL(baseURL, businessURL) [NSString stringWithFormat:@"%@%@", baseURL, businessURL];
-#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
-//#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
+//#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
+#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
 
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单
 #define loginURL             @"rest/userinfo/login.json"             //登录

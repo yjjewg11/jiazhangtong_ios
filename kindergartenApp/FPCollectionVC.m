@@ -9,10 +9,15 @@
 #import "FPCollectionVC.h"
 #import "KGHttpService.h"
 #import "MBProgressHUD+HM.h"
-
+#import "UIImageView+WebCache.h"
+#import "FPTimeLineDetailVC.h"
 @interface FPCollectionVC ()<UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     int _pageNo;
+    PageInfoDomain * pageInfo;
+    UITableViewController * reFreshView;
+    NSMutableArray * dataSource;
+    
 }
 
 @property (nonatomic, strong) UICollectionView * collectionView;
@@ -30,17 +35,32 @@
     
     [self getData];
     
-    [self creatCollectionView];
+  
     
 }
-
+- (void)initPageInfo
+{
+    if(!pageInfo)
+    {
+        pageInfo = [[PageInfoDomain alloc] initPageInfo:1 size:20];
+    }
+}
 -(void)getData{
-    NSString * pageStr = [NSString stringWithFormat:@"%d",_pageNo];
     
-    [[KGHttpService sharedService] getCollegePhotoListWithPageNo:pageStr success:^(FPCollegeListDomin *domin) {
+       [self showLoadView];
+
+    
+    [[KGHttpService sharedService] getCollegePhotoListWithPageNo:pageInfo.pageNo success:^(FPCollegeListDomin *domin) {
+        [self hidenLoadView];
+        pageInfo.pageNo++;
+        
         _dataArr = [NSMutableArray arrayWithArray:domin.data];
         
+          [self creatCollectionView];
     } faild:^(NSString *errorMsg) {
+        
+        [self hidenLoadView];
+
         [MBProgressHUD showError:@"加载错误"];
     }];
     
@@ -85,19 +105,41 @@
 //每个UICollectionView展示的内容
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * CellIdentifier = @"collectionViewCell";
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.backgroundColor = [UIColor orangeColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    label.textColor = [UIColor redColor];
-    label.text = [NSString stringWithFormat:@"%ld",indexPath.row];
     
-    for (id subView in cell.contentView.subviews) {
-        [subView removeFromSuperview];
+    @try{
+        
+        
+        static NSString * CellIdentifier = @"collectionViewCell";
+        UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+        NSLog(@"indexPath.row:%d", indexPath.row);
+
+        if(_dataArr.count<indexPath.row)return cell;
+        NSMutableDictionary * data=_dataArr[indexPath.row];
+      
+        UIImageView * imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
+        
+        [cell setRestorationIdentifier:[data objectForKey:@"uuid"]];
+       
+        NSString *path=[data objectForKey:@"path"];
+        [imgView sd_setImageWithURL:[NSURL URLWithString:path ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+         {}];
+        
+        for (id subView in cell.contentView.subviews) {
+            [subView removeFromSuperview];
+        }
+        [cell.contentView addSubview:imgView];
+        return cell;
+        
     }
-    [cell.contentView addSubview:label];
-    return cell;
+    @catch(NSException *exception) {
+        NSLog(@"exception:%@", exception);
+    }
+    @finally {
+        
+    }
+
+    
 }
 
 #pragma mark --UICollectionViewDelegateFlowLayout
@@ -109,7 +151,25 @@
     
     return CGSizeMake(quter, quter);
 }
+//UICollectionView被选中时调用的方法
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    
+    NSLog(@"click=%@",[cell restorationIdentifier]);
+  
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    FPTimeLineDetailVC * vc = [[FPTimeLineDetailVC alloc] init];
+    
+    //传递点击的日期过去
+//    vc.daytimeStr = _timeDatas[indexPath.row - 1];
+//    vc.familyUUID = [FPHomeVC getFamily_uuid];
 
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 //定义每个UICollectionView 的 margin
