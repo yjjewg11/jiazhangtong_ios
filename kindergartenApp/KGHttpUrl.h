@@ -246,5 +246,7 @@
 
 + (NSString *)getFPCollegeUrl;
 
++ (NSString *)getfPPhotoItem_addFavorites:(NSString *)uuid;
 
++ (NSString *)getfPPhotoItem_deleteFavorites:(NSString *)uuid;
 @end

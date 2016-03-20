@@ -6,9 +6,9 @@
 //  Copyright © 2016年 funi. All rights reserved.
 //
 
-#import "KGBaseDomain.h"
+#import "PageInfoDomain.h"
 
-@interface FPFamilyPhotoLastTimeVO : KGBaseDomain
+@interface FPFamilyPhotoLastTimeVO : PageInfoDomain
 
 @property (strong, nonatomic) NSString * lastTime;
 

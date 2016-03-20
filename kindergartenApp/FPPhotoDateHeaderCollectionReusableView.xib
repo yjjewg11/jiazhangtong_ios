@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FPPhotoDateHeaderCollectionReusableView">
+            <connections>
+                <outlet property="dateLbl" destination="49q-re-3qQ" id="aB1-a7-b2f"/>
+                <outlet property="total" destination="tRq-Hy-geD" id="gxw-vK-7kr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89L-ad-j2i">
+                    <rect key="frame" x="0.0" y="-2" width="320" height="44"/>
+                    <subviews>
+                        <view alpha="0.55000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Exf-ut-w3G">
+                            <rect key="frame" x="15" y="14" width="6" height="16"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="6" id="WUB-dB-kNE"/>
+                                <constraint firstAttribute="height" constant="16" id="WiV-xB-Qsq"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015-10-10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49q-re-3qQ">
+                            <rect key="frame" x="31" y="14" width="89" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="89" id="3Jg-V0-px6"/>
+                                <constraint firstAttribute="height" constant="15" id="Lr6-31-LjP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="共8张" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRq-Hy-geD">
+                            <rect key="frame" x="230" y="14" width="80" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="bnn-x9-gaj"/>
+                                <constraint firstAttribute="height" constant="15" id="qIY-Ny-MlH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Exf-ut-w3G" firstAttribute="leading" secondItem="89L-ad-j2i" secondAttribute="leading" constant="15" id="08a-sw-Acl"/>
+                        <constraint firstItem="Exf-ut-w3G" firstAttribute="centerY" secondItem="89L-ad-j2i" secondAttribute="centerY" id="6Vc-az-PP6"/>
+                        <constraint firstItem="49q-re-3qQ" firstAttribute="centerY" secondItem="89L-ad-j2i" secondAttribute="centerY" id="9ju-9I-Vy5"/>
+                        <constraint firstItem="tRq-Hy-geD" firstAttribute="centerY" secondItem="89L-ad-j2i" secondAttribute="centerY" id="BKU-X5-jth"/>
+                        <constraint firstItem="49q-re-3qQ" firstAttribute="leading" secondItem="Exf-ut-w3G" secondAttribute="trailing" constant="10" id="DpB-55-eBv"/>
+                        <constraint firstAttribute="trailing" secondItem="tRq-Hy-geD" secondAttribute="trailing" constant="10" id="G6r-Yh-qjm"/>
+                        <constraint firstAttribute="height" constant="44" id="cWZ-gb-8tl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="89L-ad-j2i" firstAttribute="bottom" secondItem="U6b-Vx-4bR" secondAttribute="bottomMargin" id="A9O-ZX-pzM"/>
+                <constraint firstAttribute="trailing" secondItem="89L-ad-j2i" secondAttribute="trailing" id="Vil-mc-PWj"/>
+                <constraint firstItem="89L-ad-j2i" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="hVn-pc-NFl"/>
+            </constraints>
+        </collectionReusableView>
+    </objects>
+</document>

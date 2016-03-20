@@ -552,7 +552,14 @@
 + (NSString *)getTimeLineItemUrl{
     return URL(baseServiceURL, @"rest/fPPhotoItem/get.json");
 }
-
+#pragma mark - 添加照片收藏
++ (NSString *)getfPPhotoItem_addFavorites:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/addFavorites.json?uuid=%@",baseServiceURL,uuid];
+}
+#pragma mark - 删除照片收藏
++ (NSString *)getfPPhotoItem_deleteFavorites:(NSString *)uuid{
+    return [NSString stringWithFormat:@"%@rest/fPPhotoItem/deleteFavorites.json?uuid=%@",baseServiceURL,uuid];
+}
 //点赞
 + (NSString *)getFPSaveDZUrl:(NSString *)uuid{
     return [NSString stringWithFormat:@"%@rest/baseDianzan/save.json",baseServiceURL];

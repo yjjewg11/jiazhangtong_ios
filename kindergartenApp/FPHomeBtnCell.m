@@ -23,8 +23,12 @@
 
 - (IBAction)timeLineBtn:(id)sender
 {
+    
+    //时光轴。下划线
     giftwareRedLine.backgroundColor = [UIColor whiteColor];
+    
     timeLineRedLine.backgroundColor = [UIColor redColor];
+    
     timeLineLbl.textColor = [UIColor redColor];
     giftwareLbl.textColor = [UIColor blackColor];
 }

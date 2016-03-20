@@ -34,6 +34,7 @@
 - (void)deleteUploadImg:(NSString *)localurl;
 
 - (FPFamilyInfoDomain *)queryTimeByFamilyUUID:(NSString *)familyUUID;
+- (void)updateMaxTime:(FPFamilyInfoDomain *)domain;
 
 - (void)addPhotoToDatabase:(NSArray *)photos;
 
@@ -44,5 +45,6 @@
 - (void)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain;
 
 - (void)deletePhotoItem:(NSString *)uuid;
-
+#pragma mark - 查询分页查询
+- (NSMutableArray *)getListTimePhotoDataByPage:(NSString *)date familyUUID:(NSString *)familyUUID pageNo: (NSInteger) pageNo  limit: (NSInteger) limit;
 @end

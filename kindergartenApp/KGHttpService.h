@@ -368,4 +368,9 @@
 - (void)saveFPDZ:(NSString *)newsuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 - (void)delFPDZ:(NSString *)newsuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)fPPhotoItem_addFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;
+
+- (void)fPPhotoItem_deleteFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;
+
 @end

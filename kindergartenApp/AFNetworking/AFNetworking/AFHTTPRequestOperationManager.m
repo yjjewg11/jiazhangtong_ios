@@ -139,6 +139,18 @@
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    NSLog(@"GET %@",URLString);
+    
+    
+    if(parameters!=nil){
+        NSData *jsonData =[NSJSONSerialization  dataWithJSONObject:parameters
+                                                           options:NSJSONWritingPrettyPrinted error:nil];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                     encoding:NSUTF8StringEncoding];
+        NSLog(@"parameters= %@",jsonString);
+
+    }
+    
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
 
     [self.operationQueue addOperation:operation];

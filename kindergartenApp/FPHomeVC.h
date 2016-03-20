@@ -2,7 +2,7 @@
 //  FPHomeVC.h
 //  kindergartenApp
 //
-//  Created by Mac on 16/1/13.
+//  Created by Mac on 16/1/13./Users/wenjiekeji/ios_20151107/jiazhangtong_ios/kindergartenApp/FPPhotoDateHeaderCollectionReusableView.m
 //  Copyright © 2016年 funi. All rights reserved.
 //
 

@@ -24,7 +24,12 @@
 #import "CommitHeaderView.h"
 #import "CommitTextFild.h"
 #import "MJRefresh.h"
+#import "FPFamilyPhotoNormalDomain.h"
+#import "MJExtension.h"
 
+#import "UIButton+Extension.h"
+
+#import <objc/runtime.h>
 
 @interface FPTimeLineDetailCell() <UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
 {
@@ -55,9 +60,19 @@
 
 @property (assign, nonatomic) NSInteger pageNo;
 @property (strong, nonatomic) NSString * currentTime;
+//评论数据数组
 @property (strong, nonatomic) NSMutableArray * dataArr;
 
 @property (strong, nonatomic) FPFamilyPhotoNormalDomain * domain;
+
+//当前照片在数据的序号
+@property  NSInteger indexOfDomain;
+
+//照片数组
+@property (strong, nonatomic) NSMutableArray * dataArrOfDomain;
+//照片url数组
+@property (strong, nonatomic) NSMutableArray * imgUrlArray;
+
 
 @property (weak, nonatomic) IBOutlet UIView * bottomView;
 
@@ -94,9 +109,36 @@
     _moreViewOpen = NO;
     self.pageNo = 1;
     
+    
+    
+    //创建imageView
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, 500)];
+    
+    self.imageView .tag = [self indexOfDomain];
+     self.imageView.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showFullImgClicked:)];
+    
+    [ self.imageView addGestureRecognizer:singleTap1];
+
+    
+    [self.scrollView addSubview:self.imageView];
+    
+    //创建image描述的Lable
+    self.imageDetailLable = [[UILabel alloc] init];
+  
+    self.imageDetailLable.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
+    self.imageDetailLable.numberOfLines = 0;
+    self.imageDetailLable.textColor = [UIColor whiteColor];
+    self.imageDetailLable.font = [UIFont systemFontOfSize:30];
+    self.imageDetailLable.text = @"today is a fun day";
     //创建infoview
     self.infoView = [[UIView alloc] init];
-    self.infoView.frame = CGRectMake(0, -180, APPWINDOWWIDTH, 180);
+    self.infoView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame)+5, APPWINDOWWIDTH, 280);
+    NSLog(@"infoView y=%f",CGRectGetMaxY(self.imageView.frame));
+    
+      [self.imageView addSubview:self.imageDetailLable];
+    
     
     self.timeLbl = [[UILabel alloc] init];
     self.timeLbl.frame = CGRectMake(20, 20, APPWINDOWWIDTH-20, 20);
@@ -121,23 +163,12 @@
     self.nameLbl.textColor = [UIColor brownColor];
     self.nameLbl.font = [UIFont systemFontOfSize:17];
     [self.infoView addSubview:self.nameLbl];
-    
-    //创建imageView
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.infoView.frame), APPWINDOWWIDTH, 500)];
-    //创建image描述的Lable
-    self.imageDetailLable = [[UILabel alloc] init];
-    [self.imageView addSubview:self.imageDetailLable];
-    self.imageDetailLable.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-    self.imageDetailLable.numberOfLines = 0;
-    self.imageDetailLable.textColor = [UIColor whiteColor];
-    self.imageDetailLable.font = [UIFont systemFontOfSize:30];
-    self.imageDetailLable.text = @"today is a fun day";
 
     //添加到scrollview
-    self.scrollView.showsVerticalScrollIndicator = NO;
-    [self.scrollView addSubview:self.imageView];
+    self.scrollView.showsVerticalScrollIndicator = YES;
+    
     [self.scrollView addSubview:self.infoView];
-    [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.imageView.frame))];
+    [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.infoView.frame))];
     
     //创建底部按钮
     [self addBtn:self.bottomView];
@@ -155,10 +186,56 @@
     self.commentTableView.rowHeight = 80;
     self.commentTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
     [self setupRefresh];
+    
+    
+    
 }
 
+//根据数据数组，转成url 数组。
+-(NSMutableArray *)getImgUrlArray{
+    
+    
+    if(_imgUrlArray){
+        return _imgUrlArray;
+    }
+    _imgUrlArray =[NSMutableArray array];
+    for(NSObject * obj in _dataArrOfDomain){
+        NSString * path=nil;
+        if([obj isKindOfClass:[FPFamilyPhotoNormalDomain class]]){
+           FPFamilyPhotoNormalDomain * tmp=obj;
+            path=tmp.path;
+        }else if([obj isKindOfClass:[NSMutableDictionary class]]){
+            NSMutableDictionary * tmp=obj;
+            path=[tmp objectForKey:@"path"];
+
+        }
+        if(path){
+            path=[[path componentsSeparatedByString:@"@"] firstObject];
+               [_imgUrlArray addObject:path];
+        }
+        
+     
+    }
+    return _imgUrlArray;
+ }
+
+
+- (void)showFullImgClicked:(UITapGestureRecognizer *)recognizer
+
+{
+    
+    //获得事件的来源
+    
+    UIImageView *imgView = [recognizer view];
+    
+
+    NSDictionary * dic = @{Key_ImagesArray : [self getImgUrlArray], Key_Tag : [NSNumber numberWithInteger:imgView.tag]};
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_BrowseImages object:self userInfo:dic];
+}
 - (void)getDZData
 {
+    
     [[KGHttpService sharedService] getFPItemExtraInfo:self.domain.uuid success:^(FPTimeLineDZDomain *needUpDateDatas)
      {
          if (needUpDateDatas)
@@ -199,49 +276,89 @@
 {
     self.scrollView.hidden = YES;
     
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.domain.path] placeholderImage:nil];
+    self.imageView .tag = [self indexOfDomain];
+    NSLog(@" self.imageView .tag=%d", self.imageView .tag);
+    
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.domain.path ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+     {
+         NSLog(@"self.domain.path=%@",self.domain.path);
+     }];
+    
+    
+    self.timeLbl.text = [NSString stringWithFormat:@"拍摄时间:%@",self.domain.photo_time];
+    self.locationLbl.text = [NSString stringWithFormat:@"位置:%@",self.domain.address];
+    self.deviceLbl.text = [NSString stringWithFormat:@"设备:%@",self.domain.phone_type];
+    self.nameLbl.text = [NSString stringWithFormat:@"上传人:%@",self.domain.create_user];
+    
+    self.imageDetailLable.text=self.domain.note;
+    
+    [self showByHideInfoView:hideInfoView];
     
     //请求点赞数据
     [self getDZData];
     
+    
     [self calImageViewHeight:self.domain success:^(CGFloat height)
     {
+        
+        
+        NSLog(@"self.imageView.height1=%f",self.imageView.height);
          //设置图片、图片高度
          self.imageView.height = height;
+        
+        
+        NSLog(@"self.imageView.height2=%f",self.imageView.height);
         self.imageDetailLable.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) - 44, APPWINDOWWIDTH, 44);
         
          [self.imageView sd_setImageWithURL:[NSURL URLWithString:[[self.domain.path componentsSeparatedByString:@"@"] firstObject]]];
-         
-         self.timeLbl.text = [NSString stringWithFormat:@"拍摄时间:%@",self.domain.photo_time];
-         self.locationLbl.text = [NSString stringWithFormat:@"位置:%@",self.domain.address];
-         self.deviceLbl.text = [NSString stringWithFormat:@"设备:%@",self.domain.phone_type];
-         self.nameLbl.text = [NSString stringWithFormat:@"上传人:%@",self.domain.create_user];
-         
-         if (hideInfoView == NO)
-         {
-             //显示infoview
-             [self.infoView setOrigin:CGPointMake(0, 0)];
-             [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
-         }
-         else
-         {
-             //隐藏infoview
-             [self.infoView setOrigin:CGPointMake(0, -180)];
-             [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
-         }
         
-         [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.imageView.frame)+49)];
-
-         self.scrollView.hidden = NO;
+        [self showByHideInfoView:hideInfoView];
      }
      faild:^(NSString *errorMsg)
      {
          //按照一个大小设置imageView
      }];
 }
-
-- (void)setData:(FPFamilyPhotoNormalDomain *)domain hideInfo:(BOOL)hideInfoView
+//不在使用
+- (void)showByHideInfoView:(BOOL)hideInfoView
 {
+    
+            [self.infoView setOrigin:CGPointMake(0, CGRectGetMaxY(self.imageView.frame))];
+    
+  //  return;
+//    
+//    if (hideInfoView == NO)
+//    {
+//        //显示infoview
+//        [self.infoView setOrigin:CGPointMake(0, 0)];
+//        [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
+//    }
+//    else
+//    {
+//        //隐藏infoview
+//        [self.infoView setOrigin:CGPointMake(0, -180)];
+//        [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
+//    }
+    
+//    [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.imageView.frame)+49)];
+//    
+    self.scrollView.hidden = NO;
+}
+- (void)setDataByMap:(id) map  indexOfDomain:(NSInteger)indexOfDomain dataArray :(NSArray*) dataArray
+{
+    
+    FPFamilyPhotoNormalDomain * tmp = [FPFamilyPhotoNormalDomain objectWithKeyValues:map];
+    
+    [self setData:tmp indexOfDomain:indexOfDomain dataArray:dataArray];
+    
+    
+}
+
+- (void)setData:(FPFamilyPhotoNormalDomain *)domain indexOfDomain:(NSInteger)indexOfDomain dataArray :(NSArray*) dataArray
+{
+    _dataArrOfDomain=dataArray;
+    [self setIndexOfDomain:indexOfDomain];
+    
     if ([domain.status isEqualToString:@"1"]) //需要修改的domain
     {
         [MBProgressHUD showMessage:@"请稍后..."];
@@ -250,7 +367,8 @@
         {
             [MBProgressHUD hideHUD];
             self.domain = item;
-            [self resetData:hideInfoView];
+            
+            [self resetData:true];
             
         }
         faild:^(NSString *errorMsg)
@@ -258,13 +376,13 @@
             [MBProgressHUD hideHUD];
             [MBProgressHUD showError:@"获取最新相片信息失败!"];
             self.domain = domain;
-            [self resetData:hideInfoView];
         }];
     }
     else
     {
         self.domain = domain;
-        [self resetData:hideInfoView];
+        
+        [self resetData:true];
     }
 }
 
@@ -520,14 +638,10 @@
     
     [[KGHUD sharedHud] show:self.contentView];
     
-    FavoritesDomain * domain = [[FavoritesDomain alloc] init];
-    domain.title = temp.note;
-    domain.type  = Topic_FPTimeLine;
-    domain.reluuid = temp.uuid;
-    domain.createtime = [KGDateUtil presentTime];
+ 
     button.enabled = NO;
     
-    [[KGHttpService sharedService] saveFavorites:domain success:^(NSString *msgStr)
+    [[KGHttpService sharedService] fPPhotoItem_addFavorites:self.domain.uuid  success:^(NSString *msgStr)
      {
          ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang2"];
          [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
@@ -547,21 +661,21 @@
 {
     [[KGHUD sharedHud] show:self.contentView];
     button.enabled = NO;
-    FPFamilyPhotoNormalDomain * temp = self.domain;
+//    FPFamilyPhotoNormalDomain * temp = self.domain;
     
-    [[KGHttpService sharedService] delFavorites:temp.uuid success:^(NSString *msgStr)
-     {
-         button.selected = !button.selected;
-         button.enabled = YES;
-         [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
-         ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang1"];
-     }
-     failed:^(NSString *errorMsg)
-     {
-         button.enabled = YES;
-         button.selected = !button.selected;
-         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-     }];
+    [[KGHttpService sharedService] fPPhotoItem_deleteFavorites:self.domain.uuid  success:^(NSString *msgStr)
+    {
+        button.selected = !button.selected;
+        button.enabled = YES;
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:msgStr];
+        ((SPBottomItem *)_buttonItems[0]).imgView.image = [UIImage imageNamed:@"newshoucang1"];
+    }
+faild:^(NSString *errorMsg)
+    {
+        button.enabled = YES;
+        button.selected = !button.selected;
+        [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
+    }];
 }
 
 #pragma mark - 点赞相关

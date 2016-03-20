@@ -321,10 +321,7 @@
         //存入数据库
         NSNotification * noti0 = [[NSNotification alloc] initWithName:@"saveuploadimg" object:domain userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti0];
-        
-        //通知主页时光轴有数据更新
-        NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:noti1];
+      
         
         //从列表移除
         NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -336,6 +333,15 @@
             
             [self startDoUploadTable];
         });
+        
+        NSString *countStr=[NSString stringWithFormat:@"%d",_dataArrs.count];
+        
+        //通知主页时光轴有数据更新
+        NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:countStr userInfo:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotification:noti1];
+        
+        
     }
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
@@ -344,8 +350,6 @@
         {
             FPUploadCell * cell = [_cells objectAtIndex:index];
             [cell setStatus:3];
-            
-          
         });
     
         //存入数据库

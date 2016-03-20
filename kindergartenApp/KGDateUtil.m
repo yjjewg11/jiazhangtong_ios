@@ -213,7 +213,22 @@
     }
     return -1;
 }
+////2016-01-20-10-11-22
++ (NSString *)getFPFormatSringWithDateStr:(NSString *)dateStr;
+{
+    if (dateStr == nil)
+    {
+        return nil;
+    }
+   
+    //把:换成-
+    NSString * oriDateStr1 = [dateStr stringByReplacingOccurrencesOfString:@":" withString:@"-"];
+    //把@" " 换成 -
+    NSString * oriDateStr2 = [oriDateStr1 stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+    
 
+    return oriDateStr2;
+}
 + (NSString *)getFPFormatSringWithDate:(NSDate *)date;
 {
     if (date == nil)
@@ -231,7 +246,6 @@
     NSString * oriDateStr2 = [oriDateStr1 stringByReplacingOccurrencesOfString:@" " withString:@"-"];
     
 //    NSLog(@"FP:转换后的日期字符串:%@",oriDateStr2);
-    
     return oriDateStr2;
 }
 

@@ -21,6 +21,9 @@
 #import "MBProgressHUD+HM.h"
 #import "HLActionSheet.h"
 #import "UMSocial.h"
+#import "FPFamilyPhotoNormalDomain.h"
+#import "MJExtension.h"
+#import "PhotoVC.h"
 
 @interface FPTimeLineDetailVC () <UICollectionViewDataSource,UICollectionViewDelegate,FPTimeLineDetailLayoutDelegate,UIAlertViewDelegate,UMSocialUIDelegate>
 {
@@ -43,7 +46,11 @@ static NSString *const PicID = @"camaracoll";
 {
     [super viewDidLoad];
     
-    self.title = [[self.daytimeStr componentsSeparatedByString:@","] firstObject];
+//    self.title = [[self.daytimeStr componentsSeparatedByString:@","] firstObject];
+//    
+    self.title = @"照片详细";
+    
+    
     _service = [DBNetDaoService defaulService];
     _imgDatas = [NSMutableArray array];
     _pageNo = 1;
@@ -56,7 +63,7 @@ static NSString *const PicID = @"camaracoll";
     //从数据库获取数据
     [self getInitData];
     
-    //创建编辑按钮
+    //显示详细按钮
     UIButton* btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0,0,20,20)];
     [btn1 setBackgroundImage:[UIImage imageNamed:@"xinxi_photo"] forState:UIControlStateNormal];
     [btn1 addTarget:self action:@selector(showInfoView) forControlEvents:UIControlEventTouchUpInside];
@@ -69,6 +76,10 @@ static NSString *const PicID = @"camaracoll";
     [center addObserver:self selector:@selector(deleteBtn) name:@"deletebtn" object:nil];
     [center addObserver:self selector:@selector(modifyBtn) name:@"modibtn" object:nil];
     [center addObserver:self selector:@selector(sharePic:) name:@"sharepic" object:nil];
+    
+    
+    //注册点击图片浏览图片通知
+    [center addObserver:self selector:@selector(browseImagesNotification:) name:Key_Notification_BrowseImages object:nil];
 }
 
 - (void)showInfoView
@@ -101,10 +112,32 @@ static NSString *const PicID = @"camaracoll";
         });
     }
 }
+- (void)setFpPhotoNormalDomainArrByDic:( NSMutableArray *) fpItemArrDic{
+    self.fpPhotoNormalDomainArr =[NSMutableArray array];
+
+    for (id map in  fpItemArrDic) {
+       FPFamilyPhotoNormalDomain * tmp = [FPFamilyPhotoNormalDomain objectWithKeyValues:map];
+        [[self fpPhotoNormalDomainArr] addObject:tmp];
+    }
+    
+}
 
 #pragma mark - 获取数据
 - (void)getInitData
 {
+    
+    //传入得数据直接使用。1.收藏列表页面进入。2。时光轴进入
+    if([self fpPhotoNormalDomainArr]&&[self fpPhotoNormalDomainArr].count>0){
+        
+        _imgDatas=[self fpPhotoNormalDomainArr];
+        [self.view addSubview:_collectionView];
+        
+        if (self.selectIndex) {
+            _selectPicNum=self.selectIndex;
+        }
+        [self resetTableViewCellIndex:_selectPicNum];
+        return;
+    }
     NSArray * arr = [_service queryPicDetailByDate:[[self.daytimeStr componentsSeparatedByString:@","] firstObject] pageNo:[NSString stringWithFormat:@"1"] familyUUID:self.familyUUID];
     if (arr)
     {
@@ -137,11 +170,27 @@ static NSString *const PicID = @"camaracoll";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FPTimeLineDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:PicID forIndexPath:indexPath];
-    
-    [cell setData:_imgDatas[indexPath.row] hideInfo:_isHideInfo];
+    [cell setData:_imgDatas[indexPath.row] indexOfDomain:indexPath.row dataArray:_imgDatas];
+   // [cell setData:_imgDatas[indexPath.row] hideInfo:_isHideInfo];
     
     return cell;
 }
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+
+//设置当前展示的图片
+- (void)resetTableViewCellIndex:(NSInteger)index{
+    _selectPicNum=index;
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:Number_Zero];
+    
+    //3）通过动画滚动到下一个位置
+    [_collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+    
+   
+}
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -232,7 +281,12 @@ static NSString *const PicID = @"camaracoll";
                 [MBProgressHUD showSuccess:@"操作成功!"];
                 //通知homevc刷新数据
                 NSNotification * noti = [[NSNotification alloc] initWithName:@"reloaddata" object:nil userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:noti];
+                if(noti){
+                    [[NSNotificationCenter defaultCenter] postNotification:noti];
+                }else{
+                    NSLog(@" NSNotification reloaddata is null");
+                }
+                
             });
         }
         faild:^(NSString *errorMsg)
@@ -377,6 +431,17 @@ static NSString *const PicID = @"camaracoll";
         alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:string delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
         [alertView show];
     }
+}
+//图片点击浏览图片通知
+- (void)browseImagesNotification:(NSNotification *)notification {
+    NSDictionary  * dic = [notification userInfo];
+    NSMutableArray * imagesMArray = [dic objectForKey:Key_ImagesArray];
+    NSInteger index = [[dic objectForKey:Key_Tag] integerValue];
+    PhotoVC * vc = [[PhotoVC alloc] init];
+    vc.imgMArray = imagesMArray;
+    vc.isShowSave = YES;
+    vc.curentPage = index;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

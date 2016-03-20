@@ -283,7 +283,14 @@
         }
     }
 }
-
+#pragma mark - 根据familyuuid 更新maxTime 和 minTime
+- (void)updateMaxTime:(FPFamilyInfoDomain *)domain
+{
+    //组织SQL语句
+    NSString *sql = [NSString stringWithFormat:@"update fp_familyinfo set maxtime=datetime('%@'),mintime=datetime('%@'),updatetime=datetime('%@') WHERE family_uuid='%@'",domain.maxTime,domain.minTime,domain.updateTime,domain.family_uuid];
+    
+    [self execSql:sql];
+}
 #pragma mark - 根据familyuuid 更新maxTime 和 minTime
 - (void)updateMaxTime:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime uptime:(NSString *)updateTime
 {
@@ -452,10 +459,10 @@
     [self execSql:sql];
 }
 
-#pragma mark - 查询列表数据用于时光轴表头显示
+#pragma mark - 查询列表数据用于时光轴表头显示，根据文件夹分
 - (NSMutableArray *)getListTimeHeadData:(NSString *)familyuuid
 {
-    NSString * sql = [NSString stringWithFormat:@"SELECT strftime('%%Y-%%m-%%d',create_time),count(1) from fp_photo_item WHERE family_uuid ='%@' GROUP BY strftime('%%Y-%%m-%%d',create_time)",familyuuid];
+    NSString * sql = [NSString stringWithFormat:@"SELECT strftime('%%Y-%%m-%%d',photo_time),count(1) from fp_photo_item WHERE family_uuid ='%@' GROUP BY strftime('%%Y-%%m-%%d',create_time)",familyuuid];
     
     NSMutableArray * marr = [NSMutableArray array];
     
@@ -479,6 +486,7 @@
     return [marr copy];
 }
 
+
 #pragma mark - 查询相片数据用于单元格显示 (6 limit)
 - (NSArray *)getListTimePhotoData:(NSString *)date familyUUID:(NSString *)familyUUID
 {
@@ -499,6 +507,29 @@
     }
     
     return [marr copy];
+}
+
+
+
+#pragma mark - 查询分页查询
+//NSInteger limit=50;
+- (NSMutableArray *)getListTimePhotoDataByPage:(NSString *)date familyUUID:(NSString *)familyUUID pageNo: (NSInteger) pageNo limit: (NSInteger) limit
+{
+    
+    NSInteger offset=(pageNo-1)*limit;
+    NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d %%H:%%M:%%S',create_time) <'%@' and family_uuid ='%@'  order by create_time desc limit %d offset %d",date,familyUUID,limit,offset];
+    NSLog(sql);
+    NSMutableArray * marr = nil;
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        [self getFPFamilyPhotoNormalDomainArray:stmt];
+    }else{
+        marr = [NSMutableArray array];
+    }
+    
+    return marr;
 }
 
 #pragma mark - 保存上传的图片路径
@@ -629,66 +660,77 @@
     
 }
 
+#pragma mark - 根据fp_photo_item 结果封对象
+- (NSMutableArray *) getFPFamilyPhotoNormalDomainArray:(sqlite3_stmt *)stmt
+{
+    NSMutableArray * marr = [NSMutableArray array];
+    
+    while (sqlite3_step(stmt) == SQLITE_ROW)
+    {
+        FPFamilyPhotoNormalDomain * domain = [[FPFamilyPhotoNormalDomain alloc] init];
+        
+        char *uuid = (char *)sqlite3_column_text(stmt, 0);
+        NSString *uuidStr = [[NSString alloc] initWithUTF8String:uuid];
+        domain.uuid = uuidStr;
+        
+        char *status = (char *)sqlite3_column_text(stmt, 1);
+        NSString *statusStr = [[NSString alloc] initWithUTF8String:status];
+        domain.status = statusStr;
+        
+        char *family_uuid = (char *)sqlite3_column_text(stmt, 2);
+        NSString *family_uuidStr = [[NSString alloc] initWithUTF8String:family_uuid];
+        domain.family_uuid = family_uuidStr;
+        
+        char *create_time = (char *)sqlite3_column_text(stmt, 3);
+        NSString *create_timeStr = [[NSString alloc] initWithUTF8String:create_time];
+        domain.create_time = create_timeStr;
+        
+        char *photo_time = (char *)sqlite3_column_text(stmt, 4);
+        NSString *photo_timeStr = [[NSString alloc] initWithUTF8String:photo_time];
+        domain.photo_time = photo_timeStr;
+        
+        char *create_useruuid = (char *)sqlite3_column_text(stmt, 5);
+        NSString *create_useruuidStr = [[NSString alloc] initWithUTF8String:create_useruuid];
+        domain.create_useruuid = create_useruuidStr;
+        
+        char *path = (char *)sqlite3_column_text(stmt, 6);
+        NSString *pathStr = [[NSString alloc] initWithUTF8String:path];
+        domain.path = pathStr;
+        
+        char *address = (char *)sqlite3_column_text(stmt, 7);
+        NSString *addressStr = [[NSString alloc] initWithUTF8String:address];
+        domain.address = addressStr;
+        
+        char *note = (char *)sqlite3_column_text(stmt, 8);
+        NSString *noteStr = [[NSString alloc] initWithUTF8String:note];
+        domain.note = noteStr;
+        
+        char *md5 = (char *)sqlite3_column_text(stmt, 9);
+        NSString *md5Str = [[NSString alloc] initWithUTF8String:md5];
+        domain.md5 = md5Str;
+        
+        char *create_user = (char *)sqlite3_column_text(stmt, 10);
+        NSString *create_userStr = [[NSString alloc] initWithUTF8String:create_user];
+        domain.create_user = create_userStr;
+        
+        [marr addObject:domain];
+    }
+    return marr;
+}
+
 #pragma mark - 根据具体某一天日期分页查询图片详情
 - (NSArray *)queryPicDetailByDate:(NSString *)date pageNo:(NSString *)pageNo familyUUID:(NSString *)familyUUID
 {
     NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 20 offset %ld",date,familyUUID,(long)(([pageNo integerValue]-1) * 20)];
     
-    NSMutableArray * marr = [NSMutableArray array];
+    NSMutableArray * marr = nil;
     
     sqlite3_stmt *stmt;
     if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
     {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            FPFamilyPhotoNormalDomain * domain = [[FPFamilyPhotoNormalDomain alloc] init];
-            
-            char *uuid = (char *)sqlite3_column_text(stmt, 0);
-            NSString *uuidStr = [[NSString alloc] initWithUTF8String:uuid];
-            domain.uuid = uuidStr;
-            
-            char *status = (char *)sqlite3_column_text(stmt, 1);
-            NSString *statusStr = [[NSString alloc] initWithUTF8String:status];
-            domain.status = statusStr;
-            
-            char *family_uuid = (char *)sqlite3_column_text(stmt, 2);
-            NSString *family_uuidStr = [[NSString alloc] initWithUTF8String:family_uuid];
-            domain.family_uuid = family_uuidStr;
-            
-            char *create_time = (char *)sqlite3_column_text(stmt, 3);
-            NSString *create_timeStr = [[NSString alloc] initWithUTF8String:create_time];
-            domain.create_time = create_timeStr;
-            
-            char *photo_time = (char *)sqlite3_column_text(stmt, 4);
-            NSString *photo_timeStr = [[NSString alloc] initWithUTF8String:photo_time];
-            domain.photo_time = photo_timeStr;
-            
-            char *create_useruuid = (char *)sqlite3_column_text(stmt, 5);
-            NSString *create_useruuidStr = [[NSString alloc] initWithUTF8String:create_useruuid];
-            domain.create_useruuid = create_useruuidStr;
-            
-            char *path = (char *)sqlite3_column_text(stmt, 6);
-            NSString *pathStr = [[NSString alloc] initWithUTF8String:path];
-            domain.path = pathStr;
-            
-            char *address = (char *)sqlite3_column_text(stmt, 7);
-            NSString *addressStr = [[NSString alloc] initWithUTF8String:address];
-            domain.address = addressStr;
-            
-            char *note = (char *)sqlite3_column_text(stmt, 8);
-            NSString *noteStr = [[NSString alloc] initWithUTF8String:note];
-            domain.note = noteStr;
-            
-            char *md5 = (char *)sqlite3_column_text(stmt, 9);
-            NSString *md5Str = [[NSString alloc] initWithUTF8String:md5];
-            domain.md5 = md5Str;
-            
-            char *create_user = (char *)sqlite3_column_text(stmt, 10);
-            NSString *create_userStr = [[NSString alloc] initWithUTF8String:create_user];
-            domain.create_user = create_userStr;
-            
-            [marr addObject:domain];
-        }
+        marr=[self getFPFamilyPhotoNormalDomainArray:stmt];
+    }else{
+        marr= [NSMutableArray array];
     }
     
     return [marr copy];

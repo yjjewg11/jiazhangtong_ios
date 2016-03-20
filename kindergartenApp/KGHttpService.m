@@ -31,7 +31,7 @@
 #import "EnrolStudentsSchoolDomain.h"
 #import "FPCollegeListDomin.h"
 #import "FPCollegePhotoDetailDomin.h"
-
+#import "KGDateUtil.h"
 @implementation KGHttpService
 
 + (KGHttpService *)sharedService {
@@ -2353,6 +2353,10 @@
     }
     
     NSDictionary * dict;
+    if(time==nil){
+        time=[KGDateUtil getLocalDateStr];
+    }
+    time=[KGDateUtil getFPFormatSringWithDateStr:time];
     
     if (type == 0)
     {
@@ -2360,7 +2364,18 @@
         
     }else if(type == 1)
     {
-        dict = @{@"family_uuid":familyUUID,@"maxTime":time,@"pageNo":pageNo};
+        @try{
+             dict = @{@"family_uuid":familyUUID,@"maxTime":time,@"pageNo":pageNo};
+        }
+        @catch(NSException *exception) {
+            NSLog(@"exception:%@", exception);
+        }
+        @finally {
+            
+        }
+        
+
+       
     }
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
@@ -2705,5 +2720,28 @@
     }];
 }
 
+#pragma 照片模块 fPPhotoItem
+//照片收藏
+- (void)fPPhotoItem_addFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+        [self getServerJson:[KGHttpUrl getfPPhotoItem_addFavorites:uuid] params:nil success:^(KGBaseDomain *baseDomain) {
+        
+            [self sessionTimeoutHandle:baseDomain];
+            success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+//照片收藏删除
+- (void)fPPhotoItem_deleteFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    [self getServerJson:[KGHttpUrl getfPPhotoItem_deleteFavorites:uuid] params:nil success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
 
 @end

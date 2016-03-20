@@ -110,7 +110,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="dateLbl" destination="S27-xf-vir" id="dPB-ee-5bv"/>
+                <outlet property="dateLbl" destination="S27-xf-vir" id="2FT-Da-dAx"/>
                 <outlet property="imageBox" destination="zs4-b0-GS1" id="FLR-aq-hSV"/>
                 <outlet property="total" destination="Dqd-TP-Wko" id="I25-Aa-XUG"/>
             </connections>

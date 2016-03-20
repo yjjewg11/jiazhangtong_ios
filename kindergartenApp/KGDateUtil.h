@@ -29,7 +29,7 @@
 
 //获取家庭相册所用时间字符串格式
 + (NSString *)getFPFormatSringWithDate:(NSDate *)date;
-
++ (NSString *)getFPFormatSringWithDateStr:(NSString *)dateStr;
 + (NSDate *)getDateWithFPFormatString:(NSString *)string;
 
 /**

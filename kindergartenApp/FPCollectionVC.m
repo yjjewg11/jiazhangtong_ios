@@ -60,8 +60,8 @@
     } faild:^(NSString *errorMsg) {
         
         [self hidenLoadView];
-
-        [MBProgressHUD showError:@"加载错误"];
+        NSLog(@"exception:%@", errorMsg);
+        [MBProgressHUD showError:errorMsg];
     }];
     
     
@@ -111,7 +111,9 @@
         
         
         static NSString * CellIdentifier = @"collectionViewCell";
+        
         UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+        
         NSLog(@"indexPath.row:%d", indexPath.row);
 
         if(_dataArr.count<indexPath.row)return cell;
@@ -119,8 +121,8 @@
       
         UIImageView * imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
         
-        [cell setRestorationIdentifier:[data objectForKey:@"uuid"]];
-       
+//        [cell setRestorationIdentifier:[data objectForKey:@"uuid"]];
+//       
         NSString *path=[data objectForKey:@"path"];
         [imgView sd_setImageWithURL:[NSURL URLWithString:path ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
          {}];
@@ -167,6 +169,9 @@
     //传递点击的日期过去
 //    vc.daytimeStr = _timeDatas[indexPath.row - 1];
 //    vc.familyUUID = [FPHomeVC getFamily_uuid];
+    
+    [vc setFpPhotoNormalDomainArrByDic:_dataArr];
+    vc.selectIndex=indexPath.row;
 
     [self.navigationController pushViewController:vc animated:YES];
 }
