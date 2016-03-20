@@ -32,6 +32,9 @@
 #import "FPHomeTimeLineSectionHeaderTableViewCell.h"
 #import "UIImageView+WebCache.h"
 
+#import "SINavigationMenuView.h"
+
+
 #define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
@@ -45,9 +48,11 @@
 
 
 NSInteger localDBlimit=50;
-@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate>
+@interface FPHomeVC () <UITableViewDataSource,UITableViewDelegate,FPHomeSelectViewDelegate,SINavigationMenuDelegate>
 {
     
+    //header 显示相册。
+    FPHomeTopView * fPHomeTopView;
     //已经加载的数据时间范围
     FPFamilyInfoDomain * localFamilyRangeTime ;
     //本地数据库分页查询还有数据没取完。默认true
@@ -119,7 +124,7 @@ NSInteger localDBlimit=50;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    NSLog(@"FPHomeVC.viewDidAppear()");
+//    NSLog(@"FPHomeVC.viewDidAppear()");
     //选择自己喜欢的颜色
     UIColor * color = [UIColor clearColor];
     NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:UITextAttributeTextColor];
@@ -184,6 +189,17 @@ NSInteger localDBlimit=50;
     FPMyFamilyPhotoCollectionDomain * domain=_dataOfmyCollectionArray[row];
     //设置全局保存
    [FPHomeVC setFamily_uuid:domain.uuid];
+    _pageNo=1;
+    localFamilyRangeTime.minTime=nil;
+    localFamilyRangeTime.maxTime=nil;
+    
+    [fPHomeTopView setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
+    
+    SINavigationMenuView *menu=self.navigationItem.titleView;
+    [menu setMenuTitle:domain.title];
+   
+    //加载相册内照片
+    [self loadDataPhotoByFamilyUUID];
   
 
 }
@@ -219,20 +235,6 @@ NSInteger localDBlimit=50;
         [_dataOfTopTitleBtnArray addObject:domain.title];
     }
     
-//    if(_dataOfTopTitleBtnArray.count==0){
-//        [_dataOfTopTitleBtnArray addObject:@"没有家庭相册"];
-//    }
-//    testArray = @[_dataOfTopTitleBtnArray];
-//   _dropMenu = [[MXPullDownMenu alloc] initWithArray:testArray selectedColor:[UIColor redColor]];
-//    _dropMenu.backgroundColor=[UIColor clearColor];
-//    _dropMenu.delegate = self;
-////    _dropMenu.set
-//    NSLog(@"APPWINDOWWIDTH=%f",APPWINDOWWIDTH);
-//    _dropMenu.frame = CGRectMake(
-//                                 30,
-//                                 0, APPWINDOWWIDTH, _dropMenu.frame.size.height);
-//
-    
     FPMyFamilyPhotoCollectionDomain * cDomain=[self getCurFPMyFamilyPhotoCollectionDomain];
     NSString * title=nil;
     if(cDomain){
@@ -247,8 +249,23 @@ NSInteger localDBlimit=50;
      [titleButton sizeToFit];
      self.navigationItem.titleView = titleButton;
     
-    //[self.view addSubview:_dropMenu];
-//      self.navigationItem.titleView = _dropMenu;
+    if (self.navigationItem) {
+        CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
+        SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:cDomain.title];
+        [menu displayMenuInView:self.view];
+        menu.items = _dataOfTopTitleBtnArray;
+        menu.delegate = self;
+        self.navigationItem.titleView = menu;
+    }
+
+}
+#pragma 导航条下拉菜单
+- (void)didSelectItemAtIndex:(NSUInteger)index
+{
+    [self changeMyCollection:index];
+    
+    
+    NSLog(@"did selected item at index %@", _dataOfTopTitleBtnArray[index]);
 }
 
 #pragma 加载完数据后
@@ -261,10 +278,13 @@ NSInteger localDBlimit=50;
     
 }
 
+
+
 - (void)initTableView
 {
     //自定义的headerview
     FPHomeTopView * view = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
+   
     
     [view setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
     view.size = CGSizeMake(APPWINDOWWIDTH, 192);
@@ -274,6 +294,7 @@ NSInteger localDBlimit=50;
         NSLog(@"push到我的家庭相册");
     };
     
+    fPHomeTopView=view;
     
     //弄到tableviewheader里面去
     ParallaxHeaderView * headerView = [ParallaxHeaderView parallaxHeaderViewWithSubView:view];
@@ -381,7 +402,7 @@ NSInteger localDBlimit=50;
     UIBarButtonItem *rightBarBtn = [[UIBarButtonItem alloc] initWithCustomView:btn1];
     
     
-     btn_shangchuanzhaopian = [[UIButton alloc] initWithFrame:CGRectMake(0,0,30,30)];
+     btn_shangchuanzhaopian = [[UIButton alloc] initWithFrame:CGRectMake(0,0,30,20)];
     [btn_shangchuanzhaopian setBackgroundImage:[UIImage imageNamed:@"uploadtaskcount"] forState:UIControlStateNormal];
     [btn_shangchuanzhaopian setTitle:@"0" forState:UIControlStateNormal];
     [btn_shangchuanzhaopian setTitleColor:[UIColor whiteColor]   forState:UIControlStateNormal];
@@ -684,6 +705,7 @@ NSInteger localDBlimit=50;
     if(!_cur_time)_cur_time=[KGDateUtil getLocalDateStr] ;
     
       NSMutableArray * arr = [_service getListTimePhotoDataByPage:_cur_time familyUUID:[FPHomeVC getFamily_uuid] pageNo:_pageNo limit:localDBlimit];
+    _pageNo++;
     
     [self loadDataPhotoByDataArr:arr];
     
@@ -819,6 +841,8 @@ NSInteger localDBlimit=50;
 //下拉刷新
 - (void)headerRereshing
 {
+    
+    [_tableView headerEndRefreshing];
     //一般这些个里边是网络请求，然后会有延迟，不会像现在刷新这么快
 
 }

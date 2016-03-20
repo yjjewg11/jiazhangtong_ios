@@ -282,8 +282,8 @@ static NSString *const PicID = @"camaracoll";
                 //通知homevc刷新数据
                 NSNotification * noti = [[NSNotification alloc] initWithName:@"reloaddata" object:nil userInfo:nil];
                 if(noti){
-                    [[NSNotificationCenter defaultCenter] postNotification:noti];
-                }else{
+//                    [[NSNotificationCenter defaultCenter] postNotification:noti];
+//                }else{
                     NSLog(@" NSNotification reloaddata is null");
                 }
                 

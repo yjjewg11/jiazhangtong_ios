@@ -266,6 +266,23 @@
 		04BDD6901C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BDD68E1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib */; };
 		04BDD6911C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDD68F1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m */; };
 		04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */; };
+		04D288671C9E915F00D12BEF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288441C9E915F00D12BEF /* Default-568h@2x.png */; };
+		04D288681C9E915F00D12BEF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288451C9E915F00D12BEF /* Default.png */; };
+		04D288691C9E915F00D12BEF /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288461C9E915F00D12BEF /* Default@2x.png */; };
+		04D2886A1C9E915F00D12BEF /* HAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D288471C9E915F00D12BEF /* HAViewController.xib */; };
+		04D2886C1C9E915F00D12BEF /* HAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2884C1C9E915F00D12BEF /* HAAppDelegate.m */; };
+		04D2886D1C9E915F00D12BEF /* HAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2884E1C9E915F00D12BEF /* HAViewController.m */; };
+		04D288711C9E915F00D12BEF /* arrow_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288551C9E915F00D12BEF /* arrow_down.png */; };
+		04D288721C9E915F00D12BEF /* arrow_down1.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288561C9E915F00D12BEF /* arrow_down1.png */; };
+		04D288731C9E915F00D12BEF /* arrow_down1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288571C9E915F00D12BEF /* arrow_down1@2x.png */; };
+		04D288741C9E915F00D12BEF /* arrow_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D288581C9E915F00D12BEF /* arrow_down@2x.png */; };
+		04D288751C9E915F00D12BEF /* SICellSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2885A1C9E915F00D12BEF /* SICellSelection.m */; };
+		04D288761C9E915F00D12BEF /* SIMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2885C1C9E915F00D12BEF /* SIMenuButton.m */; };
+		04D288771C9E915F00D12BEF /* SIMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2885E1C9E915F00D12BEF /* SIMenuCell.m */; };
+		04D288781C9E915F00D12BEF /* SIMenuConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288601C9E915F00D12BEF /* SIMenuConfiguration.m */; };
+		04D288791C9E915F00D12BEF /* SIMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288621C9E915F00D12BEF /* SIMenuTable.m */; };
+		04D2887A1C9E915F00D12BEF /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288641C9E915F00D12BEF /* SINavigationMenuView.m */; };
+		04D2887B1C9E915F00D12BEF /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288661C9E915F00D12BEF /* UIColor+Extension.m */; };
 		04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D5D30B1C47927D005399D9 /* libZXingObjC.a */; };
 		04E606351C4897E100AEE9DD /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E606331C4897E100AEE9DD /* HomeVC.m */; };
 		04E606361C4897E100AEE9DD /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E606341C4897E100AEE9DD /* HomeVC.xib */; };
@@ -1201,6 +1218,33 @@
 		04BDD68F1C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseHomeCourseCell.m; sourceTree = "<group>"; };
 		04C5D8861BE2199800A1245C /* SPCourseDetailDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDetailDomain.h; sourceTree = "<group>"; };
 		04C5D8871BE2199800A1245C /* SPCourseDetailDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDetailDomain.m; sourceTree = "<group>"; };
+		04D288441C9E915F00D12BEF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		04D288451C9E915F00D12BEF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		04D288461C9E915F00D12BEF /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		04D288481C9E915F00D12BEF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/HAViewController.xib; sourceTree = "<group>"; };
+		04D2884B1C9E915F00D12BEF /* HAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAAppDelegate.h; sourceTree = "<group>"; };
+		04D2884C1C9E915F00D12BEF /* HAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAAppDelegate.m; sourceTree = "<group>"; };
+		04D2884D1C9E915F00D12BEF /* HAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAViewController.h; sourceTree = "<group>"; };
+		04D2884E1C9E915F00D12BEF /* HAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAViewController.m; sourceTree = "<group>"; };
+		04D288521C9E915F00D12BEF /* NavigationMenu-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NavigationMenu-Prefix.pch"; sourceTree = "<group>"; };
+		04D288551C9E915F00D12BEF /* arrow_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down.png; sourceTree = "<group>"; };
+		04D288561C9E915F00D12BEF /* arrow_down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_down1.png; sourceTree = "<group>"; };
+		04D288571C9E915F00D12BEF /* arrow_down1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down1@2x.png"; sourceTree = "<group>"; };
+		04D288581C9E915F00D12BEF /* arrow_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow_down@2x.png"; sourceTree = "<group>"; };
+		04D288591C9E915F00D12BEF /* SICellSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SICellSelection.h; sourceTree = "<group>"; };
+		04D2885A1C9E915F00D12BEF /* SICellSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SICellSelection.m; sourceTree = "<group>"; };
+		04D2885B1C9E915F00D12BEF /* SIMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuButton.h; sourceTree = "<group>"; };
+		04D2885C1C9E915F00D12BEF /* SIMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuButton.m; sourceTree = "<group>"; };
+		04D2885D1C9E915F00D12BEF /* SIMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuCell.h; sourceTree = "<group>"; };
+		04D2885E1C9E915F00D12BEF /* SIMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuCell.m; sourceTree = "<group>"; };
+		04D2885F1C9E915F00D12BEF /* SIMenuConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuConfiguration.h; sourceTree = "<group>"; };
+		04D288601C9E915F00D12BEF /* SIMenuConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuConfiguration.m; sourceTree = "<group>"; };
+		04D288611C9E915F00D12BEF /* SIMenuTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SIMenuTable.h; sourceTree = "<group>"; };
+		04D288621C9E915F00D12BEF /* SIMenuTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SIMenuTable.m; sourceTree = "<group>"; };
+		04D288631C9E915F00D12BEF /* SINavigationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINavigationMenuView.h; sourceTree = "<group>"; };
+		04D288641C9E915F00D12BEF /* SINavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINavigationMenuView.m; sourceTree = "<group>"; };
+		04D288651C9E915F00D12BEF /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		04D288661C9E915F00D12BEF /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		04D5D30B1C47927D005399D9 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
 		04E606321C4897E100AEE9DD /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		04E606331C4897E100AEE9DD /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
@@ -2832,6 +2876,56 @@
 				04BDD68A1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib */,
 			);
 			name = tableviewcell;
+			sourceTree = "<group>";
+		};
+		04D288431C9E915F00D12BEF /* NavigationMenu */ = {
+			isa = PBXGroup;
+			children = (
+				04D288441C9E915F00D12BEF /* Default-568h@2x.png */,
+				04D288451C9E915F00D12BEF /* Default.png */,
+				04D288461C9E915F00D12BEF /* Default@2x.png */,
+				04D288471C9E915F00D12BEF /* HAViewController.xib */,
+				04D2884B1C9E915F00D12BEF /* HAAppDelegate.h */,
+				04D2884C1C9E915F00D12BEF /* HAAppDelegate.m */,
+				04D2884D1C9E915F00D12BEF /* HAViewController.h */,
+				04D2884E1C9E915F00D12BEF /* HAViewController.m */,
+				04D288521C9E915F00D12BEF /* NavigationMenu-Prefix.pch */,
+				04D288531C9E915F00D12BEF /* NavigationMenuView */,
+			);
+			path = NavigationMenu;
+			sourceTree = "<group>";
+		};
+		04D288531C9E915F00D12BEF /* NavigationMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				04D288541C9E915F00D12BEF /* images */,
+				04D288591C9E915F00D12BEF /* SICellSelection.h */,
+				04D2885A1C9E915F00D12BEF /* SICellSelection.m */,
+				04D2885B1C9E915F00D12BEF /* SIMenuButton.h */,
+				04D2885C1C9E915F00D12BEF /* SIMenuButton.m */,
+				04D2885D1C9E915F00D12BEF /* SIMenuCell.h */,
+				04D2885E1C9E915F00D12BEF /* SIMenuCell.m */,
+				04D2885F1C9E915F00D12BEF /* SIMenuConfiguration.h */,
+				04D288601C9E915F00D12BEF /* SIMenuConfiguration.m */,
+				04D288611C9E915F00D12BEF /* SIMenuTable.h */,
+				04D288621C9E915F00D12BEF /* SIMenuTable.m */,
+				04D288631C9E915F00D12BEF /* SINavigationMenuView.h */,
+				04D288641C9E915F00D12BEF /* SINavigationMenuView.m */,
+				04D288651C9E915F00D12BEF /* UIColor+Extension.h */,
+				04D288661C9E915F00D12BEF /* UIColor+Extension.m */,
+			);
+			path = NavigationMenuView;
+			sourceTree = "<group>";
+		};
+		04D288541C9E915F00D12BEF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				04D288551C9E915F00D12BEF /* arrow_down.png */,
+				04D288561C9E915F00D12BEF /* arrow_down1.png */,
+				04D288571C9E915F00D12BEF /* arrow_down1@2x.png */,
+				04D288581C9E915F00D12BEF /* arrow_down@2x.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		04E606311C4897B900AEE9DD /* Home */ = {
@@ -4491,6 +4585,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				04D288431C9E915F00D12BEF /* NavigationMenu */,
 				04F7D6E61C5F2CF7006B5591 /* KeyChain */,
 				04FBAEBA1C5B137F0094DC6B /* 图片浏览器 */,
 				04F9037C1C56795C0040629F /* AFNetworking */,
@@ -5663,6 +5758,7 @@
 				04A4DE151BF484DF002ABBB1 /* admogoVideo_21.png in Resources */,
 				4D0A91881B81089000373E5C /* EmojiAndTextView.xib in Resources */,
 				4D077B261B80A00300FFD5CB /* SelectClassCell.xib in Resources */,
+				04D288711C9E915F00D12BEF /* arrow_down.png in Resources */,
 				04A4DE141BF484DF002ABBB1 /* admogoVideo_20.png in Resources */,
 				04A4DE861BF484DF002ABBB1 /* webview_bar_next_ipad.png in Resources */,
 				04FEDD481C03542700921AC1 /* MySPEndCourseView.xib in Resources */,
@@ -5699,6 +5795,7 @@
 				04FA7D141C1ECB040035AF18 /* MineHomeFunCell.xib in Resources */,
 				F46CBD0B1B7449AB00380EC3 /* RecipesListViewController.xib in Resources */,
 				04A4DE5D1BF484DF002ABBB1 /* website-960x150.gif in Resources */,
+				04D288681C9E915F00D12BEF /* Default.png in Resources */,
 				0494F4791BDF777500F39865 /* MJRefresh.bundle in Resources */,
 				4D5CE7701B7E4333002F1088 /* PushNotificationViewController.xib in Resources */,
 				04A4DE531BF484DF002ABBB1 /* download-320x50.gif in Resources */,
@@ -5798,6 +5895,7 @@
 				04F9FBA11BF1A77E00AEFB88 /* UMSCommentDetailController.xib in Resources */,
 				0403DCE91BF5C85D0089E463 /* MySPCourseView.xib in Resources */,
 				04A4DE241BF484DF002ABBB1 /* admogoVideo_9.png in Resources */,
+				04D2886A1C9E915F00D12BEF /* HAViewController.xib in Resources */,
 				040466C71C438FDB00C9EE5C /* RouteDetailInfoCell.xib in Resources */,
 				04F9FB591BF1A67400AEFB88 /* bubble_min@2x.png in Resources */,
 				2457FD031B711A65006A3AB7 /* AddressbookTableViewCell.xib in Resources */,
@@ -5908,6 +6006,7 @@
 				24C46B531B5A2BC800A58F92 /* MessageViewController.xib in Resources */,
 				04F410FE1C5A11D400407C10 /* FPImagePickerImageCell.xib in Resources */,
 				04FB23781C16CD62009B57E2 /* TuiJianCell.xib in Resources */,
+				04D288731C9E915F00D12BEF /* arrow_down1@2x.png in Resources */,
 				04A4DE2F1BF484DF002ABBB1 /* adsmogo_button_pressed@2x.png in Resources */,
 				040687181C3E588D002C2196 /* MapVC.xib in Resources */,
 				04F9FBA41BF1A77E00AEFB88 /* UMShareEditViewController.xib in Resources */,
@@ -5938,6 +6037,7 @@
 				04F8894B1C058FE9002FBE6D /* HZQDatePickerView.xib in Resources */,
 				04A4DE611BF484DF002ABBB1 /* bg@2x.png in Resources */,
 				4D077B2B1B80B16100FFD5CB /* OnlyEmojiView.xib in Resources */,
+				04D288741C9E915F00D12BEF /* arrow_down@2x.png in Resources */,
 				04A4DE411BF484DF002ABBB1 /* adsMoGoInterstitial.html in Resources */,
 				04A4DE051BF484DF002ABBB1 /* adchina_stoploading@2x.png in Resources */,
 				04FB44DC1C59B68900094E67 /* FPTimeLineDetailVC.xib in Resources */,
@@ -5951,6 +6051,7 @@
 				F4E36D5F1B85B49D009BD909 /* DoPhotoCell.xib in Resources */,
 				04A4DE291BF484DF002ABBB1 /* adsmenuVoice_on@2x.png in Resources */,
 				04F8D36F1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.xib in Resources */,
+				04D288691C9E915F00D12BEF /* Default@2x.png in Resources */,
 				F4EA53871B60BD390044BE7A /* MeTableViewCell.xib in Resources */,
 				04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */,
 				04A4DE741BF484DF002ABBB1 /* webview_bar_refresh_hover@2x.png in Resources */,
@@ -5959,7 +6060,9 @@
 				04F9FB611BF1A67400AEFB88 /* umeng_add_photo@2x.png in Resources */,
 				0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */,
 				04A4DE8F1BF484DF002ABBB1 /* shareviewhead_bg.png in Resources */,
+				04D288721C9E915F00D12BEF /* arrow_down1.png in Resources */,
 				04A4DE4A1BF484DF002ABBB1 /* adsmogo_close@2x.png in Resources */,
+				04D288671C9E915F00D12BEF /* Default-568h@2x.png in Resources */,
 				24DED4FD1B7CCFD1005BC46E /* StudentOtherInfoViewController.xib in Resources */,
 				04A4DE201BF484DF002ABBB1 /* admogoVideo_5.png in Resources */,
 				04A4DE941BF484DF002ABBB1 /* webview_bar_close.png in Resources */,
@@ -6037,6 +6140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D288791C9E915F00D12BEF /* SIMenuTable.m in Sources */,
 				04F8895A1C05ABD8002FBE6D /* SDRotationLoopProgressView.m in Sources */,
 				04FB23721C16C7D0009B57E2 /* DiscorveryTypeCell.m in Sources */,
 				2489B6641B5AB49E00039E70 /* UIImage+MultiFormat.m in Sources */,
@@ -6102,6 +6206,7 @@
 				04F3D4621BF47FD3007E7AC0 /* NSDictionary_JSONExtensions.m in Sources */,
 				04F7D6E91C5F2D0F006B5591 /* CHKeychain.m in Sources */,
 				04F95F5B1C4E2E37000909B1 /* FPHomeSonView.m in Sources */,
+				04D288761C9E915F00D12BEF /* SIMenuButton.m in Sources */,
 				24AA0B421B690F4300DAC03B /* UUImageAvatarBrowser.m in Sources */,
 				04FB7CBC1C0DA84000FD3E31 /* SpCourseDetailTableVC.m in Sources */,
 				4D5CE7711B7E4333002F1088 /* SettingViewController.m in Sources */,
@@ -6121,15 +6226,19 @@
 				04FB237B1C16D91C009B57E2 /* MineHomeVC.m in Sources */,
 				04F903A61C56795C0040629F /* AFHTTPRequestOperationManager.m in Sources */,
 				04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */,
+				04D288771C9E915F00D12BEF /* SIMenuCell.m in Sources */,
 				F4885C6F1B7C982B00AF97CF /* CardInfoDomain.m in Sources */,
 				24E1F5671B7279C600057C44 /* MoreMenuView.m in Sources */,
+				04D288781C9E915F00D12BEF /* SIMenuConfiguration.m in Sources */,
 				2489B66C1B5AB49E00039E70 /* SDWebImageDecoder.m in Sources */,
 				04F936511BFEC8D7002D7621 /* SPCourseDetailVO.m in Sources */,
 				040021171C3F9A9B005F1D82 /* ShowRouteVC.m in Sources */,
 				04F3D4681BF47FD3007E7AC0 /* unzip.c in Sources */,
+				04D2887A1C9E915F00D12BEF /* SINavigationMenuView.m in Sources */,
 				F4E61B6B1B7335A900E5851A /* ReplyListViewController.m in Sources */,
 				2474DFC91B6CD2070021506F /* RecipesItemVO.m in Sources */,
 				F4EA538F1B60D8390044BE7A /* StudentInfoItemVO.m in Sources */,
+				04D288751C9E915F00D12BEF /* SICellSelection.m in Sources */,
 				04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */,
 				04F903A71C56795C0040629F /* AFHTTPSessionManager.m in Sources */,
 				248B6AB91B19B51A00FCB98F /* PagedFlowView.m in Sources */,
@@ -6142,6 +6251,7 @@
 				0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */,
 				04FE3DDB1C2BD6C2000CE445 /* EnrolStudentHomeVC.m in Sources */,
 				248B6A981B19AA7100FCB98F /* KGBaseView.m in Sources */,
+				04D2886D1C9E915F00D12BEF /* HAViewController.m in Sources */,
 				04F903AB1C56795C0040629F /* AFURLRequestSerialization.m in Sources */,
 				F48783B01B58DA1700CDC1A8 /* MJType.m in Sources */,
 				04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */,
@@ -6294,6 +6404,7 @@
 				2474DFB41B6CBB1C0021506F /* StudentSignRecordTableViewCell.m in Sources */,
 				04F3D4561BF47FD2007E7AC0 /* AdMoGoAdapterBaiduSplash.m in Sources */,
 				04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */,
+				04D2886C1C9E915F00D12BEF /* HAAppDelegate.m in Sources */,
 				04F8C7001C18351900EF5E57 /* MyUILabel.m in Sources */,
 				04FEDD471C03542700921AC1 /* MySPEndCourseView.m in Sources */,
 				04C5D8881BE2199800A1245C /* SPCourseDetailDomain.m in Sources */,
@@ -6305,6 +6416,7 @@
 				04F903AF1C56795C0040629F /* README.md in Sources */,
 				046063471BD8D82600CBC881 /* MBProgressHUD+HM.m in Sources */,
 				046063331BD8BE3B00CBC881 /* SPCourseTypeDomain.m in Sources */,
+				04D2887B1C9E915F00D12BEF /* UIColor+Extension.m in Sources */,
 				F4EA53921B60EAD20044BE7A /* StudentInfoHeaderView.m in Sources */,
 				F4DCD0EC1B1C2932007D61CA /* UIView+Shadow.m in Sources */,
 				2474DFAF1B6CB7D90021506F /* StudentSignRecordViewController.m in Sources */,
@@ -6476,6 +6588,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		04D288471C9E915F00D12BEF /* HAViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04D288481C9E915F00D12BEF /* en */,
+			);
+			name = HAViewController.xib;
+			sourceTree = "<group>";
+		};
 		04F9FB2E1BF1A67400AEFB88 /* UMFeedbackLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
