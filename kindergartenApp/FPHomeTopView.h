@@ -13,6 +13,8 @@ typedef void(^OnTap)();
 
 @interface FPHomeTopView : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *warningLbl;
+
 - (void)setData:(FPMyFamilyPhotoCollectionDomain *)domain;
 
 @property (strong, nonatomic) OnTap pushToMyAlbum;

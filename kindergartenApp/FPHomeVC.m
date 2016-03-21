@@ -87,9 +87,7 @@ NSInteger localDBlimit=50;
     
     NSMutableDictionary * dataSourceGroupChildMap;
     
-    CGFloat warningCellHeight;
-    //提示信息，有照片更新啦
-    FPHomeWarningCell * _warningCell;
+   
     
     BOOL _selectViewOpen;
     
@@ -140,7 +138,7 @@ NSInteger localDBlimit=50;
         [super viewDidLoad];
         isLocalDBHasData=true;
         isRemoteDBHasData=true;
-        localFamilyRangeTime=[FPFamilyInfoDomain new];
+//        localFamilyRangeTime=[FPFamilyInfoDomain new];
         
         
         _dataOfTopTitleBtnArray=[NSMutableArray array];
@@ -189,17 +187,9 @@ NSInteger localDBlimit=50;
     FPMyFamilyPhotoCollectionDomain * domain=_dataOfmyCollectionArray[row];
     //设置全局保存
    [FPHomeVC setFamily_uuid:domain.uuid];
-    _pageNo=1;
-    localFamilyRangeTime.minTime=nil;
-    localFamilyRangeTime.maxTime=nil;
-    
-    [fPHomeTopView setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
-    
-    SINavigationMenuView *menu=self.navigationItem.titleView;
-    [menu setMenuTitle:domain.title];
+ 
+    [self afterLoadFamilyCollectionData:domain];
    
-    //加载相册内照片
-    [self loadDataPhotoByFamilyUUID];
   
 
 }
@@ -268,13 +258,62 @@ NSInteger localDBlimit=50;
     NSLog(@"did selected item at index %@", _dataOfTopTitleBtnArray[index]);
 }
 
-#pragma 加载完数据后
-- (void)afterLoadFamilyCollectionData
+#pragma 加载家庭相册数据后，
+- (void)afterLoadFamilyCollectionData:(FPMyFamilyPhotoCollectionDomain *) domain
 {
     
-        [self initNaviationTitleBtn];
-    //加载相册内照片
-      [self loadDataPhotoByFamilyUUID];
+    _pageNo=1;
+//    localFamilyRangeTime.minTime=nil;
+//    localFamilyRangeTime.maxTime=nil;
+    localFamilyRangeTime=[_service queryTimeByFamilyUUID :[FPHomeVC getFamily_uuid]];
+    isLocalDBHasData=true;
+    isRemoteDBHasData=true;
+    
+    _cur_time=[KGDateUtil getLocalDateStr] ;
+    
+    
+    //    _cur_time=@"2015-01-01 00:00:00";
+    
+    
+    [fPHomeTopView setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
+    
+    SINavigationMenuView *menu=self.navigationItem.titleView;
+    
+    [menu setMenuTitle:domain.title];
+    
+    //先更新
+    
+      if(!localFamilyRangeTime.updateTime){
+          //有数据则，初三全部更新变更数据。
+          if([localFamilyRangeTime.minTime isEqualToString:localFamilyRangeTime.maxTime]){
+                localFamilyRangeTime.updateTime=@"2000-01-01 00:00:00";
+              [_service updateMaxTime:localFamilyRangeTime];
+          }
+        
+      }
+    if(localFamilyRangeTime.updateTime){
+        [self showLoadView];
+        [_service updateFPPhotoUpdateCountWithFamilyUUID:[FPHomeVC getFamily_uuid] success:^(NSString *status) {
+            [self hidenLoadView];
+            [self loadDataPhotoByFamilyUUID];
+            
+            
+        } faild:^(NSString *errorMsg) {
+            
+            //        [MBProgressHUD showError:@"请求超时,请稍后再试!"];
+            
+            [self hidenLoadView];
+            
+            [self loadDataPhotoByFamilyUUID];
+        }];
+
+    }else{//本地没数据，直接取数据
+        //加载相册内照片
+        [self loadDataPhotoByFamilyUUID];
+      
+       
+    }
+    
     
 }
 
@@ -285,7 +324,7 @@ NSInteger localDBlimit=50;
     //自定义的headerview
     FPHomeTopView * view = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
    
-    
+    [view.warningLbl setHidden:YES];
     [view setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
     view.size = CGSizeMake(APPWINDOWWIDTH, 192);
     //回调
@@ -555,7 +594,8 @@ NSInteger localDBlimit=50;
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        _warningCell.warningLbl.text = @"有新图片上传了,请下拉刷新";
+        [fPHomeTopView.warningLbl setHidden:NO];
+        fPHomeTopView.warningLbl.text = @"有新图片上传了,请下拉刷新";
         //上传任务数量显示
       
         [btn_shangchuanzhaopian setTitle:count forState:(UIControlStateNormal)];
@@ -569,7 +609,7 @@ NSInteger localDBlimit=50;
 {
     dispatch_async(dispatch_get_main_queue(), ^
     {
-        _warningCell.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",noti.object];
+        fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",noti.object];
     });
 }
 
@@ -592,11 +632,12 @@ NSInteger localDBlimit=50;
             
             _dataOfmyCollectionArray=datas;
             BOOL isChageFailyUuid=true;
-            
+            FPMyFamilyPhotoCollectionDomain * domain=nil;
             for(FPMyFamilyPhotoCollectionDomain* v in datas){
                 //没有初始化，则默认第一个。
                 if([FPHomeVC getFamily_uuid]==nil){
                     [FPHomeVC setFamily_uuid:v.uuid];
+                    domain=v;
                     isChageFailyUuid=false;
                     break;
                     
@@ -604,17 +645,22 @@ NSInteger localDBlimit=50;
                 //包含全局uuid，则设置为初始化
                 if([v.uuid isEqualToString:[FPHomeVC getFamily_uuid]]){
                      isChageFailyUuid=false;
+                    domain=v;
                     break;
                 }
 
             }
             //没设置则设置为第一个
             if(isChageFailyUuid&&_dataOfmyCollectionArray.count>0){
+                
+                
                 FPMyFamilyPhotoCollectionDomain * tmp=_dataOfmyCollectionArray[0];
                   [FPHomeVC setFamily_uuid:tmp.uuid];
+                domain=tmp;
             }
             
-            [self afterLoadFamilyCollectionData];
+            [self initNaviationTitleBtn];
+            [self afterLoadFamilyCollectionData:domain];
           
         });
     }
@@ -637,34 +683,17 @@ NSInteger localDBlimit=50;
 }
 
 #pragma mark - 根据数据加载到tableview
-- (void)loadDataPhotoByDataArr: (NSMutableArray *) dataArr
+//timeAfter true，标示添加数据时间数组是正序。从0位置插入。
+- (void)loadDataPhotoByDataArr: (NSMutableArray *) dataArr timeAfter:(BOOL)timeAfter
 {
     
         [_tableView footerEndRefreshing];
-    
-    //本地数据已经取完了，下次从远程服务器取。
-    if(dataArr.count<localDBlimit){
-        isLocalDBHasData=false;
-        
-    }
-    //远程没数据了就不取了。
-    if(dataArr.count==0&&isRemoteDBHasData==true){
-        [self loadRemoteDataPhotoByFamilyUUID];
-        return;
-    }
+
         //反过来
     //    NSArray * dataArr = [[arr reverseObjectEnumerator] allObjects];
     if(dataSourceGroup==nil)dataSourceGroup=[NSMutableArray array];
     if(dataSourceGroupChildMap==nil)dataSourceGroupChildMap=[[NSMutableDictionary alloc] init];
     
-        
-        if(_pageNo==1){
-            [dataSourceGroup removeAllObjects];
-           
-//            NSLog(@"dataSourceGroupChildMap.count=%d",dataSourceGroupChildMap.count);
-            [dataSourceGroupChildMap removeAllObjects];
-        }
-
  
     for(FPFamilyPhotoNormalDomain * domain in dataArr){
         
@@ -675,21 +704,40 @@ NSInteger localDBlimit=50;
         NSMutableArray *  tmp= [dataSourceGroupChildMap objectForKey:sectionName];
         //分组数据转换
         if(tmp==nil){
-            [dataSourceGroup addObject:sectionName];
             tmp=[NSMutableArray array];
-            [tmp addObject:domain];
+            if(timeAfter){
+                [dataSourceGroup insertObject:sectionName atIndex:0];
+                [tmp insertObject:domain atIndex:0];
+                
+            }else{
+                [dataSourceGroup addObject:sectionName];
+                
+                [tmp addObject:domain];
+
+            }
             [dataSourceGroupChildMap setObject:tmp forKey:sectionName];
         }else{
-            [tmp addObject:domain];
+            
+            
+            if(timeAfter){
+                [tmp insertObject:domain atIndex:0];
+                
+            }else{
+                 [tmp addObject:domain];
+            }
+           
         }
-        
-        localFamilyRangeTime.minTime=domain.create_time;
+
     }
+    
+ 
+    
     [_tableView reloadData];
     
 
 }
 #pragma mark - 获取数据库照片数据，根据创建时间
+
 - (void)loadDataPhotoByFamilyUUID
 {
     
@@ -699,15 +747,60 @@ NSInteger localDBlimit=50;
         [self loadRemoteDataPhotoByFamilyUUID];
         return;
     }
+    if(!_cur_time)_cur_time=[KGDateUtil getLocalDateStr] ;
     
 
     if(!_pageNo)_pageNo=1;
-    if(!_cur_time)_cur_time=[KGDateUtil getLocalDateStr] ;
     
-      NSMutableArray * arr = [_service getListTimePhotoDataByPage:_cur_time familyUUID:[FPHomeVC getFamily_uuid] pageNo:_pageNo limit:localDBlimit];
+    
+    
+      NSMutableArray * dataArr = [_service getListTimePhotoDataByPage:_cur_time familyUUID:[FPHomeVC getFamily_uuid] pageNo:_pageNo limit:localDBlimit];
+    
+    
+    
+    if(_pageNo==1){
+        [dataSourceGroup removeAllObjects];
+        
+        [dataSourceGroupChildMap removeAllObjects];
+    }
     _pageNo++;
     
-    [self loadDataPhotoByDataArr:arr];
+    
+    
+    
+    
+    //本地第1页数据获取后，设置第一条数据为maxTime；
+    if(isLocalDBHasData&&isRemoteDBHasData&&_pageNo==1){
+        
+        if(dataArr.count>0){
+            localFamilyRangeTime.maxTime=[dataArr firstObject];
+            [_service updateMaxTime:localFamilyRangeTime];
+        }
+    }
+    
+    //本地数据已经取完了，下次从远程服务器取。
+    if(dataArr.count<localDBlimit){
+        NSLog(@"本地数据已经没有了，准备远程取数据");
+        isLocalDBHasData=false;
+        
+    }
+    //本地没数据，直接远程取数据。
+    if(dataArr.count==0&&isRemoteDBHasData==true){
+        [self loadRemoteDataPhotoByFamilyUUID];
+        if(_pageNo==1){
+             localFamilyRangeTime.maxTime=[KGDateUtil getLocalDateStr];
+              localFamilyRangeTime.updateTime=localFamilyRangeTime.maxTime;
+              localFamilyRangeTime.minTime=localFamilyRangeTime.maxTime;
+            localFamilyRangeTime.family_uuid=localFamilyRangeTime.maxTime;
+            
+            [_service updateMaxTime:localFamilyRangeTime];
+            
+        }
+        return;
+    }
+   
+    
+    [self loadDataPhotoByDataArr:dataArr timeAfter:false];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                    {
@@ -716,8 +809,7 @@ NSInteger localDBlimit=50;
 }
 
 
-
-#pragma mark - 远程获取数据
+#pragma mark - 远程获取数据.（某个时间以前的数据）
 - (void)loadRemoteDataPhotoByFamilyUUID
 {
     
@@ -732,19 +824,19 @@ NSInteger localDBlimit=50;
         
         //1.去查询增量更新maxtime以后的数据并保存到本地,注意要更新时间
         //从数据库查询 familyUUID 所对应的 maxTime 和 minTime 如果没有相应数据 则自动创建一条，且把maxTime和minTime设置为空
-//        FPFamilyInfoDomain * localFamilyRangeTime = [_service queryTimeByFamilyUUID:[FPHomeVC getFamily_uuid]];
-//
+        //        FPFamilyInfoDomain * localFamilyRangeTime = [_service queryTimeByFamilyUUID:[FPHomeVC getFamily_uuid]];
+        //
         //加载更早以前数据
         [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:[FPHomeVC getFamily_uuid] withTime:localFamilyRangeTime.minTime timeType:1 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
          {
              
              
              [_tableView footerEndRefreshing];
-
+             
              
              [_aiv stopAnimating];
              _aiv.hidden = YES;
-
+             
              NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
              
              NSLog(@"datas.count=%d",datas.count );
@@ -752,13 +844,13 @@ NSInteger localDBlimit=50;
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                             {
                                 //更新刷新时间
-                                _warningCell.warningLbl.text = _warningCell.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
+                                fPHomeTopView.warningLbl.text = fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
                             });
              
              if(lastTimeVO.pageSize>datas.count){
                  isRemoteDBHasData=false;
              }
-            
+             
              if (datas.count> 0)
              {
                  //把数据缓存到本地
@@ -767,20 +859,91 @@ NSInteger localDBlimit=50;
                  
                  localFamilyRangeTime.family_uuid=[FPHomeVC getFamily_uuid];
                  localFamilyRangeTime.minTime=lastTimeVO.lastTime;
+                 
+                 
+                 
                  //设置maxTime 和 minTime到这个familyUUID
                  NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
+                 //
                  [_service updateMaxTime:localFamilyRangeTime];
                  
                  //2.去数据库里面查询
-                // [self loadData];
-                 [self loadDataPhotoByDataArr:datas];
+                 // [self loadData];
+                [self loadDataPhotoByDataArr:datas timeAfter:false];
              }else{
                  _tableView.footerRefreshingText = @"没有更多了...";
                  
                  [_tableView footerEndRefreshing];
-
+                 
                  
              }
+         }
+                                                                 faild:^(NSString *errorMsg)
+         {
+             [MBProgressHUD showError:@"请求超时,请稍后再试!"];
+             [_aiv stopAnimating];
+             _aiv.hidden = YES;
+         }];
+    }
+}
+
+
+
+
+
+#pragma mark - 远程获取数据.（某个时间以后的数据）。
+//本地数据库已经有数据了，在新数据的时候，增量更新。
+- (void)loadRemoteDataPhotoByFamilyUUIDAfterLocalTime
+{
+        if (![_aiv isAnimating])
+    {
+        _aiv.hidden = NO;
+        [_aiv startAnimating];
+                //加载更早以前数据
+        [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:[FPHomeVC getFamily_uuid] withTime:localFamilyRangeTime.maxTime timeType:0 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
+         {
+             
+             
+             [_tableView headerEndRefreshing];
+             [_aiv stopAnimating];
+             _aiv.hidden = YES;
+
+             NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
+             
+             NSLog(@"datasNew.count=%d",datas.count );
+            
+          
+             if (datas.count> 0)
+             {
+                 //把数据缓存到本地
+                 NSLog(@"缓存下拉加载的相片数据到数据库中");
+                 [_service addPhotoToDatabase:(datas)];
+                 
+                 localFamilyRangeTime.family_uuid=[FPHomeVC getFamily_uuid];
+                 
+                 localFamilyRangeTime.maxTime=lastTimeVO.lastTime;
+                 
+                 
+                 //设置maxTime 和 minTime到这个familyUUID
+                 NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
+                 
+                 [_service updateMaxTime:localFamilyRangeTime];
+                 
+                 //2.去数据库里面查询
+                // [self loadData];
+                [self loadDataPhotoByDataArr:datas timeAfter:true];
+             }else{
+                 _tableView.headerRefreshingText = @"没有新数据...";
+                              }
+             
+             
+             
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                            {
+                                //更新刷新时间
+                                fPHomeTopView.warningLbl.text = fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
+                            });
+             
          }
         faild:^(NSString *errorMsg)
          {
@@ -838,20 +1001,13 @@ NSInteger localDBlimit=50;
     
     [self.navigationController.navigationBar addSubview:_aiv];
 }
-//下拉刷新
-- (void)headerRereshing
-{
-    
-    [_tableView headerEndRefreshing];
-    //一般这些个里边是网络请求，然后会有延迟，不会像现在刷新这么快
 
-}
 #pragma mark - 上啦下拉
 - (void)setupRefresh
 {
 
     //下拉刷新
-    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    [_tableView addHeaderWithTarget:self action:@selector(headerRefreshing)];
    // [_tableView headerBeginRefreshing];
     
     
@@ -874,78 +1030,25 @@ NSInteger localDBlimit=50;
 #pragma mark - 下拉刷新
 - (void)headerRefreshing
 {
-    if (![_aiv isAnimating])
-    {
-        _aiv.hidden = NO;
-        [_aiv startAnimating];
-        
-        //1.去查询增量更新maxtime以后的数据并保存到本地,注意要更新时间
-        //从数据库查询 familyUUID 所对应的 maxTime 和 minTime 如果没有相应数据 则自动创建一条，且把maxTime和minTime设置为空
-        FPFamilyInfoDomain * domain = [_service queryTimeByFamilyUUID:[FPHomeVC getFamily_uuid]];
-        
-        [[KGHttpService sharedService] getPhotoCollectionUseFamilyUUID:[FPHomeVC getFamily_uuid] withTime:domain.maxTime timeType:0 pageNo:@"1" success:^(FPFamilyPhotoLastTimeVO *lastTimeVO)
-        {
-            NSArray * datas = [FPFamilyPhotoNormalDomain objectArrayWithKeyValuesArray:lastTimeVO.data];
-            
-            if (datas.count == 0)
-            {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                {
-                    [_aiv stopAnimating];
-                    _aiv.hidden = YES;
-                    //更新刷新时间
-                    _warningCell.warningLbl.text = _warningCell.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
-                });
-            }
-            else
-            {
-                //把数据缓存到本地
-                NSLog(@"缓存下拉加载的相片数据到数据库中");
-                [_service addPhotoToDatabase:(datas)];
-                
-                //设置maxTime 和 minTime到这个familyUUID
-                NSLog(@"%@ =更新time中=  %@ === %@",[KGDateUtil getLocalDateStr],lastTimeVO.lastTime,[KGDateUtil getLocalDateStr]);
-                [_service updateMaxTime:[FPHomeVC getFamily_uuid] maxTime:[KGDateUtil getLocalDateStr] minTime:lastTimeVO.lastTime uptime:[KGDateUtil getLocalDateStr]];
-                
-                //2.去数据库里面查询
-//                [self loadData];
-                
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                {
-                    [_aiv stopAnimating];
-                    _aiv.hidden = YES;
-                    //更新刷新时间
-                    _warningCell.warningLbl.text = _warningCell.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
-                });
-            }
-        }
-        faild:^(NSString *errorMsg)
-        {
-            [MBProgressHUD showError:@"请求超时,请稍后再试!"];
-            [_aiv stopAnimating];
-            _aiv.hidden = YES;
-        }];
+    
+    [self loadRemoteDataPhotoByFamilyUUIDAfterLocalTime];
     }
-}
 #pragma 表格-分组
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return dataSourceGroup.count;
 }
 
-//#pragma mark 返回每组头标题名称
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-//    NSLog(@"生成组（组%i）名称",section);
-//    return dataSourceGroup[section];
-//}
 
 #pragma mark 返回每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     NSString * groupName=dataSourceGroup[section];
     if(groupName==nil) return nil;
     NSArray *arr=[dataSourceGroupChildMap objectForKey:groupName];
-    NSInteger num= arr.count/3+1;
-
+    NSInteger num= arr.count/3;
+    if(arr.count%3>0){
+        num++;
+    }
     return num;
 }
 
@@ -1049,7 +1152,7 @@ NSInteger localDBlimit=50;
     return cell;
 }
 
-#pragma 添加切换按钮。时光轴，精品相册
+#pragma 分组名。照片日期，和照片数量
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     

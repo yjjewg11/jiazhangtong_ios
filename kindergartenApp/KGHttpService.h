@@ -48,6 +48,9 @@
 #import "FPMyFamilyPhotoListColletion.h"
 #import "FPCollegeListDomin.h"
 #import "KGHttpUrl.h"
+#import "FPFamilyInfoDomain.h"
+
+
 @interface KGHttpService : NSObject
 
 @property (strong, nonatomic) NSString * pushToken;
@@ -347,9 +350,8 @@
 
 - (void)getPhotoCollectionUseFamilyUUID:(NSString *)familyUUID withTime:(NSString *)time timeType:(NSInteger)type pageNo:(NSString *)pageNo success:(void(^)(FPFamilyPhotoLastTimeVO * lastTimeVO))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getFPPhotoUpdateCountWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime success:(void(^)(FPFamilyPhotoUpdateCount * domain))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID   domain:(FPFamilyInfoDomain *) domain  pageNo :(NSInteger) pageNo success:(void(^)(PageInfoDomain * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild;
 
-- (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime updateTime:(NSString *)updateTime success:(void(^)(NSArray * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild;
 
 - (void)uploadFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID img:(UIImage *)img success:(void(^)(NSString * str))success faild:(void(^)(NSString * errorMsg))faild;
 

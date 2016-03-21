@@ -32,7 +32,7 @@
 - (void)saveUploadImgListPath:(NSMutableArray *)localurls;
 
 - (void)deleteUploadImg:(NSString *)localurl;
-
+- (void)updateFPPhotoUpdateCountWithFamilyUUID:(NSString *)familyUUID  success:(void(^)(NSString * status))success faild:(void(^)(NSString * errorMsg))faild;
 - (FPFamilyInfoDomain *)queryTimeByFamilyUUID:(NSString *)familyUUID;
 - (void)updateMaxTime:(FPFamilyInfoDomain *)domain;
 

@@ -2437,14 +2437,15 @@
 }
 
 // 查询增量更新数据（缓存本地）
-- (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime updateTime:(NSString *)updateTime success:(void(^)(NSArray * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild
+- (void)getFPPhotoUpdateDataWithFamilyUUID:(NSString *)familyUUID   domain:(FPFamilyInfoDomain *) domain  pageNo :(NSInteger) pageNo success:(void(^)(PageInfoDomain * needUpDateDatas))success faild:(void(^)(NSString * errorMsg))faild
 {
     if (familyUUID == nil)
     {
         familyUUID = @"";
     }
     
-    NSDictionary * dict = @{@"family_uuid":familyUUID,@"maxTime":maxTime,@"updateTime":updateTime};
+    NSDictionary * dict = @{@"family_uuid":familyUUID,@"maxTime":[KGDateUtil getFPFormatSringWithDateStr:domain.maxTime],@"minTime":[KGDateUtil getFPFormatSringWithDateStr:domain.minTime]
+,@"updateTime":[KGDateUtil getFPFormatSringWithDateStr:domain.updateTime],@"pageNo":[NSString stringWithFormat:@"%d",pageNo]};
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -2457,8 +2458,8 @@
          {
              //借用一下
              FPFamilyPhotoLastTimeVO * tempResp = [FPFamilyPhotoLastTimeVO objectWithKeyValues:[responseObject objectForKey:@"list"]];
-             
-             success([FPFamilyPhotoStatusDomain objectArrayWithKeyValuesArray:tempResp.data]);
+              success(tempResp);
+//             success([FPFamilyPhotoStatusDomain objectArrayWithKeyValuesArray:tempResp.data]);
          }
          else
          {

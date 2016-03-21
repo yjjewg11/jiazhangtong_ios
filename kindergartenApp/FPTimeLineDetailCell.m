@@ -130,7 +130,7 @@
     self.imageDetailLable.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
     self.imageDetailLable.numberOfLines = 0;
     self.imageDetailLable.textColor = [UIColor whiteColor];
-    self.imageDetailLable.font = [UIFont systemFontOfSize:30];
+    self.imageDetailLable.font = [UIFont systemFontOfSize:17];
     self.imageDetailLable.text = @"today is a fun day";
     //创建infoview
     self.infoView = [[UIView alloc] init];
@@ -291,7 +291,11 @@
     self.nameLbl.text = [NSString stringWithFormat:@"上传人:%@",self.domain.create_user];
     
     self.imageDetailLable.text=self.domain.note;
-    
+    if(self.imageDetailLable.text){
+        [self.imageDetailLable setHidden:NO];
+    }else{
+         [self.imageDetailLable setHidden:YES];
+    }
     [self showByHideInfoView:hideInfoView];
     
     //请求点赞数据

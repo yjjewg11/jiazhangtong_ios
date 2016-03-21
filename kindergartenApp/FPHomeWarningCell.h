@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FPHomeWarningCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *warningLbl;
+@property (strong, nonatomic) IBOutlet UILabel *warningLbl;
 
 @end
