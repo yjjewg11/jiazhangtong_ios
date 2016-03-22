@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-@interface FPFamilyPhotoCollectionDetailTableViewController : BaseViewController
+#import "VPImageCropperViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+@interface FPFamilyPhotoCollectionDetailTableViewController : BaseViewController<VPImageCropperDelegate>
 - (void)loadLoadByUuid:( NSString *) uuid;
 @end

@@ -150,13 +150,15 @@
     {
         jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:0 error:nil];
         
-            NSLog(@"setHTTPBody= %@",[jsonData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]);
     }
     
     NSLog(@"POST %@",path);
-
-    
-    
+    if(jsonData){
+        NSLog(@"setHTTPBody= %@",[[NSString alloc] initWithData:jsonData
+                                                       encoding:NSUTF8StringEncoding]);
+        
+    }
+   
     
     NSURL * url = [NSURL URLWithString:path];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -2326,6 +2328,23 @@
      {
          [self requestErrorCode:error faild:faild];
      }];
+}
+
+// 家庭相册-保存成员
+- (void)fpFamilyPhotoCollection_save:(FPFamilyPhotoNormalDomain *)domain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fpFamilyPhotoCollection/save.json"];
+    
+    
+    [self getServerJson:url params:domain.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
 }
 
 // 家庭相册-保存成员

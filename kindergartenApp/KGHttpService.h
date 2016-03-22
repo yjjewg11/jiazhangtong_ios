@@ -343,6 +343,7 @@
 
 #pragma mark - 家庭相册模块
 -(void)fpFamilyPhotoCollection_get:(NSString *)uuid  success :(void(^)( FPMyFamilyPhotoCollectionDomain *    domain))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)fpFamilyPhotoCollection_save:(FPFamilyPhotoNormalDomain *)domain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 - (void)fPFamilyMembers_save:(FPFamilyMembers *)domain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 - (void)fPFamilyMembers_delete:(NSString *)uuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 

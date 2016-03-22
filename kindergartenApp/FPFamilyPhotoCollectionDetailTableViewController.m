@@ -12,17 +12,27 @@
 
 #import "FPFamilyMembers.h"
 #import "MBProgressHUD+HM.h"
-@interface FPFamilyPhotoCollectionDetailTableViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
+#import "UIView+Extension.h"
+#import "UIColor+Extension.h"
+#import "HZQDatePickerView.h"
+#import "KGHUD.h"
+
+
+#define ORIGINAL_MAX_WIDTH 640.0f
+
+@interface FPFamilyPhotoCollectionDetailTableViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate, UIImagePickerControllerDelegate,UIAlertViewDelegate>
 
 @end
 //家庭成员列表
  NSMutableArray * dataSource_members_list;
+ NSMutableArray * dataSource_family_list;
 NSMutableArray *dataSourceGroup;
  UITableView *_tableView;
     NSString *family_uuid;
 UIAlertView * customAlertView;
 NSInteger selectRowIndex;
 FPMyFamilyPhotoCollectionDomain *dataSource;
+UIImageView * heraldImageView;
 @implementation FPFamilyPhotoCollectionDetailTableViewController
 
 - (void)loadLoadByUuid:( NSString *) uuid{
@@ -43,6 +53,11 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
     [dataSourceGroup addObject:@"家庭成员"];
  
     
+    dataSource_family_list=[[NSMutableArray alloc]init];
+
+    [dataSource_family_list addObject:@"相册名称"];
+    [dataSource_family_list addObject:@"封面图片"];
+    [dataSource_family_list addObject:@"创建时间"];
        //初始化数据
     [self initData];
 }
@@ -81,7 +96,7 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
          dispatch_async(dispatch_get_main_queue(), ^
                         {
                             [self hidenLoadView];
-                            [self showNoNetView];
+                             [MBProgressHUD showError:errorMsg];
                         });
      }];
 
@@ -111,27 +126,31 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell=nil;
-    NSLog(@"%d,%d",indexPath.section,indexPath.row);
+   // NSLog(@"%d,%d",indexPath.section,indexPath.row);
     if(indexPath.section==0){
          cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
        
         
         switch (indexPath.row) {
             case 0:
-                cell.textLabel.text=@"相册名称";
-                cell.detailTextLabel.text=dataSource.title;                break;
+                cell.textLabel.text=dataSource_family_list[indexPath.row];
+                cell.detailTextLabel.text=dataSource.title;
+                
+                  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+                break;
             case 1:
-                
-                [cell.imageView sd_setImageWithURL:[NSURL URLWithString:dataSource.herald]];
-                
+                heraldImageView=cell.imageView;
+                  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 
                 [cell.imageView sd_setImageWithURL:[NSURL URLWithString:dataSource.herald ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
                  {}];
-                   cell.textLabel.text=@"封面图片";
+                
+                
+                   cell.textLabel.text=dataSource_family_list[indexPath.row];
 //                cell.detailTextLabel.text=dataSource.herald;
                 break;
             case 2:
-                cell.textLabel.text=@"创建时间";
+                cell.textLabel.text=dataSource_family_list[indexPath.row];
                 cell.detailTextLabel.text=[[dataSource.create_time componentsSeparatedByString:@" "] firstObject];                break;
                 
             default:
@@ -139,6 +158,7 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
         }
         
     }else{
+        //家庭成员
         cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier_members_list"];
         if(cell==nil){
           cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"reuseIdentifier_members_list"];
@@ -148,6 +168,7 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
         cell.textLabel.text=member.family_name;
         cell.detailTextLabel.text=member.tel;
         
+          cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
        
     }
 
@@ -169,15 +190,58 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
 #pragma mark 点击行
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(indexPath.section!=1)return;
     
     
-    //if (customAlertView==nil) {
+    
+    if(indexPath.section==0){
+        if(indexPath.row==2)return;
+        if(indexPath.row==1){
+            //选取照片
+            UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                          initWithTitle:nil
+                                          delegate:self
+                                          cancelButtonTitle:@"取消"
+                                          destructiveButtonTitle:nil
+                                          otherButtonTitles:@"从相册选取", @"拍照",nil];
+            actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+            [actionSheet showInView:self.contentView];
+            return;
+        }
+        
+        UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:dataSource_family_list[indexPath.row] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+       
+        [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+        UITextField *nameField = [alertView textFieldAtIndex:0];
+        
+        
+         alertView.tag=indexPath.section;
+        
+        nameField.placeholder = dataSource_family_list[indexPath.row];
+        
+        switch (indexPath.row) {
+            case 0:
+                
+                nameField.text=dataSource.title;
+                break;
+            case 1:
+                 nameField.text=dataSource.title;
+                 break;
+                
+            default:
+                break;
+        }
+         selectRowIndex=indexPath.row;
+        [alertView show];
+        return;
+    };
+    
+    
+    if (customAlertView==nil) {
          customAlertView = [[UIAlertView alloc] initWithTitle:@"修改" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",@"删除", nil];
         
         [customAlertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        
-   // }
+        customAlertView.tag=indexPath.section;
+    }
    
     UITextField *nameField = [customAlertView textFieldAtIndex:0];
     nameField.placeholder = @"家庭称呼";
@@ -225,16 +289,305 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
                        {
                            
                       [self hidenLoadView];
-                           [self showNoNetView];
+                            [MBProgressHUD showError:errorMsg];
                        });
         
     }];
 
 }
+
+
+#pragma actionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == Number_Zero) {
+        //从相册
+        if ([self isPhotoLibraryAvailable]) {
+            [self localPhoto];
+        }
+    } else if (buttonIndex == Number_One) {
+        //拍照
+        [self openCamera];
+    }
+}
+
+
+#pragma mark - 是否允许打开相册
+- (BOOL)isPhotoLibraryAvailable{
+    return [UIImagePickerController isSourceTypeAvailable:
+            UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+//打开本地相册
+- (void)localPhoto {
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    NSMutableArray *mediaTypes = [[NSMutableArray alloc] init];
+    [mediaTypes addObject:(__bridge NSString *)kUTTypeImage];
+    picker.mediaTypes = mediaTypes;
+    
+    picker.delegate = self;
+    //设置选择后的图片可被编辑
+    //    picker.allowsEditing = true;
+    [self.navigationController presentViewController:picker animated:YES completion:nil];
+}
+
+
+//开始拍照
+- (void)openCamera {
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        picker.delegate = self;
+        //设置选择后的图片可被编辑
+        //        picker.allowsEditing = true;
+        [self.navigationController presentViewController:picker animated:YES completion:nil];
+    } else {
+        //没有相机
+        
+    }
+}
+
+#pragma mark image scale utility
+- (UIImage *)imageByScalingToMaxSize:(UIImage *)sourceImage {
+    if (sourceImage.size.width < ORIGINAL_MAX_WIDTH) return sourceImage;
+    CGFloat btWidth = 0.0f;
+    CGFloat btHeight = 0.0f;
+    if (sourceImage.size.width > sourceImage.size.height) {
+        btHeight = ORIGINAL_MAX_WIDTH;
+        btWidth = sourceImage.size.width * (ORIGINAL_MAX_WIDTH / sourceImage.size.height);
+    } else {
+        btWidth = ORIGINAL_MAX_WIDTH;
+        btHeight = sourceImage.size.height * (ORIGINAL_MAX_WIDTH / sourceImage.size.width);
+    }
+    CGSize targetSize = CGSizeMake(btWidth, btHeight);
+    return [self imageByScalingAndCroppingForSourceImage:sourceImage targetSize:targetSize];
+}
+
+
+- (UIImage *)imageByScalingAndCroppingForSourceImage:(UIImage *)sourceImage targetSize:(CGSize)targetSize {
+    UIImage *newImage = nil;
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = targetSize.width;
+    CGFloat targetHeight = targetSize.height;
+    CGFloat scaleFactor = 0.0;
+    CGFloat scaledWidth = targetWidth;
+    CGFloat scaledHeight = targetHeight;
+    CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
+    if (CGSizeEqualToSize(imageSize, targetSize) == NO)
+    {
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+        
+        if (widthFactor > heightFactor)
+            scaleFactor = widthFactor; // scale to fit height
+        else
+            scaleFactor = heightFactor; // scale to fit width
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor)
+        {
+            thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+        }
+        else
+            if (widthFactor < heightFactor)
+            {
+                thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+            }
+    }
+    UIGraphicsBeginImageContext(targetSize); // this will crop
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.origin = thumbnailPoint;
+    thumbnailRect.size.width  = scaledWidth;
+    thumbnailRect.size.height = scaledHeight;
+    
+    [sourceImage drawInRect:thumbnailRect];
+    
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    if(newImage == nil) NSLog(@"could not scale image");
+    
+    //pop the context to get back to the default
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+//当选择一张图片后进入这里
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    [picker dismissViewControllerAnimated:YES completion:^() {
+        UIImage *portraitImg = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        portraitImg = [self imageByScalingToMaxSize:portraitImg];
+        // present the cropper view controller
+        VPImageCropperViewController *imgCropperVC = [[VPImageCropperViewController alloc] initWithImage:portraitImg cropFrame:CGRectMake(0, 100.0f, self.view.frame.size.width, self.view.frame.size.width) limitScaleRatio:3.0];
+        imgCropperVC.delegate = self;
+        [self presentViewController:imgCropperVC animated:YES completion:^{
+        }];
+    }];
+}
+
+
+#pragma mark - 缩放图片到指定尺寸
+- (UIImage *)compressImage:(UIImage *)imgSrc
+{
+    CGSize size = {99, 99};
+    UIGraphicsBeginImageContext(size);
+    CGRect rect = {{0,0}, size};
+    [imgSrc drawInRect:rect];
+    UIImage *compressedImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return compressedImg;
+}
+
+#pragma mark - VPImageCropperDelegate
+- (void)imageCropper:(VPImageCropperViewController *)cropperViewController didFinished:(UIImage *)editedImage{
+//    
+//    UIImage * image = [self compressImage:editedImage];
+//    
+//    
+    heraldImageView.image=[self compressImage:editedImage];
+    
+    
+    [self uploadImg:^(BOOL isSuccess, NSString *msgStr) {
+        
+
+        
+        if(isSuccess)
+        {
+            dataSource.herald= msgStr;
+           
+            
+            
+            FPMyFamilyPhotoCollectionDomain * saveDomain=[[FPMyFamilyPhotoCollectionDomain alloc]init];
+            saveDomain.uuid=dataSource.uuid;
+            saveDomain.title=dataSource.title;
+            saveDomain.herald=dataSource.herald;
+            
+            [self fpFamilyPhotoCollection_save:saveDomain block:^(BOOL isSuccess, NSString *msgStr) {
+                if(isSuccess){
+                   
+                    
+                    //刷新表格
+                    [_tableView reloadData];
+                }
+                
+            }];
+
+            
+            
+            
+        }
+        else
+        {
+            [[KGHUD sharedHud] hide:self.contentView];
+        }
+    }];
+    
+    
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+        // TO DO
+    }];
+}
+
+- (void)imageCropperDidCancel:(VPImageCropperViewController *)cropperViewController{
+    [cropperViewController dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+//上传头像
+- (void)uploadImg:(void(^)(BOOL isSuccess, NSString * msgStr))block
+{
+    [[KGHttpService sharedService] uploadImg:heraldImageView.image withName:@"file" type:1 success:^(NSString *msgStr) {
+        block(YES, msgStr);
+    } faild:^(NSString *errorMsg) {
+        block(NO, errorMsg);
+    }];
+}
+
+- (void)fpFamilyPhotoCollection_save:(FPMyFamilyPhotoCollectionDomain *) saveDomain block:(void(^)(BOOL isSuccess, NSString * msgStr))block{
+    
+    
+    [self showLoadView];
+    
+    [[KGHttpService sharedService] fpFamilyPhotoCollection_save:saveDomain success:^(NSString *msgStr) {
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^
+                       {
+                           [self hidenLoadView];
+                           [MBProgressHUD showSuccess:@"保存成功!"];
+                           block(true,msgStr);
+                       });
+        
+    } faild:^(NSString *errorMsg) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^
+                       {
+                           
+                           
+                           [self hidenLoadView];
+                           [MBProgressHUD showError:errorMsg];
+                           block(false,errorMsg);
+
+                       });
+        
+    }
+     
+     
+     ];
+
+}
 #pragma mark 窗口的代理方法，用户保存数据
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    
     //当点击了第二个按钮（OK）
-        NSLog(@"%d",buttonIndex);
+    NSLog(@"%d",buttonIndex);
+    //基本信息修改
+    if(alertView.tag ==0 )
+    {
+        
+        if (buttonIndex!=1) return;
+        UITextField *textField= [alertView textFieldAtIndex:0];
+        
+       
+        
+        FPMyFamilyPhotoCollectionDomain * saveDomain=[[FPMyFamilyPhotoCollectionDomain alloc]init];
+        saveDomain.uuid=dataSource.uuid;
+        saveDomain.title=dataSource.title;
+        saveDomain.herald=dataSource.herald;
+        
+        switch (selectRowIndex) {
+            case 0:
+                
+                saveDomain.title=textField.text;
+                break;
+            case 1:
+                saveDomain.herald=textField.text;
+                break;
+                
+            default:
+                break;
+        }
+
+        [self fpFamilyPhotoCollection_save:saveDomain block:^(BOOL isSuccess, NSString *msgStr) {
+            if(isSuccess){
+                dataSource.title=saveDomain.title;
+                dataSource.herald=saveDomain.herald;
+                
+                //刷新表格
+                [_tableView reloadData];
+            }
+           
+        }];
+        
+        return;
+    }//end tag=0
+   
     if (buttonIndex==2) {
         [self fPFamilyMembers_delete];
               return;
@@ -253,9 +606,6 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
    
         member.family_name= textField.text;
         member.tel=textField1.text;
-
-        
-        
          [self showLoadView];
         
         [[KGHttpService sharedService] fPFamilyMembers_save:member success:^(NSString *msgStr) {
@@ -278,7 +628,7 @@ FPMyFamilyPhotoCollectionDomain *dataSource;
                                member.tel=domain_old_tel;
                                
                                [self hidenLoadView];
-                               [self showNoNetView];
+                                [MBProgressHUD showError:errorMsg];
                            });
 
         }
