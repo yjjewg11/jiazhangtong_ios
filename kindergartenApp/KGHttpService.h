@@ -49,7 +49,7 @@
 #import "FPCollegeListDomin.h"
 #import "KGHttpUrl.h"
 #import "FPFamilyInfoDomain.h"
-
+#import "FPFamilyMembers.h"
 
 @interface KGHttpService : NSObject
 
@@ -342,6 +342,10 @@
 - (void)cheakUserJessionID:(NSString *)jid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 
 #pragma mark - 家庭相册模块
+-(void)fpFamilyPhotoCollection_get:(NSString *)uuid  success :(void(^)( FPMyFamilyPhotoCollectionDomain *    domain))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)fPFamilyMembers_save:(FPFamilyMembers *)domain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+- (void)fPFamilyMembers_delete:(NSString *)uuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+
 -(void)getCollegePhotoListWithPageNo:(NSInteger)pageNo success:(void(^)(FPCollegeListDomin *domin))success faild:(void(^)(NSString * errorMsg))faild;
 
 -(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild;

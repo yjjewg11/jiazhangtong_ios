@@ -31,6 +31,7 @@
 #import "EnrolStudentsSchoolDomain.h"
 #import "FPCollegeListDomin.h"
 #import "FPCollegePhotoDetailDomin.h"
+#import "FPFamilyMembers.h"
 #import "KGDateUtil.h"
 @implementation KGHttpService
 
@@ -148,7 +149,14 @@
     if([NSJSONSerialization isValidJSONObject:jsonDictionary])
     {
         jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:0 error:nil];
+        
+            NSLog(@"setHTTPBody= %@",[jsonData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]);
     }
+    
+    NSLog(@"POST %@",path);
+
+    
+    
     
     NSURL * url = [NSURL URLWithString:path];
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
@@ -2285,6 +2293,9 @@
     }];
     
 }
+
+
+#pragma  fpFamilyPhotoCollection 家庭相册
 //获取我的家庭相册
 - (void)getMyPhotoCollection:(void(^)(NSArray * datas))success faild:(void(^)(NSString * errorMsg))faild
 {
@@ -2316,6 +2327,80 @@
          [self requestErrorCode:error faild:faild];
      }];
 }
+
+// 家庭相册-保存成员
+- (void)fPFamilyMembers_save:(FPFamilyMembers *)domain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPFamilyMembers/save.json"];
+   
+    
+    [self getServerJson:url params:domain.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+
+// 家庭相册-删除成员
+- (void)fPFamilyMembers_delete:(NSString *)uuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+{
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPFamilyMembers/delete.json?uuid=",uuid];
+    
+    
+    [self getServerJson:url params:nil success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+
+-(void)fpFamilyPhotoCollection_get:(NSString *)uuid  success :(void(^)( FPMyFamilyPhotoCollectionDomain *    domain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+
+   NSString * url=[NSString stringWithFormat:@"%@%@?uuid=%@", [KGHttpUrl getBaseServiceURL], @"rest/fpFamilyPhotoCollection/get.json",uuid];
+    
+    [mgr GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues: responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         //         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             FPMyFamilyPhotoCollectionDomain * domain=[FPMyFamilyPhotoCollectionDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+             
+             NSArray *datas = [FPFamilyMembers objectArrayWithKeyValuesArray:[responseObject objectForKey:@"members_list"]];
+             domain.members_list=datas;
+//
+//
+             success(domain);
+             //             FPMyFamilyPhotoCollectionDomain * domain = datas[0];
+             //
+             //             success(domain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 //获取家庭相册列表
 -(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild
 {

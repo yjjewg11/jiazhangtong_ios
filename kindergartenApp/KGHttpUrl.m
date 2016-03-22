@@ -94,6 +94,13 @@
 
 @implementation KGHttpUrl
 
+
++ (NSString *)getBaseServiceURL{
+    return baseServiceURL;
+}
++ (NSString *)getFullUrl:(NSString *) businessURL{
+     return URL(baseServiceURL, businessURL);
+}
 //首页动态菜单
 + (NSString *)getDynamicMenuUrl {
     return URL(baseServiceURL, dynamicMenuURL);

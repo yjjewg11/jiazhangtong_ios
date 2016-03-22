@@ -283,6 +283,9 @@
 		04D288791C9E915F00D12BEF /* SIMenuTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288621C9E915F00D12BEF /* SIMenuTable.m */; };
 		04D2887A1C9E915F00D12BEF /* SINavigationMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288641C9E915F00D12BEF /* SINavigationMenuView.m */; };
 		04D2887B1C9E915F00D12BEF /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288661C9E915F00D12BEF /* UIColor+Extension.m */; };
+		04D2887F1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2887D1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m */; };
+		04D288801CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D2887E1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib */; };
+		04D288881CA11FE100D12BEF /* FPFamilyMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288871CA11FE100D12BEF /* FPFamilyMembers.m */; };
 		04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D5D30B1C47927D005399D9 /* libZXingObjC.a */; };
 		04E606351C4897E100AEE9DD /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E606331C4897E100AEE9DD /* HomeVC.m */; };
 		04E606361C4897E100AEE9DD /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E606341C4897E100AEE9DD /* HomeVC.xib */; };
@@ -1245,6 +1248,11 @@
 		04D288641C9E915F00D12BEF /* SINavigationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINavigationMenuView.m; sourceTree = "<group>"; };
 		04D288651C9E915F00D12BEF /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
 		04D288661C9E915F00D12BEF /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		04D2887C1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFamilyPhotoCollectionDetailTableViewController.h; sourceTree = "<group>"; };
+		04D2887D1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFamilyPhotoCollectionDetailTableViewController.m; sourceTree = "<group>"; };
+		04D2887E1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPFamilyPhotoCollectionDetailTableViewController.xib; sourceTree = "<group>"; };
+		04D288861CA11FE100D12BEF /* FPFamilyMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFamilyMembers.h; sourceTree = "<group>"; };
+		04D288871CA11FE100D12BEF /* FPFamilyMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFamilyMembers.m; sourceTree = "<group>"; };
 		04D5D30B1C47927D005399D9 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
 		04E606321C4897E100AEE9DD /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		04E606331C4897E100AEE9DD /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
@@ -2928,6 +2936,28 @@
 			path = images;
 			sourceTree = "<group>";
 		};
+		04D288821CA1085F00D12BEF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				04D288831CA1087100D12BEF /* New Group */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		04D288831CA1087100D12BEF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		04D288841CA1088100D12BEF /* FPFamilyPhotoCollectionDetail */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = FPFamilyPhotoCollectionDetail;
+			sourceTree = "<group>";
+		};
 		04E606311C4897B900AEE9DD /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -2961,10 +2991,11 @@
 		04F151651C45FECD00E80B3E /* FamilyPhoto(家庭相册) */ = {
 			isa = PBXGroup;
 			children = (
+				04F936CC1C4CE71F00116D86 /* view */,
+				04D288821CA1085F00D12BEF /* New Group */,
 				04F410E11C5A0FB700407C10 /* picker */,
 				04FEB70F1C507F8E00DABA93 /* dao */,
 				04F936CD1C4CE72300116D86 /* model */,
-				04F936CC1C4CE71F00116D86 /* view */,
 				04F936CB1C4CE71900116D86 /* controller */,
 			);
 			name = "FamilyPhoto(家庭相册)";
@@ -3502,6 +3533,9 @@
 				04EAA3A51C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.h */,
 				04EAA3A61C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.m */,
 				04EAA3A71C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.xib */,
+				04D2887C1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.h */,
+				04D2887D1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m */,
+				04D2887E1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3509,6 +3543,7 @@
 		04F936CC1C4CE71F00116D86 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				04D288841CA1088100D12BEF /* FPFamilyPhotoCollectionDetail */,
 				0449A34C1C4F77AA0066ABBB /* collCell */,
 				0449A3481C4F73DA0066ABBB /* layout */,
 				0449A3471C4F73410066ABBB /* HomeView */,
@@ -3550,6 +3585,8 @@
 				04F8F62A1C7AAF94006929F2 /* FPTimeLineCommentDomain.h */,
 				04F8F62B1C7AAF94006929F2 /* FPTimeLineCommentDomain.m */,
 				045C5B991C84190D0097AF4F /* FPMyFamilyPhotoListColletion.h */,
+				04D288861CA11FE100D12BEF /* FPFamilyMembers.h */,
+				04D288871CA11FE100D12BEF /* FPFamilyMembers.m */,
 				045C5B9A1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m */,
 				045C5BA11C8434610097AF4F /* FPCollegeListDomin.h */,
 				045C5BA21C8434610097AF4F /* FPCollegeListDomin.m */,
@@ -6061,6 +6098,7 @@
 				0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */,
 				04A4DE8F1BF484DF002ABBB1 /* shareviewhead_bg.png in Resources */,
 				04D288721C9E915F00D12BEF /* arrow_down1.png in Resources */,
+				04D288801CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib in Resources */,
 				04A4DE4A1BF484DF002ABBB1 /* adsmogo_close@2x.png in Resources */,
 				04D288671C9E915F00D12BEF /* Default-568h@2x.png in Resources */,
 				24DED4FD1B7CCFD1005BC46E /* StudentOtherInfoViewController.xib in Resources */,
@@ -6148,6 +6186,7 @@
 				2489B6621B5AB49E00039E70 /* UIButton+WebCache.m in Sources */,
 				045C5B981C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m in Sources */,
 				04FABBFE1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m in Sources */,
+				04D2887F1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m in Sources */,
 				0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */,
 				F4E6B2451B6B59960087EAEB /* GiftwareArticlesViewController.m in Sources */,
 				24AA0B461B690F4300DAC03B /* UUMessageContentButton.m in Sources */,
@@ -6186,6 +6225,7 @@
 				04F903AA1C56795C0040629F /* AFURLConnectionOperation.m in Sources */,
 				F4DF3BAB1B78B05A001D9DF7 /* TimetableItemView.m in Sources */,
 				2469E2131B5B5E45004888A4 /* LoginRespDomain.m in Sources */,
+				04D288881CA11FE100D12BEF /* FPFamilyMembers.m in Sources */,
 				4D5CE7821B7E4368002F1088 /* SettingViewCell.m in Sources */,
 				4D5CE7801B7E4368002F1088 /* PushNotificationTableViewCell.m in Sources */,
 				04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */,

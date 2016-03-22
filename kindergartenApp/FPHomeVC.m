@@ -33,7 +33,7 @@
 #import "UIImageView+WebCache.h"
 
 #import "SINavigationMenuView.h"
-
+#import "FPFamilyPhotoCollectionDetailTableViewController.h"
 
 #define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
 
@@ -523,7 +523,11 @@ NSInteger localDBlimit=50;
         };
         //家庭相册修改
         sonView.pushAlbunInfo = ^{
-            [weakSelf.navigationController pushViewController:[[FPCollectionVC alloc]init] animated:YES];
+            
+            FPFamilyPhotoCollectionDetailTableViewController * fPFamilyPhotoCollectionDetailTableViewController=[[FPFamilyPhotoCollectionDetailTableViewController alloc]init];
+            [fPFamilyPhotoCollectionDetailTableViewController loadLoadByUuid:[FPHomeVC getFamily_uuid]];
+            
+            [weakSelf.navigationController pushViewController:fPFamilyPhotoCollectionDetailTableViewController animated:YES];
         };
         
         sonView.origin = CGPointMake(0, -132);

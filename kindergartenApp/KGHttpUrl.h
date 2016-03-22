@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface KGHttpUrl : NSObject
-
+//服务器地址
++ (NSString *)getBaseServiceURL;
+//根据相对路径获取全路径
++ (NSString *)getFullUrl:(NSString *) businessURL;
 //首页动态菜单
 + (NSString *)getDynamicMenuUrl;
 
