@@ -517,13 +517,15 @@ NSInteger localDBlimit=50;
         //回调
         sonView.pushUpLoad = ^{
             [weakSelf.navigationController pushViewController:[[FPUploadVC alloc]init]  animated:YES];
+            [sonView setHidden:true];
         };
         sonView.pushCollege = ^{
             [weakSelf.navigationController pushViewController:[[FPCollectionVC alloc]init] animated:YES];
+             [sonView setHidden:true];
         };
         //家庭相册修改
         sonView.pushAlbunInfo = ^{
-            
+             [sonView setHidden:true];
             FPFamilyPhotoCollectionDetailTableViewController * fPFamilyPhotoCollectionDetailTableViewController=[[FPFamilyPhotoCollectionDetailTableViewController alloc]init];
             [fPFamilyPhotoCollectionDetailTableViewController loadLoadByUuid:[FPHomeVC getFamily_uuid]];
             

@@ -173,6 +173,10 @@
         NSString * responseString = nil;
         NSURLResponse * theResponse =[[NSURLResponse alloc]init];
         NSData * data = [NSURLConnection sendSynchronousRequest:request returningResponse:&theResponse error:&errorReturned];
+        
+        
+        NSLog(@"Response= %@",[[NSString alloc] initWithData:data
+                                                       encoding:NSUTF8StringEncoding]);
         dispatch_queue_t mainQueue = dispatch_get_main_queue();
         
         if (errorReturned) {
@@ -2391,6 +2395,13 @@
     
     [mgr GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
+         
+         
+         NSDictionary *responseObjectDic=responseObject;
+         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil];
+         NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                      encoding:NSUTF8StringEncoding];
+         NSLog(@"responseObject= %@",jsonString);
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues: responseObject];
          [self sessionTimeoutHandle:baseDomain];
          

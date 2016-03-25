@@ -59,5 +59,7 @@
 + (NSDate *)getLocalDate;
 
 + (NSString *)getLocalDateStr;
++ (NSString *)getDateStrByNSDate: (NSDate *)date;
++ (NSString *)getDateStrByNSDate: (NSDate *)date format:(NSString *)formatStr;
 
 @end

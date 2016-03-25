@@ -18,17 +18,30 @@
 #import "DBNetDaoService.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface FPImagePickerSelectVC () <UICollectionViewDataSource,UICollectionViewDelegate>
+#import "PickImgDayHeadView.h"
+
+#import "KGDateUtil.h"
+@interface FPImagePickerSelectVC () <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,PickImgDayHeadViewDelegate,FPImagePickerImageCellDelegate>
 {
     UICollectionView * _collectionView;
+    //照片数组加分组(日期分组）[groupInd,childInd]
+    NSMutableArray * dataSourceGroup;
+    //照片数组加分组（分组包含的数据）
     
-    NSMutableArray * _domains;
+    NSMutableDictionary * dataSourceGroupChildMap;
+ 
+    //选中的照片集合
+    NSMutableSet * _selectIndexPath;
+    UIButton *_rightBarBtnselectAllImg;
     
-    NSMutableDictionary * _selectIndexPath;
+    //全选日期集合。
+    NSMutableSet * _selectHeaderdate;
     
     FPImagePickerSelectBottomView * _bottomView;
     
     DBNetDaoService * _service;
+    //全选
+    BOOL isAllChecked;
 }
 
 @end
@@ -45,8 +58,11 @@ static NSString *const ImageCell = @"ImageCellID";
     
     self.title = @"选择图片";
     
-    _selectIndexPath = [NSMutableDictionary dictionary];
-    
+    _selectIndexPath = [[NSMutableSet alloc]init];
+    _selectHeaderdate= [[NSMutableSet alloc]init];
+    dataSourceGroup=[NSMutableArray array];
+    dataSourceGroupChildMap=[[NSMutableDictionary alloc] init];
+    [self initNavigationBar];
     [self createBottomView];
     
     //处理数据
@@ -55,17 +71,69 @@ static NSString *const ImageCell = @"ImageCellID";
     [self initCollectionView];
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(selectPhoto:) name:@"selectphoto" object:nil];
-    [center addObserver:self selector:@selector(deSelectPhoto:) name:@"deselectphoto" object:nil];
+//    [center addObserver:self selector:@selector(selectPhoto:) name:@"selectphoto" object:nil];
+//    [center addObserver:self selector:@selector(deSelectPhoto:) name:@"deselectphoto" object:nil];
+//
     [center addObserver:self selector:@selector(showBigPhoto:) name:@"showbigphoto" object:nil];
     [center addObserver:self selector:@selector(popSelf) name:@"endselect" object:nil];
 }
 
+-(void)selectAllImg{
+    
+    if(isAllChecked==YES){
+        
+        [_rightBarBtnselectAllImg setBackgroundImage:[UIImage imageNamed:@"icon_image_yes"] forState:UIControlStateNormal];
+
+       
+        isAllChecked=NO;
+
+       
+        
+    }else{
+        
+        [_rightBarBtnselectAllImg setBackgroundImage:[UIImage imageNamed:@"icon_image_no"] forState:UIControlStateNormal];
+
+        
+        isAllChecked=YES;
+   }
+    
+    for (NSString *sname in dataSourceGroup)
+    {
+      [self clickAction_selImg:sname checked:isAllChecked];
+    }
+//    [_collectionView reloadData];
+}
+
+-(void) initNavigationBar{
+    
+  
+    
+     _rightBarBtnselectAllImg = [[UIButton alloc] initWithFrame:CGRectMake(0,0,30,30)];
+    
+    [_rightBarBtnselectAllImg setBackgroundImage:[UIImage imageNamed:@"icon_image_no"] forState:UIControlStateNormal];
+    [_rightBarBtnselectAllImg addTarget:self action:@selector(selectAllImg) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    
+//    
+//    [btn2 addTarget:self action:@selector(showSonView) forControlEvents:UIControlEventTouchUpInside];
+//    
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightBarBtnselectAllImg];
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    
+    return CGSizeMake(APPWINDOWWIDTH,50);
+
+}
 - (void)initCollectionView
 {
     if (_collectionView == nil)
     {
-        FPImagePickerSelectLayout * layout = [[FPImagePickerSelectLayout alloc] init];
+//        
+//        FPImagePickerSelectLayout * layout = [[FPImagePickerSelectLayout alloc] init];
+//
+        UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 49 - 64) collectionViewLayout:layout];
         _collectionView.dataSource = self;
@@ -73,32 +141,100 @@ static NSString *const ImageCell = @"ImageCellID";
         _collectionView.delegate = self;
         [_collectionView registerNib:[UINib nibWithNibName:@"FPImagePickerImageCell" bundle:nil] forCellWithReuseIdentifier:ImageCell];
         
-        [self.view addSubview:_collectionView];
+        
+        UINib *headerNib = [UINib nibWithNibName:NSStringFromClass([PickImgDayHeadView class])  bundle:[NSBundle mainBundle]];
+        [_collectionView registerNib:headerNib  forSupplementaryViewOfKind :UICollectionElementKindSectionHeader  withReuseIdentifier: @"PickImgDayHeadView" ];  //注册加载头
+        
+//        
+//        [_collectionView registerClass:[PickImgDayHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PickImgDayHeadView"];
+//        
+        
+        //代码控制header和footer的显示
+       UICollectionViewFlowLayout *collectionViewLayout = (UICollectionViewFlowLayout *)_collectionView.collectionViewLayout;
+               [self.view addSubview:_collectionView];
     }
 }
 
+
+- (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableview = nil;
+//    NSLog(@"viewForSupplementaryElementOfKind,%d,%d",indexPath.section,indexPath.row);
+  
+    
+       if (kind == UICollectionElementKindSectionHeader)
+    {
+     
+        
+        PickImgDayHeadView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PickImgDayHeadView" forIndexPath:indexPath];
+        NSString * sname=dataSourceGroup[indexPath.section];
+        [headerView setData:sname checked:[_selectHeaderdate containsObject:sname]];
+        headerView.delegate=self;
+        return headerView;
+        
+    }
+    
+    //    if (kind == UICollectionElementKindSectionFooter)
+    //    {
+    //        RecipeCollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
+    //
+    //        reusableview = footerview;
+    //    }
+    
+    reusableview.backgroundColor = [UIColor redColor];
+    
+    return reusableview;
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     FPImagePickerImageCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ImageCell forIndexPath:indexPath];
     
-    cell.index = indexPath.row;
+    //NSIndexPath是一个对象，记录了组和行信息
+    NSLog(@"生成单元格(组：%i,行%i)",indexPath.section,indexPath.row);
+    NSString * groupName=dataSourceGroup[indexPath.section];
+    if(groupName==nil) return nil;
+    NSArray *arr=[dataSourceGroupChildMap objectForKey:groupName];
+    FPImagePickerImageDomain *tmp= arr[indexPath.row];
     
-    [cell setData:_domains[indexPath.row]];
-    
+    [cell setData:tmp];
+    cell.delegate=self;
     return cell;
 }
-
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+        return dataSourceGroup.count;
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _domains.count;
+    
+    NSString * groupName=dataSourceGroup[section];
+    if(groupName==nil) return nil;
+    NSArray *arr=[dataSourceGroupChildMap objectForKey:groupName];
+    
+    return arr.count;
+//    return _domains.count;
+}
+#pragma mark --UICollectionViewDelegateFlowLayout
+
+//定义每个Item 的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    float quter = (self.view.frame.size.width - 5) / 4 - 9;
+    
+    return CGSizeMake(quter, quter);
+}
+//定义每个UICollectionView 的 margin
+-(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(5, 5, 5, 5);
 }
 
 - (void)execDatas
 {
-    _domains = [NSMutableArray array];
+    
+    //从数据库获取数据，判断是否有已导入图片
+    NSMutableArray * marr = [_service queryLocalImg];
     
     NSLog(@"总共有:%d张",self.totalCount);
-    
     [self.group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop)
     {
         if (index < self.totalCount)
@@ -107,6 +243,15 @@ static NSString *const ImageCell = @"ImageCellID";
             
             if ([type isEqualToString:ALAssetTypePhoto])
             {
+                NSDate * createDate= [result valueForProperty:@"ALAssetPropertyDate"];
+
+                
+                NSString *sectionName = [KGDateUtil getDateStrByNSDate:createDate format:@"yyyy-MM-dd"];
+                //                 NSString *sectionName= [[domain.create_time componentsSeparatedByString:@" "] firstObject];
+                
+                NSMutableArray *  tmp= [dataSourceGroupChildMap objectForKey:sectionName];
+                
+                
                 NSURL * localUrl = [[result defaultRepresentation] url];
                 FPImagePickerImageDomain * imgDomain = [[FPImagePickerImageDomain alloc] init];
                 imgDomain.localUrl = localUrl;
@@ -114,7 +259,34 @@ static NSString *const ImageCell = @"ImageCellID";
                 imgDomain.dateStr = [result valueForProperty:@"ALAssetPropertyDate"];
                 imgDomain.isUpload = NO;
                 imgDomain.isSelect = NO;
-                [_domains addObject:imgDomain];
+                
+                
+                if ([marr containsObject:[localUrl absoluteString]])
+                {
+                    imgDomain.isUpload = YES;
+                }
+                else
+                {
+                    imgDomain.isUpload = NO;
+                }
+                
+//                [_domains addObject:imgDomain];
+                
+                
+                
+                //分组数据转换
+                if(tmp==nil){
+                    tmp=[NSMutableArray array];
+                    [dataSourceGroup addObject:sectionName];
+                    
+                     [tmp addObject:imgDomain];
+                    
+                    [dataSourceGroupChildMap setObject:tmp forKey:sectionName];
+                
+                }else{
+                     [tmp addObject:imgDomain];
+                }
+                
                 
                 if (index + 1 == self.totalCount)
                 {
@@ -123,21 +295,16 @@ static NSString *const ImageCell = @"ImageCellID";
             }
         }
     }];
+   
     
-    //从数据库获取数据，判断是否有已导入图片
-    NSMutableArray * marr = [_service queryLocalImg];
-    
-    for (FPImagePickerImageDomain * domain in _domains)
-    {
-        if ([marr containsObject:[domain.localUrl absoluteString]])
-        {
-            domain.isUpload = YES;
-        }
-        else
-        {
-            domain.isUpload = NO;
-        }
-    }
+    // 降序
+    // K --> A
+    [dataSourceGroup sortUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
+        NSString *str1=(NSString *)obj1;
+        NSString *str2=(NSString *)obj2;
+        return [str2 compare:str1];
+    }];
+
 }
 
 #pragma mark - 创建下面确定view
@@ -153,44 +320,33 @@ static NSString *const ImageCell = @"ImageCellID";
 }
 
 #pragma mark - 通知方法
-- (void)selectPhoto:(NSNotification *)noti
-{
-    NSInteger index = [noti.object integerValue];
-    
-    ((FPImagePickerImageDomain *)_domains[index]).isSelect = YES;
-    
-    FPImagePickerImageDomain * d = _domains[index];
-    
-    [_selectIndexPath setObject:d.localUrl forKey:[NSString stringWithFormat:@"%ld",(long)index]];
-    
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
-    });
-}
+//- (void)selectPhoto:(NSNotification *)noti
+//{
+//    NSInteger index = [noti.object integerValue];
+//    
+//    ((FPImagePickerImageDomain *)_domains[index]).isSelect = YES;
+//    
+//    FPImagePickerImageDomain * d = _domains[index];
+//    
+//    [_selectIndexPath setObject:nil forKey:[NSString stringWithFormat:@"%ld",(long)index]];
+//    
+//    dispatch_async(dispatch_get_main_queue(), ^
+//    {
+//       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
+//    });
+//}
 
-- (void)deSelectPhoto:(NSNotification *)noti
-{
-    NSInteger index = [noti.object integerValue];
-    
-    ((FPImagePickerImageDomain *)_domains[index]).isSelect = NO;
-    
-    [_selectIndexPath removeObjectForKey:[NSString stringWithFormat:@"%ld",(long)index]];
-    
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
-    });
-}
+
+
 
 - (void)showBigPhoto:(NSNotification *)noti
 {
-    NSInteger index = [noti.object integerValue];
-    FPImagePickerImageDomain * d = _domains[index];
+    //NSInteger index = [noti.object integerValue];
+    NSString *localUrl = [noti.userInfo objectForKey:@"localUrl"];
     
     __weak typeof(self) wkself = self;
     
-    [[FPUploadVC defaultAssetsLibrary] assetForURL:d.localUrl resultBlock:^(ALAsset *asset)
+        [[FPUploadVC defaultAssetsLibrary] assetForURL:[NSURL URLWithString:localUrl] resultBlock:^(ALAsset *asset)
     {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -201,6 +357,8 @@ static NSString *const ImageCell = @"ImageCellID";
             PhotoLargerViewController *photo = [[PhotoLargerViewController alloc] init];
             //UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:photo];
             [photo setUploadImages:array selectedIndex:0];
+            
+            
             [wkself presentViewController:photo animated:YES completion:^
             {
                 
@@ -216,13 +374,13 @@ static NSString *const ImageCell = @"ImageCellID";
 #pragma mark - 确定选择
 - (void)popSelf
 {
-    //得到词典中所有value值
-    NSEnumerator * enumeratorObject = [_selectIndexPath objectEnumerator];
+    //得到词典中所有key值
+   // NSEnumerator * enumeratorObject = [_selectIndexPath keyEnumerator];
     
     NSMutableArray * urlArr = [NSMutableArray array];
     NSMutableArray * urlStrArr = [NSMutableArray array];
     
-    for (NSURL *urls in enumeratorObject)
+    for (NSURL *urls in _selectIndexPath)
     {
         [urlArr addObject:urls];
         [urlStrArr addObject:[urls absoluteString]];
@@ -251,6 +409,58 @@ static NSString *const ImageCell = @"ImageCellID";
     NSLog(@"select delloc");
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+#pragma PickImgDayHeadViewDelegate
+-(void)clickAction_selImg:(NSString *)sectionName checked:(Boolean ) checked
+{
+     NSUInteger section =[dataSourceGroup indexOfObject:sectionName];
+    if(checked==YES){
+         [_selectHeaderdate addObject:sectionName];
+    }else{
+         [_selectHeaderdate removeObject:sectionName];
+    }
+   
+    if(section == NSNotFound){
+        return;
+    }else{
+        //找到了
+    }
+    NSMutableArray *childArr=[dataSourceGroupChildMap objectForKey:sectionName];
+    if(childArr.count==0)return;
+    NSMutableArray<NSIndexPath *> *indexPaths=[NSMutableArray array];
+    for (int i=0;i<childArr.count; i++ ) {
+        FPImagePickerImageDomain * tmp=childArr[i];
+        if(tmp.isUpload==YES){
+            continue;
+        }
+        tmp.isSelect = checked;
+        
+        
+        NSIndexPath * path= [NSIndexPath indexPathForItem:i inSection:section];
+        [indexPaths addObject:path];
+            //添加到选择框
+        [self updateSelectedStatus:childArr[i]];
+        
+        //- (void)reloadItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+    }
+    //批量更新
+    [_collectionView reloadItemsAtIndexPaths:indexPaths];
+}
 
+#pragma FPImagePickerImageCellDelegate
+-(void)updateSelectedStatus:(FPImagePickerImageDomain *)domain{
+    if(domain.isSelect==YES){
+        
+        [_selectIndexPath addObject:domain.localUrl];
+        
+    }else{
+        [_selectIndexPath removeObject:domain.localUrl];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
+                   });
+
+}
 
 @end

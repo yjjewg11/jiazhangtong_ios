@@ -137,6 +137,15 @@
  开始执行初始化上传进度表，和开始上传。
  */
 - (void)startDoUploadTable{
+    
+    NSString *countStr=[NSString stringWithFormat:@"%d",_dataArrs.count];
+    
+
+    //通知主页时光轴有数据更新
+    NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:countStr userInfo:nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:noti1];
+    
     if(_dataArrs.count>0){
     //找到第一个等待状态的数据开始上传。
         for (int i=0;i<_dataArrs.count;i++) {
@@ -334,12 +343,7 @@
             [self startDoUploadTable];
         });
         
-        NSString *countStr=[NSString stringWithFormat:@"%d",_dataArrs.count];
         
-        //通知主页时光轴有数据更新
-        NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:countStr userInfo:nil];
-        
-        [[NSNotificationCenter defaultCenter] postNotification:noti1];
         
         
     }

@@ -79,6 +79,8 @@
 		048524CD1BEE322D00DA97BB /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524CC1BEE322D00DA97BB /* libiconv.2.4.0.tbd */; };
 		048524CF1BEE324A00DA97BB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524CE1BEE324A00DA97BB /* libiconv.tbd */; };
 		048524D11BEE326600DA97BB /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524D01BEE326600DA97BB /* libstdc++.tbd */; };
+		048676EC1CA4DBFC00D168D0 /* self.myDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048676EA1CA4DBFC00D168D0 /* self.myDomain.m */; };
+		048676ED1CA4DBFC00D168D0 /* PickImgDayHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */; };
 		048ADD331BD611D600E6E6D0 /* SPTimetableDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD321BD611D600E6E6D0 /* SPTimetableDomain.m */; };
 		048ADD361BD611EB00E6E6D0 /* SPTimetableItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD351BD611EB00E6E6D0 /* SPTimetableItemVO.m */; };
 		048CF1371C23FAEB001A7CB2 /* AddressBooksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1361C23FAEB001A7CB2 /* AddressBooksViewController.xib */; };
@@ -286,6 +288,8 @@
 		04D2887F1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D2887D1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m */; };
 		04D288801CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D2887E1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib */; };
 		04D288881CA11FE100D12BEF /* FPFamilyMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288871CA11FE100D12BEF /* FPFamilyMembers.m */; };
+		04D288AE1CA3864C00D12BEF /* EditFamilyMemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */; };
+		04D288AF1CA3864C00D12BEF /* EditFamilyMemberVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */; };
 		04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D5D30B1C47927D005399D9 /* libZXingObjC.a */; };
 		04E606351C4897E100AEE9DD /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E606331C4897E100AEE9DD /* HomeVC.m */; };
 		04E606361C4897E100AEE9DD /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E606341C4897E100AEE9DD /* HomeVC.xib */; };
@@ -960,6 +964,9 @@
 		048524CC1BEE322D00DA97BB /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		048524CE1BEE324A00DA97BB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		048524D01BEE326600DA97BB /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		048676E91CA4DBFC00D168D0 /* PickImgDayHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickImgDayHeadView.h; sourceTree = "<group>"; };
+		048676EA1CA4DBFC00D168D0 /* self.myDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = self.myDomain.m; sourceTree = "<group>"; };
+		048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickImgDayHeadView.xib; sourceTree = "<group>"; };
 		048ADD311BD611D600E6E6D0 /* SPTimetableDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimetableDomain.h; sourceTree = "<group>"; };
 		048ADD321BD611D600E6E6D0 /* SPTimetableDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTimetableDomain.m; sourceTree = "<group>"; };
 		048ADD341BD611EB00E6E6D0 /* SPTimetableItemVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimetableItemVO.h; sourceTree = "<group>"; };
@@ -1253,6 +1260,9 @@
 		04D2887E1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPFamilyPhotoCollectionDetailTableViewController.xib; sourceTree = "<group>"; };
 		04D288861CA11FE100D12BEF /* FPFamilyMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPFamilyMembers.h; sourceTree = "<group>"; };
 		04D288871CA11FE100D12BEF /* FPFamilyMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPFamilyMembers.m; sourceTree = "<group>"; };
+		04D288AB1CA3864C00D12BEF /* EditFamilyMemberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditFamilyMemberVC.h; sourceTree = "<group>"; };
+		04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFamilyMemberVC.m; sourceTree = "<group>"; };
+		04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditFamilyMemberVC.xib; sourceTree = "<group>"; };
 		04D5D30B1C47927D005399D9 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
 		04E606321C4897E100AEE9DD /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		04E606331C4897E100AEE9DD /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
@@ -2936,26 +2946,18 @@
 			path = images;
 			sourceTree = "<group>";
 		};
-		04D288821CA1085F00D12BEF /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				04D288831CA1087100D12BEF /* New Group */,
-			);
-			name = "New Group";
-			sourceTree = "<group>";
-		};
-		04D288831CA1087100D12BEF /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
-			sourceTree = "<group>";
-		};
 		04D288841CA1088100D12BEF /* FPFamilyPhotoCollectionDetail */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = FPFamilyPhotoCollectionDetail;
+			sourceTree = "<group>";
+		};
+		04D288B01CA442B600D12BEF /* collectionCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = collectionCell;
 			sourceTree = "<group>";
 		};
 		04E606311C4897B900AEE9DD /* Home */ = {
@@ -2992,7 +2994,6 @@
 			isa = PBXGroup;
 			children = (
 				04F936CC1C4CE71F00116D86 /* view */,
-				04D288821CA1085F00D12BEF /* New Group */,
 				04F410E11C5A0FB700407C10 /* picker */,
 				04FEB70F1C507F8E00DABA93 /* dao */,
 				04F936CD1C4CE72300116D86 /* model */,
@@ -3234,6 +3235,9 @@
 				04F411001C5A1EC200407C10 /* FPImagePickerGroupTableCell.h */,
 				04F411011C5A1EC200407C10 /* FPImagePickerGroupTableCell.m */,
 				04F411021C5A1EC200407C10 /* FPImagePickerGroupTableCell.xib */,
+				048676E91CA4DBFC00D168D0 /* PickImgDayHeadView.h */,
+				048676EA1CA4DBFC00D168D0 /* self.myDomain.m */,
+				048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */,
 			);
 			name = tableviewcell;
 			sourceTree = "<group>";
@@ -3536,6 +3540,9 @@
 				04D2887C1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.h */,
 				04D2887D1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m */,
 				04D2887E1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib */,
+				04D288AB1CA3864C00D12BEF /* EditFamilyMemberVC.h */,
+				04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */,
+				04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3543,6 +3550,7 @@
 		04F936CC1C4CE71F00116D86 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				04D288B01CA442B600D12BEF /* collectionCell */,
 				04D288841CA1088100D12BEF /* FPFamilyPhotoCollectionDetail */,
 				0449A34C1C4F77AA0066ABBB /* collCell */,
 				0449A3481C4F73DA0066ABBB /* layout */,
@@ -5799,6 +5807,7 @@
 				04A4DE141BF484DF002ABBB1 /* admogoVideo_20.png in Resources */,
 				04A4DE861BF484DF002ABBB1 /* webview_bar_next_ipad.png in Resources */,
 				04FEDD481C03542700921AC1 /* MySPEndCourseView.xib in Resources */,
+				048676ED1CA4DBFC00D168D0 /* PickImgDayHeadView.xib in Resources */,
 				04A4DE191BF484DF002ABBB1 /* admogoVideo_25.png in Resources */,
 				04F9AC581BFC58C8004DA63D /* MySPAllCourseListCell.xib in Resources */,
 				04A4DE641BF484DF002ABBB1 /* safari@2x.png in Resources */,
@@ -5905,6 +5914,7 @@
 				04A4DE4D1BF484DF002ABBB1 /* adsmogo_rm_closeBtn.png in Resources */,
 				04FB23731C16C7D0009B57E2 /* DiscorveryTypeCell.xib in Resources */,
 				04F9FB9F1BF1A77E00AEFB88 /* UMSocialLocalizable.strings in Resources */,
+				04D288AF1CA3864C00D12BEF /* EditFamilyMemberVC.xib in Resources */,
 				04A4DE111BF484DF002ABBB1 /* admogoVideo_18.png in Resources */,
 				04A4DE8E1BF484DF002ABBB1 /* shareviewfoot_bg.png in Resources */,
 				04F95F5D1C4E2E45000909B1 /* FPHomeSonView.xib in Resources */,
@@ -6356,6 +6366,7 @@
 				24DEC8221B633F2B00C55828 /* DynamicMenuDomain.m in Sources */,
 				0449A3501C4F77C40066ABBB /* FPGiftwarePickerImageCell.m in Sources */,
 				040109B41BF1F8CB00A18622 /* MySPCourseDomain.m in Sources */,
+				04D288AE1CA3864C00D12BEF /* EditFamilyMemberVC.m in Sources */,
 				04FB236E1C16C649009B57E2 /* DiscorveryHomeLayout.m in Sources */,
 				F4DF3BA41B78AC75001D9DF7 /* TimetableViewController.m in Sources */,
 				2489B66D1B5AB49E00039E70 /* SDWebImageManager.m in Sources */,
@@ -6539,6 +6550,7 @@
 				0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */,
 				04BDD6911C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m in Sources */,
 				04FDB4DE1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m in Sources */,
+				048676EC1CA4DBFC00D168D0 /* self.myDomain.m in Sources */,
 				0400211C1C3FA16D005F1D82 /* RouteCell.m in Sources */,
 				04F3D4611BF47FD3007E7AC0 /* CDataScanner_Extensions.m in Sources */,
 				04F8D36E1C116C500098FBAB /* EnrolStudentMySchoolBtnCell.m in Sources */,

@@ -51,7 +51,12 @@
         self.selImg.hidden = NO;
     }
     
-    if (domain.isSelect == YES)
+    [self updateSelImgStatus:self.myDomain.isSelect];
+    
+}
+
+- (void) updateSelImgStatus:(BOOL) checked{
+    if (checked == YES)
     {
         self.selImg.image = [UIImage imageNamed:@"icon_image_yes"];
     }
@@ -63,25 +68,35 @@
 
 - (IBAction)btnClicked:(id)sender
 {
-    if (self.myDomain.isSelect == NO)
-    {
-        NSNotification * noti = [[NSNotification alloc] initWithName:@"selectphoto" object:@(self.index) userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:noti];
-        
-        self.selImg.image = [UIImage imageNamed:@"icon_image_yes"];
-    }
-    else
-    {
-        NSNotification * noti = [[NSNotification alloc] initWithName:@"deselectphoto" object:@(self.index) userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:noti];
-        
-        self.selImg.image = [UIImage imageNamed:@"icon_image_no"];
-    }
+    
+    self.myDomain.isSelect=!self.myDomain.isSelect;
+       [self updateSelImgStatus:self.myDomain.isSelect];
+    
+    [self.delegate updateSelectedStatus:self.myDomain];
+//    
+//    
+//    if (self.myDomain.isSelect == NO)
+//    {
+//        NSNotification * noti = [[NSNotification alloc] initWithName:@"selectphoto" object:@(self.index) userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:noti];
+//        
+//        self.selImg.image = [UIImage imageNamed:@"icon_image_yes"];
+//    }
+//    else
+//    {
+//        NSNotification * noti = [[NSNotification alloc] initWithName:@"deselectphoto" object:@(self.index) userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:noti];
+//        
+//        self.selImg.image = [UIImage imageNamed:@"icon_image_no"];
+//    }
 }
 
 - (void)longPressToDo
 {
-    NSNotification * noti = [[NSNotification alloc] initWithName:@"showbigphoto" object:@(self.index) userInfo:nil];
+    
+    NSString *localUrl = [self.myDomain.localUrl absoluteString];   //url>string
+
+    NSNotification * noti = [[NSNotification alloc] initWithName:@"showbigphoto" object:self userInfo:@{@"localUrl":localUrl}];
     [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
 

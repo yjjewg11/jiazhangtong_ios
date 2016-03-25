@@ -16,23 +16,25 @@
 #import "UIColor+Extension.h"
 #import "HZQDatePickerView.h"
 #import "KGHUD.h"
-
+#import "EditFamilyMemberVC.h"
 
 #define ORIGINAL_MAX_WIDTH 640.0f
 
-@interface FPFamilyPhotoCollectionDetailTableViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate, UIImagePickerControllerDelegate,UIAlertViewDelegate>
-
-@end
-//家庭成员列表
- NSMutableArray * dataSource_members_list;
- NSMutableArray * dataSource_family_list;
-NSMutableArray *dataSourceGroup;
- UITableView *_tableView;
+@interface FPFamilyPhotoCollectionDetailTableViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate, UIImagePickerControllerDelegate,UIAlertViewDelegate,EditFamilyMemberVCDelegate>
+{
+    //家庭成员列表
+    NSMutableArray * dataSource_members_list;
+    NSMutableArray * dataSource_family_list;
+    NSMutableArray *dataSourceGroup;
+    UITableView *_tableView;
     NSString *family_uuid;
-UIAlertView * customAlertView;
-NSInteger selectRowIndex;
-FPMyFamilyPhotoCollectionDomain *dataSource;
-UIImageView * heraldImageView;
+    UIAlertView * customAlertView;
+    NSInteger selectRowIndex;
+    FPMyFamilyPhotoCollectionDomain *dataSource;
+    UIImageView * heraldImageView;
+}
+@end
+
 @implementation FPFamilyPhotoCollectionDetailTableViewController
 
 - (void)loadLoadByUuid:( NSString *) uuid{
@@ -41,7 +43,7 @@ UIImageView * heraldImageView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  self.title = @"我的收藏";
+  self.title = @"家庭相册信息";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -72,20 +74,41 @@ UIImageView * heraldImageView;
         dispatch_async(dispatch_get_main_queue(), ^
                        {
                            [self hidenLoadView];
+                           NSLog(@"1.%@=%@",domain.title,dataSource.title);
                            dataSource=domain;
                            dataSource_members_list=domain.members_list;
+                            NSLog(@"2.%@=%@",domain.title,dataSource.title);
+                           if(_tableView==nil){
+                               //创建一个分组样式的UITableView
+                               _tableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+                               //                           _tableView.allowsSelection=NO;
+                               //设置数据源，注意必须实现对应的UITableViewDataSource协议
+                               _tableView.dataSource=self;
+                               //设置代理
+                               _tableView.delegate=self;
+                               
+                               
+                               
+                               UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, 60)];
+                               footView.backgroundColor = [UIColor clearColor];
+                               
+                               UIButton *sureButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, 60)];
+                               sureButton.backgroundColor = [UIColor clearColor];
+                               //  sureButton.layer.cornerRadius = 2.0f;
+                               sureButton.layer.masksToBounds = YES;
+                               [sureButton setTitle:@"邀请更多亲戚加入" forState:UIControlStateNormal];
+                               [sureButton addTarget:self action:@selector(tableFooterViewButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+                               sureButton.titleLabel.textColor = [UIColor grayColor];
+                               sureButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+                               [footView addSubview:sureButton];
+                               _tableView.tableFooterView = footView;
+                                   [self.view addSubview:_tableView];
+                           }else{
+                               [_tableView reloadData ];
+                           }
+                          
+                       
                            
-                           //创建一个分组样式的UITableView
-                           _tableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-                           
-                           //设置数据源，注意必须实现对应的UITableViewDataSource协议
-                           _tableView.dataSource=self;
-                           //设置代理
-                           _tableView.delegate=self;
-                           [self.view addSubview:_tableView];
-                           
-
-                          // [_tableView reloadData ];
                            
                        });
     }
@@ -102,6 +125,32 @@ UIImageView * heraldImageView;
 
 }
 
+- (void)updateFPFamilyMembers:(FPFamilyMembers *)fPFamilyMembers{
+    if(fPFamilyMembers.uuid==nil ||[fPFamilyMembers.uuid isEqualToString:@""]){
+       //新建 重新获取数据
+        [self initData];
+    }else{
+         [_tableView reloadData];
+    }
+    
+}
+
+- (void)tableFooterViewButtonPressed {
+    NSLog(@"tableFooterViewButtonPressed");
+//
+    
+    EditFamilyMemberVC *editFamilyMemberVC=[[EditFamilyMemberVC alloc]init] ;
+    editFamilyMemberVC.editFamilyMemberVCDelegate=self;
+    editFamilyMemberVC.fPFamilyMembers=[[FPFamilyMembers alloc]init];
+    editFamilyMemberVC.fPFamilyMembers.family_uuid=dataSource.uuid;
+    [self.navigationController pushViewController:editFamilyMemberVC animated:YES];
+    return;
+   
+//
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 5;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -135,6 +184,7 @@ UIImageView * heraldImageView;
             case 0:
                 cell.textLabel.text=dataSource_family_list[indexPath.row];
                 cell.detailTextLabel.text=dataSource.title;
+                    NSLog(@"3.=%@",dataSource.title);
                 
                   cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
                 break;
@@ -223,9 +273,7 @@ UIImageView * heraldImageView;
                 
                 nameField.text=dataSource.title;
                 break;
-            case 1:
-                 nameField.text=dataSource.title;
-                 break;
+           
                 
             default:
                 break;
@@ -236,30 +284,42 @@ UIImageView * heraldImageView;
     };
     
     
-    if (customAlertView==nil) {
-         customAlertView = [[UIAlertView alloc] initWithTitle:@"修改" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",@"删除", nil];
-        
-        [customAlertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        customAlertView.tag=indexPath.section;
-    }
-   
-    UITextField *nameField = [customAlertView textFieldAtIndex:0];
-    nameField.placeholder = @"家庭称呼";
-    
-    UITextField *urlField = [customAlertView textFieldAtIndex:1];
-    [urlField setSecureTextEntry:NO];
-
+    //修改成功列
     
     
-   
-    urlField.placeholder = @"电话号码";
+    EditFamilyMemberVC *editFamilyMemberVC=[[EditFamilyMemberVC alloc]init] ;
+    editFamilyMemberVC.editFamilyMemberVCDelegate=self;
     
-    FPFamilyMembers *member= dataSource_members_list[indexPath.row];
-    nameField.text=member.family_name;
-    urlField.text=member.tel;
-
-    selectRowIndex=indexPath.row;
-    [customAlertView show];
+    
+    
+    editFamilyMemberVC.fPFamilyMembers=dataSource_members_list[indexPath.row];
+    [self.navigationController pushViewController:editFamilyMemberVC animated:YES];
+    
+    return;
+//    if (customAlertView==nil) {
+//         customAlertView = [[UIAlertView alloc] initWithTitle:@"修改" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",@"删除", nil];
+//        
+//        [customAlertView setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+//        customAlertView.tag=indexPath.section;
+//    }
+//   
+//    UITextField *nameField = [customAlertView textFieldAtIndex:0];
+//    nameField.placeholder = @"家庭称呼";
+//    
+//    UITextField *urlField = [customAlertView textFieldAtIndex:1];
+//    [urlField setSecureTextEntry:NO];
+//
+//    
+//    
+//   
+//    urlField.placeholder = @"电话号码";
+//    
+//    FPFamilyMembers *member= dataSource_members_list[indexPath.row];
+//    nameField.text=member.family_name;
+//    urlField.text=member.tel;
+//
+//    selectRowIndex=indexPath.row;
+//    [customAlertView show];
 }
 - (void)fPFamilyMembers_delete{
     
@@ -606,7 +666,12 @@ UIImageView * heraldImageView;
    
         member.family_name= textField.text;
         member.tel=textField1.text;
+        
+        
+        
          [self showLoadView];
+        
+        
         
         [[KGHttpService sharedService] fPFamilyMembers_save:member success:^(NSString *msgStr) {
           

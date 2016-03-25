@@ -272,6 +272,7 @@
 
 + (NSDate *)getLocalDate
 {
+    
     NSDate *date = [NSDate date];
     
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
@@ -280,18 +281,27 @@
     
     return [date dateByAddingTimeInterval: interval];
 }
-
-+ (NSString *)getLocalDateStr
++ (NSString *)getDateStrByNSDate: (NSDate *)date
 {
-    NSDate *date = [NSDate date];
+  
+    return [KGDateUtil getDateStrByNSDate:date format:@"yyyy-MM-dd HH:mm:ss"];
+   
+}
++ (NSString *)getDateStrByNSDate: (NSDate *)date format:(NSString *)formatStr
+{
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
     NSInteger interval = [zone secondsFromGMTForDate:date];
     
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
     format.timeZone = zone;
-    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    format.dateFormat = formatStr;
     
     return [format stringFromDate:[date dateByAddingTimeInterval:interval]];
 }
++ (NSString *)getLocalDateStr
+{
+    NSDate *date = [NSDate date];
+   return [KGDateUtil getDateStrByNSDate: date];
+  }
 
 @end

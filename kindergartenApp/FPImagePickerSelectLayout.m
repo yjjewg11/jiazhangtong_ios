@@ -52,8 +52,11 @@
     CGFloat padding = 10;
     CGFloat itemWidth = (APPWINDOWWIDTH - 4 * padding) / 3;
     CGFloat itemHeight = itemWidth;
-    CGFloat itemX = padding + (padding + itemWidth) * (indexPath.row % 3);
-    CGFloat itemY = padding + (padding + itemWidth) * (indexPath.row / 3);
+    CGFloat itemX = padding + (padding + itemWidth) * (indexPath.row % 3);//0-2
+    
+//    CGFloat itemY = padding + (padding + itemWidth) * (indexPath.row / 3);
+//    
+     CGFloat itemY = padding +_newMaxHeight;//
     
     UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
@@ -82,13 +85,20 @@
     _newMaxHeight = 10;
     
     [self.attrsArray removeAllObjects];
-    NSInteger count = [self.collectionView numberOfItemsInSection:0];
-    for (NSInteger i=0; i<count; i++)
-    {
-        UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+       NSInteger numberOfSections = self.collectionView.numberOfSections;
+    for (NSInteger k=0; k<numberOfSections; k++){
+        NSInteger count = [self.collectionView numberOfItemsInSection:k];
+         _newMaxHeight =_newMaxHeight+50;
         
-        [self.attrsArray addObject:attrs];
+        for (NSInteger i=0; i<count; i++)
+        {
+            UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForRow:i inSection:k]];
+            
+            [self.attrsArray addObject:attrs];
+        }
+
+        
     }
-}
+   }
 
 @end
