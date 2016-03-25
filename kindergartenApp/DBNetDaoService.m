@@ -708,7 +708,7 @@
 #pragma mark - 根据具体某一天日期分页查询图片详情
 - (NSArray *)queryPicDetailByDate:(NSString *)date pageNo:(NSString *)pageNo familyUUID:(NSString *)familyUUID
 {
-    NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 20 offset %ld",date,familyUUID,(long)(([pageNo integerValue]-1) * 20)];
+    NSString * sql = [NSString stringWithFormat:@"SELECT * from fp_photo_item WHERE strftime('%%Y-%%m-%%d',create_time) ='%@' and family_uuid ='%@' limit 100 offset %ld",date,familyUUID,(long)(([pageNo integerValue]-1) * 100)];
     
     NSMutableArray * marr = nil;
     

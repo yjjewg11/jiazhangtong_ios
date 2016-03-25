@@ -81,6 +81,7 @@
 		048524D11BEE326600DA97BB /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524D01BEE326600DA97BB /* libstdc++.tbd */; };
 		048676EC1CA4DBFC00D168D0 /* self.myDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048676EA1CA4DBFC00D168D0 /* self.myDomain.m */; };
 		048676ED1CA4DBFC00D168D0 /* PickImgDayHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */; };
+		048676F21CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 048676F11CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m */; };
 		048ADD331BD611D600E6E6D0 /* SPTimetableDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD321BD611D600E6E6D0 /* SPTimetableDomain.m */; };
 		048ADD361BD611EB00E6E6D0 /* SPTimetableItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD351BD611EB00E6E6D0 /* SPTimetableItemVO.m */; };
 		048CF1371C23FAEB001A7CB2 /* AddressBooksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1361C23FAEB001A7CB2 /* AddressBooksViewController.xib */; };
@@ -967,6 +968,8 @@
 		048676E91CA4DBFC00D168D0 /* PickImgDayHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickImgDayHeadView.h; sourceTree = "<group>"; };
 		048676EA1CA4DBFC00D168D0 /* self.myDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = self.myDomain.m; sourceTree = "<group>"; };
 		048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickImgDayHeadView.xib; sourceTree = "<group>"; };
+		048676EE1CA5358C00D168D0 /* FPLocalDBPhotoPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPLocalDBPhotoPickerVC.h; sourceTree = "<group>"; };
+		048676F11CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPLocalDBPhotoPickerVC.m; sourceTree = "<group>"; };
 		048ADD311BD611D600E6E6D0 /* SPTimetableDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimetableDomain.h; sourceTree = "<group>"; };
 		048ADD321BD611D600E6E6D0 /* SPTimetableDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTimetableDomain.m; sourceTree = "<group>"; };
 		048ADD341BD611EB00E6E6D0 /* SPTimetableItemVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimetableItemVO.h; sourceTree = "<group>"; };
@@ -3178,10 +3181,12 @@
 		04F410F11C5A0FF800407C10 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				048676F11CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m */,
 				04F410E61C5A0FC200407C10 /* FPImagePickerVC.h */,
 				04F410E41C5A0FC200407C10 /* FPImagePickerVC.m */,
 				04F410E71C5A0FC200407C10 /* FPImagePickerSelectVC.h */,
 				046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */,
+				048676EE1CA5358C00D168D0 /* FPLocalDBPhotoPickerVC.h */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -6261,6 +6266,7 @@
 				04FB7CBC1C0DA84000FD3E31 /* SpCourseDetailTableVC.m in Sources */,
 				4D5CE7711B7E4333002F1088 /* SettingViewController.m in Sources */,
 				2489B6681B5AB49E00039E70 /* UIView+WebCacheOperation.m in Sources */,
+				048676F21CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m in Sources */,
 				248B6ABE1B19B53000FCB98F /* QCSlideSwitchDto.m in Sources */,
 				4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */,
 				0449A35A1C4F98430066ABBB /* FPCreateGiftwareVC.m in Sources */,

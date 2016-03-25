@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface FPImagePickerImageDomain : NSObject
-
+@property (strong, nonatomic) NSString * uuid;
 @property (strong, nonatomic) NSURL * localUrl;
 
 @property (assign, nonatomic) BOOL isUpload;
