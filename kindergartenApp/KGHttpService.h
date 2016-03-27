@@ -379,5 +379,7 @@
 - (void)fPPhotoItem_addFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;
 
 - (void)fPPhotoItem_deleteFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;
+- (void)fPMovie_queryMy:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild;
 
+-(void)getByUuid:(NSString *)path  uuid:(NSString *)uuid  success :(void(^)( id     responseObject))success faild:(void(^)(NSString * errorMsg))faild;
 @end

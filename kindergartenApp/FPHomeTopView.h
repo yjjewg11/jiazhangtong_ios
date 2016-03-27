@@ -11,11 +11,19 @@
 
 typedef void(^OnTap)();
 
+@protocol FPHomeTopViewDelegate <NSObject>
+- (void)clickGiftwareBtn;
+
+
+@end
+
 @interface FPHomeTopView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *warningLbl;
+@property id<FPHomeTopViewDelegate> delegate;
 
 - (void)setData:(FPMyFamilyPhotoCollectionDomain *)domain;
+
 
 @property (strong, nonatomic) OnTap pushToMyAlbum;
 

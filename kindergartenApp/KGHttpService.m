@@ -33,6 +33,9 @@
 #import "FPCollegePhotoDetailDomin.h"
 #import "FPFamilyMembers.h"
 #import "KGDateUtil.h"
+#import "FPMoive4QDomain.h"
+
+
 @implementation KGHttpService
 
 + (KGHttpService *)sharedService {
@@ -2431,6 +2434,54 @@
      }];
 }
 
+
+
+
+-(void)getByUuid:(NSString *)path  uuid:(NSString *)uuid  success :(void(^)( id   responseObject))success faild:(void(^)(NSString * errorMsg))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@?uuid=%@", [KGHttpUrl getBaseServiceURL], path,uuid];
+    
+    [mgr GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+
+         
+         NSDictionary *responseObjectDic=responseObject;
+         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil];
+         NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                      encoding:NSUTF8StringEncoding];
+         NSLog(@"responseObject= %@",jsonString);
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues: responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         //         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+//             FPMyFamilyPhotoCollectionDomain * domain=[FPMyFamilyPhotoCollectionDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+//             
+//             NSArray *datas = [FPFamilyMembers objectArrayWithKeyValuesArray:[responseObject objectForKey:@"members_list"]];
+//             domain.members_list=datas;
+             //
+             //
+             success(responseObject);
+             //             FPMyFamilyPhotoCollectionDomain * domain = datas[0];
+             //
+             //             success(domain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+
 //获取家庭相册列表
 -(void)getMyFamilyPhoto:(void(^)(FPMyFamilyPhotoListColletion * domain))success faild:(void(^)(NSString * errorMsg))faild
 {
@@ -2860,4 +2911,36 @@
     }];
 }
 
+
+
+//分页精品相册
+- (void)fPMovie_queryMy:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageInfo.pageNo]};
+    
+      NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/queryMy.json"];
+    ;
+    [[AFAppDotNetAPIClient sharedClient] GET:url
+                                  parameters:dict
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             baseDomain.list.data = [FPMoive4QDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+                                             
+                                             success(baseDomain.list.data);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+//精品文章 end
 @end

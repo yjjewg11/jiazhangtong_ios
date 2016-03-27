@@ -82,6 +82,13 @@
 		048676EC1CA4DBFC00D168D0 /* self.myDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048676EA1CA4DBFC00D168D0 /* self.myDomain.m */; };
 		048676ED1CA4DBFC00D168D0 /* PickImgDayHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */; };
 		048676F21CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 048676F11CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m */; };
+		04873CC21CA6E68D00F01CB4 /* GiftwareListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04873CC01CA6E68D00F01CB4 /* GiftwareListTableViewCell.m */; };
+		04873CC31CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04873CC11CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib */; };
+		04873CC61CA6F11B00F01CB4 /* GiftwareListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04873CC51CA6F11B00F01CB4 /* GiftwareListVC.m */; };
+		04873CC91CA7B31E00F01CB4 /* FPMoive4QDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */; };
+		04873CCD1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04873CCB1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m */; };
+		04873CCE1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04873CCC1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib */; };
+		04873CD11CA7DDFA00F01CB4 /* ShareOpenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04873CD01CA7DDFA00F01CB4 /* ShareOpenVC.m */; };
 		048ADD331BD611D600E6E6D0 /* SPTimetableDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD321BD611D600E6E6D0 /* SPTimetableDomain.m */; };
 		048ADD361BD611EB00E6E6D0 /* SPTimetableItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD351BD611EB00E6E6D0 /* SPTimetableItemVO.m */; };
 		048CF1371C23FAEB001A7CB2 /* AddressBooksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1361C23FAEB001A7CB2 /* AddressBooksViewController.xib */; };
@@ -970,6 +977,18 @@
 		048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickImgDayHeadView.xib; sourceTree = "<group>"; };
 		048676EE1CA5358C00D168D0 /* FPLocalDBPhotoPickerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPLocalDBPhotoPickerVC.h; sourceTree = "<group>"; };
 		048676F11CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPLocalDBPhotoPickerVC.m; sourceTree = "<group>"; };
+		04873CBF1CA6E68D00F01CB4 /* GiftwareListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftwareListTableViewCell.h; sourceTree = "<group>"; };
+		04873CC01CA6E68D00F01CB4 /* GiftwareListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftwareListTableViewCell.m; sourceTree = "<group>"; };
+		04873CC11CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GiftwareListTableViewCell.xib; sourceTree = "<group>"; };
+		04873CC41CA6F11B00F01CB4 /* GiftwareListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GiftwareListVC.h; sourceTree = "<group>"; };
+		04873CC51CA6F11B00F01CB4 /* GiftwareListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GiftwareListVC.m; sourceTree = "<group>"; };
+		04873CC71CA7B31E00F01CB4 /* FPMoive4QDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMoive4QDomain.h; sourceTree = "<group>"; };
+		04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMoive4QDomain.m; sourceTree = "<group>"; };
+		04873CCA1CA7D7B200F01CB4 /* FPGiftwareDetialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPGiftwareDetialVC.h; sourceTree = "<group>"; };
+		04873CCB1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPGiftwareDetialVC.m; sourceTree = "<group>"; };
+		04873CCC1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPGiftwareDetialVC.xib; sourceTree = "<group>"; };
+		04873CCF1CA7DDFA00F01CB4 /* ShareOpenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareOpenVC.h; sourceTree = "<group>"; };
+		04873CD01CA7DDFA00F01CB4 /* ShareOpenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareOpenVC.m; sourceTree = "<group>"; };
 		048ADD311BD611D600E6E6D0 /* SPTimetableDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimetableDomain.h; sourceTree = "<group>"; };
 		048ADD321BD611D600E6E6D0 /* SPTimetableDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTimetableDomain.m; sourceTree = "<group>"; };
 		048ADD341BD611EB00E6E6D0 /* SPTimetableItemVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTimetableItemVO.h; sourceTree = "<group>"; };
@@ -2416,6 +2435,9 @@
 				045C5B9C1C842A040097AF4F /* FPFamilyListCollectionViewCell.h */,
 				045C5B9D1C842A040097AF4F /* FPFamilyListCollectionViewCell.m */,
 				045C5B9E1C842A040097AF4F /* FPFamilyListCollectionViewCell.xib */,
+				04873CBF1CA6E68D00F01CB4 /* GiftwareListTableViewCell.h */,
+				04873CC01CA6E68D00F01CB4 /* GiftwareListTableViewCell.m */,
+				04873CC11CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib */,
 			);
 			name = collCell;
 			sourceTree = "<group>";
@@ -3526,8 +3548,8 @@
 				0449A3441C4F71D40066ABBB /* FPGifrwarePickerVC.h */,
 				0449A3451C4F71D40066ABBB /* FPGifrwarePickerVC.m */,
 				0449A3571C4F98430066ABBB /* FPCreateGiftwareVC.h */,
-				0449A3581C4F98430066ABBB /* FPCreateGiftwareVC.m */,
 				0449A3591C4F98430066ABBB /* FPCreateGiftwareVC.xib */,
+				0449A3581C4F98430066ABBB /* FPCreateGiftwareVC.m */,
 				04FB44D81C59B68900094E67 /* FPTimeLineDetailVC.h */,
 				04FB44D91C59B68900094E67 /* FPTimeLineDetailVC.m */,
 				04FB44DA1C59B68900094E67 /* FPTimeLineDetailVC.xib */,
@@ -3548,6 +3570,11 @@
 				04D288AB1CA3864C00D12BEF /* EditFamilyMemberVC.h */,
 				04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */,
 				04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */,
+				04873CC41CA6F11B00F01CB4 /* GiftwareListVC.h */,
+				04873CC51CA6F11B00F01CB4 /* GiftwareListVC.m */,
+				04873CCA1CA7D7B200F01CB4 /* FPGiftwareDetialVC.h */,
+				04873CCB1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m */,
+				04873CCC1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3605,6 +3632,8 @@
 				045C5BA21C8434610097AF4F /* FPCollegeListDomin.m */,
 				045C5BA41C8435900097AF4F /* FPCollegePhotoDetailDomin.h */,
 				045C5BA51C8435900097AF4F /* FPCollegePhotoDetailDomin.m */,
+				04873CC71CA7B31E00F01CB4 /* FPMoive4QDomain.h */,
+				04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -4610,6 +4639,8 @@
 				F4C0AB8A1B1C39D4007B0E35 /* KGNSStringUtil.m */,
 				F4DCD0ED1B1C2C50007D61CA /* KGDeviceUtil.h */,
 				F4DCD0EE1B1C2C50007D61CA /* KGDeviceUtil.m */,
+				04873CCF1CA7DDFA00F01CB4 /* ShareOpenVC.h */,
+				04873CD01CA7DDFA00F01CB4 /* ShareOpenVC.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -5819,6 +5850,7 @@
 				04A4DE481BF484DF002ABBB1 /* adsmogo_bannerface95.png in Resources */,
 				04F8F6311C7AB410006929F2 /* FPTimeLineCommentCell.xib in Resources */,
 				04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */,
+				04873CCE1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib in Resources */,
 				244F74931B62A4630078D30D /* PostTopicViewController.xib in Resources */,
 				04A4DE3A1BF484DF002ABBB1 /* adsmogo_star.png in Resources */,
 				04A4DE391BF484DF002ABBB1 /* adsmogoshareview_below_arrow@2x.png in Resources */,
@@ -5987,6 +6019,7 @@
 				04F9AC601BFC82D3004DA63D /* MySPAllListHeaderView.xib in Resources */,
 				04F9FB671BF1A67400AEFB88 /* umeng_fb_audio_play_default@2x.png in Resources */,
 				04F9FBA81BF1A77E00AEFB88 /* UMSShareListController.xib in Resources */,
+				04873CC31CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib in Resources */,
 				04A4DE441BF484DF002ABBB1 /* adsmogo_adclose@2x.png in Resources */,
 				04F81C251C158F6A00EE24FF /* NoDataTableViewCell.xib in Resources */,
 				04A4DE081BF484DF002ABBB1 /* admogoVideo_1.png in Resources */,
@@ -6202,6 +6235,7 @@
 				045C5B981C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m in Sources */,
 				04FABBFE1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m in Sources */,
 				04D2887F1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m in Sources */,
+				04873CC91CA7B31E00F01CB4 /* FPMoive4QDomain.m in Sources */,
 				0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */,
 				F4E6B2451B6B59960087EAEB /* GiftwareArticlesViewController.m in Sources */,
 				24AA0B461B690F4300DAC03B /* UUMessageContentButton.m in Sources */,
@@ -6335,6 +6369,7 @@
 				2489B6381B5AB32F00039E70 /* ImageCollectionViewCell.m in Sources */,
 				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
 				04F9FB6D1BF1A67400AEFB88 /* UMPostTableViewCell.m in Sources */,
+				04873CC21CA6E68D00F01CB4 /* GiftwareListTableViewCell.m in Sources */,
 				0449A3551C4F86440066ABBB /* FPGiftwarePickerTakePhotoCell.m in Sources */,
 				F4EC98911B62305700F5721F /* TopicTableViewCell.m in Sources */,
 				04F9C98B1C0ED3970078A5F5 /* EnrolStudentsSchoolDomain.m in Sources */,
@@ -6473,6 +6508,7 @@
 				04F903AF1C56795C0040629F /* README.md in Sources */,
 				046063471BD8D82600CBC881 /* MBProgressHUD+HM.m in Sources */,
 				046063331BD8BE3B00CBC881 /* SPCourseTypeDomain.m in Sources */,
+				04873CCD1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m in Sources */,
 				04D2887B1C9E915F00D12BEF /* UIColor+Extension.m in Sources */,
 				F4EA53921B60EAD20044BE7A /* StudentInfoHeaderView.m in Sources */,
 				F4DCD0EC1B1C2932007D61CA /* UIView+Shadow.m in Sources */,
@@ -6536,10 +6572,12 @@
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
 				04FEEC801C76B7670024FEAF /* FPTimeLineEditVC.m in Sources */,
 				040021131C3F9263005F1D82 /* UIImage+Rotate.m in Sources */,
+				04873CD11CA7DDFA00F01CB4 /* ShareOpenVC.m in Sources */,
 				24AA0B501B69112C00DAC03B /* ChatModel.m in Sources */,
 				2489B6601B5AB49E00039E70 /* MKAnnotationView+WebCache.m in Sources */,
 				2489B65F1B5AB49E00039E70 /* SDImageCache.m in Sources */,
 				F4DF3BA81B78AC97001D9DF7 /* TimetableDomain.m in Sources */,
+				04873CC61CA6F11B00F01CB4 /* GiftwareListVC.m in Sources */,
 				040466B91C434FE100C9EE5C /* RouteDetailVC.mm in Sources */,
 				F4E636071B67939D00800924 /* MessageDomain.m in Sources */,
 				04E606351C4897E100AEE9DD /* HomeVC.m in Sources */,

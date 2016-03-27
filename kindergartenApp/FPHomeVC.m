@@ -34,7 +34,7 @@
 
 #import "SINavigationMenuView.h"
 #import "FPFamilyPhotoCollectionDetailTableViewController.h"
-
+#import "GiftwareListVC.h"
 #define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
@@ -323,10 +323,11 @@ NSInteger localDBlimit=50;
 {
     //自定义的headerview
     FPHomeTopView * view = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTopView" owner:nil options:nil] firstObject];
-   
+    view.delegate=self;
+    
     [view.warningLbl setHidden:YES];
     [view setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
-    view.size = CGSizeMake(APPWINDOWWIDTH, 192);
+    view.size = CGSizeMake(APPWINDOWWIDTH, 235);
     //回调
     view.pushToMyAlbum = ^{
 //        [self.navigationController pushViewController:nil animated:YES];
@@ -1195,6 +1196,12 @@ NSInteger localDBlimit=50;
     return cell;
 }
 
+
+- (void)clickGiftwareBtn{
+    GiftwareListVC *vc=[[GiftwareListVC alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end
 

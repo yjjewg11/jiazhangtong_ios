@@ -22,4 +22,12 @@
 
 @property (strong, nonatomic) id  data;
 
+@property (strong, nonatomic) NSString       * share_url;
+
+@property (assign, nonatomic) NSInteger isFavor;
+@property (assign, nonatomic) NSInteger dianzan_count;
+@property (assign, nonatomic) NSInteger yidianzan;
+
+
+
 @end
