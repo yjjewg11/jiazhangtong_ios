@@ -11,5 +11,5 @@
 @interface FPGiftwareDetialVC : BaseViewController
 
 
-@property (weak, nonatomic)  FPMoive4QDomain *  domain;
+@property (strong, nonatomic)  FPMoive4QDomain *  domain;
 @end

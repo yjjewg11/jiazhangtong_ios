@@ -5,6 +5,7 @@
 //  Created by You on 15/6/1.
 //  Copyright (c) 2015年 funi. All rights reserved.
 //
+#import "BaseReplyDomain.h"
 #import "KGAccountTool.h"
 #import "KGHttpService.h"
 #import "AFAppDotNetAPIClient.h"
@@ -2943,4 +2944,52 @@
 }
 
 //精品文章 end
+
+
+
+//基本保存点赞
+- (void)baseDianzan_save:(NSString *)rel_uuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"/rest/baseDianzan/save.json"];
+    
+    NSDictionary * dic = @{@"type":[NSNumber numberWithInteger:dzype], @"rel_uuid":rel_uuid};
+    
+    [self getServerJson:url params:dic success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+//取消点赞
+- (void)baseDianzan_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSString * url=[NSString stringWithFormat:@"%@/rest/baseDianzan/delete.json?rel_uuid=%@&type=%d", [KGHttpUrl getBaseServiceURL], newsuid,dzype];
+    
+    [self getServerJson:url params:nil success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+
+//保存回复
+- (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"/rest/baseReply/save.json"];
+    
+    
+    [self getServerJson:url params:reply.keyValues success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
 @end

@@ -25,6 +25,7 @@
 		040466BA1C434FE100C9EE5C /* RouteDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040466B81C434FE100C9EE5C /* RouteDetailVC.xib */; };
 		040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040466C41C438FDB00C9EE5C /* RouteDetailInfoCell.m */; };
 		040466C71C438FDB00C9EE5C /* RouteDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040466C51C438FDB00C9EE5C /* RouteDetailInfoCell.xib */; };
+		0405B6C81CAD72E90090863C /* BaseReplyDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6C71CAD72E90090863C /* BaseReplyDomain.m */; };
 		040687171C3E588D002C2196 /* MapVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040687151C3E588D002C2196 /* MapVC.mm */; };
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
@@ -890,6 +891,8 @@
 		040466C31C438FDB00C9EE5C /* RouteDetailInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RouteDetailInfoCell.h; sourceTree = "<group>"; };
 		040466C41C438FDB00C9EE5C /* RouteDetailInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RouteDetailInfoCell.m; sourceTree = "<group>"; };
 		040466C51C438FDB00C9EE5C /* RouteDetailInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteDetailInfoCell.xib; sourceTree = "<group>"; };
+		0405B6C61CAD72E90090863C /* BaseReplyDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyDomain.h; sourceTree = "<group>"; };
+		0405B6C71CAD72E90090863C /* BaseReplyDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyDomain.m; sourceTree = "<group>"; };
 		040687141C3E588D002C2196 /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
 		040687151C3E588D002C2196 /* MapVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapVC.mm; sourceTree = "<group>"; };
 		040687161C3E588D002C2196 /* MapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
@@ -3634,6 +3637,8 @@
 				045C5BA51C8435900097AF4F /* FPCollegePhotoDetailDomin.m */,
 				04873CC71CA7B31E00F01CB4 /* FPMoive4QDomain.h */,
 				04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */,
+				0405B6C61CAD72E90090863C /* BaseReplyDomain.h */,
+				0405B6C71CAD72E90090863C /* BaseReplyDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -6252,6 +6257,7 @@
 				24AA0B451B690F4300DAC03B /* UUMessageCell.m in Sources */,
 				24E036921B750502003381D5 /* ReplyPageDomain.m in Sources */,
 				04F903AC1C56795C0040629F /* AFURLResponseSerialization.m in Sources */,
+				0405B6C81CAD72E90090863C /* BaseReplyDomain.m in Sources */,
 				04FB237F1C16DC67009B57E2 /* MineHomeChildrenCell.m in Sources */,
 				F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,

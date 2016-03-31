@@ -372,10 +372,12 @@
 
 - (void)getFPTimeLineItem:(NSString *)uuid success:(void(^)(FPFamilyPhotoNormalDomain * item))success faild:(void(^)(NSString * errorMsg))faild;
 
+//不用
 - (void)saveFPDZ:(NSString *)newsuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
-
+//不用
 - (void)delFPDZ:(NSString *)newsuid success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
-
+- (void)baseDianzan_save:(NSString *)rel_uuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+- (void)baseDianzan_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 - (void)fPPhotoItem_addFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;
 
 - (void)fPPhotoItem_deleteFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;

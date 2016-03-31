@@ -144,7 +144,7 @@
          domain.reply_count=[responseObjectDic objectForKey:@"reply_count"];
          
          FPGiftwareDetialVC * infoVC = [[FPGiftwareDetialVC alloc] init];
-         
+         infoVC.domain=domain;
          [self.navigationController pushViewController:infoVC animated:YES];
          
      }
