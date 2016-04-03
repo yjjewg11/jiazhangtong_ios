@@ -22,8 +22,9 @@
 #import "KGEmojiManage.h"
 #import "NoDataTableViewCell.h"
 #import "UIButton+Extension.h"
-
-@interface BaseReplyListVCTableView ()<UITableViewDataSource,UITableViewDelegate,UUInputFunctionViewDelegate>{
+#import "BaseReplyListTableViewCell.h"
+#import "BaseReplyListHeaderView.h"
+@interface BaseReplyListVCTableView ()<UITableViewDataSource,UITableViewDelegate,UUInputFunctionViewDelegate,BaseReplyListDataSoruceDelegate>{
     UUInputFunctionView *IFView;
 }
 
@@ -48,7 +49,7 @@
 }
 
 - (id)initWithSuperVC:(UIViewController *)superVC {
-    
+    self.superVC=superVC;
 //    CGFloat y =  Main_Screen_Height/2-30;
     CGRect frame = CGRectMake(0,  0, superVC.view.frame.size.width, superVC.view.frame.size.height);
 ////    CGRect frame = CGRectMake(0, 100, Main_Screen_Width,  Main_Screen_Height/2);
@@ -75,26 +76,12 @@
     
     
     // 设置表视图的头部视图(headView 添加子视图)
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 40)];
-    headerView.backgroundColor = [UIColor redColor];
+    BaseReplyListHeaderView *headerView =  [[[NSBundle mainBundle] loadNibNamed:@"BaseReplyListHeaderView" owner:nil options:nil] firstObject];
     
     
-    UIButton *closeBtn= [[UIButton alloc] initWithFrame:headerView.frame];
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click_CloseBtn:)];
     
-    ////    CGRect frame = CGRectMake(0, 100, Main_Screen_Width,  Main_Screen_Height/2);
-    //
-
-    [closeBtn setText:@"评论列表"];
-    closeBtn.titleLabel.font = [UIFont systemFontOfSize:APPUILABELFONTNO18];
-    [closeBtn setTextColor:[UIColor grayColor] sel:[UIColor redColor]];
-
-    [closeBtn addTarget:self action:@selector(click_CloseBtn) forControlEvents:UIControlEventTouchUpInside];
-    
-    // 添加子视图
-//    UILabel *headText = [[UILabel alloc] initWithFrame:CGRectMake(60, 0, self.frame.size.width, 40)];
-//    headText.text = @"评论列表";
-//    headText.numberOfLines = 0;
-    [headerView addSubview:closeBtn];
+        [headerView addGestureRecognizer:tap];
     _tableView.tableHeaderView = headerView; //设置头部
     _tableView.estimatedRowHeight = 110;
     _tableView.rowHeight = UITableViewAutomaticDimension;
@@ -113,8 +100,13 @@
 
     return self;
 }
-- (void)click_CloseBtn {
-    [self setHidden:YES];
+
+- (void)click_CloseBtn:(UITapGestureRecognizer *)tap {
+   
+    if (tap.state == UIGestureRecognizerStateEnded){
+            [self setHidden:YES];
+    }
+
 }
 //加载底部输入功能View
 - (void)loadInputBtn {
@@ -242,6 +234,8 @@
     {
    
         return 204;
+    }else{
+     //  return  78;
     }
 //    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
 //    // 這裏返回需要的高度
@@ -251,9 +245,9 @@
     
     int row = [indexPath row];
     // 列寬
-    CGFloat contentWidth = self.frame.size.width;
+    CGFloat contentWidth = self.frame.size.width-100;
     // 用何種字體進行顯示
-    UIFont *font = [UIFont systemFontOfSize:14];
+    UIFont *font = [UIFont systemFontOfSize:12];
     // 該行要顯示的內容
     BaseReplyDomain *domain = [self.dataSoure objectAtIndex:row];
     
@@ -264,9 +258,9 @@
     
     
     // 這裏返回需要的高度
-    NSLog(@"height=%f",size.height+54);
+    NSLog(@"height=%f",size.height+58);
     
-    return size.height+54;
+    return size.height+58;
 }
 #pragma mark - Table view data source
 
@@ -298,57 +292,16 @@
         
         return cell1;
     }
-     static NSString *reuse=@"BaseReplyUITableViewCell";
-    UITableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:reuse];
+     static NSString *reuse=@"BaseReplyListTableViewCell";
+    BaseReplyListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:reuse];
     if(cell==nil){
+      cell= [[[NSBundle mainBundle] loadNibNamed:@"BaseReplyListTableViewCell" owner:nil options:nil] firstObject];
        
-         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse];
-        cell.backgroundColor=[UIColor  greenColor];
-    }else{
-        while ([cell.contentView.subviews lastObject] != nil) {
-            [(UIView*)[cell.contentView.subviews lastObject] removeFromSuperview];  //删除并进行重新分配
-        }
     }
-    
-    BaseReplyDomain *domain=self.dataSoure[indexPath.row];
-    
-    
-
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:domain.create_img ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
-     {
-//         NSLog(@"t=%@,domain.create_img=%@",domain.content,domain.create_img);
-     }];
-
-    cell.textLabel.text=domain.create_user;
-    //自动换行，这里最重要
-   cell.detailTextLabel.numberOfLines = 0;
-  
-    
-
-//    cell.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap; //如何换行
-    //Cell中的小箭头
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//      [cell.detailTextLabel setNumberOfLines:3];//可以显示3行
-    cell.detailTextLabel.text=domain.content;
-    if (indexPath.row % 2)
-    {
-        [cell setBackgroundColor:[UIColor colorWithRed:.8 green:.8 blue:1 alpha:1]];
-    }else {
-        [cell setBackgroundColor:[UIColor clearColor]];
-    }
-    [cell setBorderWithWidth:10 color:[UIColor redColor]];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    cell.delegate=self;
+    [cell resetValue:self.dataSoure[indexPath.row] parame:nil];
     
     
-    CGRect  frame=cell.frame;
-    //frame.size.height=120;
-    NSLog(@"cell %ld frame=%f,%f,%f,%f",indexPath.row, frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-    
-    //    frame.origin.y=(indexPath.row+1)*frame.size.height;
-    // [cell setFrame:frame];
-    frame=cell.contentView.frame;
-    NSLog(@"contentView %ld frame=%f,%f,%f,%f",indexPath.row, frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 
     
     return cell;
@@ -357,81 +310,25 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0;
 }
-#pragma loadInputFuniView
-//加载底部输入功能View
-- (void)loadInputFuniView {
-    IFView = [[UUInputFunctionView alloc]initWithSuperVC:self.superVC isShow:YES];
-    IFView.delegate = self;
-    
-    CGRect  frame=IFView.frame;
-    frame.origin.y=self.frame.size.height-40-64;
-  //  frame.size.height=120;
-    NSLog(@"cell frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
 
-    [IFView setFrame:frame];
-    [self addSubview:IFView];
+#pragma BaseReplyListDataSoruceDelegate
+//取消点赞
+- (void)baseReply_delete:(NSString *)newsuid   {
+    [[KGHUD sharedHud] show:self.superVC.view];
     
-    
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardChange:) name:UIKeyboardWillHideNotification object:nil];
-  
-    
+    [[KGHttpService sharedService] baseReply_delete:newsuid type:self.type success:^(NSString *msgStr)
+     {
+         [[KGHUD sharedHud] show:self.superVC.view onlyMsg:msgStr];
+         
+         [self headerRereshing];
+         
+     } faild:^(NSString *errorMsg) {
+         [[KGHUD sharedHud] show:self.superVC.view onlyMsg:errorMsg];
+         
+     }];
 }
 
--(void)keyboardChange:(NSNotification *)notification
-{
-    NSDictionary *userInfo = [notification userInfo];
-    NSTimeInterval animationDuration;
-    UIViewAnimationCurve animationCurve;
-    CGRect keyboardEndFrame;
-    
-    [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&animationCurve];
-    [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] getValue:&animationDuration];
-    [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&keyboardEndFrame];
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    [UIView setAnimationCurve:animationCurve];
-    
-    //adjust ChatTableView's height
-//    if (notification.name == UIKeyboardWillShowNotification) {
-//        self.bottomConstraint.constant = keyboardEndFrame.size.height+40;
-//    }else{
-//        self.bottomConstraint.constant = 40;
-//    }
-    
-//    [self.view layoutIfNeeded];
-    
-    //adjust UUInputFunctionView's originPoint
-    CGRect newFrame = IFView.frame;
-    newFrame.origin.y =  keyboardEndFrame.origin.y - newFrame.size.height ;
-    
-    CGRect frame=newFrame;
-    NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-   // IFView.frame = newFrame;
-    [self setFrame:newFrame];
-    [UIView commitAnimations];
-    
-}
-#pragma mark - InputFunctionViewDelegate
-//delete
-- (void)UUInputFunctionView:(UUInputFunctionView *)funcView sendMessage:(NSString *)message
-{
-    
-    funcView.TextViewInput.text = @"";
 
-    BaseReplyDomain *domain =[[BaseReplyDomain alloc]init];
-    domain.rel_uuid=self.rel_uuid;
-    domain.type=self.type;
-    domain.content=message;
-    [[KGHttpService sharedService]  baseReply_save:domain success:^(NSString *msgStr) {
-        [self headerRereshing];
-    }faild:^(NSString *errorMsg) {
-        [MBProgressHUD showError:@"获取评论列表失败!"];
-
-    }];
-    
-   }
 
 
 @end

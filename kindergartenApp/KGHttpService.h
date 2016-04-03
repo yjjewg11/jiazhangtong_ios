@@ -386,6 +386,7 @@
 - (void)fPMovie_query:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild ;
 -(void)getByUuid:(NSString *)path  uuid:(NSString *)uuid  success :(void(^)( id     responseObject))success faild:(void(^)(NSString * errorMsg))faild;
 
+- (void)baseReply_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 - (void)baseReply_queryByRel_uuid:(NSString *)rel_uuid type:(KGTopicType)dzype  pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(PageInfoDomain * pageInfoDomain))success faild:(void(^)(NSString * errorMsg))faild;
 - (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 @end

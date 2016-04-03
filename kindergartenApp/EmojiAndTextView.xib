@@ -17,7 +17,7 @@
                     <color key="backgroundColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JK-ks-oDs">
-                    <rect key="frame" x="16" y="38" width="250" height="1"/>
+                    <rect key="frame" x="16" y="43" width="250" height="1"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-RZ-NkS">
@@ -45,7 +45,7 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
-                    <rect key="frame" x="49" y="12" width="210" height="20"/>
+                    <rect key="frame" x="49" y="0.0" width="210" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -66,11 +66,11 @@
                 <constraint firstItem="dEP-RZ-NkS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="gxW-se-mTt"/>
                 <constraint firstItem="fBO-fl-lJS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iUF-0H-vOA"/>
                 <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="8" symbolic="YES" id="jRa-Fi-mRZ"/>
-                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="Ihz-YZ-T1j" secondAttribute="bottom" constant="6" id="lb8-JU-Dvh"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="Ihz-YZ-T1j" secondAttribute="bottom" constant="-1" id="lb8-JU-Dvh"/>
                 <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="top" id="oww-rk-qYx"/>
                 <constraint firstItem="IBP-3I-SyI" firstAttribute="firstBaseline" secondItem="dEP-RZ-NkS" secondAttribute="firstBaseline" id="p7o-5o-yPS"/>
-                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" constant="4" id="pJd-2v-Eat"/>
-                <constraint firstAttribute="bottom" secondItem="3JK-ks-oDs" secondAttribute="bottom" constant="5" id="rOc-uc-1Hp"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" constant="9" id="pJd-2v-Eat"/>
+                <constraint firstAttribute="bottom" secondItem="3JK-ks-oDs" secondAttribute="bottom" id="rOc-uc-1Hp"/>
                 <constraint firstItem="IBP-3I-SyI" firstAttribute="leading" secondItem="Ihz-YZ-T1j" secondAttribute="trailing" constant="11" id="rgM-KE-uiS"/>
                 <constraint firstItem="fBO-fl-lJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="snQ-XJ-tIT"/>
                 <constraint firstAttribute="trailing" secondItem="fBO-fl-lJS" secondAttribute="trailing" id="u8U-5q-xjN"/>

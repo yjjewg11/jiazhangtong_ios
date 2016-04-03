@@ -30,6 +30,10 @@
 		0405B6D11CAE68150090863C /* BaseReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6CF1CAE68150090863C /* BaseReplyTableViewCell.m */; };
 		0405B6D21CAE68150090863C /* BaseReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0405B6D01CAE68150090863C /* BaseReplyTableViewCell.xib */; };
 		0405B6D61CB0C1230090863C /* BaseReplyInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6D51CB0C1230090863C /* BaseReplyInputViewController.m */; };
+		0405B6DC1CB0F3AD0090863C /* BaseReplyListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6DA1CB0F3AD0090863C /* BaseReplyListTableViewCell.m */; };
+		0405B6DD1CB0F3AD0090863C /* BaseReplyListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0405B6DB1CB0F3AD0090863C /* BaseReplyListTableViewCell.xib */; };
+		0405B6DF1CB10D210090863C /* BaseReplyListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0405B6DE1CB10D210090863C /* BaseReplyListHeaderView.xib */; };
+		0405B6E21CB10D580090863C /* BaseReplyListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6E11CB10D580090863C /* BaseReplyListHeaderView.m */; };
 		040687171C3E588D002C2196 /* MapVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040687151C3E588D002C2196 /* MapVC.mm */; };
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
@@ -904,6 +908,12 @@
 		0405B6D01CAE68150090863C /* BaseReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseReplyTableViewCell.xib; sourceTree = "<group>"; };
 		0405B6D41CB0C1230090863C /* BaseReplyInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyInputViewController.h; sourceTree = "<group>"; };
 		0405B6D51CB0C1230090863C /* BaseReplyInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyInputViewController.m; sourceTree = "<group>"; };
+		0405B6D91CB0F3AD0090863C /* BaseReplyListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyListTableViewCell.h; sourceTree = "<group>"; };
+		0405B6DA1CB0F3AD0090863C /* BaseReplyListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyListTableViewCell.m; sourceTree = "<group>"; };
+		0405B6DB1CB0F3AD0090863C /* BaseReplyListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseReplyListTableViewCell.xib; sourceTree = "<group>"; };
+		0405B6DE1CB10D210090863C /* BaseReplyListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseReplyListHeaderView.xib; sourceTree = "<group>"; };
+		0405B6E01CB10D580090863C /* BaseReplyListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyListHeaderView.h; sourceTree = "<group>"; };
+		0405B6E11CB10D580090863C /* BaseReplyListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyListHeaderView.m; sourceTree = "<group>"; };
 		040687141C3E588D002C2196 /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
 		040687151C3E588D002C2196 /* MapVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapVC.mm; sourceTree = "<group>"; };
 		040687161C3E588D002C2196 /* MapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
@@ -2394,6 +2404,12 @@
 			children = (
 				0405B6C91CAE66130090863C /* BaseReplyListVCTableView.h */,
 				0405B6CA1CAE66130090863C /* BaseReplyListVCTableView.m */,
+				0405B6D91CB0F3AD0090863C /* BaseReplyListTableViewCell.h */,
+				0405B6DA1CB0F3AD0090863C /* BaseReplyListTableViewCell.m */,
+				0405B6DB1CB0F3AD0090863C /* BaseReplyListTableViewCell.xib */,
+				0405B6DE1CB10D210090863C /* BaseReplyListHeaderView.xib */,
+				0405B6E01CB10D580090863C /* BaseReplyListHeaderView.h */,
+				0405B6E11CB10D580090863C /* BaseReplyListHeaderView.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -4830,7 +4846,6 @@
 				F4E61B721B73432200E5851A /* Share(分享) */,
 				2474DFB91B6CCDD80021506F /* Recipes(食谱) */,
 				2474DFA81B6CB7AA0021506F /* SignRecord(签到记录) */,
-				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
 				24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */,
 				F47AFEAA1B5E22C100D43F38 /* Announcement(公告) */,
 				2489B6751B5ABA6C00039E70 /* AddressBooks(通讯录) */,
@@ -5158,6 +5173,7 @@
 		24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */ = {
 			isa = PBXGroup;
 			children = (
+				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
 				24DE91AD1B67C22200D3FFCE /* Controller */,
 				24DE91AC1B67C21800D3FFCE /* Model */,
 				24DE91AB1B67C21100D3FFCE /* View */,
@@ -5974,6 +5990,7 @@
 				04F8731B1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib in Resources */,
 				04F89A3C1C1018D800FC0FA6 /* EnrolStudentCommentCell.xib in Resources */,
 				04F724091BD451400008A9A8 /* SPTimetableItemCell.xib in Resources */,
+				0405B6DF1CB10D210090863C /* BaseReplyListHeaderView.xib in Resources */,
 				04A4DE6A1BF484DF002ABBB1 /* webview_bar_back_grey@2x.png in Resources */,
 				04A4DE121BF484DF002ABBB1 /* admogoVideo_19.png in Resources */,
 				04A4DE421BF484DF002ABBB1 /* loading.gif in Resources */,
@@ -6194,6 +6211,7 @@
 				0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */,
 				04A4DE8F1BF484DF002ABBB1 /* shareviewhead_bg.png in Resources */,
 				04D288721C9E915F00D12BEF /* arrow_down1.png in Resources */,
+				0405B6DD1CB0F3AD0090863C /* BaseReplyListTableViewCell.xib in Resources */,
 				04D288801CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.xib in Resources */,
 				04A4DE4A1BF484DF002ABBB1 /* adsmogo_close@2x.png in Resources */,
 				04D288671C9E915F00D12BEF /* Default-568h@2x.png in Resources */,
@@ -6299,6 +6317,7 @@
 				04F903A91C56795C0040629F /* AFSecurityPolicy.m in Sources */,
 				24AA0B451B690F4300DAC03B /* UUMessageCell.m in Sources */,
 				24E036921B750502003381D5 /* ReplyPageDomain.m in Sources */,
+				0405B6E21CB10D580090863C /* BaseReplyListHeaderView.m in Sources */,
 				04F903AC1C56795C0040629F /* AFURLResponseSerialization.m in Sources */,
 				0405B6C81CAD72E90090863C /* BaseReplyDomain.m in Sources */,
 				04FB237F1C16DC67009B57E2 /* MineHomeChildrenCell.m in Sources */,
@@ -6673,6 +6692,7 @@
 				045CF51B1BE0A26200FA7EF7 /* SPSchoolDomain.m in Sources */,
 				24A175E81B5541BF00295997 /* KGDBHelperHandle.m in Sources */,
 				0449A3461C4F71D40066ABBB /* FPGifrwarePickerVC.m in Sources */,
+				0405B6DC1CB0F3AD0090863C /* BaseReplyListTableViewCell.m in Sources */,
 				04F939BE1C00701F00C9E0E8 /* MySPCourseSchoolDetailWebView.m in Sources */,
 				04F3D45C1BF47FD3007E7AC0 /* CDataScanner.m in Sources */,
 				04F903AD1C56795C0040629F /* AFURLSessionManager.m in Sources */,

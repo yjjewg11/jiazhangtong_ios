@@ -3008,6 +3008,21 @@
 
 
 
+//取消点赞
+- (void)baseReply_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSString * url=[NSString stringWithFormat:@"%@rest/baseReply/delete.json?uuid=%@&type=%d", [KGHttpUrl getBaseServiceURL], newsuid,dzype];
+    
+    [self getServerJson:url params:nil success:^(KGBaseDomain *baseDomain) {
+        
+        [self sessionTimeoutHandle:baseDomain];
+        success(baseDomain.ResMsg.message);
+    } faild:^(NSString *errorMessage) {
+        faild(errorMessage);
+    }];
+}
+
+
 #pragma mark - 请求评论列表 '2016-01-20-10-11-22','%Y-%m-%d-%H-%i-%s'
 - (void)baseReply_queryByRel_uuid:(NSString *)rel_uuid type:(KGTopicType)dzype  pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(PageInfoDomain * pageInfoDomain))success faild:(void(^)(NSString * errorMsg))faild
 {
