@@ -52,7 +52,7 @@
 {
     [self showLoadView];
     
-    [[KGHttpService sharedService] fPMovie_queryMy:pageInfo success:^(NSArray *articlesArray)
+    [[KGHttpService sharedService] fPMovie_query:pageInfo success:^(NSArray *articlesArray)
      {
          pageInfo.pageNo ++;
          

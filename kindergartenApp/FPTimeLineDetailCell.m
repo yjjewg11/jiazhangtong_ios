@@ -26,7 +26,7 @@
 #import "MJRefresh.h"
 #import "FPFamilyPhotoNormalDomain.h"
 #import "MJExtension.h"
-
+#import "BaseReplyListVCTableView.h"
 #import "UIButton+Extension.h"
 
 #import <objc/runtime.h>
@@ -56,7 +56,10 @@
 
 @property (strong, nonatomic) UIView * sepView;
 
+//不用
 @property (strong, nonatomic) UITableView * commentTableView;
+
+@property (strong, nonatomic) BaseReplyListVCTableView * baseReplyListVC;
 
 @property (assign, nonatomic) NSInteger pageNo;
 @property (strong, nonatomic) NSString * currentTime;
@@ -528,6 +531,34 @@
     CommitHeaderView * headerView = [[[NSBundle mainBundle] loadNibNamed:@"CommitHeaderView" owner:nil options:nil] firstObject];
     return headerView;
 }
+
+
+#pragma pinglun
+- (void)baseReplyListVC_show{
+    
+     NSInteger type=Topic_FPTimeLine;
+    
+    NSDictionary * dic = @{@"rel_uuid" :_domain.uuid, @"type" : [NSNumber numberWithInteger:type]};
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_ShowBaseReplyList object:self userInfo:dic];
+    
+    return;
+//    if(self.baseReplyListVC==nil){
+//        
+//        self.baseReplyListVC=[[BaseReplyListVCTableView alloc]initWithSuperVC:self];
+//        
+//        
+//      [self.contentView addSubview:self.baseReplyListVC];
+//    }else{
+//        [self.contentView bringSubviewToFront:self.baseReplyListVC];
+//    }
+//    [self.baseReplyListVC setHidden:NO];
+//    
+//    [self.baseReplyListVC setBaseReplyData:self.domain.uuid type:Topic_FPTimeLine];
+  
+    
+}
+
 #pragma mark - 下面按钮点击
 - (void)bottomBtnClicked:(UIButton *)btn
 {
@@ -545,8 +576,12 @@
             }
             break;
         }
-        case 1:
+        case 1://评论
         {
+            
+            [self baseReplyListVC_show];
+            return;
+            
             if (_isFirstCommit == NO)
             {
                 __weak typeof(self) weakSelf = self;
@@ -839,7 +874,7 @@ faild:^(NSString *errorMsg)
          [self.commentTableView headerEndRefreshing];
      }];
 
-}
+} 
 
 
 @end

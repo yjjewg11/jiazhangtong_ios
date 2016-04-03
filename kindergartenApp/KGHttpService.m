@@ -2943,13 +2943,43 @@
                                      }];
 }
 
+
+//分页精品相册
+- (void)fPMovie_query:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageInfo.pageNo]};
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/query.json"];
+    ;
+    [[AFAppDotNetAPIClient sharedClient] GET:url
+                                  parameters:dict
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             baseDomain.list.data = [FPMoive4QDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+                                             
+                                             success(baseDomain.list.data);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
 //精品文章 end
 
 
 
 //基本保存点赞
 - (void)baseDianzan_save:(NSString *)rel_uuid type:(KGTopicType)dzype success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
-     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"/rest/baseDianzan/save.json"];
+     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/baseDianzan/save.json"];
     
     NSDictionary * dic = @{@"type":[NSNumber numberWithInteger:dzype], @"rel_uuid":rel_uuid};
     
@@ -2965,7 +2995,7 @@
 //取消点赞
 - (void)baseDianzan_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
-    NSString * url=[NSString stringWithFormat:@"%@/rest/baseDianzan/delete.json?rel_uuid=%@&type=%d", [KGHttpUrl getBaseServiceURL], newsuid,dzype];
+    NSString * url=[NSString stringWithFormat:@"%@rest/baseDianzan/delete.json?rel_uuid=%@&type=%d", [KGHttpUrl getBaseServiceURL], newsuid,dzype];
     
     [self getServerJson:url params:nil success:^(KGBaseDomain *baseDomain) {
         
@@ -2977,11 +3007,51 @@
 }
 
 
+
+#pragma mark - 请求评论列表 '2016-01-20-10-11-22','%Y-%m-%d-%H-%i-%s'
+- (void)baseReply_queryByRel_uuid:(NSString *)rel_uuid type:(KGTopicType)dzype  pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(PageInfoDomain * pageInfoDomain))success faild:(void(^)(NSString * errorMsg))faild
+{
+    
+    
+     NSString * url=[NSString stringWithFormat:@"%@rest/baseReply/queryByRel_uuid.json", [KGHttpUrl getBaseServiceURL]];
+    
+    if (rel_uuid == nil)
+    {
+        rel_uuid = @"";
+    }
+    NSDictionary * dict = @{@"rel_uuid":rel_uuid,@"pageNo":pageNo,@"type":[NSNumber numberWithInteger:dzype],@"maxTime":time};
+    
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    [mgr GET:[KGHttpUrl getTimeLineItemCommentListUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {  
+             PageInfoDomain * vo = [PageInfoDomain objectWithKeyValues:[responseObject objectForKey:@"list"]];
+             NSLog(@"list.data.count=%ld",vo.data.count);
+//             NSArray * arr = [BaseReplyDomain objectArrayWithKeyValuesArray:vo.data];
+//             
+             success(vo);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 //保存回复
 - (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
     
-    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"/rest/baseReply/save.json"];
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/baseReply/save.json"];
     
     
     [self getServerJson:url params:reply.keyValues success:^(KGBaseDomain *baseDomain) {

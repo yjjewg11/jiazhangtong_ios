@@ -27,10 +27,14 @@
 //当前时间
 + (NSString *)presentTime;
 
-//获取家庭相册所用时间字符串格式
+//获取调用接口查询条件需要的所用时间字符串格式
 + (NSString *)getFPFormatSringWithDate:(NSDate *)date;
 + (NSString *)getFPFormatSringWithDateStr:(NSString *)dateStr;
 + (NSDate *)getDateWithFPFormatString:(NSString *)string;
+//获取调用接口查询条件需要的所用时间字符串格式
++ (NSString *)getQueryFormDateStringByString:(NSString *)string;
+//获取调用接口查询条件需要的所用时间字符串格式
++ (NSString *)getQueryFormDateStringByDate:(NSDate *)date;
 
 /**
  * 计算指定时间是否大雨指定分钟数

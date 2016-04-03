@@ -1119,12 +1119,7 @@ NSInteger localDBlimit=50;
         [cell initWithStyle:nil reuseIdentifier:DF_cellIdentifier];
 
         
-//        
-//            cell = [[FPHomeTablePhotoCellTableViewCell alloc]initWithStyle:nil reuseIdentifier:DF_cellIdentifier];
-        
-        NSLog(@"create cell ,index=%d",indexPath.row);
-        
-//        cell = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTablePhotoCellTableViewCell" owner:nil options:nil] firstObject];
+
         
     }else{
         //移除所有子视图
@@ -1155,6 +1150,10 @@ NSInteger localDBlimit=50;
             imgView.superview.tag=indexPath.section;
         }
     }
+//    CGRect  frame=cell.frame;
+//    //frame.size.height=120;
+//    NSLog(@"cell %ld frame=%f,%f,%f,%f",indexPath.row, frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    
     
     return cell;
 }
@@ -1175,7 +1174,7 @@ NSInteger localDBlimit=50;
         [cell initWithStyle:nil reuseIdentifier:DF_sectionHeaderIdentifier];
         
         
-        NSLog(@"create section ,section=%d",section);
+        NSLog(@"create section ,section=%ld",section);
     
         
     }

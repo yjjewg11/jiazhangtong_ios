@@ -6,9 +6,10 @@
 //  Copyright © 2016年 funi. All rights reserved.
 //
 
-#import "BaseViewController.h"
+
+#import "BaseReplyInputViewController.h"
 #pragma 照片详细显示，可以左右滑动
-@interface FPTimeLineDetailVC : BaseViewController
+@interface FPTimeLineDetailVC : BaseReplyInputViewController
 
 @property (strong, nonatomic) NSString * daytimeStr;
 @property (strong, nonatomic) NSString * familyUUID;

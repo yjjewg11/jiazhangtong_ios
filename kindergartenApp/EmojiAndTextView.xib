@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,22 +12,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBO-fl-lJS">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBO-fl-lJS">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                     <color key="backgroundColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
-                    <rect key="frame" x="16" y="13" width="210" height="20"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3JK-ks-oDs">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3JK-ks-oDs">
                     <rect key="frame" x="16" y="38" width="250" height="1"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-RZ-NkS">
-                    <rect key="frame" x="230" y="9" width="25" height="25"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-RZ-NkS">
+                    <rect key="frame" x="16" y="9" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="Qfg-Kr-HIr"/>
+                    </constraints>
                     <state key="normal" image="biaoqing">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -34,8 +32,11 @@
                         <action selector="emojiBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="ipi-js-w0z"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBP-3I-SyI">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IBP-3I-SyI">
                     <rect key="frame" x="270" y="9" width="40" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="See-bK-FDA"/>
+                    </constraints>
                     <state key="normal" image="fasong">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -43,8 +44,37 @@
                         <action selector="postBtnPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="7qQ-E5-48g"/>
                     </connections>
                 </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihz-YZ-T1j" customClass="KGTextView">
+                    <rect key="frame" x="49" y="12" width="210" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dEP-RZ-NkS" firstAttribute="centerY" secondItem="Ihz-YZ-T1j" secondAttribute="centerY" id="A2F-84-0hR"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="B75-DT-FAG"/>
+                <constraint firstAttribute="trailing" secondItem="IBP-3I-SyI" secondAttribute="trailing" constant="10" id="Cgy-6o-Ucp"/>
+                <constraint firstItem="Ihz-YZ-T1j" firstAttribute="leading" secondItem="dEP-RZ-NkS" secondAttribute="trailing" constant="8" symbolic="YES" id="Own-g7-bk9"/>
+                <constraint firstItem="dEP-RZ-NkS" firstAttribute="leading" secondItem="3JK-ks-oDs" secondAttribute="leading" id="QVL-Kp-LhX"/>
+                <constraint firstAttribute="bottom" secondItem="IBP-3I-SyI" secondAttribute="bottom" constant="10" id="SP0-a6-O85"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="8" id="SQ9-0y-VrF"/>
+                <constraint firstAttribute="trailing" secondItem="3JK-ks-oDs" secondAttribute="trailing" constant="54" id="WMP-Zt-vgB"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="centerY" secondItem="Ihz-YZ-T1j" secondAttribute="centerY" id="Zts-Fu-13n"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="baseline" secondItem="dEP-RZ-NkS" secondAttribute="baseline" id="aTx-V8-eH2"/>
+                <constraint firstItem="dEP-RZ-NkS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="gxW-se-mTt"/>
+                <constraint firstItem="fBO-fl-lJS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="iUF-0H-vOA"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="fBO-fl-lJS" secondAttribute="bottom" constant="8" symbolic="YES" id="jRa-Fi-mRZ"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="Ihz-YZ-T1j" secondAttribute="bottom" constant="6" id="lb8-JU-Dvh"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="top" id="oww-rk-qYx"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="firstBaseline" secondItem="dEP-RZ-NkS" secondAttribute="firstBaseline" id="p7o-5o-yPS"/>
+                <constraint firstItem="3JK-ks-oDs" firstAttribute="top" secondItem="dEP-RZ-NkS" secondAttribute="bottom" constant="4" id="pJd-2v-Eat"/>
+                <constraint firstAttribute="bottom" secondItem="3JK-ks-oDs" secondAttribute="bottom" constant="5" id="rOc-uc-1Hp"/>
+                <constraint firstItem="IBP-3I-SyI" firstAttribute="leading" secondItem="Ihz-YZ-T1j" secondAttribute="trailing" constant="11" id="rgM-KE-uiS"/>
+                <constraint firstItem="fBO-fl-lJS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="snQ-XJ-tIT"/>
+                <constraint firstAttribute="trailing" secondItem="fBO-fl-lJS" secondAttribute="trailing" id="u8U-5q-xjN"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

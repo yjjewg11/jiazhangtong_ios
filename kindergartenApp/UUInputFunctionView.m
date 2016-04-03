@@ -28,7 +28,8 @@
     self.superVC = superVC;
     CGFloat y = isShow ? Main_Screen_Height-40-64 : Main_Screen_Height;
     CGRect frame = CGRectMake(0, y, Main_Screen_Width, 40);
-    
+    NSLog(@"inpurt_frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
     self = [super initWithFrame:frame];
     if (self) {
 //        MP3 = [[Mp3Recorder alloc]initWithDelegate:self];

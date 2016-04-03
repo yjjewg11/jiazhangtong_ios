@@ -25,8 +25,8 @@
 #define Key_Notification_AddressbookCellFun @"AddressbookCellFun"
 #define Key_Notification_ChatSecondSend     @"ChatSecondSend"
 #define Key_Notification_SessionTimeout     @"SessionTimeout"
-
-
+#define Key_Notification_BeginBaseReplyInput   @"BeginBaseReplyInput"
+#define Key_Notification_ShowBaseReplyList   @"ShowBaseReplyList"
 #define Key_WriteVO                        @"WriteVO"
 #define Key_KeyChain                       @"KeyChain"
 #define Key_TopicCellFunType               @"topicCellFunType"

@@ -12,8 +12,8 @@
 #import "KGHttpService.h"
 #import "MBProgressHUD+HM.h"
 #import "KGDateUtil.h"
-
-@interface FPGiftwareDetialVC ()<UIWebViewDelegate>
+#import "FPTimeLineDetailMoreView.h"
+@interface FPGiftwareDetialVC ()<UIWebViewDelegate,FPTimeLineDetailMoreViewDelegate>
 {
     IBOutlet UIScrollView *contentScrollView;
     IBOutlet UIWebView * myWebView;
@@ -24,6 +24,10 @@
     __weak IBOutlet UIButton *shareBtn;
     IBOutlet UIImageView *favImageView;
     IBOutlet UIButton *favBtn;
+    
+    FPTimeLineDetailMoreView *moreView;
+    __weak IBOutlet UIButton *moreBtn;
+    BOOL moreViewIsShow;
 }
 @property (weak, nonatomic) IBOutlet UIButton *pinlunBtn;
 
@@ -66,8 +70,46 @@
 - (IBAction)pinlunClick:(id)sender {
 }
 - (IBAction)moreBtnClick:(id)sender {
+    
+    if(moreView==nil){
+       
+        moreView = [[[NSBundle mainBundle] loadNibNamed:@"FPTimeLineDetailMoreView" owner:nil options:nil] firstObject];
+        moreView.delegate = self;
+        NSLog(@"moreView=%f=%f=%f=%f",self.view.width-moreView.width-10,self.view.height-moreView.height-10,moreView.width, moreView.height);
+        moreView.frame = CGRectMake(self.view.width-moreView.width-10,self.view.height-moreView.height-10, moreView.width, moreView.height);
+        
+        CATransition *applicationLoadViewIn =[CATransition animation];
+        [applicationLoadViewIn setDuration:0.3];
+        [applicationLoadViewIn setType:kCATransitionReveal];
+        [applicationLoadViewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+        [[moreView layer]addAnimation:applicationLoadViewIn forKey:kCATransitionReveal];
+        //添加最上层
+        [self.view addSubview:moreView];
+        
+        return;
+
+    }
+    
+    if (moreViewIsShow == YES)
+    {
+        [moreView setHidden:true];
+        
+        moreViewIsShow = NO;
+    }else{
+        [moreView setHidden:false];
+        if(moreView)[self.view bringSubviewToFront:moreView];
+        moreViewIsShow=YES;
+    }
+   
+}
+- (void)deleteBtn{
+    NSLog(@"deleteBtn");
+
 }
 
+- (void)modifyBtn{
+    NSLog(@"modifyBtn");
+}
 //保存收藏
 - (void)saveFavorites:(UIButton *)button
 {

@@ -26,6 +26,10 @@
 		040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040466C41C438FDB00C9EE5C /* RouteDetailInfoCell.m */; };
 		040466C71C438FDB00C9EE5C /* RouteDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040466C51C438FDB00C9EE5C /* RouteDetailInfoCell.xib */; };
 		0405B6C81CAD72E90090863C /* BaseReplyDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6C71CAD72E90090863C /* BaseReplyDomain.m */; };
+		0405B6CC1CAE66130090863C /* BaseReplyListVCTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6CA1CAE66130090863C /* BaseReplyListVCTableView.m */; };
+		0405B6D11CAE68150090863C /* BaseReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6CF1CAE68150090863C /* BaseReplyTableViewCell.m */; };
+		0405B6D21CAE68150090863C /* BaseReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0405B6D01CAE68150090863C /* BaseReplyTableViewCell.xib */; };
+		0405B6D61CB0C1230090863C /* BaseReplyInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6D51CB0C1230090863C /* BaseReplyInputViewController.m */; };
 		040687171C3E588D002C2196 /* MapVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040687151C3E588D002C2196 /* MapVC.mm */; };
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
@@ -893,6 +897,13 @@
 		040466C51C438FDB00C9EE5C /* RouteDetailInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RouteDetailInfoCell.xib; sourceTree = "<group>"; };
 		0405B6C61CAD72E90090863C /* BaseReplyDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyDomain.h; sourceTree = "<group>"; };
 		0405B6C71CAD72E90090863C /* BaseReplyDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyDomain.m; sourceTree = "<group>"; };
+		0405B6C91CAE66130090863C /* BaseReplyListVCTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyListVCTableView.h; sourceTree = "<group>"; };
+		0405B6CA1CAE66130090863C /* BaseReplyListVCTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyListVCTableView.m; sourceTree = "<group>"; };
+		0405B6CE1CAE68150090863C /* BaseReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyTableViewCell.h; sourceTree = "<group>"; };
+		0405B6CF1CAE68150090863C /* BaseReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyTableViewCell.m; sourceTree = "<group>"; };
+		0405B6D01CAE68150090863C /* BaseReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BaseReplyTableViewCell.xib; sourceTree = "<group>"; };
+		0405B6D41CB0C1230090863C /* BaseReplyInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseReplyInputViewController.h; sourceTree = "<group>"; };
+		0405B6D51CB0C1230090863C /* BaseReplyInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyInputViewController.m; sourceTree = "<group>"; };
 		040687141C3E588D002C2196 /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
 		040687151C3E588D002C2196 /* MapVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapVC.mm; sourceTree = "<group>"; };
 		040687161C3E588D002C2196 /* MapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
@@ -2360,6 +2371,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0405B6D31CB0C0990090863C /* BaseReply(公共回复模块） */ = {
+			isa = PBXGroup;
+			children = (
+				0405B6D81CB0CC340090863C /* view */,
+				0405B6D71CB0CC1D0090863C /* controller */,
+			);
+			name = "BaseReply(公共回复模块）";
+			sourceTree = "<group>";
+		};
+		0405B6D71CB0CC1D0090863C /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				0405B6D41CB0C1230090863C /* BaseReplyInputViewController.h */,
+				0405B6D51CB0C1230090863C /* BaseReplyInputViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		0405B6D81CB0CC340090863C /* view */ = {
+			isa = PBXGroup;
+			children = (
+				0405B6C91CAE66130090863C /* BaseReplyListVCTableView.h */,
+				0405B6CA1CAE66130090863C /* BaseReplyListVCTableView.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
 		0449A3361C4F5FBE0066ABBB /* tableviewcell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2384,6 +2422,9 @@
 				042A85721C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.h */,
 				042A85731C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m */,
 				042A85741C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib */,
+				0405B6CE1CAE68150090863C /* BaseReplyTableViewCell.h */,
+				0405B6CF1CAE68150090863C /* BaseReplyTableViewCell.m */,
+				0405B6D01CAE68150090863C /* BaseReplyTableViewCell.xib */,
 			);
 			name = tableviewcell;
 			sourceTree = "<group>";
@@ -4777,6 +4818,7 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				0405B6D31CB0C0990090863C /* BaseReply(公共回复模块） */,
 				248B6AA41B19AD2C00FCB98F /* Home(主页) */,
 				04F151651C45FECD00E80B3E /* FamilyPhoto(家庭相册) */,
 				F4885C671B7C784C00AF97CF /* URLController(浏览器) */,
@@ -6076,6 +6118,7 @@
 				04A4DE7B1BF484DF002ABBB1 /* webview_bar_next_grey_ipad@2x.png in Resources */,
 				04BDD68C1C4CC84600FA0C3A /* SpCourseHomeFuncCell.xib in Resources */,
 				04B4346D1C7F064F0009EB47 /* CommitTextFild.xib in Resources */,
+				0405B6D21CAE68150090863C /* BaseReplyTableViewCell.xib in Resources */,
 				04F9FB5A1BF1A67400AEFB88 /* cancel@2x.png in Resources */,
 				04F72ABD1BEC562900623E33 /* SPTeacherCell.xib in Resources */,
 				4DE384561B7F728A009F12E4 /* MyCollectionViewController.xib in Resources */,
@@ -6270,6 +6313,7 @@
 				F4C0AB901B1C3B29007B0E35 /* SandboxFile.m in Sources */,
 				04FEC8871BEBADCE00D3D8A5 /* SPSchoolCell.m in Sources */,
 				04F903B71C56795C0040629F /* UIWebView+AFNetworking.m in Sources */,
+				0405B6D61CB0C1230090863C /* BaseReplyInputViewController.m in Sources */,
 				F47AFEB21B5E24BD00D43F38 /* AnnouncementDomain.m in Sources */,
 				F4CF7A961B79F80C00BFAA1E /* TimetableItemVO.m in Sources */,
 				04FB7CC51C0DAA7A00FD3E31 /* SpCourseCell.m in Sources */,
@@ -6551,6 +6595,7 @@
 				F4EA53861B60BD390044BE7A /* MeTableViewCell.m in Sources */,
 				04F8C6F91C18235100EF5E57 /* DiscorveryJingXuanCell.m in Sources */,
 				24B0D9DE1B763B790030B73C /* RecipesInfoView.m in Sources */,
+				0405B6D11CAE68150090863C /* BaseReplyTableViewCell.m in Sources */,
 				04F95F601C4E42D5000909B1 /* FPHomeSelectView.m in Sources */,
 				04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */,
 				04FBAEC01C5B137F0094DC6B /* UploadImage.m in Sources */,
@@ -6677,6 +6722,7 @@
 				248B6AC71B19B54500FCB98F /* KGTextField.m in Sources */,
 				04F9AC531BFC54B9004DA63D /* MySPAllCouseListDomain.m in Sources */,
 				04FB7CAB1C0D95D900FD3E31 /* SpTeacherDetailLayout.m in Sources */,
+				0405B6CC1CAE66130090863C /* BaseReplyListVCTableView.m in Sources */,
 				F4885C661B7C508600AF97CF /* FavoritesDomain.m in Sources */,
 				4D0A91861B81088700373E5C /* EmojiAndTextView.m in Sources */,
 				04F9C6791BEC457B000DD5CE /* SPSchoolDetailTableVC.m in Sources */,

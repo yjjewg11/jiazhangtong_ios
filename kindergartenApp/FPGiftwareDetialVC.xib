@@ -12,6 +12,7 @@
                 <outlet property="dzImageView" destination="Kce-1r-YAB" id="frd-ox-cIz"/>
                 <outlet property="favBtn" destination="9la-H1-u8w" id="M8q-tL-kAz"/>
                 <outlet property="favImageView" destination="YE5-dn-eXw" id="TMd-ly-lsv"/>
+                <outlet property="moreBtn" destination="4yb-Qa-0VF" id="6tK-d4-mu2"/>
                 <outlet property="myWebView" destination="3Mm-9f-yso" id="XCw-8L-30K"/>
                 <outlet property="pinlunBtn" destination="YIZ-zY-nPg" id="2k7-IG-ZG2"/>
                 <outlet property="shareBtn" destination="ABC-Vs-8av" id="qix-7q-KyF"/>

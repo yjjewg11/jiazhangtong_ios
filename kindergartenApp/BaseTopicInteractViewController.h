@@ -14,11 +14,6 @@
 #import "EmojiAndTextView.h"
 #import "TopicInteractionDomain.h"
 
-typedef NS_ENUM(NSUInteger, KeyBoardTopType) {
-    OnlyEmojiMode,//只有切换表情
-    EmojiAndTextMode,//有表情和文本输入框
-    ChatMode//聊天类型
-};
 
 @interface BaseTopicInteractViewController : BaseKeyboardViewController
 

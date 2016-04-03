@@ -384,7 +384,7 @@ static NSString *const PicID = @"camaracoll";
     
     if(!shareurl || [shareurl length] == 0)
     {
-        shareurl = @"http://wenjie.net";
+        shareurl = @"http://www.wenjie.net";
     }
     
     //微信title设置方法：
@@ -443,5 +443,4 @@ static NSString *const PicID = @"camaracoll";
     vc.curentPage = index;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 @end

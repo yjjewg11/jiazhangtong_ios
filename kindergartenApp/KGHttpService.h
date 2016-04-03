@@ -13,6 +13,7 @@
 #import "PageInfoDomain.h"
 #import "TopicDomain.h"
 #import "ReplyDomain.h"
+#import "BaseReplyDomain.h"
 #import "DianZanDomain.h"
 #import "AnnouncementDomain.h"
 #import "TeacherVO.h"
@@ -382,6 +383,9 @@
 
 - (void)fPPhotoItem_deleteFavorites:(NSString *)uuid  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild ;
 - (void)fPMovie_queryMy:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild;
-
+- (void)fPMovie_query:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild ;
 -(void)getByUuid:(NSString *)path  uuid:(NSString *)uuid  success :(void(^)( id     responseObject))success faild:(void(^)(NSString * errorMsg))faild;
+
+- (void)baseReply_queryByRel_uuid:(NSString *)rel_uuid type:(KGTopicType)dzype  pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(PageInfoDomain * pageInfoDomain))success faild:(void(^)(NSString * errorMsg))faild;
+- (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 @end

@@ -240,42 +240,33 @@
     [format setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSString * oriDateStr = [format stringFromDate:date];
-    //把:换成-
-    NSString * oriDateStr1 = [oriDateStr stringByReplacingOccurrencesOfString:@":" withString:@"-"];
-    //把@" " 换成 -
-    NSString * oriDateStr2 = [oriDateStr1 stringByReplacingOccurrencesOfString:@" " withString:@"-"];
     
-//    NSLog(@"FP:转换后的日期字符串:%@",oriDateStr2);
-    return oriDateStr2;
+    
+    return [KGDateUtil getFPFormatSringWithDateStr:oriDateStr];
+  
 }
 
-+ (NSDate *)getDateWithFPFormatString:(NSString *)string
+
++ (NSString *)getQueryFormDateStringByString:(NSString *)string
 {
-    if (string == NULL || string == nil || string == Nil)
-    {
-        return nil;
-    }
+    return [KGDateUtil getFPFormatSringWithDateStr:string];
     
-    if ([string isEqual:[NSNull null]])
-    {
-        return nil;
-    }
-    
-    NSDateFormatter * format = [[NSDateFormatter alloc] init];
-    [format setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    format.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-//    NSLog(@"%@",string);
-//    NSLog(@"FP:转换后的Date:%@",[format dateFromString:string]);
-    
-    return [format dateFromString:string];
+}
++ (NSString *)getQueryFormDateStringByDate:(NSDate *)date
+{
+    return [KGDateUtil getFPFormatSringWithDate:date];
+
 }
 
 + (NSDate *)getLocalDate
 {
     
     NSDate *date = [NSDate date];
+     NSLog(@"date:%@",date);
     
-    NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
+  
+    NSTimeZone *zone =[[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    //[NSTimeZone timeZoneWithName:@"zh_CN"];
     
     NSInteger interval = [zone secondsFromGMTForDate:date];
     
@@ -289,7 +280,7 @@
 }
 + (NSString *)getDateStrByNSDate: (NSDate *)date format:(NSString *)formatStr
 {
-    NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"zh_CN"];
+    NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     NSInteger interval = [zone secondsFromGMTForDate:date];
     
     NSDateFormatter * format = [[NSDateFormatter alloc] init];
