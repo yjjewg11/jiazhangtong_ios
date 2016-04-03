@@ -2703,6 +2703,7 @@
              domain.isFavor = [[responseObject valueForKey:@"isFavor"] integerValue];
              domain.dianzan_count = [[[responseObject valueForKey:@"dianZan"] objectForKey:@"dianzan_count"] integerValue];
              domain.yidianzan = [[[responseObject valueForKey:@"dianZan"] objectForKey:@"yidianzan"] integerValue];
+             domain.reply_count=[[responseObject valueForKey:@"reply_count"] integerValue];
              success(domain);
          }
          else

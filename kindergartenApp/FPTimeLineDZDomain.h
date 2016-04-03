@@ -13,5 +13,5 @@
 @property (assign, nonatomic) NSInteger isFavor;
 @property (assign, nonatomic) NSInteger dianzan_count;
 @property (assign, nonatomic) NSInteger yidianzan;
-
+@property (assign, nonatomic) NSInteger reply_count;
 @end

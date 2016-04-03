@@ -724,11 +724,11 @@
 }
 
 #pragma mark - 更新相片信息 note address create_time
-- (void)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain
+- (BOOL)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain
 {
     NSString * sqlupdate = [NSString stringWithFormat:@"update fp_photo_item set note='%@',address='%@' WHERE uuid='%@'",domain.note,domain.address,domain.uuid];
     
-    [self execSql:sqlupdate];
+    return [self execSql:sqlupdate];
 }
 
 #pragma mark - 删除时光轴相片

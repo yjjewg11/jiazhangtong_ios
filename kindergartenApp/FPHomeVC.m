@@ -454,8 +454,8 @@ NSInteger localDBlimit=50;
     
        
         [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:rightBarBtn,rightBarBtn2,nil]];
-        
- 
+        //初始化隐藏。大于0显示。
+    [btn_shangchuanzhaopian setHidden:YES];
     
 //    self.navigationItem.rightBarButtonItem = rightBarBtn;
  
@@ -1097,7 +1097,7 @@ NSInteger localDBlimit=50;
     FPTimeLineDetailVC * vc = [[FPTimeLineDetailVC alloc] init];
     vc.fpPhotoNormalDomainArr=arr;
     vc.selectIndex=imgView.tag;
-    
+    vc.title=groupName;
     [self.navigationController pushViewController:vc animated:YES];
                            
     

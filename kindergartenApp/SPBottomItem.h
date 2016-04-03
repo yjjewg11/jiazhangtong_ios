@@ -15,7 +15,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLbl;
+@property (weak, nonatomic) IBOutlet UILabel *tipNumberLbl;
+
+
 
 - (void)setPic:(NSString *)name Title:(NSString *)title;
 
+- (void)setTipNumber:(NSInteger)count;
 @end

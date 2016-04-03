@@ -31,6 +31,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </button>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1111" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cE8-2p-WWr">
+                    <rect key="frame" x="50" y="0.0" width="30" height="21"/>
+                    <color key="backgroundColor" red="1" green="0.037066020669999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="9"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -49,6 +56,7 @@
             <connections>
                 <outlet property="btn" destination="dR8-dK-WfU" id="IVo-xh-2mk"/>
                 <outlet property="imgView" destination="vdS-CI-y96" id="cKP-VQ-LoE"/>
+                <outlet property="tipNumberLbl" destination="cE8-2p-WWr" id="4pm-X8-B4b"/>
                 <outlet property="titleLbl" destination="Bp0-K0-cCs" id="rNZ-jL-W4U"/>
             </connections>
             <point key="canvasLocation" x="162" y="123"/>

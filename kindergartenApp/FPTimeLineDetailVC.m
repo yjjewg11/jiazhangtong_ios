@@ -32,8 +32,6 @@
     NSInteger _pageNo;
     UICollectionView * _collectionView;
     CGFloat imageViewHeight;
-    NSInteger _selectPicNum;
-    BOOL _isHideInfo;
 }
 
 @end
@@ -41,34 +39,13 @@
 @implementation FPTimeLineDetailVC
 
 static NSString *const PicID = @"camaracoll";
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-//    self.title = [[self.daytimeStr componentsSeparatedByString:@","] firstObject];
-//    
-    self.title = @"照片详细";
-    
-    
-    _service = [DBNetDaoService defaulService];
-    _imgDatas = [NSMutableArray array];
-    _pageNo = 1;
-    _selectPicNum = 0;
-    _isHideInfo = YES;
-    
-    //创建视图
-    [self initView];
-    
-    //从数据库获取数据
-    [self getInitData];
-    
-    //显示详细按钮
-    UIButton* btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0,0,20,20)];
-    [btn1 setBackgroundImage:[UIImage imageNamed:@"xinxi_photo"] forState:UIControlStateNormal];
-    [btn1 addTarget:self action:@selector(showInfoView) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *rightBarBtn = [[UIBarButtonItem alloc] initWithCustomView:btn1];
-    self.navigationItem.rightBarButtonItem = rightBarBtn;
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self regNotification];
+}
+- (void)regNotification {
+    [super regNotification];
     
     //注册通知用于更新
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
@@ -80,20 +57,45 @@ static NSString *const PicID = @"camaracoll";
     
     //注册点击图片浏览图片通知
     [center addObserver:self selector:@selector(browseImagesNotification:) name:Key_Notification_BrowseImages object:nil];
+    
 }
 
-- (void)showInfoView
-{
-    _isHideInfo = !_isHideInfo;
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:_selectPicNum inSection:0];
-    [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+   
 }
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    if(self.title==nil){
+        self.title = @"照片详细";
+    }
+   
+    _service = [DBNetDaoService defaulService];
+    _imgDatas = [NSMutableArray array];
+    _pageNo = 1;
+    self.selectIndex = 0;
+    
+    //创建视图
+    [self initView];
+    
+    //从数据库获取数据
+    [self getInitData];
+    
+    //显示详细按钮
+   
+    
+    
+}
+
 
 - (void)pushToModifyVC
 {
     FPTimeLineEditVC * vc = [[FPTimeLineEditVC alloc] init];
     
-    vc.domain = _imgDatas[_selectPicNum];
+    vc.domain = _imgDatas[self.selectIndex];
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -103,11 +105,11 @@ static NSString *const PicID = @"camaracoll";
     FPFamilyPhotoNormalDomain * domain = noti.object;
     if (domain)
     {
-        _imgDatas[_selectPicNum] = domain;
+        _imgDatas[self.selectIndex] = domain;
         
         dispatch_async(dispatch_get_main_queue(), ^
         {
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:_selectPicNum inSection:0];
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:self.selectIndex inSection:0];
             [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
         });
     }
@@ -132,23 +134,13 @@ static NSString *const PicID = @"camaracoll";
         _imgDatas=[self fpPhotoNormalDomainArr];
         [self.view addSubview:_collectionView];
         
-        if (self.selectIndex) {
-            _selectPicNum=self.selectIndex;
+        if (self.selectIndex==nil) {
+            self.selectIndex=self.selectIndex;
         }
-        [self resetTableViewCellIndex:_selectPicNum];
+        [self resetTableViewCellIndex:self.selectIndex];
         return;
     }
-    NSArray * arr = [_service queryPicDetailByDate:[[self.daytimeStr componentsSeparatedByString:@","] firstObject] pageNo:[NSString stringWithFormat:@"1"] familyUUID:self.familyUUID];
-    if (arr)
-    {
-        [_imgDatas addObjectsFromArray:arr];
-        [self.view addSubview:_collectionView];
-    }
-    else
-    {
-        [MBProgressHUD showError:@"获取相册数据失败,请重试!"];
-    }
-}
+ }
 
 #pragma mark - 创建视图
 - (void)initView
@@ -182,7 +174,7 @@ static NSString *const PicID = @"camaracoll";
 
 //设置当前展示的图片
 - (void)resetTableViewCellIndex:(NSInteger)index{
-    _selectPicNum=index;
+    self.selectIndex=index;
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:index inSection:Number_Zero];
     
     //3）通过动画滚动到下一个位置
@@ -199,12 +191,12 @@ static NSString *const PicID = @"camaracoll";
 
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout cellCenteredAtIndexPath:(NSIndexPath *)indexPath page:(int)page
 {
-    _selectPicNum = page;
+    self.selectIndex = page;
 }
 
 - (void)downloadImg
 {
-    FPFamilyPhotoNormalDomain * domain = _imgDatas[_selectPicNum];
+    FPFamilyPhotoNormalDomain * domain = _imgDatas[self.selectIndex];
     
     [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString: domain.path] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         
@@ -262,7 +254,7 @@ static NSString *const PicID = @"camaracoll";
 {
     if (buttonIndex != alertView.cancelButtonIndex)
     {
-        FPFamilyPhotoNormalDomain * domain = _imgDatas[_selectPicNum];
+        FPFamilyPhotoNormalDomain * domain = _imgDatas[self.selectIndex];
         NSLog(@"...... >>> %@",domain.uuid);
         [MBProgressHUD showMessage:@"请稍候..."];
         //调用接口删除
@@ -270,12 +262,12 @@ static NSString *const PicID = @"camaracoll";
         {
             [MBProgressHUD hideHUD];
             //从collectionview中删除
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:_selectPicNum inSection:0];
+            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:self.selectIndex inSection:0];
             dispatch_async(dispatch_get_main_queue(), ^
             {
                 //从数据库删除照片
                 [_service deletePhotoItem:domain.uuid];
-                [_imgDatas removeObjectAtIndex:_selectPicNum];
+                [_imgDatas removeObjectAtIndex:self.selectIndex];
                 [_collectionView deleteItemsAtIndexPaths:@[indexPath]];
                 [_collectionView reloadData];
                 [MBProgressHUD showSuccess:@"操作成功!"];

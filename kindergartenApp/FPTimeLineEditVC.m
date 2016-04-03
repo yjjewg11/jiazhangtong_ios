@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "DBNetDaoService.h"
 #import "KGHttpService.h"
-
+#import "MBProgressHUD+HM.h"
 @interface FPTimeLineEditVC ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
@@ -46,14 +46,19 @@
 {
     self.domain.note = self.note.text;
     self.domain.address = self.address.text;
-    //更新数据库
-    [[DBNetDaoService defaulService] updatePhotoItemInfo:self.domain];
+
     
     //保存到服务器
     [[KGHttpService sharedService] modifyFPItemInfo:self.domain.address note:self.domain.note success:^(NSString *mgr)
     {
+        [MBProgressHUD showSuccess:@"下载成功!"];
+        
+        //更新数据库
+        [[DBNetDaoService defaulService] updatePhotoItemInfo:self.domain];
+        
     } faild:^(NSString *errorMsg)
     {
+        [MBProgressHUD showError:errorMsg];
     }];
     
     //通知详情页更新这个domain

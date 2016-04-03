@@ -21,6 +21,25 @@
     self.imgView.image = [UIImage imageNamed:name];
     
     self.titleLbl.text = title;
+      [self.tipNumberLbl setHidden:YES];
+}
+
+- (void)setTipNumber:(NSInteger)count{
+    if(count==0){
+        [self.tipNumberLbl setHidden:YES];
+      
+        return;
+    }
+      [self.tipNumberLbl setHidden:NO];
+    self.tipNumberLbl.text=[NSString stringWithFormat:@"%d",count];
+    
+    //设置边缘弯曲角度
+    self.tipNumberLbl.layer.cornerRadius =10;
+    self.tipNumberLbl.clipsToBounds = YES;//（iOS7以后需要设置）
+    
+    
+    [self.tipNumberLbl setFrame:CGRectMake(self.frame.size.width/2, 5, 30, 25)];
+
 }
 
 @end

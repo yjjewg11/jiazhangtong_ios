@@ -42,7 +42,7 @@
 
 - (NSArray *)queryPicDetailByDate:(NSString *)date pageNo:(NSString *)pageNo familyUUID:(NSString *)familyUUID;
 
-- (void)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain;
+- (BOOL)updatePhotoItemInfo:(FPFamilyPhotoNormalDomain *)domain;
 
 - (void)deletePhotoItem:(NSString *)uuid;
 #pragma mark - 查询分页查询

@@ -28,10 +28,10 @@
 #import "MJExtension.h"
 #import "BaseReplyListVCTableView.h"
 #import "UIButton+Extension.h"
-
+#import "DBNetDaoService.h"
 #import <objc/runtime.h>
 
-@interface FPTimeLineDetailCell() <UITableViewDataSource,UITableViewDelegate,UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
+@interface FPTimeLineDetailCell() <UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
 {
     NSMutableArray * _buttonItems;
     FPTimeLineDetailMoreView * _moreView;
@@ -47,18 +47,18 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UIView * infoView;
 @property (strong, nonatomic) UILabel * timeLbl;
+@property (strong, nonatomic) UILabel * dianzanName;
 @property (strong, nonatomic) UILabel * locationLbl;
 @property (strong, nonatomic) UILabel * deviceLbl;
 @property (strong, nonatomic) UILabel * nameLbl;
+@property (strong, nonatomic) UIView * dividingLine;
 
-@property (strong, nonatomic) CommitTextFild * commitTextFD;
+
 @property (strong, nonatomic) UIImageView * imageView;
 
 @property (strong, nonatomic) UIView * sepView;
 
-//不用
-@property (strong, nonatomic) UITableView * commentTableView;
-
+@property (strong, nonatomic) SPBottomItem * pinglunSPBottomItem;
 @property (strong, nonatomic) BaseReplyListVCTableView * baseReplyListVC;
 
 @property (assign, nonatomic) NSInteger pageNo;
@@ -97,17 +97,7 @@
 - (void)awakeFromNib
 {
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-     
-                                             selector:@selector(keyboardWasShown:)
-     
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-     
-                                             selector:@selector(keyboardWillBeHidden:)
-     
-                                                 name:UIKeyboardWillHideNotification object:nil];
+
     
     _moreViewOpen = NO;
     self.pageNo = 1;
@@ -126,45 +116,80 @@
 
     
     [self.scrollView addSubview:self.imageView];
+
+ 
+    //UILabel自适应高度和自动换行
+    //初始化label
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,0,0)];
+    //设置自动行数与字符换行
+    [label setNumberOfLines:0];
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    // 测试字串
+       UIFont *font = [UIFont fontWithName:@"Arial" size:16];
+        //备注
+    self.imageDetailLable=label;
     
-    //创建image描述的Lable
-    self.imageDetailLable = [[UILabel alloc] init];
-  
-    self.imageDetailLable.backgroundColor = [UIColor colorWithWhite:0 alpha:0.4];
-    self.imageDetailLable.numberOfLines = 0;
-    self.imageDetailLable.textColor = [UIColor whiteColor];
-    self.imageDetailLable.font = [UIFont systemFontOfSize:17];
-    self.imageDetailLable.text = @"today is a fun day";
-    //创建infoview
     self.infoView = [[UIView alloc] init];
     self.infoView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame)+5, APPWINDOWWIDTH, 280);
-    NSLog(@"infoView y=%f",CGRectGetMaxY(self.imageView.frame));
-    
-      [self.imageView addSubview:self.imageDetailLable];
     
     
-    self.timeLbl = [[UILabel alloc] init];
-    self.timeLbl.frame = CGRectMake(20, 20, APPWINDOWWIDTH-20, 20);
-    self.timeLbl.textColor = [UIColor brownColor];
-    self.timeLbl.font = [UIFont systemFontOfSize:17];
+    NSLog(@"infoView y=%f",self.infoView.frame.origin.y);
+     [self.infoView addSubview:self.imageDetailLable];
+    
+        CGRect frame =self.imageDetailLable.frame;
+    NSLog(@"imageDetailLable frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    frame =self.infoView.frame;
+    NSLog(@"scrollView frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    
+    //点赞
+     self.dianzanName = [[UILabel alloc] init];
+    
+    UIColor *color1=[UIColor grayColor];
+    UIFont * uIFont1=[UIFont systemFontOfSize:17];
+    self.dianzanName.frame = CGRectMake(10, CGRectGetMaxY(self.imageDetailLable.frame)+5, APPWINDOWWIDTH-10, 20);
+    self.dianzanName.textColor = color1;
+    
+    self.dianzanName.font = [UIFont systemFontOfSize:12];
+    
+    self.dianzanName.text=@"0人点赞";
+    
+    [self.infoView addSubview:self.dianzanName];
+    
+    
+    //5.在导航视图底添加分割线
+    self.dividingLine = [[UIView alloc] init];
+
+         self.dividingLine.frame =CGRectMake(10, CGRectGetMaxY(self.dianzanName.frame)+2, APPWINDOWWIDTH-10, 1);
+         self.dividingLine.backgroundColor = [UIColor grayColor];
+        [self.infoView addSubview: self.dividingLine];
+    
+   //拍摄时间
+        self.timeLbl = [[UILabel alloc] init];
+    
+    
+    self.timeLbl.frame = CGRectMake(20, CGRectGetMaxY(self.dianzanName.frame)+5, APPWINDOWWIDTH-20, 20);
+    self.timeLbl.textColor = color1;
+    self.timeLbl.font = uIFont1;
     [self.infoView addSubview:self.timeLbl];
     
+    //拍摄地点
     self.locationLbl = [[UILabel alloc] init];
-    self.locationLbl.frame = CGRectMake(20, 60, APPWINDOWWIDTH-20, 20);
-    self.locationLbl.textColor = [UIColor brownColor];
-    self.locationLbl.font = [UIFont systemFontOfSize:17];
+    self.locationLbl.frame = CGRectMake(20, CGRectGetMaxY(self.timeLbl.frame)+5, APPWINDOWWIDTH-20, 20);
+    self.locationLbl.textColor =color1;
+    self.locationLbl.font = uIFont1;
     [self.infoView addSubview:self.locationLbl];
+//    
+//    self.deviceLbl = [[UILabel alloc] init];
+//    self.deviceLbl.frame = CGRectMake(20, 100, APPWINDOWWIDTH-20, 20);
+//    self.deviceLbl.textColor = [UIColor brownColor];
+//    self.deviceLbl.font = [UIFont systemFontOfSize:17];
+//    [self.infoView addSubview:self.deviceLbl];
     
-    self.deviceLbl = [[UILabel alloc] init];
-    self.deviceLbl.frame = CGRectMake(20, 100, APPWINDOWWIDTH-20, 20);
-    self.deviceLbl.textColor = [UIColor brownColor];
-    self.deviceLbl.font = [UIFont systemFontOfSize:17];
-    [self.infoView addSubview:self.deviceLbl];
-    
+    //创建人
     self.nameLbl = [[UILabel alloc] init];
-    self.nameLbl.frame = CGRectMake(20, 140, APPWINDOWWIDTH-20, 20);
-    self.nameLbl.textColor = [UIColor brownColor];
-    self.nameLbl.font = [UIFont systemFontOfSize:17];
+    self.nameLbl.frame = CGRectMake(20, CGRectGetMaxY(self.locationLbl.frame)+5, APPWINDOWWIDTH-20, 20);
+    self.nameLbl.textColor = color1;
+    self.nameLbl.font = uIFont1;
     [self.infoView addSubview:self.nameLbl];
 
     //添加到scrollview
@@ -172,6 +197,7 @@
     
     [self.scrollView addSubview:self.infoView];
     [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.infoView.frame))];
+    
     
     //创建底部按钮
     [self addBtn:self.bottomView];
@@ -182,17 +208,54 @@
     [self addSubview:_moreView];
     [self bringSubviewToFront:self.bottomView];
     
-    
-    self.commentTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, APPWINDOWHEIGHT, APPWINDOWWIDTH, (APPWINDOWHEIGHT) / 2)];
-    self.commentTableView.delegate = self;
-    self.commentTableView.dataSource = self;
-    self.commentTableView.rowHeight = 80;
-    self.commentTableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
-    [self setupRefresh];
+
     
     
     
 }
+
+//设置内容后，重计算高度
+-(void )resetFrame{
+    UIFont *font = [UIFont fontWithName:@"Arial" size:16];
+  
+    
+    
+    //设置一个行高上限
+    CGSize size = CGSizeMake(APPWINDOWWIDTH,2000);
+    
+    CGSize labelsize = [self.imageDetailLable.text sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
+    
+    [self.imageDetailLable setFrame:CGRectMake(0,0, labelsize.width, labelsize.height)];
+    NSLog(@"imageDetailLable.y=%f", CGRectGetMaxY(self.imageDetailLable.frame));
+    [self.dianzanName setFrame:CGRectMake(10, CGRectGetMaxY(self.imageDetailLable.frame)+5, APPWINDOWWIDTH-10, 20)];
+     NSLog(@"dianzanName=%f", CGRectGetMaxY(self.dianzanName.frame));
+    
+    
+    [self.dividingLine setFrame:CGRectMake(10, CGRectGetMaxY(self.dianzanName.frame)+2,self.infoView.frame.size.width-10, 1)];
+    
+    [self.timeLbl setFrame:CGRectMake(10, CGRectGetMaxY(self.dianzanName.frame)+10, APPWINDOWWIDTH-10, 20)];
+    
+    
+    [self.locationLbl setFrame:CGRectMake(10, CGRectGetMaxY(self.timeLbl.frame)+10, APPWINDOWWIDTH-10, 20)];
+    
+     NSLog(@"timeLbl=%f", CGRectGetMaxY(self.timeLbl.frame));
+    [self.nameLbl setFrame:CGRectMake(10, CGRectGetMaxY(self.locationLbl.frame)+5, APPWINDOWWIDTH-10, 20)];
+    
+ NSLog(@"nameLbl=%f", CGRectGetMaxY(self.nameLbl.frame));
+    [self.infoView setFrame:CGRectMake(0, CGRectGetMaxY(self.imageView.frame)+5, APPWINDOWWIDTH, CGRectGetMaxY(self.nameLbl.frame)+5)];
+    
+     NSLog(@"imageView=%f", CGRectGetMaxY(self.imageView.frame));
+    //添加到scrollview
+    self.scrollView.showsVerticalScrollIndicator = YES;
+    
+    [self.scrollView addSubview:self.infoView];
+    
+    [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.infoView.frame))];
+
+}
+
+
+
 
 //根据数据数组，转成url 数组。
 -(NSMutableArray *)getImgUrlArray{
@@ -243,6 +306,9 @@
      {
          if (needUpDateDatas)
          {
+             
+             [self.pinglunSPBottomItem setTipNumber:needUpDateDatas.reply_count];
+             
              if(needUpDateDatas.yidianzan == 1)
              {
                  SPBottomItem * item = _buttonItems[2];
@@ -277,30 +343,42 @@
 
 - (void)resetData:(BOOL)hideInfoView
 {
-    self.scrollView.hidden = YES;
+   
     
     self.imageView .tag = [self indexOfDomain];
     NSLog(@" self.imageView .tag=%d", self.imageView .tag);
     
     [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.domain.path ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
      {
-         NSLog(@"self.domain.path=%@",self.domain.path);
+//         NSLog(@"self.domain.path=%@",self.domain.path);
      }];
     
-    
+    if([@"(null)" isEqualToString:self.domain.photo_time]||self.domain.photo_time==nil)self.domain.photo_time=@"";
     self.timeLbl.text = [NSString stringWithFormat:@"拍摄时间:%@",self.domain.photo_time];
-    self.locationLbl.text = [NSString stringWithFormat:@"位置:%@",self.domain.address];
-    self.deviceLbl.text = [NSString stringWithFormat:@"设备:%@",self.domain.phone_type];
+    
+      if([@"(null)" isEqualToString:self.domain.address]||self.domain.address==nil)self.domain.address=@"";
+    self.locationLbl.text = [NSString stringWithFormat:@"拍摄地点:%@",self.domain.address];
+    
+//    if(self.domain.phone_type==nil)self.domain.phone_type=@"";
+//
+//    self.deviceLbl.text = [NSString stringWithFormat:@"设备:%@",self.domain.phone_type];
+    
+    if([@"(null)" isEqualToString:self.domain.create_user]||self.domain.create_user==nil)self.domain.create_user=@"";
+
     self.nameLbl.text = [NSString stringWithFormat:@"上传人:%@",self.domain.create_user];
     
+    if([@"(null)" isEqualToString:self.domain.note]||self.domain.note==nil)self.domain.note=@"";
+
     self.imageDetailLable.text=self.domain.note;
-    if(self.imageDetailLable.text){
-        [self.imageDetailLable setHidden:NO];
-    }else{
-         [self.imageDetailLable setHidden:YES];
-    }
-    [self showByHideInfoView:hideInfoView];
+//    
+//     self.imageDetailLable.text=@"这是一个测试！！！adsfsaf时发生发勿忘我勿忘我勿忘我勿忘我勿忘我阿阿阿阿阿阿阿阿阿阿阿阿阿啊00000000阿什顿。。。";
+//    if(self.imageDetailLable.text==nil){
+//        [self.imageDetailLable setHidden:NO];
+//    }else{
+//         [self.imageDetailLable setHidden:YES];
+//    }
     
+    [self resetFrame];
     //请求点赞数据
     [self getDZData];
     
@@ -309,47 +387,21 @@
     {
         
         
-        NSLog(@"self.imageView.height1=%f",self.imageView.height);
+        
+      
          //设置图片、图片高度
          self.imageView.height = height;
         
-        
-        NSLog(@"self.imageView.height2=%f",self.imageView.height);
-        self.imageDetailLable.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) - 44, APPWINDOWWIDTH, 44);
+             self.imageDetailLable.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) - 44, APPWINDOWWIDTH, 44);
         
          [self.imageView sd_setImageWithURL:[NSURL URLWithString:[[self.domain.path componentsSeparatedByString:@"@"] firstObject]]];
         
-        [self showByHideInfoView:hideInfoView];
+         [self resetFrame];
      }
      faild:^(NSString *errorMsg)
      {
          //按照一个大小设置imageView
      }];
-}
-//不在使用
-- (void)showByHideInfoView:(BOOL)hideInfoView
-{
-    
-            [self.infoView setOrigin:CGPointMake(0, CGRectGetMaxY(self.imageView.frame))];
-    
-  //  return;
-//    
-//    if (hideInfoView == NO)
-//    {
-//        //显示infoview
-//        [self.infoView setOrigin:CGPointMake(0, 0)];
-//        [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
-//    }
-//    else
-//    {
-//        //隐藏infoview
-//        [self.infoView setOrigin:CGPointMake(0, -180)];
-//        [self.imageView setOrigin:CGPointMake(0, CGRectGetMaxY(self.infoView.frame))];
-//    }
-    
-//    [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.imageView.frame)+49)];
-//    
-    self.scrollView.hidden = NO;
 }
 - (void)setDataByMap:(id) map  indexOfDomain:(NSInteger)indexOfDomain dataArray :(NSArray*) dataArray
 {
@@ -365,17 +417,25 @@
 {
     _dataArrOfDomain=dataArray;
     [self setIndexOfDomain:indexOfDomain];
-    
+    //test
+    domain.status=@"1";
     if ([domain.status isEqualToString:@"1"]) //需要修改的domain
     {
-        [MBProgressHUD showMessage:@"请稍后..."];
+        [MBProgressHUD showMessage:@"更新数据，请稍后"];
         //请求最新domain
         [[KGHttpService sharedService] getFPTimeLineItem:domain.uuid success:^(FPFamilyPhotoNormalDomain *item)
         {
             [MBProgressHUD hideHUD];
             self.domain = item;
-            
+            //更新数据库
+            [[DBNetDaoService defaulService] updatePhotoItemInfo:self.domain];
+            self.domain.status=0;
+            _dataArrOfDomain[self.indexOfDomain] =self.domain;
             [self resetData:true];
+            
+            [MBProgressHUD showSuccess:@"下载成功!"];
+            
+            
             
         }
         faild:^(NSString *errorMsg)
@@ -428,21 +488,6 @@
     }];
 }
 
-- (void)getCommentData:(NSString *)uuid
-{
-    [[KGHttpService sharedService] getFPItemCommentList:uuid pageNo:[NSString stringWithFormat:@"%ld",(long)_pageNo] time:self.currentTime success:^(NSArray *arr)
-    {
-        [self.dataArr addObjectsFromArray:arr];
-        self.commentTableView.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + 10, APPWINDOWWIDTH, 80 * self.dataArr.count);
-        [self.scrollView setContentSize:CGSizeMake(0, CGRectGetMaxY(self.commentTableView.frame)+49)];
-        [self.commentTableView reloadData];
-    }
-    faild:^(NSString *errorMsg)
-    {
-        [MBProgressHUD showError:@"获取评论列表失败!"];
-    }];
-}
-
 #pragma mark - 创建底部按钮
 - (void)addBtn:(UIView *)view
 {
@@ -460,9 +505,11 @@
     {
         NSInteger row = (NSInteger)(i / totalloc);  //行号
         NSInteger loc = i % totalloc;               //列号
-        
+       
         SPBottomItem * item = [[[NSBundle mainBundle] loadNibNamed:@"SPBottomItem" owner:nil options:nil] firstObject];
-        
+        if(i==1){//评论
+            self.pinglunSPBottomItem=item;
+        }
         [item setPic:imageName[i] Title:titleName[i]];
         
         item.btn.tag = i;
@@ -486,52 +533,6 @@
     sepView.alpha = 0.5;
     [self.bottomView addSubview:sepView];
 }
-
-#pragma mark - tableview D&D
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.dataArr.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.dataArr.count == 0)
-    {
-        UITableViewCell * newCell = [[UITableViewCell alloc]init];
-        return newCell;
-    }
-    
-    static NSString * cellid = @"comment_id";
-    
-    FPTimeLineCommentCell * cell = [tableView dequeueReusableCellWithIdentifier:cellid];
-    
-    if (cell == nil)
-    {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FPTimeLineCommentCell" owner:nil options:nil] firstObject];
-    }
-    
-    [cell setData:self.dataArr[indexPath.row]];
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80;
-}
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    
-    CommitHeaderView * headerView = [[[NSBundle mainBundle] loadNibNamed:@"CommitHeaderView" owner:nil options:nil] firstObject];
-    return headerView;
-}
-
 
 #pragma pinglun
 - (void)baseReplyListVC_show{
@@ -580,48 +581,7 @@
         {
             
             [self baseReplyListVC_show];
-            return;
-            
-            if (_isFirstCommit == NO)
-            {
-                __weak typeof(self) weakSelf = self;
-                
-                [[KGHttpService sharedService] getFPItemCommentList:self.domain.uuid pageNo:@"1" time:[KGDateUtil getFPFormatSringWithDate:[NSDate date]] success:^(NSArray *arr)
-                 {
-                     _isFirstCommit = YES;
-                     weakSelf.dataArr = [NSMutableArray arrayWithArray:arr];
-                     [self.contentView addSubview:self.commentTableView];
-                     
-                 } faild:^(NSString *errorMsg) {
-                     
-                 }];
-                
-            }
-            
-            if (_isCommit == NO)
-            {
-                self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT / 2 - 49- 64, APPWINDOWWIDTH, APPWINDOWHEIGHT / 2);
-                _useTF = YES;
-                
-                self.commitTextFD = [[[NSBundle mainBundle] loadNibNamed:@"CommitTextFild" owner:nil options:nil] firstObject];
-                __weak typeof(self) weakSelf = self;
-                //点击完成之后回调的block
-                self.commitTextFD.completeCommite = ^{
-                    [weakSelf completeCommit:nil];
-                };
-                
-                self.commitTextFD.frame = CGRectMake(0, CGRectGetMaxY(self.commentTableView.frame), APPWINDOWWIDTH, 48);
-                [self.contentView addSubview:self.commitTextFD];
-                self.commitTextFD.hidden = NO;
-                _isCommit = YES;
-                _completeBtn.hidden = NO;
-            }
-            else
-            {
-                self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT, APPWINDOWWIDTH, (APPWINDOWHEIGHT) / 2);
-                _isCommit = NO;
-                
-            }
+           
             
         }
             break;
@@ -653,22 +613,6 @@
             break;
     }
 }
-#pragma mark - 完成按钮
--(void)completeCommit:(UIBarButtonItem *)sender{
-    
-    _useTF = NO;
-    _completeBtn.hidden = YES;
-    [[KGHttpService sharedService] saveFPItemReply:self.commitTextFD.TF.text rel_uuid:self.domain.uuid success:^(NSString *mgr) {
-        [MBProgressHUD showSuccess:@"评论成功"];
-    } faild:^(NSString *errorMsg) {
-        [MBProgressHUD showError:errorMsg];
-    }];
-    [self.commentTableView headerBeginRefreshing];
-    _isCommit = NO;
-    self.commitTextFD.TF.text = @"";
-    [self.commitTextFD.TF resignFirstResponder];
-}
-
 #pragma mark - 收藏相关
 //保存收藏
 - (void)saveFavorites:(UIButton *)button
@@ -797,84 +741,6 @@ faild:^(NSString *errorMsg)
     NSNotification * noti = [[NSNotification alloc] initWithName:@"modibtn" object:nil userInfo:nil];
     [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
-
--(void)changeFreamsWithHeight:(CGFloat)height{
-    self.commentTableView.frame = CGRectMake(0, APPWINDOWHEIGHT / 2 - 49- 64 - height, APPWINDOWWIDTH, APPWINDOWHEIGHT / 2);
-    self.commitTextFD.frame = CGRectMake(0, CGRectGetMaxY(self.commentTableView.frame), APPWINDOWWIDTH, 49);
-}
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    //kbSize即為鍵盤尺寸 (有width, height)
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;//得到鍵盤的高度
-    [self changeFreamsWithHeight:kbSize.height];
-}
--(void)keyboardWillBeHidden:(NSNotification*)aNotification
-
-{
-    [self changeFreamsWithHeight:0];
-}
-
-#pragma mark - 上拉下拉
-- (void)setupRefresh
-{
-    [self.commentTableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    self.commentTableView.footerPullToRefreshText = @"上拉加载更多";
-    self.commentTableView.footerReleaseToRefreshText = @"松开立即加载";
-    self.commentTableView.footerRefreshingText = @"正在加载中...";
-    
-    [self.commentTableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    self.commentTableView.headerRefreshingText = @"正在刷新中...";
-   self.commentTableView.headerPullToRefreshText = @"下拉刷新";
-    self.commentTableView.headerReleaseToRefreshText = @"松开立即刷新";
-}
-
-- (void)footerRereshing
-{
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [[KGHttpService sharedService] getFPItemCommentList:self.domain.uuid pageNo:[NSString stringWithFormat:@"%ld",(long)self.pageNo] time:[KGDateUtil getFPFormatSringWithDate:[NSDate date]] success:^(NSArray *arr)
-     {
-         if (arr.count == 0 || arr == nil)
-         {
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 weakSelf.commentTableView.footerRefreshingText = @"没有更多了";
-                 [weakSelf.commentTableView footerEndRefreshing];
-             });
-             
-         }else
-         {
-             weakSelf.pageNo++;
-             [weakSelf.dataArr addObjectsFromArray:arr];
-             [weakSelf.commentTableView reloadData];
-             [weakSelf.commentTableView footerEndRefreshing];
-         }
-         
-     } faild:^(NSString *errorMsg) {
-         [MBProgressHUD showError:@"请求失败"];
-         [weakSelf.commentTableView headerEndRefreshing];
-     }];
-    
-}
-- (void)headerRereshing
-{
-    __weak typeof(self) weakSelf = self;
-    
-    [self.dataArr removeAllObjects];
-    
-    [[KGHttpService sharedService] getFPItemCommentList:self.domain.uuid pageNo:@"1" time:[KGDateUtil getFPFormatSringWithDate:[NSDate date]] success:^(NSArray *arr)
-     {
-         weakSelf.dataArr = [NSMutableArray arrayWithArray:arr];
-         [self.commentTableView reloadData];
-         [self.commentTableView headerEndRefreshing];
-         
-     } faild:^(NSString *errorMsg) {
-         [MBProgressHUD showError:@"请求失败"];
-         [self.commentTableView headerEndRefreshing];
-     }];
-
-} 
 
 
 @end
