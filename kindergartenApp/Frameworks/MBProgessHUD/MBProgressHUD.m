@@ -122,6 +122,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 	return NO;
 }
 
+
+
 + (NSUInteger)hideAllHUDsForView:(UIView *)view animated:(BOOL)animated {
     if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
 	NSArray *huds = [MBProgressHUD allHUDsForView:view];

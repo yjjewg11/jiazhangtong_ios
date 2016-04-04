@@ -25,7 +25,7 @@
 #import "MJExtension.h"
 #import "PhotoVC.h"
 
-@interface FPTimeLineDetailVC () <UICollectionViewDataSource,UICollectionViewDelegate,FPTimeLineDetailLayoutDelegate,UIAlertViewDelegate,UMSocialUIDelegate>
+@interface FPTimeLineDetailVC () <UICollectionViewDataSource,UICollectionViewDelegate,FPTimeLineDetailLayoutDelegate,UIAlertViewDelegate,UMSocialUIDelegate,UpdateFPFamilyPhotoNormalDomainDelegate>
 {
     DBNetDaoService * _service;
     NSMutableArray * _imgDatas;
@@ -76,7 +76,7 @@ static NSString *const PicID = @"camaracoll";
     _service = [DBNetDaoService defaulService];
     _imgDatas = [NSMutableArray array];
     _pageNo = 1;
-    self.selectIndex = 0;
+    if(self.selectIndex==nil)self.selectIndex = 0;
     
     //创建视图
     [self initView];
@@ -94,26 +94,28 @@ static NSString *const PicID = @"camaracoll";
 - (void)pushToModifyVC
 {
     FPTimeLineEditVC * vc = [[FPTimeLineEditVC alloc] init];
-    
+    vc.delegate=self;
     vc.domain = _imgDatas[self.selectIndex];
     
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)updateDetailItem:(NSNotification *)noti
+
+
+- (void)updateFPFamilyPhotoNormalDomain:(FPFamilyPhotoNormalDomain *)domain
 {
-    FPFamilyPhotoNormalDomain * domain = noti.object;
     if (domain)
     {
         _imgDatas[self.selectIndex] = domain;
         
         dispatch_async(dispatch_get_main_queue(), ^
-        {
-            NSIndexPath * indexPath = [NSIndexPath indexPathForRow:self.selectIndex inSection:0];
-            [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
-        });
+                       {
+                           NSIndexPath * indexPath = [NSIndexPath indexPathForRow:self.selectIndex inSection:0];
+                           [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                       });
     }
 }
+
 - (void)setFpPhotoNormalDomainArrByDic:( NSMutableArray *) fpItemArrDic{
     self.fpPhotoNormalDomainArr =[NSMutableArray array];
 

@@ -30,6 +30,7 @@
 #import "UIButton+Extension.h"
 #import "DBNetDaoService.h"
 #import <objc/runtime.h>
+#import "SPBottomItemTools.h"
 
 @interface FPTimeLineDetailCell() <UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
 {
@@ -41,6 +42,8 @@
     BOOL _useTF;
     UIButton * _completeBtn;
     NSInteger pageNum;
+    
+    
     
 }
 
@@ -421,11 +424,14 @@
     domain.status=@"1";
     if ([domain.status isEqualToString:@"1"]) //需要修改的domain
     {
-        [MBProgressHUD showMessage:@"更新数据，请稍后"];
+        MBProgressHUD * hub=[MBProgressHUD showMessage:@"更新数据，请稍后"];
+        hub.removeFromSuperViewOnHide=YES;
+        
         //请求最新domain
         [[KGHttpService sharedService] getFPTimeLineItem:domain.uuid success:^(FPFamilyPhotoNormalDomain *item)
         {
-            [MBProgressHUD hideHUD];
+            
+            [hub hide:YES];
             self.domain = item;
             //更新数据库
             [[DBNetDaoService defaulService] updatePhotoItemInfo:self.domain];
@@ -433,14 +439,12 @@
             _dataArrOfDomain[self.indexOfDomain] =self.domain;
             [self resetData:true];
             
-            [MBProgressHUD showSuccess:@"下载成功!"];
-            
             
             
         }
         faild:^(NSString *errorMsg)
         {
-            [MBProgressHUD hideHUD];
+            [hub hide:YES];
             [MBProgressHUD showError:@"获取最新相片信息失败!"];
             self.domain = domain;
         }];
@@ -491,6 +495,16 @@
 #pragma mark - 创建底部按钮
 - (void)addBtn:(UIView *)view
 {
+    
+    NSArray * imageName = @[@"newshoucang1",@"fp_hudong",@"fp_dz",@"fp_fenxiang",@"fp_more"];
+    NSArray * titleName = @[@"收藏",@"评论",@"点赞",@"分享",@"更多"];
+    
+  
+    _buttonItems=[SPBottomItemTools createBottoms:view imageName:imageName titleName:titleName addTarget:self action:@selector(bottomBtnClicked:) ];
+    
+    
+    self.pinglunSPBottomItem=_buttonItems[1];
+    return;
     _buttonItems = [NSMutableArray array];
     
     int totalloc = 5;
@@ -498,8 +512,7 @@
     CGFloat spcourseh = 48;
     CGFloat margin = (KGSCREEN.size.width - totalloc * spcoursew) / (totalloc + 1);
 
-    NSArray * imageName = @[@"newshoucang1",@"fp_hudong",@"fp_dz",@"fp_fenxiang",@"fp_more"];
-    NSArray * titleName = @[@"收藏",@"评论",@"点赞",@"分享",@"更多"];
+   
     
     for (NSInteger i = 0; i < 5; i++)
     {

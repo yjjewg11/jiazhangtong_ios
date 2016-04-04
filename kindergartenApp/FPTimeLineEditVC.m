@@ -11,7 +11,7 @@
 #import "DBNetDaoService.h"
 #import "KGHttpService.h"
 #import "MBProgressHUD+HM.h"
-@interface FPTimeLineEditVC ()
+@interface FPTimeLineEditVC ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *img;
 
@@ -31,9 +31,13 @@
     self.title = @"编辑";
     
     [self.img sd_setImageWithURL:[NSURL URLWithString:self.domain.path]];
+//    self.note.placeholder=@"";
     self.note.text = self.domain.note;
     self.address.text = self.domain.address;
-    self.time.text = self.domain.create_time;
+    self.time.text = self.domain.photo_time;
+    
+    
+    self.address.delegate = self;
     
     //创建编辑按钮
     UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(save)];
@@ -46,27 +50,37 @@
 {
     self.domain.note = self.note.text;
     self.domain.address = self.address.text;
-
     
-    //保存到服务器
-    [[KGHttpService sharedService] modifyFPItemInfo:self.domain.address note:self.domain.note success:^(NSString *mgr)
-    {
-        [MBProgressHUD showSuccess:@"下载成功!"];
-        
-        //更新数据库
-        [[DBNetDaoService defaulService] updatePhotoItemInfo:self.domain];
-        
-    } faild:^(NSString *errorMsg)
-    {
-        [MBProgressHUD showError:errorMsg];
+//    FPFamilyPhotoNormalDomain domain=[[FPFamilyPhotoNormalDomain alloc]init];
+//    domain.uuid=self.domain.uuid;
+//    domain.note=self.note.text;
+//    doman.
+    MBProgressHUD *hud=[MBProgressHUD showMessage:@"保存中.."];
+    hud.removeFromSuperViewOnHide=YES;
+    
+    [[KGHttpService sharedService] postByDomainBodyJson:[KGHttpUrl modifyFPItemUrl] params:self.domain success:^(KGBaseDomain *baseDomain) {
+        [hud hide:YES];
+        [MBProgressHUD showSuccess:@"保存成功!"];
+        [self.delegate updateFPFamilyPhotoNormalDomain:self.domain];
+         [self.navigationController popViewControllerAnimated:YES];
+
+    } faild:^(NSString *errorMessage) {
+        [hud hide:YES];
+        [MBProgressHUD showError:errorMessage];
     }];
     
-    //通知详情页更新这个domain
-    NSNotification * noti = [[NSNotification alloc] initWithName:@"updatedetail" object:self.domain userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:noti];
-
-    [self.navigationController popViewControllerAnimated:YES];
+    
+ 
 }
 
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{//回收键盘,取消第一响应者
+    [textField resignFirstResponder]; return YES;
+    
+}
+//2.点击空白处回收键盘
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.note resignFirstResponder];
+    [self.address resignFirstResponder];
+}
 @end

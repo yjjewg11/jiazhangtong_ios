@@ -31,14 +31,16 @@
         return;
     }
       [self.tipNumberLbl setHidden:NO];
+    //count=999;
     self.tipNumberLbl.text=[NSString stringWithFormat:@"%d",count];
     
     //设置边缘弯曲角度
     self.tipNumberLbl.layer.cornerRadius =10;
     self.tipNumberLbl.clipsToBounds = YES;//（iOS7以后需要设置）
     
-    
-    [self.tipNumberLbl setFrame:CGRectMake(self.frame.size.width/2, 5, 30, 25)];
+    float x=self.frame.size.width-40;
+    if(x<0)x=0;
+    [self.tipNumberLbl setFrame:CGRectMake(x, 2, 20, 20)];
 
 }
 

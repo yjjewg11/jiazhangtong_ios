@@ -8,6 +8,7 @@
 
 
 #import "BaseReplyInputViewController.h"
+#import "FPFamilyPhotoNormalDomain.h"
 #pragma 照片详细显示，可以左右滑动
 @interface FPTimeLineDetailVC : BaseReplyInputViewController
 

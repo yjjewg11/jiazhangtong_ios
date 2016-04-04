@@ -389,4 +389,9 @@
 - (void)baseReply_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 - (void)baseReply_queryByRel_uuid:(NSString *)rel_uuid type:(KGTopicType)dzype  pageNo:(NSString *)pageNo time:(NSString *)time success:(void(^)(PageInfoDomain * pageInfoDomain))success faild:(void(^)(NSString * errorMsg))faild;
 - (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
+//通用post 参数bodyJSOn方法
+-(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
+
+-(void)postByDomainBodyJson:(NSString *)path params:(KGBaseDomain *)domain success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
+
 @end

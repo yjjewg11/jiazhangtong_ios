@@ -137,7 +137,15 @@
         return;
     }
 }
+-(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild{
+    
+    [self getServerJson:path params:jsonDictionary success:success faild:faild];
+}
 
+-(void)postByDomainBodyJson:(NSString *)path params:(KGBaseDomain *)domain success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild{
+    
+    [self getServerJson:path params:domain.keyValues success:success faild:faild];
+}
 
 /**
  *  获取服务器数据
