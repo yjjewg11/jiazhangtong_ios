@@ -8,7 +8,7 @@
 
 #import "FPImagePickerImageCell.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "UIImageView+WebCache.h"
 @interface FPImagePickerImageCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *mainImg;
@@ -36,18 +36,38 @@
 {
     self.myDomain = domain;
     
+    if(domain.isOlnyShowImg==YES){
+        self.mainImg.image = domain.suoluetu;
+        [self.btn setHidden:YES];
+        [self.selImg setHidden:YES];
+         [self.importedLbl setHidden:YES];
+        return;
+    }
+    
+    [self.btn setHidden:NO];
+    [self.selImg setHidden:NO];
+      [self.importedLbl setHidden:NO];
+    
+    
+    if(domain.suoluetu==nil){
+        [ self.mainImg sd_setImageWithURL:domain.localUrl placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+         {}];
+
+    }else{
+        self.mainImg.image = domain.suoluetu;
+
+    }
     if (domain.isUpload == YES)
     {
         self.btn.enabled = NO;
         self.importedLbl.hidden = NO;
         self.selImg.hidden = YES;
-        self.mainImg.image = domain.suoluetu;
-    }
+          }
     else
     {
         self.btn.enabled = YES;
         self.importedLbl.hidden = YES;
-        self.mainImg.image = domain.suoluetu;
+      
         self.selImg.hidden = NO;
     }
     

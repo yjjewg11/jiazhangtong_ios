@@ -10,6 +10,7 @@
 #import "FPImagePickerVC.h"
 #import "FPImagePickerGroupDomain.h"
 
+//本地选择照片上传服务器
 @interface FPImagePickerSelectVC : BaseViewController
 
 @property (strong, nonatomic) ALAssetsGroup * group;

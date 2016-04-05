@@ -13,8 +13,11 @@
 
 - (IBAction)btnClick:(id)sender
 {
-    NSNotification * noti = [[NSNotification alloc] initWithName:@"endselect" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:noti];
+    
+    [self.delegate submitOK];
+//    
+//    NSNotification * noti = [[NSNotification alloc] initWithName:@"endselect" object:nil userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotification:noti];
 }
 
 @end

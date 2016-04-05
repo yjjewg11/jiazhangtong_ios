@@ -65,9 +65,9 @@
     titleLabel.text = baseReplyDomain.create_user;
     messageLabel.text = baseReplyDomain.content;
 
-    CGSize size=[MLEmojiLabel boundingRectWithSize:baseReplyDomain.content w:messageLabel.frame.size.width font: 12];
-    [messageLabel setSize:size];
-    
+//    CGSize size=[MLEmojiLabel boundingRectWithSize:baseReplyDomain.content w:messageLabel.frame.size.width font: 12];
+//    [messageLabel setSize:size];
+//    
     NSDate * date = [KGDateUtil getDateByDateStr:baseReplyDomain.create_time format:dateFormatStr2];
     timeLabel.text = [KGNSStringUtil compareCurrentTime:date];
     

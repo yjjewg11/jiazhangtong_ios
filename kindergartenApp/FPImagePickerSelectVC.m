@@ -21,7 +21,7 @@
 #import "PickImgDayHeadView.h"
 
 #import "KGDateUtil.h"
-@interface FPImagePickerSelectVC () <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,PickImgDayHeadViewDelegate,FPImagePickerImageCellDelegate>
+@interface FPImagePickerSelectVC () <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,PickImgDayHeadViewDelegate,FPImagePickerImageCellDelegate,FPImagePickerSelectBottomViewDelegate>
 {
     UICollectionView * _collectionView;
     //照片数组加分组(日期分组）[groupInd,childInd]
@@ -75,7 +75,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 //    [center addObserver:self selector:@selector(deSelectPhoto:) name:@"deselectphoto" object:nil];
 //
     [center addObserver:self selector:@selector(showBigPhoto:) name:@"showbigphoto" object:nil];
-    [center addObserver:self selector:@selector(popSelf) name:@"endselect" object:nil];
+//    [center addObserver:self selector:@selector(popSelf) name:@"endselect" object:nil];
 }
 
 -(void)selectAllImg{
@@ -311,7 +311,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 - (void)createBottomView
 {
     _bottomView = [[[NSBundle mainBundle] loadNibNamed:@"FPImagePickerSelectBottomView" owner:nil options:nil] firstObject];
-    
+    _bottomView.delegate=self;
     _bottomView.frame = CGRectMake(0, APPWINDOWHEIGHT-49-64, APPWINDOWWIDTH, 49);
     
     _bottomView.infoLbl.text = @"选择了:0 张";
@@ -372,7 +372,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 }
 
 #pragma mark - 确定选择
-- (void)popSelf
+- (void)submitOK;
 {
     //得到词典中所有key值
    // NSEnumerator * enumeratorObject = [_selectIndexPath keyEnumerator];

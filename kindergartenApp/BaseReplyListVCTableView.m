@@ -299,9 +299,17 @@
        
     }
     cell.delegate=self;
+    
+    CGRect frame = cell.frame;
+    NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    
+
     [cell resetValue:self.dataSoure[indexPath.row] parame:nil];
     
+    frame = cell.frame;
+    NSLog(@"frame3=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
     
+
 
     
     return cell;

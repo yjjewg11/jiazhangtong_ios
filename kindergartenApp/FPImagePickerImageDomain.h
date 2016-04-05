@@ -11,7 +11,7 @@
 @interface FPImagePickerImageDomain : NSObject
 @property (strong, nonatomic) NSString * uuid;
 @property (strong, nonatomic) NSURL * localUrl;
-
+@property (nullable, nonatomic, retain) NSString * note;
 @property (assign, nonatomic) BOOL isUpload;
 
 @property (strong, nonatomic) NSString * dateStr;
@@ -19,5 +19,7 @@
 @property (strong, nonatomic) UIImage * suoluetu;
 
 @property (assign, nonatomic) BOOL isSelect;
+
+@property (assign, nonatomic) BOOL isOlnyShowImg;
 
 @end

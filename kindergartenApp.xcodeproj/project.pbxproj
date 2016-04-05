@@ -35,6 +35,11 @@
 		0405B6DF1CB10D210090863C /* BaseReplyListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0405B6DE1CB10D210090863C /* BaseReplyListHeaderView.xib */; };
 		0405B6E21CB10D580090863C /* BaseReplyListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6E11CB10D580090863C /* BaseReplyListHeaderView.m */; };
 		0405B6E91CB21D480090863C /* SPBottomItemTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6E81CB21D480090863C /* SPBottomItemTools.m */; };
+		0405B6EF1CB24EB70090863C /* FFMovieEditMainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6EE1CB24EB70090863C /* FFMovieEditMainVC.m */; };
+		0405B6F71CB253D10090863C /* JRSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6F41CB253D10090863C /* JRSegmentControl.m */; };
+		0405B6F81CB253D10090863C /* JRSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6F61CB253D10090863C /* JRSegmentViewController.m */; };
+		0405B7001CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B6FF1CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.m */; };
+		0405B7031CB296A00090863C /* ListBaseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0405B7021CB296A00090863C /* ListBaseDomain.m */; };
 		040687171C3E588D002C2196 /* MapVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 040687151C3E588D002C2196 /* MapVC.mm */; };
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
@@ -103,6 +108,7 @@
 		048ADD361BD611EB00E6E6D0 /* SPTimetableItemVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 048ADD351BD611EB00E6E6D0 /* SPTimetableItemVO.m */; };
 		048CF1371C23FAEB001A7CB2 /* AddressBooksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1361C23FAEB001A7CB2 /* AddressBooksViewController.xib */; };
 		048CF1391C23FB08001A7CB2 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1381C23FB08001A7CB2 /* ChatViewController.xib */; };
+		0492B9E21CB3AE0A00ACB096 /* FFMovieShareData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9E11CB3AE0A00ACB096 /* FFMovieShareData.m */; };
 		0494F4791BDF777500F39865 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0494F4691BDF777500F39865 /* MJRefresh.bundle */; };
 		0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46C1BDF777500F39865 /* MJRefreshBaseView.m */; };
 		0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46E1BDF777500F39865 /* MJRefreshConst.m */; };
@@ -542,6 +548,7 @@
 		04FB23881C16E761009B57E2 /* MineHomeLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB23871C16E761009B57E2 /* MineHomeLayout.m */; };
 		04FB44DB1C59B68900094E67 /* FPTimeLineDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB44D91C59B68900094E67 /* FPTimeLineDetailVC.m */; };
 		04FB44DC1C59B68900094E67 /* FPTimeLineDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FB44DA1C59B68900094E67 /* FPTimeLineDetailVC.xib */; };
+		04FB7AA11CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB7AA01CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.m */; };
 		04FB7CA81C0D869700FD3E31 /* SpTeacherDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB7CA71C0D869700FD3E31 /* SpTeacherDetailViewController.m */; };
 		04FB7CAB1C0D95D900FD3E31 /* SpTeacherDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB7CAA1C0D95D900FD3E31 /* SpTeacherDetailLayout.m */; };
 		04FB7CAF1C0D9A9D00FD3E31 /* SpTeacherInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB7CAD1C0D9A9D00FD3E31 /* SpTeacherInfoCell.m */; };
@@ -917,6 +924,16 @@
 		0405B6E11CB10D580090863C /* BaseReplyListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseReplyListHeaderView.m; sourceTree = "<group>"; };
 		0405B6E71CB21D480090863C /* SPBottomItemTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBottomItemTools.h; sourceTree = "<group>"; };
 		0405B6E81CB21D480090863C /* SPBottomItemTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItemTools.m; sourceTree = "<group>"; };
+		0405B6ED1CB24EB70090863C /* FFMovieEditMainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMovieEditMainVC.h; sourceTree = "<group>"; };
+		0405B6EE1CB24EB70090863C /* FFMovieEditMainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMovieEditMainVC.m; sourceTree = "<group>"; };
+		0405B6F31CB253D10090863C /* JRSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentControl.h; sourceTree = "<group>"; };
+		0405B6F41CB253D10090863C /* JRSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentControl.m; sourceTree = "<group>"; };
+		0405B6F51CB253D10090863C /* JRSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRSegmentViewController.h; sourceTree = "<group>"; };
+		0405B6F61CB253D10090863C /* JRSegmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRSegmentViewController.m; sourceTree = "<group>"; };
+		0405B6FE1CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMoiveEditSubSelectPhotoVC.h; sourceTree = "<group>"; };
+		0405B6FF1CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMoiveEditSubSelectPhotoVC.m; sourceTree = "<group>"; };
+		0405B7011CB296A00090863C /* ListBaseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListBaseDomain.h; sourceTree = "<group>"; };
+		0405B7021CB296A00090863C /* ListBaseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListBaseDomain.m; sourceTree = "<group>"; };
 		040687141C3E588D002C2196 /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
 		040687151C3E588D002C2196 /* MapVC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MapVC.mm; sourceTree = "<group>"; };
 		040687161C3E588D002C2196 /* MapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
@@ -1022,6 +1039,8 @@
 		048ADD351BD611EB00E6E6D0 /* SPTimetableItemVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPTimetableItemVO.m; sourceTree = "<group>"; };
 		048CF1361C23FAEB001A7CB2 /* AddressBooksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressBooksViewController.xib; sourceTree = "<group>"; };
 		048CF1381C23FB08001A7CB2 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		0492B9E01CB3AE0A00ACB096 /* FFMovieShareData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMovieShareData.h; sourceTree = "<group>"; };
+		0492B9E11CB3AE0A00ACB096 /* FFMovieShareData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMovieShareData.m; sourceTree = "<group>"; };
 		0494F4691BDF777500F39865 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		0494F46A1BDF777500F39865 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		0494F46B1BDF777500F39865 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -1739,6 +1758,8 @@
 		04FB44D81C59B68900094E67 /* FPTimeLineDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTimeLineDetailVC.h; sourceTree = "<group>"; };
 		04FB44D91C59B68900094E67 /* FPTimeLineDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTimeLineDetailVC.m; sourceTree = "<group>"; };
 		04FB44DA1C59B68900094E67 /* FPTimeLineDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPTimeLineDetailVC.xib; sourceTree = "<group>"; };
+		04FB7A9F1CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMoiveEditNoteSelectedVC.h; sourceTree = "<group>"; };
+		04FB7AA01CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMoiveEditNoteSelectedVC.m; sourceTree = "<group>"; };
 		04FB7CA61C0D869700FD3E31 /* SpTeacherDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpTeacherDetailViewController.h; sourceTree = "<group>"; };
 		04FB7CA71C0D869700FD3E31 /* SpTeacherDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpTeacherDetailViewController.m; sourceTree = "<group>"; };
 		04FB7CA91C0D95D900FD3E31 /* SpTeacherDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpTeacherDetailLayout.h; sourceTree = "<group>"; };
@@ -2387,6 +2408,7 @@
 		0405B6D31CB0C0990090863C /* BaseReply(公共回复模块） */ = {
 			isa = PBXGroup;
 			children = (
+				0405B6F11CB24F430090863C /* model */,
 				0405B6D81CB0CC340090863C /* view */,
 				0405B6D71CB0CC1D0090863C /* controller */,
 			);
@@ -2424,6 +2446,75 @@
 				0405B6E81CB21D480090863C /* SPBottomItemTools.m */,
 			);
 			name = tools;
+			sourceTree = "<group>";
+		};
+		0405B6EA1CB24DEB0090863C /* FFMovie(精品相册) */ = {
+			isa = PBXGroup;
+			children = (
+				0405B6F01CB24ECA0090863C /* model */,
+				0405B6EC1CB24E380090863C /* view */,
+				0405B6EB1CB24E060090863C /* controller */,
+			);
+			name = "FFMovie(精品相册)";
+			sourceTree = "<group>";
+		};
+		0405B6EB1CB24E060090863C /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				04873CC41CA6F11B00F01CB4 /* GiftwareListVC.h */,
+				04873CC51CA6F11B00F01CB4 /* GiftwareListVC.m */,
+				04873CCA1CA7D7B200F01CB4 /* FPGiftwareDetialVC.h */,
+				04873CCB1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m */,
+				04873CCC1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib */,
+				0405B6ED1CB24EB70090863C /* FFMovieEditMainVC.h */,
+				0405B6EE1CB24EB70090863C /* FFMovieEditMainVC.m */,
+				0405B6FE1CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.h */,
+				0405B6FF1CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.m */,
+				04FB7A9F1CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.h */,
+				04FB7AA01CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.m */,
+				0492B9E01CB3AE0A00ACB096 /* FFMovieShareData.h */,
+				0492B9E11CB3AE0A00ACB096 /* FFMovieShareData.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		0405B6EC1CB24E380090863C /* view */ = {
+			isa = PBXGroup;
+			children = (
+				04873CBF1CA6E68D00F01CB4 /* GiftwareListTableViewCell.h */,
+				04873CC01CA6E68D00F01CB4 /* GiftwareListTableViewCell.m */,
+				04873CC11CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		0405B6F01CB24ECA0090863C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				04873CC71CA7B31E00F01CB4 /* FPMoive4QDomain.h */,
+				04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		0405B6F11CB24F430090863C /* model */ = {
+			isa = PBXGroup;
+			children = (
+				0405B6C61CAD72E90090863C /* BaseReplyDomain.h */,
+				0405B6C71CAD72E90090863C /* BaseReplyDomain.m */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		0405B6F21CB253D10090863C /* JRSegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				0405B6F31CB253D10090863C /* JRSegmentControl.h */,
+				0405B6F41CB253D10090863C /* JRSegmentControl.m */,
+				0405B6F51CB253D10090863C /* JRSegmentViewController.h */,
+				0405B6F61CB253D10090863C /* JRSegmentViewController.m */,
+			);
+			path = JRSegmentControl;
 			sourceTree = "<group>";
 		};
 		0449A3361C4F5FBE0066ABBB /* tableviewcell */ = {
@@ -2507,9 +2598,6 @@
 				045C5B9C1C842A040097AF4F /* FPFamilyListCollectionViewCell.h */,
 				045C5B9D1C842A040097AF4F /* FPFamilyListCollectionViewCell.m */,
 				045C5B9E1C842A040097AF4F /* FPFamilyListCollectionViewCell.xib */,
-				04873CBF1CA6E68D00F01CB4 /* GiftwareListTableViewCell.h */,
-				04873CC01CA6E68D00F01CB4 /* GiftwareListTableViewCell.m */,
-				04873CC11CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib */,
 			);
 			name = collCell;
 			sourceTree = "<group>";
@@ -3276,12 +3364,12 @@
 		04F410F11C5A0FF800407C10 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				048676EE1CA5358C00D168D0 /* FPLocalDBPhotoPickerVC.h */,
 				048676F11CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m */,
 				04F410E61C5A0FC200407C10 /* FPImagePickerVC.h */,
 				04F410E41C5A0FC200407C10 /* FPImagePickerVC.m */,
 				04F410E71C5A0FC200407C10 /* FPImagePickerSelectVC.h */,
 				046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */,
-				048676EE1CA5358C00D168D0 /* FPLocalDBPhotoPickerVC.h */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3293,6 +3381,8 @@
 				04F410E31C5A0FC200407C10 /* FPImagePickerGroupDomain.h */,
 				04F970A11C5A3B2C007CA8C7 /* FPImagePickerImageDomain.h */,
 				04F970A21C5A3B2C007CA8C7 /* FPImagePickerImageDomain.m */,
+				0405B7011CB296A00090863C /* ListBaseDomain.h */,
+				0405B7021CB296A00090863C /* ListBaseDomain.m */,
 			);
 			name = domain;
 			sourceTree = "<group>";
@@ -3643,11 +3733,6 @@
 				04D288AB1CA3864C00D12BEF /* EditFamilyMemberVC.h */,
 				04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */,
 				04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */,
-				04873CC41CA6F11B00F01CB4 /* GiftwareListVC.h */,
-				04873CC51CA6F11B00F01CB4 /* GiftwareListVC.m */,
-				04873CCA1CA7D7B200F01CB4 /* FPGiftwareDetialVC.h */,
-				04873CCB1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m */,
-				04873CCC1CA7D7B200F01CB4 /* FPGiftwareDetialVC.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -3705,10 +3790,6 @@
 				045C5BA21C8434610097AF4F /* FPCollegeListDomin.m */,
 				045C5BA41C8435900097AF4F /* FPCollegePhotoDetailDomin.h */,
 				045C5BA51C8435900097AF4F /* FPCollegePhotoDetailDomin.m */,
-				04873CC71CA7B31E00F01CB4 /* FPMoive4QDomain.h */,
-				04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */,
-				0405B6C61CAD72E90090863C /* BaseReplyDomain.h */,
-				0405B6C71CAD72E90090863C /* BaseReplyDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -4741,6 +4822,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				0405B6F21CB253D10090863C /* JRSegmentControl */,
 				04D288431C9E915F00D12BEF /* NavigationMenu */,
 				04F7D6E61C5F2CF7006B5591 /* KeyChain */,
 				04FBAEBA1C5B137F0094DC6B /* 图片浏览器 */,
@@ -4847,6 +4929,7 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				0405B6EA1CB24DEB0090863C /* FFMovie(精品相册) */,
 				0405B6D31CB0C0990090863C /* BaseReply(公共回复模块） */,
 				248B6AA41B19AD2C00FCB98F /* Home(主页) */,
 				04F151651C45FECD00E80B3E /* FamilyPhoto(家庭相册) */,
@@ -6395,6 +6478,7 @@
 				045C5BA31C8434610097AF4F /* FPCollegeListDomin.m in Sources */,
 				045C5BA61C8435900097AF4F /* FPCollegePhotoDetailDomin.m in Sources */,
 				F4C0AB8B1B1C39D4007B0E35 /* KGDateUtil.m in Sources */,
+				0405B7031CB296A00090863C /* ListBaseDomain.m in Sources */,
 				04FB237B1C16D91C009B57E2 /* MineHomeVC.m in Sources */,
 				04F903A61C56795C0040629F /* AFHTTPRequestOperationManager.m in Sources */,
 				04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */,
@@ -6413,6 +6497,7 @@
 				04D288751C9E915F00D12BEF /* SICellSelection.m in Sources */,
 				04FA221C1C113B2F002A88F1 /* EnrolStudentMySchoolVC.m in Sources */,
 				04F903A71C56795C0040629F /* AFHTTPSessionManager.m in Sources */,
+				0405B7001CB2590F0090863C /* FFMoiveEditSubSelectPhotoVC.m in Sources */,
 				248B6AB91B19B51A00FCB98F /* PagedFlowView.m in Sources */,
 				04F903B01C56795C0040629F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				04FA92891C4DE6E600010DAE /* UIImage+ImageEffects.m in Sources */,
@@ -6447,6 +6532,7 @@
 				04F3D45B1BF47FD3007E7AC0 /* OpenUDID.m in Sources */,
 				04FBAECE1C5B3AA10094DC6B /* FPFamilyPhotoUploadDomain.m in Sources */,
 				04F8F62C1C7AAF94006929F2 /* FPTimeLineCommentDomain.m in Sources */,
+				0405B6EF1CB24EB70090863C /* FFMovieEditMainVC.m in Sources */,
 				249926E31B8093BD0071DFB3 /* TopicInteractionDomain.m in Sources */,
 				2489B6381B5AB32F00039E70 /* ImageCollectionViewCell.m in Sources */,
 				04FF47601C046D97004DC45D /* GDTMobNativeAdapter.m in Sources */,
@@ -6564,6 +6650,7 @@
 				04F9FB6C1BF1A67400AEFB88 /* UMFullScreenPhotoView.m in Sources */,
 				2474DFCF1B6CD43C0021506F /* CookbookDomain.m in Sources */,
 				2489B66A1B5AB49E00039E70 /* SDWebImageDownloaderOperation.m in Sources */,
+				0405B6F81CB253D10090863C /* JRSegmentViewController.m in Sources */,
 				042A85751C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m in Sources */,
 				04F8D3691C1168200098FBAB /* EnrolStudentMySchoolCommentCell.m in Sources */,
 				0449A33A1C4F5FD60066ABBB /* FPUploadCell.m in Sources */,
@@ -6571,6 +6658,7 @@
 				04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */,
 				040466C61C438FDB00C9EE5C /* RouteDetailInfoCell.m in Sources */,
 				0401B2D51C76EF6B0014886F /* FPTimeLineDZDomain.m in Sources */,
+				0492B9E21CB3AE0A00ACB096 /* FFMovieShareData.m in Sources */,
 				04FABBFA1C757E8C001D4BC9 /* FPTimeLineDetailCell.m in Sources */,
 				F4E36D591B85B49D009BD909 /* AssetHelper.m in Sources */,
 				046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */,
@@ -6602,6 +6690,7 @@
 				248B6A931B19A9D900FCB98F /* UIColor+Extension.m in Sources */,
 				24A175F31B55430600295997 /* KGTableParam.m in Sources */,
 				04F994341C51DC0900CD5818 /* FPHomeWarningCell.m in Sources */,
+				04FB7AA11CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.m in Sources */,
 				04F410ED1C5A0FC200407C10 /* FPImagePickerVC.m in Sources */,
 				045C5B9B1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m in Sources */,
 				04F9724F1C50E1AA00FECD21 /* FPFamilyPhotoLastTimeVO.m in Sources */,
@@ -6745,6 +6834,7 @@
 				24DE91A81B67B94500D3FFCE /* MessageTableViewCell.m in Sources */,
 				04FDBE661C1928A700516755 /* SystemConfigOfTopic.m in Sources */,
 				248B6AD21B19B58D00FCB98F /* MLNavigationController.m in Sources */,
+				0405B6F71CB253D10090863C /* JRSegmentControl.m in Sources */,
 				04FEC5731BEDCCAA00C642A6 /* YouHuiDataListVO.m in Sources */,
 				4DE384551B7F728A009F12E4 /* MyCollectionViewController.m in Sources */,
 				24AA0B471B690F4300DAC03B /* UUMessageFrame.m in Sources */,

@@ -35,6 +35,8 @@
 #import "SINavigationMenuView.h"
 #import "FPFamilyPhotoCollectionDetailTableViewController.h"
 #import "GiftwareListVC.h"
+#import "FFMovieEditMainVC.h"
+
 #define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
@@ -578,7 +580,8 @@ NSInteger localDBlimit=50;
 
 - (void)pushToCreateGiftwareShopVC
 {
-    
+    FFMovieEditMainVC * vc = [[FFMovieEditMainVC alloc] init];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 - (void)getPhotoDatas

@@ -14,7 +14,7 @@
 #import "MBProgressHUD+HM.h"
 #import "FPTimeLineCommentCell.h"
 #import "KGDateUtil.h"
-#import "SPBottomItem.h"
+
 #import "EYPopupViewHeader.h"
 #import "KGHUD.h"
 #import "HLActionSheet.h"
@@ -30,6 +30,7 @@
 #import "UIButton+Extension.h"
 #import "DBNetDaoService.h"
 #import <objc/runtime.h>
+#import "SPBottomItem.h"
 #import "SPBottomItemTools.h"
 
 @interface FPTimeLineDetailCell() <UMSocialUIDelegate,FPTimeLineDetailMoreViewDelegate>
@@ -201,6 +202,9 @@
     [self.scrollView addSubview:self.infoView];
     [self.scrollView setContentSize:CGSizeMake(0,CGRectGetMaxY(self.infoView.frame))];
     
+    CGSize size=self.bottomView.size;
+    size.width=APPWINDOWWIDTH;
+    [self.bottomView setSize:size];
     
     //创建底部按钮
     [self addBtn:self.bottomView];
@@ -421,7 +425,6 @@
     _dataArrOfDomain=dataArray;
     [self setIndexOfDomain:indexOfDomain];
     //test
-    domain.status=@"1";
     if ([domain.status isEqualToString:@"1"]) //需要修改的domain
     {
         MBProgressHUD * hub=[MBProgressHUD showMessage:@"更新数据，请稍后"];
@@ -557,18 +560,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_ShowBaseReplyList object:self userInfo:dic];
     
     return;
-//    if(self.baseReplyListVC==nil){
-//        
-//        self.baseReplyListVC=[[BaseReplyListVCTableView alloc]initWithSuperVC:self];
-//        
-//        
-//      [self.contentView addSubview:self.baseReplyListVC];
-//    }else{
-//        [self.contentView bringSubviewToFront:self.baseReplyListVC];
-//    }
-//    [self.baseReplyListVC setHidden:NO];
-//    
-//    [self.baseReplyListVC setBaseReplyData:self.domain.uuid type:Topic_FPTimeLine];
   
     
 }

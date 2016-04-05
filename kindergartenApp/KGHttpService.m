@@ -35,7 +35,7 @@
 #import "FPFamilyMembers.h"
 #import "KGDateUtil.h"
 #import "FPMoive4QDomain.h"
-
+#import "ListBaseDomain.h"
 
 @implementation KGHttpService
 
@@ -137,6 +137,79 @@
         return;
     }
 }
+
+-(void)getListByURL:(NSString *)path   success :(void (^)(ListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    [mgr GET:path parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         
+         
+         NSDictionary *responseObjectDic=responseObject;
+         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil];
+         NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                      encoding:NSUTF8StringEncoding];
+         NSLog(@"responseObject= %@",jsonString);
+         
+         ListBaseDomain * baseDomain = [ListBaseDomain objectWithKeyValues: responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         //         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             
+             success(baseDomain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
+-(void)getByURL:(NSString *)path   success :(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    [mgr GET:path parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         
+         
+         NSDictionary *responseObjectDic=responseObject;
+         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil];
+         NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                      encoding:NSUTF8StringEncoding];
+         NSLog(@"responseObject= %@",jsonString);
+         
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues: responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         //         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+           
+             success(baseDomain);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 -(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild{
     
     [self getServerJson:path params:jsonDictionary success:success faild:faild];
@@ -3001,6 +3074,9 @@
     }];
 }
 
+
+
+
 //取消点赞
 - (void)baseDianzan_delete:(NSString *)newsuid  type:(KGTopicType)dzype  success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {
     
@@ -3086,4 +3162,8 @@
         faild(errorMessage);
     }];
 }
+
+
+
+
 @end

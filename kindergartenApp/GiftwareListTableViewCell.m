@@ -21,6 +21,8 @@
 
 @implementation GiftwareListTableViewCell
 - (void)setDomain:(FPMoive4QDomain * )domain{
+    
+    
     NSURL *imageUrl = [NSURL URLWithString:domain.herald];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
     
@@ -38,10 +40,10 @@
     NSString * dt1=[[domain.create_time componentsSeparatedByString:@" "] firstObject];
     self.subtitle_lable.text=[NSString stringWithFormat:@"%@制作于%@,共%d张照片",domain.create_username,dt1,domain.photo_count];
     
-    self.reply_count_label.text=[NSString stringWithFormat:@"%d",domain.reply_count];
+    self.reply_count_label.text=[NSString stringWithFormat:@"%d",domain.reply_count ];
     
     NSDictionary * dic =domain.dianZan;
-    int dianzancount=[dic  valueForKey :@"dianzan_count"];
+    NSInteger dianzancount=[dic  valueForKey :@"dianzan_count"];
     
      self.dianzan_count_label.text=[NSString stringWithFormat:@"%d",dianzancount];
     

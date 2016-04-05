@@ -19,7 +19,7 @@
 #import "FPHomeVC.h"
 #import "KGDateUtil.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-@interface FPLocalDBPhotoPickerVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,PickImgDayHeadViewDelegate,FPImagePickerImageCellDelegate>
+@interface FPLocalDBPhotoPickerVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,PickImgDayHeadViewDelegate,FPImagePickerImageCellDelegate,FPImagePickerSelectBottomViewDelegate>
 {
     
     UICollectionView * _collectionView;
@@ -56,7 +56,10 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
     
     self.title = @"选择图片";
     
-    if(_selectIndexPath==nil)_selectIndexPath = [[NSMutableSet alloc]init];
+    //if(_selectIndexPath==nil)_selectIndexPath = [[NSMutableSet alloc]init];
+    if(self.selectDomainMap==nil)self.selectDomainMap=[[NSMutableDictionary alloc]init];
+    
+    
     _selectHeaderdate= [[NSMutableSet alloc]init];
     dataSourceGroup=[NSMutableArray array];
     dataSourceGroupChildMap=[[NSMutableDictionary alloc] init];
@@ -74,7 +77,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
     //    [center addObserver:self selector:@selector(deSelectPhoto:) name:@"deselectphoto" object:nil];
     //
     [center addObserver:self selector:@selector(showBigPhoto:) name:@"showbigphoto" object:nil];
-    [center addObserver:self selector:@selector(popSelf) name:@"endselect" object:nil];
+//    [center addObserver:self selector:@selector(popSelf) name:@"endselect" object:nil];
 }
 
 -(void)selectAllImg{
@@ -233,7 +236,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
     NSMutableArray * marr = [_service getListTimePhotoDataByPage:[KGDateUtil getLocalDateStr] familyUUID:[FPHomeVC getFamily_uuid] pageNo:1 limit:999999];
 ;
     
-    NSLog(@"总共有:%d张",marr.count);
+    NSLog(@"总共有:%ld张",marr.count);
     if(dataSourceGroup==nil)dataSourceGroup=[NSMutableArray array];
     if(dataSourceGroupChildMap==nil)dataSourceGroupChildMap=[[NSMutableDictionary alloc] init];
     
@@ -250,10 +253,14 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
         FPImagePickerImageDomain *pickDomain=[[FPImagePickerImageDomain alloc]init];
         pickDomain.uuid= domain.uuid;
         pickDomain.localUrl=[NSURL URLWithString:domain.path];
-        pickDomain.suoluetu=[UIImage imageNamed:domain.path];
+        pickDomain.note=domain.note;
+       // pickDomain.suoluetu=[UIImage imageNamed:domain.path];
         
         
-        pickDomain.isSelect=[_selectIndexPath containsObject:pickDomain.uuid];
+        FPImagePickerImageDomain *selectDomain=[self.selectDomainMap objectForKey:pickDomain.uuid];
+        
+        pickDomain.isSelect=selectDomain!=nil;
+        
         //分组数据转换
         if(tmp==nil){
             tmp=[NSMutableArray array];
@@ -287,10 +294,10 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 - (void)createBottomView
 {
     _bottomView = [[[NSBundle mainBundle] loadNibNamed:@"FPImagePickerSelectBottomView" owner:nil options:nil] firstObject];
-    
+    _bottomView.delegate=self;
     _bottomView.frame = CGRectMake(0, APPWINDOWHEIGHT-49-64, APPWINDOWWIDTH, 49);
     
-     _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
+     _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[self.selectDomainMap count]];
     
         [self.view addSubview:_bottomView];
 }
@@ -329,36 +336,12 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 }
 
 #pragma mark - 确定选择
-- (void)popSelf
+- (void)submitOK;
 {
-    //得到词典中所有key值
-    // NSEnumerator * enumeratorObject = [_selectIndexPath keyEnumerator];
+    [self.delegate submitSelectMap:self.selectDomainMap];
+
+  [self.navigationController popViewControllerAnimated:YES];
     
-    NSMutableArray * urlArr = [NSMutableArray array];
-    NSMutableArray * urlStrArr = [NSMutableArray array];
-    
-    for (NSURL *urls in _selectIndexPath)
-    {
-        [urlArr addObject:urls];
-        [urlStrArr addObject:[urls absoluteString]];
-    }
-//    
-//    NSNotification * noti = [[NSNotification alloc] initWithName:@"didgetphotodata" object:[urlArr copy] userInfo:nil];
-//    [[NSNotificationCenter defaultCenter] postNotification:noti];
-//    
-//    //存入数据库
-//    [_service saveUploadImgListPath:urlStrArr];
-    
-    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       for (UIViewController *temp in self.navigationController.viewControllers)
-                       {
-//                           if ([temp isKindOfClass:[FPUploadVC class]])
-//                           {
-//                               [self.navigationController popToViewController:temp animated:YES];
-//                           }
-                       }
-                   });
 }
 
 - (void)dealloc
@@ -406,16 +389,17 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 #pragma FPImagePickerImageCellDelegate
 -(void)updateSelectedStatus:(FPImagePickerImageDomain *)domain{
     if(domain.isSelect==YES){
-        
-        [_selectIndexPath addObject:domain.uuid];
+        [self.selectDomainMap setObject:domain forKey:domain.uuid];
+       // [_selectIndexPath addObject:domain.uuid];
         
     }else{
-        [_selectIndexPath removeObject:domain.uuid];
+        [self.selectDomainMap removeObjectForKey:domain.uuid];
+        //[_selectIndexPath removeObject:domain.uuid];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^
                    {
-                       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[_selectIndexPath count]];
+                       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[self.selectDomainMap count]];
                    });
     
 }

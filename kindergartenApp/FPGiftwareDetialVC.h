@@ -6,9 +6,9 @@
 //  Copyright © 2016年 funi. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseReplyInputViewController.h"
 #import "FPMoive4QDomain.h"
-@interface FPGiftwareDetialVC : BaseViewController
+@interface FPGiftwareDetialVC : BaseReplyInputViewController
 
 
 @property (strong, nonatomic)  FPMoive4QDomain *  domain;

@@ -11,17 +11,31 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="评论列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ml-57-XBM">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="评论列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ml-57-XBM">
                     <rect key="frame" x="5" y="5" width="142" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="142" id="iK5-K9-x39"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="0.515471122" blue="0.29619176069999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ftr-ox-Xty">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ftr-ox-Xty">
                     <rect key="frame" x="280" y="5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="qQY-6L-2bl"/>
+                    </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ftr-ox-Xty" secondAttribute="trailing" constant="10" id="CFt-C4-mtk"/>
+                <constraint firstItem="5Ml-57-XBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="CsB-o3-CJI"/>
+                <constraint firstItem="ftr-ox-Xty" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="KG6-EX-OTQ"/>
+                <constraint firstItem="ftr-ox-Xty" firstAttribute="top" secondItem="5Ml-57-XBM" secondAttribute="top" id="MFE-cW-3k0"/>
+                <constraint firstAttribute="bottom" secondItem="ftr-ox-Xty" secondAttribute="bottom" constant="9" id="VNW-F8-MBd"/>
+                <constraint firstItem="ftr-ox-Xty" firstAttribute="bottom" secondItem="5Ml-57-XBM" secondAttribute="bottom" id="dZG-Tr-EpJ"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="234" y="153"/>
         </view>

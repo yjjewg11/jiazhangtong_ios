@@ -39,6 +39,7 @@
 #import "DiscorveryNewNumberDomain.h"
 #import "DiscorveryReMenJingXuanDomain.h"
 #import "SystemConfigOfTopic.h"
+#import "ListBaseDomain.h"
 #import "FPMyFamilyPhotoCollectionDomain.h"
 #import "FPFamilyPhotoLastTimeVO.h"
 #import "FPFamilyPhotoUpdateCount.h"
@@ -392,6 +393,7 @@
 //通用post 参数bodyJSOn方法
 -(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 
+-(void)getListByURL:(NSString *)path   success :(void (^)(ListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)postByDomainBodyJson:(NSString *)path params:(KGBaseDomain *)domain success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
-
+-(void)getByURL:(NSString *)path   success :(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 @end
