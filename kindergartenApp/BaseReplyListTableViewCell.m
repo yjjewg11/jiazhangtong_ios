@@ -32,7 +32,7 @@
     
     
     //当点击了第二个按钮（OK）
-    NSLog(@"%d",buttonIndex);
+    NSLog(@"%ld",buttonIndex);
     //基本信息修改
     if(buttonIndex ==1 )
     {
@@ -65,15 +65,20 @@
     titleLabel.text = baseReplyDomain.create_user;
     messageLabel.text = baseReplyDomain.content;
 
-//    CGSize size=[MLEmojiLabel boundingRectWithSize:baseReplyDomain.content w:messageLabel.frame.size.width font: 12];
-//    [messageLabel setSize:size];
-//    
+    CGSize size=[MLEmojiLabel boundingRectWithSize:baseReplyDomain.content w:messageLabel.frame.size.width font: 13];
+    [messageLabel setSize:size];
+//
     NSDate * date = [KGDateUtil getDateByDateStr:baseReplyDomain.create_time format:dateFormatStr2];
     timeLabel.text = [KGNSStringUtil compareCurrentTime:date];
     
     [headImageView sd_setImageWithURL:[NSURL URLWithString:baseReplyDomain.create_img] placeholderImage:[UIImage imageNamed:@"head_def"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [headImageView setBorderWithWidth:Number_Zero color:KGColorFrom16(0xE7E7EE) radian:headImageView.width / Number_Two];
     }];
+    CGSize cellSize=CGSizeMake(self.frame.size.width,  CGRectGetMaxY(messageLabel.frame)+2);
+//    baseReplyDomain.frame=CGRectMake(cellframe.origin.x, CGRectGetMaxY(messageLabel.frame), cellframe.size.width, CGRectGetMaxY(messageLabel.frame)+2);
+    [self setSize:cellSize];
+    //[self setFrame:cellframe];
+    
 }
 
 @end

@@ -75,14 +75,8 @@
     
     
     
-    // 设置表视图的头部视图(headView 添加子视图)
-    BaseReplyListHeaderView *headerView =  [[[NSBundle mainBundle] loadNibNamed:@"BaseReplyListHeaderView" owner:nil options:nil] firstObject];
-    
-    
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click_CloseBtn:)];
-    
-        [headerView addGestureRecognizer:tap];
-    _tableView.tableHeaderView = headerView; //设置头部
+   
+//    _tableView.tableHeaderView = headerView; //设置头部
     _tableView.estimatedRowHeight = 110;
     _tableView.rowHeight = UITableViewAutomaticDimension;
     
@@ -237,10 +231,10 @@
     }else{
      //  return  78;
     }
-//    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
 //    // 這裏返回需要的高度
 //    NSLog(@"height1=%f",cell.frame.size.height);
-//    return cell.frame.size.height;
+    return cell.frame.size.height+25;
 //    
     
     int row = [indexPath row];
@@ -300,15 +294,15 @@
     }
     cell.delegate=self;
     
-    CGRect frame = cell.frame;
-    NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+//    CGRect frame = cell.frame;
+//    NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
     
 
     [cell resetValue:self.dataSoure[indexPath.row] parame:nil];
     
-    frame = cell.frame;
-    NSLog(@"frame3=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-    
+//    frame = cell.frame;
+//    NSLog(@"frame3=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+//    
 
 
     
@@ -316,7 +310,19 @@
 }
 #pragma mark - tableview D&D
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0;
+    return 44;
+}
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    // 设置表视图的头部视图(headView 添加子视图)
+    BaseReplyListHeaderView *headerView =  [[[NSBundle mainBundle] loadNibNamed:@"BaseReplyListHeaderView" owner:nil options:nil] firstObject];
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click_CloseBtn:)];
+    
+    [headerView addGestureRecognizer:tap];
+    
+    return headerView;
 }
 
 #pragma BaseReplyListDataSoruceDelegate
