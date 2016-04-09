@@ -87,7 +87,7 @@ UITextField *nameField = [alertView textFieldAtIndex:0];
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setTitle:self.domain.title];
     myWebView.backgroundColor = [UIColor clearColor];
     myWebView.opaque = NO;
     myWebView.scrollView.scrollEnabled = YES;

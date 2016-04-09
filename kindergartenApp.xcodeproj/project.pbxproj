@@ -118,6 +118,7 @@
 		0492B9FD1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B9FB1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib */; };
 		0492BA001CB8D88300ACB096 /* FPMoiveDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9FF1CB8D88300ACB096 /* FPMoiveDomain.m */; };
 		0492BA021CB9000300ACB096 /* FFMoiveSubmitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */; };
+		0492BA051CB9543200ACB096 /* PXUIWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492BA041CB9543000ACB096 /* PXUIWebView.m */; };
 		0494F4791BDF777500F39865 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0494F4691BDF777500F39865 /* MJRefresh.bundle */; };
 		0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46C1BDF777500F39865 /* MJRefreshBaseView.m */; };
 		0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46E1BDF777500F39865 /* MJRefreshConst.m */; };
@@ -1066,6 +1067,8 @@
 		0492B9FE1CB8D88300ACB096 /* FPMoiveDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMoiveDomain.h; sourceTree = "<group>"; };
 		0492B9FF1CB8D88300ACB096 /* FPMoiveDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMoiveDomain.m; sourceTree = "<group>"; };
 		0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FFMoiveSubmitView.xib; sourceTree = "<group>"; };
+		0492BA031CB9543000ACB096 /* PXUIWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXUIWebView.h; sourceTree = "<group>"; };
+		0492BA041CB9543000ACB096 /* PXUIWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXUIWebView.m; sourceTree = "<group>"; };
 		0494F4691BDF777500F39865 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		0494F46A1BDF777500F39865 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		0494F46B1BDF777500F39865 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -4819,6 +4822,8 @@
 				24C46B2A1B5A29F700A58F92 /* MessageView */,
 				04F8C6FE1C18351900EF5E57 /* MyUILabel.h */,
 				04F8C6FF1C18351900EF5E57 /* MyUILabel.m */,
+				0492BA031CB9543000ACB096 /* PXUIWebView.h */,
+				0492BA041CB9543000ACB096 /* PXUIWebView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -6590,6 +6595,7 @@
 				04FB23831C16E1B8009B57E2 /* MineHomeStudentHeadItem.m in Sources */,
 				04F936D01C4CE74100116D86 /* FPHomeTopView.m in Sources */,
 				249926E01B80545A0071DFB3 /* KGRange.m in Sources */,
+				0492BA051CB9543200ACB096 /* PXUIWebView.m in Sources */,
 				2489B62E1B5A62A900039E70 /* KGTabBarViewController.m in Sources */,
 				F47AFEAE1B5E22EA00D43F38 /* AnnouncementListViewController.m in Sources */,
 				04F946ED1BF5ECD200F8B31F /* MySPCourseCommentVC.m in Sources */,

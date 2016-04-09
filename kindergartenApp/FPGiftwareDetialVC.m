@@ -16,11 +16,12 @@
 #import "SPBottomItem.h"
 #import "SPBottomItemTools.h"
 #import "FFMovieEditMainVC.h"
-@interface FPGiftwareDetialVC ()<UIWebViewDelegate,FPTimeLineDetailMoreViewDelegate,UIAlertViewDelegate>
+#import "PXUIWebView.h"
+@interface FPGiftwareDetialVC ()<UIWebViewDelegate,FPTimeLineDetailMoreViewDelegate,UIAlertViewDelegate,PXJSExport,PXUIWebViewDelegate>
 {
 
     IBOutlet UIScrollView *contentScrollView;
-    IBOutlet UIWebView * myWebView;
+    IBOutlet PXUIWebView * myWebView;
     
     FPTimeLineDetailMoreView *moreView;
    NSMutableArray * _buttonItems;
@@ -48,8 +49,8 @@
     myWebView.opaque = NO;
     contentScrollView.scrollEnabled = NO;
     myWebView.scrollView.scrollEnabled = YES;
-    
-    myWebView.delegate = self;
+    [myWebView initViewByController:self];
+    myWebView.delegate1 = self;
     
     NSLog(@"myWebView loadRequest, url=%@",self.domain.share_url);
     CGSize size=self.bottomView.size;
@@ -378,14 +379,19 @@
     // Pass the selected object to the new view controller.
 }
 */
-- (void)webViewDidStartLoad:(UIWebView *)webView{
-    [[KGHUD sharedHud] show:self.view];
+
+
+- (void)fullScreen{
+    [self.navigationController setNavigationBarHidden:YES];
+    [self.bottomView setHidden:YES];
 }
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    
-    [[KGHUD sharedHud] hide:self.view];
+- (void)exitFullScreen{
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.bottomView setHidden:NO];
 }
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
-     [[KGHUD sharedHud] hide:self.view];
+- (void)makeFPMovie{
+    FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
+    [self.navigationController pushViewController:vc animated:NO];
+
 }
 @end
