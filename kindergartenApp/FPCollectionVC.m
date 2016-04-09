@@ -68,6 +68,11 @@
 }
 -(void)creatCollectionView
 {
+    
+    if(self.collectionView!=nil){
+        [self.collectionView reloadData];
+        return ;
+    }
     UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     self.collectionView=[[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];

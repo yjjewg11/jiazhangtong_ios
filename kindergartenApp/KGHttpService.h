@@ -44,6 +44,7 @@
 #import "FPFamilyPhotoLastTimeVO.h"
 #import "FPFamilyPhotoUpdateCount.h"
 #import "FPFamilyPhotoStatusDomain.h"
+#import "FPMoiveDomain.h"
 #import "FPTimeLineDZDomain.h"
 #import "FPTimeLineCommentDomain.h"
 #import "FPFamilyPhotoNormalDomain.h"
@@ -52,7 +53,7 @@
 #import "KGHttpUrl.h"
 #import "FPFamilyInfoDomain.h"
 #import "FPFamilyMembers.h"
-
+#import "KGListBaseDomain.h"
 @interface KGHttpService : NSObject
 
 @property (strong, nonatomic) NSString * pushToken;
@@ -63,7 +64,7 @@
 @property (strong, nonatomic) GroupDomain     * groupDomain;                //选择的机构 默认为机构列表第一条数据 首页切换机构后需要重置
 
 + (KGHttpService *)sharedService;
-
+- (void)queryByPage:(NSString * )url pageNo:(NSInteger ) pageNo success:(void (^)(KGListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMsg))faild;
 //根据组织id得到图片
 - (NSString *)getGroupImgByUUID:(NSString *)groupUUID;
 
@@ -392,8 +393,11 @@
 - (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 //通用post 参数bodyJSOn方法
 -(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
+- (void)fPMovie_queryByURL:(NSString *) url pageInfo:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild;
 
 -(void)getListByURL:(NSString *)path   success :(void (^)(ListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)postByDomainBodyJson:(NSString *)path params:(KGBaseDomain *)domain success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)getByURL:(NSString *)path   success :(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
+
+- (void)fpMovie_save:(FPMoiveDomain *)domain success:(void (^)(KGBaseDomain * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 @end

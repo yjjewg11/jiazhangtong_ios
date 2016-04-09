@@ -12,7 +12,7 @@
 #define dateFormatStr2  @"yyyy-MM-dd HH:mm:ss"
 
 @interface KGDateUtil : NSObject
-
++ (NSString *)getNowDateYMD;
 + (NSString *)getTime;
 
 //获取过去几天日期  默认当天

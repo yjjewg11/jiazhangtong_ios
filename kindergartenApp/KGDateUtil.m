@@ -278,6 +278,12 @@
     return [KGDateUtil getDateStrByNSDate:date format:@"yyyy-MM-dd HH:mm:ss"];
    
 }
++ (NSString *)getNowDateYMD{
+    NSDate *date = [NSDate date];
+
+    return [KGDateUtil getDateStrByNSDate:date format:@"yyyy-MM-dd"];
+    
+}
 + (NSString *)getDateStrByNSDate: (NSDate *)date format:(NSString *)formatStr
 {
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];

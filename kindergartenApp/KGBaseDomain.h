@@ -28,6 +28,6 @@
 @property (assign, nonatomic) NSInteger dianzan_count;
 @property (assign, nonatomic) NSInteger yidianzan;
 
-
+@property (strong, nonatomic) NSString       * data_id;
 
 @end

@@ -38,9 +38,9 @@
     self.tipNumberLbl.layer.cornerRadius =10;
     self.tipNumberLbl.clipsToBounds = YES;//（iOS7以后需要设置）
     
-    float x=self.frame.size.width-40;
+    float x=self.frame.size.width/2;
     if(x<0)x=0;
-    [self.tipNumberLbl setFrame:CGRectMake(x, 2, 20, 20)];
+    [self.tipNumberLbl setFrame:CGRectMake(x, 5, 20, 20)];
 
 }
 

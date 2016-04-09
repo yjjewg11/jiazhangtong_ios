@@ -16,14 +16,19 @@
 #import "GiftwareListTableViewCell.h"
 #import "MJExtension.h"
 #import "FPGiftwareDetialVC.h"
+#import "FFMoiveSubmitView.h"
 @interface GiftwareListVC () <UITableViewDataSource,UITableViewDelegate>
 {
     UITableViewController * reFreshView;
-    
+   
     PageInfoDomain * pageInfo;
-    
+    FFMoiveSubmitView * _bottomView;
     NSMutableArray * dataSource;
-}@end
+     NSMutableArray * segmentUrlArray;
+    NSInteger segmentIndex;
+}
+
+@end
 
 @implementation GiftwareListVC
 
@@ -31,13 +36,72 @@
     [super viewDidLoad];
     
     self.title = @"精品相册";
-    
+//
+    [self initSegmentedControl];
     [self initPageInfo];
     
     [self getTableData];
     
     [self initReFreshView];
 }
+
+- (void)initSegmentedControl
+{
+    NSArray *segmentedData = [[NSArray alloc]initWithObjects:@"我的",@"所有",nil];
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedData];
+    segmentedControl.frame = CGRectMake(0, 0,APPWINDOWWIDTH, 30.0);
+    
+    segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;//设置样式
+    /*
+     这个是设置按下按钮时的颜色
+     */
+    segmentedControl.tintColor = [UIColor colorWithRed:49.0 / 256.0 green:148.0 / 256.0 blue:208.0 / 256.0 alpha:1];
+    segmentedControl.selectedSegmentIndex = 0;//默认选中的按钮索引
+    segmentIndex=segmentedControl.selectedSegmentIndex;
+     NSString * url0=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/queryMy.json"];
+    NSString * url1=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/query.json"];
+    segmentUrlArray= [[NSArray alloc]initWithObjects:url0,url1,nil];
+
+   
+    
+    /*
+     下面的代码实同正常状态和按下状态的属性控制,比如字体的大小和颜色等
+     */
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:12],NSFontAttributeName,[UIColor redColor], NSForegroundColorAttributeName, nil ,nil];
+    
+    
+    [segmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    
+    
+    NSDictionary *highlightedAttributes = [NSDictionary dictionaryWithObject:[UIColor redColor] forKey:NSForegroundColorAttributeName];
+    
+    [segmentedControl setTitleTextAttributes:highlightedAttributes forState:UIControlStateHighlighted];
+    
+    //设置分段控件点击相应事件
+    [segmentedControl addTarget:self action:@selector(doSomethingInSegment:)forControlEvents:UIControlEventValueChanged];
+    
+    [self.view addSubview:segmentedControl];
+}
+-(void)doSomethingInSegment:(UISegmentedControl *)Seg
+{
+    
+    segmentIndex= Seg.selectedSegmentIndex;
+    [self headerRereshing];
+//    
+//    switch (Index)
+//    {
+//        case 0:
+//          
+//            break;
+//        case 1:
+//            
+//            break;
+//            
+//               default:
+//            break;
+//    }
+}
+
 - (void)initPageInfo
 {
     if(!pageInfo)
@@ -51,8 +115,10 @@
 - (void)getTableData
 {
     [self showLoadView];
+          NSString * url=segmentUrlArray[segmentIndex];
     
-    [[KGHttpService sharedService] fPMovie_query:pageInfo success:^(NSArray *articlesArray)
+    
+    [[KGHttpService sharedService] fPMovie_queryByURL:url pageInfo:pageInfo success:^(NSArray *articlesArray)
      {
          pageInfo.pageNo ++;
          
@@ -82,7 +148,7 @@
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
     reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
-    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+    reFreshView.tableView.frame = CGRectMake(0, 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64-30);
     [self setupRefresh];
 }
 
@@ -141,7 +207,7 @@
          
          NSDictionary *responseObjectDic=responseObject;
          domain.share_url=[responseObjectDic objectForKey:@"share_url"];
-         domain.reply_count=[responseObjectDic objectForKey:@"reply_count"];
+         domain.reply_count=[[responseObjectDic objectForKey:@"reply_count"] integerValue];
          
          FPGiftwareDetialVC * infoVC = [[FPGiftwareDetialVC alloc] init];
          infoVC.domain=domain;
@@ -183,7 +249,10 @@
 
 - (void)footerRereshing
 {
-    [[KGHttpService sharedService] fPMovie_queryMy:pageInfo success:^(NSArray *articlesArray)
+    NSString * url=segmentUrlArray[segmentIndex];
+    
+    
+    [[KGHttpService sharedService] fPMovie_queryByURL:url pageInfo:pageInfo success:^(NSArray *articlesArray)
      {
          if (articlesArray.count != 0)
          {
@@ -217,7 +286,10 @@
     [dataSource removeAllObjects];
     dataSource = nil;
     
-    [[KGHttpService sharedService] fPMovie_queryMy:pageInfo success:^(NSArray *articlesArray)
+    NSString * url=segmentUrlArray[segmentIndex];
+    
+    
+    [[KGHttpService sharedService] fPMovie_queryByURL:url pageInfo:pageInfo success:^(NSArray *articlesArray)
      {
          pageInfo.pageNo ++;
          

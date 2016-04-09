@@ -109,6 +109,15 @@
 		048CF1371C23FAEB001A7CB2 /* AddressBooksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1361C23FAEB001A7CB2 /* AddressBooksViewController.xib */; };
 		048CF1391C23FB08001A7CB2 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048CF1381C23FB08001A7CB2 /* ChatViewController.xib */; };
 		0492B9E21CB3AE0A00ACB096 /* FFMovieShareData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9E11CB3AE0A00ACB096 /* FFMovieShareData.m */; };
+		0492B9E71CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9E61CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.m */; };
+		0492B9EA1CB77FD600ACB096 /* FPMovieTemplateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9E91CB77FD600ACB096 /* FPMovieTemplateDomain.m */; };
+		0492B9ED1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9EC1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.m */; };
+		0492B9F01CB7A99200ACB096 /* Mp3Domain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9EF1CB7A99200ACB096 /* Mp3Domain.m */; };
+		0492B9F81CB7FCB000ACB096 /* FFMoiveSubmitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9F71CB7FCB000ACB096 /* FFMoiveSubmitView.m */; };
+		0492B9FC1CB8D48300ACB096 /* FFMoiveEditPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9FA1CB8D48300ACB096 /* FFMoiveEditPreviewVC.m */; };
+		0492B9FD1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B9FB1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib */; };
+		0492BA001CB8D88300ACB096 /* FPMoiveDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9FF1CB8D88300ACB096 /* FPMoiveDomain.m */; };
+		0492BA021CB9000300ACB096 /* FFMoiveSubmitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */; };
 		0494F4791BDF777500F39865 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0494F4691BDF777500F39865 /* MJRefresh.bundle */; };
 		0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46C1BDF777500F39865 /* MJRefreshBaseView.m */; };
 		0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46E1BDF777500F39865 /* MJRefreshConst.m */; };
@@ -1041,6 +1050,22 @@
 		048CF1381C23FB08001A7CB2 /* ChatViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
 		0492B9E01CB3AE0A00ACB096 /* FFMovieShareData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMovieShareData.h; sourceTree = "<group>"; };
 		0492B9E11CB3AE0A00ACB096 /* FFMovieShareData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMovieShareData.m; sourceTree = "<group>"; };
+		0492B9E51CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMovieEditTemplateSelectVC.h; sourceTree = "<group>"; };
+		0492B9E61CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMovieEditTemplateSelectVC.m; sourceTree = "<group>"; };
+		0492B9E81CB77FD600ACB096 /* FPMovieTemplateDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMovieTemplateDomain.h; sourceTree = "<group>"; };
+		0492B9E91CB77FD600ACB096 /* FPMovieTemplateDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMovieTemplateDomain.m; sourceTree = "<group>"; };
+		0492B9EB1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMoiveEditMp3SelectedVC.h; sourceTree = "<group>"; };
+		0492B9EC1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMoiveEditMp3SelectedVC.m; sourceTree = "<group>"; };
+		0492B9EE1CB7A99200ACB096 /* Mp3Domain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mp3Domain.h; sourceTree = "<group>"; };
+		0492B9EF1CB7A99200ACB096 /* Mp3Domain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mp3Domain.m; sourceTree = "<group>"; };
+		0492B9F61CB7FCB000ACB096 /* FFMoiveSubmitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMoiveSubmitView.h; sourceTree = "<group>"; };
+		0492B9F71CB7FCB000ACB096 /* FFMoiveSubmitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMoiveSubmitView.m; sourceTree = "<group>"; };
+		0492B9F91CB8D48300ACB096 /* FFMoiveEditPreviewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMoiveEditPreviewVC.h; sourceTree = "<group>"; };
+		0492B9FA1CB8D48300ACB096 /* FFMoiveEditPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMoiveEditPreviewVC.m; sourceTree = "<group>"; };
+		0492B9FB1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FFMoiveEditPreviewVC.xib; sourceTree = "<group>"; };
+		0492B9FE1CB8D88300ACB096 /* FPMoiveDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPMoiveDomain.h; sourceTree = "<group>"; };
+		0492B9FF1CB8D88300ACB096 /* FPMoiveDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPMoiveDomain.m; sourceTree = "<group>"; };
+		0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FFMoiveSubmitView.xib; sourceTree = "<group>"; };
 		0494F4691BDF777500F39865 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		0494F46A1BDF777500F39865 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		0494F46B1BDF777500F39865 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -2474,6 +2499,13 @@
 				04FB7AA01CB2BABA0063EFDD /* FFMoiveEditNoteSelectedVC.m */,
 				0492B9E01CB3AE0A00ACB096 /* FFMovieShareData.h */,
 				0492B9E11CB3AE0A00ACB096 /* FFMovieShareData.m */,
+				0492B9E51CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.h */,
+				0492B9E61CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.m */,
+				0492B9EB1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.h */,
+				0492B9EC1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.m */,
+				0492B9F91CB8D48300ACB096 /* FFMoiveEditPreviewVC.h */,
+				0492B9FA1CB8D48300ACB096 /* FFMoiveEditPreviewVC.m */,
+				0492B9FB1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -2484,6 +2516,9 @@
 				04873CBF1CA6E68D00F01CB4 /* GiftwareListTableViewCell.h */,
 				04873CC01CA6E68D00F01CB4 /* GiftwareListTableViewCell.m */,
 				04873CC11CA6E68D00F01CB4 /* GiftwareListTableViewCell.xib */,
+				0492B9F61CB7FCB000ACB096 /* FFMoiveSubmitView.h */,
+				0492B9F71CB7FCB000ACB096 /* FFMoiveSubmitView.m */,
+				0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2493,6 +2528,12 @@
 			children = (
 				04873CC71CA7B31E00F01CB4 /* FPMoive4QDomain.h */,
 				04873CC81CA7B31E00F01CB4 /* FPMoive4QDomain.m */,
+				0492B9E81CB77FD600ACB096 /* FPMovieTemplateDomain.h */,
+				0492B9E91CB77FD600ACB096 /* FPMovieTemplateDomain.m */,
+				0492B9EE1CB7A99200ACB096 /* Mp3Domain.h */,
+				0492B9EF1CB7A99200ACB096 /* Mp3Domain.m */,
+				0492B9FE1CB8D88300ACB096 /* FPMoiveDomain.h */,
+				0492B9FF1CB8D88300ACB096 /* FPMoiveDomain.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -6244,6 +6285,7 @@
 				04FD8DF01C3A6B0B00BB186A /* SpCourseDetailVC.xib in Resources */,
 				045C5BA01C842A040097AF4F /* FPFamilyListCollectionViewCell.xib in Resources */,
 				04A4DE9A1BF484DF002ABBB1 /* webview_bar_share.png in Resources */,
+				0492B9FD1CB8D48300ACB096 /* FFMoiveEditPreviewVC.xib in Resources */,
 				04F936D21C4CE74F00116D86 /* FPHomeTopView.xib in Resources */,
 				040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */,
 				04FABBFB1C757E8C001D4BC9 /* FPTimeLineDetailCell.xib in Resources */,
@@ -6255,6 +6297,7 @@
 				04D288731C9E915F00D12BEF /* arrow_down1@2x.png in Resources */,
 				04A4DE2F1BF484DF002ABBB1 /* adsmogo_button_pressed@2x.png in Resources */,
 				040687181C3E588D002C2196 /* MapVC.xib in Resources */,
+				0492BA021CB9000300ACB096 /* FFMoiveSubmitView.xib in Resources */,
 				04F9FBA41BF1A77E00AEFB88 /* UMShareEditViewController.xib in Resources */,
 				04F9F2F71BF9BF4500470F0C /* MySPCourseCommentCell.xib in Resources */,
 				04B434681C7EF89D0009EB47 /* CommitHeaderView.xib in Resources */,
@@ -6458,7 +6501,9 @@
 				F4E36D5A1B85B49D009BD909 /* DoAlbumCell.m in Sources */,
 				F47AFEB51B5E2BF800D43F38 /* PageInfoDomain.m in Sources */,
 				04F3D4621BF47FD3007E7AC0 /* NSDictionary_JSONExtensions.m in Sources */,
+				0492B9FC1CB8D48300ACB096 /* FFMoiveEditPreviewVC.m in Sources */,
 				04F7D6E91C5F2D0F006B5591 /* CHKeychain.m in Sources */,
+				0492BA001CB8D88300ACB096 /* FPMoiveDomain.m in Sources */,
 				04F95F5B1C4E2E37000909B1 /* FPHomeSonView.m in Sources */,
 				04D288761C9E915F00D12BEF /* SIMenuButton.m in Sources */,
 				24AA0B421B690F4300DAC03B /* UUImageAvatarBrowser.m in Sources */,
@@ -6468,6 +6513,7 @@
 				048676F21CA5496000D168D0 /* FPLocalDBPhotoPickerVC.m in Sources */,
 				248B6ABE1B19B53000FCB98F /* QCSlideSwitchDto.m in Sources */,
 				4D5CE76B1B7E4333002F1088 /* AdvanceViewController.m in Sources */,
+				0492B9F81CB7FCB000ACB096 /* FFMoiveSubmitView.m in Sources */,
 				0449A35A1C4F98430066ABBB /* FPCreateGiftwareVC.m in Sources */,
 				24A175F71B55433300295997 /* KGHUD.m in Sources */,
 				04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */,
@@ -6600,6 +6646,8 @@
 				F48783B31B58DA1700CDC1A8 /* NSObject+MJProperty.m in Sources */,
 				F4E635FE1B675EB700800924 /* AnnouncementTableViewCell.m in Sources */,
 				F46CBD0A1B7449AB00380EC3 /* RecipesListViewController.m in Sources */,
+				0492B9F01CB7A99200ACB096 /* Mp3Domain.m in Sources */,
+				0492B9EA1CB77FD600ACB096 /* FPMovieTemplateDomain.m in Sources */,
 				04F8731A1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m in Sources */,
 				F4E36D5E1B85B49D009BD909 /* DoPhotoCell.m in Sources */,
 				04F3D45A1BF47FD3007E7AC0 /* mongoose.c in Sources */,
@@ -6614,6 +6662,7 @@
 				F471EDF61B70AA0E00EEBA1D /* QueryChatsVO.m in Sources */,
 				04BDD68B1C4CC84600FA0C3A /* SpCourseHomeFuncCell.m in Sources */,
 				248B6AD61B19B5CF00FCB98F /* Reachability.m in Sources */,
+				0492B9ED1CB7A70E00ACB096 /* FFMoiveEditMp3SelectedVC.m in Sources */,
 				040021201C3FA79A005F1D82 /* RouteDomain.m in Sources */,
 				04FA59921C27D05A009689C7 /* EYTagView.m in Sources */,
 				04FBAEBF1C5B137F0094DC6B /* PhotoLargerViewController.m in Sources */,
@@ -6736,6 +6785,7 @@
 				2489B6271B5A5FEB00039E70 /* KGUser.m in Sources */,
 				24AA0B411B690F4300DAC03B /* UUAVAudioPlayer.m in Sources */,
 				04F903B11C56795C0040629F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				0492B9E71CB772BF00ACB096 /* FFMovieEditTemplateSelectVC.m in Sources */,
 				04F9C99B1C0EFD550078A5F5 /* EnrolStudentDataVO.m in Sources */,
 				04FF07261C771B5000B891D6 /* FPTimeLineDetailMoreView.m in Sources */,
 				04F89A3B1C1018D800FC0FA6 /* EnrolStudentCommentCell.m in Sources */,

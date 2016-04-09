@@ -54,7 +54,7 @@
     CGRect frame = CGRectMake(0,  0, superVC.view.frame.size.width, superVC.view.frame.size.height);
 ////    CGRect frame = CGRectMake(0, 100, Main_Screen_Width,  Main_Screen_Height/2);
 //    
-    NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
 //
     self = [super initWithFrame:frame];
     self.pageNo = 1;
@@ -62,7 +62,7 @@
 //      CGRect frameTable = CGRectMake(0, 0, Main_Screen_Width, frame.size.height-30);
 //    
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,self.frame.size.width,self.frame.size.height-40) ];
-    NSLog(@"self.tableView.h=%f",self.frame.size.height-40);
+
   //  self.tableView.rowHeight = 70;    // 默认44px
   //  self.tableView.height=self.height-50;
     
@@ -110,7 +110,7 @@
     CGRect frame = _replyBtn.frame;
     ////    CGRect frame = CGRectMake(0, 100, Main_Screen_Width,  Main_Screen_Height/2);
     //
-    NSLog(@"loadInputBtn.frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
     [_replyBtn setText:@"写下您的评论..."];
     _replyBtn.titleLabel.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
     [_replyBtn setTextColor:[UIColor grayColor] sel:[UIColor grayColor]];
@@ -151,7 +151,7 @@
 {
     self.pageNo=1;
     self.currentTime=nil;
-    self.dataSoure=nil;
+  
     [self baseReply_queryByRel_uuid];
     
 }
@@ -180,16 +180,22 @@
     if(self.currentTime==nil)self.currentTime=[KGDateUtil getQueryFormDateStringByDate:[KGDateUtil getLocalDate]];
     
     
-    if(self.dataSoure==nil)self.dataSoure=[NSMutableArray array];
-
+  
     [[KGHttpService sharedService] baseReply_queryByRel_uuid:self.rel_uuid type:self.type pageNo:[NSString stringWithFormat:@"%ld",self.pageNo] time:self.currentTime  success:^(PageInfoDomain * pageInfoDomain)
      {
          
          NSArray * arr = [BaseReplyDomain objectArrayWithKeyValuesArray:pageInfoDomain.data];
- if(self.pageNo==1)[self.tableView headerEndRefreshing];
-         
+
          if (arr.count == 0)
          {
+             if(self.pageNo==1){
+                 self.dataSoure=[NSMutableArray array];
+                 [self.tableView reloadData];
+                 
+                 [self.tableView headerEndRefreshing];
+                 
+             }
+             
              self.tableView.footerRefreshingText = @"没有更多了...";
              
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
@@ -204,7 +210,12 @@
          
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                         {
+                            
+
                             [self.tableView footerEndRefreshing];
+                            if(self.pageNo==1)[self.tableView headerEndRefreshing];
+                            
+                            if(self.pageNo==1)self.dataSoure=[NSMutableArray array];
                             [self.dataSoure addObjectsFromArray:arr];
                             [self.tableView reloadData];
                         });
@@ -222,7 +233,7 @@
      }];
 }
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataSoure.count == 0)
     {
@@ -233,29 +244,11 @@
     }
     UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
 //    // 這裏返回需要的高度
-//    NSLog(@"height1=%f",cell.frame.size.height);
+
     return cell.frame.size.height+25;
-//    
-    
-    int row = [indexPath row];
-    // 列寬
-    CGFloat contentWidth = self.frame.size.width-100;
-    // 用何種字體進行顯示
-    UIFont *font = [UIFont systemFontOfSize:12];
-    // 該行要顯示的內容
-    BaseReplyDomain *domain = [self.dataSoure objectAtIndex:row];
-    
-    NSString *content =domain.content;
-    
-    // 計算出顯示完內容需要的最小尺寸
-    CGSize size = [content sizeWithFont:font constrainedToSize:CGSizeMake(contentWidth, 1000.0f) lineBreakMode:UILineBreakModeWordWrap];
-    
-    
-    // 這裏返回需要的高度
-    NSLog(@"height=%f",size.height+58);
-    
-    return size.height+58;
+//
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -15,6 +15,7 @@
 #import "FPTimeLineDetailMoreView.h"
 #import "SPBottomItem.h"
 #import "SPBottomItemTools.h"
+#import "FFMovieEditMainVC.h"
 @interface FPGiftwareDetialVC ()<UIWebViewDelegate,FPTimeLineDetailMoreViewDelegate,UIAlertViewDelegate>
 {
 
@@ -208,6 +209,10 @@
 
 - (void)modifyBtn{
     NSLog(@"modifyBtn");
+    
+    FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
+    [FFMovieShareData getFFMovieShareData].domain=self.domain;
+       [self.navigationController pushViewController:vc animated:NO];
 }
 //保存收藏
 - (void)saveFavorites:(UIButton *)button

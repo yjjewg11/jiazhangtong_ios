@@ -1,12 +1,13 @@
 //
-//  FFMoiveEditNoteSelectedVC.m
+//  FFMovieEditTemplateSelectVC.m
 //  kindergartenApp
 //
-//  Created by WenJieKeJi on 16/4/4.
+//  Created by WenJieKeJi on 16/4/8.
 //  Copyright © 2016年 funi. All rights reserved.
 //
 
-#import "FFMoiveEditNoteSelectedVC.h"
+#import "FFMovieEditTemplateSelectVC.h"
+
 
 #import "FPImagePickerImageCell.h"
 #import "FPImagePickerImageDomain.h"
@@ -16,22 +17,26 @@
 #import "FPImagePickerSelectBottomView.h"
 #import "UIImageView+WebCache.h"
 #import "FPTimeLineEditVC.h"
+#import "FFMovieShareData.h"
+#import "FPMovieTemplateDomain.h"
 #import "FFMoiveSubmitView.h"
 #import "UIButton+Extension.h"
 
-@interface FFMoiveEditNoteSelectedVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,FFMoiveEditSubSelectPhotoVCEndSelected,UpdateFPFamilyPhotoNormalDomainDelegate>
+@interface FFMovieEditTemplateSelectVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     UICollectionView * _collectionView;
     //照片数组加分组(日期分组）[groupInd,childInd]
     NSMutableArray * dataSource;
     NSIndexPath * selectIndexPath;
-
-    FFMoiveSubmitView * _bottomView;
+    //选中遮掩成
+    UIView * selectmaskView;
+      int _pageNo;
+     FFMoiveSubmitView * _bottomView;
 }
+
 @end
 
-@implementation FFMoiveEditNoteSelectedVC
-
+@implementation FFMovieEditTemplateSelectVC
 
 #pragma mark - 创建下面确定view
 - (void)createBottomView
@@ -57,36 +62,55 @@
 - (void)btnClick:(UIButton *)sender
 {
     
-    NSDictionary * dic = @{ @"nextIndex" : [NSNumber numberWithInteger:2]};
+    NSDictionary * dic = @{ @"nextIndex" : [NSNumber numberWithInteger:3]};
     
     [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_FFMoviewEditclickSubmitBysubView object:self userInfo:dic];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initCollectionView];
-    [self selectEndNoitce:nil];
+    _pageNo = 1;
+
+      [self initCollectionView];
     [self createBottomView];
-//    dataSource=[NSMutableArray array];
-//    [_collectionView reloadData];
+    [self getData];
     // Do any additional setup after loading the view.
 }
+- (void)setSelectedFPMoive4QDomain:(FPMovieTemplateDomain *) template{
+    FPMoive4QDomain * domain=[FFMovieShareData getFFMovieShareData].domain;
+    domain.template_key=template.key;
+    domain.mp3=template.mp3;
+    
+}
+- (void)getData{
+  
+    MBProgressHUD * hub=[MBProgressHUD showMessage:@"加载数据，请稍后"];
+    hub.removeFromSuperViewOnHide=YES;
+    NSString * url=[NSString stringWithFormat:@"%@rest/fPMovieTemplate/query.json", [KGHttpUrl getBaseServiceURL]];
+    //请求最新domain
+    [[KGHttpService sharedService] queryByPage:url pageNo:_pageNo success:^(KGListBaseDomain *baseDomain) {
+        _pageNo++;
+        [hub hide:YES];
+        dataSource=   [FPMovieTemplateDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+      
+        if(dataSource.count>0){
+            FPMoive4QDomain * domain=[FFMovieShareData getFFMovieShareData].domain;
+            //初始值
+            if(domain.template_key==nil){
+                [self setSelectedFPMoive4QDomain:dataSource[0]];
+            }
+            
+        }
+        [_collectionView reloadData];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    } faild:^(NSString *errorMsg) {
+        [hub hide:YES];
+        [MBProgressHUD showError:errorMsg];
+    } ];
+  
+
 }
-#pragma FFMoiveEditSubSelectPhotoVCEndSelected
--(void)selectEndNoitce:(NSMutableDictionary *)selectDomainMap{
-     dataSource=[NSMutableArray array];
-    
-    ;
-    NSMutableDictionary *tmpMap=[FFMovieShareData getFFMovieShareData].selectDomainMap;
-    
-    [dataSource addObjectsFromArray:[tmpMap allValues]];
-     [_collectionView reloadData];
-}
+
 - (void)initCollectionView
 {
     if (_collectionView == nil)
@@ -110,43 +134,12 @@
 {
     
     selectIndexPath=indexPath;
-    FPImagePickerImageDomain *selectDomain= dataSource[indexPath.row];
-        MBProgressHUD * hub=[MBProgressHUD showMessage:@"更新数据，请稍后"];
-    hub.removeFromSuperViewOnHide=YES;
+    FPMovieTemplateDomain *selectDomain= dataSource[indexPath.row];
     
-    //请求最新domain
-    [[KGHttpService sharedService] getFPTimeLineItem:selectDomain.uuid success:^(FPFamilyPhotoNormalDomain *item)
-     {
-         
-         [hub hide:YES];
-         
-         
-         
-         FPTimeLineEditVC * vc = [[FPTimeLineEditVC alloc] init];
-         vc.delegate=self;
-         vc.domain =item;
-         
-         [self.navigationController pushViewController:vc animated:YES];
-
-         
-         
-         
-     }
-                                               faild:^(NSString *errorMsg)
-     {
-         [hub hide:YES];
-         [MBProgressHUD showError:@"获取最新相片信息失败!"];
-
-     }];
+    [self setSelectedFPMoive4QDomain:selectDomain];
+    [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
     
-}
-#pragma UpdateFPFamilyPhotoNormalDomainDelegate
-- (void)updateFPFamilyPhotoNormalDomain:(FPFamilyPhotoNormalDomain *)domain
-{
-     FPImagePickerImageDomain *selectDomain= dataSource[selectIndexPath.row];
     
-    selectDomain.note=domain.note;
-      [_collectionView reloadItemsAtIndexPaths:@[selectIndexPath]];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -158,30 +151,30 @@
     
     NSLog(@"indexPath.row:%ld", indexPath.row);
     
-    FPImagePickerImageDomain * data=dataSource[indexPath.row];
+    FPMovieTemplateDomain * data=dataSource[indexPath.row];
     
     UIImageView * imgView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, cell.width, cell.height-20)];
     
     //        [cell setRestorationIdentifier:[data objectForKey:@"uuid"]];
     //
-   
-    [imgView sd_setImageWithURL:data.localUrl placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+    
+    [imgView sd_setImageWithURL:data.herald placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
      {}];
     
     // 测试字串
     UIFont *font = [UIFont fontWithName:@"Arial" size:12];
     //备注
     //设置一个行高上限
-//    CGSize size = CGSizeMake(cell.width, cell.height);
-//    
-//    CGSize labelsize = [data.note sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
-//    
+    //    CGSize size = CGSizeMake(cell.width, cell.height);
+    //
+    //    CGSize labelsize = [data.note sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
+    //
     
     //UILabel自适应高度和自动换行
     //初始化label
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,cell.height-20,cell.width, 20)];
-//    [label setBackgroundColor:UIColor blackColor];
-    label.text=data.note;
+    //    [label setBackgroundColor:UIColor blackColor];
+    label.text=data.title;
     
     //设置自动行数与字符换行
     [label setNumberOfLines:0];
@@ -193,11 +186,30 @@
         [subView removeFromSuperview];
     }
     [cell.contentView addSubview:imgView];
-     [cell.contentView addSubview:label];
+    [cell.contentView addSubview:label];
     
-  
-    return cell;
+    
+    FPMoive4QDomain * domain=[FFMovieShareData getFFMovieShareData].domain;
+    if([domain.template_key isEqualToString:data.key]){
+        [self setViewCellSelectd:imgView];
 
+    }
+    return cell;
+    
+}
+-(void) setViewCellSelectd:(UIView *) view{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,view.width, view.height)];
+    label.text=@"已选中";
+    label.font=[UIFont fontWithName:@"Arial" size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    [label setBackgroundColor: [ UIColor colorWithWhite: 1 alpha: 0.70 ]];
+//    [label setBorderWithWidth:1 color:[UIColor redColor]];
+
+    if(selectmaskView!=nil)
+        [selectmaskView removeFromSuperview];
+    selectmaskView=label;
+    [view addSubview:label];
+   
 }
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -227,9 +239,16 @@
 
 
 
+
 - (void)submitOK{
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 /*
 #pragma mark - Navigation
 
@@ -239,5 +258,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
 
 @end

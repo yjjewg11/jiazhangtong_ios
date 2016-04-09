@@ -17,6 +17,7 @@
 #define Key_Notification_MessageText       @"messageText"
 #define Key_Notification_TopicDZ           @"topicDZ"
 #define Key_Notification_TopicReply        @"TopicReply"
+#define Key_Notification_FFMoviewEditclickSubmitBysubView        @"FFMoviewEditclickSubmitBysubView"
 #define Key_Notification_BeginReplyTopic   @"beginReplyTopic"
 #define Key_Notification_TopicHeight       @"topicCellHeightChange"
 #define Key_Notification_TopicLoadMore     @"topicCellLoadMore"

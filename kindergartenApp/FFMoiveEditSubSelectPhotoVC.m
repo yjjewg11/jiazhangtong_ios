@@ -15,18 +15,22 @@
 #import "MJExtension.h"
 #import "FPLocalDBPhotoPickerVC.h"
 #import "FPImagePickerSelectBottomView.h"
+#import "FFMoiveSubmitView.h"
+#import "UIButton+Extension.h"
 
-
-@interface FFMoiveEditSubSelectPhotoVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,FPLocalDBPhotoPickerVCDelegate,FPImagePickerImageCellDelegate,FPImagePickerSelectBottomViewDelegate>
+@interface FFMoiveEditSubSelectPhotoVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,FPLocalDBPhotoPickerVCDelegate,FPImagePickerImageCellDelegate>
 {
     UICollectionView * _collectionView;
     //照片数组加分组(日期分组）[groupInd,childInd]
     NSMutableArray * dataSource;
     FPImagePickerImageDomain *selectDomain;
     
-    FPImagePickerSelectBottomView * _bottomView;
+     FFMoiveSubmitView * _bottomView;
 
     float barHeight ;
+    
+    //选中遮掩成
+    UIView * selectmaskView;
 }
 @end
 
@@ -35,6 +39,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     barHeight=0;
+
 //    barHeight=self.navigationController.navigationBar.size.height;
 //    [self.navigationController.navigationBar setSize:CGSizeMake(0,0)];
       [self initCollectionView];
@@ -48,12 +53,26 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 {
     if (_collectionView == nil)
     {
+        
+        if(dataSource==nil){
+            dataSource=[NSMutableArray array];
+        }
+
+        
         //
         //        FPImagePickerSelectLayout * layout = [[FPImagePickerSelectLayout alloc] init];
         //
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
+        CGRect frame = self.view.frame;
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, self.view.frame.size.height - 49 - 64-barHeight) collectionViewLayout:layout];
+        NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+        frame.size.height=[FFMovieShareData getFFMovieShareData].vcHeight;
+        [self.view setFrame:frame];
+        
+        frame = self.view.frame;
+        NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, self.view.frame.size.height - 44) collectionViewLayout:layout];
         _collectionView.dataSource = self;
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.delegate = self;
@@ -62,11 +81,23 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
         [self.view addSubview:_collectionView];
     }
 }
+
+- (void)setSelectedFPMoive4QDomain_herald:(NSString *) herald{
+    FPMoive4QDomain * domain=[FFMovieShareData getFFMovieShareData].domain;
+    domain.herald=herald;
+    
+}
+
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if(indexPath.row<dataSource.count){
+       
+           FPImagePickerImageDomain *data=dataSource[indexPath.row];
+        [self setSelectedFPMoive4QDomain_herald:[data.localUrl absoluteString]  ];
+        [_collectionView reloadItemsAtIndexPaths:@[indexPath]];
+        
         return;
     }
     
@@ -101,25 +132,49 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-    
-    FPImagePickerImageCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ImageCell forIndexPath:indexPath];
-    
-    //最后添加选择图片按钮
+        FPImagePickerImageCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:ImageCell forIndexPath:indexPath];
+       //最后添加选择图片按钮
     if(dataSource.count==indexPath.row)
     {
+        
           [cell setData:[self getSelectDomain]];
     }else{
-        [cell setData:dataSource[indexPath.row]];
+      
+         FPImagePickerImageDomain *data=dataSource[indexPath.row];
+        [cell setData:data];
+        FPMoive4QDomain * domain=[FFMovieShareData getFFMovieShareData].domain;
+        if([domain.herald isEqualToString:[data.localUrl absoluteString] ]){
+            [self setViewCellSelectd:cell];
+            
+        }
+
 
     }
     
     
       cell.delegate=self;
+    
     return cell;
 }
+
+
+-(void) setViewCellSelectd:(UIView *) view{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,view.width, view.height)];
+    label.text=@"封面";
+    label.font=[UIFont fontWithName:@"Arial" size:18];
+    label.textAlignment = UITextAlignmentCenter;
+    [label setBackgroundColor: [ UIColor colorWithWhite: 1 alpha: 0.70 ]];
+    //    [label setBorderWithWidth:1 color:[UIColor redColor]];
+    
+    if(selectmaskView!=nil)
+        [selectmaskView removeFromSuperview];
+    selectmaskView=label;
+    [view addSubview:label];
+    
+}
+
+
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
@@ -167,17 +222,36 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 }
 
 
+
 #pragma mark - 创建下面确定view
 - (void)createBottomView
 {
-    _bottomView = [[[NSBundle mainBundle] loadNibNamed:@"FPImagePickerSelectBottomView" owner:nil options:nil] firstObject];
-    _bottomView.delegate=self;
-    _bottomView.frame = CGRectMake(0, self.view.size.height-49-64-20-barHeight, APPWINDOWWIDTH, 49);
+
+    UIButton *_bottomViewBtn= [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.size.height-44, APPWINDOWWIDTH, 44)];
     
-    _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[[FFMovieShareData getFFMovieShareData].selectDomainMap count]];
+  
+    [_bottomViewBtn setText:@"下一步"];
     
-    [self.view addSubview:_bottomView];
+    _bottomViewBtn.titleLabel.font = [UIFont systemFontOfSize:APPUILABELFONTNO15];
+    [_bottomViewBtn setTitleColor:[UIColor whiteColor ] forState:UIControlStateNormal];
+    [_bottomViewBtn setBackgroundColor:[UIColor redColor]];
+    _bottomViewBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+   
+     [_bottomViewBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [_bottomView addSubview:dd];
+    
+       [self.view addSubview:_bottomViewBtn];
+ 
+    
 }
+- (void)btnClick:(UIButton *)sender
+{
+
+    NSDictionary * dic = @{ @"nextIndex" : [NSNumber numberWithInteger:1]};
+                           
+   [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_FFMoviewEditclickSubmitBysubView object:self userInfo:dic];
+}
+
 
 
 #pragma FPImagePickerImageCellDelegate
@@ -191,10 +265,10 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
         //[_selectIndexPath removeObject:domain.uuid];
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[[FFMovieShareData getFFMovieShareData].selectDomainMap count]];
-                   });
+//    dispatch_async(dispatch_get_main_queue(), ^
+//                   {
+//                       _bottomView.infoLbl.text = [NSString stringWithFormat:@"选择了: %ld张",(long)[[FFMovieShareData getFFMovieShareData].selectDomainMap count]];
+//                   });
     
 }
 

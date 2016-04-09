@@ -43,9 +43,10 @@
     self.reply_count_label.text=[NSString stringWithFormat:@"%d",domain.reply_count ];
     
     NSDictionary * dic =domain.dianZan;
-    NSInteger dianzancount=[dic  valueForKey :@"dianzan_count"];
+    NSNumber * dianzancount=[dic  valueForKey :@"dianzan_count"];
     
-     self.dianzan_count_label.text=[NSString stringWithFormat:@"%d",dianzancount];
+//    self.dianzan_count_label.text=dianzancount;
+     self.dianzan_count_label.text=[NSString stringWithFormat:@"%d",[dianzancount integerValue] ];
     
 }
 - (void)awakeFromNib {

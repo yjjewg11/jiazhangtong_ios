@@ -17,6 +17,8 @@
 @property (assign, nonatomic) NSInteger status;
 @property (copy, nonatomic) NSString * create_time;
 @property (assign, nonatomic) NSInteger reply_count;
+@property (copy, nonatomic) NSString * template_key;
+@property (copy, nonatomic) NSString * mp3;
 @property (copy, nonatomic) id dianZan;
 
 

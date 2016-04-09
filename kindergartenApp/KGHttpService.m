@@ -2997,11 +2997,11 @@
 
 
 //分页精品相册
-- (void)fPMovie_queryMy:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild {
+- (void)fPMovie_queryByURL:(NSString *) url pageInfo:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild {
     
     NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageInfo.pageNo]};
     
-      NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/queryMy.json"];
+//      NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/queryMy.json"];
     ;
     [[AFAppDotNetAPIClient sharedClient] GET:url
                                   parameters:dict
@@ -3166,4 +3166,45 @@
 
 
 
+//公共分页查询
+- (void)queryByPage:(NSString * )url pageNo:(NSInteger ) pageNo success:(void (^)(KGListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    NSDictionary * dict = @{@"pageNo":[NSString stringWithFormat:@"%ld",(long)pageNo]};
+    
+  
+    ;
+    [[AFAppDotNetAPIClient sharedClient] GET:url
+                                  parameters:dict
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGListBaseDomain * baseDomain = [KGListBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+//                                             baseDomain.list.data = [FPMoive4QDomain objectArrayWithKeyValuesArray:baseDomain.list.data];
+                                             
+                                             success(baseDomain);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
+
+
+
+
+// 家庭相册-保存成员
+- (void)fpMovie_save:(FPMoiveDomain *)domain success:(void (^)(KGBaseDomain * success))success faild:(void (^)(NSString * errorMsg))faild
+{
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/save.json"];
+    
+    
+    [self getServerJson:url params:domain.keyValues success:success faild:faild];
+}
 @end
