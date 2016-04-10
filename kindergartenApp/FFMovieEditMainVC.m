@@ -148,10 +148,10 @@
 {
     
     CGFloat Y = 0.0f;
-    if (self.navigationController != nil && ![self.navigationController isNavigationBarHidden]) {
-        self.automaticallyAdjustsScrollViewInsets = NO;
+//    if (self.navigationController != nil && ![self.navigationController isNavigationBarHidden]) {
+//        self.automaticallyAdjustsScrollViewInsets = NO;
 //        Y = 64.0f;
-    }
+//    }
     
     vcWidth = self.view.frame.size.width;
     vcHeight = self.view.frame.size.height - Y;
@@ -256,8 +256,9 @@
     }
 
     if(self.domain.uuid==nil){//新建
+        [FFMovieShareData getFFMovieShareData].selectDomainMap=nil;
         [self initVCArray];
-
+        
         return;
     }
     NSString * url=[NSString stringWithFormat:@"%@rest/fPPhotoItem/queryForMovieUuid.json?movie_uuid=%@", [KGHttpUrl getBaseServiceURL], self.domain.uuid];
@@ -321,6 +322,7 @@
     saveDomain.photo_uuids=[FFMovieShareData getFFMovie_photo_uuids];
     if(saveDomain.photo_uuids==nil ||saveDomain.photo_uuids.length==0){
         [MBProgressHUD showError:@"请选择照片"];
+           [segment setSelectedIndex:0];
         return;
     }
     MBProgressHUD *hud=[MBProgressHUD showMessage:@"保存中"];

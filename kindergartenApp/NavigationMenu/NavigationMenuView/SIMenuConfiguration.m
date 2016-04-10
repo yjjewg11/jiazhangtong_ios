@@ -61,12 +61,12 @@
 //Items color in menu
 + (UIColor *)itemsColor
 {
-    return [UIColor blackColor];
+    return [UIColor groupTableViewBackgroundColor];
 }
 
 + (UIColor *)mainColor
 {
-    return [UIColor blackColor];
+    return [UIColor groupTableViewBackgroundColor];
 }
 
 + (float)selectionSpeed
@@ -76,7 +76,7 @@
 
 + (UIColor *)itemTextColor
 {
-    return [UIColor whiteColor];
+    return [UIColor blackColor];
 }
 
 + (UIColor *)selectionColor

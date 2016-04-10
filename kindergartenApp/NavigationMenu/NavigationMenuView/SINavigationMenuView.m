@@ -60,9 +60,15 @@
 //        UIWindow *mainWindow = [[UIApplication sharedApplication] keyWindow];
 //        CGRect frame = mainWindow.frame;
 //        frame.origin.y += self.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
-        self.table = [[SIMenuTable alloc] initWithFrame:self.menuContainer.frame items:self.items];
+           CGRect frame =CGRectMake(0, 0, self.menuContainer.width, self.menuContainer.height);
+//        self.menuContainer.frame
+        self.table = [[SIMenuTable alloc] initWithFrame:frame items:self.items];
         self.table.menuDelegate = self;
     }
+    
+//    CGRect frame =self.table.frame;
+//    
+//    NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
     [self.menuContainer addSubview:self.table];
     [self rotateArrow:M_PI];
     [self.table show];

@@ -25,7 +25,7 @@
         self.contentView.backgroundColor = [UIColor color:[SIMenuConfiguration itemsColor] withAlpha:[SIMenuConfiguration menuAlpha]];
         self.textLabel.textColor = [SIMenuConfiguration itemTextColor];
         self.textLabel.textAlignment = NSTextAlignmentCenter;
-        self.textLabel.shadowColor = [UIColor darkGrayColor];
+//        self.textLabel.shadowColor = [UIColor darkGrayColor];
         self.textLabel.shadowOffset = CGSizeMake(0.0, -1.0);
         
         self.selectionStyle = UITableViewCellEditingStyleNone;

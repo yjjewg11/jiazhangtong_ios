@@ -480,13 +480,22 @@ NSInteger localDBlimit=50;
 - (void)pushToUpLoadVC
 {
     
- 
-    if (_selectViewOpen == NO)
+    if (sonView)
     {
-        if (sonView)
-        {
-            [sonView setHidden:true];
+        [sonView  setHidden:YES];
+    }
+    if (selView)
+    {
+        if([selView isHidden]){
+             if(selView)[self.view bringSubviewToFront:selView];
+              [selView setHidden:NO];
+        }else{
+              [selView setHidden:YES];
         }
+      
+        return;
+    }
+ 
         
         selView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSelectView" owner:nil options:nil] firstObject];
         selView.delegate = self;
@@ -501,15 +510,15 @@ NSInteger localDBlimit=50;
        
        [self.view addSubview:selView];
         
-        _selectViewOpen = YES;
-    }else{
-        if(selView)[self.view bringSubviewToFront:selView];
-    }
+   
 }
 
 - (void)showSonView
 {
-    
+    if (selView)
+    {
+        [selView  setHidden:YES];
+    }
     if(sonView==nil){
         
         
@@ -520,15 +529,15 @@ NSInteger localDBlimit=50;
         //回调
         sonView.pushUpLoad = ^{
             [weakSelf.navigationController pushViewController:[[FPUploadVC alloc]init]  animated:YES];
-            [sonView setHidden:true];
+            [sonView setHidden:YES];
         };
         sonView.pushCollege = ^{
             [weakSelf.navigationController pushViewController:[[FPCollectionVC alloc]init] animated:YES];
-             [sonView setHidden:true];
+             [sonView setHidden:YES];
         };
         //家庭相册修改
         sonView.pushAlbunInfo = ^{
-             [sonView setHidden:true];
+             [sonView setHidden:YES];
             FPFamilyPhotoCollectionDetailTableViewController * fPFamilyPhotoCollectionDetailTableViewController=[[FPFamilyPhotoCollectionDetailTableViewController alloc]init];
             [fPFamilyPhotoCollectionDetailTableViewController loadLoadByUuid:[FPHomeVC getFamily_uuid]];
             
@@ -545,7 +554,14 @@ NSInteger localDBlimit=50;
         sonView.layer.shadowPath = shadowPath.CGPath;
           [self.view addSubview:sonView];
     }else{
-        [self.view bringSubviewToFront:sonView];
+        
+        if([sonView isHidden]){
+            [sonView setHidden:NO];
+            [self.view bringSubviewToFront:sonView];
+        }else{
+            [sonView setHidden:YES];
+        }
+       
 
     }
     
@@ -555,11 +571,13 @@ NSInteger localDBlimit=50;
         if (sonView.origin.y == 0)
         {
             sonView.origin = CGPointMake(0, -132);
+             [sonView setHidden:NO];
             [self.view bringSubviewToFront:sonView];
         }
         else
         {
             sonView.origin = CGPointMake(0, 0);
+             [sonView setHidden:NO];
             [self.view bringSubviewToFront:sonView];
         }
         
@@ -581,6 +599,7 @@ NSInteger localDBlimit=50;
 - (void)pushToCreateGiftwareShopVC
 {
     FFMovieEditMainVC * vc = [[FFMovieEditMainVC alloc] init];
+     [FFMovieShareData getFFMovieShareData].domain=nil;
     [self.navigationController pushViewController:vc animated:NO];
 }
 
@@ -860,7 +879,7 @@ NSInteger localDBlimit=50;
              if(lastTimeVO.pageSize>datas.count){
                  isRemoteDBHasData=false;
              }
-             
+            
              if (datas.count> 0)
              {
                  //把数据缓存到本地
@@ -884,6 +903,7 @@ NSInteger localDBlimit=50;
                  _tableView.footerRefreshingText = @"没有更多了...";
                  
                  [_tableView footerEndRefreshing];
+                 [_tableView reloadData];
                  
                  
              }

@@ -24,13 +24,16 @@
 
 - (IBAction)upLoadBtn:(UIButton *)sender {
     self.pushUpLoad();
+    [self setHidden:YES];
 }
 
 - (IBAction)myCollection:(UIButton *)sender {
     self.pushCollege();
+     [self setHidden:YES];
 }
 
 - (IBAction)photoAlbumInfo:(UIButton *)sender {
     self.pushAlbunInfo();
+     [self setHidden:YES];
 }
 @end

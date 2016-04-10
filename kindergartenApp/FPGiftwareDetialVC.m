@@ -213,6 +213,7 @@
     
     FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
     [FFMovieShareData getFFMovieShareData].domain=self.domain;
+    
        [self.navigationController pushViewController:vc animated:NO];
 }
 //保存收藏
@@ -391,6 +392,7 @@
 }
 - (void)makeFPMovie{
     FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
+    [FFMovieShareData getFFMovieShareData].domain=nil;
     [self.navigationController pushViewController:vc animated:NO];
 
 }

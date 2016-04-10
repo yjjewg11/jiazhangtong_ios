@@ -30,15 +30,18 @@
 - (IBAction)cancelBtn:(id)sender
 {
     [self.delegate hidenSelf];
+    [self setHidden:YES];
 }
 
 - (IBAction)selectImage:(id)sender
 {
     [self.delegate pushToImagePickerVC];
+    [self setHidden:YES];
 }
 
 - (IBAction)createGiftwareShop:(id)sender
 {
     [self.delegate pushToCreateGiftwareShopVC];
+    [self setHidden:YES];
 }
 @end

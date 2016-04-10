@@ -63,10 +63,12 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
         //        FPImagePickerSelectLayout * layout = [[FPImagePickerSelectLayout alloc] init];
         //
         UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc] init];
-        CGRect frame = self.view.frame;
+        CGRect frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT-64);
         
-        NSLog(@"frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-        frame.size.height=[FFMovieShareData getFFMovieShareData].vcHeight;
+        NSLog(@"frame step1=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+//
+//        frame.size.height=[FFMovieShareData getFFMovieShareData].vcHeight;
+        
         [self.view setFrame:frame];
         
         frame = self.view.frame;
@@ -229,7 +231,8 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
 
     UIButton *_bottomViewBtn= [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.size.height-44, APPWINDOWWIDTH, 44)];
     
-  
+    CGRect frame = _bottomViewBtn.frame;
+    NSLog(@"_bottomViewBtn.frame=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
     [_bottomViewBtn setText:@"下一步"];
     
     _bottomViewBtn.titleLabel.font = [UIFont systemFontOfSize:APPUILABELFONTNO15];
