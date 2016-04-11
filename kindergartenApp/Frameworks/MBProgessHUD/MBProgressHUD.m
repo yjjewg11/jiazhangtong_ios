@@ -105,6 +105,8 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 #pragma mark - Class methods
 
 + (MB_INSTANCETYPE)showHUDAddedTo:(UIView *)view animated:(BOOL)animated {
+      if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    
 	MBProgressHUD *hud = [[self alloc] initWithView:view];
 	[view addSubview:hud];
 	[hud show:animated];
@@ -199,6 +201,9 @@ static const CGFloat kDetailsLabelFontSize = 12.f;
 }
 
 - (id)initWithView:(UIView *)view {
+    
+      if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
+    
 	NSAssert(view, @"View must not be nil.");
 	return [self initWithFrame:view.bounds];
 }

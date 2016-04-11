@@ -73,6 +73,7 @@
  *  @param msgText    显示文本
  */
 - (void)show:(UIView *)parentView msg:(NSString *)msgText {
+      if (parentView == nil) parentView = [[UIApplication sharedApplication].windows lastObject];
     [self hide:parentView];
     hud = [[MBProgressHUD alloc] initWithView:parentView];
     hud.tag = HUD_TAG;
@@ -91,7 +92,10 @@
  *  @param msgText    显示文本 不显示则为nil
  */
 - (void)showSector:(UIView *)parentView msg:(NSString *)msgText {
+     if (parentView == nil) parentView = [[UIApplication sharedApplication].windows lastObject];
+    
     [self hide:parentView];
+    
     hud = [[MBProgressHUD alloc] initWithView:parentView];
     hud.tag = HUD_TAG;
     hud.removeFromSuperViewOnHide = YES;

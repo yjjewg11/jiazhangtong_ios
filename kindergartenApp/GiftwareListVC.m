@@ -147,7 +147,7 @@
     reFreshView = [[UITableViewController alloc] init];
     reFreshView.tableView.delegate = self;
     reFreshView.tableView.dataSource = self;
-    reFreshView.tableView.backgroundColor = KGColorFrom16(0xEBEBF2);
+    reFreshView.tableView.backgroundColor = KGColorFrom16(0xF0F0F0);
     reFreshView.tableView.frame = CGRectMake(0, 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64-30);
     [self setupRefresh];
 }
@@ -314,7 +314,7 @@
     }
     else
     {
-        return 260;
+        return 351;
     }
 }
 
