@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DianzanNameShowView">
+            <connections>
+                <outlet property="namesShowLbl" destination="hfd-ya-37d" id="VeU-ly-uzA"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfd-ya-37d" customClass="MLEmojiLabel">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="highlightedColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-mR-gII">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <connections>
+                        <action selector="btnClick:" destination="-1" eventType="touchUpInside" id="dn2-Ms-h1w"/>
+                        <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="HX2-zo-a4T"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="hfd-ya-37d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0n5-rm-FDj"/>
+                <constraint firstAttribute="trailing" secondItem="9AA-mR-gII" secondAttribute="trailing" id="GBr-6o-hzP"/>
+                <constraint firstAttribute="trailing" secondItem="hfd-ya-37d" secondAttribute="trailing" id="Hbz-eQ-NrJ"/>
+                <constraint firstItem="9AA-mR-gII" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZMJ-hP-lcH"/>
+                <constraint firstAttribute="bottom" secondItem="9AA-mR-gII" secondAttribute="bottom" id="jsa-pW-Bmj"/>
+                <constraint firstAttribute="bottom" secondItem="hfd-ya-37d" secondAttribute="bottom" id="mzi-wJ-FrJ"/>
+                <constraint firstItem="hfd-ya-37d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vsj-A1-JVK"/>
+                <constraint firstItem="9AA-mR-gII" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yXH-88-xKt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+</document>

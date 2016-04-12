@@ -17,7 +17,7 @@
 #import "MJExtension.h"
 #import "FPGiftwareDetialVC.h"
 #import "FFMoiveSubmitView.h"
-@interface GiftwareListVC () <UITableViewDataSource,UITableViewDelegate>
+@interface GiftwareListVC () <UITableViewDataSource,UITableViewDelegate,GiftwareListTableViewCellDelegate>
 {
     UITableViewController * reFreshView;
    
@@ -185,19 +185,21 @@
         if (cell == nil)
         {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"GiftwareListTableViewCell" owner:nil options:nil] firstObject];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;  
             
         }
               
         [cell setDomain:dataSource[indexPath.row]];
+        cell.delegate=self;
         
         return cell;
     }
 }
 
 #pragma mark - 选中单元格
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)touchInsideCell:(FPMoive4QDomain * )domain
 {
-    FPMoive4QDomain * annDomain = dataSource[indexPath.row];
+    FPMoive4QDomain * annDomain = domain;
     
     [[KGHUD sharedHud] show:self.view];
     [[KGHttpService sharedService] getByUuid:@"/rest/fPMovie/get.json" uuid:annDomain.uuid success:^(id responseObject)

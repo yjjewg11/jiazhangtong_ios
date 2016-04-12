@@ -15,16 +15,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="332.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FNc-Mz-sko">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FNc-Mz-sko">
                         <rect key="frame" x="0.0" y="15" width="320" height="318"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Ac-DQ-tY9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ac-DQ-tY9">
                                 <rect key="frame" x="9" y="10" width="302" height="190"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="190" id="Zm8-vS-SKC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYx-wI-ALm">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYx-wI-ALm">
                                 <rect key="frame" x="9" y="198" width="302" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -40,10 +40,16 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5j-sT-Cca">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIB-bI-atL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
+                                <connections>
+                                    <action selector="touchInside_detail:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nUg-ov-f5o"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X5j-sT-Cca">
                                 <rect key="frame" x="8" y="248" width="311" height="70"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-Wn-Riy">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-Wn-Riy">
                                         <rect key="frame" x="0.0" y="10" width="312" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Yop-8E-dUO"/>
@@ -68,7 +74,7 @@
                                             <constraint firstAttribute="width" constant="30" id="Byr-yj-dij"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYG-As-cqd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYG-As-cqd">
                                         <rect key="frame" x="224" y="38" width="87" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,6 +83,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fp_hudong" translatesAutoresizingMaskIntoConstraints="NO" id="AHS-lB-KZN">
                                         <rect key="frame" x="66" y="36" width="25" height="25"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vw-0G-T7y">
+                                        <rect key="frame" x="178" y="23.5" width="133" height="42.5"/>
+                                        <connections>
+                                            <action selector="touchInside_dianzan:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ewx-QX-2Xc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -119,10 +131,18 @@
                 </subviews>
                 <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
+                    <constraint firstItem="FNc-Mz-sko" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="2dI-Am-v8B"/>
                     <constraint firstItem="FNc-Mz-sko" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="375-EL-yUv"/>
                     <constraint firstItem="FNc-Mz-sko" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cvK-4d-g8T"/>
                     <constraint firstAttribute="bottomMargin" secondItem="FNc-Mz-sko" secondAttribute="bottom" constant="-8.5" id="ggX-iO-Vgh"/>
+                    <constraint firstItem="FNc-Mz-sko" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="kHK-cT-SIn"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="FNc-Mz-sko" secondAttribute="trailing" constant="8" id="vgZ-rQ-534"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="cvK-4d-g8T"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dianzan_count_label" destination="wYG-As-cqd" id="O47-SF-bIg"/>

@@ -136,7 +136,7 @@ NSInteger localDBlimit=50;
     
     @try{
         
-        NSLog(@"FPHomeVC.viewDidLoad()");
+//        NSLog(@"FPHomeVC.viewDidLoad()");
         [super viewDidLoad];
         isLocalDBHasData=true;
         isRemoteDBHasData=true;
@@ -285,7 +285,7 @@ NSInteger localDBlimit=50;
     
     //先更新
     
-      if(!localFamilyRangeTime.updateTime){
+      if(!localFamilyRangeTime.updateTime==nil||[@"" isEqualToString:localFamilyRangeTime.updateTime]){
           //有数据则，初三全部更新变更数据。
           if([localFamilyRangeTime.minTime isEqualToString:localFamilyRangeTime.maxTime]){
                 localFamilyRangeTime.updateTime=@"2000-01-01 00:00:00";
@@ -293,7 +293,7 @@ NSInteger localDBlimit=50;
           }
         
       }
-    if(localFamilyRangeTime.updateTime){
+    if(localFamilyRangeTime.updateTime!=nil){
         [self showLoadView];
         [_service updateFPPhotoUpdateCountWithFamilyUUID:[FPHomeVC getFamily_uuid] success:^(NSString *status) {
             [self hidenLoadView];
@@ -723,7 +723,7 @@ NSInteger localDBlimit=50;
     if(dataSourceGroup==nil)dataSourceGroup=[NSMutableArray array];
     if(dataSourceGroupChildMap==nil)dataSourceGroupChildMap=[[NSMutableDictionary alloc] init];
     
- 
+    
     for(FPFamilyPhotoNormalDomain * domain in dataArr){
         
         if(domain.create_time==nil){
@@ -792,8 +792,6 @@ NSInteger localDBlimit=50;
         
         [dataSourceGroupChildMap removeAllObjects];
     }
-    _pageNo++;
-    
     
     
     
@@ -802,11 +800,14 @@ NSInteger localDBlimit=50;
     if(isLocalDBHasData&&isRemoteDBHasData&&_pageNo==1){
         
         if(dataArr.count>0){
-            localFamilyRangeTime.maxTime=[dataArr firstObject];
+            FPFamilyPhotoNormalDomain * domain=[dataArr firstObject];
+            localFamilyRangeTime.maxTime=domain.create_time;
             [_service updateMaxTime:localFamilyRangeTime];
         }
     }
+    _pageNo++;
     
+
     //本地数据已经取完了，下次从远程服务器取。
     if(dataArr.count<localDBlimit){
         NSLog(@"本地数据已经没有了，准备远程取数据");

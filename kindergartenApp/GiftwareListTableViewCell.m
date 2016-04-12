@@ -7,6 +7,8 @@
 //
 
 #import "GiftwareListTableViewCell.h"
+#import "DianzanNameShowView.h"
+
 @interface GiftwareListTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *herald_imageView;
 @property (weak, nonatomic) IBOutlet UILabel *subtitle_lable;
@@ -14,14 +16,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *dianzan_count_label;
 @property (weak, nonatomic) IBOutlet UILabel *title_label;
 
-
+@property (strong,nonatomic) FPMoive4QDomain *  domain1;
 
 @end
 
 
 @implementation GiftwareListTableViewCell
 - (void)setDomain:(FPMoive4QDomain * )domain{
-    
+    self.domain1=domain;
     
     NSURL *imageUrl = [NSURL URLWithString:domain.herald];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
@@ -57,6 +59,19 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (IBAction)touchInside_detail:(id)sender {
+    
+    [self.delegate touchInsideCell:self.domain1];
+    
+
+}
+- (IBAction)touchInside_dianzan:(id)sender {
+    
+    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
+     [[self superview] addSubview:dianzan];
+//    [self addSubview:dianzan];
+    [dianzan loadData:self.domain1.uuid type:Topic_FPGiftware];
 }
 
 @end

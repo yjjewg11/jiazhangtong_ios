@@ -119,6 +119,9 @@
 		0492BA001CB8D88300ACB096 /* FPMoiveDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B9FF1CB8D88300ACB096 /* FPMoiveDomain.m */; };
 		0492BA021CB9000300ACB096 /* FFMoiveSubmitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */; };
 		0492BA051CB9543200ACB096 /* PXUIWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492BA041CB9543000ACB096 /* PXUIWebView.m */; };
+		0492BA181CBCE70E00ACB096 /* DianzanNameShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492BA171CBCE70E00ACB096 /* DianzanNameShowView.m */; };
+		0492BA1A1CBCE74700ACB096 /* DianzanNameShowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492BA191CBCE74700ACB096 /* DianzanNameShowView.xib */; };
+		0492BA1E1CBCEB4600ACB096 /* DianzanUserDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492BA1D1CBCEB4600ACB096 /* DianzanUserDomain.m */; };
 		0494F4791BDF777500F39865 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0494F4691BDF777500F39865 /* MJRefresh.bundle */; };
 		0494F47A1BDF777500F39865 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46C1BDF777500F39865 /* MJRefreshBaseView.m */; };
 		0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F46E1BDF777500F39865 /* MJRefreshConst.m */; };
@@ -1069,6 +1072,11 @@
 		0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FFMoiveSubmitView.xib; sourceTree = "<group>"; };
 		0492BA031CB9543000ACB096 /* PXUIWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXUIWebView.h; sourceTree = "<group>"; };
 		0492BA041CB9543000ACB096 /* PXUIWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXUIWebView.m; sourceTree = "<group>"; };
+		0492BA161CBCE70E00ACB096 /* DianzanNameShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianzanNameShowView.h; sourceTree = "<group>"; };
+		0492BA171CBCE70E00ACB096 /* DianzanNameShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DianzanNameShowView.m; sourceTree = "<group>"; };
+		0492BA191CBCE74700ACB096 /* DianzanNameShowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DianzanNameShowView.xib; sourceTree = "<group>"; };
+		0492BA1C1CBCEB4600ACB096 /* DianzanUserDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianzanUserDomain.h; sourceTree = "<group>"; };
+		0492BA1D1CBCEB4600ACB096 /* DianzanUserDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DianzanUserDomain.m; sourceTree = "<group>"; };
 		0494F4691BDF777500F39865 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		0494F46A1BDF777500F39865 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		0494F46B1BDF777500F39865 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
@@ -2711,6 +2719,34 @@
 				04FA14D01C3E080A008D0BF8 /* SpCourseDetailCommentVC.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		0492BA141CBCE6A600ACB096 /* BaseDianzan(公共点赞) */ = {
+			isa = PBXGroup;
+			children = (
+				0492BA1B1CBCEB0B00ACB096 /* model */,
+				0492BA151CBCE6C400ACB096 /* view */,
+			);
+			name = "BaseDianzan(公共点赞)";
+			sourceTree = "<group>";
+		};
+		0492BA151CBCE6C400ACB096 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				0492BA161CBCE70E00ACB096 /* DianzanNameShowView.h */,
+				0492BA171CBCE70E00ACB096 /* DianzanNameShowView.m */,
+				0492BA191CBCE74700ACB096 /* DianzanNameShowView.xib */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		0492BA1B1CBCEB0B00ACB096 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				0492BA1C1CBCEB4600ACB096 /* DianzanUserDomain.h */,
+				0492BA1D1CBCEB4600ACB096 /* DianzanUserDomain.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		0494F4681BDF777500F39865 /* MJRefresh */ = {
@@ -4975,6 +5011,7 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				0492BA141CBCE6A600ACB096 /* BaseDianzan(公共点赞) */,
 				0405B6EA1CB24DEB0090863C /* FFMovie(精品相册) */,
 				0405B6D31CB0C0990090863C /* BaseReply(公共回复模块） */,
 				248B6AA41B19AD2C00FCB98F /* Home(主页) */,
@@ -6190,6 +6227,7 @@
 				04F9FB591BF1A67400AEFB88 /* bubble_min@2x.png in Resources */,
 				2457FD031B711A65006A3AB7 /* AddressbookTableViewCell.xib in Resources */,
 				24E634821B6FB9CC00A23A66 /* RecipesHeadTableViewCell.xib in Resources */,
+				0492BA1A1CBCE74700ACB096 /* DianzanNameShowView.xib in Resources */,
 				04FEC57B1BEDD84A00C642A6 /* YouHuiCell.xib in Resources */,
 				F4EA53941B60EAE30044BE7A /* StudentInfoHeaderView.xib in Resources */,
 				04A4DE911BF484DF002ABBB1 /* sms.png in Resources */,
@@ -6634,6 +6672,7 @@
 				04FB23771C16CD62009B57E2 /* TuiJianCell.m in Sources */,
 				04FA14D11C3E080A008D0BF8 /* SpCourseDetailCommentVC.m in Sources */,
 				2457FD0B1B712C13006A3AB7 /* FaceBoard.m in Sources */,
+				0492BA1E1CBCEB4600ACB096 /* DianzanUserDomain.m in Sources */,
 				04FA598A1C27C68A009689C7 /* EYTagPopupView.m in Sources */,
 				04FDB4E31C1AD9A900EF0D68 /* ZYQAssetPickerController.m in Sources */,
 				04FB7CAF1C0D9A9D00FD3E31 /* SpTeacherInfoCell.m in Sources */,
@@ -6821,6 +6860,7 @@
 				0494F47C1BDF777500F39865 /* MJRefreshFooterView.m in Sources */,
 				248B6A9B1B19AAD200FCB98F /* KGMessageView.m in Sources */,
 				0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */,
+				0492BA181CBCE70E00ACB096 /* DianzanNameShowView.m in Sources */,
 				04BDD6911C4CD05A00FA0C3A /* SpCourseHomeCourseCell.m in Sources */,
 				04FDB4DE1BFC1C7E00A73E2E /* MySPTeacherCommentCell.m in Sources */,
 				048676EC1CA4DBFC00D168D0 /* self.myDomain.m in Sources */,

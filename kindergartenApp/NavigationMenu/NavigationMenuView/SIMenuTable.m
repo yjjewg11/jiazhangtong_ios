@@ -146,6 +146,7 @@
     SIMenuCell *cell = (SIMenuCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil) {
         cell = [[SIMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
     }
     
     cell.textLabel.text = [self.items objectAtIndex:indexPath.row];

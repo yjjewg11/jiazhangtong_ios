@@ -10,6 +10,16 @@
 
 #import "FPMoive4QDomain.h"
 
+
+@protocol GiftwareListTableViewCellDelegate <NSObject>
+
+- (void)touchInsideCell:(FPMoive4QDomain * )domain;
+
+@end
+
 @interface GiftwareListTableViewCell : UITableViewCell
 - (void)setDomain:(FPMoive4QDomain * )domain;
+
+@property   id<GiftwareListTableViewCellDelegate> delegate;
+
 @end
