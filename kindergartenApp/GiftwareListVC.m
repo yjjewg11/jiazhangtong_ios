@@ -31,6 +31,17 @@
 @end
 
 @implementation GiftwareListVC
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self regNotification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,6 +54,8 @@
     [self getTableData];
     
     [self initReFreshView];
+    
+    
 }
 
 - (void)initSegmentedControl
@@ -196,7 +209,8 @@
     }
 }
 
-#pragma mark - 选中单元格
+#pragma mark - touchInsideCell
+
 - (void)touchInsideCell:(FPMoive4QDomain * )domain
 {
     FPMoive4QDomain * annDomain = domain;

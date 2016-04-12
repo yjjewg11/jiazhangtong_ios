@@ -3063,7 +3063,7 @@
 {
     
     
-    NSString * url=[NSString stringWithFormat:@"%@rest/baseDianzan/queryNameByPage", [KGHttpUrl getBaseServiceURL]];
+    NSString * url=[NSString stringWithFormat:@"%@rest/baseDianzan/queryNameByPage.json", [KGHttpUrl getBaseServiceURL]];
     
     if (rel_uuid == nil)
     {
@@ -3073,7 +3073,7 @@
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
-    [mgr GET:[KGHttpUrl getTimeLineItemCommentListUrl] parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    [mgr GET:url parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
      {
          KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
          [self sessionTimeoutHandle:baseDomain];

@@ -285,12 +285,13 @@ NSInteger localDBlimit=50;
     
     //先更新
     
-      if(!localFamilyRangeTime.updateTime==nil||[@"" isEqualToString:localFamilyRangeTime.updateTime]){
+      if(localFamilyRangeTime.updateTime==nil||[@"" isEqualToString:localFamilyRangeTime.updateTime]){
+          
+          localFamilyRangeTime.updateTime=@"1700-01-01 00:00:00";
+          [_service updateUpdateTime:localFamilyRangeTime.family_uuid updatetime:localFamilyRangeTime.updateTime];
           //有数据则，初三全部更新变更数据。
-          if([localFamilyRangeTime.minTime isEqualToString:localFamilyRangeTime.maxTime]){
-                localFamilyRangeTime.updateTime=@"2000-01-01 00:00:00";
-              [_service updateMaxTime:localFamilyRangeTime];
-          }
+//          if([localFamilyRangeTime.minTime isEqualToString:localFamilyRangeTime.maxTime]){
+//                          }
         
       }
     if(localFamilyRangeTime.updateTime!=nil){
@@ -302,7 +303,7 @@ NSInteger localDBlimit=50;
             
         } faild:^(NSString *errorMsg) {
             
-            //        [MBProgressHUD showError:@"请求超时,请稍后再试!"];
+                    [MBProgressHUD showError:errorMsg];
             
             [self hidenLoadView];
             
@@ -1016,7 +1017,7 @@ NSInteger localDBlimit=50;
 - (void)saveUploadImgPath:(NSNotification *)noti
 {
     FPUploadSaveUrlDomain * domain = noti.object;
-    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status] family_uuid:domain.family_uuid];
+    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status] family_uuid:domain.family_uuid uuid:domain.uuid];
 }
 
 

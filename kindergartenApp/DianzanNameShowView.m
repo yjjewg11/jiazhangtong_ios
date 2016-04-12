@@ -72,7 +72,7 @@
      {
          [hud hide:YES];
 
-         [MBProgressHUD showError:@"获取评论列表失败!"];
+         [MBProgressHUD showError:errorMsg];
         
      }];
 }

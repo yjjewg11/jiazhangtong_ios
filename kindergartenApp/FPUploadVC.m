@@ -138,7 +138,7 @@
  */
 - (void)startDoUploadTable{
     
-    NSString *countStr=[NSString stringWithFormat:@"%d",_dataArrs.count];
+    NSString *countStr=[NSString stringWithFormat:@"%ld",_dataArrs.count];
     
 
     //通知主页时光轴有数据更新
@@ -302,7 +302,7 @@
     //这里传入一个 uuid
      FPFamilyPhotoUploadDomain *uploadDmain=_dataArrs[index];
     NSDictionary * dict = @{
-//                            @"JSESSIONID":[KGHttpService sharedService].loginRespDomain.JSESSIONID,
+
                             @"family_uuid":uploadDmain.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType};
     
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
@@ -320,13 +320,17 @@
     AFHTTPRequestOperation *operation =
     [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        
+        KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+//        [self sessionTimeoutHandle:baseDomain];
+        
         FPUploadSaveUrlDomain * domain = [[FPUploadSaveUrlDomain alloc] init];
        
-        
+        domain.uuid=baseDomain.data_id;
         domain.localUrl = [uploadDmain.localurl absoluteString];
         domain.family_uuid=uploadDmain.family_uuid;
         domain.status = 0;//成功
-        
+     
         //存入数据库
         NSNotification * noti0 = [[NSNotification alloc] initWithName:@"saveuploadimg" object:domain userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:noti0];

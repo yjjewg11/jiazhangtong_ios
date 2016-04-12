@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DianzanNameShowView">
             <connections>
-                <outlet property="namesShowLbl" destination="hfd-ya-37d" id="VeU-ly-uzA"/>
+                <outlet property="namesShowLbl" destination="hfd-ya-37d" id="jQw-ys-xRA"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

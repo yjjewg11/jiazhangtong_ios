@@ -14,7 +14,7 @@
 @protocol GiftwareListTableViewCellDelegate <NSObject>
 
 - (void)touchInsideCell:(FPMoive4QDomain * )domain;
-
+//- (void)touchInsideCellOfReply:(FPMoive4QDomain * )domain;
 @end
 
 @interface GiftwareListTableViewCell : UITableViewCell

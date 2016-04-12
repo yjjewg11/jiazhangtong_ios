@@ -286,6 +286,11 @@
 }
 + (NSString *)getDateStrByNSDate: (NSDate *)date format:(NSString *)formatStr
 {
+    
+    　NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    　　[dateFormat setDateFormat:formatStr];
+    　　NSString *dateString = [dateFormat stringFromDate:date];
+    return dateString;
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
     NSInteger interval = [zone secondsFromGMTForDate:date];
     

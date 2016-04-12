@@ -6,8 +6,8 @@
 //  Copyright © 2016年 funi. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "BaseReplyInputViewController.h"
 
-@interface GiftwareListVC : BaseViewController
+@interface GiftwareListVC : BaseReplyInputViewController
 
 @end

@@ -347,20 +347,44 @@
          [MBProgressHUD showError:@"获取收藏信息失败!"];
      }];
 }
+- (void)loadImgByRemote
+{
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.domain.path ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+     {
+         //         NSLog(@"self.domain.path=%@",self.domain.path);
+     }];
+    
+    
+    
+    
+    
+    //原图，远程地址
+    [self calImageViewHeight:self.domain success:^(CGFloat height)
+     {
+         
+         
+         //设置图片、图片高度
+         self.imageView.height = height;
+         
+         self.imageDetailLable.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) - 44, APPWINDOWWIDTH, 44);
+         
+         [self.imageView sd_setImageWithURL:[NSURL URLWithString:[[self.domain.path componentsSeparatedByString:@"@"] firstObject]]];
+         
+         [self resetFrame];
+     }
+                       faild:^(NSString *errorMsg)
+     {
+         //按照一个大小设置imageView
+     }];
 
+}
 - (void)resetData:(BOOL)hideInfoView
 {
    
     
     self.imageView .tag = [self indexOfDomain];
     NSLog(@" self.imageView .tag=%d", self.imageView .tag);
-    
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.domain.path ] placeholderImage:[UIImage imageNamed:@"waitImageDown"] options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
-     {
-//         NSLog(@"self.domain.path=%@",self.domain.path);
-     }];
-    
-    if([@"(null)" isEqualToString:self.domain.photo_time]||self.domain.photo_time==nil)self.domain.photo_time=@"";
+      if([@"(null)" isEqualToString:self.domain.photo_time]||self.domain.photo_time==nil)self.domain.photo_time=@"";
     self.timeLbl.text = [NSString stringWithFormat:@"拍摄时间:%@",self.domain.photo_time];
     
       if([@"(null)" isEqualToString:self.domain.address]||self.domain.address==nil)self.domain.address=@"";
@@ -385,31 +409,37 @@
 //         [self.imageDetailLable setHidden:YES];
 //    }
     
+    
+    
+    
+    DBNetDaoService * _service = [DBNetDaoService defaulService];
+    NSString * localUrl=[_service getfp_upload_localurl:self.domain.uuid];
+    
+    //本地有图片则优先显示。
+    if(localUrl.length>0){
+        ALAssetsLibrary * _library =[FPUploadVC defaultAssetsLibrary];
+        [_library assetForURL:localUrl resultBlock:^(ALAsset *asset)
+         {
+             //获取大图
+             UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+             [self.imageView setImage:img];
+             
+         }
+                 failureBlock:^(NSError *error)
+         {
+             NSLog(@"根据local url 查找失败");
+             [self loadImgByRemote];
+         }];
+        
+    }else{
+        [self loadImgByRemote];
+        
+    }
+
     [self resetFrame];
     //请求点赞数据
     [self getDZData];
-    
-    
-    [self calImageViewHeight:self.domain success:^(CGFloat height)
-    {
-        
-        
-        
-      
-         //设置图片、图片高度
-         self.imageView.height = height;
-        
-             self.imageDetailLable.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) - 44, APPWINDOWWIDTH, 44);
-        
-         [self.imageView sd_setImageWithURL:[NSURL URLWithString:[[self.domain.path componentsSeparatedByString:@"@"] firstObject]]];
-        
-         [self resetFrame];
-     }
-     faild:^(NSString *errorMsg)
-     {
-         //按照一个大小设置imageView
-     }];
-}
+    }
 - (void)setDataByMap:(id) map  indexOfDomain:(NSInteger)indexOfDomain dataArray :(NSArray*) dataArray
 {
     

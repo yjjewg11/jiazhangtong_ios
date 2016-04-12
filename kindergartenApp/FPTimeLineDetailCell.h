@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FPFamilyPhotoNormalDomain.h"
 #import "FPTimeLineDetailCommentDomain.h"
-
+#import "FPUploadVC.h"
 @interface FPTimeLineDetailCell : UICollectionViewCell
 
 - (void)setData:(FPFamilyPhotoNormalDomain *)domain indexOfDomain:(NSInteger)indexOfDomain dataArray :(NSArray*) dataArray;

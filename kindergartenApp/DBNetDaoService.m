@@ -65,7 +65,7 @@
             NSString * fp_familyinfo_Table = @"CREATE TABLE IF NOT EXISTS fp_familyinfo (family_uuid CHAR(45) PRIMARY KEY NOT NULL,'maxtime' datetime,'mintime' datetime,'updatetime' datetime);";
             
             //上传用 上传队列信息
-            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload ('user_uuid' CHAR(45) NOT NULL,'status' CHAR(4),'success_time' datetime,localurl CHAR(1024) NOT NULL,'family_uuid' CHAR(45) );";
+            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload ('uuid' CHAR(45),'user_uuid' CHAR(45) NOT NULL,'status' CHAR(4),'success_time' datetime,localurl CHAR(1024) NOT NULL,'family_uuid' CHAR(45) );";
             
             
             
@@ -73,12 +73,21 @@
             [self execSql:fp_familyinfo_Table];
             [self execSql:fp_upload_Table];
             
+            if(![self hasColumOfTable:@"fp_upload" column:@" uuid char(45)"]){
+                //上传用 上传队列信息
+                NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN uuid char(45);";
+                ;
+                    [self execSql:fp_upload_Table_family_uuid];
+            }
+            
+            
             if(![self hasColumOfTable:@"fp_upload" column:@"family_uuid"]){
                 //上传用 上传队列信息
                 NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN family_uuid char(45);";
                 ;
-                    [self execSql:fp_upload_Table_family_uuid];
+                [self execSql:fp_upload_Table_family_uuid];
             }
+
             
             
         }
@@ -89,7 +98,7 @@
 #pragma mark - 查询失败、成功的图片，用于选择图片是标示是否已经上传过
 - (bool)hasColumOfTable:(NSString *) table column:(NSString *) column
 {
-    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+
       NSString * sql = [NSString stringWithFormat:@"select sql from sqlite_master where tbl_name='%@' and type='table';",table];
     
     sqlite3_stmt *stmt;
@@ -123,14 +132,16 @@
 {
     //从数据库查询 familyUUID 所对应的 maxTime 和 minTime 如果没有相应数据 则自动创建一条，且把maxTime和minTime设置为空
     FPFamilyInfoDomain * domain = [self queryTimeByFamilyUUID:familyUUID];
-    
+   
     if(!domain){
         domain=[[FPFamilyInfoDomain alloc] init];
         domain.family_uuid=familyUUID;
     }
     
-    NSString * updateTime= domain.updateTime;
-    NSString * maxTime=[KGDateUtil getLocalDateStr];
+    
+//
+//    NSString * updateTime= domain.updateTime;
+//    NSString * maxTime=[KGDateUtil getLocalDateStr];
 
     
     [self updateFPPhotoUpdateCountByPageWithFamilyUUID:familyUUID  domain: domain  pageNo: 1 success:success faild:faild];
@@ -148,7 +159,7 @@
          //这里更新updatetime
 //         [self updateUpdateTime:familyUUID updatetime:[KGDateUtil getLocalDateStr]];
          
-         NSArray *arr= needUpDateDatas.data;
+         NSArray *arr= [FPFamilyPhotoStatusDomain  objectArrayWithKeyValuesArray:needUpDateDatas.data];
          if (arr.count > 0)
          {
              [self updatePhotoStatus:arr];
@@ -272,17 +283,17 @@
 - (void)updateMaxTime:(FPFamilyInfoDomain *)domain
 {
     //组织SQL语句
-    NSString *sql = [NSString stringWithFormat:@"update fp_familyinfo set maxtime=datetime('%@'),mintime=datetime('%@'),updatetime=datetime('%@') WHERE family_uuid='%@'",domain.maxTime,domain.minTime,domain.updateTime,domain.family_uuid];
-    
-    [self execSql:sql];
+    NSString *sql = [NSString stringWithFormat:@"update fp_familyinfo set maxtime=datetime('%@'),mintime=datetime('%@') WHERE family_uuid='%@'",domain.maxTime,domain.minTime,domain.family_uuid];
+     [self execInsertTransactionSql:@[sql]];
+//    [self execSql:sql];
 }
 #pragma mark - 根据familyuuid 更新maxTime 和 minTime
 - (void)updateMaxTime:(NSString *)familyUUID maxTime:(NSString *)maxTime minTime:(NSString *)minTime uptime:(NSString *)updateTime
 {
     //组织SQL语句
     NSString *sql = [NSString stringWithFormat:@"update fp_familyinfo set maxtime=datetime('%@'),mintime=datetime('%@'),updatetime=datetime('%@') WHERE family_uuid='%@'",maxTime,minTime,updateTime,familyUUID];
-    
-    [self execSql:sql];
+     [self execInsertTransactionSql:@[sql]];
+//    [self execSql:sql];
 }
 
 #pragma mark - 保存新的图片到数据库
@@ -320,8 +331,8 @@
             NSString * sql = [NSString stringWithFormat:@"delete from fp_photo_item  WHERE uuid = '%@'",domain.s,domain.u];
             
             [transactionSql addObject:sql];
-        }else{
-            NSString * sql = [NSString stringWithFormat:@"update fp_photo_item set maxtime = '%@' WHERE uuid = '%@'",domain.s,domain.u];
+        }else  if([@"1" isEqualToString: domain.u]){
+            NSString * sql = [NSString stringWithFormat:@"update fp_photo_item set status = 1 WHERE uuid = '%@'",domain.s];
             
             [transactionSql addObject:sql];
         }
@@ -372,8 +383,12 @@
 }
 
 #pragma mark - 批量执行sql
-- (void)execInsertTransactionSql:(NSMutableArray *)transactionSql
+- (void)execInsertTransactionSql:(NSArray *)transactionSql
 {
+    if(transactionSql.count==0){
+        NSLog(@"execInsertTransactionSql,count=0");
+        return;
+    }
     //使用事务，提交插入sql语句
     @try
     {
@@ -404,6 +419,8 @@
     }
     @catch(NSException *e)
     {
+        
+        NSLog(@"%@=%@",e.name,e.description);
         char *errorMsg;
         if (sqlite3_exec(db, "ROLLBACK", NULL, NULL, &errorMsg)==SQLITE_OK)
         {
@@ -423,8 +440,8 @@
     NSLog(@"更新updatetime中");
     
     NSString * sql = [NSString stringWithFormat:@"update fp_familyinfo set updatetime='%@' WHERE family_uuid='%@'",updatetime,familyuuid];
-    
-    [self execSql:sql];
+    [self execInsertTransactionSql:@[sql]];
+//    [self execSql:sql];
 }
 
 #pragma mark - 根据familyuuid更新maxtime
@@ -433,8 +450,8 @@
     NSLog(@"更新updatetime中");
     
     NSString * sql = [NSString stringWithFormat:@"update fp_familyinfo set maxtime='%@' WHERE family_uuid='%@'",maxTime,familyuuid];
-    
-    [self execSql:sql];
+       [self execInsertTransactionSql:@[sql]];
+//    [self execSql:sql];
 }
 
 #pragma mark - 查询列表数据用于时光轴表头显示，根据文件夹分
@@ -512,97 +529,6 @@
     return marr;
 }
 
-#pragma mark - 保存上传的图片路径
-- (void)saveUploadImgPath:(NSString *)localurl status:(NSString *)status family_uuid:(NSString *)family_uuid
-{
-    NSString * date = [KGDateUtil getLocalDateStr];
-    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
-    
-    NSString * sql1 = [NSString stringWithFormat:@"SELECT localurl from fp_upload   WHERE user_uuid='%@' AND localurl='%@' and family_uuid='%@' ",useruuid,localurl,family_uuid];
-    NSInteger count = 0;
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, [sql1 UTF8String], -1, &stmt, nil) == SQLITE_OK)
-    {
-        while (sqlite3_step(stmt)==SQLITE_ROW)
-        {
-            count++;
-        }
-        
-        sqlite3_finalize(stmt);
-    }
-    if (count == 0) //没找到 插入
-    {
-   
-        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (user_uuid,status,success_time,localurl,family_uuid) values ('%@','%@','%@','%@','%@')",useruuid,status,date,localurl,family_uuid];
-        NSLog(@"saveUploadImgPath sql=%@",sql);
-        [self execSql:sql];
-    }
-    else            //找到了，更新
-    {
-        NSString * sql = [NSString stringWithFormat:@"update fp_upload set status='%@' WHERE user_uuid='%@' AND localurl='%@'  and family_uuid='%@'",status,useruuid,localurl,family_uuid];
-           NSLog(@"saveUploadImgPath sql=%@",sql);
-        [self execSql:sql];
-    }
-}
-
-#pragma mark - 查询失败、成功的图片，用于选择图片是标示是否已经上传过
-- (NSMutableArray *)queryLocalImg
-{
-    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
-    
-    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"0",@"1"];
-    
-    NSMutableArray * marr = [NSMutableArray array];
-    
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
-    {
-        while (sqlite3_step(stmt)==SQLITE_ROW)
-        {
-            char *localurl = (char *)sqlite3_column_text(stmt, 0);
-            NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
-            [marr addObject:localurlStr];
-        }
-    }
-    
-    sqlite3_finalize(stmt);
-    
-    NSLog(@"count=%d,sql=%@",marr.count,sql);
-    return marr;
-}
-
-#pragma mark - 查询等待，失败的图片
-- (NSMutableArray *)queryUploadListLocalImg
-{
-    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
-    
-    NSString * sql = [NSString stringWithFormat:@"SELECT localurl,status,family_uuid from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@');",useruuid,@"1",@"3"];
-    
-    NSMutableArray * marr = [NSMutableArray array];
-    
-    sqlite3_stmt *stmt;
-    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
-    {
-        while (sqlite3_step(stmt) == SQLITE_ROW)
-        {
-            
-             FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
-          
-            NSString * localurl=[self getStringByChar:(char *)sqlite3_column_text(stmt, 0)];
-             domain.localurl=[NSURL URLWithString:localurl];
-            domain.status=[[self getStringByChar:((char *)sqlite3_column_text(stmt, 1))] integerValue];
-           domain.family_uuid=[self getStringByChar:((char *)sqlite3_column_text(stmt, 2))];
-     
-            [marr addObject:domain];
-
-        }
-    }
-    
-    sqlite3_finalize(stmt);
-      NSLog(@"count=%d,sql=%@",marr.count,sql);
-    return marr;
-}
-
 #pragma mark - 批量导入的时候，保存列表数据
 - (NSString*)getStringByChar:(char *)chars
 {
@@ -612,27 +538,28 @@
 - (void)saveUploadImgListPath:(NSMutableArray *)localurls
 {
     NSString * date = [KGDateUtil getLocalDateStr];
-    NSString * useruuid = [KGHttpService sharedService].loginRespDomain.JSESSIONID;
+    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
+    NSString * useruuid = userDomain.uuid;
     NSMutableArray * transactionSql = [[NSMutableArray alloc] init];
     NSString * family_uuid=[FPHomeVC getFamily_uuid];
     for (NSString * url in localurls)
     {
-        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (user_uuid,status,success_time,localurl,family_uuid) values ('%@','%@','%@','%@')",useruuid,@"1",date,url,family_uuid];
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (uuid,user_uuid,status,success_time,localurl,family_uuid) values ('','%@','%@','%@','%@','%@')",useruuid,@"1",date,url,family_uuid];
 
         [transactionSql addObject:sql];
     }
     
     [self execInsertTransactionSql:transactionSql];
     
-      NSLog(@"count=%d,sql=%@insert into fp_upload (user_uuid,status,success_time,localurl,family_uuid) values (' ',' ',' ',' ')",localurls.count);
+      NSLog(@"count=%d,sql=insert into fp_upload (user_uuid,status,success_time,localurl,family_uuid) values (' ',' ',' ',' ')",localurls.count);
 }
 
 #pragma mark - 删除上传列表中的数据
 - (void)deleteUploadImg:(NSString *)localurl
 {
     NSString * sql = [NSString stringWithFormat:@"DELETE FROM fp_upload WHERE localurl='%@'",localurl];
-    
-    [self execSql:sql];
+     [self execInsertTransactionSql:@[sql]];
+//    [self execSql:sql];
 }
 
 #pragma mark - 刷新，查询最新数据并且保存到数据库
@@ -728,15 +655,150 @@
 {
     NSString * sqlupdate = [NSString stringWithFormat:@"update fp_photo_item set note='%@',address='%@' WHERE uuid='%@'",domain.note,domain.address,domain.uuid];
     
-    return [self execSql:sqlupdate];
+      [self execInsertTransactionSql:@[sqlupdate]];//[self execSql:sqlupdate];
+    
+    return YES;
 }
 
 #pragma mark - 删除时光轴相片
 - (void)deletePhotoItem:(NSString *)uuid
 {
     NSString * sql = [NSString stringWithFormat:@"DELETE FROM fp_photo_item WHERE uuid='%@'",uuid];
+    [self execInsertTransactionSql:@[sql]];
+//    [self execSql:sql];
+}
+
+
+
+#pragma mark -
+- (NSString *)getfp_upload_localurl:(NSString *)uuid
+{
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE  uuid ='%@'",uuid];
     
-    [self execSql:sql];
+    NSMutableArray * marr = [NSMutableArray array];
+    NSString *urlStr=nil;
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            char *url = (char *)sqlite3_column_text(stmt, 0);
+            NSString *urlStr = [[NSString alloc] initWithUTF8String:url];
+            
+            
+        }
+    }
+    sqlite3_finalize(stmt);
+    
+   return urlStr;
+}
+
+
+#pragma mark - 保存上传的图片路径
+- (void)saveUploadImgPath:(NSString *)localurl status:(NSString *)status family_uuid:(NSString *)family_uuid uuid:(NSString *)uuid
+{
+    NSString * date = [KGDateUtil getLocalDateStr];
+    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
+    NSString * useruuid = userDomain.uuid;
+    NSString * sql1 = [NSString stringWithFormat:@"SELECT localurl from fp_upload   WHERE user_uuid='%@' AND localurl='%@' and family_uuid='%@' ",useruuid,localurl,family_uuid];
+    NSInteger count = 0;
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql1 UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            count++;
+        }
+        
+        sqlite3_finalize(stmt);
+    }
+    if (count == 0) //没找到 插入
+    {
+        
+        NSString * sql = [NSString stringWithFormat:@"insert into fp_upload (user_uuid,status,success_time,localurl,family_uuid,uuid) values ('%@','%@','%@','%@','%@','%@')",useruuid,status,date,localurl,family_uuid,uuid];
+        NSLog(@"saveUploadImgPath sql=%@",sql);
+        //        [self execSql:sql];
+        [self execInsertTransactionSql:@[sql]];
+    }
+    else            //找到了，更新
+    {
+        NSString * sql = [NSString stringWithFormat:@"update fp_upload set status='%@' ,uuid='%@' WHERE user_uuid='%@' AND localurl='%@'  and family_uuid='%@'",status,uuid,useruuid,localurl,family_uuid];
+        NSLog(@"saveUploadImgPath sql=%@",sql);
+        [self execInsertTransactionSql:@[sql]];
+        //        [self execSql:sql];
+    }
+}
+
+
+- (void)update_fp_uploadOfUuid:(NSString *)uuid  localurl:(NSString *)localurl
+{
+    NSLog(@"更新updatetime中");
+    
+    NSString * sql = [NSString stringWithFormat:@"update fp_upload set uuid='%@' WHERE localurl='%@'",uuid,localurl
+                      ];
+    [self execInsertTransactionSql:@[sql]];
+    //    [self execSql:sql];
+}
+
+#pragma mark - 查询失败、成功的图片，用于选择图片是标示是否已经上传过
+- (NSMutableArray *)queryLocalImg
+{
+    
+    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
+    NSString * useruuid = userDomain.uuid;
+    
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"0",@"1"];
+    
+    NSMutableArray * marr = [NSMutableArray array];
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt)==SQLITE_ROW)
+        {
+            char *localurl = (char *)sqlite3_column_text(stmt, 0);
+            NSString *localurlStr = [[NSString alloc] initWithUTF8String:localurl];
+            [marr addObject:localurlStr];
+        }
+    }
+    
+    sqlite3_finalize(stmt);
+    
+    NSLog(@"count=%d,sql=%@",marr.count,sql);
+    return marr;
+}
+
+#pragma mark - 查询等待，失败的图片
+- (NSMutableArray *)queryUploadListLocalImg
+{
+
+    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
+    NSString * useruuid = userDomain.uuid;
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl,status,family_uuid from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@');",useruuid,@"1",@"3"];
+    
+    NSMutableArray * marr = [NSMutableArray array];
+    
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+            
+            FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
+            
+            NSString * localurl=[self getStringByChar:(char *)sqlite3_column_text(stmt, 0)];
+            domain.localurl=[NSURL URLWithString:localurl];
+            domain.status=[[self getStringByChar:((char *)sqlite3_column_text(stmt, 1))] integerValue];
+            domain.family_uuid=[self getStringByChar:((char *)sqlite3_column_text(stmt, 2))];
+            
+            [marr addObject:domain];
+            
+        }
+    }
+    
+    sqlite3_finalize(stmt);
+    NSLog(@"count=%d,sql=%@",marr.count,sql);
+    return marr;
 }
 
 @end

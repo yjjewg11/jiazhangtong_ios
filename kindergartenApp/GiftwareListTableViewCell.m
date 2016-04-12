@@ -66,11 +66,21 @@
     
 
 }
-- (IBAction)touchInside_dianzan:(id)sender {
+- (IBAction)touchInside_replyList:(id)sender {
+//    [self.delegate touchInsideCellOfReply:self.domain1];
     
-    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-     [[self superview] addSubview:dianzan];
-//    [self addSubview:dianzan];
+    NSInteger type=Topic_FPGiftware;
+    
+    NSDictionary * dic = @{@"rel_uuid" :_domain1.uuid, @"type" : [NSNumber numberWithInteger:type]};
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:Key_Notification_ShowBaseReplyList object:self userInfo:dic];
+}
+- (IBAction)touchInside_dianzan:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    
+    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, button.frame.origin.y, 320, 44)]; 
+//     [[self superview] addSubview:dianzan];
+    [self.contentView addSubview:dianzan];
     [dianzan loadData:self.domain1.uuid type:Topic_FPGiftware];
 }
 
