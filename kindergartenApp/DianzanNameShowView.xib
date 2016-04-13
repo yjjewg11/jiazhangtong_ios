@@ -5,31 +5,29 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DianzanNameShowView">
-            <connections>
-                <outlet property="namesShowLbl" destination="hfd-ya-37d" id="jQw-ys-xRA"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DianzanNameShowView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfd-ya-37d" customClass="MLEmojiLabel">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="highlightedColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9AA-mR-gII">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="btnClick:" destination="-1" eventType="touchUpInside" id="dn2-Ms-h1w"/>
-                        <action selector="touchUpOutside:" destination="-1" eventType="touchUpOutside" id="HX2-zo-a4T"/>
+                        <action selector="btnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Yw3-qa-CKJ"/>
+                        <action selector="touchUpOutside:" destination="iN0-l3-epB" eventType="touchUpOutside" id="XD2-8n-oXQ"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="hfd-ya-37d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0n5-rm-FDj"/>
                 <constraint firstAttribute="trailing" secondItem="9AA-mR-gII" secondAttribute="trailing" id="GBr-6o-hzP"/>
@@ -41,6 +39,9 @@
                 <constraint firstItem="9AA-mR-gII" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yXH-88-xKt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="namesShowLbl" destination="hfd-ya-37d" id="KXa-6o-alP"/>
+            </connections>
         </view>
     </objects>
 </document>

@@ -55,7 +55,7 @@
 #import "FPFamilyMembers.h"
 #import "KGListBaseDomain.h"
 @interface KGHttpService : NSObject
-
+@property (strong, nonatomic) KGUser * userinfo;
 @property (strong, nonatomic) NSString * pushToken;
 @property (strong, nonatomic) KGTabBarViewController * tabBarViewController;//首页控制器
 @property (strong, nonatomic) LoginRespDomain * loginRespDomain;

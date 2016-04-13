@@ -239,6 +239,12 @@
 
 //设置选中的标题到头。
 -(void)setHeaderTitle:(NSString *) title{
+    if(titlelb==nil){
+        titlelb=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, 44)];
+        titlelb.text=@"请选择";
+        [titlelb setTextAlignment:NSTextAlignmentCenter];
+    }
+    
     if(titlelb!=nil){
         
         titlelb.text=[NSString stringWithFormat:@"已选择:%@",title ];
@@ -250,9 +256,12 @@
     // 设置表视图的头部视图(headView 添加子视图)
     UIView *headerView =  [[UIView alloc]init];
     [headerView setBackgroundColor:[UIColor grayColor]];
-    titlelb=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
-    titlelb.text=@"请选择";
-    [titlelb setTextAlignment:NSTextAlignmentCenter];
+    if(titlelb==nil){
+        titlelb=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
+        titlelb.text=@"请选择";
+        [titlelb setTextAlignment:NSTextAlignmentCenter];
+    }
+   
     [headerView addSubview:titlelb];
     
     return headerView;

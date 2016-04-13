@@ -538,8 +538,8 @@
 - (void)saveUploadImgListPath:(NSMutableArray *)localurls
 {
     NSString * date = [KGDateUtil getLocalDateStr];
-    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
-    NSString * useruuid = userDomain.uuid;
+    
+    NSString * useruuid = [KGHttpService sharedService].userinfo.uuid;
     NSMutableArray * transactionSql = [[NSMutableArray alloc] init];
     NSString * family_uuid=[FPHomeVC getFamily_uuid];
     for (NSString * url in localurls)
@@ -674,7 +674,7 @@
 - (NSString *)getfp_upload_localurl:(NSString *)uuid
 {
     NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE  uuid ='%@'",uuid];
-    
+    NSLog(@"sql=%@",sql);
     NSMutableArray * marr = [NSMutableArray array];
     NSString *urlStr=nil;
     sqlite3_stmt *stmt;
@@ -683,7 +683,7 @@
         while (sqlite3_step(stmt)==SQLITE_ROW)
         {
             char *url = (char *)sqlite3_column_text(stmt, 0);
-            NSString *urlStr = [[NSString alloc] initWithUTF8String:url];
+           urlStr = [[NSString alloc] initWithUTF8String:url];
             
             
         }
@@ -698,8 +698,7 @@
 - (void)saveUploadImgPath:(NSString *)localurl status:(NSString *)status family_uuid:(NSString *)family_uuid uuid:(NSString *)uuid
 {
     NSString * date = [KGDateUtil getLocalDateStr];
-    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
-    NSString * useruuid = userDomain.uuid;
+    NSString * useruuid = [KGHttpService sharedService].userinfo.uuid;
     NSString * sql1 = [NSString stringWithFormat:@"SELECT localurl from fp_upload   WHERE user_uuid='%@' AND localurl='%@' and family_uuid='%@' ",useruuid,localurl,family_uuid];
     NSInteger count = 0;
     sqlite3_stmt *stmt;
@@ -743,9 +742,8 @@
 #pragma mark - 查询失败、成功的图片，用于选择图片是标示是否已经上传过
 - (NSMutableArray *)queryLocalImg
 {
-    
-    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
-    NSString * useruuid = userDomain.uuid;
+  
+    NSString * useruuid = [KGHttpService sharedService].userinfo.uuid;
     
     NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"0",@"1"];
     
@@ -764,7 +762,7 @@
     
     sqlite3_finalize(stmt);
     
-    NSLog(@"count=%d,sql=%@",marr.count,sql);
+    NSLog(@"count=%ld,sql=%@",marr.count,sql);
     return marr;
 }
 
@@ -772,8 +770,7 @@
 - (NSMutableArray *)queryUploadListLocalImg
 {
 
-    LoginRespDomain *userDomain=[KGHttpService sharedService].loginRespDomain;
-    NSString * useruuid = userDomain.uuid;
+    NSString * useruuid = [KGHttpService sharedService].userinfo.uuid;
     NSString * sql = [NSString stringWithFormat:@"SELECT localurl,status,family_uuid from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@');",useruuid,@"1",@"3"];
     
     NSMutableArray * marr = [NSMutableArray array];

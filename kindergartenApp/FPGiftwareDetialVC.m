@@ -235,7 +235,7 @@
     }
     FavoritesDomain * domain = [[FavoritesDomain alloc] init];
     domain.title = self.domain.title;
-    domain.type  = Topic_FPTimeLine;
+    domain.type  = Topic_FPGiftware;
     domain.reluuid = self.domain.uuid;
     domain.createtime = [KGDateUtil presentTime];
     button.enabled = NO;
@@ -287,7 +287,7 @@
                        });
         return;
     }
-    [[KGHttpService sharedService] baseDianzan_save:self.domain.uuid type:Topic_FPTimeLine success:^(NSString *msgStr) {
+    [[KGHttpService sharedService] baseDianzan_save:self.domain.uuid type:Topic_FPGiftware success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
         
         SPBottomItem * item = _buttonItems[2];
@@ -306,7 +306,7 @@
     [[KGHUD sharedHud] show:self.view];
     
     sender.enabled = NO;
-    [[KGHttpService sharedService] baseDianzan_delete:self.domain.uuid type:Topic_FPTimeLine success:^(NSString *msgStr)
+    [[KGHttpService sharedService] baseDianzan_delete:self.domain.uuid type:Topic_FPGiftware success:^(NSString *msgStr)
      {
          [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
          

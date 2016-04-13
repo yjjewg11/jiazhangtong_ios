@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "KGUUID.h"
 @interface FPUploadVC : BaseViewController
 
 @property (nonatomic , strong) ALAssetsLibrary * library;

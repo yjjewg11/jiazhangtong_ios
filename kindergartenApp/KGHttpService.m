@@ -480,7 +480,7 @@
          if([baseDomain.ResMsg.status isEqualToString:String_Success])
          {
              _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
-             
+             _userinfo=_loginRespDomain.userinfo;
              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
              [defaults setObject:_loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
              [defaults synchronize];
@@ -508,7 +508,7 @@
                                       success:^(NSURLSessionDataTask* task, id responseObject) {
                                           
                                           _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
-                                          
+                                          _userinfo=_loginRespDomain.userinfo;
                                           
                                           NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                                           [defaults setObject:_loginRespDomain.JSESSIONID forKey:@"loginJessionID"];

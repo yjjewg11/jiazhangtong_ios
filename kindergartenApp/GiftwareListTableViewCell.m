@@ -78,8 +78,14 @@
 - (IBAction)touchInside_dianzan:(id)sender {
     UIButton *button = (UIButton *)sender;
     
-    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, button.frame.origin.y, 320, 44)]; 
+//    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, self.contentView.frame.size.height-44, self.contentView.frame.size.width, 44)];
+    
+    DianzanNameShowView * dianzan= [[[NSBundle mainBundle] loadNibNamed:@"DianzanNameShowView" owner:nil options:nil] firstObject];
+    [dianzan setFrame:CGRectMake(0, self.contentView.frame.size.height-44, self.contentView.frame.size.width, 44)];
 //     [[self superview] addSubview:dianzan];
+//    UILabel * dianzan=[[UILabel alloc]initWithFrame:CGRectMake(0, self.contentView.frame.size.height-44, 320, 44)];
+//    dianzan.text=@"dfdfsdsdf";
+//    [dianzan setBackgroundColor:[UIColor grayColor] ];
     [self.contentView addSubview:dianzan];
     [dianzan loadData:self.domain1.uuid type:Topic_FPGiftware];
 }

@@ -414,12 +414,17 @@
     
     DBNetDaoService * _service = [DBNetDaoService defaulService];
     NSString * localUrl=[_service getfp_upload_localurl:self.domain.uuid];
-    
+//    localUrl=@"assets-library://asset/asset111.JPG?id=99D53A1F-FEEF-40E1-8BB3-7DD55A43C8B71111&ext=JPG";
     //本地有图片则优先显示。
     if(localUrl.length>0){
         ALAssetsLibrary * _library =[FPUploadVC defaultAssetsLibrary];
-        [_library assetForURL:localUrl resultBlock:^(ALAsset *asset)
+        [_library assetForURL:[NSURL URLWithString:localUrl] resultBlock:^(ALAsset *asset)
          {
+             // Could not find asset with UUID
+             if(asset==nil){
+                  [self loadImgByRemote];
+                 return ;
+             }
              //获取大图
              UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
              [self.imageView setImage:img];

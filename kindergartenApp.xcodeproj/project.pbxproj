@@ -328,6 +328,8 @@
 		04D288AE1CA3864C00D12BEF /* EditFamilyMemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */; };
 		04D288AF1CA3864C00D12BEF /* EditFamilyMemberVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */; };
 		04D5D30C1C47927D005399D9 /* libZXingObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D5D30B1C47927D005399D9 /* libZXingObjC.a */; };
+		04DDAB931CBE3E8900C3D48C /* KGUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAB921CBE3E8900C3D48C /* KGUUID.m */; };
+		04DDAB961CBE3EE500C3D48C /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAB951CBE3EE500C3D48C /* KeyChainStore.m */; };
 		04E606351C4897E100AEE9DD /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E606331C4897E100AEE9DD /* HomeVC.m */; };
 		04E606361C4897E100AEE9DD /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E606341C4897E100AEE9DD /* HomeVC.xib */; };
 		04EAA3A81C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAA3A61C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.m */; };
@@ -1368,6 +1370,11 @@
 		04D288AC1CA3864C00D12BEF /* EditFamilyMemberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditFamilyMemberVC.m; sourceTree = "<group>"; };
 		04D288AD1CA3864C00D12BEF /* EditFamilyMemberVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditFamilyMemberVC.xib; sourceTree = "<group>"; };
 		04D5D30B1C47927D005399D9 /* libZXingObjC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libZXingObjC.a; path = "Pods/../build/Debug-iphoneos/libZXingObjC.a"; sourceTree = "<group>"; };
+		04DDAB901CBE3E0C00C3D48C /* jiazhangtong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = jiazhangtong.entitlements; sourceTree = "<group>"; };
+		04DDAB911CBE3E8900C3D48C /* KGUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUUID.h; sourceTree = "<group>"; };
+		04DDAB921CBE3E8900C3D48C /* KGUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUUID.m; sourceTree = "<group>"; };
+		04DDAB941CBE3EE500C3D48C /* KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyChainStore.h; sourceTree = "<group>"; };
+		04DDAB951CBE3EE500C3D48C /* KeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyChainStore.m; sourceTree = "<group>"; };
 		04E606321C4897E100AEE9DD /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		04E606331C4897E100AEE9DD /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
 		04E606341C4897E100AEE9DD /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeVC.xib; sourceTree = "<group>"; };
@@ -4791,6 +4798,7 @@
 		248B6A5B1B19A39200FCB98F /* kindergartenApp */ = {
 			isa = PBXGroup;
 			children = (
+				04DDAB901CBE3E0C00C3D48C /* jiazhangtong.entitlements */,
 				248B6A821B19A8AE00FCB98F /* Classes */,
 				248B6A5C1B19A39200FCB98F /* Supporting Files */,
 			);
@@ -4890,6 +4898,10 @@
 				248B6A601B19A39200FCB98F /* AppDelegate.h */,
 				248B6A611B19A39200FCB98F /* AppDelegate.m */,
 				248B6A5E1B19A39200FCB98F /* main.m */,
+				04DDAB911CBE3E8900C3D48C /* KGUUID.h */,
+				04DDAB921CBE3E8900C3D48C /* KGUUID.m */,
+				04DDAB941CBE3EE500C3D48C /* KeyChainStore.h */,
+				04DDAB951CBE3EE500C3D48C /* KeyChainStore.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -6004,6 +6016,12 @@
 							com.apple.BackgroundModes = {
 								enabled = 0;
 							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
 						};
 					};
 				};
@@ -6607,6 +6625,7 @@
 				046998A91C8038A300664359 /* FPUploadVC.m in Sources */,
 				2489B6631B5AB49E00039E70 /* UIImage+GIF.m in Sources */,
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
+				04DDAB961CBE3EE500C3D48C /* KeyChainStore.m in Sources */,
 				24AA0B481B690F4300DAC03B /* UUProgressHUD.m in Sources */,
 				04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */,
 				04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */,
@@ -6802,6 +6821,7 @@
 				4DF056CC1B877E5000ED3840 /* PhotoVC.m in Sources */,
 				F4EC989A1B62306800F5721F /* TopicFrame.m in Sources */,
 				04FBAEC91C5B34B80094DC6B /* FPImagePickerSelectBottomView.m in Sources */,
+				04DDAB931CBE3E8900C3D48C /* KGUUID.m in Sources */,
 				F4C4D1C81B69F05C00335443 /* TopicInteractionView.m in Sources */,
 				2489B6311B5A683E00039E70 /* AFAppDotNetAPIClient.m in Sources */,
 				04FB7CA81C0D869700FD3E31 /* SpTeacherDetailViewController.m in Sources */,
@@ -7092,6 +7112,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
+				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				ENABLE_BITCODE = NO;
@@ -7159,6 +7180,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
+				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				ENABLE_BITCODE = NO;

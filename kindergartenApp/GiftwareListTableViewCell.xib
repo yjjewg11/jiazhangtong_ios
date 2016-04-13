@@ -34,8 +34,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIB-bI-atL">
-                                <rect key="frame" x="0.0" y="0.0" width="30" height="248"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aIB-bI-atL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
                                 <connections>
                                     <action selector="touchInside_detail:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nUg-ov-f5o"/>
                                 </connections>
@@ -117,11 +117,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="X5j-sT-Cca" secondAttribute="trailing" constant="1" id="1IZ-RG-D3L"/>
+                            <constraint firstAttribute="trailing" secondItem="aIB-bI-atL" secondAttribute="trailing" id="1cZ-uo-0SX"/>
                             <constraint firstItem="7Ac-DQ-tY9" firstAttribute="trailing" secondItem="mYx-wI-ALm" secondAttribute="trailing" id="6YO-HI-1sd"/>
                             <constraint firstItem="aIB-bI-atL" firstAttribute="bottom" secondItem="mYx-wI-ALm" secondAttribute="bottom" id="AEC-UF-uWw"/>
+                            <constraint firstItem="aIB-bI-atL" firstAttribute="leading" secondItem="FNc-Mz-sko" secondAttribute="leading" id="Dcr-z3-4K5"/>
                             <constraint firstItem="aIB-bI-atL" firstAttribute="leading" secondItem="FNc-Mz-sko" secondAttribute="leading" id="GH5-Mw-T4X"/>
                             <constraint firstItem="7Ac-DQ-tY9" firstAttribute="leading" secondItem="mYx-wI-ALm" secondAttribute="leading" id="N3l-Jl-IJz"/>
                             <constraint firstItem="aIB-bI-atL" firstAttribute="top" secondItem="FNc-Mz-sko" secondAttribute="top" id="V06-b1-A9n"/>
+                            <constraint firstItem="aIB-bI-atL" firstAttribute="top" secondItem="FNc-Mz-sko" secondAttribute="top" id="WPs-bx-mqD"/>
                             <constraint firstItem="7Ac-DQ-tY9" firstAttribute="leading" secondItem="FNc-Mz-sko" secondAttribute="leading" constant="9" id="Y8p-j4-P3V"/>
                             <constraint firstItem="X5j-sT-Cca" firstAttribute="leading" secondItem="FNc-Mz-sko" secondAttribute="leadingMargin" id="YvS-9p-vBD"/>
                             <constraint firstItem="7Ac-DQ-tY9" firstAttribute="top" secondItem="FNc-Mz-sko" secondAttribute="top" constant="10" id="fhv-NO-npF"/>

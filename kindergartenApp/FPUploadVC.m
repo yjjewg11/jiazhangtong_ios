@@ -107,11 +107,14 @@
     
     NSMutableArray * marr = [NSMutableArray arrayWithArray:[_service queryUploadListLocalImg]];
     
+    if(_dataArrs==nil)_dataArrs=[NSMutableArray array];
     for (NSInteger i=0; i<marr.count; i++)
     {
-        [_library assetForURL:[NSURL URLWithString:marr[i]] resultBlock:^(ALAsset *asset)
+        
+        FPFamilyPhotoUploadDomain * domain=marr[i];
+        [_library assetForURL:domain.localurl resultBlock:^(ALAsset *asset)
         {
-            FPFamilyPhotoUploadDomain * domain=marr[i];
+          
 //            FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
 //            domain.localurl = [NSURL URLWithString:marr[i]];
 //            domain.status = 1;
@@ -285,7 +288,7 @@
         //获取时间
         NSString * date = [asset valueForProperty:@"ALAssetPropertyDate"];
         
-        [self upLoadPic:img photoTime:date index:index];
+        [self upLoadPic:img photoTime:date index:index uploadDomain:domain];
     }
     failureBlock:^(NSError *error)
     {
@@ -293,17 +296,18 @@
     }];
 }
 
-- (void)upLoadPic:(UIImage *)img photoTime:(NSString *)photoTime index:(NSInteger)index
+- (void)upLoadPic:(UIImage *)img photoTime:(NSString *)photoTime index:(NSInteger)index uploadDomain:(FPFamilyPhotoUploadDomain *)uploadDomain
 {
     NSData *data;
     data = UIImageJPEGRepresentation(img, 0.1);
-    
+     NSString * phone_uuid=[KGUUID getUUID];//手机设备唯一标示
     NSString * phoneType = [UIDevice currentDevice].model;
     //这里传入一个 uuid
      FPFamilyPhotoUploadDomain *uploadDmain=_dataArrs[index];
     NSDictionary * dict = @{
 
-                            @"family_uuid":uploadDmain.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType};
+                            @"family_uuid":uploadDmain.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType,@"md5":[uploadDomain.localurl absoluteString],@"phone_uuid":phone_uuid,@"address":@""};
+    NSLog(@"FPUploadImgUrl=%@",[KGHttpUrl getFPUploadImgUrl] );
     
     AFHTTPRequestSerializer *serializer = [AFHTTPRequestSerializer serializer];
     
