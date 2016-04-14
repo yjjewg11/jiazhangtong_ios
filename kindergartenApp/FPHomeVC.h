@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-static NSString *family_uuid = nil;
+#import "NoDataTableViewCell.h"
+//static NSString *family_uuid = nil;
 
 @interface FPHomeVC : BaseViewController
 +(void) setFamily_uuid:(NSString *)str;

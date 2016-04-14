@@ -786,7 +786,9 @@
             NSString * localurl=[self getStringByChar:(char *)sqlite3_column_text(stmt, 0)];
             domain.localurl=[NSURL URLWithString:localurl];
             domain.status=[[self getStringByChar:((char *)sqlite3_column_text(stmt, 1))] integerValue];
-            domain.family_uuid=[self getStringByChar:((char *)sqlite3_column_text(stmt, 2))];
+            char * family_uuidChars=((char *)sqlite3_column_text(stmt, 2));
+            NSString *family_uuid=[self getStringByChar:family_uuidChars];
+            domain.family_uuid=family_uuid;
             
             [marr addObject:domain];
             

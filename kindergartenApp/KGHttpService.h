@@ -54,6 +54,7 @@
 #import "FPFamilyInfoDomain.h"
 #import "FPFamilyMembers.h"
 #import "KGListBaseDomain.h"
+#import "GlobalMap.h"
 @interface KGHttpService : NSObject
 @property (strong, nonatomic) KGUser * userinfo;
 @property (strong, nonatomic) NSString * pushToken;

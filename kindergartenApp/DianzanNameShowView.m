@@ -55,7 +55,9 @@
          NSString * namesString=[names componentsJoinedByString:@","];
          
          NSString * str = [NSString stringWithFormat:@"%@等赞", namesString];
-         
+         if(arr.count==0){
+             str=@"无人点赞";
+         }
          NSRange range = [str rangeOfString:namesString];
          
          NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:str];

@@ -180,24 +180,27 @@
     if(self.currentTime==nil)self.currentTime=[KGDateUtil getQueryFormDateStringByDate:[KGDateUtil getLocalDate]];
     
     
-  
+    
+    
     [[KGHttpService sharedService] baseReply_queryByRel_uuid:self.rel_uuid type:self.type pageNo:[NSString stringWithFormat:@"%ld",self.pageNo] time:self.currentTime  success:^(PageInfoDomain * pageInfoDomain)
      {
+         
+         if(self.pageNo==1){
+              [self.tableView headerEndRefreshing];
+             self.dataSoure=[NSMutableArray array];
+             
+             
+         }
+
          
          NSArray * arr = [BaseReplyDomain objectArrayWithKeyValuesArray:pageInfoDomain.data];
 
          if (arr.count == 0)
          {
-             if(self.pageNo==1){
-                 self.dataSoure=[NSMutableArray array];
-                 [self.tableView reloadData];
-                 
-                 [self.tableView headerEndRefreshing];
-                 
-             }
              
              self.tableView.footerRefreshingText = @"没有更多了...";
-             
+             [self.tableView reloadData];
+            
              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
                             {
                                 [self.tableView footerEndRefreshing];
@@ -213,9 +216,7 @@
                             
 
                             [self.tableView footerEndRefreshing];
-                            if(self.pageNo==1)[self.tableView headerEndRefreshing];
-                            
-                            if(self.pageNo==1)self.dataSoure=[NSMutableArray array];
+                        
                             [self.dataSoure addObjectsFromArray:arr];
                             [self.tableView reloadData];
                         });
@@ -259,7 +260,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
     NSLog(@"self.dataSoure.count=%ld",[self.dataSoure count]);
-    
+    if (self.dataSoure==nil)return 0;
+
     if (self.dataSoure.count == 0)
     {
         return 1;
@@ -270,9 +272,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (self.dataSoure.count == 0)
+        if (self.dataSoure.count == 0)
     {
+        
+       
         NoDataTableViewCell * cell1 = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

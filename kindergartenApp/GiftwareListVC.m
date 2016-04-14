@@ -19,7 +19,7 @@
 #import "FFMoiveSubmitView.h"
 @interface GiftwareListVC () <UITableViewDataSource,UITableViewDelegate,GiftwareListTableViewCellDelegate>
 {
-    UITableViewController * reFreshView;
+    UITableView * tableView;
    
     PageInfoDomain * pageInfo;
     FFMoiveSubmitView * _bottomView;
@@ -129,17 +129,22 @@
 {
     [self showLoadView];
           NSString * url=segmentUrlArray[segmentIndex];
-    
+    if(pageInfo.pageNo==1){
+          dataSource = [NSMutableArray array];
+    }
     
     [[KGHttpService sharedService] fPMovie_queryByURL:url pageInfo:pageInfo success:^(NSArray *articlesArray)
      {
+         
          pageInfo.pageNo ++;
          
-         dataSource = [NSMutableArray arrayWithArray:articlesArray];
-         
+   
+         [dataSource addObjectsFromArray:articlesArray];
+  
+          [tableView reloadData];
          [self hidenLoadView];
          
-         [self.view addSubview:reFreshView.tableView];
+       
      }
                                              faild:^(NSString *errorMsg)
      {
@@ -157,11 +162,14 @@
 //初始化列表
 - (void)initReFreshView
 {
-    reFreshView = [[UITableViewController alloc] init];
-    reFreshView.tableView.delegate = self;
-    reFreshView.tableView.dataSource = self;
-    reFreshView.tableView.backgroundColor = KGColorFrom16(0xF0F0F0);
-    reFreshView.tableView.frame = CGRectMake(0, 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64-30);
+    tableView = [[UITableView alloc] init];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    tableView.backgroundColor = KGColorFrom16(0xF0F0F0);
+    tableView.frame = CGRectMake(0, 30, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64-30);
+    
+      [self.view addSubview:tableView];
+    
     [self setupRefresh];
 }
 
@@ -185,7 +193,7 @@
     {
         NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
         
-        reFreshView.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         return cell;
     }
@@ -252,47 +260,21 @@
 #pragma mark - 上啦下拉
 - (void)setupRefresh
 {
-    [reFreshView.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    reFreshView.tableView.footerPullToRefreshText = @"上拉加载更多";
-    reFreshView.tableView.footerReleaseToRefreshText = @"松开立即加载";
-    reFreshView.tableView.footerRefreshingText = @"正在加载中...";
+    [tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    tableView.footerPullToRefreshText = @"上拉加载更多";
+    tableView.footerReleaseToRefreshText = @"松开立即加载";
+    tableView.footerRefreshingText = @"正在加载中...";
     
-    [reFreshView.tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
-    reFreshView.tableView.headerRefreshingText = @"正在刷新中...";
-    reFreshView.tableView.headerPullToRefreshText = @"下拉刷新";
-    reFreshView.tableView.headerReleaseToRefreshText = @"松开立即刷新";
+    [tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
+    tableView.headerRefreshingText = @"正在刷新中...";
+    tableView.headerPullToRefreshText = @"下拉刷新";
+    tableView.headerReleaseToRefreshText = @"松开立即刷新";
 }
 
 - (void)footerRereshing
 {
-    NSString * url=segmentUrlArray[segmentIndex];
-    
-    
-    [[KGHttpService sharedService] fPMovie_queryByURL:url pageInfo:pageInfo success:^(NSArray *articlesArray)
-     {
-         if (articlesArray.count != 0)
-         {
-             pageInfo.pageNo ++;
-             
-             [dataSource addObjectsFromArray:articlesArray];
-             
-             [reFreshView.tableView footerEndRefreshing];
-             
-             [reFreshView.tableView reloadData];
-         }
-         else
-         {
-             reFreshView.tableView.footerRefreshingText = @"没有更多了...";
-             
-             [reFreshView.tableView footerEndRefreshing];
-         }
-         
-     }
-                                             faild:^(NSString *errorMsg)
-     {
-         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-         [reFreshView.tableView footerEndRefreshing];
-     }];
+    [self getTableData];
+
 }
 
 - (void)headerRereshing
@@ -301,26 +283,8 @@
     
     [dataSource removeAllObjects];
     dataSource = nil;
-    
-    NSString * url=segmentUrlArray[segmentIndex];
-    
-    
-    [[KGHttpService sharedService] fPMovie_queryByURL:url pageInfo:pageInfo success:^(NSArray *articlesArray)
-     {
-         pageInfo.pageNo ++;
-         
-         dataSource = [NSMutableArray arrayWithArray:articlesArray];
-         
-         [reFreshView.tableView headerEndRefreshing];
-         
-         [reFreshView.tableView reloadData];
-     }
-        faild:^(NSString *errorMsg)
-     {
-         [[KGHUD sharedHud] show:self.contentView onlyMsg:errorMsg];
-         [reFreshView.tableView headerEndRefreshing];
-     }];
-}
+    [self getTableData];
+    }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

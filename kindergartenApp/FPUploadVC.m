@@ -17,17 +17,18 @@
 #import "KGHttpService.h"
 #import "DBNetDaoService.h"
 
-@interface FPUploadVC () <UITableViewDelegate,UITableViewDataSource>
+@interface FPUploadVC () <UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
     NSMutableArray * _dataArrs;
     
     NSMutableArray * _cells;
     
     DBNetDaoService * _service;
+    Reachability * wifiStatus; //网络状态
 }
 
 @property (strong, nonatomic) UITableView * uploadTable;
-
+@property  BOOL  isUploadBy4G;
 @end
 
 @implementation FPUploadVC
@@ -52,9 +53,14 @@
     return _library;
 }
 
+-(void)updateCellBy:(NSNotification *)noti{
+     FPUploadSaveUrlDomain * domain = noti.object;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    wifiStatus = [Reachability reachabilityWithHostName:@"www.baidu.com"];
     
     NSLog(@"FPUplodVC viewDidLoad,isJumpTwoPages=%d,pushToSelectImageVC=%d",self.isJumpTwoPages,self.pushToSelectImageVC);
     if (self.isJumpTwoPages == YES) {
@@ -83,7 +89,7 @@
     
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didGetPhotoData:) name:@"didgetphotodata" object:nil];
-    [center addObserver:self selector:@selector(startUpLoad:) name:@"startupload" object:nil];
+//    [center addObserver:self selector:@selector(startUpLoad:) name:@"startupload" object:nil];
     
     //从数据库去读取上传失败的，等待上传的数据
     [self getDataFromDatabase];
@@ -108,34 +114,36 @@
     NSMutableArray * marr = [NSMutableArray arrayWithArray:[_service queryUploadListLocalImg]];
     
     if(_dataArrs==nil)_dataArrs=[NSMutableArray array];
-    for (NSInteger i=0; i<marr.count; i++)
-    {
-        
-        FPFamilyPhotoUploadDomain * domain=marr[i];
-        [_library assetForURL:domain.localurl resultBlock:^(ALAsset *asset)
-        {
-          
-//            FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
-//            domain.localurl = [NSURL URLWithString:marr[i]];
-//            domain.status = 1;
-            domain.suoluetu = [UIImage imageWithCGImage:[asset thumbnail]];
-            [_dataArrs addObject:domain];
-             
-            if (_dataArrs.count == marr.count)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^
-                {
-                    [self.uploadTable reloadData];
-                });
-            }
-        }
-        failureBlock:^(NSError *error)
-        {
-            NSLog(@"获取列表数据拉");
-        }];
-    }
+    
+    _dataArrs= marr;
+    
+       [self.uploadTable reloadData];
+    
+ 
+    
 }
 
+- (void)startDoUploadTable2{
+    
+    if(_dataArrs.count>0){
+        //找到第一个等待状态的数据开始上传。
+        for (int i=0;i<_dataArrs.count;i++) {
+            FPFamilyPhotoUploadDomain * domain=_dataArrs[i];
+            if(domain.status==1){
+                NSLog(@"startDoUploadTable _dataArrs.count=@d",_dataArrs.count);
+                NSNotification * noti = [[NSNotification alloc] initWithName:@"startupload" object:@(i) userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotification:noti];
+                
+                break;
+            }
+            
+        }
+        
+    }else{
+        NSLog(@"startDoUploadTable _dataArrs.count==0");
+    }
+    [self.uploadTable reloadData];
+}
 /**
  开始执行初始化上传进度表，和开始上传。
  */
@@ -149,25 +157,47 @@
     
     [[NSNotificationCenter defaultCenter] postNotification:noti1];
     
-    if(_dataArrs.count>0){
-    //找到第一个等待状态的数据开始上传。
-        for (int i=0;i<_dataArrs.count;i++) {
-            FPFamilyPhotoUploadDomain * domain=_dataArrs[i];
-            if(domain.status==1){
-                NSLog(@"startDoUploadTable _dataArrs.count=@d",_dataArrs.count);
-                NSNotification * noti = [[NSNotification alloc] initWithName:@"startupload" object:@(i) userInfo:nil];
-                [[NSNotificationCenter defaultCenter] postNotification:noti];
-                
-                break;
-            }
-        
-        }
-        
-    }else{
-        NSLog(@"startDoUploadTable _dataArrs.count==0");
+    if(_dataArrs.count==0){
+        return;
     }
-         [self.uploadTable reloadData];
+    
+    
+    //确认允许4G上传标记。
+    if(self.isUploadBy4G==YES){
+        [self startDoUploadTable2];
+        return;
+    }
+    //wifi直接上传
+    if(![wifiStatus isReachableViaWiFi]){
+        [self startDoUploadTable2];
+        return;
+
+    }    //4G判断
+    {
+        
+        UIAlertView * al = [[UIAlertView alloc] initWithTitle:@"不是wifi环境，使用移动流量，是否要上传?" message:@"请确认" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        
+        [al show];
+        return;
+    }
+ 
+    
 }
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex)
+    {
+        self.isUploadBy4G=YES;
+        [self startDoUploadTable2];
+      
+    }
+}
+
+
+
 #pragma mark - tableview d & d
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -235,28 +265,31 @@
     for (NSInteger i=0; i<urls.count; i++)
     {
         FPFamilyPhotoUploadDomain * domain = [[FPFamilyPhotoUploadDomain alloc] init];
-        
-        [_library assetForURL:urls[i] resultBlock:^(ALAsset *asset)
-        {
-            domain.family_uuid=[FPHomeVC getFamily_uuid];
-            domain.localurl = urls[i];
-            domain.status = 1;
-            domain.suoluetu = [UIImage imageWithCGImage:[asset thumbnail]];
-            [_dataArrs addObject:domain];
-            
-            if (i == urls.count-1)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^
-                {
-                    [self startDoUploadTable];
-                });
-            }
-        }
-        failureBlock:^(NSError *error)
-        {
-            NSLog(@"大图失败拉");
-        }];
+        domain.family_uuid=[FPHomeVC getFamily_uuid];
+        domain.localurl = urls[i];
+        domain.status = 1;
+//        domain.suoluetu = [UIImage imageWithCGImage:[asset thumbnail]];
+        [_dataArrs addObject:domain];
+        [UploadPhotoToRemoteService addPhotoUploadDomain:domain];
+//        
+//        [_library assetForURL:urls[i] resultBlock:^(ALAsset *asset)
+//        {
+//            
+////            
+////            if (i == urls.count-1)
+////            {
+////                dispatch_async(dispatch_get_main_queue(), ^
+////                {
+//////                    [self startDoUploadTable];
+////                });
+////            }
+//        }
+//        failureBlock:^(NSError *error)
+//        {
+//            NSLog(@"大图失败拉");
+//        }];
     }
+    [self.uploadTable reloadData];
 }
 
 - (void)dealloc
@@ -304,6 +337,7 @@
     NSString * phoneType = [UIDevice currentDevice].model;
     //这里传入一个 uuid
      FPFamilyPhotoUploadDomain *uploadDmain=_dataArrs[index];
+   
     NSDictionary * dict = @{
 
                             @"family_uuid":uploadDmain.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType,@"md5":[uploadDomain.localurl absoluteString],@"phone_uuid":phone_uuid,@"address":@""};

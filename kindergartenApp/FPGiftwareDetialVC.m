@@ -209,7 +209,7 @@
 
 
 - (void)modifyBtn{
-    NSLog(@"modifyBtn");
+//    NSLog(@"modifyBtn");
     
     FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
     [FFMovieShareData getFFMovieShareData].domain=self.domain;

@@ -130,6 +130,8 @@
 		0494F47E1BDF777500F39865 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F4741BDF777500F39865 /* UIScrollView+MJExtension.m */; };
 		0494F47F1BDF777500F39865 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F4761BDF777500F39865 /* UIScrollView+MJRefresh.m */; };
 		0494F4801BDF777500F39865 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494F4781BDF777500F39865 /* UIView+MJExtension.m */; };
+		0497A9A01CBF7A190029B2E2 /* GlobalMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497A99F1CBF7A190029B2E2 /* GlobalMap.m */; };
+		0497A9AC1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497A9AB1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m */; };
 		0498AED01BDE160F001E653C /* SPDataListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498AECF1BDE160F001E653C /* SPDataListVO.m */; };
 		0498AED31BDE17A3001E653C /* SPCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498AED21BDE17A3001E653C /* SPCourseDomain.m */; };
 		04A4DDFF1BF484DF002ABBB1 /* adchina_btnconfirm.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A4DD181BF484DE002ABBB1 /* adchina_btnconfirm.png */; };
@@ -1095,6 +1097,10 @@
 		0494F4761BDF777500F39865 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		0494F4771BDF777500F39865 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		0494F4781BDF777500F39865 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		0497A99E1CBF7A190029B2E2 /* GlobalMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalMap.h; sourceTree = "<group>"; };
+		0497A99F1CBF7A190029B2E2 /* GlobalMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalMap.m; sourceTree = "<group>"; };
+		0497A9AA1CBFDF750029B2E2 /* UploadPhotoToRemoteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadPhotoToRemoteService.h; sourceTree = "<group>"; };
+		0497A9AB1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadPhotoToRemoteService.m; sourceTree = "<group>"; };
 		0498AECE1BDE160F001E653C /* SPDataListVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDataListVO.h; sourceTree = "<group>"; };
 		0498AECF1BDE160F001E653C /* SPDataListVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDataListVO.m; sourceTree = "<group>"; };
 		0498AED11BDE17A3001E653C /* SPCourseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDomain.h; sourceTree = "<group>"; };
@@ -2780,6 +2786,15 @@
 			path = ../MJRefresh;
 			sourceTree = "<group>";
 		};
+		0497A9A91CBFDEBE0029B2E2 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0497A9AA1CBFDF750029B2E2 /* UploadPhotoToRemoteService.h */,
+				0497A9AB1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
 		0498AEC81BDE024A001E653C /* DropDownMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -3265,6 +3280,7 @@
 		04F151651C45FECD00E80B3E /* FamilyPhoto(家庭相册) */ = {
 			isa = PBXGroup;
 			children = (
+				0497A9A91CBFDEBE0029B2E2 /* Service */,
 				0405B6E61CB21D040090863C /* tools */,
 				04F936CC1C4CE71F00116D86 /* view */,
 				04F410E11C5A0FB700407C10 /* picker */,
@@ -4902,6 +4918,8 @@
 				04DDAB921CBE3E8900C3D48C /* KGUUID.m */,
 				04DDAB941CBE3EE500C3D48C /* KeyChainStore.h */,
 				04DDAB951CBE3EE500C3D48C /* KeyChainStore.m */,
+				0497A99E1CBF7A190029B2E2 /* GlobalMap.h */,
+				0497A99F1CBF7A190029B2E2 /* GlobalMap.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -6498,6 +6516,7 @@
 				2489B6641B5AB49E00039E70 /* UIImage+MultiFormat.m in Sources */,
 				24759EB01B5FC89900A3087D /* KGListBaseDomain.m in Sources */,
 				2489B6621B5AB49E00039E70 /* UIButton+WebCache.m in Sources */,
+				0497A9AC1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m in Sources */,
 				045C5B981C8411BB0097AF4F /* UIFamilyPhotoViewLayout.m in Sources */,
 				04FABBFE1C7595AE001D4BC9 /* FPTimeLineDetailCommentDomain.m in Sources */,
 				04D2887F1CA1075000D12BEF /* FPFamilyPhotoCollectionDetailTableViewController.m in Sources */,
@@ -6683,6 +6702,7 @@
 				04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */,
 				24DEC8221B633F2B00C55828 /* DynamicMenuDomain.m in Sources */,
 				0449A3501C4F77C40066ABBB /* FPGiftwarePickerImageCell.m in Sources */,
+				0497A9A01CBF7A190029B2E2 /* GlobalMap.m in Sources */,
 				040109B41BF1F8CB00A18622 /* MySPCourseDomain.m in Sources */,
 				04D288AE1CA3864C00D12BEF /* EditFamilyMemberVC.m in Sources */,
 				04FB236E1C16C649009B57E2 /* DiscorveryHomeLayout.m in Sources */,

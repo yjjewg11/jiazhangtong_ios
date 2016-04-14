@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FPFamilyPhotoUploadDomain.h"
+#import "UploadPhotoToRemoteService.h"
 
 @interface FPUploadCell : UITableViewCell
 

@@ -81,7 +81,13 @@
 //    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, self.contentView.frame.size.height-44, self.contentView.frame.size.width, 44)];
     
     DianzanNameShowView * dianzan= [[[NSBundle mainBundle] loadNibNamed:@"DianzanNameShowView" owner:nil options:nil] firstObject];
-    [dianzan setFrame:CGRectMake(0, self.contentView.frame.size.height-44, self.contentView.frame.size.width, 44)];
+    float x=self.contentView.frame.size.width/2-280;
+    if(x<1)x=1;
+    float width=280;
+    if(self.contentView.frame.size.width<280){
+        width=self.contentView.frame.size.width;
+    }
+    [dianzan setFrame:CGRectMake(x, self.contentView.frame.size.height-44, width, 80)];
 //     [[self superview] addSubview:dianzan];
 //    UILabel * dianzan=[[UILabel alloc]initWithFrame:CGRectMake(0, self.contentView.frame.size.height-44, 320, 44)];
 //    dianzan.text=@"dfdfsdsdf";

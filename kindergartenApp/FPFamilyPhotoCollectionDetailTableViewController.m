@@ -90,17 +90,24 @@
                                
                                
                                UIView *footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, 60)];
-                               footView.backgroundColor = [UIColor clearColor];
+                               footView.backgroundColor = [UIColor whiteColor];
                                
                                UIButton *sureButton  = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, 60)];
-                               sureButton.backgroundColor = [UIColor clearColor];
+                               sureButton.backgroundColor = [UIColor whiteColor];
                                //  sureButton.layer.cornerRadius = 2.0f;
                                sureButton.layer.masksToBounds = YES;
                                [sureButton setTitle:@"邀请更多亲戚加入" forState:UIControlStateNormal];
                                [sureButton addTarget:self action:@selector(tableFooterViewButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-                               sureButton.titleLabel.textColor = [UIColor grayColor];
+                               [sureButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                               [sureButton.titleLabel setTextColor:[UIColor blackColor]];
                                sureButton.titleLabel.textAlignment = NSTextAlignmentCenter;
                                [footView addSubview:sureButton];
+                               
+                               
+//                               UIView *footViewLine = [[UIView alloc]initWithFrame:CGRectMake(0, 59, APPWINDOWWIDTH, 1)];
+//                               footViewLine.backgroundColor = [UIColor grayColor];
+//                               [footView addSubview:footViewLine];
+                               
                                _tableView.tableFooterView = footView;
                                    [self.view addSubview:_tableView];
                            }else{

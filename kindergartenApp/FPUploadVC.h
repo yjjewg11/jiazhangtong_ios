@@ -9,6 +9,9 @@
 #import "BaseViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "KGUUID.h"
+#import "Reachability.h"
+#import "UploadPhotoToRemoteService.h"
+
 @interface FPUploadVC : BaseViewController
 
 @property (nonatomic , strong) ALAssetsLibrary * library;

@@ -66,7 +66,31 @@
 {
     self.status = domain.status;
     self.localUrl = domain.localurl;
-    self.suoluetu.image = domain.suoluetu;
+    
+    
+    ALAssetsLibrary *_library=[UploadPhotoToRemoteService defaultAssetsLibrary];
+    if(domain.suoluetu==nil){
+        [_library assetForURL:domain.localurl resultBlock:^(ALAsset *asset)
+         {
+             
+             if(asset!=nil){
+                 domain.suoluetu = [UIImage imageWithCGImage:[asset thumbnail]];
+                 
+                 self.suoluetu.image = domain.suoluetu;
+             }
+            
+             
+         }
+                 failureBlock:^(NSError *error)
+         {
+             NSLog(@"获取列表数据拉");
+         }];
+
+    }else{
+          self.suoluetu.image = domain.suoluetu;
+    }
+    
+  
 }
 
 - (IBAction)btnClick:(id)sender

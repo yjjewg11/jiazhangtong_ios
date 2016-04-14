@@ -106,13 +106,17 @@ NSInteger localDBlimit=50;
 
 @implementation FPHomeVC
 +(void) setFamily_uuid:(NSString *)str{
-    family_uuid=str;
+//    family_uuid=str;
+    
+    [GlobalMap setObject:str forKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
     //存沙盒
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     [userDefaults setObject:str forKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
 }
 +(NSString *) getFamily_uuid{
+    
+    NSString * family_uuid=[GlobalMap objectForKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
     if(family_uuid==nil){
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         family_uuid= [userDefaults objectForKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
@@ -431,6 +435,9 @@ NSInteger localDBlimit=50;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(dataSourceGroup==0){//无数据
+        return 204;
+    }
     return APPWINDOWWIDTH/3;
 }
 
@@ -1074,6 +1081,9 @@ NSInteger localDBlimit=50;
 
 #pragma mark 返回每组行数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(dataSourceGroup==0){
+        return 1;
+    }
     NSString * groupName=dataSourceGroup[section];
     if(groupName==nil) return nil;
     NSArray *arr=[dataSourceGroupChildMap objectForKey:groupName];
@@ -1132,7 +1142,15 @@ NSInteger localDBlimit=50;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if (dataSource.count == 0)
+    {
+        NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
+        
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return cell;
+    }
+
     FPHomeTablePhotoCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:DF_cellIdentifier];
     
     if (cell == nil)
