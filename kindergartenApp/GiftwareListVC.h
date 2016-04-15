@@ -7,7 +7,9 @@
 //
 
 #import "BaseReplyInputViewController.h"
-
+#import "FFMovieEditMainVC.h"
+#import "FPUploadVC.h"
+#import "GlobalMap.h"
 @interface GiftwareListVC : BaseReplyInputViewController
 
 @end

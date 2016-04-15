@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *reply_count_label;
 @property (weak, nonatomic) IBOutlet UILabel *dianzan_count_label;
 @property (weak, nonatomic) IBOutlet UILabel *title_label;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 @property (strong,nonatomic) FPMoive4QDomain *  domain1;
 
@@ -81,18 +82,25 @@
 //    DianzanNameShowView * dianzan=[[DianzanNameShowView alloc]initWithFrame:CGRectMake(0, self.contentView.frame.size.height-44, self.contentView.frame.size.width, 44)];
     
     DianzanNameShowView * dianzan= [[[NSBundle mainBundle] loadNibNamed:@"DianzanNameShowView" owner:nil options:nil] firstObject];
-    float x=self.contentView.frame.size.width/2-280;
-    if(x<1)x=1;
-    float width=280;
-    if(self.contentView.frame.size.width<280){
-        width=self.contentView.frame.size.width;
-    }
-    [dianzan setFrame:CGRectMake(x, self.contentView.frame.size.height-44, width, 80)];
+//    float x=self.contentView.frame.size.width/2-280;
+//    if(x<1)x=1;
+//    float width=280;
+//    if(self.contentView.frame.size.width<280){
+//        width=self.contentView.frame.size.width;
+//    }
+    CGRect frame=self.bottomView.frame;
+    frame.origin.x=1;
+    frame.origin.y=1;
+    
+        [dianzan setFrame:frame];
 //     [[self superview] addSubview:dianzan];
 //    UILabel * dianzan=[[UILabel alloc]initWithFrame:CGRectMake(0, self.contentView.frame.size.height-44, 320, 44)];
 //    dianzan.text=@"dfdfsdsdf";
 //    [dianzan setBackgroundColor:[UIColor grayColor] ];
-    [self.contentView addSubview:dianzan];
+//    [self.contentView addSubview:dianzan];
+    
+    [self.bottomView addSubview:dianzan];
+
     [dianzan loadData:self.domain1.uuid type:Topic_FPGiftware];
 }
 

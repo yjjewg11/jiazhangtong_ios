@@ -37,10 +37,10 @@
 #import "GiftwareListVC.h"
 #import "FFMovieEditMainVC.h"
 
-#define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
+
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
-#define DF_cellIdentifier @"UITableViewCell"
+#define DF_cellIdentifier @"FPHomeVC_UITableViewCell"
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
 #define  DF_sectionHeaderIdentifier @"FPHomeTimeLineSectionHeaderTableViewCell"
@@ -643,7 +643,8 @@ NSInteger localDBlimit=50;
 {
     _selectViewOpen = NO;
     
-    [selView removeFromSuperview];
+//    [selView removeFromSuperview];
+    [selView setHidden:YES];
 }
 
 #pragma mark - 通知 用于提示用户
@@ -1174,31 +1175,23 @@ NSInteger localDBlimit=50;
         return cell;
     }
 
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:DF_cellIdentifier];
+//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:DF_cellIdentifier];
     
-    if (cell == nil)
-    {
-        
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DF_cellIdentifier];
-//        cell = [[[NSBundle mainBundle] loadNibNamed:@"UITableViewCell" owner:nil options:nil] firstObject];
+//    if (cell == nil)
+//    {
 //        
-//        [cell initWithStyle:nil reuseIdentifier:DF_cellIdentifier];
-
-        //移除所有子视图
-        [cell.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            UIView *subView = (UIView *)obj;
-            [subView removeFromSuperview];
-        }];
-
-
-        
-    }else{
-        //移除所有子视图
-        [cell.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            UIView *subView = (UIView *)obj;
-            [subView removeFromSuperview];
-        }];
-    }
+//        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DF_cellIdentifier];
+//
+//        
+//    }else{
+//        //移除所有子视图
+//        [cell.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//            UIView *subView = (UIView *)obj;
+//            [subView removeFromSuperview];
+//        }];
+//    }
+//    
+     UITableViewCell * cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DF_cellIdentifier];
     
 
     //一列显示3个数据

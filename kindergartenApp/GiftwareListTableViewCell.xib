@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="333"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="332.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="332"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FNc-Mz-sko">
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X5j-sT-Cca">
-                                <rect key="frame" x="8" y="248" width="311" height="70"/>
+                                <rect key="frame" x="8" y="248" width="303" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-Wn-Riy">
                                         <rect key="frame" x="0.0" y="10" width="312" height="22"/>
@@ -93,7 +93,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="awv-IF-tWz" firstAttribute="top" secondItem="XIK-Wn-Riy" secondAttribute="bottom" constant="3" id="5Yf-KS-UCt"/>
-                                    <constraint firstAttribute="trailing" secondItem="wYG-As-cqd" secondAttribute="trailing" id="9Ji-mT-ZSG"/>
+                                    <constraint firstAttribute="trailing" secondItem="wYG-As-cqd" secondAttribute="trailing" constant="-8" id="9Ji-mT-ZSG"/>
                                     <constraint firstItem="wYG-As-cqd" firstAttribute="top" secondItem="XIK-Wn-Riy" secondAttribute="bottom" constant="6" id="A2b-MZ-Fda"/>
                                     <constraint firstItem="awv-IF-tWz" firstAttribute="leading" secondItem="X5j-sT-Cca" secondAttribute="leading" constant="99" id="CPJ-js-vOY"/>
                                     <constraint firstItem="2af-FL-MEI" firstAttribute="top" secondItem="XIK-Wn-Riy" secondAttribute="bottom" id="JMh-hH-EDa"/>
@@ -104,7 +104,7 @@
                                     <constraint firstItem="awv-IF-tWz" firstAttribute="leading" secondItem="AHS-lB-KZN" secondAttribute="trailing" constant="8" id="TpA-7I-Top"/>
                                     <constraint firstAttribute="bottom" secondItem="awv-IF-tWz" secondAttribute="bottom" constant="8" id="U9I-Hr-u6M"/>
                                     <constraint firstItem="XIK-Wn-Riy" firstAttribute="leading" secondItem="X5j-sT-Cca" secondAttribute="leading" id="UxX-fi-NfL"/>
-                                    <constraint firstItem="XIK-Wn-Riy" firstAttribute="centerX" secondItem="X5j-sT-Cca" secondAttribute="centerX" id="YFA-Fc-iW1"/>
+                                    <constraint firstItem="XIK-Wn-Riy" firstAttribute="centerX" secondItem="X5j-sT-Cca" secondAttribute="centerX" constant="4.5" id="YFA-Fc-iW1"/>
                                     <constraint firstItem="awv-IF-tWz" firstAttribute="centerY" secondItem="AHS-lB-KZN" secondAttribute="centerY" id="hnO-hk-TeJ"/>
                                     <constraint firstItem="awv-IF-tWz" firstAttribute="centerY" secondItem="wYG-As-cqd" secondAttribute="centerY" id="m6W-xR-fnS"/>
                                     <constraint firstItem="awv-IF-tWz" firstAttribute="leading" secondItem="AHS-lB-KZN" secondAttribute="trailing" constant="8" symbolic="YES" id="mLI-BK-QbA"/>
@@ -116,7 +116,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="X5j-sT-Cca" secondAttribute="trailing" constant="1" id="1IZ-RG-D3L"/>
+                            <constraint firstAttribute="trailing" secondItem="X5j-sT-Cca" secondAttribute="trailing" constant="9" id="1IZ-RG-D3L"/>
                             <constraint firstAttribute="trailing" secondItem="aIB-bI-atL" secondAttribute="trailing" id="1cZ-uo-0SX"/>
                             <constraint firstItem="7Ac-DQ-tY9" firstAttribute="trailing" secondItem="mYx-wI-ALm" secondAttribute="trailing" id="6YO-HI-1sd"/>
                             <constraint firstItem="aIB-bI-atL" firstAttribute="bottom" secondItem="mYx-wI-ALm" secondAttribute="bottom" id="AEC-UF-uWw"/>
@@ -149,6 +149,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bottomView" destination="X5j-sT-Cca" id="Szr-DX-x53"/>
                 <outlet property="dianzan_count_label" destination="wYG-As-cqd" id="O47-SF-bIg"/>
                 <outlet property="herald_imageView" destination="7Ac-DQ-tY9" id="25W-5G-4fi"/>
                 <outlet property="reply_count_label" destination="awv-IF-tWz" id="Abb-Sx-qXu"/>

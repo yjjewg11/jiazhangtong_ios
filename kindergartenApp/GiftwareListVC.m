@@ -17,6 +17,8 @@
 #import "MJExtension.h"
 #import "FPGiftwareDetialVC.h"
 #import "FFMoiveSubmitView.h"
+#import "FPHomeSelectView.h"
+
 @interface GiftwareListVC () <UITableViewDataSource,UITableViewDelegate,GiftwareListTableViewCellDelegate>
 {
     UITableView * tableView;
@@ -26,6 +28,9 @@
     NSMutableArray * dataSource;
      NSMutableArray * segmentUrlArray;
     NSInteger segmentIndex;
+    //上传照片选择（上传照片，新建精品相册）
+    FPHomeSelectView * selView;
+    
 }
 
 @end
@@ -55,8 +60,28 @@
     
     [self initReFreshView];
     
+    [self createBarItems];
+}
+
+
+
+
+#pragma mark - 创建navBar items
+- (void)createBarItems
+{
+    UIButton* btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0,0,30,30)];
+    [btn1 setBackgroundImage:[UIImage imageNamed:@"new_album"] forState:UIControlStateNormal];
+    [btn1 addTarget:self action:@selector(pushToUpLoadVC) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightBarBtn = [[UIBarButtonItem alloc] initWithCustomView:btn1];
+    
+
+    
+    
+    
+    self.navigationItem.rightBarButtonItem=rightBarBtn;
     
 }
+
 
 - (void)initSegmentedControl
 {
@@ -303,14 +328,65 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)pushToUpLoadVC
+{
+    
+  
+    if (selView)
+    {
+        if([selView isHidden]){
+            [self.view bringSubviewToFront:selView];
+            [selView setHidden:NO];
+        }else{
+            [selView setHidden:YES];
+        }
+        
+        return;
+    }
+    
+    
+    selView = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeSelectView" owner:nil options:nil] firstObject];
+    selView.delegate = self;
+    selView.frame = CGRectMake(0, 0, self.view.width, self.view.height);
+    
+    CATransition *applicationLoadViewIn =[CATransition animation];
+    [applicationLoadViewIn setDuration:0.3];
+    [applicationLoadViewIn setType:kCATransitionReveal];
+    [applicationLoadViewIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn]];
+    [[selView layer]addAnimation:applicationLoadViewIn forKey:kCATransitionReveal];
+    //添加最上层
+    
+    [self.view addSubview:selView];
+    
+    
 }
-*/
 
+- (void)pushToImagePickerVC
+{
+    
+    FPUploadVC * vc = [[FPUploadVC alloc] init];
+    vc.isJumpTwoPages = YES;
+    
+    
+    NSString * family_uuid=[GlobalMap objectForKey:NSUserDefaults_Key_FPMyFamilyPhotoCollection];
+   	
+    vc.family_uuid = family_uuid;
+    
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
+- (void)pushToCreateGiftwareShopVC
+{
+    FFMovieEditMainVC * vc = [[FFMovieEditMainVC alloc] init];
+    [FFMovieShareData getFFMovieShareData].domain=nil;
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
+
+- (void)hidenSelf
+{
+ 
+    [selView removeFromSuperview];
+}
 @end
