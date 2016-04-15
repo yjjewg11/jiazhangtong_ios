@@ -40,7 +40,7 @@
 #define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
-#define DF_cellIdentifier @"FPHomeTablePhotoCellTableViewCell"
+#define DF_cellIdentifier @"UITableViewCell"
 
 //由于此方法调用十分频繁，cell的标示声明成静态变量有利于性能优化
 #define  DF_sectionHeaderIdentifier @"FPHomeTimeLineSectionHeaderTableViewCell"
@@ -1172,17 +1172,22 @@ NSInteger localDBlimit=50;
         return cell;
     }
 
-    FPHomeTablePhotoCellTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:DF_cellIdentifier];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:DF_cellIdentifier];
     
     if (cell == nil)
     {
         
-        
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FPHomeTablePhotoCellTableViewCell" owner:nil options:nil] firstObject];
-        
-        [cell initWithStyle:nil reuseIdentifier:DF_cellIdentifier];
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:DF_cellIdentifier];
+//        cell = [[[NSBundle mainBundle] loadNibNamed:@"UITableViewCell" owner:nil options:nil] firstObject];
+//        
+//        [cell initWithStyle:nil reuseIdentifier:DF_cellIdentifier];
 
-        
+        //移除所有子视图
+        [cell.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIView *subView = (UIView *)obj;
+            [subView removeFromSuperview];
+        }];
+
 
         
     }else{

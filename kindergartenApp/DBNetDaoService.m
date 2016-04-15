@@ -1,4 +1,4 @@
-///Users/Mac/ios开发/jiazhangban_ios/kindergartenApp
+ ///Users/Mac/ios开发/jiazhangban_ios/kindergartenApp
 //  DBNetDaoService.m
 //  kindergartenApp
 //
@@ -73,13 +73,13 @@
             [self execSql:fp_familyinfo_Table];
             [self execSql:fp_upload_Table];
             
-            if(![self hasColumOfTable:@"fp_upload" column:@" uuid char(45)"]){
-                //上传用 上传队列信息
-                NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN uuid char(45);";
-                ;
-                    [self execSql:fp_upload_Table_family_uuid];
-            }
-            
+//            if(![self hasColumOfTable:@"fp_upload" column:@" uuid char(45)"]){
+//                //上传用 上传队列信息
+//                NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN uuid char(45);";
+//                ;
+//                    [self execSql:fp_upload_Table_family_uuid];
+//            }
+//            
             
             if(![self hasColumOfTable:@"fp_upload" column:@"family_uuid"]){
                 //上传用 上传队列信息
