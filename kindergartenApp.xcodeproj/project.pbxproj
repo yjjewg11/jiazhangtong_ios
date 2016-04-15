@@ -337,7 +337,6 @@
 		04EAA3A81C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAA3A61C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.m */; };
 		04EAA3A91C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EAA3A71C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.xib */; };
 		04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F151671C45FF1800E80B3E /* FPHomeVC.m */; };
-		04F1516A1C45FF1800E80B3E /* FPHomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F151681C45FF1800E80B3E /* FPHomeVC.xib */; };
 		04F3D4541BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3E81BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04F3D4551BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3EA1BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04F3D4561BF47FD2007E7AC0 /* AdMoGoAdapterBaiduSplash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F3D3EC1BF47FD2007E7AC0 /* AdMoGoAdapterBaiduSplash.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1389,7 +1388,6 @@
 		04EAA3A71C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPPhotoDateHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
 		04F151661C45FF1800E80B3E /* FPHomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeVC.h; sourceTree = "<group>"; };
 		04F151671C45FF1800E80B3E /* FPHomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeVC.m; sourceTree = "<group>"; };
-		04F151681C45FF1800E80B3E /* FPHomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeVC.xib; sourceTree = "<group>"; };
 		04F3D3E71BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduFullAds.h; sourceTree = "<group>"; };
 		04F3D3E81BF47FD2007E7AC0 /* AdMoGoAdapterBaiduFullAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterBaiduFullAds.m; sourceTree = "<group>"; };
 		04F3D3E91BF47FD2007E7AC0 /* AdMoGoAdapterBaiduMobAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduMobAd.h; sourceTree = "<group>"; };
@@ -3808,7 +3806,6 @@
 			children = (
 				04F151661C45FF1800E80B3E /* FPHomeVC.h */,
 				04F151671C45FF1800E80B3E /* FPHomeVC.m */,
-				04F151681C45FF1800E80B3E /* FPHomeVC.xib */,
 				0449A3331C4F5E0F0066ABBB /* FPUploadVC.h */,
 				046998A81C8038A300664359 /* FPUploadVC.m */,
 				0449A3441C4F71D40066ABBB /* FPGifrwarePickerVC.h */,
@@ -6424,7 +6421,6 @@
 				04F8D36A1C1168200098FBAB /* EnrolStudentMySchoolCommentCell.xib in Resources */,
 				04A4DE741BF484DF002ABBB1 /* webview_bar_refresh_hover@2x.png in Resources */,
 				04A4DE2D1BF484DF002ABBB1 /* adsmogo_button_left_default@2x.png in Resources */,
-				04F1516A1C45FF1800E80B3E /* FPHomeVC.xib in Resources */,
 				04F9FB611BF1A67400AEFB88 /* umeng_add_photo@2x.png in Resources */,
 				0403DCE11BF5B9CD0089E463 /* MYSPCourseTableViewCell.xib in Resources */,
 				04A4DE8F1BF484DF002ABBB1 /* shareviewhead_bg.png in Resources */,
@@ -7133,8 +7129,8 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7185,7 +7181,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -7201,8 +7197,8 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7253,7 +7249,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};

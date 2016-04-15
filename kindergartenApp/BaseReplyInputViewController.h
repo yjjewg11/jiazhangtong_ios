@@ -21,7 +21,7 @@
 @property (strong, nonatomic) OnlyEmojiView * onlyEmojiView;//只存在表情视图
 @property (assign, nonatomic) CGFloat emojiInputY;
 @property (strong, nonatomic) EmojiAndTextView * emojiAndTextView;
-  @property (weak, nonatomic) BaseReplyListVCTableView * baseReplyListVC;
+  @property (strong, nonatomic) BaseReplyListVCTableView * baseReplyListVC;
 
 
 @property (strong,nonatomic) NSString *rel_uuid;

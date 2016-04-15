@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -29,7 +29,7 @@
                         <constraint firstAttribute="width" constant="291" id="GU8-aD-QYO"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <state key="normal" title=" 从手机通讯录添加 &gt;">
+                    <state key="normal" title=" 从手机通讯录添加">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <variation key="default">
@@ -82,7 +82,7 @@
                     <rect key="frame" x="0.0" y="136" width="320" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家庭昵称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-Gw-1eL">
-                            <rect key="frame" x="8" y="9" width="68" height="20.5"/>
+                            <rect key="frame" x="8" y="9" width="68" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -106,26 +106,24 @@
                         <constraint firstAttribute="height" constant="40" id="vCx-Qo-eEP"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="actionbar_forward.png" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-oT-Bwu">
-                    <rect key="frame" x="299" y="37" width="13" height="21"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-oT-Bwu">
+                    <rect key="frame" x="294" y="38" width="15" height="25"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="leading" secondItem="N7g-wg-Jah" secondAttribute="leading" id="5qj-mn-ofp"/>
                 <constraint firstItem="GVi-jb-J1T" firstAttribute="top" secondItem="Jgp-Gx-3Vs" secondAttribute="bottom" constant="1" id="BAQ-Vd-wjK"/>
+                <constraint firstAttribute="trailing" secondItem="wz9-oT-Bwu" secondAttribute="trailing" constant="8" id="BCn-Qu-5S0"/>
                 <constraint firstAttribute="bottom" secondItem="QbG-sy-YF1" secondAttribute="bottom" id="BVD-WI-Do2"/>
-                <constraint firstAttribute="trailing" secondItem="wz9-oT-Bwu" secondAttribute="trailing" constant="8" id="Bnp-tL-D44"/>
                 <constraint firstItem="QbG-sy-YF1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CNz-hf-09G"/>
-                <constraint firstAttribute="trailing" secondItem="wz9-oT-Bwu" secondAttribute="trailing" constant="13" id="JRE-CH-wgu"/>
-                <constraint firstItem="wz9-oT-Bwu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="37" id="NbP-bE-uqe"/>
                 <constraint firstItem="N7g-wg-Jah" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="33" id="SLf-JS-3dj"/>
                 <constraint firstItem="QbG-sy-YF1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TiQ-rb-CA4"/>
                 <constraint firstAttribute="trailing" secondItem="N7g-wg-Jah" secondAttribute="trailing" id="U5o-Tg-2ny"/>
                 <constraint firstItem="N7g-wg-Jah" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Utg-Ku-v5z"/>
                 <constraint firstAttribute="trailing" secondItem="Jgp-Gx-3Vs" secondAttribute="trailing" id="ZJb-DE-4Vv"/>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="leading" secondItem="GVi-jb-J1T" secondAttribute="leading" id="cIY-kz-QyT"/>
-                <constraint firstAttribute="trailing" secondItem="wz9-oT-Bwu" secondAttribute="trailing" constant="8" id="hWo-LL-f1q"/>
+                <constraint firstItem="wz9-oT-Bwu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="38" id="i00-rG-zXf"/>
                 <constraint firstAttribute="trailing" secondItem="QbG-sy-YF1" secondAttribute="trailing" id="lOv-vt-bVv"/>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="trailing" secondItem="GVi-jb-J1T" secondAttribute="trailing" id="qBC-JF-7da"/>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="top" secondItem="N7g-wg-Jah" secondAttribute="bottom" constant="27" id="qD4-Ia-VlN"/>
@@ -135,15 +133,10 @@
                 <constraint firstItem="N7g-wg-Jah" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="33" id="zAo-OI-WJb"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="JRE-CH-wgu"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="363" y="237"/>
         </view>
     </objects>
     <resources>
-        <image name="actionbar_forward.png" width="13" height="21"/>
+        <image name="youjiantou" width="7" height="12"/>
     </resources>
 </document>

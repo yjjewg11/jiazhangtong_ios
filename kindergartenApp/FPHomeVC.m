@@ -285,6 +285,8 @@ NSInteger localDBlimit=50;
 //    localFamilyRangeTime.minTime=nil;
 //    localFamilyRangeTime.maxTime=nil;
     localFamilyRangeTime=[_service queryTimeByFamilyUUID :[FPHomeVC getFamily_uuid]];
+    
+
     isLocalDBHasData=true;
     isRemoteDBHasData=true;
     
@@ -302,16 +304,16 @@ NSInteger localDBlimit=50;
     
     //先更新
     
-      if(localFamilyRangeTime.updateTime==nil||[@"" isEqualToString:localFamilyRangeTime.updateTime]){
-          
-          localFamilyRangeTime.updateTime=@"1700-01-01 00:00:00";
-          [_service updateUpdateTime:localFamilyRangeTime.family_uuid updatetime:localFamilyRangeTime.updateTime];
-          //有数据则，初三全部更新变更数据。
-//          if([localFamilyRangeTime.minTime isEqualToString:localFamilyRangeTime.maxTime]){
-//                          }
-        
-      }
-    if(localFamilyRangeTime.updateTime!=nil){
+//      if(localFamilyRangeTime.updateTime==nil||[@"" isEqualToString:localFamilyRangeTime.updateTime]){
+//          
+//          localFamilyRangeTime.updateTime=@"1700-01-01 00:00:00";
+//          [_service updateUpdateTime:localFamilyRangeTime.family_uuid updatetime:localFamilyRangeTime.updateTime];
+//          //有数据则，初三全部更新变更数据。
+////          if([localFamilyRangeTime.minTime isEqualToString:localFamilyRangeTime.maxTime]){
+////                          }
+//        
+//      }
+    if(localFamilyRangeTime.updateTime!=nil&&localFamilyRangeTime.maxTime	!=nil){
         [self showLoadView];
         [_service updateFPPhotoUpdateCountWithFamilyUUID:[FPHomeVC getFamily_uuid] success:^(NSString *status) {
             [self hidenLoadView];

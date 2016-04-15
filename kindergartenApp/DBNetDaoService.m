@@ -208,7 +208,9 @@
     if (sqlite3_exec(db, [sqlQuery UTF8String], NULL, NULL, &err) != SQLITE_OK)
     {
         fprintf( stderr , " SQL error : %s\n " , err);
-        return nil;
+        FPFamilyInfoDomain *localFamilyRangeTime=[[FPFamilyInfoDomain alloc]init];;
+        localFamilyRangeTime.family_uuid=familyUUID;
+        return localFamilyRangeTime;
     }
     else
     {
@@ -283,7 +285,7 @@
         }
         else
         {
-            return nil;
+            return domain;
         }
     }
 }

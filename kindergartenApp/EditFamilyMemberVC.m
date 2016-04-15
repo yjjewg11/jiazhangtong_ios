@@ -56,7 +56,7 @@
     
     
 
-    NSLog(@"%@", phoneNO);
+    NSLog(@"%@phoneNO=", phoneNO);
     
     
     
@@ -174,11 +174,21 @@
     long index = ABMultiValueGetIndexForIdentifier(phone,identifier);
     
     NSString *phoneNO = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phone, index);
+    
     phoneNO = [phoneNO stringByReplacingOccurrencesOfString:@"-" withString:@""];
     NSLog(@"%@", phoneNO);
+    
+    CFStringRef anFullName = ABRecordCopyCompositeName(person);
+    NSString *fullname= [NSString stringWithFormat:@"%@",anFullName];
+    
     if (phone && phoneNO.length == 11) {
         
-        [peoplePicker dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:^{
+            _textField_tel.text=phoneNO;
+            _textField_name.text=fullname;
+            
+        }];
+
         return NO;
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误提示" message:@"请选择正确手机号" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -206,7 +216,45 @@
     [rightItem setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = rightItem;
     
+    
+    
+    
+    
+    
+    ABAddressBookRef addressBook = ABAddressBookCreate();
+    
+    
+    __block BOOL accessGranted = NO;
+    if (ABAddressBookRequestAccessWithCompletion != NULL) {
+        
+        // we're on iOS 6
+        NSLog(@"on iOS 6 or later, trying to grant access permission");
+        
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+            accessGranted = granted;
+            dispatch_semaphore_signal(sema);
+        });
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+//        dispatch_release(sema);
+    }
+    else { // we're on iOS 5 or older
+        
+        NSLog(@"on iOS 5 or older, it is OK");
+        accessGranted = YES;
+    }
+    
+    if (accessGranted) {
+        
+        NSLog(@"we got the access right");
+    }else{
+        [MBProgressHUD showSuccess:@"请到设置>隐私>通讯录打开本应用的权限设置"];
+   
+    }
 }
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
