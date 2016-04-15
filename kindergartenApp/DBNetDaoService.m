@@ -136,6 +136,14 @@
     if(!domain){
         domain=[[FPFamilyInfoDomain alloc] init];
         domain.family_uuid=familyUUID;
+        
+        if(domain.maxTime==nil){
+            return;
+        }
+        
+        if(domain.updateTime==nil){
+            return;
+        }
     }
     
     
@@ -306,7 +314,10 @@
     for (NSInteger i=0; i<photos.count; i++)
     {
         FPFamilyPhotoNormalDomain * dataDomain = photos[i];
-        
+        if(dataDomain.note==nil)dataDomain.note=@"";
+         if(dataDomain.photo_time==nil)dataDomain.photo_time=@"";
+         if(dataDomain.md5==nil)dataDomain.md5=@"";
+         if(dataDomain.path==nil)dataDomain.path=@"";
         NSString * sql = [NSString stringWithFormat:@"insert into fp_photo_item (uuid,status,family_uuid,create_time,photo_time,create_useruuid,path,address,note,md5,create_user) values ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",dataDomain.uuid,dataDomain.status,dataDomain.family_uuid,dataDomain.create_time,dataDomain.photo_time,dataDomain.create_useruuid,dataDomain.path,dataDomain.address,dataDomain.note,dataDomain.md5,dataDomain.create_user];
         
         [transactionSql addObject:sql];

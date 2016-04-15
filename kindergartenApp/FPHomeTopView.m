@@ -97,11 +97,11 @@
     }
     
     [placeholderImg sd_setImageWithURL:[NSURL URLWithString:domain.herald]];
-    //给placeimg添加点击手势
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap:)];
-    
-    [placeholderImg addGestureRecognizer:tap];
-    
+//    //给placeimg添加点击手势
+//    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onTap:)];
+//    
+//    [placeholderImg addGestureRecognizer:tap];
+//    
     
     if (domain.photo_count == nil || [domain.photo_count isEqualToString:@""])
     {
@@ -117,6 +117,9 @@
     
     
     self.pushToMyAlbum();
+}
+- (IBAction)onClick_myFamily:(id)sender {
+     self.pushToMyAlbum();
 }
 
 @end

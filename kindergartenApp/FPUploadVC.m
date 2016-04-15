@@ -249,16 +249,19 @@
 {
     if([UploadPhotoToRemoteService isUpoading]){
         [UploadPhotoToRemoteService pauseUploadAll];
-        
+         uploadStatusBar.title=@"全部开始";
     }else{
       
         if([UploadPhotoToRemoteService upLoadAllFromLocalDB]==0){
             [MBProgressHUD showSuccess:@"已经全部上传了"];
+            
+        }else{
+              [self refresh_uploadStatusBar_title];
         }
        
     }
     
-    [self refresh_uploadStatusBar_title];
+  
 }
 - (void)openSelectImageView
 {

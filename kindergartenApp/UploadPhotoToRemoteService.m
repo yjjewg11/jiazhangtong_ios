@@ -10,7 +10,7 @@
 
 @implementation UploadPhotoToRemoteService
 //最大
-static NSInteger maxUploadingNumber=1;
+static NSInteger maxUploadingNumber=2;
 DBNetDaoService * _localDbservice;
 
 
@@ -125,13 +125,13 @@ DBNetDaoService * _localDbservice;
 {
   
     
-    if(self.waitUploadDataArray.count>0){
-        NSLog(@"self.waitUploadDataArray .count=%ld",self.waitUploadDataArray .count);
-//        return self.waitUploadDataArray .count;
-    }else{//数据库只去一次。防止重复
+    if(self.waitUploadDataArray==nil||self.waitUploadDataArray.count==0){
+       
+//       //数据库只去一次。防止重复
         self.waitUploadDataArray = [NSMutableArray arrayWithArray:[_localDbservice queryUploadListLocalImg]];
 
     }
+     NSLog(@"self.waitUploadDataArray .count=%ld",self.waitUploadDataArray .count);
        [self upLoadDataFromwaitUploadDataArray];
     return self.waitUploadDataArray .count;
 }

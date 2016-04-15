@@ -63,6 +63,12 @@
                             <color key="textColor" red="0.99336965460526316" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMD-pZ-vSK">
+                            <rect key="frame" x="120" y="25" width="75" height="75"/>
+                            <connections>
+                                <action selector="onClick_myFamily:" destination="29n-Mr-gQp" eventType="touchUpInside" id="9fL-UC-Mvj"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="tdR-WD-ysx" firstAttribute="top" secondItem="wed-In-f5u" secondAttribute="top" constant="25" id="36N-U7-YhN"/>
@@ -202,7 +208,7 @@
                 <outlet property="totalPhotoNumLbl" destination="tdR-WD-ysx" id="K0u-9C-CCg"/>
                 <outlet property="warningLbl" destination="E63-pW-afJ" id="Ost-hL-Tj5"/>
             </connections>
-            <point key="canvasLocation" x="350" y="236"/>
+            <point key="canvasLocation" x="350" y="235.5"/>
         </view>
     </objects>
     <resources>

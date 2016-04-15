@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "UploadPhotoToRemoteService.h"
 @interface HomeVC : BaseViewController
 
 @end

@@ -319,7 +319,7 @@ NSInteger localDBlimit=50;
             
             
         } faild:^(NSString *errorMsg) {
-            
+            errorMsg=[NSString stringWithFormat:@"更新数据失败:%@",errorMsg];
                     [MBProgressHUD showError:errorMsg];
             
             [self hidenLoadView];
@@ -349,7 +349,15 @@ NSInteger localDBlimit=50;
     [view setData:[self getCurFPMyFamilyPhotoCollectionDomain]];
     view.size = CGSizeMake(APPWINDOWWIDTH, 235);
     //回调
+    __weak typeof(self) weakSelf = self;
+
     view.pushToMyAlbum = ^{
+        
+        
+        FPFamilyPhotoCollectionDetailTableViewController * fPFamilyPhotoCollectionDetailTableViewController=[[FPFamilyPhotoCollectionDetailTableViewController alloc]init];
+        [fPFamilyPhotoCollectionDetailTableViewController loadLoadByUuid:[FPHomeVC getFamily_uuid]];
+        
+        [weakSelf.navigationController pushViewController:fPFamilyPhotoCollectionDetailTableViewController animated:YES];
 //        [self.navigationController pushViewController:nil animated:YES];
         NSLog(@"push到我的家庭相册");
     };

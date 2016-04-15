@@ -119,10 +119,13 @@
         }];
     }
 }
-
+-(void) initDataByUserLoginAfter{
+    [UploadPhotoToRemoteService upLoadAllFromLocalDB];
+}
 #pragma mark - 初始化view
 - (void)initHomeView
 {
+    [self initDataByUserLoginAfter];
     NSArray * imgSrcArr = @[@"hudong",@"kechenbiao",@"shipu",@"gonggao",@"qiandao",@"pingjialaoshi",@"baobaoruxue",@"tongxunlu",@"techang1",@"gengduo"];
     
     NSArray * nameTitleArr = @[@"班级互动",@"课程表",@"每日食谱",@"校园公告",@"签到记录",@"评价老师",@"宝宝入学",@"通讯录",@"特长课程",@"更多"];
