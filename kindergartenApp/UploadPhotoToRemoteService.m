@@ -314,7 +314,7 @@ DBNetDaoService * _localDbservice;
         return NO;
     }
     //wifi直接上传
-    if(![self.wifiStatus isReachableViaWiFi]){
+    if([self.wifiStatus isReachableViaWiFi]){
 //        [self upLoadDataFromwaitUploadDataArray];
         return NO;
         
