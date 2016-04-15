@@ -12,10 +12,7 @@
 //最大
 static NSInteger maxUploadingNumber=1;
 DBNetDaoService * _localDbservice;
-//带上传队列
-NSMutableArray * waitUploadDataArray;
-//上传队列
-NSMutableArray * uploadingDataArray;
+
 
 + (ALAssetsLibrary *)defaultAssetsLibrary
 {
@@ -36,7 +33,7 @@ NSMutableArray * uploadingDataArray;
                       service = [[UploadPhotoToRemoteService alloc] init];
                       service.library=[[ALAssetsLibrary alloc] init];
                       _localDbservice = [DBNetDaoService defaulService];
-                      uploadingDataArray=[NSMutableArray array];
+                      service.uploadingDataArray=[NSMutableArray array];
                       
                       service.wifiStatus = [Reachability reachabilityWithHostName:@"www.baidu.com"];
                       
@@ -57,14 +54,28 @@ NSMutableArray * uploadingDataArray;
 /**
  重新从数据库获取数据，全部上传。只允许调一次。启动时，防止数据冲突
  */
-+ (void)upLoadAllFromLocalDB{
-   
-    [[UploadPhotoToRemoteService getService] upLoadDataFromDatabase];
++ (NSInteger)upLoadAllFromLocalDB{
+   UploadPhotoToRemoteService *s=[UploadPhotoToRemoteService getService];
+    s.isPauseUpload=NO;
+    return [s upLoadDataFromDatabase];
+    
+ 
 }
++ (void)pauseUploadAll{
+    UploadPhotoToRemoteService * s=[UploadPhotoToRemoteService getService];
+    s.isPauseUpload=YES;
+    
+}
++ (BOOL)isUpoading{
+    UploadPhotoToRemoteService * s=[UploadPhotoToRemoteService getService];
+    return s.uploadingDataArray.count>0;
+}
+
 //添加到新数据到数据库和，开始上传
 + (void)addPhotoUploadDomain:(FPFamilyPhotoUploadDomain *)domain{
+  
     UploadPhotoToRemoteService * s=[UploadPhotoToRemoteService getService];
-    
+      s.isPauseUpload=NO;
     FPUploadSaveUrlDomain * savedomain = [[FPUploadSaveUrlDomain alloc] init];
     
     savedomain.localUrl = [domain.localurl absoluteString];
@@ -73,41 +84,56 @@ NSMutableArray * uploadingDataArray;
 
     [s addToWaitFPFamilyPhotoUploadDomain:domain];
     
+    
+    
 }
 - (void)addToWaitFPFamilyPhotoUploadDomain:(FPFamilyPhotoUploadDomain *)domain{
-    [waitUploadDataArray addObject:domain];
-    [self upLoadDataFromWaitUploadDataArray];
+    
+    [self.waitUploadDataArray addObject:domain];
+    [self upLoadDataFromwaitUploadDataArray];
 }
 + (void)upLoadFPFamilyPhotoUploadDomain:(FPFamilyPhotoUploadDomain *)domain{
     
     [[UploadPhotoToRemoteService getService]startUpLoad:domain];
 }
-- (void)upLoadDataFromWaitUploadDataArray
+- (void)upLoadDataFromwaitUploadDataArray
 {
-    if(waitUploadDataArray.count==0)return;
+    if(self.waitUploadDataArray.count==0)return;
     
-    while(waitUploadDataArray.count>0&&uploadingDataArray.count<maxUploadingNumber){
-        FPFamilyPhotoUploadDomain * domain=waitUploadDataArray[0];
-        [uploadingDataArray addObject:domain];
-        [waitUploadDataArray removeObject:domain];
+    if( self.isPauseUpload){
+        NSLog(@"s.isPauseUpload=true");
+        return;
+    }
+    
+    //需要走判断流程，用户确认
+    if([self uploadBy4GuserConfirm]){
+        
+        return;
+    }
+    while(self.waitUploadDataArray.count>0&&self.uploadingDataArray.count<maxUploadingNumber){
+        FPFamilyPhotoUploadDomain * domain=self.waitUploadDataArray[0];
+        [self.uploadingDataArray addObject:domain];
+        [self.waitUploadDataArray removeObject:domain];
         
         [self startUpLoad:domain];
-        NSLog(@"uploadingDataArray.count=%ld",uploadingDataArray.count);
+        NSLog(@"self.uploadingDataArray.count=%ld",self.uploadingDataArray.count);
     }
 
 }
 
-- (void)upLoadDataFromDatabase
+- (NSInteger)upLoadDataFromDatabase
 {
   
     
-    if(waitUploadDataArray.count>0){
-        NSLog(@"waitUploadDataArray .count=%ld",waitUploadDataArray .count);
-        return;
-    }
-    waitUploadDataArray = [NSMutableArray arrayWithArray:[_localDbservice queryUploadListLocalImg]];
-    [self upLoadDataFromWaitUploadDataArray];
+    if(self.waitUploadDataArray.count>0){
+        NSLog(@"self.waitUploadDataArray .count=%ld",self.waitUploadDataArray .count);
+//        return self.waitUploadDataArray .count;
+    }else{//数据库只去一次。防止重复
+        self.waitUploadDataArray = [NSMutableArray arrayWithArray:[_localDbservice queryUploadListLocalImg]];
 
+    }
+       [self upLoadDataFromwaitUploadDataArray];
+    return self.waitUploadDataArray .count;
 }
 #pragma mark - 开始上传
 - (void)startUpLoad:(FPFamilyPhotoUploadDomain *)domain
@@ -145,6 +171,22 @@ NSMutableArray * uploadingDataArray;
 
 - (void)upLoadPic:(UIImage *)img photoTime:(NSString *)photoTime  uploadDomain:(FPFamilyPhotoUploadDomain *)uploadDomain
 {
+    
+    
+    
+    {
+    
+        //通知开始上传
+        FPUploadSaveUrlDomain * domain = [[FPUploadSaveUrlDomain alloc] init];
+        
+//        domain.uuid=baseDomain.data_id;
+        domain.localUrl = [uploadDomain.localurl absoluteString];
+        domain.family_uuid=uploadDomain.family_uuid;
+        domain.status = 2;//成功
+        
+        [self saveFPUploadSaveUrlDomain:domain uploadDomain:uploadDomain];
+        
+    }
     NSData *data;
     data = UIImageJPEGRepresentation(img, 0.1);
     NSString * phone_uuid=[KGUUID getUUID];//手机设备唯一标示
@@ -191,9 +233,9 @@ NSMutableArray * uploadingDataArray;
      {
          
          //重新上传
-         [waitUploadDataArray addObject:uploadDomain];
+         [self.waitUploadDataArray addObject:uploadDomain];
        
-         [self upLoadDataFromWaitUploadDataArray];
+         [self upLoadDataFromwaitUploadDataArray];
 
          
      }];
@@ -236,11 +278,70 @@ NSMutableArray * uploadingDataArray;
     if(domain.status==1){//添加等待数据
         return;
     }
+    if(domain.status==2){//开始上传
+        return;
+    }
     
+    if(domain.status==0){//上传成功
+        [self.uploadingDataArray removeObject:uploadDomain];
+         [self upLoadDataFromwaitUploadDataArray];
+        
+        
+        
+        
     
-    [uploadingDataArray removeObject:uploadDomain];
-    [self upLoadDataFromWaitUploadDataArray];
+        NSString *countStr=[NSString stringWithFormat:@"%ld",self.waitUploadDataArray.count+self.uploadingDataArray.count];
+        
+        //通知主页时光轴有数据更新
+        NSNotification * noti1 = [[NSNotification alloc] initWithName:@"canUpDatePhotoData" object:countStr userInfo:nil];
+        
+        [[NSNotificationCenter defaultCenter] postNotification:noti1];
+        
+
+
+        return;
+    }
+   
+    
+   
+}
+//4G上传提示，用户确认
+- (BOOL)uploadBy4GuserConfirm{
+    
+    //确认允许4G上传标记。
+    if(self.isUploadBy4G==YES){
+//        [self upLoadDataFromwaitUploadDataArray];
+        return NO;
+    }
+    //wifi直接上传
+    if(![self.wifiStatus isReachableViaWiFi]){
+//        [self upLoadDataFromwaitUploadDataArray];
+        return NO;
+        
+    }    //4G判断
+    {
+        //提示窗口，只谈一次。
+        if(self.isShowAlertView==YES){
+            return YES;
+        }
+        UIAlertView * al = [[UIAlertView alloc] initWithTitle:@"请确认" message:@"不是wifi环境，使用移动流量，是否要上传?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        
+        [al show];
+        return YES;
+    }
+
 }
 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    self.isShowAlertView==NO;
+    if (buttonIndex != alertView.cancelButtonIndex)
+    {
+        self.isUploadBy4G=YES;
+         [self upLoadDataFromwaitUploadDataArray];
+    }
+}
 
 @end

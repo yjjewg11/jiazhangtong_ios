@@ -95,6 +95,7 @@
 
 - (IBAction)btnClick:(id)sender
 {
+    return;
     if (self.status == 1) //通知 vc 开始上传
     {
         [self setStatus:2];

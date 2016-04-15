@@ -165,18 +165,8 @@ NSInteger localDBlimit=50;
         
         //获取我的家庭相册信息
         [self getMyPhotoCollectionInfo];
-        //注册通知,用户提示用户有新数据需要更新啦
-        NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-        [center addObserver:self selector:@selector(showUpDatePhotoDataView:) name:@"canUpDatePhotoData" object:nil];
         
-        //用于从数据库获取数据
-        [center addObserver:self selector:@selector(loadData) name:@"canLoadData" object:nil];
-        [center addObserver:self selector:@selector(saveUploadImgPath:) name:@"saveuploadimg" object:nil];
-        [center addObserver:self selector:@selector(headerRefreshing) name:@"refreshtimelinedata" object:nil];
-        [center addObserver:self selector:@selector(showEndUpDatePhotoDataView:) name:@"updateInfo" object:nil];
-        [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
-        
-
+        [self regNotification];
     }
     @catch(NSException *exception) {
         NSLog(@"exception:%@", exception);
@@ -186,6 +176,29 @@ NSInteger localDBlimit=50;
     }
     
 }
+
+
+
+
+
+
+
+//注册通知
+- (void)regNotification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    //注册通知,用户提示用户有新数据需要更新啦
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(showUpDatePhotoDataView:) name:@"canUpDatePhotoData" object:nil];
+    
+    //用于从数据库获取数据
+    [center addObserver:self selector:@selector(loadData) name:@"canLoadData" object:nil];
+//    [center addObserver:self selector:@selector(saveUploadImgPath:) name:@"saveuploadimg" object:nil];
+    [center addObserver:self selector:@selector(headerRefreshing) name:@"refreshtimelinedata" object:nil];
+    [center addObserver:self selector:@selector(showEndUpDatePhotoDataView:) name:@"updateInfo" object:nil];
+    [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
+}
+
 
 //切换家庭相册
 - (void)changeMyCollection :(NSInteger)row
@@ -495,7 +508,7 @@ NSInteger localDBlimit=50;
     if (selView)
     {
         if([selView isHidden]){
-             if(selView)[self.view bringSubviewToFront:selView];
+             [self.view bringSubviewToFront:selView];
               [selView setHidden:NO];
         }else{
               [selView setHidden:YES];
@@ -1023,8 +1036,8 @@ NSInteger localDBlimit=50;
 #pragma mark - 保存上传图片列表
 - (void)saveUploadImgPath:(NSNotification *)noti
 {
-    FPUploadSaveUrlDomain * domain = noti.object;
-    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status] family_uuid:domain.family_uuid uuid:domain.uuid];
+//    FPUploadSaveUrlDomain * domain = noti.object;
+//    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status] family_uuid:domain.family_uuid uuid:domain.uuid];
 }
 
 
@@ -1142,8 +1155,8 @@ NSInteger localDBlimit=50;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (dataSource.count == 0)
-    {
+    
+    if(dataSourceGroup==0){
         NoDataTableViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"NoDataTableViewCell" owner:nil options:nil] firstObject];
         
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

@@ -11,7 +11,7 @@
 #import "KGUUID.h"
 #import "Reachability.h"
 #import "UploadPhotoToRemoteService.h"
-
+#import "MBProgressHUD+HM.h"
 @interface FPUploadVC : BaseViewController
 
 @property (nonatomic , strong) ALAssetsLibrary * library;

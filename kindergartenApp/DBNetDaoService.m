@@ -744,8 +744,8 @@
 {
   
     NSString * useruuid = [KGHttpService sharedService].userinfo.uuid;
-    
-    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' AND (status='%@' OR status='%@' OR status='%@');",useruuid,@"3",@"0",@"1"];
+   
+    NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE user_uuid='%@' and family_uuid ='%@' AND (status='3' OR status='0' OR status='1');",useruuid, [FPHomeVC getFamily_uuid]];
     
     NSMutableArray * marr = [NSMutableArray array];
     

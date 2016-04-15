@@ -87,7 +87,7 @@
 //}
 - (void)setData:(FPMyFamilyPhotoCollectionDomain *)domain
 {
-    if ([titleLbl.text isEqualToString:@""] || titleLbl.text == nil)
+    if ([domain.title isEqualToString:@""] || domain.title == nil)
     {
         titleLbl.text = @"我的家庭相册";
     }

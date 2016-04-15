@@ -21,8 +21,8 @@
 {
     NSMutableArray * _dataArrs;
     
-    NSMutableArray * _cells;
-    
+//    NSMutableArray * _cells;
+    UIBarButtonItem *uploadStatusBar ;
     DBNetDaoService * _service;
     Reachability * wifiStatus; //网络状态
 }
@@ -74,7 +74,7 @@
     }
     
     _dataArrs = [NSMutableArray array];
-    _cells = [NSMutableArray array];
+//    _cells = [NSMutableArray array];
     
     _library = [[ALAssetsLibrary alloc] init];
     
@@ -85,18 +85,24 @@
     UIBarButtonItem *barbtn = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(openSelectImageView)];
     barbtn.title = @"添加相片";
     barbtn.tintColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = barbtn;
     
-    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self selector:@selector(didGetPhotoData:) name:@"didgetphotodata" object:nil];
-//    [center addObserver:self selector:@selector(startUpLoad:) name:@"startupload" object:nil];
+    //在右上角添加一个按钮来选择图片
+    uploadStatusBar = [[UIBarButtonItem alloc] initWithImage:nil style:UIBarButtonItemStyleDone target:self action:@selector(uploadStatusBar_click)];
     
-    //从数据库去读取上传失败的，等待上传的数据
+    uploadStatusBar.tintColor = [UIColor whiteColor];
+    
+ [self refresh_uploadStatusBar_title];
+     [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:barbtn,uploadStatusBar,nil]];
+//    self.navigationItem.rightBarButtonItem = barbtn;
+    [self regNotification];
+   
     [self getDataFromDatabase];
     
 
     
 }
+
+
 
 - (void)initTableView
 {
@@ -219,7 +225,7 @@
     [cell setData:_dataArrs[indexPath.row]];
     cell.index = indexPath.row;
     
-    [_cells addObject:cell];
+//    [_cells addObject:cell];
     
     return cell;
 }
@@ -228,7 +234,32 @@
 {
     return 44;
 }
+- (void)refresh_uploadStatusBar_title{
+    if([UploadPhotoToRemoteService isUpoading]){
+        uploadStatusBar.title=@"全部暂停";
+        
+        
+    }else{
+               uploadStatusBar.title=@"全部开始";
+        
+    }
 
+}
+- (void)uploadStatusBar_click
+{
+    if([UploadPhotoToRemoteService isUpoading]){
+        [UploadPhotoToRemoteService pauseUploadAll];
+        
+    }else{
+      
+        if([UploadPhotoToRemoteService upLoadAllFromLocalDB]==0){
+            [MBProgressHUD showSuccess:@"已经全部上传了"];
+        }
+       
+    }
+    
+    [self refresh_uploadStatusBar_title];
+}
 - (void)openSelectImageView
 {
     FPImagePickerVC * vc = [[FPImagePickerVC alloc] init];
@@ -394,8 +425,8 @@
         //失败了，修改_dataarr状态
         dispatch_async(dispatch_get_main_queue(), ^
         {
-            FPUploadCell * cell = [_cells objectAtIndex:index];
-            [cell setStatus:3];
+//            FPUploadCell * cell = [_cells objectAtIndex:index];
+//            [cell setStatus:3];
         });
     
         //存入数据库
@@ -423,8 +454,8 @@
         
         dispatch_async(dispatch_get_main_queue(), ^
         {
-            FPUploadCell * cell = [_cells objectAtIndex:index];
-            [cell setPercent:percent];
+//            FPUploadCell * cell = [_cells objectAtIndex:index];
+//            [cell setPercent:percent];
         });
     }];
     
@@ -433,4 +464,30 @@
 }
 
 
+- (void)regNotification {
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(didGetPhotoData:) name:@"didgetphotodata" object:nil];
+    //    [center addObserver:self selector:@selector(startUpLoad:) name:@"startupload" object:nil];
+    [center addObserver:self selector:@selector(saveUploadImgPath:) name:@"saveuploadimg" object:nil];
+    //从数据库去读取上传失败的，等待上传的数据
+}
+- (void)saveUploadImgPath:(NSNotification *)noti
+{
+    FPUploadSaveUrlDomain * domainNew = noti.object;
+    for (int i=0;i<_dataArrs.count;i++) {
+        FPFamilyPhotoUploadDomain * domain=_dataArrs[i];
+        
+        if([[domain.localurl absoluteString] isEqualToString:domainNew.localUrl]&&[domain.family_uuid isEqualToString:domainNew.family_uuid]){
+            domain.status=domainNew.status;
+            if(domain.status==0){//
+                 [_dataArrs removeObject:domain];
+                [self.uploadTable deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+               
+            }else{
+                [self.uploadTable reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
+    }
+}
 @end

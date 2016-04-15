@@ -57,6 +57,7 @@ typedef enum : NSInteger {
 
 //注册通知
 - (void)regNotification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self registerMessageListen];
 }
 
