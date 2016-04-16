@@ -27,6 +27,7 @@
 #import "MJRefresh.h"
 #import "NoDataTableViewCell.h"
 #import "MessageTableViewCell.h"
+#import "FPGiftwareDetialVC.h"
 
 @interface MessageViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -245,6 +246,8 @@
             vc = [[AnnouncementInfoViewController alloc] init];
             ((AnnouncementInfoViewController *)vc).annuuid = domain.rel_uuid;
             break;
+            
+            
         case Topic_Articles:
             vc = [[GiftwareArticlesInfoViewController alloc] init];
             ((GiftwareArticlesInfoViewController *)vc).annuuid = domain.rel_uuid;
@@ -276,7 +279,30 @@
             vc = [[BrowseURLViewController alloc] init];
             ((BrowseURLViewController *)vc).url = domain.url;
             break;
-        default:
+            
+        case Topic_FPFamilyPhotoCollection:
+            
+//           vc= [[FPHomeVC alloc] init];
+//            if(domain.rel_uuid!=nil&&domain.rel_uuid.length>0){
+//             [FPHomeVC setFamily_uuid:domain.rel_uuid];
+//            }
+            break;
+
+        case Topic_FPGiftware:
+            
+            vc = [[FPGiftwareDetialVC alloc] init];
+            ((FPGiftwareDetialVC *)vc).uuid=domain.rel_uuid;
+            
+            break;
+            
+        case Topic_FPTimeLine:
+            if(domain.rel_uuid!=nil&&domain.rel_uuid.length>0){
+                [self loadFPFamilyPhotoNormalDomainByUuid:domain.rel_uuid];
+            }
+            
+            break;
+
+               default:
             break;
     }
     
@@ -314,6 +340,42 @@
     {
         
     }];
+}
+
+
+-(void)loadFPFamilyPhotoNormalDomainByUuid:(NSString *)uuid{
+        MBProgressHUD * hub=[MBProgressHUD showMessage:@"更新数据，请稍后"];
+        hub.removeFromSuperViewOnHide=YES;
+        
+        //请求最新domain
+        [[KGHttpService sharedService] getFPTimeLineItem:uuid success:^(FPFamilyPhotoNormalDomain *item)
+         {
+             
+             [hub hide:YES];
+             [[DBNetDaoService defaulService] updatePhotoItemInfo:item];
+             
+             //更新数据库
+             
+             item.status=0;
+             
+             NSMutableArray *arr=[NSMutableArray array];
+             [arr addObject:item];
+             FPTimeLineDetailVC * vc = [[FPTimeLineDetailVC alloc] init];
+             vc.fpPhotoNormalDomainArr=arr;
+             vc.selectIndex=0;
+             vc.title=[[item.create_time componentsSeparatedByString:@" "] firstObject];
+             ;
+             [self.navigationController pushViewController:vc animated:YES];
+
+             
+             
+             
+         }
+                                                   faild:^(NSString *errorMsg)
+         {
+             [hub hide:YES];
+             [MBProgressHUD showError:@"获取最新相片信息失败!"];
+         }];
 }
 
 

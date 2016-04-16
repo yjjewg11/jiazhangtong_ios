@@ -52,13 +52,14 @@
     [myWebView initViewByController:self];
     myWebView.delegate1 = self;
     
-    NSLog(@"myWebView loadRequest, url=%@",self.domain.share_url);
-    CGSize size=self.bottomView.size;
+       CGSize size=self.bottomView.size;
     size.width=APPWINDOWWIDTH;
     [self.bottomView setSize:size];
     //创建底部按钮
     [self addBtn:self.bottomView];
-    [self resetViewParam];
+
+    [self loadDomainByUuid:self.uuid];
+    
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -330,7 +331,8 @@
 - (void)resetViewParam {
     
     
-    
+    NSLog(@"myWebView loadRequest, url=%@",self.domain.share_url);
+
     self.title = self.domain.title;
 
     [myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.domain.share_url]]];
@@ -383,17 +385,75 @@
 
 
 - (void)fullScreen{
-    [self.navigationController setNavigationBarHidden:YES];
-    [self.bottomView setHidden:YES];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       [self.navigationController setNavigationBarHidden:YES];
+                       [self.bottomView setHidden:YES];
+                   });
+    
+  
 }
 - (void)exitFullScreen{
-    [self.navigationController setNavigationBarHidden:NO];
-    [self.bottomView setHidden:NO];
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       [self.navigationController setNavigationBarHidden:NO];
+                       [self.bottomView setHidden:NO];
+                   });
+    
+    
 }
 - (void)makeFPMovie{
-    FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
-    [FFMovieShareData getFFMovieShareData].domain=nil;
-    [self.navigationController pushViewController:vc animated:NO];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
+                       [FFMovieShareData getFFMovieShareData].domain=nil;
+                       [self.navigationController pushViewController:vc animated:NO];
+                   });
+    
+   
 
 }
+
+
+
+- (void)loadDomainByUuid:(NSString * )uuid
+{
+
+    
+    [[KGHUD sharedHud] show:self.view];
+    [[KGHttpService sharedService] getByUuid:@"/rest/fPMovie/get.json" uuid:uuid success:^(id responseObject)
+     {
+         [[KGHUD sharedHud] hide:self.view];
+         FPMoive4QDomain * domain=[FPMoive4QDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
+         
+         NSDictionary *responseObjectDic=responseObject;
+         domain.share_url=[responseObjectDic objectForKey:@"share_url"];
+         domain.reply_count=[[responseObjectDic objectForKey:@"reply_count"] integerValue];
+         self.domain=domain;
+         dispatch_async(dispatch_get_main_queue(), ^
+                        {
+                             [self resetViewParam];
+                        });
+         
+       
+         
+     }
+                                       faild:^(NSString *errorMsg)
+     {
+         
+         dispatch_async(dispatch_get_main_queue(), ^
+                        {
+                            [[KGHUD sharedHud] hide:self.view];
+                            
+                            [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
+
+                        });
+             }];
+
+}
+
 @end

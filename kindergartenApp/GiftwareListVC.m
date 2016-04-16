@@ -246,39 +246,10 @@
 
 - (void)touchInsideCell:(FPMoive4QDomain * )domain
 {
-    FPMoive4QDomain * annDomain = domain;
     
-    [[KGHUD sharedHud] show:self.view];
-    [[KGHttpService sharedService] getByUuid:@"/rest/fPMovie/get.json" uuid:annDomain.uuid success:^(id responseObject)
-     {
-         [[KGHUD sharedHud] hide:self.view];
-           FPMoive4QDomain * domain=[FPMoive4QDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];
-         
-         NSDictionary *responseObjectDic=responseObject;
-         domain.share_url=[responseObjectDic objectForKey:@"share_url"];
-         domain.reply_count=[[responseObjectDic objectForKey:@"reply_count"] integerValue];
-         
-         FPGiftwareDetialVC * infoVC = [[FPGiftwareDetialVC alloc] init];
-         infoVC.domain=domain;
-         [self.navigationController pushViewController:infoVC animated:YES];
-         
-     }
-          faild:^(NSString *errorMsg)
-     {
-          [[KGHUD sharedHud] hide:self.view];
-         
-             [[KGHUD sharedHud] show:self.view onlyMsg:errorMsg];
-     }];
-
-    
-//
-//    GiftwareArticlesInfoViewController * infoVC = [[GiftwareArticlesInfoViewController alloc] init];
-//    
-//    infoVC.annuuid = annDomain.uuid;
-//    
-//    infoVC.title = annDomain.title;
-//    
-//    [self.navigationController pushViewController:infoVC animated:YES];
+    FPGiftwareDetialVC * infoVC = [[FPGiftwareDetialVC alloc] init];
+    infoVC.uuid=domain.uuid;
+    [self.navigationController pushViewController:infoVC animated:YES];
 }
 
 

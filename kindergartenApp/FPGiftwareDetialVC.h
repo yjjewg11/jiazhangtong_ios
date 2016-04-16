@@ -11,5 +11,8 @@
 @interface FPGiftwareDetialVC : BaseReplyInputViewController
 
 
+@property (strong, nonatomic)  NSString *  uuid;
+
 @property (strong, nonatomic)  FPMoive4QDomain *  domain;
+
 @end

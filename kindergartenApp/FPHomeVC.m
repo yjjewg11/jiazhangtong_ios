@@ -313,7 +313,7 @@ NSInteger localDBlimit=50;
 ////                          }
 //        
 //      }
-    if(localFamilyRangeTime.updateTime!=nil&&localFamilyRangeTime.maxTime	!=nil){
+    if(localFamilyRangeTime.updateTime.length<1&&localFamilyRangeTime.maxTime.length<1){
         [self showLoadView];
         [_service updateFPPhotoUpdateCountWithFamilyUUID:[FPHomeVC getFamily_uuid] success:^(NSString *status) {
             [self hidenLoadView];

@@ -41,9 +41,11 @@ typedef enum {
     Topic_YHHD        = 85, //优惠活动
     
     Topic_FX          = 71,
+     Topic_FPFamilyPhotoCollection  = 20,//家庭相册
     
-    Topic_FPTimeLine  = 21,
-    Topic_FPGiftware  = 22,
+    Topic_FPTimeLine  = 21,//照片
+    Topic_FPGiftware  = 22,//精品相册(动态相册)
+
     
     Topic_Interact    = 99, //班级互动
     Topic_TeacherChat = 11, //与老师的写信列表

@@ -136,9 +136,7 @@ static NSString *const PicID = @"camaracoll";
         _imgDatas=[self fpPhotoNormalDomainArr];
         [self.view addSubview:_collectionView];
         
-        if (self.selectIndex==nil) {
-            self.selectIndex=self.selectIndex;
-        }
+       
         [self resetTableViewCellIndex:self.selectIndex];
         return;
     }

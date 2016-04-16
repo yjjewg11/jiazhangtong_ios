@@ -47,11 +47,11 @@
 
 - (IBAction)giftwarePhotos:(id)sender
 {
-    giftwareRedLine.backgroundColor = [UIColor redColor];
-    timeLineRedLine.backgroundColor = [UIColor whiteColor];
-    timeLineLbl.textColor = [UIColor blackColor];
-    giftwareLbl.textColor = [UIColor redColor];
-    
+//    giftwareRedLine.backgroundColor = [UIColor redColor];
+//    timeLineRedLine.backgroundColor = [UIColor whiteColor];
+//    timeLineLbl.textColor = [UIColor blackColor];
+//    giftwareLbl.textColor = [UIColor redColor];
+//    
     [self.delegate clickGiftwareBtn];
     
  
