@@ -28,7 +28,6 @@
     NSMutableArray *dataSourceGroup;
     UITableView *_tableView;
     NSString *family_uuid;
-    UIAlertView * customAlertView;
     NSInteger selectRowIndex;
     FPMyFamilyPhotoCollectionDomain *dataSource;
     UIImageView * heraldImageView;
@@ -290,13 +289,20 @@
         return;
     };
     
+    FPFamilyMembers* fPFamilyMembers=dataSource_members_list[indexPath.row];
+    NSString *msg=[NSString stringWithFormat:@"%@:%@",fPFamilyMembers.family_name,fPFamilyMembers.tel];
+    //修改成员列
     
-    //修改成功列
+       UIAlertView      * customAlertView = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"修改",@"删除", nil];
+    customAlertView.tag=indexPath.section;
+
+        selectRowIndex=indexPath.row;
+        [customAlertView show];
     
+    return;
     
     EditFamilyMemberVC *editFamilyMemberVC=[[EditFamilyMemberVC alloc]init] ;
     editFamilyMemberVC.editFamilyMemberVCDelegate=self;
-    
     
     
     editFamilyMemberVC.fPFamilyMembers=dataSource_members_list[indexPath.row];
@@ -604,7 +610,6 @@
         
     }
      
-     
      ];
 
 }
@@ -660,6 +665,18 @@
               return;
     }
     if (buttonIndex==1) {
+        
+        
+        
+        
+        EditFamilyMemberVC *editFamilyMemberVC=[[EditFamilyMemberVC alloc]init] ;
+        editFamilyMemberVC.editFamilyMemberVCDelegate=self;
+        
+        
+        editFamilyMemberVC.fPFamilyMembers=dataSource_members_list[selectRowIndex];
+        [self.navigationController pushViewController:editFamilyMemberVC animated:YES];
+        
+        return;
         UITextField *textField= [alertView textFieldAtIndex:0];
         
           UITextField *textField1= [alertView textFieldAtIndex:1];
@@ -721,7 +738,6 @@
     }   
 }
 */
-
 /*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
