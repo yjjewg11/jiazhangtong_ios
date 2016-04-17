@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -25,16 +25,6 @@
                                 <constraint firstAttribute="height" constant="80" id="YY0-DR-mUF"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的家庭相册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kF-21-ald">
-                            <rect key="frame" x="85" y="110" width="150" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="150" id="4Bt-6T-6fK"/>
-                                <constraint firstAttribute="height" constant="20" id="eWn-Ew-Jcf"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r3c-zl-5p0">
                             <rect key="frame" x="125" y="25" width="70" height="70"/>
                             <constraints>
@@ -69,11 +59,23 @@
                                 <action selector="onClick_myFamily:" destination="29n-Mr-gQp" eventType="touchUpInside" id="9fL-UC-Mvj"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的家庭相册" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kF-21-ald">
+                            <rect key="frame" x="85" y="110" width="150" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="4Bt-6T-6fK"/>
+                                <constraint firstAttribute="height" constant="25" id="eWn-Ew-Jcf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <constraints>
                         <constraint firstItem="tdR-WD-ysx" firstAttribute="top" secondItem="wed-In-f5u" secondAttribute="top" constant="25" id="36N-U7-YhN"/>
+                        <constraint firstItem="1kF-21-ald" firstAttribute="top" secondItem="IwN-Pc-gJZ" secondAttribute="bottom" constant="10" id="3aK-io-7Yf"/>
                         <constraint firstItem="E63-pW-afJ" firstAttribute="leading" secondItem="wed-In-f5u" secondAttribute="leading" id="49E-5c-9NX"/>
                         <constraint firstItem="r3c-zl-5p0" firstAttribute="centerX" secondItem="wed-In-f5u" secondAttribute="centerX" id="6LJ-dk-fvO"/>
+                        <constraint firstItem="1kF-21-ald" firstAttribute="top" secondItem="IwN-Pc-gJZ" secondAttribute="bottom" constant="8" id="6zb-b0-4W1"/>
                         <constraint firstItem="E63-pW-afJ" firstAttribute="centerX" secondItem="1kF-21-ald" secondAttribute="centerX" constant="-160" id="8o4-ya-ePd"/>
                         <constraint firstItem="r3c-zl-5p0" firstAttribute="top" secondItem="wed-In-f5u" secondAttribute="top" constant="25" id="987-yQ-wAJ"/>
                         <constraint firstAttribute="trailing" secondItem="2St-Yu-RxG" secondAttribute="trailing" id="AAN-1j-VGR"/>
@@ -87,6 +89,12 @@
                         <constraint firstAttribute="bottom" secondItem="2St-Yu-RxG" secondAttribute="bottom" id="nlT-zm-JqH"/>
                         <constraint firstItem="IwN-Pc-gJZ" firstAttribute="top" secondItem="wed-In-f5u" secondAttribute="top" constant="20" id="p72-jv-Unj"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="6zb-b0-4W1"/>
+                            <exclude reference="OlM-9F-ZiA"/>
+                        </mask>
+                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4KB-lb-7xP">
                     <rect key="frame" x="0.0" y="192" width="320" height="43"/>

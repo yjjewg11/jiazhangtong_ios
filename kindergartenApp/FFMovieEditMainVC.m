@@ -159,7 +159,7 @@
     
     NSLog(@"vcHeight=%f",vcHeight);
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, vcWidth, vcHeight)];
-    [scrollView setBackgroundColor:[UIColor yellowColor] ];
+//    [scrollView setBackgroundColor:[UIColor yellowColor] ];
     
     scrollView.contentSize = CGSizeMake(vcWidth * self.titles.count, vcHeight);
     scrollView.showsHorizontalScrollIndicator = NO;

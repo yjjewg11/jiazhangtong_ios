@@ -3231,20 +3231,6 @@
 			path = images;
 			sourceTree = "<group>";
 		};
-		04D288841CA1088100D12BEF /* FPFamilyPhotoCollectionDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = FPFamilyPhotoCollectionDetail;
-			sourceTree = "<group>";
-		};
-		04D288B01CA442B600D12BEF /* collectionCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = collectionCell;
-			sourceTree = "<group>";
-		};
 		04E606311C4897B900AEE9DD /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -3840,8 +3826,6 @@
 		04F936CC1C4CE71F00116D86 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				04D288B01CA442B600D12BEF /* collectionCell */,
-				04D288841CA1088100D12BEF /* FPFamilyPhotoCollectionDetail */,
 				0449A34C1C4F77AA0066ABBB /* collCell */,
 				0449A3481C4F73DA0066ABBB /* layout */,
 				0449A3471C4F73410066ABBB /* HomeView */,

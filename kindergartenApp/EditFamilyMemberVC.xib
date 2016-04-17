@@ -106,15 +106,17 @@
                         <constraint firstAttribute="height" constant="40" id="vCx-Qo-eEP"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-oT-Bwu">
-                    <rect key="frame" x="294" y="38" width="15" height="25"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-oT-Bwu">
+                    <rect key="frame" x="297" y="38" width="15" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="3EO-oz-Q9p"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="leading" secondItem="N7g-wg-Jah" secondAttribute="leading" id="5qj-mn-ofp"/>
                 <constraint firstItem="GVi-jb-J1T" firstAttribute="top" secondItem="Jgp-Gx-3Vs" secondAttribute="bottom" constant="1" id="BAQ-Vd-wjK"/>
-                <constraint firstAttribute="trailing" secondItem="wz9-oT-Bwu" secondAttribute="trailing" constant="8" id="BCn-Qu-5S0"/>
                 <constraint firstAttribute="bottom" secondItem="QbG-sy-YF1" secondAttribute="bottom" id="BVD-WI-Do2"/>
                 <constraint firstItem="QbG-sy-YF1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CNz-hf-09G"/>
                 <constraint firstItem="N7g-wg-Jah" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="33" id="SLf-JS-3dj"/>
@@ -122,8 +124,10 @@
                 <constraint firstAttribute="trailing" secondItem="N7g-wg-Jah" secondAttribute="trailing" id="U5o-Tg-2ny"/>
                 <constraint firstItem="N7g-wg-Jah" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Utg-Ku-v5z"/>
                 <constraint firstAttribute="trailing" secondItem="Jgp-Gx-3Vs" secondAttribute="trailing" id="ZJb-DE-4Vv"/>
+                <constraint firstItem="wz9-oT-Bwu" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="btQ-vI-9PG"/>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="leading" secondItem="GVi-jb-J1T" secondAttribute="leading" id="cIY-kz-QyT"/>
-                <constraint firstItem="wz9-oT-Bwu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="38" id="i00-rG-zXf"/>
+                <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="top" secondItem="wz9-oT-Bwu" secondAttribute="bottom" constant="32" id="jnq-LQ-NRC"/>
+                <constraint firstItem="wz9-oT-Bwu" firstAttribute="centerY" secondItem="N7g-wg-Jah" secondAttribute="centerY" id="lGf-XL-Tp2"/>
                 <constraint firstAttribute="trailing" secondItem="QbG-sy-YF1" secondAttribute="trailing" id="lOv-vt-bVv"/>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="trailing" secondItem="GVi-jb-J1T" secondAttribute="trailing" id="qBC-JF-7da"/>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="top" secondItem="N7g-wg-Jah" secondAttribute="bottom" constant="27" id="qD4-Ia-VlN"/>

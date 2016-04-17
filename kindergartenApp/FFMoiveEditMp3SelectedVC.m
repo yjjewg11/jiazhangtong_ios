@@ -264,6 +264,16 @@
    
     [headerView addSubview:titlelb];
     
+    　//秀发，不可见的数据，没触法设置herader方法ßßßååß
+    for( Mp3Domain * domain in self.dataSoure){
+        if([[FFMovieShareData getFFMovieShareData].domain.mp3 isEqualToString:domain.path]){
+            
+            [self setHeaderTitle:domain.title];
+            
+        }
+
+    }
+    
     return headerView;
 }
 
