@@ -59,6 +59,21 @@
         [telWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",domain.tel]]]];
         [self.view addSubview:telWebView];
     } else {
+        
+        //问科技客服
+        
+        if([@"group_wjd" isEqualToString:domain.teacher_uuid]){
+            
+            
+            /**
+             *  打开客服会话
+             *  @param aPersonId 客服Id
+             */
+            
+            [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:@"飨受人生" fromNavigationController:self.navigationController];
+            
+            return;
+        }
         //发消息
         ChatViewController * chatVC = [[ChatViewController alloc] init];
         chatVC.addressbookDomain = domain;
@@ -110,7 +125,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"AddressbookTableViewCell" owner:nil options:nil] firstObject];
         [cell resetValue:[addressBookList.listKD objectAtIndex:indexPath.row] parame:nil];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"AddressbookTableViewCell"];
+               cell = [tableView dequeueReusableCellWithIdentifier:@"AddressbookTableViewCell"];
         AddressBookDomain * domain = [addressBookList.list objectAtIndex:indexPath.row];
         [cell resetValue:domain parame:nil];
     }

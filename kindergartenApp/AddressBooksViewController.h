@@ -7,6 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "SPKitExample.h"
+#import <WXOpenIMSDKFMWK/YWFMWK.h>
+#import <WXOUIModule/YWUIFMWK.h>
+
 
 @interface AddressBooksViewController : BaseViewController
 
