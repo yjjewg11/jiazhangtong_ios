@@ -71,6 +71,11 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // YWSDK快速接入接口，程序启动后调用这个接口
+    [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
+    
+    // 从这到当前方法结束是您的业务代码
+    NSLog(@"Path:%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES));
     
     [application setStatusBarStyle:UIStatusBarStyleDefault];
     

@@ -21,7 +21,8 @@
 #import "KGNavigationController.h"
 
 #import "SystemShareKey.h"
-
+#import "SPKitExample.h"
+#import "KGAccountService.h"
 @interface SettingViewController : BaseViewController 
 
 @end

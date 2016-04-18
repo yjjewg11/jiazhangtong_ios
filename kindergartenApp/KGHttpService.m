@@ -5,37 +5,8 @@
 //  Created by You on 15/6/1.
 //  Copyright (c) 2015年 funi. All rights reserved.
 //
-#import "BaseReplyDomain.h"
-#import "KGAccountTool.h"
+
 #import "KGHttpService.h"
-#import "AFAppDotNetAPIClient.h"
-#import "KGHttpUrl.h"
-#import "MJExtension.h"
-#import "KGListBaseDomain.h"
-#import "DynamicMenuDomain.h"
-#import "GroupDomain.h"
-#import "MessageDomain.h"
-#import "StudentSignRecordDomain.h"
-#import "RecipesDomain.h"
-#import "EmojiDomain.h"
-#import "AddressBookDomain.h"
-#import "chatInfoDomain.h"
-#import "KGEmojiManage.h"
-#import "TimetableDomain.h"
-#import "ClassDomain.h"
-#import "CardInfoDomain.h"
-#import "AFNetworking.h"
-#import "SPTimetableDomain.h"
-#import "SPCourseTypeDomain.h"
-#import "SPCourseDetailDomain.h"
-#import "SPSchoolDomain.h"
-#import "EnrolStudentsSchoolDomain.h"
-#import "FPCollegeListDomin.h"
-#import "FPCollegePhotoDetailDomin.h"
-#import "FPFamilyMembers.h"
-#import "KGDateUtil.h"
-#import "FPMoive4QDomain.h"
-#import "ListBaseDomain.h"
 
 @implementation KGHttpService
 

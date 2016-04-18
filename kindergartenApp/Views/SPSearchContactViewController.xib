@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SPSearchContactViewController">
+            <connections>
+                <outlet property="searchDisplayController" destination="EgQ-PW-gOJ" id="h32-JH-TI7"/>
+                <outlet property="searchTextField" destination="qAj-Il-xK3" id="i1s-XF-hmx"/>
+                <outlet property="tableView" destination="8IK-sC-Pgu" id="bMm-GX-CpF"/>
+                <outlet property="view" destination="bzC-MF-npA" id="POC-4s-eJV"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="bzC-MF-npA">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEi-f3-lKT">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="搜索联系人账号" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qAj-Il-xK3">
+                            <rect key="frame" x="20" y="21" width="251" height="19"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="Mhj-VA-4x4"/>
+                            </connections>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hil-Ws-Dsu">
+                            <rect key="frame" x="276" y="8" width="44" height="44"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="cWy-My-J1I"/>
+                                <constraint firstAttribute="height" constant="44" id="de1-J9-2JM"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="lxr_icon_search"/>
+                            <connections>
+                                <action selector="onSearch:" destination="-1" eventType="touchUpInside" id="LqP-cU-r2p"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="qAj-Il-xK3" firstAttribute="centerY" secondItem="JEi-f3-lKT" secondAttribute="centerY" id="QAl-7x-Yy4"/>
+                        <constraint firstItem="hil-Ws-Dsu" firstAttribute="centerY" secondItem="qAj-Il-xK3" secondAttribute="centerY" id="UuD-r7-fjh"/>
+                        <constraint firstAttribute="trailing" secondItem="hil-Ws-Dsu" secondAttribute="trailing" id="WBi-BF-KaU"/>
+                        <constraint firstItem="hil-Ws-Dsu" firstAttribute="leading" secondItem="qAj-Il-xK3" secondAttribute="trailing" constant="5" id="hfd-Xn-6VP"/>
+                        <constraint firstAttribute="height" constant="60" id="lpw-NS-WwI"/>
+                        <constraint firstItem="qAj-Il-xK3" firstAttribute="leading" secondItem="JEi-f3-lKT" secondAttribute="leading" constant="20" id="r7Y-Op-Ywx"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="64" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8IK-sC-Pgu">
+                    <rect key="frame" x="0.0" y="61" width="320" height="507"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="gS3-Gq-Mtu"/>
+                        <outlet property="delegate" destination="-1" id="9e9-f1-eFg"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="8IK-sC-Pgu" firstAttribute="top" secondItem="JEi-f3-lKT" secondAttribute="bottom" constant="1" id="2oQ-sl-8F0"/>
+                <constraint firstAttribute="trailing" secondItem="JEi-f3-lKT" secondAttribute="trailing" id="9vd-0r-mA6"/>
+                <constraint firstItem="JEi-f3-lKT" firstAttribute="top" secondItem="bzC-MF-npA" secondAttribute="top" id="CGO-72-Y2Y"/>
+                <constraint firstItem="JEi-f3-lKT" firstAttribute="leading" secondItem="bzC-MF-npA" secondAttribute="leading" id="GyZ-8H-6W0"/>
+                <constraint firstAttribute="bottom" secondItem="8IK-sC-Pgu" secondAttribute="bottom" id="Twn-vm-bhu"/>
+                <constraint firstItem="8IK-sC-Pgu" firstAttribute="leading" secondItem="bzC-MF-npA" secondAttribute="leading" id="i0q-Kr-rrZ"/>
+                <constraint firstAttribute="trailing" secondItem="8IK-sC-Pgu" secondAttribute="trailing" id="mZR-q5-eDv"/>
+            </constraints>
+            <point key="canvasLocation" x="186" y="623"/>
+        </view>
+        <searchDisplayController id="EgQ-PW-gOJ">
+            <connections>
+                <outlet property="delegate" destination="-1" id="BTV-Pd-op3"/>
+                <outlet property="searchContentsController" destination="-1" id="z69-46-eOY"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="gQq-Tj-ZPJ"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="MB7-eH-QzD"/>
+            </connections>
+        </searchDisplayController>
+    </objects>
+    <resources>
+        <image name="lxr_icon_search" width="17" height="17"/>
+    </resources>
+</document>

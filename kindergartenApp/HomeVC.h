@@ -8,6 +8,9 @@
 
 #import "BaseViewController.h"
 #import "UploadPhotoToRemoteService.h"
+#import "KGAccountService.h"
+
+
 @interface HomeVC : BaseViewController
 
 @end

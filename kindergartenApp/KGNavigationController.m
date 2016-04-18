@@ -40,8 +40,12 @@
         viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(back) image:@"fjiantou" highImage:@"fjiantou"];
     }
     ((BaseViewController *)self.topViewController).animating = YES;
-    viewController.animating = YES;
-    [super pushViewController:viewController animated:animated];
+    
+      if ( [viewController isKindOfClass:[BaseViewController class]] ) {
+          viewController.animating = YES;
+
+      }
+      [super pushViewController:viewController animated:animated];
     //开启iOS7的滑动返回效果
 }
 

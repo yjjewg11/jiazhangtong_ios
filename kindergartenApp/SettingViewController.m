@@ -84,6 +84,9 @@
         switch (indexPath.row) {
             case 0:{
                 vc = [[AdvanceViewController alloc] init];
+                [[SPKitExample sharedInstance] exampleOpenFeedbackViewController:YES fromViewController:self];
+                
+                return;
             }
                 break;
             case 1:{
@@ -124,6 +127,7 @@
         
         [[KGHttpService sharedService] logout:^(NSString *msgStr) {
             [KGAccountTool delAccount];
+            [KGAccountService logout];
             [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [UIApplication sharedApplication].keyWindow.rootViewController = [[KGNavigationController alloc] initWithRootViewController:loginVC];

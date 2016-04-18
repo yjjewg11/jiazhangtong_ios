@@ -121,6 +121,8 @@
 }
 -(void) initDataByUserLoginAfter{
     [UploadPhotoToRemoteService upLoadAllFromLocalDB];
+    
+    [KGAccountService login];
 }
 #pragma mark - 初始化view
 - (void)initHomeView

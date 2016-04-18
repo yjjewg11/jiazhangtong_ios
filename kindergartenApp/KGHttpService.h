@@ -55,6 +55,37 @@
 #import "FPFamilyMembers.h"
 #import "KGListBaseDomain.h"
 #import "GlobalMap.h"
+
+#import "BaseReplyDomain.h"
+#import "KGAccountTool.h"
+#import "AFAppDotNetAPIClient.h"
+#import "KGHttpUrl.h"
+#import "MJExtension.h"
+#import "KGListBaseDomain.h"
+#import "DynamicMenuDomain.h"
+#import "GroupDomain.h"
+#import "MessageDomain.h"
+#import "StudentSignRecordDomain.h"
+#import "RecipesDomain.h"
+#import "EmojiDomain.h"
+#import "AddressBookDomain.h"
+#import "chatInfoDomain.h"
+#import "KGEmojiManage.h"
+#import "TimetableDomain.h"
+#import "ClassDomain.h"
+#import "CardInfoDomain.h"
+#import "AFNetworking.h"
+#import "SPTimetableDomain.h"
+#import "SPCourseTypeDomain.h"
+#import "SPCourseDetailDomain.h"
+#import "SPSchoolDomain.h"
+#import "EnrolStudentsSchoolDomain.h"
+#import "FPCollegeListDomin.h"
+#import "FPCollegePhotoDetailDomin.h"
+#import "FPFamilyMembers.h"
+#import "KGDateUtil.h"
+#import "FPMoive4QDomain.h"
+#import "ListBaseDomain.h"
 @interface KGHttpService : NSObject
 @property (strong, nonatomic) KGUser * userinfo;
 @property (strong, nonatomic) NSString * pushToken;
@@ -66,6 +97,9 @@
 
 + (KGHttpService *)sharedService;
 - (void)queryByPage:(NSString * )url pageNo:(NSInteger ) pageNo success:(void (^)(KGListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMsg))faild;
+
+- (void)sessionTimeoutHandle:(KGBaseDomain *)baseDomain;
+- (void)requestErrorCode:(NSError*)error faild:(void (^)(NSString* errorMessage))faild;
 //根据组织id得到图片
 - (NSString *)getGroupImgByUUID:(NSString *)groupUUID;
 

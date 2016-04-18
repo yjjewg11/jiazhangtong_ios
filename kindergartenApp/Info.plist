@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>mqqwpa</string>
-		<string>weixin</string>
-		<string>wechat</string>
-		<string>mqq</string>
-	</array>
-	<key>CFBundleDisplayName</key>
-	<string>问界互动家园</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -64,9 +54,26 @@
 				<string>tencent1104813270</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.taobao.taesdk</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tbopen23285145</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>201603031503</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mqqwpa</string>
+		<string>weixin</string>
+		<string>wechat</string>
+		<string>mqq</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
