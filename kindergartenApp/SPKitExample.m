@@ -1431,7 +1431,7 @@ const CGFloat kSPCustomConversationCellContentMargin =10;
     [service makeFeedbackConversationWithCompletionBlock:^(YWFeedbackConversation *conversation, NSError *error) {
         if ( conversation != nil ) {
             YWFeedbackViewController *feedback = [weakSelf.ywIMKit makeFeedbackViewControllerWithConversation:conversation];
-            
+            [feedback setTitle:@"意见反馈"];
             feedback.contactInfo=self.userinfo.loginname;
             if ( [aViewController isKindOfClass:[UINavigationController class]] ) {
                 UINavigationController *nav = (UINavigationController *)aViewController;

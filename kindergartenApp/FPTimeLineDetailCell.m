@@ -124,7 +124,7 @@
  
     //UILabel自适应高度和自动换行
     //初始化label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,0,0)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,APPWINDOWWIDTH,20)];
     //设置自动行数与字符换行
     [label setNumberOfLines:0];
     label.lineBreakMode = UILineBreakModeWordWrap;
@@ -232,7 +232,7 @@
     
     CGSize labelsize = [self.imageDetailLable.text sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
     
-    [self.imageDetailLable setFrame:CGRectMake(0,0, labelsize.width, labelsize.height)];
+    [self.imageDetailLable setFrame:CGRectMake(0,0, APPWINDOWWIDTH, labelsize.height+20)];
     NSLog(@"imageDetailLable.y=%f", CGRectGetMaxY(self.imageDetailLable.frame));
     [self.dianzanName setFrame:CGRectMake(10, CGRectGetMaxY(self.imageDetailLable.frame)+5, APPWINDOWWIDTH-10, 20)];
      NSLog(@"dianzanName=%f", CGRectGetMaxY(self.dianzanName.frame));
