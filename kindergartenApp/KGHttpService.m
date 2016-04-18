@@ -2391,7 +2391,7 @@
 }
 
 // 家庭相册-保存成员
-- (void)fpFamilyPhotoCollection_save:(FPFamilyPhotoNormalDomain *)domain success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild
+- (void)fpFamilyPhotoCollection_save:(FPFamilyPhotoNormalDomain *)domain success:(void (^)(KGBaseDomain * msgStr))success faild:(void (^)(NSString * errorMsg))faild
 {
     
     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fpFamilyPhotoCollection/save.json"];
@@ -2401,7 +2401,7 @@
         
         [self sessionTimeoutHandle:baseDomain];
         
-        success(baseDomain.ResMsg.message);
+        success(baseDomain);
     } faild:^(NSString *errorMessage) {
         faild(errorMessage);
     }];

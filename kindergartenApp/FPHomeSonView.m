@@ -15,6 +15,7 @@
 
 - (IBAction)photoAlbumInfo:(UIButton *)sender;
 
+- (IBAction)addMyCollection:(id)sender;
 
 @end
 
@@ -35,5 +36,10 @@
 - (IBAction)photoAlbumInfo:(UIButton *)sender {
     self.pushAlbunInfo();
      [self setHidden:YES];
+}
+
+- (IBAction)addMyCollection:(id)sender {
+    self.addMyCollectionBtn();
+       [self setHidden:YES];
 }
 @end

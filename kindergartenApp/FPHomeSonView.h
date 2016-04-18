@@ -11,13 +11,13 @@
 typedef void(^upLoadBtn)();
 typedef void(^collegeBtn)();
 typedef void(^albumIfonBtn)();
-
+typedef void(^addMyCollectionBtn)();
 
 @interface FPHomeSonView : UIView
 
 @property(nonatomic, strong) upLoadBtn pushUpLoad;
 @property(nonatomic, strong) collegeBtn pushCollege;
 @property(nonatomic, strong) albumIfonBtn pushAlbunInfo;
-
+@property(nonatomic, strong) addMyCollectionBtn addMyCollectionBtn;
 
 @end

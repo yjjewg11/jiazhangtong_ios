@@ -59,9 +59,18 @@
     [dataSource_family_list addObject:@"相册名称"];
     [dataSource_family_list addObject:@"封面图片"];
     [dataSource_family_list addObject:@"创建时间"];
-       //初始化数据
-    [self initData];
-}
+    
+    
+    if(family_uuid.length>0){
+        //初始化数据
+        [self initData];
+
+    }else{
+        //新建data_id
+        [self modifyFamilyphoto: [NSIndexPath indexPathForRow:0 inSection:0]];
+        
+    }
+ }
 
 
 
@@ -243,6 +252,33 @@
     return dataSourceGroup[section];
 }
 
+//添加修改标题 [NSIndexPath indexPathForRow:0 inSection:0]
+-(void)modifyFamilyphoto:(NSIndexPath *)indexPath{
+    
+    UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:dataSource_family_list[indexPath.row] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
+    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    UITextField *nameField = [alertView textFieldAtIndex:0];
+    
+    
+    alertView.tag=indexPath.section;
+    
+    nameField.placeholder = dataSource_family_list[indexPath.row];
+    
+    switch (indexPath.row) {
+        case 0:
+            
+            nameField.text=dataSource.title;
+            break;
+            
+            
+        default:
+            break;
+    }
+    selectRowIndex=indexPath.row;
+    [alertView show];
+    return;
+};
 #pragma mark 点击行
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -264,31 +300,8 @@
             return;
         }
         
-        UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:dataSource_family_list[indexPath.row] message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-       
-        [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-        UITextField *nameField = [alertView textFieldAtIndex:0];
-        
-        
-         alertView.tag=indexPath.section;
-        
-        nameField.placeholder = dataSource_family_list[indexPath.row];
-        
-        switch (indexPath.row) {
-            case 0:
-                
-                nameField.text=dataSource.title;
-                break;
-           
-                
-            default:
-                break;
-        }
-         selectRowIndex=indexPath.row;
-        [alertView show];
-        return;
-    };
-    
+        [self modifyFamilyphoto:indexPath];
+    }
     FPFamilyMembers* fPFamilyMembers=dataSource_members_list[indexPath.row];
     NSString *msg=[NSString stringWithFormat:@"%@:%@",fPFamilyMembers.family_name,fPFamilyMembers.tel];
     //修改成员列
@@ -524,7 +537,7 @@
 //    
     heraldImageView.image=[self compressImage:editedImage];
     
-    
+    			
     [self uploadImg:^(BOOL isSuccess, NSString *msgStr) {
         
 
@@ -540,10 +553,10 @@
             saveDomain.title=dataSource.title;
             saveDomain.herald=dataSource.herald;
             
-            [self fpFamilyPhotoCollection_save:saveDomain block:^(BOOL isSuccess, NSString *msgStr) {
+            [self fpFamilyPhotoCollection_save:saveDomain block:^(BOOL isSuccess, KGBaseDomain *msgStr) {
                 if(isSuccess){
+                 
                    
-                    
                     //刷新表格
                     [_tableView reloadData];
                 }
@@ -581,12 +594,12 @@
     }];
 }
 
-- (void)fpFamilyPhotoCollection_save:(FPMyFamilyPhotoCollectionDomain *) saveDomain block:(void(^)(BOOL isSuccess, NSString * msgStr))block{
+- (void)fpFamilyPhotoCollection_save:(FPMyFamilyPhotoCollectionDomain *) saveDomain block:(void(^)(BOOL isSuccess, KGBaseDomain * msgStr))block{
     
     
     [self showLoadView];
     
-    [[KGHttpService sharedService] fpFamilyPhotoCollection_save:saveDomain success:^(NSString *msgStr) {
+    [[KGHttpService sharedService] fpFamilyPhotoCollection_save:saveDomain success:^(KGBaseDomain *msgStr) {
         
         
         dispatch_async(dispatch_get_main_queue(), ^
@@ -623,7 +636,7 @@
     if(alertView.tag ==0 )
     {
         
-        if (buttonIndex!=1) return;
+        if (buttonIndex!=1) return;//取消
         UITextField *textField= [alertView textFieldAtIndex:0];
         
        
@@ -646,8 +659,15 @@
                 break;
         }
 
-        [self fpFamilyPhotoCollection_save:saveDomain block:^(BOOL isSuccess, NSString *msgStr) {
+        [self fpFamilyPhotoCollection_save:saveDomain block:^(BOOL isSuccess, KGBaseDomain *msgStr) {
             if(isSuccess){
+                
+                if(family_uuid.length<1){//新建
+                    family_uuid=msgStr.data_id;
+                    [self initData];
+                    return;
+                }
+
                 dataSource.title=saveDomain.title;
                 dataSource.herald=saveDomain.herald;
                 

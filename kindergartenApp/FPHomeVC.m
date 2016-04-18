@@ -286,7 +286,7 @@ NSInteger localDBlimit=50;
 //    localFamilyRangeTime.maxTime=nil;
     localFamilyRangeTime=[_service queryTimeByFamilyUUID :[FPHomeVC getFamily_uuid]];
     
-
+    
     isLocalDBHasData=true;
     isRemoteDBHasData=true;
     
@@ -575,8 +575,18 @@ NSInteger localDBlimit=50;
             [weakSelf.navigationController pushViewController:fPFamilyPhotoCollectionDetailTableViewController animated:YES];
         };
         
-        sonView.origin = CGPointMake(0, -132);
-        sonView.size = CGSizeMake(140, 132);
+        //家庭相册添加
+        sonView.addMyCollectionBtn = ^{
+            [sonView setHidden:YES];
+            FPFamilyPhotoCollectionDetailTableViewController * fPFamilyPhotoCollectionDetailTableViewController=[[FPFamilyPhotoCollectionDetailTableViewController alloc]init];
+//            [fPFamilyPhotoCollectionDetailTableViewController loadLoadByUuid:[FPHomeVC getFamily_uuid]];
+//            
+            [weakSelf.navigationController pushViewController:fPFamilyPhotoCollectionDetailTableViewController animated:YES];
+        };
+
+        
+        sonView.origin = CGPointMake(0, -174);
+        sonView.size = CGSizeMake(140, 174);
         UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:sonView.bounds];
         sonView.layer.masksToBounds = NO;
         sonView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -601,7 +611,7 @@ NSInteger localDBlimit=50;
     {
         if (sonView.origin.y == 0)
         {
-            sonView.origin = CGPointMake(0, -132);
+            sonView.origin = CGPointMake(0, -174);
              [sonView setHidden:NO];
             [self.view bringSubviewToFront:sonView];
         }
