@@ -329,6 +329,7 @@
 		04A50C641CC4AAE000EC9F4B /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */; };
 		04A50C651CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C541CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework */; };
 		04A50C661CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */; };
+		04A50C6B1CC4E00500EC9F4B /* GuidePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */; };
 		04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */; };
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
@@ -1393,6 +1394,8 @@
 		04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = yw_1222.jpg; path = build/OneSDK/yw_1222.jpg; sourceTree = "<group>"; };
 		04A50C541CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWExtensionForCustomerServiceFMWK.framework; path = build/OneSDK/YWExtensionForCustomerServiceFMWK.framework; sourceTree = "<group>"; };
 		04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWFeedbackServiceFMWK.framework; path = build/OneSDK/YWFeedbackServiceFMWK.framework; sourceTree = "<group>"; };
+		04A50C691CC4E00500EC9F4B /* GuidePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageController.h; sourceTree = "<group>"; };
+		04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageController.m; sourceTree = "<group>"; };
 		04AA3CBB1BE5EAA200DCC290 /* SPCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCommentDomain.h; sourceTree = "<group>"; };
 		04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCommentDomain.m; sourceTree = "<group>"; };
 		04AA3CC11BE5F24D00DCC290 /* SpCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseCommentCell.h; sourceTree = "<group>"; };
@@ -3282,6 +3285,23 @@
 			path = AdsMoGoSDK;
 			sourceTree = "<group>";
 		};
+		04A50C671CC4DF8100EC9F4B /* GuidePage(引导页） */ = {
+			isa = PBXGroup;
+			children = (
+				04A50C681CC4DFC000EC9F4B /* Controller */,
+			);
+			name = "GuidePage(引导页）";
+			sourceTree = "<group>";
+		};
+		04A50C681CC4DFC000EC9F4B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04A50C691CC4E00500EC9F4B /* GuidePageController.h */,
+				04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		04A5A0921BE7604C00024E21 /* tableviewcell */ = {
 			isa = PBXGroup;
 			children = (
@@ -5167,6 +5187,7 @@
 		248B6AA31B19ACEC00FCB98F /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				04A50C671CC4DF8100EC9F4B /* GuidePage(引导页） */,
 				0482BEE11CC37DC200ABD6B1 /* TaobaoIM(淘宝即时通讯) */,
 				0492BA141CBCE6A600ACB096 /* BaseDianzan(公共点赞) */,
 				0405B6EA1CB24DEB0090863C /* FFMovie(精品相册) */,
@@ -6917,6 +6938,7 @@
 				2489B6691B5AB49E00039E70 /* SDWebImageDownloader.m in Sources */,
 				2474DFA71B6CA7E50021506F /* KGTextView.m in Sources */,
 				04F903B51C56795C0040629F /* UIProgressView+AFNetworking.m in Sources */,
+				04A50C6B1CC4E00500EC9F4B /* GuidePageController.m in Sources */,
 				F48783AE1B58DA1700CDC1A8 /* MJFoundation.m in Sources */,
 				04F3D4691BF47FD3007E7AC0 /* zip.c in Sources */,
 				F4EC988D1B6211AC00F5721F /* StudentNoteInfoViewController.m in Sources */,

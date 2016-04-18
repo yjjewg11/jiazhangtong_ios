@@ -28,7 +28,9 @@
 @end
 
 @implementation KGTabBarViewController
-
+-(void)goFPFamilyPhotoMainViewController{
+    self.selectedIndex=3;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

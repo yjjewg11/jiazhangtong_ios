@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface KGTabBarViewController : UITabBarController
-
+-(void)goFPFamilyPhotoMainViewController;
 @end

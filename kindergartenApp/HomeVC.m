@@ -123,7 +123,11 @@
     [UploadPhotoToRemoteService upLoadAllFromLocalDB];
     
     [KGAccountService login];
+    
+     [GuidePageController firstLaunch];
 }
+
+
 #pragma mark - 初始化view
 - (void)initHomeView
 {

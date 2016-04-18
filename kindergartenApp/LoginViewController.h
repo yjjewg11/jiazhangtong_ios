@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseKeyboardViewController.h"
 #import "KGTextField.h"
+#import "GuidePageController.h"
 
 @interface LoginViewController : BaseViewController
 

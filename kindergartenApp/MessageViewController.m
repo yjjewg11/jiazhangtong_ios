@@ -281,7 +281,10 @@
             break;
             
         case Topic_FPFamilyPhotoCollection:
-            
+            if([ [self parentViewController] isKindOfClass:[KGTabBarViewController class]]){
+                KGTabBarViewController * kgvc=[self parentViewController];
+                [kgvc goFPFamilyPhotoMainViewController];
+            }
 //           vc= [[FPHomeVC alloc] init];
 //            if(domain.rel_uuid!=nil&&domain.rel_uuid.length>0){
 //             [FPHomeVC setFamily_uuid:domain.rel_uuid];

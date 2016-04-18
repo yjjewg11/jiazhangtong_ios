@@ -172,10 +172,11 @@
 
 - (void)loginSuccess {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIWindow* window = [UIApplication sharedApplication].keyWindow;
-        window.rootViewController = [[KGTabBarViewController alloc] init];
+        [GuidePageController firstLaunch];
     });
 }
+
+
 
 #pragma mark - 监听键盘事件
 - (void)keyboardWasShown:(NSNotification*)aNotification
