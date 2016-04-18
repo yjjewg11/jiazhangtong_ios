@@ -191,8 +191,9 @@ DBNetDaoService * _localDbservice;
     data = UIImageJPEGRepresentation(img, 0.1);
     NSString * phone_uuid=[KGUUID getUUID];//手机设备唯一标示
     NSString * phoneType = [UIDevice currentDevice].model;
-
     
+    NSString * pathExtension=[uploadDomain.localurl pathExtension];
+     NSString * filename=[ NSString stringWithFormat:@"f.%@",pathExtension ];
     NSDictionary * dict = @{
                             
                             @"family_uuid":uploadDomain.family_uuid,@"photo_time":photoTime,@"phone_type":phoneType,@"md5":[uploadDomain.localurl absoluteString],@"phone_uuid":phone_uuid,@"address":@""};
@@ -204,7 +205,7 @@ DBNetDaoService * _localDbservice;
                                     {
                                         [formData appendPartWithFileData:data
                                                                     name:@"file"
-                                                                fileName:@"file"
+                                                                fileName:filename
                                                                 mimeType:@"image/jpeg"];
                                     } error:nil];
     
