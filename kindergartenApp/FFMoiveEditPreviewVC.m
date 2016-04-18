@@ -22,21 +22,29 @@
 @end
 
 @implementation FFMoiveEditPreviewVC
+- (IBAction)submitBtn_status1:(id)sender {
+     self.domain.status=@"1";//发布。
+       [self showAlert_modifyName];
+}
+
 - (IBAction)submitBtn_click:(id)sender {
     
-    
-
-UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:@"相册名" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-
-[alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
-UITextField *nameField = [alertView textFieldAtIndex:0];
-
-  nameField.text=self.domain.title;
-[alertView show];
-
+     self.domain.status=@"0";//发布。
+    [self showAlert_modifyName];
 
 }
 
+- (void)showAlert_modifyName {
+    
+    
+    UIAlertView *alertView= [[UIAlertView alloc] initWithTitle:@"相册名" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    
+    [alertView setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    UITextField *nameField = [alertView textFieldAtIndex:0];
+    
+    nameField.text=self.domain.title;
+    [alertView show];
+}
 #pragma mark 窗口的代理方法，用户保存数据
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -56,7 +64,7 @@ UITextField *nameField = [alertView textFieldAtIndex:0];
     //    saveDomain.photo_uuids=domain4q.photo_uuids;
     saveDomain.template_key=domain4q.template_key;
     saveDomain.mp3=domain4q.mp3;
-    saveDomain.status=@"0";//发布。
+  
     if(saveDomain.title==nil||saveDomain.title.length==0){
         [MBProgressHUD showError:@"请输入相册名"];
         return;

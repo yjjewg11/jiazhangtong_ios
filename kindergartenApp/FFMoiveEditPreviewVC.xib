@@ -19,27 +19,57 @@
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VJ0-aX-CZQ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="538"/>
                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="538" id="Rfn-fo-J63"/>
+                    </constraints>
                 </webView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fN-io-9gd">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSU-M2-5CN">
                     <rect key="frame" x="0.0" y="538" width="320" height="30"/>
-                    <color key="backgroundColor" red="1" green="0.037066020669999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="发布">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="submitBtn_click:" destination="-1" eventType="touchDown" id="FmN-ur-jxs"/>
-                    </connections>
-                </button>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7N-c4-3co">
+                            <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="160" id="XRD-H2-cAA"/>
+                            </constraints>
+                            <state key="normal" title="不公开">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="submitBtn_status1:" destination="-1" eventType="touchUpInside" id="l7c-jG-qp1"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fN-io-9gd">
+                            <rect key="frame" x="160" y="0.0" width="160" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.037066020669999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="公开">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="submitBtn_click:" destination="-1" eventType="touchDown" id="FmN-ur-jxs"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="V7N-c4-3co" firstAttribute="leading" secondItem="kSU-M2-5CN" secondAttribute="leading" id="4Mj-Ex-tle"/>
+                        <constraint firstItem="2fN-io-9gd" firstAttribute="top" secondItem="kSU-M2-5CN" secondAttribute="top" id="94U-07-oAe"/>
+                        <constraint firstAttribute="trailing" secondItem="2fN-io-9gd" secondAttribute="trailing" id="QdF-fI-q2z"/>
+                        <constraint firstItem="V7N-c4-3co" firstAttribute="top" secondItem="kSU-M2-5CN" secondAttribute="top" id="cr8-WT-DJ9"/>
+                        <constraint firstItem="2fN-io-9gd" firstAttribute="leading" secondItem="V7N-c4-3co" secondAttribute="trailing" id="m9i-yv-HiC"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="VJ0-aX-CZQ" firstAttribute="leading" secondItem="kSU-M2-5CN" secondAttribute="leading" id="33S-4V-kP2"/>
+                <constraint firstItem="VJ0-aX-CZQ" firstAttribute="trailing" secondItem="kSU-M2-5CN" secondAttribute="trailing" id="OS0-b2-Gme"/>
                 <constraint firstAttribute="trailing" secondItem="VJ0-aX-CZQ" secondAttribute="trailing" id="axk-sd-wmf"/>
-                <constraint firstAttribute="bottom" secondItem="2fN-io-9gd" secondAttribute="bottom" id="b9w-3f-3tD"/>
                 <constraint firstItem="VJ0-aX-CZQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ekV-zs-Abb"/>
                 <constraint firstItem="VJ0-aX-CZQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iL7-Bz-qZ1"/>
-                <constraint firstItem="2fN-io-9gd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uqr-YC-Tkl"/>
-                <constraint firstAttribute="trailing" secondItem="2fN-io-9gd" secondAttribute="trailing" id="wMG-Sp-pEN"/>
-                <constraint firstItem="2fN-io-9gd" firstAttribute="top" secondItem="VJ0-aX-CZQ" secondAttribute="bottom" id="x4q-fb-F23"/>
+                <constraint firstAttribute="bottom" secondItem="kSU-M2-5CN" secondAttribute="bottom" id="vcb-m1-M7w"/>
+                <constraint firstItem="kSU-M2-5CN" firstAttribute="top" secondItem="VJ0-aX-CZQ" secondAttribute="bottom" id="wO5-UL-faF"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
