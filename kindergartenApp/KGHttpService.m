@@ -246,7 +246,7 @@
         
     }
     
-    NSLog(@"POST %@",path);
+    NSLog(@"POST1 %@",path);
     if(jsonData){
         NSLog(@"setHTTPBody= %@",[[NSString alloc] initWithData:jsonData
                                                        encoding:NSUTF8StringEncoding]);
@@ -300,7 +300,7 @@
 
 - (void)postByDicByParams:(NSString *)path param:(NSDictionary *)param  success:(void(^)(id success))success failed:(void(^)(NSString *errorMsg))faild{
     
-    [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getDelFavoritesUrl] parameters:param success:^(NSURLSessionDataTask *task, id responseObject) {
+    [[AFAppDotNetAPIClient sharedClient] POST:path parameters:param success:^(NSURLSessionDataTask *task, id responseObject) {
         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
         
         [self sessionTimeoutHandle:baseDomain];
@@ -312,6 +312,26 @@
             faild(baseDomain.ResMsg.message);
         }
 
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self requestErrorCode:error faild:faild];
+    }];
+}
+
+- (void)getByDicByParams:(NSString *)path param:(NSDictionary *)param  success:(void(^)(id success))success failed:(void(^)(NSString *errorMsg))faild{
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:path parameters:param success:^(NSURLSessionDataTask *task, id responseObject) {
+        KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
+        if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+            success(responseObject);
+            //            success([responseObject objectForKey:@"imgUrl"]);
+        } else {
+            faild(baseDomain.ResMsg.message);
+        }
+        
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [self requestErrorCode:error faild:faild];
@@ -511,7 +531,7 @@
              _loginRespDomain = [LoginRespDomain objectWithKeyValues:responseObject];
              _userinfo=_loginRespDomain.userinfo;
              NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-             [defaults setObject:_loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
+             [defaults setObject:_loginRespDomain.JSESSIONID forKey:Key_loginJessionID];
              [defaults synchronize];
              
              success(baseDomain.ResMsg.status);
@@ -540,7 +560,7 @@
                                           _userinfo=_loginRespDomain.userinfo;
                                           
                                           NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                                          [defaults setObject:_loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
+                                          [defaults setObject:_loginRespDomain.JSESSIONID forKey:Key_loginJessionID];
                                           [defaults synchronize];
                                           
                                           if([_loginRespDomain.ResMsg.status isEqualToString:String_Success]) {

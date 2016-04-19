@@ -431,6 +431,7 @@
 -(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 
 - (void)postByDicByParams:(NSString *)path param:(NSDictionary *)param  success:(void(^)(id success))success failed:(void(^)(NSString *errorMsg))faild;
+- (void)getByDicByParams:(NSString *)path param:(NSDictionary *)param  success:(void(^)(id success))success failed:(void(^)(NSString *errorMsg))faild;
 - (void)fPMovie_queryByURL:(NSString *) url pageInfo:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild;
 
 -(void)getListByURL:(NSString *)path   success :(void (^)(ListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;

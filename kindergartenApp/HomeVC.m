@@ -52,7 +52,7 @@
 {
     [super viewDidLoad];
     
-    [self autoLogin];
+//    [self autoLogin];
     
     //获取地理坐标
     [self getMapLocation];
@@ -66,37 +66,6 @@
     //注册通知，用于发现模块 最新数目显示
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(getNewsNumber) name:@"homerefreshnum" object:nil];
-}
-
-#pragma mark - 自动登录
-- (void)autoLogin
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString * jid =  [defaults objectForKey:@"loginJessionID"];
-    NSLog(@"local jessionid %@",jid);
-    
-    if(jid)
-    {
-        [[KGHttpService sharedService] cheakUserJessionID:jid success:^(NSString *msgStr)
-        {
-            NSLog(@"自动登录 ==  %@",msgStr);
-            if ([msgStr isEqualToString:@"success"])
-            {
-                dispatch_async(dispatch_get_main_queue(), ^
-                {
-                    [self initHomeView];
-                });
-            }
-            else
-            {
-                [self checkUserLogin];
-            }
-            
-        }faild:^(NSString *errorMsg)
-        {
-            [self checkUserLogin];
-        }];
-    }
 }
 
 - (void)checkUserLogin

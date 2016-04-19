@@ -28,6 +28,10 @@
 #define  KEY_USERNAME_PASSWORD @"com.company.app.usernamepassword"
 #define  KEY_USERNAME @"com.company.app.username"
 #define  KEY_PASSWORD @"com.company.app.password"
+
+#define  KEY_thirdLogin_type @"KEY_thirdLogin_type"
+#define  KEY_thirdLogin_access_token @"KEY_thirdLogin_access_token"
+#define  Key_loginJessionID @"loginJessionID"
 #ifdef DEBUG // 处于开发阶段
 #define FuniLog(...) NSLog(__VA_ARGS__)
 #else // 处于发布阶段

@@ -64,6 +64,16 @@
 				<string>tbopen23285145</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.wenjie.jiazhangtong</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wjkj.jiazhangtong</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>201603031503</string>

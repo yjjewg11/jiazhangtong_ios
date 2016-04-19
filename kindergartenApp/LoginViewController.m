@@ -243,6 +243,24 @@
     });
 }
 - (IBAction)btn_touchInside_wenxin:(id)sender {
+
+    	
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        //  获取微博用户名、uid、token等
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+            
+            NSDictionary * dic = @{@"appid" : ShareKey_WeChat,
+                                   @"access_token": snsAccount.accessToken,
+                                   @"openid":		snsAccount.openId};
+            [self userThirdLoginWenXin_access_token:dic];
+
+            
+            NSLog(@"username is %@, uid is %@, token is %@ iconUrl is %@,openId=%@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL,snsAccount.openId);
+        }
+    });
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -304,6 +322,35 @@
     
 }
 
+- (void)userThirdLoginWenXin_access_token: (NSDictionary * ) dic{
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userThirdLoginWenXin/access_token.json"];
+    [[KGHUD sharedHud] show:self.view msg:@"登录中..."];
+    
+    [[KGHttpService sharedService] getByDicByParams:url param:dic success:^(id success) {
+        [[KGHUD sharedHud] hide:self.view];
+        
+        NSDictionary * responseDic=success;
+        ;
+        
+        if([@"0"  isEqualToString:[responseDic objectForKey:@"needBindTel"]]){//不需绑定
+            [self userinfo_thirdLogin:[dic objectForKey:@"access_token"] type:@"weixin"];
+        }else{
+            [self showAlertBindTelView];
+            
+        }
+        //        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
+    } failed:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] hide:self.view];
+        
+        [MBProgressHUD showError:errorMsg];
+    }];
+       
+    
+    
+    
+}
+
 /**
  access_token
  String
@@ -326,11 +373,17 @@
        [KGHttpService sharedService].loginRespDomain = loginRespDomain;
         [KGHttpService sharedService].userinfo=loginRespDomain.userinfo;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
-        
+        [defaults setObject:loginRespDomain.JSESSIONID forKey:Key_loginJessionID];
+         [defaults setObject:type forKey:KEY_thirdLogin_type];
+         [defaults setObject:access_token forKey:KEY_thirdLogin_access_token];
         [defaults synchronize];
-        
-        [self loginSuccess];
+        if([@"0"  isEqualToString:loginRespDomain.needBindTel]){//不需绑定
+             [self loginSuccess];
+        }else{
+            [self showAlertBindTelView];
+            
+        }
+     
         
         
         
@@ -340,19 +393,11 @@
         [MBProgressHUD showError:errorMsg];
     }];
     
-    [[KGHttpService sharedService] postByDomainBodyJson:url params:nil success:^(KGBaseDomain *baseDomain) {
-        [self hidenLoadView];
-        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
-    } faild:^(NSString *errorMessage) {
-        [self hidenLoadView];
-        [MBProgressHUD showError:errorMessage];
-    }];
-    
-    
+
     
     
 }
-
+//弹出 提示绑定手机也没
 -(void)showAlertBindTelView{
     AlertBindTelView *alert=[[AlertBindTelView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT)];
     
