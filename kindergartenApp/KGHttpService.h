@@ -434,6 +434,6 @@
 -(void)getListByURL:(NSString *)path   success :(void (^)(ListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)postByDomainBodyJson:(NSString *)path params:(KGBaseDomain *)domain success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)getByURL:(NSString *)path   success :(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
-
+-(void)getNSDictionaryByURL:(NSString *)path   success :(void (^)(NSDictionary * dic))success faild:(void (^)(NSString * errorMessage))faild;
 - (void)fpMovie_save:(FPMoiveDomain *)domain success:(void (^)(KGBaseDomain * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "MyInfoUpdateController.h"
 @interface MineHomeVC : BaseViewController
 
 @property (strong, nonatomic) NSMutableArray * arr;

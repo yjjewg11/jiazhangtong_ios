@@ -104,7 +104,7 @@ static NSString *const NormalColle = @"normalcolle";
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -144,6 +144,17 @@ static NSString *const NormalColle = @"normalcolle";
         return cell;
     }
     
+    else if (indexPath.row == 4)
+    {
+        MineHomeFunCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColle forIndexPath:indexPath];
+        
+        [cell setImageAndTitle:[UIImage imageNamed:@"fp_ren"] title:@"个人信息"];
+        
+        return cell;
+    }
+    
+
+    
     return nil;
 }
 
@@ -162,6 +173,11 @@ static NSString *const NormalColle = @"normalcolle";
     else if (indexPath.row == 3)
     {
         SettingViewController * vc = [[SettingViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else if (indexPath.row == 4)
+    {
+        MyInfoUpdateController * vc = [[MyInfoUpdateController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

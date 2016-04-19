@@ -829,6 +829,8 @@
 		4DF056D51B877F3A00ED3840 /* KGImageBrowseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056D21B877F3A00ED3840 /* KGImageBrowseView.m */; };
 		4DF056D61B877F3A00ED3840 /* KGPhotoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF056D41B877F3A00ED3840 /* KGPhotoScrollView.m */; };
 		8DFBC4EDA7E10DE2EB0D6521 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE98BB1CDE9A04A59474C9E1 /* libPods.a */; };
+		E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */; };
+		E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -2289,6 +2291,10 @@
 		4DF056D31B877F3A00ED3840 /* KGPhotoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGPhotoScrollView.h; sourceTree = "<group>"; };
 		4DF056D41B877F3A00ED3840 /* KGPhotoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGPhotoScrollView.m; sourceTree = "<group>"; };
 		B2BE578489F7695DFCD5A04E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E755FA131CC5DB6200AF32A0 /* MyInfoUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoUpdateController.h; sourceTree = "<group>"; };
+		E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoUpdateController.m; sourceTree = "<group>"; };
+		E755FA171CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentInfoUpdateDomain.h; sourceTree = "<group>"; };
+		E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentInfoUpdateDomain.m; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F463E6431B66106D00AB92B9 /* DianZanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianZanDomain.h; sourceTree = "<group>"; };
@@ -5391,6 +5397,8 @@
 		24C46B391B5A2AC200A58F92 /* Me(我) */ = {
 			isa = PBXGroup;
 			children = (
+				E755FA161CC5E4B200AF32A0 /* domain */,
+				E755FA121CC5DB2C00AF32A0 /* controller */,
 				04F151631C45FE8B00E80B3E /* Student */,
 				04F151641C45FEAB00E80B3E /* MySPCourse */,
 				04F1516B1C460A3900E80B3E /* Home */,
@@ -5762,6 +5770,24 @@
 				04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E755FA121CC5DB2C00AF32A0 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				E755FA131CC5DB6200AF32A0 /* MyInfoUpdateController.h */,
+				E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		E755FA161CC5E4B200AF32A0 /* domain */ = {
+			isa = PBXGroup;
+			children = (
+				E755FA171CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.h */,
+				E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */,
+			);
+			name = domain;
 			sourceTree = "<group>";
 		};
 		F45EABCD1B563F75003C367C /* Base */ = {
@@ -6810,6 +6836,7 @@
 				2489B6631B5AB49E00039E70 /* UIImage+GIF.m in Sources */,
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
 				04DDAB961CBE3EE500C3D48C /* KeyChainStore.m in Sources */,
+				E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */,
 				24AA0B481B690F4300DAC03B /* UUProgressHUD.m in Sources */,
 				04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */,
 				04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */,
@@ -6853,6 +6880,7 @@
 				24C46B521B5A2BC800A58F92 /* MessageViewController.m in Sources */,
 				0498AED01BDE160F001E653C /* SPDataListVO.m in Sources */,
 				4D077B291B80B14800FFD5CB /* OnlyEmojiView.m in Sources */,
+				E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */,
 				F4DDEBBC1B7DFD7C00470D76 /* MLEmojiLabel.m in Sources */,
 				04F994381C5207DB00CD5818 /* FPFamilyPhotoStatusDomain.m in Sources */,
 				248B6ACE1B19B57400FCB98F /* FuniKeyChain.m in Sources */,

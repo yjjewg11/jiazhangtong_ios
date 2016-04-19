@@ -181,6 +181,44 @@
      }];
 }
 
+
+
+-(void)getNSDictionaryByURL:(NSString *)path   success :(void (^)(NSDictionary * dic))success faild:(void (^)(NSString * errorMessage))faild
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    
+    [mgr GET:path parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         
+         
+         NSDictionary *responseObjectDic=responseObject;
+         NSData * jsonData = [NSJSONSerialization dataWithJSONObject:responseObject options:0 error:nil];
+         NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                      encoding:NSUTF8StringEncoding];
+         NSLog(@"responseObject= %@",jsonString);
+         
+         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues: responseObject];
+         [self sessionTimeoutHandle:baseDomain];
+         
+         //         NSLog(@"%@",responseObject);
+         
+         if([baseDomain.ResMsg.status isEqualToString:String_Success])
+         {
+             
+             success(responseObjectDic);
+         }
+         else
+         {
+             faild(baseDomain.ResMsg.message);
+         }
+     }
+     failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error)
+     {
+         [self requestErrorCode:error faild:faild];
+     }];
+}
+
 -(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild{
     
     [self getServerJson:path params:jsonDictionary success:success faild:faild];

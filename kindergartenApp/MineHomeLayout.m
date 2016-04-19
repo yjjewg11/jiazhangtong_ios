@@ -98,13 +98,32 @@
         itemHeight = 44;
         itemX = 0;
         itemY = _newMaxHeight;
-        _newMaxHeight = itemY + itemHeight + 15;
+        _newMaxHeight = itemY + itemHeight+1;
         
         attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
         
         return attrs;
     }
     else if (indexPath.row == 3)
+    {
+        CGFloat itemWidth = 0;
+        CGFloat itemHeight = 0;
+        CGFloat itemX = 0;
+        CGFloat itemY = 0;
+        
+        UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+        
+        itemWidth = KGSCREEN.size.width;
+        itemHeight = 44;
+        itemX = 0;
+        itemY = _newMaxHeight;
+        _newMaxHeight = itemY + itemHeight+1;
+        
+        attrs.frame = CGRectMake(itemX, itemY, itemWidth, itemHeight);
+        
+        return attrs;
+    }
+    else if (indexPath.row == 4)
     {
         CGFloat itemWidth = 0;
         CGFloat itemHeight = 0;
