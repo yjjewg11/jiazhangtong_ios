@@ -16,7 +16,6 @@
 #import "KGNSStringUtil.h"
 #import "KGHUD.h"
 #import "MBProgressHUD+HM.h"
-
 #define UserNameKey @"UserName"
 #define PasswordKey @"Password"
 
@@ -24,7 +23,7 @@
 {
     IBOutlet UIImageView * headImageView;
     IBOutlet UIImageView * savePwdImageView;
-    IBOutlet UIButton * savePwdBtn;
+//    IBOutlet UIButton * savePwdBtn;
     IBOutlet UIButton * loginBtn;
     IBOutlet UIButton * regBtn;
     KGUser * user;
@@ -48,7 +47,7 @@
     [super viewDidLoad];
     
     keyboardOn = NO;
-    
+    [self.view setBackgroundColor:[UIColor colorWithHexCode:@"#FF6666"]];
     [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
     NSString * userName = [[NSUserDefaults standardUserDefaults] objectForKey:UserNameKey];
     NSString * password = [[NSUserDefaults standardUserDefaults] objectForKey:PasswordKey];
@@ -57,11 +56,11 @@
     _userPwdTextField.text = password;
     _userPwdTextField.delegate = self;
     
-    if (userName != nil && password != nil)
-    {
-        savePwdBtn.selected = YES;
-        savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
-    }
+//    if (userName != nil && password != nil)
+//    {
+//        savePwdBtn.selected = YES;
+//        savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
+//    }
     
     //注册键盘事件
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -80,9 +79,9 @@
 
 - (IBAction)savePwdBtnClicked:(UIButton *)sender
 {
-    savePwdBtn.selected = !sender.selected;
-    savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
-    if (!savePwdBtn.selected) {
+//    savePwdBtn.selected = !sender.selected;
+//    savePwdImageView.image = [UIImage imageNamed:savePwdBtn.selected ? @"jizhu" : @"bujizhu"];
+    if (YES) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserNameKey];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:PasswordKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -124,7 +123,7 @@
     {
         //不勾选保存密码 也需要保存用户名
         [[NSUserDefaults standardUserDefaults] setObject:_userNameTextField.text forKey:UserNameKey];
-        if (savePwdBtn.selected)
+        if (YES)
         {
             [[NSUserDefaults standardUserDefaults] setObject:_userPwdTextField.text forKey:PasswordKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -143,14 +142,14 @@
             [[KGHUD sharedHud] hide:self.view];
             [MBProgressHUD showSuccess:@"登录成功"];
             
-            if(savePwdBtn.selected)
+            if(YES)
             {
                 [KGAccountTool saveAccount:user];
             }
-            else
-            {
-                [KGAccountTool delAccount];
-            }
+//            else
+//            {
+//                [KGAccountTool delAccount];
+//            }
             
             [self loginSuccess];
             
@@ -213,12 +212,164 @@
 {
     [textField resignFirstResponder];
 }
+- (IBAction)btn_touchInside_qq:(id)sender {
+    
+    NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:UMSocialSnsTypeMobileQQ];
+    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+   
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+       
+        NSLog(@"login response is %@",response);
+     
+        //获取微博用户名、uid、token等
+       
+        if (response.responseCode == UMSResponseCodeSuccess) {
+          
+            UMSocialAccountEntity *snsAccount = [[UMSocialAccountManager socialAccountDictionary] valueForKey:platformName];
+          
+            NSLog(@"username is %@, uid is %@, token is %@,iconUrl is %@",snsAccount.userName,snsAccount.usid,snsAccount.accessToken,snsAccount.iconURL);
+            
+        NSDictionary * dic = @{@"appid" : ShareKey_TencentWB,
+                               @"access_token": snsAccount.accessToken,
+                               @"openid":snsAccount.openId};
+                   [self userThirdLoginQQ_access_token:dic];
+        
+       }
+        
+
+        
+       	
+    });
+}
+- (IBAction)btn_touchInside_wenxin:(id)sender {
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     
     return YES;
+}
+
+//- (void)thrid_bindAccount{
+//    
+//    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"/rest/userinfo/bindAccount.json"];
+//    
+//    [[KGHttpService sharedService] postByDomainBodyJson:url params:self.domain success:^(KGBaseDomain *baseDomain) {
+//        [self hidenLoadView];
+//        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
+//    } faild:^(NSString *errorMessage) {
+//        [self hidenLoadView];
+//        [MBProgressHUD showError:errorMessage];
+//    }];
+//    
+//    
+//}
+//
+- (void)userThirdLoginQQ_access_token: (NSDictionary * ) dic{
+    
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userThirdLoginQQ/access_token.json"];
+        [[KGHUD sharedHud] show:self.view msg:@"登录中..."];
+    
+    [[KGHttpService sharedService] postByDicByParams:url param:dic success:^(id success) {
+        [[KGHUD sharedHud] hide:self.view];
+
+         NSDictionary * responseDic=success;
+        ;
+        
+        if([@"0"  isEqualToString:[responseDic objectForKey:@"needBindTel"]]){//不需绑定
+            [self userinfo_thirdLogin:[dic objectForKey:@"access_token"] type:@"qq"];
+        }else{
+            [self showAlertBindTelView];
+            
+        }
+//        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
+    } failed:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] hide:self.view];
+
+        [MBProgressHUD showError:errorMsg];
+    }];
+    
+    [[KGHttpService sharedService] postByDomainBodyJson:url params:nil success:^(KGBaseDomain *baseDomain) {
+        [self hidenLoadView];
+        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
+    } faild:^(NSString *errorMessage) {
+        [self hidenLoadView];
+        [MBProgressHUD showError:errorMessage];
+    }];
+    
+    
+    
+    
+}
+
+/**
+ access_token
+ String
+ 是
+ 票据
+ type
+ String
+ 是
+ 取值:qq, weixin
+ */
+- (void)userinfo_thirdLogin: (NSString *)access_token type:(NSString *)type{
+    
+    NSDictionary *  dic=@{@"access_token":access_token,@"type":type};
+    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userinfo/thirdLogin.json"];
+    [[KGHUD sharedHud] show:self.view msg:@"登录中..."];
+    
+    [[KGHttpService sharedService] postByDicByParams:url param:dic success:^(id success) {
+        [[KGHUD sharedHud] hide:self.view];
+        LoginRespDomain *loginRespDomain = [LoginRespDomain objectWithKeyValues:success];
+       [KGHttpService sharedService].loginRespDomain = loginRespDomain;
+        [KGHttpService sharedService].userinfo=loginRespDomain.userinfo;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:loginRespDomain.JSESSIONID forKey:@"loginJessionID"];
+        
+        [defaults synchronize];
+        
+        [self loginSuccess];
+        
+        
+        
+    } failed:^(NSString *errorMsg) {
+        [[KGHUD sharedHud] hide:self.view];
+        
+        [MBProgressHUD showError:errorMsg];
+    }];
+    
+    [[KGHttpService sharedService] postByDomainBodyJson:url params:nil success:^(KGBaseDomain *baseDomain) {
+        [self hidenLoadView];
+        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
+    } faild:^(NSString *errorMessage) {
+        [self hidenLoadView];
+        [MBProgressHUD showError:errorMessage];
+    }];
+    
+    
+    
+    
+}
+
+-(void)showAlertBindTelView{
+    AlertBindTelView *alert=[[AlertBindTelView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT)];
+    
+    [self.view addSubview:alert];
+    
+    alert.bindTelBtn=^{
+        BindTelController * regVC = [[BindTelController alloc] init];
+      
+        [self.navigationController pushViewController:regVC animated:YES];
+
+    };
+    
+    alert.cancelBtn=^{
+        [alert removeFromSuperview];
+        [self loginSuccess];
+    };
+    
 }
 
 @end

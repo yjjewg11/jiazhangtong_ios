@@ -429,10 +429,13 @@
 - (void)baseReply_save:(BaseReplyDomain *)reply success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild;
 //通用post 参数bodyJSOn方法
 -(void)postByBodyJson:(NSString *)path params:(NSDictionary *)jsonDictionary success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
+
+- (void)postByDicByParams:(NSString *)path param:(NSDictionary *)param  success:(void(^)(id success))success failed:(void(^)(NSString *errorMsg))faild;
 - (void)fPMovie_queryByURL:(NSString *) url pageInfo:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * articlesArray))success faild:(void (^)(NSString * errorMsg))faild;
 
 -(void)getListByURL:(NSString *)path   success :(void (^)(ListBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)postByDomainBodyJson:(NSString *)path params:(KGBaseDomain *)domain success:(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
+- (void)postByDomainByParams:(NSString *)path param:(KGBaseDomain *)param  success:(void(^)(id))success failed:(void(^)(NSString *errorMsg))faild;
 -(void)getByURL:(NSString *)path   success :(void (^)(KGBaseDomain * baseDomain))success faild:(void (^)(NSString * errorMessage))faild;
 -(void)getNSDictionaryByURL:(NSString *)path   success :(void (^)(NSDictionary * dic))success faild:(void (^)(NSString * errorMessage))faild;
 - (void)fpMovie_save:(FPMoiveDomain *)domain success:(void (^)(KGBaseDomain * msgStr))success faild:(void (^)(NSString * errorMsg))faild;

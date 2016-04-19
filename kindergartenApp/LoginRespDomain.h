@@ -16,6 +16,5 @@
 @property (strong, nonatomic) NSArray        * class_list; //班级列表
 @property (strong, nonatomic) NSString       * JSESSIONID;
 @property (strong, nonatomic) KGUser         * userinfo;
-
-
+@property (strong, nonatomic) NSString       * needBindTel;
 @end

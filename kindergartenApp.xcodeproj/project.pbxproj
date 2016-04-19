@@ -831,6 +831,11 @@
 		8DFBC4EDA7E10DE2EB0D6521 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE98BB1CDE9A04A59474C9E1 /* libPods.a */; };
 		E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */; };
 		E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */; };
+		E755FA1C1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */; };
+		E755FA201CC6384400AF32A0 /* BindTelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA1E1CC6384400AF32A0 /* BindTelController.m */; };
+		E755FA211CC6384400AF32A0 /* BindTelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E755FA1F1CC6384400AF32A0 /* BindTelController.xib */; };
+		E755FA251CC638AB00AF32A0 /* AlertBindTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA241CC638AB00AF32A0 /* AlertBindTelView.m */; };
+		E755FA271CC638BC00AF32A0 /* AlertBindTelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E755FA261CC638BC00AF32A0 /* AlertBindTelView.xib */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -2295,6 +2300,14 @@
 		E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoUpdateController.m; sourceTree = "<group>"; };
 		E755FA171CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentInfoUpdateDomain.h; sourceTree = "<group>"; };
 		E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentInfoUpdateDomain.m; sourceTree = "<group>"; };
+		E755FA1A1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThridUserAccessTokenDomain.h; sourceTree = "<group>"; };
+		E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThridUserAccessTokenDomain.m; sourceTree = "<group>"; };
+		E755FA1D1CC6384400AF32A0 /* BindTelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindTelController.h; sourceTree = "<group>"; };
+		E755FA1E1CC6384400AF32A0 /* BindTelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindTelController.m; sourceTree = "<group>"; };
+		E755FA1F1CC6384400AF32A0 /* BindTelController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BindTelController.xib; sourceTree = "<group>"; };
+		E755FA231CC638AB00AF32A0 /* AlertBindTelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertBindTelView.h; sourceTree = "<group>"; };
+		E755FA241CC638AB00AF32A0 /* AlertBindTelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertBindTelView.m; sourceTree = "<group>"; };
+		E755FA261CC638BC00AF32A0 /* AlertBindTelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertBindTelView.xib; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F463E6431B66106D00AB92B9 /* DianZanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianZanDomain.h; sourceTree = "<group>"; };
@@ -4769,6 +4782,8 @@
 				2469E2121B5B5E45004888A4 /* LoginRespDomain.m */,
 				F4885C6D1B7C982B00AF97CF /* CardInfoDomain.h */,
 				F4885C6E1B7C982B00AF97CF /* CardInfoDomain.m */,
+				E755FA1A1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.h */,
+				E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -4782,6 +4797,9 @@
 				2489B6201B5A40E200039E70 /* RegViewController.h */,
 				2489B6211B5A40E200039E70 /* RegViewController.m */,
 				2489B6221B5A40E200039E70 /* RegViewController.xib */,
+				E755FA1D1CC6384400AF32A0 /* BindTelController.h */,
+				E755FA1E1CC6384400AF32A0 /* BindTelController.m */,
+				E755FA1F1CC6384400AF32A0 /* BindTelController.xib */,
 			);
 			name = Coontroller;
 			sourceTree = "<group>";
@@ -5344,6 +5362,7 @@
 		24A175FA1B55505D00295997 /* Login(登录) */ = {
 			isa = PBXGroup;
 			children = (
+				E755FA221CC6387D00AF32A0 /* view */,
 				2489B61F1B5A39B900039E70 /* Coontroller */,
 				2489B61E1B5A39B200039E70 /* Model */,
 				2489B6281B5A606A00039E70 /* Tool */,
@@ -5788,6 +5807,16 @@
 				E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */,
 			);
 			name = domain;
+			sourceTree = "<group>";
+		};
+		E755FA221CC6387D00AF32A0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E755FA231CC638AB00AF32A0 /* AlertBindTelView.h */,
+				E755FA241CC638AB00AF32A0 /* AlertBindTelView.m */,
+				E755FA261CC638BC00AF32A0 /* AlertBindTelView.xib */,
+			);
+			name = view;
 			sourceTree = "<group>";
 		};
 		F45EABCD1B563F75003C367C /* Base */ = {
@@ -6426,6 +6455,7 @@
 				F4E636041B676AD400800924 /* AnnouncementInfoViewController.xib in Resources */,
 				04A4DE401BF484DF002ABBB1 /* adsMoGoFullScreen.html in Resources */,
 				04A4DE2E1BF484DF002ABBB1 /* adsmogo_button_left_disabled@2x.png in Resources */,
+				E755FA211CC6384400AF32A0 /* BindTelController.xib in Resources */,
 				04A4DDFF1BF484DF002ABBB1 /* adchina_btnconfirm.png in Resources */,
 				04F9FB621BF1A67400AEFB88 /* umeng_fb_audio_dialog_cancel@2x.png in Resources */,
 				2474DFB51B6CBB1C0021506F /* StudentSignRecordTableViewCell.xib in Resources */,
@@ -6524,6 +6554,7 @@
 				04FEDD4D1C035A0D00921AC1 /* MySPCourseEndedView.xib in Resources */,
 				2489B6741B5AB77600039E70 /* IntroductionViewController.xib in Resources */,
 				04FF07281C771B5F00B891D6 /* FPTimeLineDetailMoreView.xib in Resources */,
+				E755FA271CC638BC00AF32A0 /* AlertBindTelView.xib in Resources */,
 				04A4DE591BF484DF002ABBB1 /* website-320x50.gif in Resources */,
 				248B6A6D1B19A39200FCB98F /* LaunchScreen.xib in Resources */,
 				04A4DE461BF484DF002ABBB1 /* adsmogo_bannerbg@2x.png in Resources */,
@@ -6727,6 +6758,7 @@
 				0405B6E21CB10D580090863C /* BaseReplyListHeaderView.m in Sources */,
 				04F903AC1C56795C0040629F /* AFURLResponseSerialization.m in Sources */,
 				0405B6C81CAD72E90090863C /* BaseReplyDomain.m in Sources */,
+				E755FA251CC638AB00AF32A0 /* AlertBindTelView.m in Sources */,
 				04FB237F1C16DC67009B57E2 /* MineHomeChildrenCell.m in Sources */,
 				F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
@@ -6837,6 +6869,7 @@
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
 				04DDAB961CBE3EE500C3D48C /* KeyChainStore.m in Sources */,
 				E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */,
+				E755FA1C1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m in Sources */,
 				24AA0B481B690F4300DAC03B /* UUProgressHUD.m in Sources */,
 				04F9C98F1C0ED5680078A5F5 /* EnrolStudentsHomeLayout.m in Sources */,
 				04FE04261BF1DD1E0069CF9A /* MYSPCourseTableVC.m in Sources */,
@@ -7073,6 +7106,7 @@
 				04F411031C5A1EC200407C10 /* FPImagePickerGroupTableCell.m in Sources */,
 				24759EAD1B5FC48500A3087D /* TopicDomain.m in Sources */,
 				04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */,
+				E755FA201CC6384400AF32A0 /* BindTelController.m in Sources */,
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
 				04FEEC801C76B7670024FEAF /* FPTimeLineEditVC.m in Sources */,
 				040021131C3F9263005F1D82 /* UIImage+Rotate.m in Sources */,

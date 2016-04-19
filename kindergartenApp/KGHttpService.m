@@ -298,6 +298,26 @@
     });
 }
 
+- (void)postByDicByParams:(NSString *)path param:(NSDictionary *)param  success:(void(^)(id success))success failed:(void(^)(NSString *errorMsg))faild{
+    
+    [[AFAppDotNetAPIClient sharedClient] POST:[KGHttpUrl getDelFavoritesUrl] parameters:param success:^(NSURLSessionDataTask *task, id responseObject) {
+        KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+        
+        [self sessionTimeoutHandle:baseDomain];
+        
+        if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+            success(responseObject);
+//            success([responseObject objectForKey:@"imgUrl"]);
+        } else {
+            faild(baseDomain.ResMsg.message);
+        }
+
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        [self requestErrorCode:error faild:faild];
+    }];
+}
+
 
 //图片上传
 - (void)uploadImg:(UIImage *)img withName:(NSString *)imgName type:(NSInteger)imgType success:(void (^)(NSString * msgStr))success faild:(void (^)(NSString * errorMsg))faild {

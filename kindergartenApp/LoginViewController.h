@@ -10,7 +10,11 @@
 #import "BaseKeyboardViewController.h"
 #import "KGTextField.h"
 #import "GuidePageController.h"
+#import "UMSocial.h"
+#import "SystemShareKey.h"
 
+#import "AlertBindTelView.h"
+#import "BindTelController.h"
 @interface LoginViewController : BaseViewController
 
 @property(strong, nonatomic) IBOutlet UITextField * userNameTextField;
