@@ -115,14 +115,14 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView{
-    [[KGHUD sharedHud] show:self.view];
+//    [[KGHUD sharedHud] show:self.view];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
     
-    [[KGHUD sharedHud] hide:self.view];
+//    [[KGHUD sharedHud] hide:self.view];
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error{
-    [[KGHUD sharedHud] hide:self.view];
+//    [[KGHUD sharedHud] hide:self.view];
 }
 /*
 #pragma mark - Navigation

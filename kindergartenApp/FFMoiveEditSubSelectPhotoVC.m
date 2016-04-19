@@ -219,7 +219,18 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
    
     [dataSource removeAllObjects];
     [dataSource addObjectsFromArray:[selectDomainMap allValues ]];
+    if(dataSource.count>0){
+        //没设置封面的，设置第一个为封面
+        if([FFMovieShareData getFFMovieShareData].domain.herald.length<1){
+            FPImagePickerImageDomain *data=dataSource[0];
+
+            [FFMovieShareData getFFMovieShareData].domain.herald=[data .localUrl absoluteString];
+        }
+    }
+   
     [_collectionView reloadData];
+    
+    
     [self.delegate selectEndNoitce:selectDomainMap];
 }
 

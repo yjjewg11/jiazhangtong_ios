@@ -282,10 +282,15 @@ static int exception_callback_handler() {
     if(remoteNotification){
         notification = (NSDictionary *)remoteNotification;
     }
-    __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)self.window.rootViewController;
-    if(tabVC.selectedIndex != Number_Two) {
-        UIViewController * vc = [tabVC.childViewControllers objectAtIndex:Number_Two];
-        vc.tabBarItem.image = [[UIImage imageNamed:@"zhuye_xinxiaoxi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    if([ self.window.rootViewController isKindOfClass:[KGTabBarViewController class]]){
+        
+        __weak KGTabBarViewController * tabVC = (KGTabBarViewController*)self.window.rootViewController;
+        if(tabVC.selectedIndex != Number_Two) {
+            UIViewController * vc = [tabVC.childViewControllers objectAtIndex:Number_Two];
+            vc.tabBarItem.image = [[UIImage imageNamed:@"zhuye_xinxiaoxi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        }
+
     }
     
     
