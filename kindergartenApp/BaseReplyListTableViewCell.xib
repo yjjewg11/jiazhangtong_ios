@@ -35,25 +35,16 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head_def" translatesAutoresizingMaskIntoConstraints="NO" id="eaJ-Zu-CGT">
                         <rect key="frame" x="5" y="10" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="MA2-C1-jjI"/>
+                            <constraint firstAttribute="width" constant="45" id="w0J-iM-uPK"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="context" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mab-uS-tOf" customClass="MLEmojiLabel">
                         <rect key="frame" x="58" y="34" width="224" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="42.5" id="Fuc-oi-cw9"/>
-                            <constraint firstAttribute="width" constant="224" id="Uod-8C-BbK"/>
-                            <constraint firstAttribute="width" constant="224" id="ob5-m2-c9F"/>
-                            <constraint firstAttribute="height" constant="43" id="vGY-yR-gX8"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Fuc-oi-cw9"/>
-                                <exclude reference="ob5-m2-c9F"/>
-                                <exclude reference="vGY-yR-gX8"/>
-                            </mask>
-                        </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KxJ-l9-AKd">
                         <rect key="frame" x="272" y="34" width="40" height="20"/>
@@ -97,6 +88,7 @@
                     <constraint firstAttribute="trailing" secondItem="jL4-Pj-Bmc" secondAttribute="trailing" id="WwZ-gT-1xl"/>
                     <constraint firstItem="eaJ-Zu-CGT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="X4d-EG-2CB"/>
                     <constraint firstAttribute="bottomMargin" secondItem="mab-uS-tOf" secondAttribute="bottom" constant="-8.5" id="ZWm-bQ-Oyu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="mab-uS-tOf" secondAttribute="trailing" constant="30" id="cqb-gz-dT4"/>
                     <constraint firstItem="mab-uS-tOf" firstAttribute="leading" secondItem="eaJ-Zu-CGT" secondAttribute="trailing" constant="10" id="e0z-bA-dgQ"/>
                     <constraint firstItem="vkB-bO-7OK" firstAttribute="leading" secondItem="eaJ-Zu-CGT" secondAttribute="trailing" constant="14" id="ec0-83-uvH"/>
                     <constraint firstItem="vkB-bO-7OK" firstAttribute="top" secondItem="eaJ-Zu-CGT" secondAttribute="top" id="jeV-ob-cXS"/>
