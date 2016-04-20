@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    [self setTitle:@"绑定电话"];
     [valCodeBtn setBorderWithWidth:0 color:[UIColor clearColor] radian:5.0];
     
     [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];

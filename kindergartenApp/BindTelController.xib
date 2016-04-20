@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BindTelController">
@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7fS-m9-T08" userLabel="contentView">
-                    <rect key="frame" x="-140" y="50" width="600" height="600"/>
+                    <rect key="frame" x="-140" y="0.0" width="600" height="600"/>
                     <subviews>
                         <view multipleTouchEnabled="YES" tag="10" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8MR-IZ-uS8">
                             <rect key="frame" x="156" y="30" width="288" height="35"/>
@@ -134,7 +134,7 @@
             </subviews>
             <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.89411764705882346" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="7fS-m9-T08" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-16" id="94S-tQ-rtv"/>
+                <constraint firstItem="7fS-m9-T08" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="54z-kD-Mfv"/>
                 <constraint firstItem="7fS-m9-T08" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RBH-FW-lnQ"/>
                 <constraint firstItem="7fS-m9-T08" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="gwa-mL-8GY"/>
                 <constraint firstItem="7fS-m9-T08" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-140" id="qGD-Rt-re6"/>

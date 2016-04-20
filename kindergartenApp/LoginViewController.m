@@ -45,7 +45,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+   
     keyboardOn = NO;
     [self.view setBackgroundColor:[UIColor colorWithHexCode:@"#FF6666"]];
     [headImageView setBorderWithWidth:Number_Zero color:[UIColor clearColor] radian:headImageView.width / Number_Two];
@@ -398,11 +398,11 @@
     AlertBindTelView *alert= [[[NSBundle mainBundle] loadNibNamed:@"AlertBindTelView" owner:nil options:nil] firstObject];
 //    [alert setFrame:CGRectMake(0, 0,APPWINDOWWIDTH, APPWINDOWHEIGHT)];
 //    alert.backgroundColor = KGColorFrom16(0xF54B68);
-    CGRect frame = alert.frame;
-    NSLog(@"frame1=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-    frame = self.view.frame;
-    NSLog(@"frame2=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
-
+//    CGRect frame = alert.frame;
+//    NSLog(@"frame1=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+//    frame = self.view.frame;
+//    NSLog(@"frame2=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+//
     
     [self.view addSubview:alert];
     
@@ -418,7 +418,7 @@
     // 使用mas_makeConstraints添加约束
     [view mas_makeConstraints:^(MASConstraintMaker * make) {
         // 添加大	小约束（make就是要添加约束的控件view）
-        make.size.mas_equalTo(CGSizeMake(APPWINDOWWIDTH-100, APPWINDOWHEIGHT-100));
+        make.size.mas_equalTo(CGSizeMake(APPWINDOWWIDTH, APPWINDOWHEIGHT));
         
         // 添加居中约束（居中方式与self相同）
         make.center.equalTo(weakSelf.view); }];

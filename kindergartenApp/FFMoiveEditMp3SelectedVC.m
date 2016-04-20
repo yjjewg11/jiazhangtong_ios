@@ -121,7 +121,7 @@
   
     ////    CGRect frame = CGRectMake(0, 100, Main_Screen_Width,  Main_Screen_Height/2);
     //
-    [self.view setBackgroundColor:[UIColor blueColor]] ;
+//    [self.view setBackgroundColor:[UIColor blueColor]] ;
     self.pageNo = 1;
  
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-40-64) ];
@@ -131,9 +131,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.tableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
+//    self.tableView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
       self.dataSoure=[NSMutableArray array];
-
+ [self.tableView   setSeparatorColor:[UIColor    grayColor]];  //设置分割线为蓝色
    [self.view addSubview:self.tableView];
     [self setupRefresh];
     
