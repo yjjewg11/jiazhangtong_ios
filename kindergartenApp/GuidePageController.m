@@ -105,7 +105,7 @@
 
 +(void) firstLaunch{
     //判断是不是第一次启动应用
-    NSString *firstLaunch =@"firstLaunch2";
+    NSString *firstLaunch =@"firstLaunch3";
      UIWindow* window = [UIApplication sharedApplication].keyWindow;
     if(![[NSUserDefaults standardUserDefaults] boolForKey:firstLaunch])
     {

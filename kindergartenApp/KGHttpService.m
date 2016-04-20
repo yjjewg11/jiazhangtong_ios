@@ -622,6 +622,11 @@
     
     [self getServerJson:[KGHttpUrl getLogoutUrl] params:nil success:^(KGBaseDomain *baseDomain) {
         success(baseDomain.ResMsg.message);
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:nil forKey:Key_loginJessionID];
+        [defaults setObject:nil forKey:KEY_thirdLogin_type];
+        [defaults setObject:nil forKey:KEY_thirdLogin_access_token];
+        [defaults synchronize];
     } faild:^(NSString *errorMsg) {
         faild(errorMsg);
     }];

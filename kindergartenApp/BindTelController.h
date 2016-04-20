@@ -12,4 +12,5 @@
 @property(strong, nonatomic) NSString * tel;
 @property(strong, nonatomic) NSString * type;
 @property(strong, nonatomic) NSString * smsCode;
+@property(strong, nonatomic) NSString * access_token;
 @end

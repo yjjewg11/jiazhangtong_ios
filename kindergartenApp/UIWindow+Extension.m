@@ -25,9 +25,9 @@
     //    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     // 当前软件的版本号（从Info.plist中获得）
     //    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
-    [self notAllowedEntner];
-//    [self autoLoginJessionid];
     
+    [self autoLoginJessionid];
+        
     return;
     if (YES) { // 版本号相同：这次打开和上次打开的是同一个版本
         //登陆页面

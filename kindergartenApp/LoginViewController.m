@@ -298,13 +298,17 @@
         
         NSDictionary * responseDic=success;
         ;
+           self.type=@"qq";
         
+        self.access_token=[dic objectForKey:@"access_token"];
+        NSLog(@"needBindTel=%@",[responseDic objectForKey:@"needBindTel"]);
         if([@"0"  isEqualToString:[responseDic objectForKey:@"needBindTel"]]){//不需绑定
-            [self userinfo_thirdLogin:[dic objectForKey:@"access_token"] type:@"weixin"];
+            [self userinfo_thirdLogin:self.access_token type:self.type];
         }else{
             [self showAlertBindTelView];
             
         }
+
 //        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
     } failed:^(NSString *errorMsg) {
         [[KGHUD sharedHud] hide:self.view];
@@ -319,16 +323,17 @@
 - (void)userThirdLoginWenXin_access_token: (NSDictionary * ) dic{
     
     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userThirdLoginWenXin/access_token.json"];
-    [[KGHUD sharedHud] show:self.view msg:@"登录中..."];
+    [[KGHUD sharedHud] show:self.view msg:@"验证..."];
     
     [[KGHttpService sharedService] getByDicByParams:url param:dic success:^(id success) {
         [[KGHUD sharedHud] hide:self.view];
         
         NSDictionary * responseDic=success;
         ;
-        
+        self.type=@"weixin";
+        self.access_token=[dic objectForKey:@"access_token"];
         if([@"0"  isEqualToString:[responseDic objectForKey:@"needBindTel"]]){//不需绑定
-            [self userinfo_thirdLogin:[dic objectForKey:@"access_token"] type:@"weixin"];
+            [self userinfo_thirdLogin:self.access_token type:self.type];
         }else{
             [self showAlertBindTelView];
             
@@ -366,17 +371,13 @@
         LoginRespDomain *loginRespDomain = [LoginRespDomain objectWithKeyValues:success];
        [KGHttpService sharedService].loginRespDomain = loginRespDomain;
         [KGHttpService sharedService].userinfo=loginRespDomain.userinfo;
+        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:loginRespDomain.JSESSIONID forKey:Key_loginJessionID];
          [defaults setObject:type forKey:KEY_thirdLogin_type];
          [defaults setObject:access_token forKey:KEY_thirdLogin_access_token];
         [defaults synchronize];
-        if([@"0"  isEqualToString:loginRespDomain.needBindTel]){//不需绑定
-             [self loginSuccess];
-        }else{
-            [self showAlertBindTelView];
-            
-        }
+        [self loginSuccess];
      
         
         
@@ -413,7 +414,7 @@
     UIView *view = alert;
     view.backgroundColor = [UIColor redColor];
     [self.view addSubview:view];
-    
+  
     // 使用mas_makeConstraints添加约束
     [view mas_makeConstraints:^(MASConstraintMaker * make) {
         // 添加大	小约束（make就是要添加约束的控件view）
@@ -426,14 +427,16 @@
 //    return;
     alert.bindTelBtn=^{
         BindTelController * regVC = [[BindTelController alloc] init];
-      
+        regVC.type=self.type;
+        regVC.access_token= self.access_token;
         [self.navigationController pushViewController:regVC animated:YES];
          [alert removeFromSuperview];
 
     };
     
     alert.cancelBtn=^{
-         [self loginSuccess];
+        [self userinfo_thirdLogin:self.access_token type:self.type];
+//         [self loginSuccess];
         [alert removeFromSuperview];
        
     };

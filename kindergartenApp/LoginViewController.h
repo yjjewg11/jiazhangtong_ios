@@ -17,7 +17,8 @@
 #import "BindTelController.h"
 #import "Masonry.h"
 @interface LoginViewController : BaseViewController
-
+@property(strong, nonatomic) NSString * type;
+@property(strong, nonatomic) NSString * access_token;
 @property(strong, nonatomic) IBOutlet UITextField * userNameTextField;
 @property(strong, nonatomic) IBOutlet UITextField * userPwdTextField;
 
