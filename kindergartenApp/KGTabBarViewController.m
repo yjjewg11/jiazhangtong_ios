@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+//     [self autoLoginJessionid];
     HomeVC * home = [[HomeVC alloc] init];
     [self addChildVc:home title:@"学校" image:@"hxuexiao" selectedImage:@"hxuexiao2"];
     
@@ -141,5 +141,6 @@
     // 添加为子控制器
     [self addChildViewController:nav];
 }
+
 
 @end

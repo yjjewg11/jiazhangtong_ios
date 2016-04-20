@@ -14,7 +14,7 @@
 #import "LoginViewController.h"
 #import "KGNavigationController.h"
 #import "KGHttpService.h"
-#import "KGHUD.h"
+
 
 @implementation UIWindow (Extension)
 
@@ -25,8 +25,9 @@
     //    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:key];
     // 当前软件的版本号（从Info.plist中获得）
     //    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[key];
+      self.rootViewController = [[KGTabBarViewController alloc] init];
+    [self makeKeyAndVisible];
     
-    [self autoLoginJessionid];
         
     return;
     if (YES) { // 版本号相同：这次打开和上次打开的是同一个版本
@@ -62,119 +63,12 @@
 
 
     [[KGHttpService sharedService] login:user success:^(NSString *msgStr) {
-        [self allowedEntner];
+//        [self allowedEntner];
     } faild:^(NSString *errorMsg) {
 //         [UIApplication sharedApplication].keyWindow;
-        [[KGHUD sharedHud] show:self onlyMsg:errorMsg];
+//        [[KGHUD sharedHud] show:self onlyMsg:errorMsg];
         self.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
     }];
-}
-//验证不通过允许进入
-- (void)notAllowedEntner{
-    self.rootViewController  = [[KGNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]];
-    [self makeKeyAndVisible];
-
-}
-//验证通过允许进入
-- (void)allowedEntner{
-      [GuidePageController firstLaunch];
-    
-    [self makeKeyAndVisible];
-
- 
-}
-//第三方登录
-- (void)autoLoginThirdAccessToken{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    NSString *access_token=[defaults objectForKey:KEY_thirdLogin_access_token];
-    NSString *type=[defaults objectForKey:KEY_thirdLogin_type];
-    
-    if(access_token.length>0&&type.length>0){
-        [self userinfo_thirdLogin:access_token type:type];
-    }
-    
-    [self notAllowedEntner];
-}
-
-/**
- access_token
- String
- 是
- 票据
- type
- String
- 是
- 取值:qq, weixin
- */
-- (void)userinfo_thirdLogin: (NSString *)access_token type:(NSString *)type{
-    
-    NSDictionary *  dic=@{@"access_token":access_token,@"type":type};
-    NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userinfo/thirdLogin.json"];
-    [[KGHUD sharedHud] show:self.rootViewController.view msg:@"登录中..."];
-    
-    [[KGHttpService sharedService] postByDicByParams:url param:dic success:^(id success) {
-        [[KGHUD sharedHud] hide:self.rootViewController.view];
-        LoginRespDomain *loginRespDomain = [LoginRespDomain objectWithKeyValues:success];
-        [KGHttpService sharedService].loginRespDomain = loginRespDomain;
-        [KGHttpService sharedService].userinfo=loginRespDomain.userinfo;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:loginRespDomain.JSESSIONID forKey:Key_loginJessionID];
-        [defaults setObject:type forKey:KEY_thirdLogin_type];
-        [defaults setObject:access_token forKey:KEY_thirdLogin_access_token];
-        [defaults synchronize];
-        
-      [self allowedEntner];
-        
-        
-        
-    } failed:^(NSString *errorMsg) {
-        [[KGHUD sharedHud] hide:self.rootViewController.view];
-        [self notAllowedEntner];
-
-    }];
-    
-    
-    
-    
-}
-#pragma mark - 自动登录
-- (void)autoLoginJessionid
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString * jid =  [defaults objectForKey:Key_loginJessionID];
-    NSLog(@"local jessionid %@",jid);
-    
-    if(jid<1){
-        [self autoLoginThirdAccessToken];
-        return;
-    }
-    {
-        [[KGHUD sharedHud] show: self.rootViewController];
-        
-        
-        [[KGHttpService sharedService] cheakUserJessionID:jid success:^(NSString *msgStr)
-         {
-             
-             [ [KGHUD sharedHud] hide:  self.rootViewController ];
-          
-             if ([msgStr isEqualToString:@"success"])
-             {
-                 dispatch_async(dispatch_get_main_queue(), ^
-                                {
-                                    [self allowedEntner];
-                                });
-             }
-             else
-             {
-                 [self autoLoginThirdAccessToken];
-             }
-             
-         }faild:^(NSString *errorMsg)
-         {
-             [self autoLoginThirdAccessToken];
-         }];
-    }
 }
 
 @end
