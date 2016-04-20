@@ -5031,12 +5031,13 @@
 		248B6A831B19A91000FCB98F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				248B6AB51B19B07900FCB98F /* Config */,
 				243918E11B5D1E4A00F3727E /* Controller */,
 				248B6A891B19A95600FCB98F /* Category */,
 				248B6A881B19A95000FCB98F /* Libs */,
 				248B6A871B19A94700FCB98F /* Model */,
 				F4C0AB911B1C3B7C007B0E35 /* Service */,
-				248B6A861B19A93700FCB98F /* Other */,
+				248B6A861B19A93700FCB98F /* Main */,
 				248B6A851B19A92C00FCB98F /* Tool */,
 				248B6A841B19A92300FCB98F /* View */,
 			);
@@ -5077,10 +5078,9 @@
 			name = Tool;
 			sourceTree = "<group>";
 		};
-		248B6A861B19A93700FCB98F /* Other */ = {
+		248B6A861B19A93700FCB98F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				248B6AB51B19B07900FCB98F /* Config */,
 				248B6A601B19A39200FCB98F /* AppDelegate.h */,
 				248B6A611B19A39200FCB98F /* AppDelegate.m */,
 				248B6A5E1B19A39200FCB98F /* main.m */,
@@ -5091,7 +5091,7 @@
 				0497A99E1CBF7A190029B2E2 /* GlobalMap.h */,
 				0497A99F1CBF7A190029B2E2 /* GlobalMap.m */,
 			);
-			name = Other;
+			name = Main;
 			sourceTree = "<group>";
 		};
 		248B6A871B19A94700FCB98F /* Model */ = {

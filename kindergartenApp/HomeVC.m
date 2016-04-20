@@ -66,6 +66,9 @@
     //注册通知，用于发现模块 最新数目显示
     NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(getNewsNumber) name:@"homerefreshnum" object:nil];
+    
+    [self initHomeView];
+
 }
 
 - (void)checkUserLogin

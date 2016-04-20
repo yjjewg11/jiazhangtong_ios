@@ -290,14 +290,14 @@
     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userThirdLoginQQ/access_token.json"];
         [[KGHUD sharedHud] show:self.view msg:@"登录中..."];
     
-    [[KGHttpService sharedService] postByDicByParams:url param:dic success:^(id success) {
+    [[KGHttpService sharedService] getByDicByParams:url param:dic success:^(id success) {
         [[KGHUD sharedHud] hide:self.view];
-
-         NSDictionary * responseDic=success;
+        
+        NSDictionary * responseDic=success;
         ;
         
         if([@"0"  isEqualToString:[responseDic objectForKey:@"needBindTel"]]){//不需绑定
-            [self userinfo_thirdLogin:[dic objectForKey:@"access_token"] type:@"qq"];
+            [self userinfo_thirdLogin:[dic objectForKey:@"access_token"] type:@"weixin"];
         }else{
             [self showAlertBindTelView];
             
@@ -308,15 +308,6 @@
 
         [MBProgressHUD showError:errorMsg];
     }];
-    
-    [[KGHttpService sharedService] postByDomainBodyJson:url params:nil success:^(KGBaseDomain *baseDomain) {
-        [self hidenLoadView];
-        [MBProgressHUD showSuccess:baseDomain.ResMsg.message];
-    } faild:^(NSString *errorMessage) {
-        [self hidenLoadView];
-        [MBProgressHUD showError:errorMessage];
-    }];
-    
     
     
     
@@ -407,12 +398,14 @@
         BindTelController * regVC = [[BindTelController alloc] init];
       
         [self.navigationController pushViewController:regVC animated:YES];
+         [alert removeFromSuperview];
 
     };
     
     alert.cancelBtn=^{
+         [self loginSuccess];
         [alert removeFromSuperview];
-        [self loginSuccess];
+       
     };
     
 }

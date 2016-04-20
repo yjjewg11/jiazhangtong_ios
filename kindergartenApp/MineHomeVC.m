@@ -135,7 +135,7 @@ static NSString *const NormalColle = @"normalcolle";
         
         return cell;
     }
-    else if (indexPath.row == 3)
+    else if (indexPath.row == 4)
     {
         MineHomeFunCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColle forIndexPath:indexPath];
         
@@ -144,7 +144,7 @@ static NSString *const NormalColle = @"normalcolle";
         return cell;
     }
     
-    else if (indexPath.row == 4)
+    else if (indexPath.row == 3)
     {
         MineHomeFunCell * cell = [_collectionView dequeueReusableCellWithReuseIdentifier:NormalColle forIndexPath:indexPath];
         
@@ -170,12 +170,12 @@ static NSString *const NormalColle = @"normalcolle";
         MySPCourseVC * vc = [[MySPCourseVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.row == 3)
+    else if (indexPath.row == 4)
     {
         SettingViewController * vc = [[SettingViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.row == 4)
+    else if (indexPath.row == 3)
     {
         MyInfoUpdateController * vc = [[MyInfoUpdateController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];

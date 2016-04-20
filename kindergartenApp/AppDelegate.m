@@ -327,8 +327,23 @@ static int exception_callback_handler() {
     //    [UMSocialTencentWeiboHandler openSSOWithRedirectUrl:@"http://sns.whalecloud.com/tencent2/callback"];
 }
 
+-(BOOL)myRUL_handleOpenURL:(NSURL *)url{
+    
+    if ([url.description hasPrefix:@"wjkj.jiazhangtong://"]) {
+        //你的处理逻辑
+        
+        return YES;
+    }
+    return NO;
+}
+
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
+    //你的处理逻辑
+
+    if([self myRUL_handleOpenURL:url])return YES;
+   
+    
     BOOL judge = [UMSocialSnsService handleOpenURL:url];
     return judge;
 }
@@ -338,6 +353,11 @@ static int exception_callback_handler() {
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    
+    //你的处理逻辑
+    
+    if([self myRUL_handleOpenURL:url])return YES;
+    
     BOOL judge = [UMSocialSnsService handleOpenURL:url];
     
     return  judge;
