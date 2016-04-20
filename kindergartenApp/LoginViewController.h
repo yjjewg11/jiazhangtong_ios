@@ -15,6 +15,7 @@
 
 #import "AlertBindTelView.h"
 #import "BindTelController.h"
+#import "Masonry.h"
 @interface LoginViewController : BaseViewController
 
 @property(strong, nonatomic) IBOutlet UITextField * userNameTextField;

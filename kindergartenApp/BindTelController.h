@@ -7,7 +7,9 @@
 //
 
 #import "BaseKeyboardViewController.h"
-
+#import "MBProgressHUD+HM.h"
 @interface BindTelController : BaseKeyboardViewController
-
+@property(strong, nonatomic) NSString * tel;
+@property(strong, nonatomic) NSString * type;
+@property(strong, nonatomic) NSString * smsCode;
 @end

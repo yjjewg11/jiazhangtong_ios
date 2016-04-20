@@ -70,6 +70,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
+    
+    
+//    [self showAlertBindTelView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -391,10 +394,36 @@
 //弹出 提示绑定手机也没
 -(void)showAlertBindTelView{
     NSLog(@"showAlertBindTelView");
-    AlertBindTelView *alert=[[AlertBindTelView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT)];
+    AlertBindTelView *alert= [[[NSBundle mainBundle] loadNibNamed:@"AlertBindTelView" owner:nil options:nil] firstObject];
+//    [alert setFrame:CGRectMake(0, 0,APPWINDOWWIDTH, APPWINDOWHEIGHT)];
+//    alert.backgroundColor = KGColorFrom16(0xF54B68);
+    CGRect frame = alert.frame;
+    NSLog(@"frame1=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+    frame = self.view.frame;
+    NSLog(@"frame2=%f,%f,%f,%f",frame.origin.x,frame.origin.y,frame.size.width,frame.size.height);
+
     
     [self.view addSubview:alert];
     
+    
+    
+    // 防止block中的循环引用
+    __weak typeof(self) weakSelf = self;
+    // 初始化view并设置背景
+    UIView *view = alert;
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+    
+    // 使用mas_makeConstraints添加约束
+    [view mas_makeConstraints:^(MASConstraintMaker * make) {
+        // 添加大	小约束（make就是要添加约束的控件view）
+        make.size.mas_equalTo(CGSizeMake(APPWINDOWWIDTH-100, APPWINDOWHEIGHT-100));
+        
+        // 添加居中约束（居中方式与self相同）
+        make.center.equalTo(weakSelf.view); }];
+  
+
+//    return;
     alert.bindTelBtn=^{
         BindTelController * regVC = [[BindTelController alloc] init];
       

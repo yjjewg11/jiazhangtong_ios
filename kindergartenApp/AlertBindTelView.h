@@ -11,9 +11,6 @@ typedef void(^bindTelBtn)();
 typedef void(^cancelBtn)();
 @interface AlertBindTelView : UIView
 
-
-
-
 @property(nonatomic, strong) bindTelBtn bindTelBtn;
 @property(nonatomic, strong) cancelBtn cancelBtn;
 @end
