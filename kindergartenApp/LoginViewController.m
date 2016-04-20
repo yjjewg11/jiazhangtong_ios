@@ -390,6 +390,7 @@
 }
 //弹出 提示绑定手机也没
 -(void)showAlertBindTelView{
+    NSLog(@"showAlertBindTelView");
     AlertBindTelView *alert=[[AlertBindTelView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT)];
     
     [self.view addSubview:alert];
