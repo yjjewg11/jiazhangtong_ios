@@ -336,6 +336,9 @@
 - (void)pushToImagePickerVC
 {
     
+    
+    
+    
     FPUploadVC * vc = [[FPUploadVC alloc] init];
     vc.isJumpTwoPages = YES;
     
@@ -349,6 +352,15 @@
 
 - (void)pushToCreateGiftwareShopVC
 {
+    
+    
+    int count=[[DBNetDaoService defaulService] getfp_photo_item_count:[FPHomeVC getFamily_uuid]];
+    if(count==0){
+        [MBProgressHUD showSuccess:@"请先上传照片"];
+        return;
+    }
+
+    
     FFMovieEditMainVC * vc = [[FFMovieEditMainVC alloc] init];
     [FFMovieShareData getFFMovieShareData].domain=nil;
     [self.navigationController pushViewController:vc animated:NO];

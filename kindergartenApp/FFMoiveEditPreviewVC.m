@@ -111,14 +111,20 @@
     hud.removeFromSuperViewOnHide=YES;
     [[KGHttpService sharedService] fpMovie_save:saveDomain success:^(KGBaseDomain *domain) {
         [hud hide:YES];
-        
+        NSArray * arr=self.navigationController.viewControllers;
         //修复回退报错bug
-        for (UIViewController *controller in self.navigationController.viewControllers) {
+        for (NSInteger i=arr.count-1;i>=0;i--) {
+            UIViewController *controller=arr[i];
+            
             if ([controller isKindOfClass:[FPGiftwareDetialVC class]]) {
                 [self.navigationController popToViewController:controller animated:YES];
                 return;
             }else  if ([controller isKindOfClass:[KGTabBarViewController class]]) {
                     [self.navigationController popToViewController:controller animated:YES];
+                return;
+            }
+            else  if ([controller isKindOfClass:[FPHomeVC class]]) {
+                [self.navigationController popToViewController:controller animated:YES];
                 return;
             }
         }

@@ -211,7 +211,11 @@
 
 - (void)modifyBtn{
 //    NSLog(@"modifyBtn");
-    
+    int count=[[DBNetDaoService defaulService] getfp_photo_item_count:[FPHomeVC getFamily_uuid]];
+    if(count==0){
+        [MBProgressHUD showSuccess:@"请先上传照片"];
+        return;
+    }
     FFMovieEditMainVC *vc= [[FFMovieEditMainVC alloc]init];
     [FFMovieShareData getFFMovieShareData].domain=self.domain;
     

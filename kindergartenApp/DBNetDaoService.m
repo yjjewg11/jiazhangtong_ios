@@ -560,6 +560,36 @@
 
 #pragma mark - 查询分页查询
 //NSInteger limit=50;
+//查询照片总数
+- (int)getfp_photo_item_count:(NSString *)familyUUID
+{
+    
+    NSString * sql = [NSString stringWithFormat:@"SELECT count(*) from fp_photo_item WHERE family_uuid ='%@'",familyUUID];
+    NSLog(sql);
+    NSMutableArray * marr = nil;
+    int count=0;
+    sqlite3_stmt *stmt;
+    if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)
+    {
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW)
+        {
+          
+           
+            count = sqlite3_column_int(stmt, 0);
+            
+        }
+
+    }
+    sqlite3_finalize(stmt);
+    
+    
+    return count;
+}
+
+
+#pragma mark - 查询分页查询
+//NSInteger limit=50;
 - (NSMutableArray *)getListTimePhotoDataByPage:(NSString *)date familyUUID:(NSString *)familyUUID pageNo: (NSInteger) pageNo limit: (NSInteger) limit
 {
     

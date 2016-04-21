@@ -126,7 +126,7 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
         
        selectDomain=[[FPImagePickerImageDomain alloc]init];
         selectDomain.isOlnyShowImg=YES;
-        selectDomain.suoluetu= [UIImage imageNamed:@"newshoucang1"];
+        selectDomain.suoluetu= [UIImage imageNamed:@"tjphoto_jpxc"];
       
     }
     return selectDomain;

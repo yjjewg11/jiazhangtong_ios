@@ -15,6 +15,7 @@
 
 @interface DBNetDaoService : NSObject
 - (void)restAllTable;
+- (int)getfp_photo_item_count:(NSString *)familyUUID;
 - (void)getTimelinePhotos:(NSString *)familyUUID;
 
 - (NSMutableArray *)getListTimeHeadData:(NSString *)familyuuid;

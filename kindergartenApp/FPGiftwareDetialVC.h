@@ -8,6 +8,8 @@
 
 #import "BaseReplyInputViewController.h"
 #import "FPMoive4QDomain.h"
+#import "DBNetDaoService.h"
+#import "FPHomeVC.h"
 @interface FPGiftwareDetialVC : BaseReplyInputViewController
 
 
