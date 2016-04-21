@@ -87,13 +87,15 @@
 {
     NSArray *segmentedData = [[NSArray alloc]initWithObjects:@"我的",@"所有",nil];
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedData];
+    
     segmentedControl.frame = CGRectMake(0, 0,APPWINDOWWIDTH, 30.0);
     
     segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;//设置样式
     /*
      这个是设置按下按钮时的颜色
      */
-    segmentedControl.tintColor = [UIColor colorWithRed:49.0 / 256.0 green:148.0 / 256.0 blue:208.0 / 256.0 alpha:1];
+//    segmentedControl.layer.borderColor = [UIColor whiteColor].CGColor;
+//    segmentedControl.tintColor = [UIColor colorWithRed:49.0 / 256.0 green:148.0 / 256.0 blue:208.0 / 256.0 alpha:1];
     segmentedControl.selectedSegmentIndex = 0;//默认选中的按钮索引
     segmentIndex=segmentedControl.selectedSegmentIndex;
      NSString * url0=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/fPMovie/queryMy.json"];
@@ -290,7 +292,7 @@
     }
     else
     {
-        return 354;
+        return 302;
     }
 }
 

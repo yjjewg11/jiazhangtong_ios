@@ -47,7 +47,7 @@
     // 使用mas_makeConstraints添加约束
     [view mas_makeConstraints:^(MASConstraintMaker * make) {
         // 添加大	小约束（make就是要添加约束的控件view）
-        make.size.mas_equalTo(view.size);
+        make.size.mas_equalTo(CGSizeMake(320,320));
         
         // 添加居中约束（居中方式与self相同）
         make.center.equalTo(weakSelf.view); }];

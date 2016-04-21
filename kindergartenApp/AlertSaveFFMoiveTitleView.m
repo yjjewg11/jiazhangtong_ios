@@ -46,7 +46,7 @@
     [self updateViewShow];
 }
 -(void)updateViewShow{
-    if(self.status==0){
+    if([@"0" isEqualToString:self.status]){
         [self.imgCheck1 setHidden:NO];
         [self.imgCheck2 setHidden:YES];
         
