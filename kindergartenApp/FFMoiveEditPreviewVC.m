@@ -112,13 +112,17 @@
     [[KGHttpService sharedService] fpMovie_save:saveDomain success:^(KGBaseDomain *domain) {
         [hud hide:YES];
         
-        
-        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:3] animated:YES];
-        
-//        [self.navigationController popViewControllerAnimated:NO];
-//        [self.navigationController popViewControllerAnimated:YES];
-        
-        
+        //修复回退报错bug
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[FPGiftwareDetialVC class]]) {
+                [self.navigationController popToViewController:controller animated:YES];
+                return;
+            }else  if ([controller isKindOfClass:[KGTabBarViewController class]]) {
+                    [self.navigationController popToViewController:controller animated:YES];
+                return;
+            }
+        }
+         [self.navigationController popViewControllerAnimated:YES];
     } faild:^(NSString *errorMsg) {
         [hud hide:YES];
         [MBProgressHUD showError:errorMsg];

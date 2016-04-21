@@ -233,7 +233,8 @@ static NSString *const ImageCell = @"FPImagePickerImageCell";
     
     //从数据库获取数据，判断是否有已导入图片
     NSMutableArray * marr = [_service queryLocalImg];
-    
+    NSLog(@"已导入图片:%ld张",marr.count);
+
     NSLog(@"总共有:%ld张",self.totalCount);
     [self.group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop)
     {

@@ -11,6 +11,7 @@
 #import "BaseViewController.h"
 #import "AlertSaveFFMoiveTitleView.h"
 #import "Masonry.h"
+#import "FPGiftwareDetialVC.h"
 @interface FFMoiveEditPreviewVC : BaseViewController
 
 @property (strong, nonatomic)  FPMoive4QDomain *  domain;
