@@ -23,14 +23,47 @@
 
 @implementation FFMoiveEditPreviewVC
 - (IBAction)submitBtn_status1:(id)sender {
-     self.domain.status=@"1";//发布。
+//     self.domain.status=@"1";//发布。
        [self showAlert_modifyName];
 }
 
 - (IBAction)submitBtn_click:(id)sender {
     
-     self.domain.status=@"0";//发布。
-    [self showAlert_modifyName];
+    
+    
+    __weak AlertSaveFFMoiveTitleView *alert= [[[NSBundle mainBundle] loadNibNamed:@"AlertSaveFFMoiveTitleView" owner:nil options:nil] firstObject];
+    
+    
+    [self.view addSubview:alert];
+    
+    [alert setTitleAndStatus:self.domain.title status:[FFMovieShareData getFFMovieShareData].domain.status];
+    
+    // 防止block中的循环引用
+    __weak typeof(self) weakSelf = self;
+    // 初始化view并设置背景
+    __weak UIView *view = alert;
+    [self.view addSubview:view];
+    
+    // 使用mas_makeConstraints添加约束
+    [view mas_makeConstraints:^(MASConstraintMaker * make) {
+        // 添加大	小约束（make就是要添加约束的控件view）
+        make.size.mas_equalTo(view.size);
+        
+        // 添加居中约束（居中方式与self相同）
+        make.center.equalTo(weakSelf.view); }];
+    
+    
+    alert.okBtn=^{
+        self.domain.status=alert.status;
+        self.domain.title=alert.title;
+        [self fpMovie_save];
+
+        [alert removeFromSuperview];
+        
+    };
+
+//     self.domain.status=@"0";//发布。
+//    [self showAlert_modifyName];
 
 }
 
@@ -64,7 +97,7 @@
     //    saveDomain.photo_uuids=domain4q.photo_uuids;
     saveDomain.template_key=domain4q.template_key;
     saveDomain.mp3=domain4q.mp3;
-  
+    saveDomain.status=domain4q.status;
     if(saveDomain.title==nil||saveDomain.title.length==0){
         [MBProgressHUD showError:@"请输入相册名"];
         return;
@@ -80,8 +113,10 @@
         [hud hide:YES];
         
         
-        [self.navigationController popViewControllerAnimated:YES];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:3] animated:YES];
+        
+//        [self.navigationController popViewControllerAnimated:NO];
+//        [self.navigationController popViewControllerAnimated:YES];
         
         
     } faild:^(NSString *errorMsg) {

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AlertSaveFFMoiveTitleView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="316"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="保存相册" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Smb-PA-g11">
+                    <rect key="frame" x="101" y="8" width="118" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                    <color key="textColor" red="1" green="0.037066020669999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iNa-F9-Gax" userLabel="splitLineView">
+                    <rect key="frame" x="0.0" y="44" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nje-IE-7j6" userLabel="splitLineView">
+                    <rect key="frame" x="0.0" y="124" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Li-gv-SwK" userLabel="splitLineView">
+                    <rect key="frame" x="0.0" y="232" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkB-DB-0nb" userLabel="check1View">
+                    <rect key="frame" x="0.0" y="133" width="320" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Al5-4a-75I">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <connections>
+                                <action selector="touchinside_check1:" destination="iN0-l3-epB" eventType="touchUpInside" id="K1m-0d-2Gb"/>
+                            </connections>
+                        </button>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="xuanzhong" translatesAutoresizingMaskIntoConstraints="NO" id="vfG-t5-cUF" userLabel="xuanzhong1">
+                            <rect key="frame" x="40" y="11" width="30" height="25"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="公开相册所有人可见" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojq-YF-sDJ">
+                            <rect key="frame" x="71" y="2" width="208" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入相册标题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iCz-GN-ia5">
+                    <rect key="frame" x="41" y="73" width="244" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                </textField>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WIN-JL-TyI" userLabel="splitLineView">
+                    <rect key="frame" x="30" y="111" width="250" height="3"/>
+                    <color key="backgroundColor" red="1" green="0.037066020669999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gbc-cG-yzk" userLabel="check2View">
+                    <rect key="frame" x="0.0" y="180" width="320" height="44"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="suj-dm-hSB">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <connections>
+                                <action selector="tochinside_check2:" destination="iN0-l3-epB" eventType="touchUpInside" id="4PX-RQ-OWm"/>
+                            </connections>
+                        </button>
+                        <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="xuanzhong" translatesAutoresizingMaskIntoConstraints="NO" id="fpJ-9f-5ig" userLabel="xuanzhong2">
+                            <rect key="frame" x="38" y="11" width="30" height="25"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="不公开相册仅自己可见" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEW-K0-o1H">
+                            <rect key="frame" x="71" y="2" width="208" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CW7-3r-Kwf">
+                    <rect key="frame" x="182" y="252" width="120" height="44"/>
+                    <color key="backgroundColor" red="0.99607843137254903" green="0.35686274509803922" blue="0.30980392156862746" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                    <state key="normal" title="确认">
+                        <color key="titleColor" red="0.97942313759999999" green="0.97942313759999999" blue="0.97942313759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="touchInside_Ok:" destination="iN0-l3-epB" eventType="touchUpInside" id="Adr-kV-Iij"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-r4-T9C">
+                    <rect key="frame" x="24" y="252" width="120" height="44"/>
+                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                    <state key="normal" title="取消">
+                        <color key="titleColor" red="0.97942313759999999" green="0.97942313759999999" blue="0.97942313759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="touchInside_cancel:" destination="iN0-l3-epB" eventType="touchUpInside" id="Pcd-RR-iyK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgCheck1" destination="vfG-t5-cUF" id="Dio-fR-3hc"/>
+                <outlet property="imgCheck2" destination="fpJ-9f-5ig" id="QkG-R1-k3h"/>
+                <outlet property="title_tf" destination="iCz-GN-ia5" id="1PU-pe-xk4"/>
+            </connections>
+            <point key="canvasLocation" x="395" y="176"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="xuanzhong" width="30" height="25"/>
+    </resources>
+</document>

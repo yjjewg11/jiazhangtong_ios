@@ -251,6 +251,7 @@
         self.domain=[FFMovieShareData getFFMovieShareData].domain;
     if(self.domain==nil){
         self.domain=[[FPMoive4QDomain alloc]init];
+        self.domain.status=@"1";
         [FFMovieShareData getFFMovieShareData].domain=self.domain;
        
     }
@@ -314,6 +315,8 @@
     saveDomain.template_key=domain4q.template_key;
     saveDomain.mp3=domain4q.mp3;
     saveDomain.status=@"1";//不发布。临存。预览用
+    
+    
     if(saveDomain.title==nil||saveDomain.title.length==0){
         saveDomain.title=[NSString stringWithFormat:@"精品相册%@",[KGDateUtil getNowDateYMD] ];
         

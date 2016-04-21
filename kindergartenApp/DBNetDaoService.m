@@ -26,7 +26,7 @@
 {
     sqlite3 * db;
 }
-
+  
 @end
 
 @implementation DBNetDaoService
@@ -46,6 +46,17 @@
 {
     if (self = [super init])
     {
+        
+        NSString * tmpKey=@"CFBundleShortVersionString";
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:tmpKey];
+        ;
+        //
+        if([version isEqualToString:[[NSUserDefaults standardUserDefaults]  stringForKey:tmpKey]]){
+            return self;
+        }
+        [[NSUserDefaults standardUserDefaults] setObject:version forKey:tmpKey];
+        NSLog(@"exec init sqlite db! ");
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documents = [paths objectAtIndex:0];
         NSString *database_path = [documents stringByAppendingPathComponent:DBNAME];
@@ -58,35 +69,7 @@
         else
         {
             NSLog(@"数据库打开成功,创建表");
-            //创建表 图片信息
-            NSString * fp_photo_item_Table = @"CREATE TABLE IF NOT EXISTS fp_photo_item (uuid CHAR(45) PRIMARY KEY NOT NULL,status INT,family_uuid  CHAR(45),'create_time' datetime,'photo_time' datetime,'create_useruuid' CHAR (45),'path' CHAR (512),'address' CHAR (45),'note' CHAR (300),'md5' CHAR (512),'create_user' CHAR (45));CREATE INDEX IF NOT EXISTS index_1 ON fp_photo_item (create_time);CREATE INDEX IF NOT EXISTS index_2 ON fp_photo_item (photo_time);CREATE INDEX IF NOT EXISTS index_3 ON fp_photo_item (family_uuid);";
-            
-            //保存家庭相册时间信息
-            NSString * fp_familyinfo_Table = @"CREATE TABLE IF NOT EXISTS fp_familyinfo (family_uuid CHAR(45) PRIMARY KEY NOT NULL,'maxtime' datetime,'mintime' datetime,'updatetime' datetime);";
-            
-            //上传用 上传队列信息
-            NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload ('uuid' CHAR(45),'user_uuid' CHAR(45) NOT NULL,'status' CHAR(4),'success_time' datetime,localurl CHAR(1024) NOT NULL,'family_uuid' CHAR(45) );";
-            
-            
-            
-            [self execSql:fp_photo_item_Table];
-            [self execSql:fp_familyinfo_Table];
-            [self execSql:fp_upload_Table];
-            
-//            if(![self hasColumOfTable:@"fp_upload" column:@" uuid char(45)"]){
-//                //上传用 上传队列信息
-//                NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN uuid char(45);";
-//                ;
-//                    [self execSql:fp_upload_Table_family_uuid];
-//            }
-//            
-            
-            if(![self hasColumOfTable:@"fp_upload" column:@"family_uuid"]){
-                //上传用 上传队列信息
-                NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN family_uuid char(45);";
-                ;
-                [self execSql:fp_upload_Table_family_uuid];
-            }
+            [self createAllTable];
 
             
             
@@ -94,6 +77,59 @@
     }
     return self;
 }
+//创建表
+- (void)createAllTable{
+    
+    //创建表 图片信息
+    NSString * fp_photo_item_Table = @"CREATE TABLE IF NOT EXISTS fp_photo_item (uuid CHAR(45) PRIMARY KEY NOT NULL,status INT,family_uuid  CHAR(45),'create_time' datetime,'photo_time' datetime,'create_useruuid' CHAR (45),'path' CHAR (512),'address' CHAR (45),'note' CHAR (300),'md5' CHAR (512),'create_user' CHAR (45));CREATE INDEX IF NOT EXISTS index_1 ON fp_photo_item (create_time);CREATE INDEX IF NOT EXISTS index_2 ON fp_photo_item (photo_time);CREATE INDEX IF NOT EXISTS index_3 ON fp_photo_item (family_uuid);";
+    
+    //保存家庭相册时间信息
+    NSString * fp_familyinfo_Table = @"CREATE TABLE IF NOT EXISTS fp_familyinfo (family_uuid CHAR(45) PRIMARY KEY NOT NULL,'maxtime' datetime,'mintime' datetime,'updatetime' datetime);";
+    
+    //上传用 上传队列信息
+    NSString * fp_upload_Table = @"CREATE TABLE IF NOT EXISTS fp_upload ('uuid' CHAR(45),'user_uuid' CHAR(45) NOT NULL,'status' CHAR(4),'success_time' datetime,localurl CHAR(1024) NOT NULL,'family_uuid' CHAR(45) );";
+    
+    
+    
+    [self execSql:fp_photo_item_Table];
+    [self execSql:fp_familyinfo_Table];
+    [self execSql:fp_upload_Table];
+
+}
+//清空所有数据
+- (void)restAllTable{
+      NSLog(@"restAllTable");
+    [self dropAllTable];
+    [self createAllTable];
+}
+//清空所有数据
+- (void)dropAllTable{
+    NSMutableArray * arr=[NSMutableArray array];
+    [arr addObject:@"DROP TABLE  fp_photo_item"];
+    [arr addObject:@"DROP TABLE fp_familyinfo"];
+    [arr addObject:@"DROP TABLE fp_upload"];
+    [self execInsertTransactionSql:arr];
+    
+}
+//根据版本号。更新表格呢
+- (void)updateAllTable{
+    //            if(![self hasColumOfTable:@"fp_upload" column:@" uuid char(45)"]){
+    //                //上传用 上传队列信息
+    //                NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN uuid char(45);";
+    //                ;
+    //                    [self execSql:fp_upload_Table_family_uuid];
+    //            }
+    //
+    
+    if(![self hasColumOfTable:@"fp_upload" column:@"family_uuid"]){
+        //上传用 上传队列信息
+        NSString * fp_upload_Table_family_uuid=@"ALTER TABLE fp_upload ADD COLUMN family_uuid char(45);";
+        ;
+        [self execSql:fp_upload_Table_family_uuid];
+    }
+
+}
+
 
 #pragma mark - 查询失败、成功的图片，用于选择图片是标示是否已经上传过
 - (bool)hasColumOfTable:(NSString *) table column:(NSString *) column

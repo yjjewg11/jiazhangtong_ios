@@ -18,6 +18,7 @@
 @end
 
 @interface GiftwareListTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *showStatusView;
 - (void)setDomain:(FPMoive4QDomain * )domain;
 
 @property   id<GiftwareListTableViewCellDelegate> delegate;

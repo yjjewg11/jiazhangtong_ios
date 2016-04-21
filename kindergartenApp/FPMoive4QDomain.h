@@ -14,7 +14,7 @@
 @property (assign, nonatomic) NSInteger  photo_count;
 @property (copy, nonatomic) NSString * create_useruuid;
 @property (copy, nonatomic) NSString * create_username;
-@property (assign, nonatomic) NSInteger status;
+//@property (assign, nonatomic) NSInteger status;
 @property (copy, nonatomic) NSString * create_time;
 @property (assign, nonatomic) NSInteger reply_count;
 @property (copy, nonatomic) NSString * template_key;

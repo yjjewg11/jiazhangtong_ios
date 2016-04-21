@@ -647,4 +647,73 @@ _family_uuid	NSString *	0x7f960c1842b0	0x00007f960c1842b0\
     \{\
 \pard\tx866\pardeftab866\pardirnatural
 \cf16 //        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];\cf0 \
-}
+\pard\tx866\pardeftab866\pardirnatural
+\cf8 typedef\cf0  \cf8 void\cf0 (^cancelBtn)();\
+\cf8 @interface\cf0  AlertBindTelView : \cf11 UIView\cf0 \
+\
+\cf8 @property\cf0 (\cf8 nonatomic\cf0 , \cf8 strong\cf0 ) \cf9 bindTelBtn\cf0  bindTelBtn;\
+\cf8 @property\cf0 (\cf8 nonatomic\cf0 , \cf8 strong\cf0 ) \cf9 cancelBtn\cf0  cancelBtn;\
+\
+\pard\tx866\pardeftab866\pardirnatural
+\cf2 #import \cf3 "Masonry.h"\cf0 \
+\pard\tx866\pardeftab866\pardirnatural
+\cf12 AlertBindTelView\cf0  *alert= [[[\cf11 NSBundle\cf0  \cf7 mainBundle\cf0 ] \cf7 loadNibNamed\cf0 :\cf3 @"AlertBindTelView"\cf0  \cf7 owner\cf0 :\cf8 nil\cf0  \cf7 options\cf0 :\cf8 nil\cf0 ] \cf7 firstObject\cf0 ];\
+\
+ \
+    [\cf8 self\cf0 .\cf10 view\cf0  \cf7 addSubview\cf0 :alert];\
+    \
+    \
+    \
+    \cf16 // 
+\f2 \cf16 \'b7\'c0\'d6\'b9
+\f0 \cf16 block
+\f2 \cf16 \'d6\'d0\'b5\'c4\'d1\'ad\'bb\'b7\'d2\'fd\'d3\'c3
+\f0 \cf0 \
+    \cf8 __weak\cf0  \cf8 typeof\cf0 (\cf8 self\cf0 ) weakSelf = \cf8 self\cf0 ;\
+    \cf16 // 
+\f2 \cf16 \'b3\'f5\'ca\'bc\'bb\'af
+\f0 \cf16 view
+\f2 \cf16 \'b2\'a2\'c9\'e8\'d6\'c3\'b1\'b3\'be\'b0
+\f0 \cf0 \
+    \cf11 UIView\cf0  *view = alert;\
+    [\cf8 self\cf0 .\cf10 view\cf0  \cf7 addSubview\cf0 :view];\
+  \
+    \cf16 // 
+\f2 \cf16 \'ca\'b9\'d3\'c3
+\f0 \cf16 mas_makeConstraints
+\f2 \cf16 \'cc\'ed\'bc\'d3\'d4\'bc\'ca\'f8
+\f0 \cf0 \
+    [view \cf13 mas_makeConstraints\cf0 :^(\cf12 MASConstraintMaker\cf0  * make) \{\
+        \cf16 // 
+\f2 \cf16 \'cc\'ed\'bc\'d3\'b4\'f3
+\f0 \cf16 	
+\f2 \cf16 \'d0\'a1\'d4\'bc\'ca\'f8\'a3\'a8
+\f0 \cf16 make
+\f2 \cf16 \'be\'cd\'ca\'c7\'d2\'aa\'cc\'ed\'bc\'d3\'d4\'bc\'ca\'f8\'b5\'c4\'bf\'d8\'bc\'fe
+\f0 \cf16 view
+\f2 \cf16 \'a3\'a9
+\f0 \cf0 \
+        make.\cf9 size\cf0 .\cf18 mas_equalTo\cf0 (CGSizeMake(\cf18 APPWINDOWWIDTH\cf0 , \cf18 APPWINDOWHEIGHT\cf0 ));\
+        \
+        \cf16 // 
+\f2 \cf16 \'cc\'ed\'bc\'d3\'be\'d3\'d6\'d0\'d4\'bc\'ca\'f8\'a3\'a8\'be\'d3\'d6\'d0\'b7\'bd\'ca\'bd\'d3\'eb
+\f0 \cf16 self
+\f2 \cf16 \'cf\'e0\'cd\'ac\'a3\'a9
+\f0 \cf0 \
+        make.\cf9 center\cf0 .\cf13 equalTo\cf0 (weakSelf.\cf10 view\cf0 ); \}];\
+  \
+\
+\pard\tx866\pardeftab866\pardirnatural
+\cf16 //    return;\cf0 \
+    alert.\cf9 bindTelBtn\cf0 =^\{\
+        \cf12 BindTelController\cf0  * regVC = [[\cf12 BindTelController\cf0  \cf7 alloc\cf0 ] \cf7 init\cf0 ];\
+        regVC.\cf9 type\cf0 =\cf8 self\cf0 .\cf9 type\cf0 ;\
+        regVC.\cf9 access_token\cf0 = \cf8 self\cf0 .\cf9 access_token\cf0 ;\
+        [\cf8 self\cf0 .\cf10 navigationController\cf0  \cf7 pushViewController\cf0 :regVC \cf7 animated\cf0 :\cf8 YES\cf0 ];\
+         [alert \cf7 removeFromSuperview\cf0 ];\
+\
+    \};\
+\
+\
+\pard\tx866\pardeftab866\pardirnatural
+\cf8 self\cf0 .\cf9 okBtn\cf0 ();}

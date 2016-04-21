@@ -14,7 +14,7 @@
 #import "LoginRespDomain.h"
 
 @interface DBNetDaoService : NSObject
-
+- (void)restAllTable;
 - (void)getTimelinePhotos:(NSString *)familyUUID;
 
 - (NSMutableArray *)getListTimeHeadData:(NSString *)familyuuid;

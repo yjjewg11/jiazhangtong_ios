@@ -75,9 +75,11 @@
                 //清除缓存的图片
                 [[SDImageCache sharedImageCache] clearDisk];
                 NSString * msg = [NSString stringWithFormat:@"清除了%.2lfMB的缓存",(((long)i / 1024.00)/1024.00)];
-                
+                 
                 UIAlertView * al = [[UIAlertView alloc] initWithTitle:@"成功" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
                 [al show];
+                
+                [[DBNetDaoService defaulService] restAllTable];
             }
         }
     }else if (indexPath.section == 1){

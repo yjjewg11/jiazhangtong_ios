@@ -26,7 +26,14 @@
 - (void)setDomain:(FPMoive4QDomain * )domain{
     self.domain1=domain;
     
-    NSURL *imageUrl = [NSURL URLWithString:domain.herald];
+    if([@"0" isEqualToString: domain.status]){
+        [self.showStatusView setHidden:YES];
+
+    }else{
+        [self.showStatusView setHidden:NO];
+
+    }
+       NSURL *imageUrl = [NSURL URLWithString:domain.herald];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
     
     self.herald_imageView.clipsToBounds = YES;

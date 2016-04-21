@@ -395,7 +395,7 @@
 //弹出 提示绑定手机也没
 -(void)showAlertBindTelView{
     NSLog(@"showAlertBindTelView");
-    AlertBindTelView *alert= [[[NSBundle mainBundle] loadNibNamed:@"AlertBindTelView" owner:nil options:nil] firstObject];
+    __weak AlertBindTelView *alert= [[[NSBundle mainBundle] loadNibNamed:@"AlertBindTelView" owner:nil options:nil] firstObject];
 //    [alert setFrame:CGRectMake(0, 0,APPWINDOWWIDTH, APPWINDOWHEIGHT)];
 //    alert.backgroundColor = KGColorFrom16(0xF54B68);
 //    CGRect frame = alert.frame;

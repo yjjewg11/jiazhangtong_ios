@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "FPMoive4QDomain.h"
 #import "BaseViewController.h"
+#import "AlertSaveFFMoiveTitleView.h"
+#import "Masonry.h"
 @interface FFMoiveEditPreviewVC : BaseViewController
 
 @property (strong, nonatomic)  FPMoive4QDomain *  domain;

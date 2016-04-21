@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -31,9 +32,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="80" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1111" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cE8-2p-WWr">
-                    <rect key="frame" x="50" y="0.0" width="30" height="21"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1111" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cE8-2p-WWr">
+                    <rect key="frame" x="43" y="0.0" width="17" height="17"/>
                     <color key="backgroundColor" red="1" green="0.037066020669999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="cE8-2p-WWr" secondAttribute="height" multiplier="1:1" id="CKy-Xu-Pwc"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="9"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -50,6 +54,8 @@
                 <constraint firstItem="dR8-dK-WfU" firstAttribute="leading" secondItem="qp0-b2-DCe" secondAttribute="leading" id="NB9-ul-M1d"/>
                 <constraint firstItem="vdS-CI-y96" firstAttribute="top" secondItem="qp0-b2-DCe" secondAttribute="top" constant="5" id="YUz-zL-evQ"/>
                 <constraint firstItem="vdS-CI-y96" firstAttribute="centerX" secondItem="qp0-b2-DCe" secondAttribute="centerX" id="hJf-Gj-mCW"/>
+                <constraint firstItem="cE8-2p-WWr" firstAttribute="top" secondItem="dR8-dK-WfU" secondAttribute="top" id="sXk-DJ-1Ya"/>
+                <constraint firstItem="cE8-2p-WWr" firstAttribute="leading" secondItem="vdS-CI-y96" secondAttribute="trailing" constant="-10" id="yYS-Jc-Xba"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

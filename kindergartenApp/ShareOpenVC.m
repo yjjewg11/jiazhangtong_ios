@@ -10,6 +10,7 @@
 
 #import "HLActionSheet.h"
 #import "UMSocial.h"
+#import "SystemShareKey.h"
 @implementation ShareOpenVC
 
 
@@ -95,7 +96,7 @@
     
     //朋友圈title设置方法：
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-    [UMSocialWechatHandler setWXAppId:@"wx6699cf8b21e12618" appSecret:@"639c78a45d012434370f4c1afc57acd1" url:shareurl];
+    [UMSocialWechatHandler setWXAppId:ShareKey_WeChat appSecret:ShareKey_WeChatSecret url:shareurl];
     [UMSocialData defaultData].extConfig.qqData.title =title;
     [UMSocialData defaultData].extConfig.qqData.url = shareurl;
     

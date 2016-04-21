@@ -8,7 +8,7 @@
 
 #import "PXUIWebView.h"
 #import "KGHUD.h"
-
+#import "SystemShareKey.h"
 @interface PXUIWebView () <PXJSExport,UIActionSheetDelegate,UIActionSheetDelegate,UMSocialUIDelegate,UIWebViewDelegate,UIImagePickerControllerDelegate,ZYQAssetPickerControllerDelegate>
 {
     NSString * _jsessionId;
@@ -247,7 +247,7 @@ enum
     
     //朋友圈title设置方法：
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = domain.title;
-    [UMSocialWechatHandler setWXAppId:@"wx6699cf8b21e12618" appSecret:@"639c78a45d012434370f4c1afc57acd1" url:domain.httpurl];
+    [UMSocialWechatHandler setWXAppId:ShareKey_WeChat appSecret:ShareKey_WeChatSecret url:domain.httpurl];
     [UMSocialData defaultData].extConfig.qqData.title = domain.title;
     [UMSocialData defaultData].extConfig.qqData.url = domain.httpurl;
     

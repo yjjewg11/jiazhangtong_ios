@@ -330,6 +330,8 @@
 		04A50C651CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C541CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework */; };
 		04A50C661CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */; };
 		04A50C6B1CC4E00500EC9F4B /* GuidePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */; };
+		04A50C6E1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6D1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m */; };
+		04A50C701CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C6F1CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib */; };
 		04AA3CBD1BE5EAA200DCC290 /* SPCommentDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */; };
 		04AA3CC41BE5F24D00DCC290 /* SpCourseCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AA3CC21BE5F24D00DCC290 /* SpCourseCommentCell.m */; };
 		04AA3CC51BE5F24D00DCC290 /* SpCourseCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AA3CC31BE5F24D00DCC290 /* SpCourseCommentCell.xib */; };
@@ -1403,6 +1405,9 @@
 		04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWFeedbackServiceFMWK.framework; path = build/OneSDK/YWFeedbackServiceFMWK.framework; sourceTree = "<group>"; };
 		04A50C691CC4E00500EC9F4B /* GuidePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageController.h; sourceTree = "<group>"; };
 		04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageController.m; sourceTree = "<group>"; };
+		04A50C6C1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertSaveFFMoiveTitleView.h; sourceTree = "<group>"; };
+		04A50C6D1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertSaveFFMoiveTitleView.m; sourceTree = "<group>"; };
+		04A50C6F1CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertSaveFFMoiveTitleView.xib; sourceTree = "<group>"; };
 		04AA3CBB1BE5EAA200DCC290 /* SPCommentDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCommentDomain.h; sourceTree = "<group>"; };
 		04AA3CBC1BE5EAA200DCC290 /* SPCommentDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCommentDomain.m; sourceTree = "<group>"; };
 		04AA3CC11BE5F24D00DCC290 /* SpCourseCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseCommentCell.h; sourceTree = "<group>"; };
@@ -2647,6 +2652,9 @@
 				0492B9F61CB7FCB000ACB096 /* FFMoiveSubmitView.h */,
 				0492B9F71CB7FCB000ACB096 /* FFMoiveSubmitView.m */,
 				0492BA011CB9000300ACB096 /* FFMoiveSubmitView.xib */,
+				04A50C6C1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.h */,
+				04A50C6D1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m */,
+				04A50C6F1CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -6305,6 +6313,7 @@
 				F4885C6C1B7C78C400AF97CF /* BrowseURLViewController.xib in Resources */,
 				04A4DE7F1BF484DF002ABBB1 /* webview_bar_share_ipad@2x.png in Resources */,
 				04A4DE041BF484DF002ABBB1 /* adchina_stoploading.png in Resources */,
+				04A50C701CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib in Resources */,
 				24C46B411B5A2B1100A58F92 /* MeViewController.xib in Resources */,
 				04FB9FA41C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.xib in Resources */,
 				4D5CE7831B7E4368002F1088 /* SettingViewCell.xib in Resources */,
@@ -6927,6 +6936,7 @@
 				04F3D46A1BF47FD3007E7AC0 /* ZipArchive.mm in Sources */,
 				04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */,
 				24DEC8221B633F2B00C55828 /* DynamicMenuDomain.m in Sources */,
+				04A50C6E1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m in Sources */,
 				0449A3501C4F77C40066ABBB /* FPGiftwarePickerImageCell.m in Sources */,
 				0497A9A01CBF7A190029B2E2 /* GlobalMap.m in Sources */,
 				040109B41BF1F8CB00A18622 /* MySPCourseDomain.m in Sources */,
