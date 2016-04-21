@@ -239,6 +239,7 @@ NSInteger localDBlimit=50;
 //    _dataOfTopTitleBtnArray = @[@"智能排序",@"评价最高",@"距离最近"];
 //
     
+    _dataOfTopTitleBtnArray=[NSMutableArray array];
     for(FPMyFamilyPhotoCollectionDomain * domain in _dataOfmyCollectionArray){
         
         [_dataOfTopTitleBtnArray addObject:domain.title];
@@ -259,6 +260,9 @@ NSInteger localDBlimit=50;
      self.navigationItem.titleView = titleButton;
     
     if (self.navigationItem) {
+        if( self.navigationItem.titleView){
+            [self.navigationItem.titleView removeFromSuperview];
+        }
         CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
         SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:cDomain.title];
         [menu displayMenuInView:self.view];

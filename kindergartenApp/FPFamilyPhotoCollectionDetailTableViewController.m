@@ -301,6 +301,7 @@
         }
         
         [self modifyFamilyphoto:indexPath];
+        return;
     }
     FPFamilyMembers* fPFamilyMembers=dataSource_members_list[indexPath.row];
     NSString *msg=[NSString stringWithFormat:@"%@:%@",fPFamilyMembers.family_name,fPFamilyMembers.tel];
@@ -607,6 +608,22 @@
                            [self hidenLoadView];
                            [MBProgressHUD showSuccess:@"保存成功!"];
                            block(true,msgStr);
+                           
+                           
+                           
+                           
+                           NSArray * arr=self.navigationController.viewControllers;
+                           //修复回退报错bug
+                           for (NSInteger i=arr.count-1;i>=0;i--) {
+                               UIViewController *controller=arr[i];
+                               
+                                if ([controller isKindOfClass:[FPHomeVC class]]) {
+                                    [(FPHomeVC *)controller getMyPhotoCollectionInfo];
+                                    
+                                   return;
+                               }
+                           }
+
                        });
         
     } faild:^(NSString *errorMsg) {

@@ -40,6 +40,10 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self regNotification];
+    
+    [segment setSelectedIndex:_index];
+
+    
 }
 
 

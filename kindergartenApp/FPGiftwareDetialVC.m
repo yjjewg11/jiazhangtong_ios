@@ -429,7 +429,7 @@
 
     
     [[KGHUD sharedHud] show:self.view];
-    [[KGHttpService sharedService] getByUuid:@"/rest/fPMovie/get.json" uuid:uuid success:^(id responseObject)
+    [[KGHttpService sharedService] getByUuid:@"rest/fPMovie/get.json" uuid:uuid success:^(id responseObject)
      {
          [[KGHUD sharedHud] hide:self.view];
          FPMoive4QDomain * domain=[FPMoive4QDomain objectWithKeyValues:[responseObject objectForKey:@"data"]];

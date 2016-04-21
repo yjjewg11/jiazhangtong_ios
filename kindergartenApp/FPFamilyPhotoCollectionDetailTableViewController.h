@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "FPHomeVC.h"
 #import "VPImageCropperViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 @interface FPFamilyPhotoCollectionDetailTableViewController : BaseViewController<VPImageCropperDelegate>

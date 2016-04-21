@@ -13,6 +13,6 @@
 @interface FPHomeVC : BaseViewController
 +(void) setFamily_uuid:(NSString *)str;
 +(NSString *) getFamily_uuid;
-
+- (void)getMyPhotoCollectionInfo;
 
 @end

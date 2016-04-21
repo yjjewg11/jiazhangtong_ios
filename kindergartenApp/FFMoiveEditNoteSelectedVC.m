@@ -177,23 +177,35 @@
 //    CGSize labelsize = [data.note sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
 //    
     
-    //UILabel自适应高度和自动换行
-    //初始化label
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,cell.height-20,cell.width, 20)];
-//    [label setBackgroundColor:UIColor blackColor];
-    label.text=data.note;
-    
-    //设置自动行数与字符换行
-    [label setNumberOfLines:0];
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    
-    [imgView addSubview:label];
+   
     
     for (id subView in cell.contentView.subviews) {
         [subView removeFromSuperview];
     }
     [cell.contentView addSubview:imgView];
-     [cell.contentView addSubview:label];
+    
+    //显示编辑按钮
+    if(data.note.length<1){
+        UIImageView * imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bianji_jpxc_jtcx"] ];
+        
+        [imageView setFrame:CGRectMake(cell.width/2-10,cell.height-20,20, 20)
+         ];
+         [cell.contentView addSubview:imageView];
+     }else{
+        //UILabel自适应高度和自动换行
+        //初始化label
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,cell.height-20,cell.width, 20)];
+        //    [label setBackgroundColor:UIColor blackColor];
+        label.text=data.note;
+        
+        //设置自动行数与字符换行
+        [label setNumberOfLines:0];
+        label.lineBreakMode = UILineBreakModeWordWrap;
+        
+//        [imgView addSubview:label];
+          [cell.contentView addSubview:label];
+    }
+   
     
   
     return cell;

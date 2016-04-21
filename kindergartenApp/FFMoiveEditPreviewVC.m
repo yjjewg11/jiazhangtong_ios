@@ -117,6 +117,8 @@
             UIViewController *controller=arr[i];
             
             if ([controller isKindOfClass:[FPGiftwareDetialVC class]]) {
+                [(FPGiftwareDetialVC *)controller   loadDomainByUuid:self.domain.uuid];
+                
                 [self.navigationController popToViewController:controller animated:YES];
                 return;
             }else  if ([controller isKindOfClass:[KGTabBarViewController class]]) {

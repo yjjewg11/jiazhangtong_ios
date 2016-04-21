@@ -110,14 +110,14 @@
     CGRect frame = _replyBtn.frame;
     ////    CGRect frame = CGRectMake(0, 100, Main_Screen_Width,  Main_Screen_Height/2);
     //
-
+    [_replyBtn setBackgroundColor:[UIColor whiteColor]];
     [_replyBtn setText:@"写下您的评论..."];
     _replyBtn.titleLabel.font = [UIFont systemFontOfSize:APPUILABELFONTNO12];
     [_replyBtn setTextColor:[UIColor grayColor] sel:[UIColor grayColor]];
     _replyBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     _replyBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     _replyBtn.layer.borderWidth = 1;
-    _replyBtn.layer.borderColor = [[UIColor blackColor] CGColor];
+    _replyBtn.layer.borderColor = [[UIColor grayColor] CGColor];
     [_replyBtn addTarget:self action:@selector(click_replyBtn) forControlEvents:UIControlEventTouchUpInside];
 
     [self addSubview:_replyBtn];

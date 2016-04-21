@@ -16,4 +16,5 @@
 @interface FFMoiveEditPreviewVC : BaseViewController
 
 @property (strong, nonatomic)  FPMoive4QDomain *  domain;
+
 @end

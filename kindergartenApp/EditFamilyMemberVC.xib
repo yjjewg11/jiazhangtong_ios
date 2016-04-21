@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -20,7 +20,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QbG-sy-YF1">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" red="0.83777225379999998" green="0.83777225379999998" blue="0.83777225379999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7g-wg-Jah">
                     <rect key="frame" x="0.0" y="33" width="320" height="35"/>
@@ -41,10 +41,10 @@
                         <action selector="action_addFromAddressBook:" destination="-1" eventType="touchDown" id="MGY-gI-3lz"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgp-Gx-3Vs">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jgp-Gx-3Vs">
                     <rect key="frame" x="0.0" y="95" width="320" height="40"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZ9-zJ-WS0">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="手机号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZ9-zJ-WS0">
                             <rect key="frame" x="8" y="10" width="68" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="skx-3S-DjZ"/>
@@ -53,7 +53,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="gM4-QQ-mEo">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" adjustsFontSizeToFit="NO" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="gM4-QQ-mEo">
                             <rect key="frame" x="132" y="5" width="180" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="180" id="CdY-cK-f55"/>
@@ -78,7 +78,7 @@
                         <constraint firstAttribute="trailing" secondItem="gM4-QQ-mEo" secondAttribute="trailing" constant="8" id="znW-Pw-Puj"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVi-jb-J1T">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GVi-jb-J1T">
                     <rect key="frame" x="0.0" y="136" width="320" height="40"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="家庭昵称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-Gw-1eL">
@@ -87,7 +87,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T6E-pZ-NuE">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入昵称" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T6E-pZ-NuE">
                             <rect key="frame" x="132" y="6" width="180" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="180" id="dLI-xJ-lgc"/>
@@ -106,14 +106,14 @@
                         <constraint firstAttribute="height" constant="40" id="vCx-Qo-eEP"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-oT-Bwu">
-                    <rect key="frame" x="297" y="38" width="15" height="25"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="youjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="wz9-oT-Bwu">
+                    <rect key="frame" x="297" y="41" width="15" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="3EO-oz-Q9p"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.83627288509999997" green="0.83627288509999997" blue="0.83627288509999997" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="Jgp-Gx-3Vs" firstAttribute="leading" secondItem="N7g-wg-Jah" secondAttribute="leading" id="5qj-mn-ofp"/>
                 <constraint firstItem="GVi-jb-J1T" firstAttribute="top" secondItem="Jgp-Gx-3Vs" secondAttribute="bottom" constant="1" id="BAQ-Vd-wjK"/>

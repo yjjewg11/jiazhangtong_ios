@@ -285,6 +285,16 @@ DBNetDaoService * _localDbservice;
     
     if(domain.status==0){//上传成功
         [self.uploadingDataArray removeObject:uploadDomain];
+//        //上传完毕后，发送通知
+//        if(self.uploadingDataArray.count==0&&self.waitUploadDataArray.count==0){
+//            //通知主页时光轴有数据更新
+//            NSNotification * noti1 = [[NSNotification alloc] initWithName:@"updatePhotoToRemoteFinish" object:nil userInfo:nil];
+//            
+//            [[NSNotificationCenter defaultCenter] postNotification:noti1];
+//            
+//
+//        }
+        
          [self upLoadDataFromwaitUploadDataArray];
         
         

@@ -16,5 +16,5 @@
 @property (strong, nonatomic)  NSString *  uuid;
 
 @property (strong, nonatomic)  FPMoive4QDomain *  domain;
-
+- (void)loadDomainByUuid:(NSString * )uuid;
 @end
