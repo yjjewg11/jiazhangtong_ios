@@ -42,6 +42,22 @@
 
 @implementation FPGiftwareDetialVC
 
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self loadDomainByUuid:self.uuid];
+    myWebView.delegate1 = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    myWebView.delegate1 = nil;
+    [myWebView loadHTMLString:@"" baseURL:nil];
+   
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -58,7 +74,6 @@
     //创建底部按钮
     [self addBtn:self.bottomView];
 
-    [self loadDomainByUuid:self.uuid];
     
     
     // Do any additional setup after loading the view from its nib.
