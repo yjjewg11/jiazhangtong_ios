@@ -195,7 +195,7 @@ NSInteger localDBlimit=50;
     [center addObserver:self selector:@selector(loadData) name:@"canLoadData" object:nil];
 //    [center addObserver:self selector:@selector(saveUploadImgPath:) name:@"saveuploadimg" object:nil];
     [center addObserver:self selector:@selector(headerRefreshing) name:@"refreshtimelinedata" object:nil];
-    [center addObserver:self selector:@selector(showEndUpDatePhotoDataView:) name:@"updateInfo" object:nil];
+//    [center addObserver:self selector:@selector(showEndUpDatePhotoDataView:) name:@"updateInfo" object:nil];
     [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
 }
 
@@ -667,7 +667,7 @@ NSInteger localDBlimit=50;
     dispatch_async(dispatch_get_main_queue(), ^
     {
         [fPHomeTopView.warningLbl setHidden:NO];
-        fPHomeTopView.warningLbl.text = @"有新图片上传了,请下拉刷新";
+        fPHomeTopView.warningLbl.text = @"有新照片,请下拉刷新";
         //上传任务数量显示
       
         [btn_shangchuanzhaopian setTitle:count forState:(UIControlStateNormal)];
@@ -677,13 +677,13 @@ NSInteger localDBlimit=50;
     });
 }
 
-- (void)showEndUpDatePhotoDataView:(NSNotification *)noti
-{
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-        fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",noti.object];
-    });
-}
+//- (void)showEndUpDatePhotoDataView:(NSNotification *)noti
+//{
+//    dispatch_async(dispatch_get_main_queue(), ^
+//    {
+//        fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",noti.object];
+//    });
+//}
 
 #pragma mark - 获取我的相册信息 首页头部显示用
 - (void)getMyPhotoCollectionInfo
@@ -914,11 +914,11 @@ NSInteger localDBlimit=50;
              
              NSLog(@"datas.count=%d",datas.count );
              
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                            {
-                                //更新刷新时间
-                                fPHomeTopView.warningLbl.text = fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
-                            });
+//             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+//                            {
+//                                //更新刷新时间
+//                                fPHomeTopView.warningLbl.text = fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
+//                            });
              
              if(lastTimeVO.pageSize>datas.count){
                  isRemoteDBHasData=false;
@@ -1008,15 +1008,18 @@ NSInteger localDBlimit=50;
                 [self loadDataPhotoByDataArr:datas timeAfter:true];
              }else{
                  _tableView.headerRefreshingText = @"没有新数据...";
-                              }
+              }
              
-             
-             
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                            {
-                                //更新刷新时间
-                                fPHomeTopView.warningLbl.text = fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
-                            });
+             //没有数据隐藏提示
+             if(lastTimeVO.pageSize>datas.count){
+                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+                                {
+                                    [fPHomeTopView.warningLbl setHidden:YES];
+                                    //更新刷新时间
+                                    //                                fPHomeTopView.warningLbl.text = fPHomeTopView.warningLbl.text = [NSString stringWithFormat:@"最后更新时间:%@",[KGDateUtil getLocalDateStr]];
+                                });
+
+             }
              
          }
         faild:^(NSString *errorMsg)

@@ -716,4 +716,10 @@ _family_uuid	NSString *	0x7f960c1842b0	0x00007f960c1842b0\
 \
 \
 \pard\tx866\pardeftab866\pardirnatural
-\cf8 self\cf0 .\cf9 okBtn\cf0 ();}
+\cf8 self\cf0 .\cf9 okBtn\cf0 ();\
+\
+\pard\tx866\pardeftab866\pardirnatural
+
+\f9\b \cf0 SELECT localurl from fp_upload WHERE user_uuid='0c71ae19-abbc-4b0f-889b-675dc403b9a4' and family_uuid ='7e5da870-7284-4211-8ebb-278068ce631a' AND (status='3' OR status='0' OR status='1');\
+\
+insert into fp_upload (user_uuid,status,success_time,localurl,family_uuid,uuid) values ('0c71ae19-abbc-4b0f-889b-675dc403b9a4','0','2016-04-21 16:41:05','assets-library://asset/asset.JPG?id=9F983DBA-EC35-42B8-8773-B597CF782EDD&ext=JPG','7e5da870-7284-4211-8ebb-278068ce631a','07e2f802-3d31-4a81-bfd0-3369c7702ce0')}
