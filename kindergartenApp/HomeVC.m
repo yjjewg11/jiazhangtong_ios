@@ -584,14 +584,24 @@
 #pragma mark - 自动登录
 - (void)autoLoginJessionid
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    
+       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * jid =  [defaults objectForKey:Key_loginJessionID];
     NSLog(@"local jessionid %@",jid);
     
     if(jid<1){
+        
         [self autoLoginThirdAccessToken];
         return;
     }
+       //已经登录
+    LoginRespDomain *loginRespDomain=[KGHttpService sharedService].loginRespDomain;
+        if([jid isEqualToString:loginRespDomain.JSESSIONID]){
+             [self allowedEntner];
+            return;
+        }
     {
         //        [[KGHUD sharedHud] show: self.rootViewController];
         

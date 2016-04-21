@@ -84,7 +84,12 @@ UILabel * ui_tel;
     }else{
         ui_img.image=[UIImage imageNamed:@"waitImageDown"];
     }
-    ui_tel.text=domain.tel;
+    if(domain.tel.length>0){
+         ui_tel.text=domain.tel;
+    }else{
+         ui_tel.text=@"绑定手机号码";
+    }
+   
     
   
     [_tableView reloadData];
@@ -131,6 +136,26 @@ UILabel * ui_tel;
             return;
         }
         
+        
+         if(indexPath.row==3){
+             
+             if(self.domain.tel.length>1){
+                 return;
+             }
+             
+            BindTelController * regVC = [[BindTelController alloc] init];
+             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+             
+             
+             NSString *access_token=[defaults objectForKey:KEY_thirdLogin_access_token];
+             NSString *type=[defaults objectForKey:KEY_thirdLogin_type];
+             
+            regVC.type=type;
+            regVC.access_token= access_token;
+             regVC.isBack=YES;
+            [self.navigationController pushViewController:regVC animated:YES];
+          
+        }
     }
    
  

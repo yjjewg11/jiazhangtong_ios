@@ -13,6 +13,7 @@
 #import "KGHUD.h"
 #import "HZQDatePickerView.h"
 #import "VPImageCropperViewController.h"
+#import "BindTelController.h"
 @interface MyInfoUpdateController : BaseViewController
 
 @end

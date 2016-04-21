@@ -43,7 +43,7 @@
     [valCodeBtn setBorderWithWidth:0 color:[UIColor clearColor] radian:5.0];
     
     [self registerBtnEnable:YES alpha:Number_ViewAlpha_Ten];
-    phoneTextField.text=@"13628037994";
+//    phoneTextField.text=@"13628037994";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,24 +114,21 @@
         [MBProgressHUD showError:@"access_token is null		"];
         return;
     }
-    
-    
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:nil forKey:Key_loginJessionID];
-    [defaults setObject:self.type forKey:KEY_thirdLogin_type];
-    [defaults setObject:self.access_token forKey:KEY_thirdLogin_access_token];
-    [defaults synchronize];
-    UIWindow* window = [UIApplication sharedApplication].keyWindow;
-    [window switchRootViewController];
-    
-    return;
+   
     NSDictionary *  dic=@{@"tel":self.tel,	@"smsCode":self.smsCode,@"type":self.type,@"access_token":self.access_token};
     NSString * url=[NSString stringWithFormat:@"%@%@", [KGHttpUrl getBaseServiceURL], @"rest/userinfo/bindTel.json"];
     [[KGHUD sharedHud] show:self.view];
     
     [[KGHttpService sharedService] postByDicByParams:url param:dic success:^(id success) {
         
+        
+        //返回
+        if(self.isBack){
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
+        
+        //登录界面情况下，直接进入主页
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:nil forKey:Key_loginJessionID];
         [defaults setObject:self.type forKey:KEY_thirdLogin_type];
