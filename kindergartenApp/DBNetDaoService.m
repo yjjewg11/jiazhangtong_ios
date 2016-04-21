@@ -47,6 +47,24 @@
     if (self = [super init])
     {
         
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documents = [paths objectAtIndex:0];
+        NSString *database_path = [documents stringByAppendingPathComponent:DBNAME];
+        NSLog(@"%@",database_path);
+        if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK)
+        {
+            sqlite3_close(db);
+            NSLog(@"数据库打开失败");
+        }
+        else
+        {
+            NSLog(@"数据库打开成功,创建表");
+            
+            
+            
+            
+        }
+        
         NSString * tmpKey=@"CFBundleShortVersionString";
         NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:tmpKey];
         ;
@@ -56,24 +74,9 @@
         }
         [[NSUserDefaults standardUserDefaults] setObject:version forKey:tmpKey];
         NSLog(@"exec init sqlite db! ");
+      
         
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documents = [paths objectAtIndex:0];
-        NSString *database_path = [documents stringByAppendingPathComponent:DBNAME];
-        NSLog(@"%@",database_path);
-        if (sqlite3_open([database_path UTF8String], &db) != SQLITE_OK)
-        {
-            sqlite3_close(db);
-            NSLog(@"数据库打开失败");  
-        }
-        else
-        {
-            NSLog(@"数据库打开成功,创建表");
-            [self createAllTable];
-
-            
-            
-        }
+          [self createAllTable];
     }
     return self;
 }
