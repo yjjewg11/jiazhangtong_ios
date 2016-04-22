@@ -23,7 +23,7 @@
 - (void)toShare:(NSString *)title url:(NSString *)url
 {
     
-    if (title == nil)
+    if (title .length<1)
     {
         title= @"分享";
     }
@@ -85,14 +85,23 @@
 #pragma mark - 处理分享操作
 - (void)handelShareWithShareType:(NSString *)shareType title:(NSString *)title url:(NSString *)url
 {
+    
+    
+    if(!title || [title length] == 0)
+    {
+        title = @"分享";
+    }
+    
+    if(!url || [url length] == 0)
+    {
+        url = @"http://www.wenjie.net";
+    }
+    
     NSString * contentString =title;
     
     NSString * shareurl =url;
     
-    if(!shareurl || [shareurl length] == 0)
-    {
-        shareurl = @"http://www.wenjie.net";
-    }
+  
     
     //微信title设置方法：
     [UMSocialData defaultData].extConfig.wechatSessionData.title = title;

@@ -92,10 +92,10 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NgS-oD-eIN" userLabel="dianzanview">
-                                        <rect key="frame" x="170" y="24" width="133" height="44"/>
+                                        <rect key="frame" x="188" y="24" width="115" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vw-0G-T7y">
-                                                <rect key="frame" x="0.0" y="0.0" width="133" height="30"/>
+                                                <rect key="frame" x="-10" y="0.0" width="131" height="49"/>
                                                 <connections>
                                                     <action selector="touchInside_dianzan:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ewx-QX-2Xc"/>
                                                 </connections>
@@ -104,7 +104,7 @@
                                                 <rect key="frame" x="0.0" y="6" width="30" height="30"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="11" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYG-As-cqd">
-                                                <rect key="frame" x="38" y="11" width="95" height="21"/>
+                                                <rect key="frame" x="33" y="11" width="82" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
