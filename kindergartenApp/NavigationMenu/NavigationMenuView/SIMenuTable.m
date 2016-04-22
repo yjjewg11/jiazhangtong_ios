@@ -174,5 +174,8 @@
 
     }];
 }
-
+- (void)reloadByArray:(NSArray *)arr{
+     self.items = [NSArray arrayWithArray:arr];
+//    [self.table reloadData];
+}
 @end

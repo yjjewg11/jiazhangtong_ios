@@ -132,6 +132,7 @@
         {
             if(self.shareOpenVC==nil){
                 self.shareOpenVC=[[ShareOpenVC alloc]init];
+                self.shareOpenVC.parentVC=self;
             }
             
             NSString * title=self.domain.title;

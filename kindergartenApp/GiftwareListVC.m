@@ -292,7 +292,8 @@
     }
     else
     {
-        return 302;
+        NSLog(@"heightForRowAtIndexPath=%fd", APPWINDOWWIDTH/320* 310);
+        return APPWINDOWWIDTH/320* 305;
     }
 }
 

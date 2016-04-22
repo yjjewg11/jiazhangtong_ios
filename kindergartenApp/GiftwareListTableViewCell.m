@@ -27,7 +27,7 @@
     self.domain1=domain;
     
     if([@"0" isEqualToString: domain.status]){
-        [self.showStatusView setHidden:YES];
+        [self.showStatusView setHidden:NO];
 
     }else{
         [self.showStatusView setHidden:NO];

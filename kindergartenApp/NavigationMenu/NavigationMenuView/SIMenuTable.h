@@ -20,5 +20,6 @@
 - (id)initWithFrame:(CGRect)frame items:(NSArray *)items;
 - (void)show;
 - (void)hide;
+- (void)reloadByArray:(NSArray *)arr;
 
 @end
