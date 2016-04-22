@@ -1432,7 +1432,10 @@ const CGFloat kSPCustomConversationCellContentMargin =10;
         if ( conversation != nil ) {
             YWFeedbackViewController *feedback = [weakSelf.ywIMKit makeFeedbackViewControllerWithConversation:conversation];
             [feedback setTitle:@"意见反馈"];
-            feedback.contactInfo=self.userinfo.loginname;
+            //电话号码
+            if(self.userinfo.loginname.length>11){
+                feedback.contactInfo=self.userinfo.loginname;
+            }
             if ( [aViewController isKindOfClass:[UINavigationController class]] ) {
                 UINavigationController *nav = (UINavigationController *)aViewController;
                 [nav setNavigationBarHidden:NO animated:YES];

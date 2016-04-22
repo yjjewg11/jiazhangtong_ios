@@ -108,9 +108,16 @@
 //清空所有数据
 - (void)dropAllTable{
     NSMutableArray * arr=[NSMutableArray array];
-    [arr addObject:@"DROP TABLE  fp_photo_item"];
-    [arr addObject:@"DROP TABLE fp_familyinfo"];
-    [arr addObject:@"DROP TABLE fp_upload"];
+//    [arr addObject:@"DROP TABLE  fp_photo_item"];
+//    [arr addObject:@"DROP TABLE fp_familyinfo"];
+//    [arr addObject:@"DROP TABLE fp_upload"];
+//    
+    [arr addObject:@"delete from  fp_photo_item"];
+    [arr addObject:@"delete from fp_familyinfo"];
+    [arr addObject:@"delete from fp_upload"];
+//     [self execSql:arr[0]];
+//     [self execSql:arr[1]];
+//     [self execSql:arr[2]];
     [self execInsertTransactionSql:arr];
     
 }

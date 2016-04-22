@@ -188,10 +188,15 @@ DBNetDaoService * _localDbservice;
         
     }
     NSData *data;
-    data = UIImageJPEGRepresentation(img, 0.1);
+//    data = UIImageJPEGRepresentation(img, 1);
+//    NSLog(@"UIImageJPEGRepresentation(img, 1)=%ld",(unsigned long)data.length);
+    data = UIImageJPEGRepresentation(img, 0.5);
+//       NSLog(@"UIImageJPEGRepresentation(img, 0.1)=%ld",(unsigned long)data.length);
+//   
+    
     NSString * phone_uuid=[KGUUID getUUID];//手机设备唯一标示
     NSString * phoneType = [UIDevice currentDevice].model;
-    
+ 
     NSString * pathExtension=[uploadDomain.localurl pathExtension];
      NSString * filename=[ NSString stringWithFormat:@"f.%@",pathExtension ];
     NSDictionary * dict = @{
