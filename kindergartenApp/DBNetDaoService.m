@@ -746,7 +746,8 @@
 - (void)deletePhotoItem:(NSString *)uuid
 {
     NSString * sql = [NSString stringWithFormat:@"DELETE FROM fp_photo_item WHERE uuid='%@'",uuid];
-    [self execInsertTransactionSql:@[sql]];
+     NSString * sql1 = [NSString stringWithFormat:@"DELETE FROM fp_upload WHERE uuid='%@'",uuid];
+    [self execInsertTransactionSql:@[sql,sql1]];
 //    [self execSql:sql];
 }
 
