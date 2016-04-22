@@ -18,7 +18,7 @@
 #import "AnnouncementInfoViewController.h"
 #import "IntroductionViewController.h"
 #import "SPSchoolDetailVC.h"
-
+#import "FPGiftwareDetialVC.h"
 @interface MyCollectionViewController : BaseViewController
 
 

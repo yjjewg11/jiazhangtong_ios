@@ -160,7 +160,8 @@
         //获取课程表数据
         [[KGHttpService sharedService] getTeachingPlanList:beginDataStr endDate:endDataStr cuid:[classuuidMArray objectAtIndex:reqIndex] success:^(NSArray *teachPlanArray)
         {
-            
+            [self hidenLoadView];
+
             if(teachPlanArray && [teachPlanArray count] > Number_Zero)
             {
                 [allTimetableMDic setObject:teachPlanArray forKey:[classuuidMArray objectAtIndex:reqIndex]];
@@ -187,7 +188,8 @@
     {
         //加载数据到表表格中
         [lastSelItemView loadSPTimetableData:spTeachPlanArray];
-        
+        [self hidenLoadView];
+
         successCount++;
         
         if (successCount == 2)

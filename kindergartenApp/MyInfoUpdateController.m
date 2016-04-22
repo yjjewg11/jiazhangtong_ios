@@ -26,7 +26,7 @@ UILabel * ui_tel;
 @implementation MyInfoUpdateController
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self loadData];
+//    [self loadData];
     [super viewDidAppear:animated];
     
 }

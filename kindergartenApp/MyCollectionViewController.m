@@ -240,6 +240,17 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
+        case Topic_FPGiftware:
+        {
+            FPGiftwareDetialVC * vc = [[FPGiftwareDetialVC alloc] init];
+            vc.uuid=data.reluuid;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+          
+            break;
+            
+
         case Topic_FX:{
             BrowseURLViewController * vc = [[BrowseURLViewController alloc] init];
             vc.url = data.url;
