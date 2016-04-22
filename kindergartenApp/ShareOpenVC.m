@@ -11,6 +11,9 @@
 #import "HLActionSheet.h"
 #import "UMSocial.h"
 #import "SystemShareKey.h"
+@interface ShareOpenVC()<UMSocialUIDelegate>
+
+@end
 @implementation ShareOpenVC
 
 
@@ -22,7 +25,7 @@
     
     if (title == nil)
     {
-        title= @"";
+        title= @"分享";
     }
     
     NSArray *titles = @[@"微博",@"微信",@"朋友圈",@"QQ好友",@"复制链接"];
@@ -111,7 +114,7 @@
     
     UMSocialSnsPlatform * snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:shareType];
     
-    snsPlatform.snsClickHandler(self, [UMSocialControllerService defaultControllerService],YES);
+    snsPlatform.snsClickHandler(self.parentVC, [UMSocialControllerService defaultControllerService],YES);
 }
 
 

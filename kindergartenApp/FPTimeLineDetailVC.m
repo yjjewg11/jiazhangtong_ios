@@ -24,6 +24,7 @@
 #import "FPFamilyPhotoNormalDomain.h"
 #import "MJExtension.h"
 #import "PhotoVC.h"
+#import "ShareOpenVC.h"
 
 @interface FPTimeLineDetailVC () <UICollectionViewDataSource,UICollectionViewDelegate,FPTimeLineDetailLayoutDelegate,UIAlertViewDelegate,UMSocialUIDelegate,UpdateFPFamilyPhotoNormalDomainDelegate>
 {
@@ -32,7 +33,8 @@
     NSInteger _pageNo;
     UICollectionView * _collectionView;
     CGFloat imageViewHeight;
-}
+   }
+@property  ShareOpenVC* shareOpenVC;
 
 @end
 
@@ -297,7 +299,21 @@ static NSString *const PicID = @"camaracoll";
 #pragma mark - 处理分享
 - (void)sharePic:(NSNotification *)noti
 {
-    [self shareClicked:noti.object];
+    //老代码不在使用
+//    [self shareClicked:noti.object];
+    
+    FPFamilyPhotoNormalDomain * temp = noti.object;
+    
+    if(self.shareOpenVC==nil){
+        self.shareOpenVC=[[ShareOpenVC alloc]init];
+        self.shareOpenVC.parentVC=self;
+    }
+    
+    NSString * title=temp.note;
+    NSString * url=temp.path;
+    
+    [self.shareOpenVC toShare:title url:url];
+
 }
 
 #pragma mark - 分享相关

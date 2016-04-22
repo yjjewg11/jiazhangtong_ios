@@ -427,8 +427,17 @@
                   [self loadImgByRemote];
                  return ;
              }
-             //获取大图
+             //获取大图,使用
              UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+//             NSData *data;
+//             data = UIImageJPEGRepresentation(img, 1);
+//              NSLog(@"fullResolutionImage=%ld", data.length);
+//             
+//             img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+//            
+//             data = UIImageJPEGRepresentation(img, 1);
+//               NSLog(@"fullResolutionImage=%ld", data.length);
+             	
              [self.imageView setImage:img];
              
                self.imageView.height = [self scaleHeight:img width:APPWINDOWWIDTH];

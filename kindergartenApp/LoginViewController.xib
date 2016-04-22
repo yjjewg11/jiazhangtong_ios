@@ -328,12 +328,20 @@
                                     <rect key="frame" x="115" y="34" width="89" height="89"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Vrc-LZ-vIh" secondAttribute="height" multiplier="1:1" id="hLf-ox-2L0"/>
+                                        <constraint firstAttribute="height" constant="89" id="p8Q-P6-z8a"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="p8Q-P6-z8a"/>
+                                        </mask>
+                                    </variation>
                                     <variation key="heightClass=regular" misplaced="YES">
                                         <rect key="frame" x="114" y="63" width="75" height="75"/>
                                     </variation>
-                                    <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                        <rect key="frame" x="116" y="106" width="89" height="89"/>
+                                    <variation key="widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="p8Q-P6-z8a"/>
+                                        </mask>
                                     </variation>
                                     <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                         <rect key="frame" x="109" y="82" width="90" height="90"/>
@@ -345,13 +353,11 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="eTp-3s-4e6" secondAttribute="height" multiplier="16:9" id="PpQ-ma-gTF">
-                                    <variation key="widthClass=compact" constant="-26.666666666666629"/>
-                                </constraint>
                                 <constraint firstAttribute="bottom" secondItem="Vrc-LZ-vIh" secondAttribute="bottom" constant="5" id="ca8-Th-Hkb"/>
                                 <constraint firstItem="Vrc-LZ-vIh" firstAttribute="top" relation="lessThanOrEqual" secondItem="eTp-3s-4e6" secondAttribute="top" constant="33" id="fLk-by-AoS">
                                     <variation key="heightClass=regular" constant="63"/>
                                 </constraint>
+                                <constraint firstAttribute="bottom" secondItem="Vrc-LZ-vIh" secondAttribute="bottom" id="fQd-hF-c3I"/>
                                 <constraint firstAttribute="bottom" secondItem="Vrc-LZ-vIh" secondAttribute="bottom" constant="5" id="fd7-kw-qOn">
                                     <variation key="heightClass=compact-widthClass=compact" constant="8"/>
                                 </constraint>
@@ -368,6 +374,7 @@
                                 <mask key="constraints">
                                     <exclude reference="ca8-Th-Hkb"/>
                                     <exclude reference="fLk-by-AoS"/>
+                                    <exclude reference="fQd-hF-c3I"/>
                                     <exclude reference="fd7-kw-qOn"/>
                                     <exclude reference="rLn-bV-ENU"/>
                                     <exclude reference="wcm-Bc-DfC"/>
@@ -382,6 +389,11 @@
                                 <mask key="constraints">
                                     <include reference="fLk-by-AoS"/>
                                     <include reference="rLn-bV-ENU"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="fQd-hF-c3I"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -417,6 +429,7 @@
                             <variation key="widthClass=compact" constant="8"/>
                             <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
                         </constraint>
+                        <constraint firstItem="eTp-3s-4e6" firstAttribute="top" secondItem="OFE-eo-oxW" secondAttribute="top" constant="62" id="QBx-LO-BVv"/>
                         <constraint firstItem="WEg-yH-be5" firstAttribute="centerX" secondItem="OFE-eo-oxW" secondAttribute="centerX" id="Rzc-di-bkh"/>
                         <constraint firstItem="GN9-gP-9qe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ezG-Cw-WHT" secondAttribute="bottom" constant="1" id="TmV-F2-31W"/>
                         <constraint firstItem="eTp-3s-4e6" firstAttribute="centerX" secondItem="OFE-eo-oxW" secondAttribute="centerX" id="V2U-Ku-XwJ">
@@ -450,6 +463,7 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="QBx-LO-BVv"/>
                             <exclude reference="3eS-wg-Vqh"/>
                             <exclude reference="0AM-zi-pGr"/>
                             <exclude reference="5M5-FU-yrb"/>
@@ -476,6 +490,7 @@
                     </variation>
                     <variation key="widthClass=compact">
                         <mask key="constraints">
+                            <include reference="QBx-LO-BVv"/>
                             <include reference="mTJ-L8-eqr"/>
                             <include reference="84v-vX-FYR"/>
                             <include reference="f5P-m5-ENa"/>

@@ -70,7 +70,7 @@ NSInteger localDBlimit=50;
     NSArray * _dataOfmyCollectionArray;
     NSInteger  _PullDownMenu_myCollection_index;
     
-    
+    SINavigationMenuView * _topMenu;
     UITableView * _tableView;
     //左上下拉按钮
     FPHomeSonView * sonView;
@@ -259,16 +259,20 @@ NSInteger localDBlimit=50;
      [titleButton sizeToFit];
      self.navigationItem.titleView = titleButton;
     
-    if (self.navigationItem) {
-        if( self.navigationItem.titleView){
-            [self.navigationItem.titleView removeFromSuperview];
-        }
+    if (_topMenu!=nil) {
+        [_topMenu onHideMenu];
+        [_topMenu removeFromSuperview];
+        _topMenu=nil;
+    }
+    
+    {
+        
         CGRect frame = CGRectMake(0.0, 0.0, 200.0, self.navigationController.navigationBar.bounds.size.height);
-        SINavigationMenuView *menu = [[SINavigationMenuView alloc] initWithFrame:frame title:cDomain.title];
-        [menu displayMenuInView:self.view];
-        menu.items = _dataOfTopTitleBtnArray;
-        menu.delegate = self;
-        self.navigationItem.titleView = menu;
+        _topMenu= [[SINavigationMenuView alloc] initWithFrame:frame title:cDomain.title];
+        [_topMenu displayMenuInView:self.view];
+        _topMenu.items = _dataOfTopTitleBtnArray;
+        _topMenu.delegate = self;
+        self.navigationItem.titleView = _topMenu;
     }
 
 }

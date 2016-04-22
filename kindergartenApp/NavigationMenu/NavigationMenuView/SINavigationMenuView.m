@@ -53,7 +53,15 @@
         [self onHideMenu];
     }
 }
-
+- (void)reloadByArray:(NSArray *)arr{
+    
+    if (!self.table){
+        self.items=arr;
+    }else {
+         [self.table reloadByArray:arr];
+    }
+   
+}
 - (void)onShowMenu
 {
     if (!self.table) {

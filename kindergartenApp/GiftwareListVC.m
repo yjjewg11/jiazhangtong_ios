@@ -89,7 +89,7 @@
     UISegmentedControl *segmentedControl = [[UISegmentedControl alloc]initWithItems:segmentedData];
     
     segmentedControl.frame = CGRectMake(0, 0,APPWINDOWWIDTH, 30.0);
-    
+    [segmentedControl setBorderWithWidth:0 color:[UIColor whiteColor]];
     segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;//设置样式
     /*
      这个是设置按下按钮时的颜色
@@ -292,7 +292,8 @@
     }
     else
     {
-        return 302;
+        NSLog(@"heightForRowAtIndexPath=%fd", APPWINDOWWIDTH/320* 310);
+        return APPWINDOWWIDTH/320* 305;
     }
 }
 

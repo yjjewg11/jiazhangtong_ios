@@ -22,5 +22,6 @@
 - (id)setMenuTitle:(NSString *)title;
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
 - (void)displayMenuInView:(UIView *)view;
-
+- (void)reloadByArray:(NSArray *)arr;
+- (void)onHideMenu;
 @end

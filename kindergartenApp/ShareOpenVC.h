@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ShareOpenVC : NSObject
+@property (strong, nonatomic) UIViewController * parentVC;
+
+
 //分享
 - (void)toShare:(NSString *)title url:(NSString *)url;
 
