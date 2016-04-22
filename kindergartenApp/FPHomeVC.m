@@ -133,6 +133,9 @@ NSInteger localDBlimit=50;
     UIColor * color = [UIColor clearColor];
     NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:UITextAttributeTextColor];
     self.navigationController.navigationBar.titleTextAttributes = dict;
+//    [self fPPhotoItem_queryOfNewDataCount];
+    //获取我的家庭相册信息
+    [self getMyPhotoCollectionInfo];
 }
 
 - (void)viewDidLoad
@@ -163,8 +166,7 @@ NSInteger localDBlimit=50;
         
         [self initTableView];
         
-        //获取我的家庭相册信息
-        [self getMyPhotoCollectionInfo];
+        
         
         [self regNotification];
     }
@@ -193,7 +195,9 @@ NSInteger localDBlimit=50;
     
     //用于从数据库获取数据
     [center addObserver:self selector:@selector(loadData) name:@"canLoadData" object:nil];
-//    [center addObserver:self selector:@selector(saveUploadImgPath:) name:@"saveuploadimg" object:nil];
+    
+    [center addObserver:self selector:@selector(updatePhotoToRemoteFinish:) name:@"updatePhotoToRemoteFinish" object:nil];
+    
     [center addObserver:self selector:@selector(headerRefreshing) name:@"refreshtimelinedata" object:nil];
 //    [center addObserver:self selector:@selector(showEndUpDatePhotoDataView:) name:@"updateInfo" object:nil];
     [center addObserver:self selector:@selector(reloadData) name:@"reloaddata" object:nil];
@@ -323,6 +327,9 @@ NSInteger localDBlimit=50;
 //      }
     					
     if(localFamilyRangeTime.updateTime.length>1&&localFamilyRangeTime.maxTime.length>1){
+        
+        [self fPPhotoItem_queryOfNewDataCount];
+        
         [self showLoadView];
         [_service updateFPPhotoUpdateCountWithFamilyUUID:[FPHomeVC getFamily_uuid] success:^(NSString *status) {
             [self hidenLoadView];
@@ -1075,8 +1082,13 @@ NSInteger localDBlimit=50;
 //}
 
 #pragma mark - 保存上传图片列表
-- (void)saveUploadImgPath:(NSNotification *)noti
+- (void)updatePhotoToRemoteFinish:(NSNotification *)noti
 {
+    NSLog(@"updatePhotoToRemoteFinish");
+    //防止数据还没更新
+      [self performSelector:@selector(getMyPhotoCollectionInfo) withObject:nil afterDelay:2.0f];
+    
+//    [self getMyPhotoCollectionInfo];
 //    FPUploadSaveUrlDomain * domain = noti.object;
 //    [_service saveUploadImgPath:domain.localUrl status:[NSString stringWithFormat:@"%ld",(long)domain.status] family_uuid:domain.family_uuid uuid:domain.uuid];
 }
@@ -1295,6 +1307,34 @@ NSInteger localDBlimit=50;
     
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)fPPhotoItem_queryOfNewDataCount{
+    localFamilyRangeTime=[_service queryTimeByFamilyUUID :[FPHomeVC getFamily_uuid]];
+    if(localFamilyRangeTime.maxTime.length<1){
+        return;
+    }
+    
+    NSDictionary * dict = @{@"family_uuid":[FPHomeVC getFamily_uuid],@"maxTime":[KGDateUtil getQueryFormDateStringByString:localFamilyRangeTime.maxTime]};
+    NSString * url=[NSString stringWithFormat:@"%@rest/fPPhotoItem/queryOfNewDataCount.json", [KGHttpUrl getBaseServiceURL]];
+    
+    [[KGHttpService sharedService] getByDicByParams:url param:dict success:^(id success) {
+        NSDictionary * responseDic=success;
+        ;
+       
+        NSNumber * newDataCount=[responseDic objectForKey:@"newDataCount"];
+        NSInteger tmpCount=[newDataCount integerValue];
+        NSLog(@"newDataCount=%ld",tmpCount);
+        if(tmpCount>0){
+            dispatch_async(dispatch_get_main_queue(), ^
+                           {
+                               [fPHomeTopView.warningLbl setHidden:NO];
+                               fPHomeTopView.warningLbl.text = @"有新照片,请下拉刷新";
+                           });
+        }
+    } failed:^(NSString *errorMsg) {
+        
+    }];
+}
+
 
 @end
 
