@@ -415,6 +415,8 @@
     DBNetDaoService * _service = [DBNetDaoService defaulService];
     NSString * localUrl=[_service getfp_upload_localurl:self.domain.uuid];
 //    localUrl=@"assets-library://asset/asset111.JPG?id=99D53A1F-FEEF-40E1-8BB3-7DD55A43C8B71111&ext=JPG";
+    
+    NSLog(@"show LocalUrl=%@",localUrl);;
     //本地有图片则优先显示。
     if(localUrl.length>0){
         ALAssetsLibrary * _library =[FPUploadVC defaultAssetsLibrary];
@@ -426,8 +428,11 @@
                  return ;
              }
              //获取大图
-             UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+             UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
              [self.imageView setImage:img];
+             
+               self.imageView.height = [self scaleHeight:img width:APPWINDOWWIDTH];
+               [self resetFrame];		
              
          }
                  failureBlock:^(NSError *error)
@@ -513,22 +518,42 @@
          {
              [[SDImageCache sharedImageCache] storeImage:image forKey:[[domain.path componentsSeparatedByString:@"@"] firstObject] toDisk:YES];
              
-             CGFloat imgW = image.size.width;
-             CGFloat imgH = image.size.height;
              
-             //计算宽度压缩了还是拉伸了
-             CGFloat widthBiZhi = (APPWINDOWWIDTH) / imgW;
-             if (widthBiZhi >= 1) //直接按照这个比例设定imageview的高度,也就是图片本身的imgH
-             {
-                 success(imgH);
-             }
-             else //高度按照这个比例相应缩小
-             {
-                 success(imgH * widthBiZhi);
-             }
+            CGFloat widthBiZhi = [self scaleHeight:image width:APPWINDOWWIDTH];
+              success(widthBiZhi);
+//             CGFloat imgW = image.size.width;
+//             CGFloat imgH = image.size.height;
+//             
+//             //计算宽度压缩了还是拉伸了
+//             CGFloat widthBiZhi = (APPWINDOWWIDTH) / imgW;
+//             if (widthBiZhi >= 1) //直接按照这个比例设定imageview的高度,也就是图片本身的imgH
+//             {
+//                 success(imgH);
+//             }
+//             else //高度按照这个比例相应缩小
+//             {
+//                 success(imgH * widthBiZhi);
+//             }		
          }
     }];
 }
+
+-(CGFloat)scaleHeight:(UIImage *)image width:(CGFloat)width{
+    CGFloat imgW = image.size.width;
+    CGFloat imgH = image.size.height;
+    
+    //计算宽度压缩了还是拉伸了
+    CGFloat widthBiZhi = (width) / imgW;
+    if (widthBiZhi >= 1) //直接按照这个比例设定imageview的高度,也就是图片本身的imgH
+    {
+        return width;
+    }
+    else //高度按照这个比例相应缩小
+    {
+        return (imgH * widthBiZhi);
+    }
+}
+
 
 #pragma mark - 创建底部按钮
 - (void)addBtn:(UIView *)view

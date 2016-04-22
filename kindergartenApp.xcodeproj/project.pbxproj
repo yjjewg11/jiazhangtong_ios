@@ -7429,7 +7429,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
+				PROVISIONING_PROFILE = "b53d365c-7840-458b-b390-239acf172453";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -7499,7 +7499,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
+				PROVISIONING_PROFILE = "b53d365c-7840-458b-b390-239acf172453";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7";
 			};

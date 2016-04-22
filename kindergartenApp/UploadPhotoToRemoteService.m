@@ -155,7 +155,7 @@ DBNetDaoService * _localDbservice;
              return;
          }
          //获取大图
-         UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullResolutionImage]];
+         UIImage * img = [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
          //获取时间
          NSString * date = [asset valueForProperty:@"ALAssetPropertyDate"];
          
