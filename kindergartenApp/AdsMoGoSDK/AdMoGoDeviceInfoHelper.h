@@ -15,7 +15,6 @@
 
 #import "sys/utsname.h"
 #import "AdMoGoCountryCodeHelper.h"
-#import "AdMoGoReachability.h"
 #import "AdMoGoView.h"
 
 #import "AdMoGoCountryCodeHelperIOS5.h"
@@ -125,10 +124,6 @@
  *获取新增受众类型
  */
 - (int)getNewAudienceTypeByAppKey:(NSString *)appKey;
-/**
- *获得网络状态
- */
--(AdMoGoNetworkStatus)getNetworkStatus;
 /*
     将adViewType转换为请求类型
     返回请求类型

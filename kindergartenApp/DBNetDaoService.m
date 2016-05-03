@@ -765,7 +765,7 @@
 {
     NSString * sql = [NSString stringWithFormat:@"SELECT localurl from fp_upload WHERE  uuid ='%@'",uuid];
     NSLog(@"sql=%@",sql);
-    NSMutableArray * marr = [NSMutableArray array];
+ 
     NSString *urlStr=nil;
     sqlite3_stmt *stmt;
     if (sqlite3_prepare_v2(db, [sql UTF8String], -1, &stmt, nil) == SQLITE_OK)

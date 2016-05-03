@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AdMoGoConfigData.h"
-#import "AdMogoConfigDic.h"
-#import "NSMutableDictionary+AdsMogoDic.h"
+
 @interface AdMoGoConfigDataCenter : NSObject
 
 /*

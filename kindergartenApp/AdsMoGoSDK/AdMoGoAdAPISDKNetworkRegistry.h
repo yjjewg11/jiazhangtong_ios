@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AdMoGoClassWrapper.h"
 
 
 @class AdMoGoAdNetworkAdapter;
@@ -19,5 +18,5 @@
 - (void)setAdapterDict:(NSMutableDictionary *)adapterDict;
 - (void)registerClass:(Class)adapterClass;
 
-- (AdMoGoClassWrapper *)adapterClassFor:(NSInteger)adNetworkType;
+- (id)adapterClassFor:(NSInteger)adNetworkType;
 @end
