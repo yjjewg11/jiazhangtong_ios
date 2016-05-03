@@ -10,7 +10,7 @@
 #import "KeyChainStore.h"
 @implementation KGUUID
 
-+(NSString *)getUUID
++(NSString *)getKGUUID
 {
     NSString * strUUID = (NSString *)[KeyChainStore load:KEY_USERNAME_PASSWORD];
    

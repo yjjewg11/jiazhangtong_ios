@@ -194,7 +194,7 @@ DBNetDaoService * _localDbservice;
 //       NSLog(@"UIImageJPEGRepresentation(img, 0.1)=%ld",(unsigned long)data.length);
 //   
     
-    NSString * phone_uuid=[KGUUID getUUID];//手机设备唯一标示
+    NSString * phone_uuid=[KGUUID getKGUUID];//手机设备唯一标示
     NSString * phoneType = [UIDevice currentDevice].model;
  
     NSString * pathExtension=[uploadDomain.localurl pathExtension];
