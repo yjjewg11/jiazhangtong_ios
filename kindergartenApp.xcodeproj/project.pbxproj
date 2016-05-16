@@ -355,11 +355,6 @@
 		04DDA5FD1CD8EACE00DBF147 /* AdMoGoWebBrowser_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DDA5F11CD8EACE00DBF147 /* AdMoGoWebBrowser_ipad.xib */; };
 		04DDA5FE1CD8EACE00DBF147 /* libAdsMogo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA5F91CD8EACE00DBF147 /* libAdsMogo.a */; };
 		04DDA5FF1CD8EACE00DBF147 /* libAdsMogo_i386.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA5FA1CD8EACE00DBF147 /* libAdsMogo_i386.a */; };
-		04DDA6141CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDA6041CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		04DDA6151CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDA6061CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		04DDA6161CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDA6081CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		04DDA6171CD8EB7600DBF147 /* baidumobadsdk.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04DDA60D1CD8EB7600DBF147 /* baidumobadsdk.bundle */; };
-		04DDA6181CD8EB7600DBF147 /* libBaiduMobAdSdk64bit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA6131CD8EB7600DBF147 /* libBaiduMobAdSdk64bit.a */; };
 		04DDA62A1CD8EBB900DBF147 /* AdMoGoAdapterDGTFullAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDA61C1CD8EBB900DBF147 /* AdMoGoAdapterDGTFullAd.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04DDA62B1CD8EBB900DBF147 /* AdMoGoAdapterDGTMob.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDA61E1CD8EBB900DBF147 /* AdMoGoAdapterDGTMob.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		04DDA62D1CD8EBB900DBF147 /* GDTMobNativeAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDA6221CD8EBB900DBF147 /* GDTMobNativeAdapter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -559,8 +554,6 @@
 		04FA59931C27D05A009689C7 /* EYTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA59911C27D05A009689C7 /* EYTextField.m */; };
 		04FA59951C27E77C009689C7 /* ShareBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA59941C27E77C009689C7 /* ShareBtnView.xib */; };
 		04FA59981C27E863009689C7 /* ShareBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA59971C27E863009689C7 /* ShareBtnView.m */; };
-		04FA7D081C1E95EE0035AF18 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D071C1E95EE0035AF18 /* JavaScriptCore.framework */; };
-		04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA7D0E1C1EA9FA0035AF18 /* WebKit.framework */; };
 		04FA7D131C1ECB040035AF18 /* MineHomeFunCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FA7D111C1ECB040035AF18 /* MineHomeFunCell.m */; };
 		04FA7D141C1ECB040035AF18 /* MineHomeFunCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FA7D121C1ECB040035AF18 /* MineHomeFunCell.xib */; };
 		04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FA92811C4DDCE800010DAE /* Accelerate.framework */; };
@@ -1434,23 +1427,6 @@
 		04DDA5F91CD8EACE00DBF147 /* libAdsMogo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdsMogo.a; sourceTree = "<group>"; };
 		04DDA5FA1CD8EACE00DBF147 /* libAdsMogo_i386.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdsMogo_i386.a; sourceTree = "<group>"; };
 		04DDA5FB1CD8EACE00DBF147 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
-		04DDA6031CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduFullAds.h; sourceTree = "<group>"; };
-		04DDA6041CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterBaiduFullAds.m; sourceTree = "<group>"; };
-		04DDA6051CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduMobAd.h; sourceTree = "<group>"; };
-		04DDA6061CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterBaiduMobAd.m; sourceTree = "<group>"; };
-		04DDA6071CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterBaiduSplash.h; sourceTree = "<group>"; };
-		04DDA6081CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterBaiduSplash.m; sourceTree = "<group>"; };
-		04DDA6091CD8EB7600DBF147 /* BaiduMobAdCommonConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdCommonConfig.h; sourceTree = "<group>"; };
-		04DDA60A1CD8EB7600DBF147 /* BaiduMobAdDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdDelegateProtocol.h; sourceTree = "<group>"; };
-		04DDA60B1CD8EB7600DBF147 /* BaiduMobAdInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdInterstitial.h; sourceTree = "<group>"; };
-		04DDA60C1CD8EB7600DBF147 /* BaiduMobAdInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdInterstitialDelegate.h; sourceTree = "<group>"; };
-		04DDA60D1CD8EB7600DBF147 /* baidumobadsdk.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = baidumobadsdk.bundle; sourceTree = "<group>"; };
-		04DDA60E1CD8EB7600DBF147 /* BaiduMobAdSplash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdSplash.h; sourceTree = "<group>"; };
-		04DDA60F1CD8EB7600DBF147 /* BaiduMobAdSplashDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdSplashDelegate.h; sourceTree = "<group>"; };
-		04DDA6101CD8EB7600DBF147 /* BaiduMobAdVideoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdVideoDelegate.h; sourceTree = "<group>"; };
-		04DDA6111CD8EB7600DBF147 /* BaiduMobAdVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdVideoView.h; sourceTree = "<group>"; };
-		04DDA6121CD8EB7600DBF147 /* BaiduMobAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobAdView.h; sourceTree = "<group>"; };
-		04DDA6131CD8EB7600DBF147 /* libBaiduMobAdSdk64bit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobAdSdk64bit.a; sourceTree = "<group>"; };
 		04DDA61B1CD8EBB900DBF147 /* AdMoGoAdapterDGTFullAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterDGTFullAd.h; sourceTree = "<group>"; };
 		04DDA61C1CD8EBB900DBF147 /* AdMoGoAdapterDGTFullAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdMoGoAdapterDGTFullAd.m; sourceTree = "<group>"; };
 		04DDA61D1CD8EBB900DBF147 /* AdMoGoAdapterDGTMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMoGoAdapterDGTMob.h; sourceTree = "<group>"; };
@@ -2462,8 +2438,6 @@
 				0482BEF31CC389DB00ABD6B1 /* CoreData.framework in Frameworks */,
 				04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */,
 				0482BED21CC37BC900ABD6B1 /* UTMini.framework in Frameworks */,
-				04FA7D0F1C1EA9FA0035AF18 /* WebKit.framework in Frameworks */,
-				04FA7D081C1E95EE0035AF18 /* JavaScriptCore.framework in Frameworks */,
 				0482BEE01CC37D1500ABD6B1 /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */,
 				04A50C581CC4AAE000EC9F4B /* ALBBSDK.framework in Frameworks */,
@@ -2482,7 +2456,6 @@
 				04663D9D1BE719680033C436 /* AddressBook.framework in Frameworks */,
 				04A50C661CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */,
-				04DDA6181CD8EB7600DBF147 /* libBaiduMobAdSdk64bit.a in Frameworks */,
 				04FE6D251BF5838200181134 /* AddressBookUI.framework in Frameworks */,
 				0482BED31CC37BC900ABD6B1 /* WXOpenIMSDKFMWK.framework in Frameworks */,
 				04DDA62E1CD8EBB900DBF147 /* libGDTMobSDK.a in Frameworks */,
@@ -3362,38 +3335,6 @@
 			path = AdsMoGoSDK;
 			sourceTree = "<group>";
 		};
-		04DDA6011CD8EB7600DBF147 /* Baidu_SDK_340 */ = {
-			isa = PBXGroup;
-			children = (
-				04DDA6021CD8EB7600DBF147 /* AdsMoGoAdapter */,
-				04DDA6091CD8EB7600DBF147 /* BaiduMobAdCommonConfig.h */,
-				04DDA60A1CD8EB7600DBF147 /* BaiduMobAdDelegateProtocol.h */,
-				04DDA60B1CD8EB7600DBF147 /* BaiduMobAdInterstitial.h */,
-				04DDA60C1CD8EB7600DBF147 /* BaiduMobAdInterstitialDelegate.h */,
-				04DDA60D1CD8EB7600DBF147 /* baidumobadsdk.bundle */,
-				04DDA60E1CD8EB7600DBF147 /* BaiduMobAdSplash.h */,
-				04DDA60F1CD8EB7600DBF147 /* BaiduMobAdSplashDelegate.h */,
-				04DDA6101CD8EB7600DBF147 /* BaiduMobAdVideoDelegate.h */,
-				04DDA6111CD8EB7600DBF147 /* BaiduMobAdVideoView.h */,
-				04DDA6121CD8EB7600DBF147 /* BaiduMobAdView.h */,
-				04DDA6131CD8EB7600DBF147 /* libBaiduMobAdSdk64bit.a */,
-			);
-			path = Baidu_SDK_340;
-			sourceTree = "<group>";
-		};
-		04DDA6021CD8EB7600DBF147 /* AdsMoGoAdapter */ = {
-			isa = PBXGroup;
-			children = (
-				04DDA6031CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.h */,
-				04DDA6041CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.m */,
-				04DDA6051CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.h */,
-				04DDA6061CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.m */,
-				04DDA6071CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.h */,
-				04DDA6081CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.m */,
-			);
-			path = AdsMoGoAdapter;
-			sourceTree = "<group>";
-		};
 		04DDA6191CD8EBB900DBF147 /* GDTMob_SDK_430 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3513,7 +3454,6 @@
 			isa = PBXGroup;
 			children = (
 				04DDA6191CD8EBB900DBF147 /* GDTMob_SDK_430 */,
-				04DDA6011CD8EB7600DBF147 /* Baidu_SDK_340 */,
 			);
 			path = AdNetworkLibs;
 			sourceTree = "<group>";
@@ -6315,7 +6255,6 @@
 				04DDA58E1CD8EAC300DBF147 /* shareviewfoot_bg@2x.png in Resources */,
 				04DDA5A61CD8EAC300DBF147 /* webview_bar_pause_ipad@2x.png in Resources */,
 				04FB23731C16C7D0009B57E2 /* DiscorveryTypeCell.xib in Resources */,
-				04DDA6171CD8EB7600DBF147 /* baidumobadsdk.bundle in Resources */,
 				04F9FB9F1BF1A77E00AEFB88 /* UMSocialLocalizable.strings in Resources */,
 				04D288AF1CA3864C00D12BEF /* EditFamilyMemberVC.xib in Resources */,
 				04F95F5D1C4E2E45000909B1 /* FPHomeSonView.xib in Resources */,
@@ -6970,7 +6909,6 @@
 				04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */,
 				E755FA201CC6384400AF32A0 /* BindTelController.m in Sources */,
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
-				04DDA6151CD8EB7600DBF147 /* AdMoGoAdapterBaiduMobAd.m in Sources */,
 				04FEEC801C76B7670024FEAF /* FPTimeLineEditVC.m in Sources */,
 				040021131C3F9263005F1D82 /* UIImage+Rotate.m in Sources */,
 				04873CD11CA7DDFA00F01CB4 /* ShareOpenVC.m in Sources */,
@@ -6991,7 +6929,6 @@
 				04F8F6301C7AB410006929F2 /* FPTimeLineCommentCell.m in Sources */,
 				F4EA53981B60EF800044BE7A /* StudentBaseInfoViewController.m in Sources */,
 				0494F47C1BDF777500F39865 /* MJRefreshFooterView.m in Sources */,
-				04DDA6161CD8EB7600DBF147 /* AdMoGoAdapterBaiduSplash.m in Sources */,
 				248B6A9B1B19AAD200FCB98F /* KGMessageView.m in Sources */,
 				0403DCE71BF5C84D0089E463 /* MySPCourseView.m in Sources */,
 				0492BA181CBCE70E00ACB096 /* DianzanNameShowView.m in Sources */,
@@ -7056,7 +6993,6 @@
 				2489B6671B5AB49E00039E70 /* UIImageView+WebCache.m in Sources */,
 				048ADD331BD611D600E6E6D0 /* SPTimetableDomain.m in Sources */,
 				4D077B1D1B8038BE00FFD5CB /* CollectNoticeTableViewCell.m in Sources */,
-				04DDA6141CD8EB7600DBF147 /* AdMoGoAdapterBaiduFullAds.m in Sources */,
 				24DE91A81B67B94500D3FFCE /* MessageTableViewCell.m in Sources */,
 				04FDBE661C1928A700516755 /* SystemConfigOfTopic.m in Sources */,
 				248B6AD21B19B58D00FCB98F /* MLNavigationController.m in Sources */,
@@ -7140,8 +7076,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: luo qian (3K95Y73CQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: luo qian (3K95Y73CQX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -7188,8 +7124,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: luo qian (3K95Y73CQX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: luo qian (3K95Y73CQX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
