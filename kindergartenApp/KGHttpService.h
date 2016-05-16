@@ -210,7 +210,7 @@
 
 
 //公告相关 begin
-
+- (void)getAnnouncementInfoByUrl:(NSString *)url success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild ;
 //获取单个公告详情
 - (void)getAnnouncementInfo:(NSString *)uuid success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild;
 

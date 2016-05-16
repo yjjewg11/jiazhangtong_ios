@@ -12,7 +12,7 @@
 @interface GiftwareArticlesInfoViewController : BaseViewController
 
 @property (strong, nonatomic) NSString * annuuid;
-
+@property  KGTopicType type;
 @property (strong, nonatomic) NSString * title;
 
 - (IBAction)articlesFunBtnClicked:(UIButton *)sender;

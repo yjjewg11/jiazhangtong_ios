@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-
+#import "GiftwareArticlesInfoViewController.h"
 @interface AnnouncementListViewController : BaseViewController <UITableViewDataSource>
 
 

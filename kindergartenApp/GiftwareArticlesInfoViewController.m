@@ -56,7 +56,7 @@
     myWebView.scrollView.scrollEnabled = YES;
     
     myWebView.delegate = self;
-    [self getArticlesInfo];//获取精品文章详情
+       [self getArticlesInfo];//获取精品文章详情
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -76,11 +76,21 @@
 {
     [[KGHUD sharedHud] show:self.view];
     
-    [[KGHttpService sharedService] getArticlesInfo:_annuuid success:^(AnnouncementDomain *announcementObj)
+    
+    NSString * url=nil;
+    if(_type==Topic_XYGG){
+        url=[NSString stringWithFormat:@"%@rest/share/getAnnUrlJSON.json?uuid=%@", [KGHttpUrl getBaseServiceURL], _annuuid];
+    }else{
+        url=[NSString stringWithFormat:@"%@rest/share/getArticleUrlJSON.json?uuid=%@", [KGHttpUrl getBaseServiceURL], _annuuid];
+    }
+    [[KGHttpService sharedService] getAnnouncementInfoByUrl:url success:^(AnnouncementDomain *announcementObj)
     {
         announcementDomain = announcementObj;
         self.urlStr = announcementDomain.share_url;
+        self.type=announcementDomain.type;
+        self.title=announcementDomain.title;
         [[KGHUD sharedHud] hide:self.view];
+        
         [self resetViewParam];
     }
     faild:^(NSString *errorMsg)
@@ -154,7 +164,7 @@
         });
         return;
     }
-    [[KGHttpService sharedService] saveDZ:announcementDomain.uuid type:Topic_Articles success:^(NSString *msgStr) {
+    [[KGHttpService sharedService] saveDZ:announcementDomain.uuid type:self.type success:^(NSString *msgStr) {
         [[KGHUD sharedHud] show:self.view onlyMsg:msgStr];
 
         dzImageView.image = [UIImage imageNamed:@"zan2"];
@@ -319,7 +329,7 @@
 
     FavoritesDomain * domain = [[FavoritesDomain alloc] init];
     domain.title = announcementDomain.title;
-    domain.type  = Topic_Articles;
+    domain.type  = self.type;
     domain.reluuid = announcementDomain.uuid;
     domain.createtime = [KGDateUtil presentTime];
     button.enabled = NO;

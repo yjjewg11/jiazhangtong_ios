@@ -5034,6 +5034,7 @@
 				2474DFB91B6CCDD80021506F /* Recipes(食谱) */,
 				2474DFA81B6CB7AA0021506F /* SignRecord(签到记录) */,
 				24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */,
+				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
 				F47AFEAA1B5E22C100D43F38 /* Announcement(公告) */,
 				2489B6751B5ABA6C00039E70 /* AddressBooks(通讯录) */,
 				24A175FA1B55505D00295997 /* Login(登录) */,
@@ -5363,7 +5364,6 @@
 		24DE91AA1B67C1FC00D3FFCE /* Teacher(评价老师) */ = {
 			isa = PBXGroup;
 			children = (
-				F4E6B23E1B6B59100087EAEB /* GiftwareArticles(精品文章) */,
 				24DE91AD1B67C22200D3FFCE /* Controller */,
 				24DE91AC1B67C21800D3FFCE /* Model */,
 				24DE91AB1B67C21100D3FFCE /* View */,

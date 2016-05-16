@@ -242,15 +242,22 @@
     
     switch (domain.type) {
         case Topic_XYGG:
+            vc = [[GiftwareArticlesInfoViewController alloc] init];
+            ((GiftwareArticlesInfoViewController *)vc).annuuid = domain.rel_uuid;
+            ((GiftwareArticlesInfoViewController *)vc).type = Topic_XYGG;
+            break;
+
         case Topic_Announcement:
-            vc = [[AnnouncementInfoViewController alloc] init];
-            ((AnnouncementInfoViewController *)vc).annuuid = domain.rel_uuid;
+            vc = [[GiftwareArticlesInfoViewController alloc] init];
+            ((GiftwareArticlesInfoViewController *)vc).annuuid = domain.rel_uuid;
+            ((GiftwareArticlesInfoViewController *)vc).type = Topic_Announcement;
             break;
             
             
         case Topic_Articles:
             vc = [[GiftwareArticlesInfoViewController alloc] init];
             ((GiftwareArticlesInfoViewController *)vc).annuuid = domain.rel_uuid;
+             ((GiftwareArticlesInfoViewController *)vc).type = Topic_Articles;
             break;
         case Topic_ZSJH:
             vc = [[IntroductionViewController alloc] init];

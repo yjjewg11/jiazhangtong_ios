@@ -139,6 +139,7 @@
     GiftwareArticlesInfoViewController * infoVC = [[GiftwareArticlesInfoViewController alloc] init];
     
     infoVC.annuuid = annDomain.uuid;
+    infoVC.type=Topic_Articles;
 
     infoVC.title = annDomain.title;
     

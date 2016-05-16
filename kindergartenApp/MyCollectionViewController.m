@@ -203,12 +203,18 @@
         case Topic_Articles:{
         GiftwareArticlesInfoViewController * vc = [[GiftwareArticlesInfoViewController alloc] init];
             vc.annuuid = data.reluuid;
+            vc.type=Topic_Articles;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case Topic_XYGG:{
-            AnnouncementInfoViewController * vc = [[AnnouncementInfoViewController alloc] init];
+            
+            GiftwareArticlesInfoViewController * vc = [[GiftwareArticlesInfoViewController alloc] init];
+            vc.annuuid = data.reluuid;
+            vc.type=Topic_XYGG;
             [self.navigationController pushViewController:vc animated:YES];
+//            AnnouncementInfoViewController * vc = [[AnnouncementInfoViewController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case Topic_ZSJH:{

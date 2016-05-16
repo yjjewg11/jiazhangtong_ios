@@ -973,7 +973,6 @@
 
 
 #pragma 公告相关 begin
-
 //获取单个公告详情
 - (void)getAnnouncementInfo:(NSString *)uuid success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild {
     
@@ -999,6 +998,36 @@
                                      }];
 }
 
+
+
+//获取单个文章详情
+- (void)getAnnouncementInfoByUrl:(NSString *)url success:(void (^)(AnnouncementDomain * announcementObj))success faild:(void (^)(NSString * errorMsg))faild {
+    
+    
+    [[AFAppDotNetAPIClient sharedClient] GET:url
+                                  parameters:nil
+                                     success:^(NSURLSessionDataTask* task, id responseObject) {
+                                         
+                                         KGBaseDomain * baseDomain = [KGBaseDomain objectWithKeyValues:responseObject];
+                                         
+                                         [self sessionTimeoutHandle:baseDomain];
+                                         
+                                         if([baseDomain.ResMsg.status isEqualToString:String_Success]) {
+                                             
+                                             AnnouncementDomain * announcement = [AnnouncementDomain objectWithKeyValues:baseDomain.data];
+                                             announcement.share_url = [responseObject objectForKey:@"share_url"];
+                                             announcement.isFavor = [[responseObject objectForKey:@"isFavor"] boolValue];
+                                             announcement.count = [[responseObject objectForKey:@"count"] integerValue];
+                                             
+                                             success(announcement);
+                                         } else {
+                                             faild(baseDomain.ResMsg.message);
+                                         }
+                                     }
+                                     failure:^(NSURLSessionDataTask* task, NSError* error) {
+                                         [self requestErrorCode:error faild:faild];
+                                     }];
+}
 //分页获取公告列表
 - (void)getAnnouncementList:(PageInfoDomain *)pageInfo success:(void (^)(NSArray * announcementArray))success faild:(void (^)(NSString * errorMsg))faild {
     

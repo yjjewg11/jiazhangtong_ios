@@ -200,10 +200,23 @@
 #pragma reFreshView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AnnouncementDomain * domain = dataSource[indexPath.row];
-    AnnouncementInfoViewController * infoVC = [[AnnouncementInfoViewController alloc] init];
-    infoVC.annuuid = domain.uuid;
+    AnnouncementDomain * annDomain = dataSource[indexPath.row];
+    
+    
+    
+    GiftwareArticlesInfoViewController * infoVC = [[GiftwareArticlesInfoViewController alloc] init];
+    
+    infoVC.annuuid = annDomain.uuid;
+    infoVC.type=Topic_XYGG;
+    
+    infoVC.title = annDomain.title;
+    
     [self.navigationController pushViewController:infoVC animated:YES];
+//    
+//    
+//    AnnouncementInfoViewController * infoVC = [[AnnouncementInfoViewController alloc] init];
+//    infoVC.annuuid = domain.uuid;
+//    [self.navigationController pushViewController:infoVC animated:YES];
 }
 
 
