@@ -829,17 +829,6 @@
 		E755FA271CC638BC00AF32A0 /* AlertBindTelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E755FA261CC638BC00AF32A0 /* AlertBindTelView.xib */; };
 		E76D90511D0021BD00562DEC /* UIViewController+EZBackPop.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90501D0021BD00562DEC /* UIViewController+EZBackPop.m */; };
 		E76D90551D00221F00562DEC /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90531D00221F00562DEC /* Aspects.m */; };
-		E76D90701D00228700562DEC /* NSArray+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90581D00228700562DEC /* NSArray+DDKit.m */; };
-		E76D90711D00228700562DEC /* NSDate+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D905A1D00228700562DEC /* NSDate+DDKit.m */; };
-		E76D90721D00228700562DEC /* NSString+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D905C1D00228700562DEC /* NSString+DDKit.m */; };
-		E76D90731D00228700562DEC /* UIButton+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D905E1D00228700562DEC /* UIButton+DDKit.m */; };
-		E76D90741D00228700562DEC /* UIColor+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90601D00228700562DEC /* UIColor+DDKit.m */; };
-		E76D90751D00228700562DEC /* UIImage+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90621D00228700562DEC /* UIImage+DDKit.m */; };
-		E76D90761D00228700562DEC /* UIImageView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90641D00228700562DEC /* UIImageView+DDKit.m */; };
-		E76D90771D00228700562DEC /* UILabel+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90661D00228700562DEC /* UILabel+DDKit.m */; };
-		E76D90781D00228700562DEC /* UISegmentedControl+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90681D00228700562DEC /* UISegmentedControl+DDKit.m */; };
-		E76D90791D00228700562DEC /* UIView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D906A1D00228700562DEC /* UIView+DDKit.m */; };
-		E76D907A1D00228700562DEC /* UIViewController+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D906C1D00228700562DEC /* UIViewController+DDKit.m */; };
 		E76D908C1D0022F800562DEC /* HIKLoadPercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D907D1D0022F800562DEC /* HIKLoadPercentView.m */; };
 		E76D908D1D0022F800562DEC /* HIKLoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D907F1D0022F800562DEC /* HIKLoadView.m */; };
 		E76D908E1D0022F800562DEC /* HIKLoadViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90811D0022F800562DEC /* HIKLoadViewItem.m */; };
@@ -852,6 +841,17 @@
 		E76D90981D002F8E00562DEC /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90961D002F8E00562DEC /* libcrypto.a */; };
 		E76D90991D002F8E00562DEC /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90971D002F8E00562DEC /* libssl.a */; };
 		E76D909C1D00326A00562DEC /* HomeMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D909B1D00326A00562DEC /* HomeMenuBtn.m */; };
+		E7C752B01D01D71500DA0C38 /* NSArray+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529A1D01D71500DA0C38 /* NSArray+DDKit.m */; };
+		E7C752B11D01D71500DA0C38 /* NSDate+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529C1D01D71500DA0C38 /* NSDate+DDKit.m */; };
+		E7C752B21D01D71500DA0C38 /* NSString+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529E1D01D71500DA0C38 /* NSString+DDKit.m */; };
+		E7C752B31D01D71500DA0C38 /* UIButton+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752A01D01D71500DA0C38 /* UIButton+DDKit.m */; };
+		E7C752B41D01D71500DA0C38 /* UIColor+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752A21D01D71500DA0C38 /* UIColor+DDKit.m */; };
+		E7C752B51D01D71500DA0C38 /* UIImage+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752A41D01D71500DA0C38 /* UIImage+DDKit.m */; };
+		E7C752B61D01D71500DA0C38 /* UIImageView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752A61D01D71500DA0C38 /* UIImageView+DDKit.m */; };
+		E7C752B71D01D71500DA0C38 /* UILabel+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752A81D01D71500DA0C38 /* UILabel+DDKit.m */; };
+		E7C752B81D01D71500DA0C38 /* UISegmentedControl+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AA1D01D71500DA0C38 /* UISegmentedControl+DDKit.m */; };
+		E7C752B91D01D71500DA0C38 /* UIView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AC1D01D71500DA0C38 /* UIView+DDKit.m */; };
+		E7C752BA1D01D71500DA0C38 /* UIViewController+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -2296,30 +2296,6 @@
 		E76D90501D0021BD00562DEC /* UIViewController+EZBackPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+EZBackPop.m"; sourceTree = "<group>"; };
 		E76D90521D00221F00562DEC /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		E76D90531D00221F00562DEC /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
-		E76D90561D00228700562DEC /* DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDKit.h; sourceTree = "<group>"; };
-		E76D90571D00228700562DEC /* NSArray+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DDKit.h"; sourceTree = "<group>"; };
-		E76D90581D00228700562DEC /* NSArray+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DDKit.m"; sourceTree = "<group>"; };
-		E76D90591D00228700562DEC /* NSDate+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DDKit.h"; sourceTree = "<group>"; };
-		E76D905A1D00228700562DEC /* NSDate+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DDKit.m"; sourceTree = "<group>"; };
-		E76D905B1D00228700562DEC /* NSString+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDKit.h"; sourceTree = "<group>"; };
-		E76D905C1D00228700562DEC /* NSString+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDKit.m"; sourceTree = "<group>"; };
-		E76D905D1D00228700562DEC /* UIButton+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DDKit.h"; sourceTree = "<group>"; };
-		E76D905E1D00228700562DEC /* UIButton+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+DDKit.m"; sourceTree = "<group>"; };
-		E76D905F1D00228700562DEC /* UIColor+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DDKit.h"; sourceTree = "<group>"; };
-		E76D90601D00228700562DEC /* UIColor+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DDKit.m"; sourceTree = "<group>"; };
-		E76D90611D00228700562DEC /* UIImage+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DDKit.h"; sourceTree = "<group>"; };
-		E76D90621D00228700562DEC /* UIImage+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DDKit.m"; sourceTree = "<group>"; };
-		E76D90631D00228700562DEC /* UIImageView+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+DDKit.h"; sourceTree = "<group>"; };
-		E76D90641D00228700562DEC /* UIImageView+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+DDKit.m"; sourceTree = "<group>"; };
-		E76D90651D00228700562DEC /* UILabel+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+DDKit.h"; sourceTree = "<group>"; };
-		E76D90661D00228700562DEC /* UILabel+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+DDKit.m"; sourceTree = "<group>"; };
-		E76D90671D00228700562DEC /* UISegmentedControl+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+DDKit.h"; sourceTree = "<group>"; };
-		E76D90681D00228700562DEC /* UISegmentedControl+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+DDKit.m"; sourceTree = "<group>"; };
-		E76D90691D00228700562DEC /* UIView+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DDKit.h"; sourceTree = "<group>"; };
-		E76D906A1D00228700562DEC /* UIView+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DDKit.m"; sourceTree = "<group>"; };
-		E76D906B1D00228700562DEC /* UIViewController+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DDKit.h"; sourceTree = "<group>"; };
-		E76D906C1D00228700562DEC /* UIViewController+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DDKit.m"; sourceTree = "<group>"; };
-		E76D906E1D00228700562DEC /* DDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCategory.h; sourceTree = "<group>"; };
 		E76D907C1D0022F800562DEC /* HIKLoadPercentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIKLoadPercentView.h; sourceTree = "<group>"; };
 		E76D907D1D0022F800562DEC /* HIKLoadPercentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIKLoadPercentView.m; sourceTree = "<group>"; };
 		E76D907E1D0022F800562DEC /* HIKLoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIKLoadView.h; sourceTree = "<group>"; };
@@ -2341,6 +2317,30 @@
 		E76D90971D002F8E00562DEC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = build/openssl/lib/libssl.a; sourceTree = "<group>"; };
 		E76D909A1D00326A00562DEC /* HomeMenuBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuBtn.h; sourceTree = "<group>"; };
 		E76D909B1D00326A00562DEC /* HomeMenuBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuBtn.m; sourceTree = "<group>"; };
+		E7C752981D01D71500DA0C38 /* DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDKit.h; sourceTree = "<group>"; };
+		E7C752991D01D71500DA0C38 /* NSArray+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DDKit.h"; sourceTree = "<group>"; };
+		E7C7529A1D01D71500DA0C38 /* NSArray+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DDKit.m"; sourceTree = "<group>"; };
+		E7C7529B1D01D71500DA0C38 /* NSDate+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DDKit.h"; sourceTree = "<group>"; };
+		E7C7529C1D01D71500DA0C38 /* NSDate+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DDKit.m"; sourceTree = "<group>"; };
+		E7C7529D1D01D71500DA0C38 /* NSString+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DDKit.h"; sourceTree = "<group>"; };
+		E7C7529E1D01D71500DA0C38 /* NSString+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DDKit.m"; sourceTree = "<group>"; };
+		E7C7529F1D01D71500DA0C38 /* UIButton+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+DDKit.h"; sourceTree = "<group>"; };
+		E7C752A01D01D71500DA0C38 /* UIButton+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+DDKit.m"; sourceTree = "<group>"; };
+		E7C752A11D01D71500DA0C38 /* UIColor+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DDKit.h"; sourceTree = "<group>"; };
+		E7C752A21D01D71500DA0C38 /* UIColor+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DDKit.m"; sourceTree = "<group>"; };
+		E7C752A31D01D71500DA0C38 /* UIImage+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DDKit.h"; sourceTree = "<group>"; };
+		E7C752A41D01D71500DA0C38 /* UIImage+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DDKit.m"; sourceTree = "<group>"; };
+		E7C752A51D01D71500DA0C38 /* UIImageView+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+DDKit.h"; sourceTree = "<group>"; };
+		E7C752A61D01D71500DA0C38 /* UIImageView+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+DDKit.m"; sourceTree = "<group>"; };
+		E7C752A71D01D71500DA0C38 /* UILabel+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+DDKit.h"; sourceTree = "<group>"; };
+		E7C752A81D01D71500DA0C38 /* UILabel+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+DDKit.m"; sourceTree = "<group>"; };
+		E7C752A91D01D71500DA0C38 /* UISegmentedControl+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UISegmentedControl+DDKit.h"; sourceTree = "<group>"; };
+		E7C752AA1D01D71500DA0C38 /* UISegmentedControl+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UISegmentedControl+DDKit.m"; sourceTree = "<group>"; };
+		E7C752AB1D01D71500DA0C38 /* UIView+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DDKit.h"; sourceTree = "<group>"; };
+		E7C752AC1D01D71500DA0C38 /* UIView+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DDKit.m"; sourceTree = "<group>"; };
+		E7C752AD1D01D71500DA0C38 /* UIViewController+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DDKit.h"; sourceTree = "<group>"; };
+		E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DDKit.m"; sourceTree = "<group>"; };
+		E7C752AF1D01D71500DA0C38 /* DDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCategory.h; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F463E6431B66106D00AB92B9 /* DianZanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianZanDomain.h; sourceTree = "<group>"; };
@@ -5730,8 +5730,8 @@
 		E724B2791CFE99D4004FDB0C /* EZCamera(萤石云监控) */ = {
 			isa = PBXGroup;
 			children = (
+				E7C752961D01D71500DA0C38 /* DDCategory */,
 				E76D907B1D0022E700562DEC /* CustomUI */,
-				E76D906F1D00228700562DEC /* DDCategory */,
 				E76D90541D00221F00562DEC /* Aspects */,
 				E724B2831CFEA20E004FDB0C /* view */,
 				E724B27F1CFEA090004FDB0C /* domain */,
@@ -5805,46 +5805,6 @@
 			path = ../../../Desktop/ezvizopensdk_v3.4.0.20160503/EZOpenSDKDemo/EZOpenSDKDemo/Venders/Aspects;
 			sourceTree = "<group>";
 		};
-		E76D906D1D00228700562DEC /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				E76D90561D00228700562DEC /* DDKit.h */,
-				E76D90571D00228700562DEC /* NSArray+DDKit.h */,
-				E76D90581D00228700562DEC /* NSArray+DDKit.m */,
-				E76D90591D00228700562DEC /* NSDate+DDKit.h */,
-				E76D905A1D00228700562DEC /* NSDate+DDKit.m */,
-				E76D905B1D00228700562DEC /* NSString+DDKit.h */,
-				E76D905C1D00228700562DEC /* NSString+DDKit.m */,
-				E76D905D1D00228700562DEC /* UIButton+DDKit.h */,
-				E76D905E1D00228700562DEC /* UIButton+DDKit.m */,
-				E76D905F1D00228700562DEC /* UIColor+DDKit.h */,
-				E76D90601D00228700562DEC /* UIColor+DDKit.m */,
-				E76D90611D00228700562DEC /* UIImage+DDKit.h */,
-				E76D90621D00228700562DEC /* UIImage+DDKit.m */,
-				E76D90631D00228700562DEC /* UIImageView+DDKit.h */,
-				E76D90641D00228700562DEC /* UIImageView+DDKit.m */,
-				E76D90651D00228700562DEC /* UILabel+DDKit.h */,
-				E76D90661D00228700562DEC /* UILabel+DDKit.m */,
-				E76D90671D00228700562DEC /* UISegmentedControl+DDKit.h */,
-				E76D90681D00228700562DEC /* UISegmentedControl+DDKit.m */,
-				E76D90691D00228700562DEC /* UIView+DDKit.h */,
-				E76D906A1D00228700562DEC /* UIView+DDKit.m */,
-				E76D906B1D00228700562DEC /* UIViewController+DDKit.h */,
-				E76D906C1D00228700562DEC /* UIViewController+DDKit.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
-		E76D906F1D00228700562DEC /* DDCategory */ = {
-			isa = PBXGroup;
-			children = (
-				E76D906D1D00228700562DEC /* Categories */,
-				E76D906E1D00228700562DEC /* DDCategory.h */,
-			);
-			name = DDCategory;
-			path = ../../../Desktop/ezvizopensdk_v3.4.0.20160503/EZOpenSDKDemo/EZOpenSDKDemo/Venders/DDCategory;
-			sourceTree = "<group>";
-		};
 		E76D907B1D0022E700562DEC /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -5866,6 +5826,45 @@
 				E76D908B1D0022F800562DEC /* NSDate-Utilities.m */,
 			);
 			name = CustomUI;
+			sourceTree = "<group>";
+		};
+		E7C752961D01D71500DA0C38 /* DDCategory */ = {
+			isa = PBXGroup;
+			children = (
+				E7C752971D01D71500DA0C38 /* Categories */,
+				E7C752AF1D01D71500DA0C38 /* DDCategory.h */,
+			);
+			path = DDCategory;
+			sourceTree = "<group>";
+		};
+		E7C752971D01D71500DA0C38 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E7C752981D01D71500DA0C38 /* DDKit.h */,
+				E7C752991D01D71500DA0C38 /* NSArray+DDKit.h */,
+				E7C7529A1D01D71500DA0C38 /* NSArray+DDKit.m */,
+				E7C7529B1D01D71500DA0C38 /* NSDate+DDKit.h */,
+				E7C7529C1D01D71500DA0C38 /* NSDate+DDKit.m */,
+				E7C7529D1D01D71500DA0C38 /* NSString+DDKit.h */,
+				E7C7529E1D01D71500DA0C38 /* NSString+DDKit.m */,
+				E7C7529F1D01D71500DA0C38 /* UIButton+DDKit.h */,
+				E7C752A01D01D71500DA0C38 /* UIButton+DDKit.m */,
+				E7C752A11D01D71500DA0C38 /* UIColor+DDKit.h */,
+				E7C752A21D01D71500DA0C38 /* UIColor+DDKit.m */,
+				E7C752A31D01D71500DA0C38 /* UIImage+DDKit.h */,
+				E7C752A41D01D71500DA0C38 /* UIImage+DDKit.m */,
+				E7C752A51D01D71500DA0C38 /* UIImageView+DDKit.h */,
+				E7C752A61D01D71500DA0C38 /* UIImageView+DDKit.m */,
+				E7C752A71D01D71500DA0C38 /* UILabel+DDKit.h */,
+				E7C752A81D01D71500DA0C38 /* UILabel+DDKit.m */,
+				E7C752A91D01D71500DA0C38 /* UISegmentedControl+DDKit.h */,
+				E7C752AA1D01D71500DA0C38 /* UISegmentedControl+DDKit.m */,
+				E7C752AB1D01D71500DA0C38 /* UIView+DDKit.h */,
+				E7C752AC1D01D71500DA0C38 /* UIView+DDKit.m */,
+				E7C752AD1D01D71500DA0C38 /* UIViewController+DDKit.h */,
+				E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		F45EABCD1B563F75003C367C /* Base */ = {
@@ -6778,7 +6777,6 @@
 			files = (
 				04D288791C9E915F00D12BEF /* SIMenuTable.m in Sources */,
 				04F8895A1C05ABD8002FBE6D /* SDRotationLoopProgressView.m in Sources */,
-				E76D90791D00228700562DEC /* UIView+DDKit.m in Sources */,
 				04FB23721C16C7D0009B57E2 /* DiscorveryTypeCell.m in Sources */,
 				2489B6641B5AB49E00039E70 /* UIImage+MultiFormat.m in Sources */,
 				24759EB01B5FC89900A3087D /* KGListBaseDomain.m in Sources */,
@@ -6813,8 +6811,8 @@
 				E724B27D1CFE9A5C004FDB0C /* EZCameraListViewController.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
 				04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */,
+				E7C752B31D01D71500DA0C38 /* UIButton+DDKit.m in Sources */,
 				24DEC81F1B633AEF00C55828 /* ReplyDomain.m in Sources */,
-				E76D90771D00228700562DEC /* UILabel+DDKit.m in Sources */,
 				04FB7CB91C0DA49000FD3E31 /* SpTeacherDetailWebViewCell.m in Sources */,
 				F4E2D4811B6B6334001472EC /* GiftwareArticlesInfoViewController.m in Sources */,
 				04FEC5701BEDCA3B00C642A6 /* YouHuiTableVC.m in Sources */,
@@ -6829,7 +6827,6 @@
 				0482BF311CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.m in Sources */,
 				0494F4801BDF777500F39865 /* UIView+MJExtension.m in Sources */,
 				24C46B281B5A28CF00A58F92 /* BaseKeyboardViewController.m in Sources */,
-				E76D907A1D00228700562DEC /* UIViewController+DDKit.m in Sources */,
 				04FA59871C27C68A009689C7 /* EYInputPopupView.m in Sources */,
 				E76D908C1D0022F800562DEC /* HIKLoadPercentView.m in Sources */,
 				04F903AA1C56795C0040629F /* AFURLConnectionOperation.m in Sources */,
@@ -6840,7 +6837,6 @@
 				4D5CE7801B7E4368002F1088 /* PushNotificationTableViewCell.m in Sources */,
 				04F8C6EC1C18056A00EF5E57 /* DiscorveryMeiRiTuiJianDomain.m in Sources */,
 				04F9721C1C50BFBE00FECD21 /* FPMyFamilyPhotoCollectionDomain.m in Sources */,
-				E76D90711D00228700562DEC /* NSDate+DDKit.m in Sources */,
 				0449A34B1C4F73FC0066ABBB /* FPGiftwarePickerLayout.m in Sources */,
 				04DDA62B1CD8EBB900DBF147 /* AdMoGoAdapterDGTMob.m in Sources */,
 				F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */,
@@ -6873,6 +6869,7 @@
 				24A175F71B55433300295997 /* KGHUD.m in Sources */,
 				04FB9F9F1C0C5373004D6AA4 /* SpCourseAndSchoolListLayout.m in Sources */,
 				04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */,
+				E7C752B21D01D71500DA0C38 /* NSString+DDKit.m in Sources */,
 				24C46B491B5A2B7A00A58F92 /* InteractViewController.m in Sources */,
 				F4C0AB941B1C3BB6007B0E35 /* KGHttpUrl.m in Sources */,
 				04F970A31C5A3B2C007CA8C7 /* FPImagePickerImageDomain.m in Sources */,
@@ -6905,17 +6902,16 @@
 				04FA92891C4DE6E600010DAE /* UIImage+ImageEffects.m in Sources */,
 				F48783B41B58DA1700CDC1A8 /* NSString+MJExtension.m in Sources */,
 				F471EDFC1B70B40100EEBA1D /* KGEmojiManage.m in Sources */,
+				E7C752BA1D01D71500DA0C38 /* UIViewController+DDKit.m in Sources */,
 				248B6ABF1B19B53000FCB98F /* QCSlideSwitchView.m in Sources */,
 				0494F47B1BDF777500F39865 /* MJRefreshConst.m in Sources */,
 				04FE3DDB1C2BD6C2000CE445 /* EnrolStudentHomeVC.m in Sources */,
 				248B6A981B19AA7100FCB98F /* KGBaseView.m in Sources */,
+				E7C752B71D01D71500DA0C38 /* UILabel+DDKit.m in Sources */,
 				04D2886D1C9E915F00D12BEF /* HAViewController.m in Sources */,
 				0482BEE81CC37E8500ABD6B1 /* SPUtil.m in Sources */,
-				E76D90761D00228700562DEC /* UIImageView+DDKit.m in Sources */,
 				04F903AB1C56795C0040629F /* AFURLRequestSerialization.m in Sources */,
-				E76D90741D00228700562DEC /* UIColor+DDKit.m in Sources */,
 				F48783B01B58DA1700CDC1A8 /* MJType.m in Sources */,
-				E76D90751D00228700562DEC /* UIImage+DDKit.m in Sources */,
 				04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */,
 				E76D908F1D0022F800562DEC /* HIKLoadViewItem+configPath.m in Sources */,
 				046998A51C801F8100664359 /* FPHomeTimeLineCell.m in Sources */,
@@ -6923,6 +6919,7 @@
 				F4DCD0F21B1C2E87007D61CA /* UIButton+Extension.m in Sources */,
 				046998A91C8038A300664359 /* FPUploadVC.m in Sources */,
 				2489B6631B5AB49E00039E70 /* UIImage+GIF.m in Sources */,
+				E7C752B91D01D71500DA0C38 /* UIView+DDKit.m in Sources */,
 				245474D91B5FDD6C00D49D40 /* StudentInfoViewController.m in Sources */,
 				04DDAB961CBE3EE500C3D48C /* KeyChainStore.m in Sources */,
 				E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */,
@@ -6962,6 +6959,7 @@
 				04F8894C1C058FE9002FBE6D /* UIColor+HexString.m in Sources */,
 				04FEC5661BED943E00C642A6 /* SPShareSaveDomain.m in Sources */,
 				04F9AC5E1BFC82B4004DA63D /* MySPAllListHeaderView.m in Sources */,
+				E7C752B11D01D71500DA0C38 /* NSDate+DDKit.m in Sources */,
 				04F498181C0BEF2800C1E2DA /* FeHourGlass.m in Sources */,
 				04FB7CC01C0DA86800FD3E31 /* SpCourseItem.m in Sources */,
 				04F903A81C56795C0040629F /* AFNetworkReachabilityManager.m in Sources */,
@@ -6988,6 +6986,7 @@
 				0497A9A01CBF7A190029B2E2 /* GlobalMap.m in Sources */,
 				040109B41BF1F8CB00A18622 /* MySPCourseDomain.m in Sources */,
 				04D288AE1CA3864C00D12BEF /* EditFamilyMemberVC.m in Sources */,
+				E7C752B81D01D71500DA0C38 /* UISegmentedControl+DDKit.m in Sources */,
 				04FB236E1C16C649009B57E2 /* DiscorveryHomeLayout.m in Sources */,
 				F4DF3BA41B78AC75001D9DF7 /* TimetableViewController.m in Sources */,
 				2489B66D1B5AB49E00039E70 /* SDWebImageManager.m in Sources */,
@@ -7049,8 +7048,6 @@
 				04F9C9981C0EFA9D0078A5F5 /* EnrolStudentSchoolDetailVC.m in Sources */,
 				2489B6661B5AB49E00039E70 /* UIImageView+HighlightedWebCache.m in Sources */,
 				244F74921B62A4630078D30D /* PostTopicViewController.m in Sources */,
-				E76D90721D00228700562DEC /* NSString+DDKit.m in Sources */,
-				E76D90701D00228700562DEC /* NSArray+DDKit.m in Sources */,
 				04FA22211C114045002A88F1 /* EnrolStudentMySchoolLayout.m in Sources */,
 				248B6A621B19A39200FCB98F /* AppDelegate.m in Sources */,
 				2489B6691B5AB49E00039E70 /* SDWebImageDownloader.m in Sources */,
@@ -7082,6 +7079,7 @@
 				04FB23881C16E761009B57E2 /* MineHomeLayout.m in Sources */,
 				04FAEF671C0FDB9600BCBE5E /* EnrolStudentSchoolDetailLayout.m in Sources */,
 				2474DFB41B6CBB1C0021506F /* StudentSignRecordTableViewCell.m in Sources */,
+				E7C752B61D01D71500DA0C38 /* UIImageView+DDKit.m in Sources */,
 				04595CB91BE8718D008DD54A /* SPCommentVO.m in Sources */,
 				04D2886C1C9E915F00D12BEF /* HAAppDelegate.m in Sources */,
 				04F8C7001C18351900EF5E57 /* MyUILabel.m in Sources */,
@@ -7139,6 +7137,7 @@
 				0405B6D11CAE68150090863C /* BaseReplyTableViewCell.m in Sources */,
 				04F95F601C4E42D5000909B1 /* FPHomeSelectView.m in Sources */,
 				04FD8DEF1C3A6B0B00BB186A /* SpCourseDetailVC.m in Sources */,
+				E7C752B01D01D71500DA0C38 /* NSArray+DDKit.m in Sources */,
 				04FBAEC01C5B137F0094DC6B /* UploadImage.m in Sources */,
 				2489B6611B5AB49E00039E70 /* NSData+ImageContentType.m in Sources */,
 				04DDA62A1CD8EBB900DBF147 /* AdMoGoAdapterDGTFullAd.m in Sources */,
@@ -7147,7 +7146,6 @@
 				F471EDF91B70ACC000EEBA1D /* AddressBookResp.m in Sources */,
 				04F903B21C56795C0040629F /* UIAlertView+AFNetworking.m in Sources */,
 				2489B62B1B5A607A00039E70 /* KGAccountTool.m in Sources */,
-				E76D90781D00228700562DEC /* UISegmentedControl+DDKit.m in Sources */,
 				248B6AAA1B19AD7A00FCB98F /* KGBaseDomain.m in Sources */,
 				0403DCE01BF5B9CD0089E463 /* MYSPCourseTableViewCell.m in Sources */,
 				E76D90921D0022F800562DEC /* UIImageView+EzvizOpenSDK.m in Sources */,
@@ -7180,6 +7178,7 @@
 				24A175E71B5541BF00295997 /* KGDBHelper.m in Sources */,
 				04FEC56D1BEDC9D100C642A6 /* YouHuiVC.m in Sources */,
 				04F9F3001BF9C67500470F0C /* MySPButtonCell.m in Sources */,
+				E7C752B51D01D71500DA0C38 /* UIImage+DDKit.m in Sources */,
 				04FB9FA31C0C5D7E004D6AA4 /* SpCourseAndSchoolListSchoolCell.m in Sources */,
 				F4DCD0EF1B1C2C50007D61CA /* KGDeviceUtil.m in Sources */,
 				04FEC57F1BEDDE7200C642A6 /* YouHuiDetailVC.m in Sources */,
@@ -7212,6 +7211,7 @@
 				F4E6B24A1B6B5D440087EAEB /* GiftwareArticlesTableViewCell.m in Sources */,
 				04B434661C7EF85E0009EB47 /* CommitHeaderView.m in Sources */,
 				F4EA538B1B60C6DF0044BE7A /* MeFunTableViewCell.m in Sources */,
+				E7C752B41D01D71500DA0C38 /* UIColor+DDKit.m in Sources */,
 				243918E41B5D1E5800F3727E /* KGNavigationController.m in Sources */,
 				0482BEEF1CC3838E00ABD6B1 /* UIControl+BlockSupport.m in Sources */,
 				045CF51B1BE0A26200FA7EF7 /* SPSchoolDomain.m in Sources */,
@@ -7238,7 +7238,6 @@
 				04F9F2F61BF9BF4500470F0C /* MySPCourseCommentCell.m in Sources */,
 				24E634811B6FB9CC00A23A66 /* RecipesHeadTableViewCell.m in Sources */,
 				04F972521C50E25700FECD21 /* FPFamilyPhotoLastTimeDomain.m in Sources */,
-				E76D90731D00228700562DEC /* UIButton+DDKit.m in Sources */,
 				2474DFCC1B6CD4240021506F /* RecipesDomain.m in Sources */,
 				04F410EC1C5A0FC200407C10 /* FPImagePickerGroupDomain.m in Sources */,
 				F4E636031B676AD400800924 /* AnnouncementInfoViewController.m in Sources */,
