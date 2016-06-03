@@ -828,7 +828,6 @@
 		E755FA251CC638AB00AF32A0 /* AlertBindTelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA241CC638AB00AF32A0 /* AlertBindTelView.m */; };
 		E755FA271CC638BC00AF32A0 /* AlertBindTelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E755FA261CC638BC00AF32A0 /* AlertBindTelView.xib */; };
 		E76D90511D0021BD00562DEC /* UIViewController+EZBackPop.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90501D0021BD00562DEC /* UIViewController+EZBackPop.m */; };
-		E76D90551D00221F00562DEC /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90531D00221F00562DEC /* Aspects.m */; };
 		E76D908C1D0022F800562DEC /* HIKLoadPercentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D907D1D0022F800562DEC /* HIKLoadPercentView.m */; };
 		E76D908D1D0022F800562DEC /* HIKLoadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D907F1D0022F800562DEC /* HIKLoadView.m */; };
 		E76D908E1D0022F800562DEC /* HIKLoadViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90811D0022F800562DEC /* HIKLoadViewItem.m */; };
@@ -852,6 +851,7 @@
 		E7C752B81D01D71500DA0C38 /* UISegmentedControl+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AA1D01D71500DA0C38 /* UISegmentedControl+DDKit.m */; };
 		E7C752B91D01D71500DA0C38 /* UIView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AC1D01D71500DA0C38 /* UIView+DDKit.m */; };
 		E7C752BA1D01D71500DA0C38 /* UIViewController+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */; };
+		E7C752BE1D01D83400DA0C38 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752BD1D01D83400DA0C38 /* Aspects.m */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -2294,8 +2294,6 @@
 		E755FA261CC638BC00AF32A0 /* AlertBindTelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertBindTelView.xib; sourceTree = "<group>"; };
 		E76D904F1D0021BD00562DEC /* UIViewController+EZBackPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+EZBackPop.h"; sourceTree = "<group>"; };
 		E76D90501D0021BD00562DEC /* UIViewController+EZBackPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+EZBackPop.m"; sourceTree = "<group>"; };
-		E76D90521D00221F00562DEC /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
-		E76D90531D00221F00562DEC /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		E76D907C1D0022F800562DEC /* HIKLoadPercentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIKLoadPercentView.h; sourceTree = "<group>"; };
 		E76D907D1D0022F800562DEC /* HIKLoadPercentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIKLoadPercentView.m; sourceTree = "<group>"; };
 		E76D907E1D0022F800562DEC /* HIKLoadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIKLoadView.h; sourceTree = "<group>"; };
@@ -2341,6 +2339,8 @@
 		E7C752AD1D01D71500DA0C38 /* UIViewController+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DDKit.h"; sourceTree = "<group>"; };
 		E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DDKit.m"; sourceTree = "<group>"; };
 		E7C752AF1D01D71500DA0C38 /* DDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCategory.h; sourceTree = "<group>"; };
+		E7C752BC1D01D83400DA0C38 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
+		E7C752BD1D01D83400DA0C38 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F463E6431B66106D00AB92B9 /* DianZanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianZanDomain.h; sourceTree = "<group>"; };
@@ -5730,9 +5730,9 @@
 		E724B2791CFE99D4004FDB0C /* EZCamera(萤石云监控) */ = {
 			isa = PBXGroup;
 			children = (
+				E7C752BB1D01D83400DA0C38 /* Aspects */,
 				E7C752961D01D71500DA0C38 /* DDCategory */,
 				E76D907B1D0022E700562DEC /* CustomUI */,
-				E76D90541D00221F00562DEC /* Aspects */,
 				E724B2831CFEA20E004FDB0C /* view */,
 				E724B27F1CFEA090004FDB0C /* domain */,
 				E724B27A1CFE9A5C004FDB0C /* EZCameraListViewController.h */,
@@ -5795,16 +5795,6 @@
 			name = view;
 			sourceTree = "<group>";
 		};
-		E76D90541D00221F00562DEC /* Aspects */ = {
-			isa = PBXGroup;
-			children = (
-				E76D90521D00221F00562DEC /* Aspects.h */,
-				E76D90531D00221F00562DEC /* Aspects.m */,
-			);
-			name = Aspects;
-			path = ../../../Desktop/ezvizopensdk_v3.4.0.20160503/EZOpenSDKDemo/EZOpenSDKDemo/Venders/Aspects;
-			sourceTree = "<group>";
-		};
 		E76D907B1D0022E700562DEC /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -5865,6 +5855,15 @@
 				E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		E7C752BB1D01D83400DA0C38 /* Aspects */ = {
+			isa = PBXGroup;
+			children = (
+				E7C752BC1D01D83400DA0C38 /* Aspects.h */,
+				E7C752BD1D01D83400DA0C38 /* Aspects.m */,
+			);
+			path = Aspects;
 			sourceTree = "<group>";
 		};
 		F45EABCD1B563F75003C367C /* Base */ = {
@@ -6931,7 +6930,6 @@
 				24DED4FC1B7CCFD1005BC46E /* StudentOtherInfoViewController.m in Sources */,
 				046063491BD8D82600CBC881 /* MBProgressHUD.m in Sources */,
 				04F9FB681BF1A67400AEFB88 /* UMFeedbackViewController.m in Sources */,
-				E76D90551D00221F00562DEC /* Aspects.m in Sources */,
 				24DE91B41B67C78700D3FFCE /* TeacherJudgeViewController.m in Sources */,
 				F4885C6B1B7C78C400AF97CF /* BrowseURLViewController.m in Sources */,
 				F48783B51B58DA1700CDC1A8 /* README.md in Sources */,
@@ -7110,6 +7108,7 @@
 				04F410ED1C5A0FC200407C10 /* FPImagePickerVC.m in Sources */,
 				045C5B9B1C84190D0097AF4F /* FPMyFamilyPhotoListColletion.m in Sources */,
 				04F9724F1C50E1AA00FECD21 /* FPFamilyPhotoLastTimeVO.m in Sources */,
+				E7C752BE1D01D83400DA0C38 /* Aspects.m in Sources */,
 				04F9F2FB1BF9C38700470F0C /* MySPNormalCell.m in Sources */,
 				04FB9F9C1C0C370D004D6AA4 /* SpCourseAndSchoolListVC.m in Sources */,
 				24850B141B7B860E003C442E /* ClassDomain.m in Sources */,
