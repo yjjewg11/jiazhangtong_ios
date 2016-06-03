@@ -24,6 +24,7 @@
 #import "KGAccountTool.h"
 #import <Bugly/CrashReporter.h>
 #import "AdMoGoLogCenter.h"
+#import "EZOpenSDK.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"
@@ -71,6 +72,10 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //萤石开放平台SDK初始化
+    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
+    
     // YWSDK快速接入接口，程序启动后调用这个接口
     [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
     

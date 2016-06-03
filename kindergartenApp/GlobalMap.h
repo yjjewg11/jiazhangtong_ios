@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #define NSUserDefaults_Key_FPMyFamilyPhotoCollection   @"FPMyFamilyPhotoCollection"     //用户偏好存储key
+#define GlobalMap_EZAccessToken   @"GlobalMap_EZAccessToken"     //萤石云token
 //内存全局数据存放。重启后失效
 @interface GlobalMap : NSObject
     @property (strong, nonatomic) NSMutableDictionary * map;

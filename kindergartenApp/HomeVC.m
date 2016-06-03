@@ -124,9 +124,30 @@
 - (void)initHomeView
 {
 //    [self initDataByUserLoginAfter];
-    NSArray * imgSrcArr = @[@"hudong",@"kechenbiao",@"shipu",@"gonggao",@"qiandao",@"pingjialaoshi",@"baobaoruxue",@"tongxunlu",@"techang1",@"gengduo"];
+    NSMutableArray *homeMenuBtnArr=[NSMutableArray array];
     
-    NSArray * nameTitleArr = @[@"班级互动",@"课程表",@"每日食谱",@"校园公告",@"签到记录",@"评价老师",@"宝宝入学",@"通讯录",@"特长课程",@"更多"];
+   
+    [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"班级互动" iconUrl:@"hudong" tag:10]];
+    [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"课程表" iconUrl:@"kechenbiao" tag:11]];
+     [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"每日食谱" iconUrl:@"shipu" tag:12]];
+    
+     [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"校园公告" iconUrl:@"gonggao" tag:13]];
+     [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"签到记录" iconUrl:@"qiandao" tag:14]];
+      [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"视频" iconUrl:@"jiankongshiping" tag:20]];
+    
+    
+    [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"评价老师" iconUrl:@"pingjialaoshi" tag:15]];
+    [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"宝宝入学" iconUrl:@"baobaoruxue" tag:16]];
+    [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"通讯录" iconUrl:@"tongxunlu" tag:17]];
+     [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"通讯录" iconUrl:@"tongxunlu" tag:17]];
+     [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"特长课程" iconUrl:@"techang1" tag:18]];
+   
+    [homeMenuBtnArr addObject:[[HomeMenuBtn alloc]initData:@"更多" iconUrl:@"gengduo" tag:19]];
+//    NSArray * imgSrcArr = @[@"hudong",@"kechenbiao",@"shipu",@"gonggao",@"qiandao",@"pingjialaoshi",@"baobaoruxue",@"tongxunlu",@"techang1",@"gengduo"];
+//    
+//    NSArray * nameTitleArr = @[@"班级互动",@"课程表",@"每日食谱",@"校园公告",@"签到记录",@"评价老师",@"宝宝入学",@"通讯录",@"特长课程",@"更多"];
+
+    
     
     //创建scrollview
     scrollView = [[UIScrollView alloc] init];
@@ -174,18 +195,21 @@
     }];
     
     //接下来创建每个功能view
-    NSInteger count = 10;
+    NSInteger count = homeMenuBtnArr.count;
     CGFloat padding = 20;//每个功能view的间距
     UIView * lastView = nil;
     
     for ( NSInteger i = 0 ; i < count ; ++i )
     {
+        
+        
+        HomeMenuBtn * homeMenuBtn=homeMenuBtnArr[i];
         UIView *subv = [UIView new];
         [funContainer addSubview:subv];
         
         //创建title lbl
         UILabel *lable = [[UILabel alloc] init];
-        lable.text = nameTitleArr[i];
+        lable.text = homeMenuBtn.name;
         lable.font = [UIFont systemFontOfSize:14];
         lable.textAlignment = NSTextAlignmentCenter;
         [subv addSubview:lable];
@@ -199,7 +223,7 @@
         
         //创建image view
         UIImageView *imgView = [[UIImageView alloc] init];
-        imgView.image = [UIImage imageNamed:imgSrcArr[i]];
+        imgView.image = [UIImage imageNamed:homeMenuBtn.iconUrl];
         [subv addSubview:imgView];
         [imgView mas_makeConstraints:^(MASConstraintMaker *make)
         {
@@ -211,7 +235,7 @@
         
         //创建button
         UIButton * btn = [[UIButton alloc] init];
-        btn.tag = 10 + i;
+        btn.tag = homeMenuBtn.tag;
         [btn addTarget:self action:@selector(funBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
         [subv addSubview:btn];
         [btn mas_makeConstraints:^(MASConstraintMaker *make)
@@ -434,7 +458,11 @@
             [self loadMoreFunMenu:sender];
             [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
-            
+        case 20:
+              baseVC = [[EZCameraListViewController alloc] init];
+            [self umengEvent:@"shipingCount" attributes:@{@"name":@"iphone"} number:@(1)];
+            break;
+   
         default:
             break;
     }
