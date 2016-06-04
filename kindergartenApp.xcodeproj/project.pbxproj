@@ -374,7 +374,6 @@
 		04DDA6491CD8FD5200DBF147 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA6481CD8FD5200DBF147 /* OpenGLES.framework */; };
 		04DDA64C1CD904A100DBF147 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA64B1CD904A100DBF147 /* CoreAudio.framework */; };
 		04DDA64E1CD9113800DBF147 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA64D1CD9113800DBF147 /* libxml2.tbd */; };
-		04DDA9841CD91BBF00DBF147 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04DDA97A1CD91BBF00DBF147 /* mapapi.bundle */; };
 		04DDAB931CBE3E8900C3D48C /* KGUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAB921CBE3E8900C3D48C /* KGUUID.m */; };
 		04DDAB961CBE3EE500C3D48C /* KeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DDAB951CBE3EE500C3D48C /* KeyChainStore.m */; };
 		04E606351C4897E100AEE9DD /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E606331C4897E100AEE9DD /* HomeVC.m */; };
@@ -851,6 +850,7 @@
 		E7C752B91D01D71500DA0C38 /* UIView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AC1D01D71500DA0C38 /* UIView+DDKit.m */; };
 		E7C752BA1D01D71500DA0C38 /* UIViewController+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */; };
 		E7C752BE1D01D83400DA0C38 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752BD1D01D83400DA0C38 /* Aspects.m */; };
+		E7C752D11D01E7FE00DA0C38 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
 		F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6471B6613D500AB92B9 /* GroupDomain.m */; };
@@ -1490,7 +1490,6 @@
 		04DDA6481CD8FD5200DBF147 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		04DDA64B1CD904A100DBF147 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		04DDA64D1CD9113800DBF147 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		04DDA97A1CD91BBF00DBF147 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapKit/BaiduMapAPI_Map.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		04DDAB901CBE3E0C00C3D48C /* jiazhangtong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = jiazhangtong.entitlements; sourceTree = "<group>"; };
 		04DDAB911CBE3E8900C3D48C /* KGUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGUUID.h; sourceTree = "<group>"; };
 		04DDAB921CBE3E8900C3D48C /* KGUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGUUID.m; sourceTree = "<group>"; };
@@ -2339,6 +2338,7 @@
 		E7C752AF1D01D71500DA0C38 /* DDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCategory.h; sourceTree = "<group>"; };
 		E7C752BC1D01D83400DA0C38 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		E7C752BD1D01D83400DA0C38 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = build/BaiduMapKit/mapapi.bundle; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		F463E6431B66106D00AB92B9 /* DianZanDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DianZanDomain.h; sourceTree = "<group>"; };
@@ -3485,7 +3485,6 @@
 		04DDA97B1CD91BBF00DBF147 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				04DDA97A1CD91BBF00DBF147 /* mapapi.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -5646,6 +5645,7 @@
 		C925B64CB131B415E0126F11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */,
 				E76D90961D002F8E00562DEC /* libcrypto.a */,
 				E76D90971D002F8E00562DEC /* libssl.a */,
 				E76D90941D002F5D00562DEC /* libEZOpenSDK.a */,
@@ -6429,7 +6429,6 @@
 				04FB7CBA1C0DA49000FD3E31 /* SpTeacherDetailWebViewCell.xib in Resources */,
 				04DDA5611CD8EAC300DBF147 /* adsmogoshareview_below_arrow.png in Resources */,
 				24A175FF1B5550B000295997 /* LoginViewController.xib in Resources */,
-				04DDA9841CD91BBF00DBF147 /* mapapi.bundle in Resources */,
 				04DDA57F1CD8EAC300DBF147 /* download-728x90.gif in Resources */,
 				4D077B211B8081BC00FFD5CB /* Images.xcassets in Resources */,
 				04DDA54F1CD8EAC300DBF147 /* adsmenu_off@2x.png in Resources */,
@@ -6497,6 +6496,7 @@
 				04F9FB5C1BF1A67400AEFB88 /* save@2x.png in Resources */,
 				04DDA5541CD8EAC300DBF147 /* adsmogoWebViewMenu_bg@2x.png in Resources */,
 				04DDA5881CD8EAC300DBF147 /* adsmogo_corner.png in Resources */,
+				E7C752D11D01E7FE00DA0C38 /* mapapi.bundle in Resources */,
 				04EAA3A91C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.xib in Resources */,
 				04F8C6FA1C18235100EF5E57 /* DiscorveryJingXuanCell.xib in Resources */,
 				F4E36D611B85B49D009BD909 /* ZeroCameraCell.xib in Resources */,
@@ -7427,7 +7427,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/libc++",
 					"$(PROJECT_DIR)/build",
 					"$(PROJECT_DIR)/build/OneSDK",
-					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit",
+					"$(PROJECT_DIR)/build/BaiduMapKit",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
 				);
@@ -7469,8 +7469,20 @@
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_430/libs",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/openssl/lib",
+					"$(PROJECT_DIR)/build/BaiduMapKit",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/LBXScan\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/ZXingObjC\"",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
@@ -7504,7 +7516,7 @@
 					"$(PROJECT_DIR)/kindergartenApp/libc++",
 					"$(PROJECT_DIR)/build",
 					"$(PROJECT_DIR)/build/OneSDK",
-					"$(PROJECT_DIR)/Pods/BaiduMapKit/BaiduMapKit",
+					"$(PROJECT_DIR)/build/BaiduMapKit",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
 				);
@@ -7546,8 +7558,20 @@
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_430/libs",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/openssl/lib",
+					"$(PROJECT_DIR)/build/BaiduMapKit",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/LBXScan\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/ZXingObjC\"",
+				);
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
