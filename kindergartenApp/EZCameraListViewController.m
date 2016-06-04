@@ -65,7 +65,7 @@
     //    [self.view setBackgroundColor:[UIColor blueColor]] ;
     self.pageNo = 1;
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0,self.view.frame.size.width,self.view.frame.size.height-40-64) ];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64) ];
     
     
     
@@ -144,20 +144,17 @@
             return;
         }
         
-        
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-                       {
-                           [self.tableView footerEndRefreshing];
-                           if(self.pageNo==1){
-                               self.dataSoure=[NSMutableArray array];
-                           }
-                           
-                           
-                           [self.dataSoure addObjectsFromArray: [EZCamrea objectArrayWithKeyValuesArray:baseDomain.list.data]];
-                           
-                           [self.tableView reloadData];
-                       });
+        {
+            [self.tableView footerEndRefreshing];
+            if(self.pageNo==1){
+                self.dataSoure=[NSMutableArray array];
+            }
+            
+            
+            [self.dataSoure addObjectsFromArray: [EZCamrea objectArrayWithKeyValuesArray:baseDomain.list.data]];
+            
+            [self.tableView reloadData];
+        }
         
     } faild:^(NSString *errorMsg) {
         

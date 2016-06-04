@@ -89,6 +89,9 @@
 		046998AB1C8039DD00664359 /* FPImagePickerSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */; };
 		046998C11C80580900664359 /* FPCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998BF1C80580900664359 /* FPCollectionVC.m */; };
 		046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */; };
+		04729B951D01DCC90042D24B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90971D002F8E00562DEC /* libssl.a */; };
+		04729B961D01DCC90042D24B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90961D002F8E00562DEC /* libcrypto.a */; };
+		04729B971D01DCD50042D24B /* libEZOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90941D002F5D00562DEC /* libEZOpenSDK.a */; };
 		0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */; };
 		0482BECF1CC37BC900ABD6B1 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEC61CC37BC900ABD6B1 /* SecurityGuardSDK.framework */; };
 		0482BED21CC37BC900ABD6B1 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEC91CC37BC900ABD6B1 /* UTMini.framework */; };
@@ -819,7 +822,6 @@
 		E724B2871CFEA237004FDB0C /* EzCameraTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B2851CFEA237004FDB0C /* EzCameraTableViewCell.m */; };
 		E724B2881CFEA237004FDB0C /* EzCameraTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */; };
 		E724B28B1CFEAA73004FDB0C /* EZLivePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B28A1CFEAA73004FDB0C /* EZLivePlayViewController.m */; };
-		E724B29A1CFEB339004FDB0C /* EZOpenSDK in Resources */ = {isa = PBXBuildFile; fileRef = E724B2981CFEB339004FDB0C /* EZOpenSDK */; };
 		E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */; };
 		E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */; };
 		E755FA1C1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */; };
@@ -836,9 +838,6 @@
 		E76D90911D0022F800562DEC /* EZRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90871D0022F800562DEC /* EZRecordCell.m */; };
 		E76D90921D0022F800562DEC /* UIImageView+EzvizOpenSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90891D0022F800562DEC /* UIImageView+EzvizOpenSDK.m */; };
 		E76D90931D0022F800562DEC /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D908B1D0022F800562DEC /* NSDate-Utilities.m */; };
-		E76D90951D002F5D00562DEC /* libEZOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90941D002F5D00562DEC /* libEZOpenSDK.a */; };
-		E76D90981D002F8E00562DEC /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90961D002F8E00562DEC /* libcrypto.a */; };
-		E76D90991D002F8E00562DEC /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90971D002F8E00562DEC /* libssl.a */; };
 		E76D909C1D00326A00562DEC /* HomeMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D909B1D00326A00562DEC /* HomeMenuBtn.m */; };
 		E7C752B01D01D71500DA0C38 /* NSArray+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529A1D01D71500DA0C38 /* NSArray+DDKit.m */; };
 		E7C752B11D01D71500DA0C38 /* NSDate+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529C1D01D71500DA0C38 /* NSDate+DDKit.m */; };
@@ -2279,7 +2278,6 @@
 		E724B2891CFEAA73004FDB0C /* EZLivePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZLivePlayViewController.h; sourceTree = "<group>"; };
 		E724B28A1CFEAA73004FDB0C /* EZLivePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZLivePlayViewController.m; sourceTree = "<group>"; };
 		E724B28C1CFEAEDC004FDB0C /* build */ = {isa = PBXFileReference; lastKnownFileType = folder; path = build; sourceTree = "<group>"; };
-		E724B2981CFEB339004FDB0C /* EZOpenSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = EZOpenSDK; path = /Users/liumingquan/Documents/jiazhangtong_ios/build/ezviz_sdk_20160530/EZOpenSDK; sourceTree = "<absolute>"; };
 		E755FA131CC5DB6200AF32A0 /* MyInfoUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoUpdateController.h; sourceTree = "<group>"; };
 		E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoUpdateController.m; sourceTree = "<group>"; };
 		E755FA171CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentInfoUpdateDomain.h; sourceTree = "<group>"; };
@@ -2513,9 +2511,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E76D90981D002F8E00562DEC /* libcrypto.a in Frameworks */,
-				E76D90991D002F8E00562DEC /* libssl.a in Frameworks */,
-				E76D90951D002F5D00562DEC /* libEZOpenSDK.a in Frameworks */,
+				04729B971D01DCD50042D24B /* libEZOpenSDK.a in Frameworks */,
+				04729B951D01DCC90042D24B /* libssl.a in Frameworks */,
+				04729B961D01DCC90042D24B /* libcrypto.a in Frameworks */,
 				E724B2741CFE9804004FDB0C /* OpenAL.framework in Frameworks */,
 				E724B2721CFE97EE004FDB0C /* GLKit.framework in Frameworks */,
 				E724B2701CFE97DA004FDB0C /* VideoToolbox.framework in Frameworks */,
@@ -6462,7 +6460,6 @@
 				04DDA58A1CD8EAC300DBF147 /* bg@2x.png in Resources */,
 				04DDA5941CD8EAC300DBF147 /* webview_bar_back_hover@2x.png in Resources */,
 				04DDA5721CD8EAC300DBF147 /* adsmogo_btnbg@2x.png in Resources */,
-				E724B29A1CFEB339004FDB0C /* EZOpenSDK in Resources */,
 				040466BA1C434FE100C9EE5C /* RouteDetailVC.xib in Resources */,
 				04F994351C51DC0900CD5818 /* FPHomeWarningCell.xib in Resources */,
 				0449A35B1C4F98430066ABBB /* FPCreateGiftwareVC.xib in Resources */,
@@ -7477,9 +7474,9 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "b53d365c-7840-458b-b390-239acf172453";
+				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 arm64";
+				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
 			name = Debug;
 		};
@@ -7554,9 +7551,9 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "b53d365c-7840-458b-b390-239acf172453";
+				PROVISIONING_PROFILE = "68c09853-99c4-4e6c-971d-80ebe8165e81";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 arm64";
+				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
 			name = Release;
 		};
