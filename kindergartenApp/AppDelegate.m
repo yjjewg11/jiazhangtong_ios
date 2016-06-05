@@ -73,13 +73,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //萤石开放平台SDK初始化
-    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
-    
-    // YWSDK快速接入接口，程序启动后调用这个接口
-    [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
-    
-    // 从这到当前方法结束是您的业务代码
+ 
+      // 从这到当前方法结束是您的业务代码
     NSLog(@"Path:%@", NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES));
     
     [application setStatusBarStyle:UIStatusBarStyleDefault];
@@ -131,7 +126,9 @@
     {
         NSLog(@"百度地图 manager start failed!");
     }
+    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
     
+
     return YES;
 }
 
@@ -217,7 +214,9 @@ static int exception_callback_handler() {
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    return UIInterfaceOrientationMaskPortrait;
+    
+    
+    return UIInterfaceOrientationMaskAll;
 }
 
 // 在 iOS8 系统中，还需要添加这个方法。通过新的 API 注册推送服务

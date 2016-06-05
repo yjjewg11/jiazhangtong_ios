@@ -41,7 +41,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+//    [self initEZOpenSDK];
     self.title = @"视频";
     [self initView];
     [self headerRereshing];
@@ -173,6 +173,19 @@
 }
 
 
+- (void)initEZOpenSDK
+{
+//     static dispatch_once_t onceinitEZOpenSDK;
+//    dispatch_once(&onceinitEZOpenSDK, ^{
+//        //萤石开放平台SDK初始化
+//        [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
+//        
+//        NSLog(@"EZOpenSDK initLibWithAppKey=44b89d0bea824201ad557c48f73635d9");
+//    });
+  
+  
+}
+
 - (void)setToken{
   
     
@@ -185,6 +198,7 @@
         
       [GlobalMap setObject:accessToken forKey:GlobalMap_EZAccessToken];
         [EZOpenSDK setAccessToken:accessToken];
+       
         
     } faild:^(NSString *errorMessage) {
         [self hidenLoadView];

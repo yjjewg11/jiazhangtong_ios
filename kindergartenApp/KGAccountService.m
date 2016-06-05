@@ -26,7 +26,15 @@
 + (void)login
 {
     
+    
+   
     [[KGAccountService sharedService] im_getMyLoginUser:^(TaobaoIMAccountDomain *success) {
+//        #ifdef DEBUG
+//        
+//        #endif
+//        // YWSDK快速接入接口，程序启动后调用这个接口
+        [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
+//
         SPKitExample *sPKitExample=[SPKitExample sharedInstance];
         sPKitExample.userinfo=[KGHttpService sharedService].userinfo;
         [sPKitExample callThisAfterISVAccountLoginSuccessWithYWLoginId:success.userid passWord:success.password preloginedBlock:^{

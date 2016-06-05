@@ -94,7 +94,7 @@
     self.controlButton.enabled = NO;
     self.captureButton.enabled = NO;
     self.localRecordButton.enabled = NO;
-    _url=@"rtmp://hzrtmp02.ys7.com:1935/livestream/553280151_4_2_1_0";
+//    _url=@"rtmp://hzrtmp02.ys7.com:1935/livestream/553280151_4_2_1_0";
     if (_url)
     {
         _player = [EZOpenSDK createPlayerWithUrl:_url];
@@ -311,6 +311,8 @@
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
+
+
 
 - (IBAction)capture:(id)sender
 {
