@@ -7417,8 +7417,8 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7490,7 +7490,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5c0feae-54d9-4f6c-913f-45d73cda0644";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
@@ -7506,8 +7506,8 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = NO;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -7579,7 +7579,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5c0feae-54d9-4f6c-913f-45d73cda0644";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
