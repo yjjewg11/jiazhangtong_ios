@@ -242,10 +242,11 @@
 
 //加载菜谱
 - (void)loadRecipes:(RecipesItemVO *)recipesVO cell:(UITableViewCell *)cell {
-    CGRect frame = CGRectMake(CELLPADDING, Number_Zero, CELLCONTENTWIDTH, cell.height);
+    CGFloat CELLPADDING8 = 6;
+    CGRect frame = CGRectMake(CELLPADDING8, Number_Zero, CELLCONTENTWIDTH, cell.height);
     UIView * recipesImgsView = [[UIView alloc] initWithFrame:frame];
     
-    CGFloat w = (frame.size.width - CELLPADDING * Number_Two) / Number_Three;
+    CGFloat w = (frame.size.width - CELLPADDING8 * Number_Two) / Number_Three;
     CGFloat h = 70;
     CGFloat index = Number_Zero;
     CGFloat row   = Number_Zero;
@@ -253,18 +254,28 @@
     UIImageView * imageView = nil;
     UIButton    * btn = nil;
     for(CookbookDomain * cookbook in recipesVO.cookbookArray) {
-        
-        imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CELLPADDING + index * w, row * h, w, h)];
+        CGFloat startLeft=(CELLPADDING8 + w) *index ;
+//        if(index==0){
+//            startLeft=0;
+//        }
+        imageView = [[UIImageView alloc] initWithFrame:CGRectMake( startLeft, row * h, w, h)];
         imageView.backgroundColor = [UIColor clearColor];
         [imageView setClipsToBounds:YES];
-        [imageView setContentMode:UIViewContentModeScaleToFill];
+//        [imageView setContentMode:UIViewContentModeScaleToFill];
         [recipesImgsView addSubview:imageView];
-        
+        [imageView setContentMode:UIViewContentModeCenter];
         [imageView sd_setImageWithURL:[NSURL URLWithString:cookbook.img] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
         }];
         
-        btn = [[UIButton alloc] initWithFrame:CGRectMake(index * w, imageView.y, w, h)];
+        UILabel * label=[[UILabel alloc] initWithFrame:CGRectMake(0, h-24, w, 24)];
+        label.font=[UIFont systemFontOfSize:12];
+        label.alpha = 0.6;
+        [label setTextColor:[UIColor whiteColor]];
+        [label setBackgroundColor:[UIColor blackColor]];
+        label.text=cookbook.name;
+        [imageView addSubview:label];
+        btn = [[UIButton alloc] initWithFrame:CGRectMake(startLeft, imageView.y, w, h)];
         btn.targetObj = imageView;
         objc_setAssociatedObject(btn, "cookbook", cookbook, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [btn addTarget:self action:@selector(showRecipesImgClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -355,6 +366,8 @@
 - (void)showRecipesImgClicked:(UIButton *)sender{
     UIImageView * imageView = (UIImageView *)sender.targetObj;
     CookbookDomain * cookbook = objc_getAssociatedObject(sender, "cookbook");
+
+   
     [UUImageAvatarBrowser showImage:imageView url:cookbook.img];
 }
 
