@@ -815,12 +815,9 @@
 		E724B2701CFE97DA004FDB0C /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E724B26F1CFE97DA004FDB0C /* VideoToolbox.framework */; };
 		E724B2721CFE97EE004FDB0C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E724B2711CFE97EE004FDB0C /* GLKit.framework */; };
 		E724B2741CFE9804004FDB0C /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E724B2731CFE9804004FDB0C /* OpenAL.framework */; };
-		E724B27D1CFE9A5C004FDB0C /* EZCameraListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B27B1CFE9A5C004FDB0C /* EZCameraListViewController.m */; };
-		E724B27E1CFE9A5C004FDB0C /* EZCameraListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E724B27C1CFE9A5C004FDB0C /* EZCameraListViewController.xib */; };
 		E724B2821CFEA0B4004FDB0C /* EZCamrea.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B2811CFEA0B4004FDB0C /* EZCamrea.m */; };
 		E724B2871CFEA237004FDB0C /* EzCameraTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B2851CFEA237004FDB0C /* EzCameraTableViewCell.m */; };
 		E724B2881CFEA237004FDB0C /* EzCameraTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */; };
-		E724B28B1CFEAA73004FDB0C /* EZLivePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B28A1CFEAA73004FDB0C /* EZLivePlayViewController.m */; };
 		E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */; };
 		E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */; };
 		E755FA1C1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */; };
@@ -2267,16 +2264,11 @@
 		E724B26F1CFE97DA004FDB0C /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		E724B2711CFE97EE004FDB0C /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		E724B2731CFE9804004FDB0C /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		E724B27A1CFE9A5C004FDB0C /* EZCameraListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCameraListViewController.h; sourceTree = "<group>"; };
-		E724B27B1CFE9A5C004FDB0C /* EZCameraListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZCameraListViewController.m; sourceTree = "<group>"; };
-		E724B27C1CFE9A5C004FDB0C /* EZCameraListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EZCameraListViewController.xib; sourceTree = "<group>"; };
 		E724B2801CFEA0B4004FDB0C /* EZCamrea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCamrea.h; sourceTree = "<group>"; };
 		E724B2811CFEA0B4004FDB0C /* EZCamrea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZCamrea.m; sourceTree = "<group>"; };
 		E724B2841CFEA237004FDB0C /* EzCameraTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzCameraTableViewCell.h; sourceTree = "<group>"; };
 		E724B2851CFEA237004FDB0C /* EzCameraTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EzCameraTableViewCell.m; sourceTree = "<group>"; };
 		E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EzCameraTableViewCell.xib; sourceTree = "<group>"; };
-		E724B2891CFEAA73004FDB0C /* EZLivePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZLivePlayViewController.h; sourceTree = "<group>"; };
-		E724B28A1CFEAA73004FDB0C /* EZLivePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZLivePlayViewController.m; sourceTree = "<group>"; };
 		E724B28C1CFEAEDC004FDB0C /* build */ = {isa = PBXFileReference; lastKnownFileType = folder; path = build; sourceTree = "<group>"; };
 		E755FA131CC5DB6200AF32A0 /* MyInfoUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoUpdateController.h; sourceTree = "<group>"; };
 		E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoUpdateController.m; sourceTree = "<group>"; };
@@ -5735,16 +5727,11 @@
 				E76D907B1D0022E700562DEC /* CustomUI */,
 				E724B2831CFEA20E004FDB0C /* view */,
 				E724B27F1CFEA090004FDB0C /* domain */,
-				E724B27A1CFE9A5C004FDB0C /* EZCameraListViewController.h */,
-				E724B27B1CFE9A5C004FDB0C /* EZCameraListViewController.m */,
-				E724B27C1CFE9A5C004FDB0C /* EZCameraListViewController.xib */,
 				E76D904F1D0021BD00562DEC /* UIViewController+EZBackPop.h */,
 				E76D90501D0021BD00562DEC /* UIViewController+EZBackPop.m */,
 				E7061C9B1D0076ED00589827 /* query_loading.gif */,
-				E724B2891CFEAA73004FDB0C /* EZLivePlayViewController.h */,
 				E7DA2D1B1D03C8F5006F8F8D /* EZMain.storyboard */,
 				E71689821D01C46C00E37A3C /* EZMain2.storyboard */,
-				E724B28A1CFEAA73004FDB0C /* EZLivePlayViewController.m */,
 			);
 			name = "EZCamera(萤石云监控)";
 			sourceTree = "<group>";
@@ -6614,7 +6601,6 @@
 				04DDA5AE1CD8EAC300DBF147 /* webview_bar_next_grey_ipad.png in Resources */,
 				2491BB531B6E27F00052532B /* RecipesStudentInfoTableViewCell.xib in Resources */,
 				04DDA5621CD8EAC300DBF147 /* adsmogoshareview_below_arrow@2x.png in Resources */,
-				E724B27E1CFE9A5C004FDB0C /* EZCameraListViewController.xib in Resources */,
 				04DDA5581CD8EAC300DBF147 /* adsmogo_button_pressed@2x.png in Resources */,
 				04F89A361C1011CC00FC0FA6 /* EnrolStudentWebViewCell.xib in Resources */,
 				04DDA5561CD8EAC300DBF147 /* adsmogo_button_left_default@2x.png in Resources */,
@@ -6808,7 +6794,6 @@
 				04FB237F1C16DC67009B57E2 /* MineHomeChildrenCell.m in Sources */,
 				F463E6481B6613D500AB92B9 /* GroupDomain.m in Sources */,
 				04F4981B1C0BEFBE00C1E2DA /* UIColor+flat.m in Sources */,
-				E724B27D1CFE9A5C004FDB0C /* EZCameraListViewController.m in Sources */,
 				4D5CE77E1B7E4368002F1088 /* ModifyPasswordTableViewCell.m in Sources */,
 				04F9AC501BFC5412004DA63D /* MySPAllCourseListVO.m in Sources */,
 				E7C752B31D01D71500DA0C38 /* UIButton+DDKit.m in Sources */,
@@ -6963,7 +6948,6 @@
 				04FB7CC01C0DA86800FD3E31 /* SpCourseItem.m in Sources */,
 				04F903A81C56795C0040629F /* AFNetworkReachabilityManager.m in Sources */,
 				04FA408B1C337F8400E5D606 /* HLActionSheet.m in Sources */,
-				E724B28B1CFEAA73004FDB0C /* EZLivePlayViewController.m in Sources */,
 				24C46B521B5A2BC800A58F92 /* MessageViewController.m in Sources */,
 				0498AED01BDE160F001E653C /* SPDataListVO.m in Sources */,
 				4D077B291B80B14800FFD5CB /* OnlyEmojiView.m in Sources */,

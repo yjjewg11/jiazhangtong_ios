@@ -24,7 +24,7 @@
 #import "KGAccountTool.h"
 #import <Bugly/CrashReporter.h>
 #import "AdMoGoLogCenter.h"
-#import "EZOpenSDK.h"
+//#import "EZOpenSDK.h"
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"
@@ -126,7 +126,7 @@
     {
         NSLog(@"百度地图 manager start failed!");
     }
-    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
+//    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
     
 
     return YES;
