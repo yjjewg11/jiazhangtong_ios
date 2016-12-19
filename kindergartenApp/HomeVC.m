@@ -478,7 +478,7 @@
     NSString * numberKey = @"__ct__";
     NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionaryWithDictionary:attributes];
     [mutableDictionary setObject:[number stringValue] forKey:numberKey];
-    [MobClick event:eventId attributes:mutableDictionary];
+//    [MobClick event:eventId attributes:mutableDictionary];
 }
 
 #pragma mark - 更多按钮点击

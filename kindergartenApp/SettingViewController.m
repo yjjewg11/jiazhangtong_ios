@@ -10,9 +10,6 @@
 #import "KGDateUtil.h"
 #import "KGHttpService.h"
 #import "SDWebImageManager.h"
-
-#import "MobClick.h"
-
 @interface SettingViewController () <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

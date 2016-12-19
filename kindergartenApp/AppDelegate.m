@@ -15,7 +15,6 @@
 #import "UMSocialSinaHandler.h"
 #import "SystemShareKey.h"
 #import "UMFeedback.h"
-#import "MobClick.h"
 #import "UMSocialQQHandler.h"
 #import "UMessage.h"
 #import "KGNavigationController.h"
@@ -48,28 +47,29 @@
     return (AppDelegate *)[[UIApplication sharedApplication]  delegate];
 }
 
-
-
-- (void)umengTrack {
-//    [MobClick setCrashReportEnabled:NO]; // 如果不需要捕捉异常，注释掉此行]
-    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];//参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
-    //
-    [MobClick startWithAppkey:uMengAppKey reportPolicy:(ReportPolicy)BATCH channelId:nil];
-    //   reportPolicy为枚举类型,可以为 REALTIME, BATCH,SENDDAILY,SENDWIFIONLY几种
-    //   channelId 为NSString * 类型，channelId 为nil或@""时,默认会被被当作@"App Store"渠道
-    
-    //      [MobClick checkUpdate];   //自动更新检查, 如果需要自定义更新请使用下面的方法,需要接收一个(NSDictionary *)appInfo的参数
-    //    [MobClick checkUpdateWithDelegate:self selector:@selector(updateMethod:)];
-    
-    [MobClick updateOnlineConfig];  //在线参数配置
-    
-    //    1.6.8之前的初始化方法
-    //    [MobClick setDelegate:self reportPolicy:REALTIME];  //建议使用新方法
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
-    
-}
+//
+//
+//
+//- (void)umengTrack {
+////    [MobClick setCrashReportEnabled:NO]; // 如果不需要捕捉异常，注释掉此行]
+//    [MobClick setLogEnabled:YES];  // 打开友盟sdk调试，注意Release发布时需要注释掉此行,减少io消耗
+//    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//    [MobClick setAppVersion:version];//参数为NSString * 类型,自定义app版本信息，如果不设置，默认从CFBundleVersion里取
+//    //
+//    [MobClick startWithAppkey:uMengAppKey reportPolicy:(ReportPolicy)BATCH channelId:nil];
+//    //   reportPolicy为枚举类型,可以为 REALTIME, BATCH,SENDDAILY,SENDWIFIONLY几种
+//    //   channelId 为NSString * 类型，channelId 为nil或@""时,默认会被被当作@"App Store"渠道
+//    
+//    //      [MobClick checkUpdate];   //自动更新检查, 如果需要自定义更新请使用下面的方法,需要接收一个(NSDictionary *)appInfo的参数
+//    //    [MobClick checkUpdateWithDelegate:self selector:@selector(updateMethod:)];
+//    
+//    [MobClick updateOnlineConfig];  //在线参数配置
+//    
+//    //    1.6.8之前的初始化方法
+//    //    [MobClick setDelegate:self reportPolicy:REALTIME];  //建议使用新方法
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onlineConfigCallBack:) name:UMOnlineConfigDidFinishedNotification object:nil];
+//    
+//}
 
 - (void)onlineConfigCallBack:(NSNotification *)note {
     
@@ -101,7 +101,7 @@
     //设置友盟反馈 appkey
     [UMFeedback setAppkey:uMengAppKey];
     //设置友盟更新
-    [self umengTrack];
+//    [self umengTrack];
     //友盟分享
     [self umengShareConfig];
     //设置友盟推送消息
@@ -112,9 +112,9 @@
     
     
     //关闭友盟Crash收集
-    [MobClick setCrashReportEnabled:NO];
-    [MobClick setLogEnabled:NO];
-    
+//    [MobClick setCrashReportEnabled:NO];
+//    [MobClick setLogEnabled:NO];
+//    
     
     
     [self setupBugly];
@@ -249,7 +249,7 @@
         [self savePushToken:key];
     }
     
-    [UMessage registerDeviceToken:deviceToken];
+//    [UMessage registerDeviceToken:deviceToken];
 }
 
 //save token
@@ -285,6 +285,8 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
+    
+    
     [self handleNotification:application notification:userInfo remoteNotification:nil];
 }
 
@@ -308,8 +310,12 @@
     
 //    NSDictionary * dic = [notification objectForKey:@"aps"];
     //关闭友盟自带的弹出框
+    //关闭友盟自带的弹出框
     [UMessage setAutoAlert:NO];
-    [UMessage sendClickReportForRemoteNotification:notification];
+    [UMessage didReceiveRemoteNotification:notification];
+    
+//    [UMessage setAutoAlert:NO];
+//    [UMessage sendClickReportForRemoteNotification:notification];
 //    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"通知" message:[dic objectForKey:@"alert"] delegate:nil cancelButtonTitle:@"忽略" otherButtonTitles:@"查看", nil];
 //    [alertView show];
 }
@@ -389,50 +395,78 @@
 
 #pragma mark - 注册友盟的消息推送
 - (void)registerUMessageNotification:(NSDictionary *)launchOptions{
-    //set AppKey and LaunchOptions
+    
+    
+    //设置 AppKey 及 LaunchOptions
     [UMessage startWithAppkey:uMengAppKey launchOptions:launchOptions];
+    //注册通知
+    [UMessage registerForRemoteNotifications];
+    //iOS10必须加下面这段代码。
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate=self;
+    UNAuthorizationOptions types10=UNAuthorizationOptionBadge|UNAuthorizationOptionAlert|UNAuthorizationOptionSound;
+    [center requestAuthorizationWithOptions:types10 completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        if (granted) {
+            //点击允许
+            
+        } else {
+            //点击不允许
+            
+        }
+    }];
+
     
-    //register remoteNotification types
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
-    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
-    {
-        //register remoteNotification types
-        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
-        action1.identifier = @"action1_identifier";
-        action1.title=@"Accept";
-        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
-        
-        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
-        action2.identifier = @"action2_identifier";
-        action2.title=@"Reject";
-        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
-        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
-        action2.destructive = YES;
-        
-        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
-        categorys.identifier = @"category1";//这组动作的唯一标示
-        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
-        
-        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
-                                                                                     categories:[NSSet setWithObject:categorys]];
-        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
-        
-    } else{
-        //register remoteNotification types
-        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
-         |UIRemoteNotificationTypeSound
-         |UIRemoteNotificationTypeAlert];
-    }
-#else
-    
-    //register remoteNotification types
-    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
-     |UIRemoteNotificationTypeSound
-     |UIRemoteNotificationTypeAlert];
-    
-#endif
     //for log
-    [UMessage setLogEnabled:NO];
+    
+#if DEBUG
+     [UMessage setLogEnabled:YES];
+#endif
+    
+   
+    //set AppKey and LaunchOptions
+//    [UMessage startWithAppkey:uMengAppKey launchOptions:launchOptions];
+//    
+//    //register remoteNotification types
+//#if __IPHONE_OS_VERSION_MAX_ALLOWED >= _IPHONE80_
+//    if(UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0"))
+//    {
+//        //register remoteNotification types
+//        UIMutableUserNotificationAction *action1 = [[UIMutableUserNotificationAction alloc] init];
+//        action1.identifier = @"action1_identifier";
+//        action1.title=@"Accept";
+//        action1.activationMode = UIUserNotificationActivationModeForeground;//当点击的时候启动程序
+//        
+//        UIMutableUserNotificationAction *action2 = [[UIMutableUserNotificationAction alloc] init];  //第二按钮
+//        action2.identifier = @"action2_identifier";
+//        action2.title=@"Reject";
+//        action2.activationMode = UIUserNotificationActivationModeBackground;//当点击的时候不启动程序，在后台处理
+//        action2.authenticationRequired = YES;//需要解锁才能处理，如果action.activationMode = UIUserNotificationActivationModeForeground;则这个属性被忽略；
+//        action2.destructive = YES;
+//        
+//        UIMutableUserNotificationCategory *categorys = [[UIMutableUserNotificationCategory alloc] init];
+//        categorys.identifier = @"category1";//这组动作的唯一标示
+//        [categorys setActions:@[action1,action2] forContext:(UIUserNotificationActionContextDefault)];
+//        
+//        UIUserNotificationSettings *userSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert
+//                                                                                     categories:[NSSet setWithObject:categorys]];
+//        [UMessage registerRemoteNotificationAndUserNotificationSettings:userSettings];
+//        
+//    } else{
+//        //register remoteNotification types
+//        [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+//         |UIRemoteNotificationTypeSound
+//         |UIRemoteNotificationTypeAlert];
+//    }
+//#else
+//    
+//    //register remoteNotification types
+//    [UMessage registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge
+//     |UIRemoteNotificationTypeSound
+//     |UIRemoteNotificationTypeAlert];
+//    
+//#endif
+//    //for log
+//    [UMessage setLogEnabled:NO];
 }
 
 /**

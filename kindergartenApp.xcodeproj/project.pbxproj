@@ -45,6 +45,8 @@
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
 		040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A27431BEB664C00620876 /* SPBottomItem.xib */; };
 		042681C21E081E0E0025A2A5 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042681C11E081E0E0025A2A5 /* Bugly.framework */; };
+		042681C61E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 042681C41E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a */; };
+		042681C81E082D160025A2A5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042681C71E082D160025A2A5 /* UserNotifications.framework */; };
 		042A85751C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A85731C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m */; };
 		042A85761C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042A85741C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib */; };
 		043BCFE21C9BDC9C0050AD96 /* FPHomeTimeLineSectionHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BCFE01C9BDC9C0050AD96 /* FPHomeTimeLineSectionHeaderTableViewCell.m */; };
@@ -496,7 +498,6 @@
 		04F9F3001BF9C67500470F0C /* MySPButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F2FE1BF9C67500470F0C /* MySPButtonCell.m */; };
 		04F9F3011BF9C67500470F0C /* MySPButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */; };
 		04F9F3041BF9DD7E00470F0C /* MySPCourseTeacherList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9F3031BF9DD7E00470F0C /* MySPCourseTeacherList.m */; };
-		04F9FB2C1BF1A64B00AEFB88 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB291BF1A64B00AEFB88 /* libMobClickLibrary.a */; };
 		04F9FB571BF1A67400AEFB88 /* UMFeedbackLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F9FB2E1BF1A67400AEFB88 /* UMFeedbackLocalizable.strings */; };
 		04F9FB581BF1A67400AEFB88 /* libUMFeedback.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB301BF1A67400AEFB88 /* libUMFeedback.a */; };
 		04F9FB591BF1A67400AEFB88 /* bubble_min@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04F9FB321BF1A67400AEFB88 /* bubble_min@2x.png */; };
@@ -522,7 +523,6 @@
 		04F9FB6D1BF1A67400AEFB88 /* UMPostTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9FB511BF1A67400AEFB88 /* UMPostTableViewCell.m */; };
 		04F9FB6E1BF1A67400AEFB88 /* UMRadialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9FB531BF1A67400AEFB88 /* UMRadialView.m */; };
 		04F9FB6F1BF1A67400AEFB88 /* UMTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F9FB551BF1A67400AEFB88 /* UMTextView.m */; };
-		04F9FB9E1BF1A77E00AEFB88 /* libUMessage_Sdk_1.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB721BF1A77E00AEFB88 /* libUMessage_Sdk_1.1.0.a */; };
 		04F9FB9F1BF1A77E00AEFB88 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04F9FB751BF1A77E00AEFB88 /* UMSocialLocalizable.strings */; };
 		04F9FBA01BF1A77E00AEFB88 /* libUMSocial_Sdk_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F9FB831BF1A77E00AEFB88 /* libUMSocial_Sdk_4.2.3.a */; };
 		04F9FBA11BF1A77E00AEFB88 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F9FB851BF1A77E00AEFB88 /* UMSCommentDetailController.xib */; };
@@ -1010,6 +1010,9 @@
 		040A27411BEB663300620876 /* SPBottomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItem.m; sourceTree = "<group>"; };
 		040A27431BEB664C00620876 /* SPBottomItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPBottomItem.xib; sourceTree = "<group>"; };
 		042681C11E081E0E0025A2A5 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
+		042681C41E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.4.0.a; sourceTree = "<group>"; };
+		042681C51E082C580025A2A5 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
+		042681C71E082D160025A2A5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		042A85721C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeTablePhotoCellTableViewCell.h; sourceTree = "<group>"; };
 		042A85731C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTablePhotoCellTableViewCell.m; sourceTree = "<group>"; };
 		042A85741C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeTablePhotoCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -1703,9 +1706,6 @@
 		04F9F2FF1BF9C67500470F0C /* MySPButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySPButtonCell.xib; sourceTree = "<group>"; };
 		04F9F3021BF9DD7E00470F0C /* MySPCourseTeacherList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySPCourseTeacherList.h; sourceTree = "<group>"; };
 		04F9F3031BF9DD7E00470F0C /* MySPCourseTeacherList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySPCourseTeacherList.m; sourceTree = "<group>"; };
-		04F9FB291BF1A64B00AEFB88 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
-		04F9FB2A1BF1A64B00AEFB88 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
-		04F9FB2B1BF1A64B00AEFB88 /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
 		04F9FB2F1BF1A67400AEFB88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/UMFeedbackLocalizable.strings; sourceTree = "<group>"; };
 		04F9FB301BF1A67400AEFB88 /* libUMFeedback.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMFeedback.a; sourceTree = "<group>"; };
 		04F9FB321BF1A67400AEFB88 /* bubble_min@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bubble_min@2x.png"; sourceTree = "<group>"; };
@@ -1743,8 +1743,6 @@
 		04F9FB541BF1A67400AEFB88 /* UMTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTextView.h; sourceTree = "<group>"; };
 		04F9FB551BF1A67400AEFB88 /* UMTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTextView.m; sourceTree = "<group>"; };
 		04F9FB561BF1A67400AEFB88 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMFeedbackLocalizable.strings"; sourceTree = "<group>"; };
-		04F9FB721BF1A77E00AEFB88 /* libUMessage_Sdk_1.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMessage_Sdk_1.1.0.a; sourceTree = "<group>"; };
-		04F9FB731BF1A77E00AEFB88 /* UMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMessage.h; sourceTree = "<group>"; };
 		04F9FB761BF1A77E00AEFB88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		04F9FB781BF1A77E00AEFB88 /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		04F9FB791BF1A77E00AEFB88 /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -2505,6 +2503,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042681C81E082D160025A2A5 /* UserNotifications.framework in Frameworks */,
 				04729B971D01DCD50042D24B /* libEZOpenSDK.a in Frameworks */,
 				04729B951D01DCC90042D24B /* libssl.a in Frameworks */,
 				04729B961D01DCC90042D24B /* libcrypto.a in Frameworks */,
@@ -2559,13 +2558,13 @@
 				4D5CE78F1B7E4540002F1088 /* AdSupport.framework in Frameworks */,
 				24E4D9491B64EE690088745A /* SystemConfiguration.framework in Frameworks */,
 				04663DA31BE71A590033C436 /* libsqlite3.tbd in Frameworks */,
-				04F9FB9E1BF1A77E00AEFB88 /* libUMessage_Sdk_1.1.0.a in Frameworks */,
 				048524CF1BEE324A00DA97BB /* libiconv.tbd in Frameworks */,
 				04A50C571CC4AAE000EC9F4B /* ALBBOpenAccount.framework in Frameworks */,
 				2487E63F1B6166700030320A /* Foundation.framework in Frameworks */,
 				04A50C561CC4AAE000EC9F4B /* ALBBFullSecurityGuard.framework in Frameworks */,
 				4D5CE7871B7E4527002F1088 /* MediaPlayer.framework in Frameworks */,
 				04F9FBAE1BF1A77E00AEFB88 /* libSocialWechat.a in Frameworks */,
+				042681C61E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				04663CCE1BE708E30033C436 /* MapKit.framework in Frameworks */,
 				04F9FBAC1BF1A77E00AEFB88 /* TencentOpenAPI.framework in Frameworks */,
 				04F9FBAB1BF1A77E00AEFB88 /* libSocialQQ.a in Frameworks */,
@@ -2580,7 +2579,6 @@
 				04F9FBAA1BF1A77E00AEFB88 /* libSocialSina.a in Frameworks */,
 				24E4D94F1B64EE970088745A /* CoreLocation.framework in Frameworks */,
 				04F9FB691BF1A67400AEFB88 /* libUMOpus.a in Frameworks */,
-				04F9FB2C1BF1A64B00AEFB88 /* libMobClickLibrary.a in Frameworks */,
 				04A50C5D1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework in Frameworks */,
 				04DDA5FE1CD8EACE00DBF147 /* libAdsMogo.a in Frameworks */,
 				0482BECF1CC37BC900ABD6B1 /* SecurityGuardSDK.framework in Frameworks */,
@@ -2724,6 +2722,15 @@
 				0405B6F61CB253D10090863C /* JRSegmentViewController.m */,
 			);
 			path = JRSegmentControl;
+			sourceTree = "<group>";
+		};
+		042681C31E082C580025A2A5 /* UMessage_Sdk_1.4.0 */ = {
+			isa = PBXGroup;
+			children = (
+				042681C41E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a */,
+				042681C51E082C580025A2A5 /* UMessage.h */,
+			);
+			path = UMessage_Sdk_1.4.0;
 			sourceTree = "<group>";
 		};
 		0449A3361C4F5FBE0066ABBB /* tableviewcell */ = {
@@ -4057,16 +4064,6 @@
 			name = collcells;
 			sourceTree = "<group>";
 		};
-		04F9FB281BF1A64B00AEFB88 /* UMAnalytics_Sdk_3.5.10 */ = {
-			isa = PBXGroup;
-			children = (
-				04F9FB291BF1A64B00AEFB88 /* libMobClickLibrary.a */,
-				04F9FB2A1BF1A64B00AEFB88 /* MobClick.h */,
-				04F9FB2B1BF1A64B00AEFB88 /* MobClickSocialAnalytics.h */,
-			);
-			path = UMAnalytics_Sdk_3.5.10;
-			sourceTree = "<group>";
-		};
 		04F9FB2D1BF1A67400AEFB88 /* UMengFeedback_SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -4137,20 +4134,10 @@
 		04F9FB701BF1A77E00AEFB88 /* Share_4.2.3 */ = {
 			isa = PBXGroup;
 			children = (
-				04F9FB711BF1A77E00AEFB88 /* UMessage_Sdk_1.1.0 */,
 				04F9FB741BF1A77E00AEFB88 /* UMSocial_Sdk_4.2.3 */,
 				04F9FB8F1BF1A77E00AEFB88 /* UMSocial_Sdk_Extra_Frameworks */,
 			);
 			path = Share_4.2.3;
-			sourceTree = "<group>";
-		};
-		04F9FB711BF1A77E00AEFB88 /* UMessage_Sdk_1.1.0 */ = {
-			isa = PBXGroup;
-			children = (
-				04F9FB721BF1A77E00AEFB88 /* libUMessage_Sdk_1.1.0.a */,
-				04F9FB731BF1A77E00AEFB88 /* UMessage.h */,
-			);
-			path = UMessage_Sdk_1.1.0;
 			sourceTree = "<group>";
 		};
 		04F9FB741BF1A77E00AEFB88 /* UMSocial_Sdk_4.2.3 */ = {
@@ -4982,6 +4969,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				042681C31E082C580025A2A5 /* UMessage_Sdk_1.4.0 */,
 				042681C11E081E0E0025A2A5 /* Bugly.framework */,
 				04DDA6191CD8EBB900DBF147 /* GDTMob_SDK_430 */,
 				04DDA97C1CD91BBF00DBF147 /* BaiduMapKit */,
@@ -5616,6 +5604,7 @@
 		C925B64CB131B415E0126F11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				042681C71E082D160025A2A5 /* UserNotifications.framework */,
 				E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */,
 				E76D90961D002F8E00562DEC /* libcrypto.a */,
 				E76D90971D002F8E00562DEC /* libssl.a */,
@@ -6123,7 +6112,6 @@
 			children = (
 				04F9FB701BF1A77E00AEFB88 /* Share_4.2.3 */,
 				04F9FB2D1BF1A67400AEFB88 /* UMengFeedback_SDK */,
-				04F9FB281BF1A64B00AEFB88 /* UMAnalytics_Sdk_3.5.10 */,
 			);
 			name = Umeng;
 			sourceTree = "<group>";
@@ -6263,7 +6251,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -7435,6 +7423,7 @@
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/openssl/lib",
 					"$(PROJECT_DIR)/build/BaiduMapKit",
+					"$(PROJECT_DIR)/kindergartenApp/UMessage_Sdk_1.4.0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -7524,6 +7513,7 @@
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/openssl/lib",
 					"$(PROJECT_DIR)/build/BaiduMapKit",
+					"$(PROJECT_DIR)/kindergartenApp/UMessage_Sdk_1.4.0",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "UIColor+Extension.h"
-#import "MobClick.h"
 #import "NoNetView.h"
 #import "UIColor+flat.h"
 #import "SDRotationLoopProgressView.h"
