@@ -12,9 +12,6 @@
 #import "KGNavigationController.h"
 #import "KGHUD.h"
 #import "LoginViewController.h"
-#import "AdMoGoDelegateProtocol.h"
-#import "AdMoGoView.h"
-#import "AdMoGoWebBrowserControllerUserDelegate.h"
 #import "KGDateUtil.h"
 #import "InteractViewController.h"
 #import "EnrolStudentHomeVC.h"
@@ -35,7 +32,7 @@
 #define FunItemH 60.00;
 #define FunItemW 50.00;
 
-@interface HomeVC () <CLLocationManagerDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate>
+@interface HomeVC () <CLLocationManagerDelegate>
 {
     PopupView * popupView;
     DiscorveryNewNumberDomain * numberDomain;
@@ -168,12 +165,12 @@
     }];
     
     //先把广告view加进去
-    AdMoGoView * adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
-                                          adMoGoViewDelegate:self];
-    adView.adWebBrowswerDelegate = self;
-    adView.frame = CGRectMake((APPWINDOWWIDTH - 320)/2 , 0, 320, 150);
-    [container addSubview:adView];
-    
+//    AdMoGoView * adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
+//                                          adMoGoViewDelegate:self];
+//    adView.adWebBrowswerDelegate = self;
+//    adView.frame = CGRectMake((APPWINDOWWIDTH - 320)/2 , 0, 320, 150);
+//    [container addSubview:adView];
+//    
     //再创建一个funview
     UIView * funContainer = [UIView new];
     [container addSubview:funContainer];
@@ -311,16 +308,16 @@
 {
     return self;
 }
-- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView
-{}
-- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView
-{}
-- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error
-{}
-- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView
-{}
-- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
-{}
+//- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView
+//{}
+//- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView
+//{}
+//- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error
+//{}
+//- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView
+//{}
+//- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
+//{}
 
 #pragma mark - 获取最新话题
 - (void)getSysConfig

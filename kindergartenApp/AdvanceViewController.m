@@ -8,7 +8,7 @@
 
 #import "AdvanceViewController.h"
 #import "ACMacros.h"
-#import "UMFeedback.h"
+//#import "UMFeedback.h"
 #import "KGHUD.h"
 #import "KGUser.h"
 #import "KGAccountTool.h"
@@ -37,13 +37,13 @@
     KGUser * account = [KGAccountTool account];
     
     NSString * contents = [NSString stringWithFormat:@"%@:%@",account.loginname,_advanceTextView.text];
-    
-    [[UMFeedback sharedInstance] post:@{@"content":contents} completion:^(NSError *error) {
-        [[KGHUD sharedHud] show:self.view onlyMsg:error==nil?@"提交反馈成功,感谢您的支持":error.localizedDescription];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
-    }];
+//    
+//    [[UMFeedback sharedInstance] post:@{@"content":contents} completion:^(NSError *error) {
+//        [[KGHUD sharedHud] show:self.view onlyMsg:error==nil?@"提交反馈成功,感谢您的支持":error.localizedDescription];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [self.navigationController popViewControllerAnimated:YES];
+//        });
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

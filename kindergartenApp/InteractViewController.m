@@ -24,13 +24,9 @@
 #import "BrowseURLViewController.h"
 #import "NoDataTableViewCell.h"
 
-#import "AdMoGoDelegateProtocol.h"
-#import "AdMoGoView.h"
-#import "AdMoGoWebBrowserControllerUserDelegate.h"
-
 #import "HLActionSheet.h"
 
-@interface InteractViewController () <UITableViewDataSource,UITableViewDelegate,AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,TopicTableViewCellDelegate,UMSocialUIDelegate,UIScrollViewDelegate>
+@interface InteractViewController () <UITableViewDataSource,UITableViewDelegate,TopicTableViewCellDelegate,UMSocialUIDelegate,UIScrollViewDelegate>
 {
     UITableViewController * reFreshView;
     
@@ -43,7 +39,7 @@
     
     BOOL rdyToRefesh;
     
-    AdMoGoView * _adView;
+//    AdMoGoView * _adView;
 }
 
 @end
@@ -69,14 +65,14 @@
         self.navigationItem.rightBarButtonItem = rightBarItem;
     }
     
-    //芒果横幅广告
-    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone
-                                         adType:AdViewTypeNormalBanner                                adMoGoViewDelegate:self
-                                      autoScale:YES];
-    _adView.adWebBrowswerDelegate = self;
-    _adView.frame = CGRectMake((APPWINDOWWIDTH - 320)/2, 0.0, APPWINDOWWIDTH, 50.0);
-    [self.view addSubview:_adView];
-    
+//    //芒果横幅广告
+//    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone
+//                                         adType:AdViewTypeNormalBanner                                adMoGoViewDelegate:self
+//                                      autoScale:YES];
+//    _adView.adWebBrowswerDelegate = self;
+//    _adView.frame = CGRectMake((APPWINDOWWIDTH - 320)/2, 0.0, APPWINDOWWIDTH, 50.0);
+//    [self.view addSubview:_adView];
+//    
     if ([[UIDevice currentDevice].systemVersion floatValue] >=7.0) {
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
@@ -93,9 +89,9 @@
 - (void)dealloc
 {
     NSLog(@"delloc --- ");
-    _adView.adWebBrowswerDelegate = nil;
-    _adView.delegate = nil;
-    _adView = nil;//清除掉
+//    _adView.adWebBrowswerDelegate = nil;
+//    _adView.delegate = nil;
+//    _adView = nil;//清除掉
     reFreshView = nil;
     interactArray = nil;
     dataSource = nil;
@@ -450,41 +446,41 @@
 {
     return self;
 }
-
-/**
- * 广告开始请求回调
- */
-- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView{
-    NSLog(@"广告开始请求回调");
-}
-/**
- * 广告接收成功回调
- */
-- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
-    NSLog(@"广告接收成功回调");
-}
-/**
- * 广告接收失败回调
- */
-- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error{
-    NSLog(@"广告接收失败回调");
-}
-/**
- * 点击广告回调
- */
-- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView{
-    NSLog(@"点击广告回调");
-}
-/**
- *You can get notified when the user delete the ad
- 广告关闭回调
- */
-- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
-{
-    _adView.hidden = YES;
-    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
-}
-
+//
+///**
+// * 广告开始请求回调
+// */
+//- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView{
+//    NSLog(@"广告开始请求回调");
+//}
+///**
+// * 广告接收成功回调
+// */
+//- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView{
+//    NSLog(@"广告接收成功回调");
+//}
+///**
+// * 广告接收失败回调
+// */
+//- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error{
+//    NSLog(@"广告接收失败回调");
+//}
+///**
+// * 点击广告回调
+// */
+//- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView{
+//    NSLog(@"点击广告回调");
+//}
+///**
+// *You can get notified when the user delete the ad
+// 广告关闭回调
+// */
+//- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
+//{
+//    _adView.hidden = YES;
+//    reFreshView.tableView.frame = CGRectMake(0, 0, APPWINDOWWIDTH, APPWINDOWHEIGHT - 64);
+//}
+//
 
 - (void)openWebWithUrl:(NSString *)url
 {

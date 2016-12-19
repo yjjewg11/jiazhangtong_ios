@@ -14,7 +14,7 @@
 #import "UMSocialWechatHandler.h"
 #import "UMSocialSinaHandler.h"
 #import "SystemShareKey.h"
-#import "UMFeedback.h"
+//#import "UMFeedback.h"
 #import "UMSocialQQHandler.h"
 #import "UMessage.h"
 #import "KGNavigationController.h"
@@ -22,7 +22,6 @@
 #import "KGHUD.h"
 #import "KGAccountTool.h"
 #import <Bugly/Bugly.h>
-#import "AdMoGoLogCenter.h"
 //#import "EZOpenSDK.h"
 
 
@@ -99,7 +98,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //设置友盟反馈 appkey
-    [UMFeedback setAppkey:uMengAppKey];
+//    [UMFeedback setAppkey:uMengAppKey];
     //设置友盟更新
 //    [self umengTrack];
     //友盟分享

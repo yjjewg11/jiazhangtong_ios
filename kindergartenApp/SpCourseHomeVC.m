@@ -18,17 +18,13 @@
 #import "SpCourseHomeFuncCell.h"
 #import "SpCourseCell.h"
 
-#import "AdMoGoDelegateProtocol.h"
-#import "AdMoGoView.h"
-#import "AdMoGoWebBrowserControllerUserDelegate.h"
-
 #define FinishReqCount 2
 
-@interface SpCourseHomeVC () <AdMoGoDelegate,AdMoGoWebBrowserControllerUserDelegate,SpCourseHomeFuncCellDelegate,NoNetViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface SpCourseHomeVC () <SpCourseHomeFuncCellDelegate,NoNetViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     NSMutableArray * _courseTypes;
     NSMutableArray * _hotCourseData;
-    AdMoGoView * _adView;
+//    AdMoGoView * _adView;
     NSInteger _reqSuccessCount;
     NSInteger _reqFailedCount;
     NSInteger _pageNo;
@@ -69,7 +65,7 @@
     [self initTableView];
     
     //加载ad
-    [self initAD];
+//    [self initAD];
 }
 
 #pragma mark - 初始化tableview
@@ -80,17 +76,17 @@
     _tableView.dataSource = self;
     [self setupRefresh];
 }
-
-#pragma mark - 创建ad
-- (void)initAD
-{
-    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
-                              adMoGoViewDelegate:self];
-    
-    _adView.adWebBrowswerDelegate = self;
-    
-    _adView.frame = CGRectMake((APPWINDOWWIDTH - 320) / 2, 0, 320, 150);
-}
+//
+//#pragma mark - 创建ad
+//- (void)initAD
+//{
+//    _adView = [[AdMoGoView alloc] initWithAppKey:MoGo_ID_IPhone adType:AdViewTypeCustomSize
+//                              adMoGoViewDelegate:self];
+//    
+//    _adView.adWebBrowswerDelegate = self;
+//    
+//    _adView.frame = CGRectMake((APPWINDOWWIDTH - 320) / 2, 0, 320, 150);
+//}
 
 #pragma mark - 加载课程分类数据
 - (void)loadCourseTypesData
@@ -199,15 +195,15 @@
         return cell;
     }
 }
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return _adView;
-}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return _adView;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 150;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -317,16 +313,16 @@
 {
     return self;
 }
-- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView
-{}
-- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView
-{}
-- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error
-{}
-- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView
-{}
-- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
-{}
+//- (void)adMoGoDidStartAd:(AdMoGoView *)adMoGoView
+//{}
+//- (void)adMoGoDidReceiveAd:(AdMoGoView *)adMoGoView
+//{}
+//- (void)adMoGoDidFailToReceiveAd:(AdMoGoView *)adMoGoView didFailWithError:(NSError *)error
+//{}
+//- (void)adMoGoClickAd:(AdMoGoView *)adMoGoView
+//{}
+//- (void)adMoGoDeleteAd:(AdMoGoView *)adMoGoView
+//{}
 
 - (void)dealloc
 {
