@@ -22,9 +22,14 @@
 #import "LoginViewController.h"
 #import "KGHUD.h"
 #import "KGAccountTool.h"
-#import <Bugly/CrashReporter.h>
+#import <Bugly/Bugly.h>
 #import "AdMoGoLogCenter.h"
 //#import "EZOpenSDK.h"
+
+
+
+#define BUGLY_APP_ID @"900009876"
+
 
 #define UMSYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define RemoveHUDNotification @"RemoveHUD"
@@ -110,9 +115,12 @@
     [MobClick setCrashReportEnabled:NO];
     [MobClick setLogEnabled:NO];
     
-    [[CrashReporter sharedInstance] enableLog:NO];
-    //bugly
-     [[CrashReporter sharedInstance] installWithAppId:@"900009876"];
+    
+    
+    [self setupBugly];
+    
+
+//    [Bugly startWithAppId:@"900009876"];
     
     //注册SessionTimeout通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionTimeoutNotification:) name:Key_Notification_SessionTimeout object:nil];
@@ -131,58 +139,58 @@
 
     return YES;
 }
-
-static int exception_callback_handler() {
-    NSLog(@"bugly exception callback handler");
-    
-    NSException * exception = [[CrashReporter sharedInstance] getCurrentException];
-    if (exception) {
-        // 捕获的Obj-C异常
-    }
-    
-    // 捕获的错误信号堆栈
-    NSString * callStack = [[CrashReporter sharedInstance] getCrashStack];
-    NSLog(@" %@", callStack);
-    
-    KGUser * userinfo = [KGAccountTool account];
-    
-    // 设置崩溃场景的附件
-    if (userinfo) {
-        [[CrashReporter sharedInstance] setUserData:@"用户身份" value:userinfo.loginname];
-    }else{
-        [[CrashReporter sharedInstance] setUserData:@"用户身份" value:@"未登录用户"];
-    }
-    
-    [[CrashReporter sharedInstance] setAttachLog:@"业务关键日志"];
-    
-    return 1;
-}
-
-// 自定义Bugly配置
-- (void)customizeBuglySDKConfig {
-    // 调试阶段开启sdk日志打印, 发布阶段请务必关闭
-#if DEBUG == 1
-    [[CrashReporter sharedInstance] enableLog:YES];
-#endif
-    
-    // SDK默认采用BundleShortVersion(BundleVersion)的格式作为版本,如果你的应用版本不是采用这样的格式，你可以通过此接口设置
-    //    [[CrashReporter sharedInstance] setBundleVer:@"1.0.2"];
-    
-    // 如果你的App有对应的发布渠道(如AppStore),你可以通过此接口设置, 默认值为unknown,
-    [[CrashReporter sharedInstance] setChannel:@"测试渠道"];
-    KGUser * userinfo = [KGAccountTool account];
-    // 你可以在初始化之前设置本地保存的用户身份, 也可以在用户身份切换后调用此接口即时修改
-    [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"测试用户:%@", userinfo.loginname]];
-    
-    // 关闭卡顿监听上报
-    [[CrashReporter sharedInstance] enableBlockMonitor:NO autoReport:NO];
-    
-    // 关闭进程内符号化处理, SDK默认开启此功能, 如果开启, 请检查Xcode工程配置Strip Style不能为ALL Symbols
-    [[CrashReporter sharedInstance] setEnableSymbolicateInProcess:NO];
-    
-    // 自定义崩溃处理回调函数
-    exp_call_back_func = &exception_callback_handler;
-}
+//
+//static int exception_callback_handler() {
+//    NSLog(@"bugly exception callback handler");
+//    
+//    NSException * exception = [[CrashReporter sharedInstance] getCurrentException];
+//    if (exception) {
+//        // 捕获的Obj-C异常
+//    }
+//    
+//    // 捕获的错误信号堆栈
+//    NSString * callStack = [[CrashReporter sharedInstance] getCrashStack];
+//    NSLog(@" %@", callStack);
+//    
+//    KGUser * userinfo = [KGAccountTool account];
+//    
+//    // 设置崩溃场景的附件
+//    if (userinfo) {
+//        [[CrashReporter sharedInstance] setUserData:@"用户身份" value:userinfo.loginname];
+//    }else{
+//        [[CrashReporter sharedInstance] setUserData:@"用户身份" value:@"未登录用户"];
+//    }
+//    
+//    [[CrashReporter sharedInstance] setAttachLog:@"业务关键日志"];
+//    
+//    return 1;
+//}
+//
+//// 自定义Bugly配置
+//- (void)customizeBuglySDKConfig {
+//    // 调试阶段开启sdk日志打印, 发布阶段请务必关闭
+//#if DEBUG == 1
+//    [[CrashReporter sharedInstance] enableLog:YES];
+//#endif
+//    
+//    // SDK默认采用BundleShortVersion(BundleVersion)的格式作为版本,如果你的应用版本不是采用这样的格式，你可以通过此接口设置
+//    //    [[CrashReporter sharedInstance] setBundleVer:@"1.0.2"];
+//    
+//    // 如果你的App有对应的发布渠道(如AppStore),你可以通过此接口设置, 默认值为unknown,
+//    [[CrashReporter sharedInstance] setChannel:@"测试渠道"];
+//    KGUser * userinfo = [KGAccountTool account];
+//    // 你可以在初始化之前设置本地保存的用户身份, 也可以在用户身份切换后调用此接口即时修改
+//    [[CrashReporter sharedInstance] setUserId:[NSString stringWithFormat:@"测试用户:%@", userinfo.loginname]];
+//    
+//    // 关闭卡顿监听上报
+//    [[CrashReporter sharedInstance] enableBlockMonitor:NO autoReport:NO];
+//    
+//    // 关闭进程内符号化处理, SDK默认开启此功能, 如果开启, 请检查Xcode工程配置Strip Style不能为ALL Symbols
+//    [[CrashReporter sharedInstance] setEnableSymbolicateInProcess:NO];
+//    
+//    // 自定义崩溃处理回调函数
+//    exp_call_back_func = &exception_callback_handler;
+//}
 
 - (void)sessionTimeoutNotification:(NSNotification *)notification
 {
@@ -443,6 +451,59 @@ static int exception_callback_handler() {
 - (void)onGetPermissionState:(int)iError
 {
     
+}
+
+
+
+- (void)setupBugly {
+    // Get the default config
+    BuglyConfig * config = [[BuglyConfig alloc] init];
+    
+    // Open the debug mode to print the sdk log message.
+    // Default value is NO, please DISABLE it in your RELEASE version.
+#if DEBUG
+    config.debugMode = YES;
+#endif
+    
+    // Open the customized log record and report, BuglyLogLevelWarn will report Warn, Error log message.
+    // Default value is BuglyLogLevelSilent that means DISABLE it.
+    // You could change the value according to you need.
+    config.reportLogLevel = BuglyLogLevelWarn;
+    
+    // Open the STUCK scene data in MAIN thread record and report.
+    // Default value is NO
+    config.blockMonitorEnable = YES;
+    
+    // Set the STUCK THRESHOLD time, when STUCK time > THRESHOLD it will record an event and report data when the app launched next time.
+    // Default value is 3.5 second.
+    config.blockMonitorTimeout = 1.5;
+    
+    // Set the app channel to deployment
+    config.channel = @"Bugly";
+    
+    config.delegate = self;
+    
+    config.blockMonitorEnable=YES;
+    config.unexpectedTerminatingDetectionEnable=YES;
+    config.appTransportSecurityEnable=YES;
+    config.symbolicateInProcessEnable=YES;
+    // NOTE:Required
+    // Start the Bugly sdk with APP_ID and your config
+    [Bugly startWithAppId:BUGLY_APP_ID
+#if DEBUG
+        developmentDevice:YES
+#endif
+                   config:config];
+    
+    // Set the customizd tag thats config in your APP registerd on the  bugly.qq.com
+    // [Bugly setTag:1799];
+    
+    [Bugly setUserIdentifier:[NSString stringWithFormat:@"User: %@", [UIDevice currentDevice].name]];
+    
+    [Bugly setUserValue:[NSProcessInfo processInfo].processName forKey:@"Process"];
+    
+    // NOTE: This is only TEST code for BuglyLog , please UNCOMMENT it in your code.
+    //[self performSelectorInBackground:@selector(testLogOnBackground) withObject:nil];
 }
 
 @end

@@ -44,6 +44,7 @@
 		040687181C3E588D002C2196 /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040687161C3E588D002C2196 /* MapVC.xib */; };
 		040A27421BEB663300620876 /* SPBottomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A27411BEB663300620876 /* SPBottomItem.m */; };
 		040A27441BEB664C00620876 /* SPBottomItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A27431BEB664C00620876 /* SPBottomItem.xib */; };
+		042681C21E081E0E0025A2A5 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042681C11E081E0E0025A2A5 /* Bugly.framework */; };
 		042A85751C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042A85731C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m */; };
 		042A85761C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042A85741C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib */; };
 		043BCFE21C9BDC9C0050AD96 /* FPHomeTimeLineSectionHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043BCFE01C9BDC9C0050AD96 /* FPHomeTimeLineSectionHeaderTableViewCell.m */; };
@@ -404,7 +405,6 @@
 		04F81C251C158F6A00EE24FF /* NoDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F81C231C158F6A00EE24FF /* NoDataTableViewCell.xib */; };
 		04F84EBB1C0851E800A51140 /* NoNetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F84EBA1C0851E800A51140 /* NoNetView.m */; };
 		04F84EBD1C08522700A51140 /* NoNetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F84EBC1C08522700A51140 /* NoNetView.xib */; };
-		04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F84EBF1C085F3400A51140 /* Bugly.framework */; };
 		04F8731A1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F873181C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m */; };
 		04F8731B1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F873191C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib */; };
 		04F8894A1C058FE9002FBE6D /* HZQDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F889461C058FE9002FBE6D /* HZQDatePickerView.m */; };
@@ -1009,6 +1009,7 @@
 		040A27401BEB663300620876 /* SPBottomItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPBottomItem.h; sourceTree = "<group>"; };
 		040A27411BEB663300620876 /* SPBottomItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPBottomItem.m; sourceTree = "<group>"; };
 		040A27431BEB664C00620876 /* SPBottomItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SPBottomItem.xib; sourceTree = "<group>"; };
+		042681C11E081E0E0025A2A5 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		042A85721C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPHomeTablePhotoCellTableViewCell.h; sourceTree = "<group>"; };
 		042A85731C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPHomeTablePhotoCellTableViewCell.m; sourceTree = "<group>"; };
 		042A85741C9BBF2800F4A3CA /* FPHomeTablePhotoCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FPHomeTablePhotoCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -1542,7 +1543,6 @@
 		04F84EB91C0851E800A51140 /* NoNetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoNetView.h; sourceTree = "<group>"; };
 		04F84EBA1C0851E800A51140 /* NoNetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoNetView.m; sourceTree = "<group>"; };
 		04F84EBC1C08522700A51140 /* NoNetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoNetView.xib; sourceTree = "<group>"; };
-		04F84EBF1C085F3400A51140 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		04F873171C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailCourseInfo.h; sourceTree = "<group>"; };
 		04F873181C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpCourseDetailCourseInfo.m; sourceTree = "<group>"; };
 		04F873191C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpCourseDetailCourseInfo.xib; sourceTree = "<group>"; };
@@ -2535,6 +2535,7 @@
 				0482BEF31CC389DB00ABD6B1 /* CoreData.framework in Frameworks */,
 				04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */,
 				0482BED21CC37BC900ABD6B1 /* UTMini.framework in Frameworks */,
+				042681C21E081E0E0025A2A5 /* Bugly.framework in Frameworks */,
 				0482BEE01CC37D1500ABD6B1 /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */,
 				04A50C581CC4AAE000EC9F4B /* ALBBSDK.framework in Frameworks */,
@@ -2552,7 +2553,6 @@
 				04A50C621CC4AAE000EC9F4B /* WXOUIModule.framework in Frameworks */,
 				04663D9D1BE719680033C436 /* AddressBook.framework in Frameworks */,
 				04A50C661CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework in Frameworks */,
-				04F84EC01C085F3400A51140 /* Bugly.framework in Frameworks */,
 				04FE6D251BF5838200181134 /* AddressBookUI.framework in Frameworks */,
 				0482BED31CC37BC900ABD6B1 /* WXOpenIMSDKFMWK.framework in Frameworks */,
 				04DDA62E1CD8EBB900DBF147 /* libGDTMobSDK.a in Frameworks */,
@@ -3662,14 +3662,6 @@
 			name = KeyChain;
 			sourceTree = "<group>";
 		};
-		04F84EBE1C085F3400A51140 /* libc++ */ = {
-			isa = PBXGroup;
-			children = (
-				04F84EBF1C085F3400A51140 /* Bugly.framework */,
-			);
-			path = "libc++";
-			sourceTree = "<group>";
-		};
 		04F889441C058FE9002FBE6D /* HZQDatePickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4505,14 +4497,6 @@
 			name = FaceBoard;
 			sourceTree = "<group>";
 		};
-		246187F01BB9874B00D7DDA8 /* Bugly */ = {
-			isa = PBXGroup;
-			children = (
-				04F84EBE1C085F3400A51140 /* libc++ */,
-			);
-			name = Bugly;
-			sourceTree = "<group>";
-		};
 		2474DFA81B6CB7AA0021506F /* SignRecord(签到记录) */ = {
 			isa = PBXGroup;
 			children = (
@@ -4998,6 +4982,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				042681C11E081E0E0025A2A5 /* Bugly.framework */,
 				04DDA6191CD8EBB900DBF147 /* GDTMob_SDK_430 */,
 				04DDA97C1CD91BBF00DBF147 /* BaiduMapKit */,
 				04DDA5C41CD8EACE00DBF147 /* AdsMoGoSDK */,
@@ -5016,7 +5001,6 @@
 				04F889541C05ABD8002FBE6D /* CQLoadManger */,
 				04F889441C058FE9002FBE6D /* HZQDatePickerView */,
 				0498AEC81BDE024A001E653C /* DropDownMenu */,
-				246187F01BB9874B00D7DDA8 /* Bugly */,
 				4D1CDE9C1B8CB24700165B9A /* VPImageCropper */,
 				4DF056C81B877E3D00ED3840 /* PhotoVC */,
 				F4E36D4A1B85B48F009BD909 /* DoImagePicker */,
