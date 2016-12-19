@@ -30,7 +30,20 @@ static NSString * const AFAppDotNetAPIBaseURLString = @"https://api.app.net/";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedClient = [[AFAppDotNetAPIClient alloc] initWithBaseURL:[NSURL URLWithString:AFAppDotNetAPIBaseURLString]];
-        _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+        
+        
+//        AFHTTPSessionManager * sessionManager = [AFHTTPSessionManager manager];
+        _sharedClient.requestSerializer.HTTPShouldHandleCookies = YES;
+        
+        
+        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy defaultPolicy];
+        //allowInvalidCertificates 是否允许无效证书（也就是自建的证书），默认为NO//如果是需要验证自建证书，需要设置为YES
+        securityPolicy.allowInvalidCertificates = YES;
+        //validatesDomainName 是否需要验证域名，默认为YES；
+        securityPolicy.validatesDomainName = NO;
+        _sharedClient.securityPolicy  = securityPolicy;
+//                  _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+//        _sharedClient.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
     });
     
     return _sharedClient;

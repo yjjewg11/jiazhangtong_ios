@@ -3438,7 +3438,8 @@
 				04DDA61A1CD8EBB900DBF147 /* AdsMoGoAdapter */,
 				04DDA6231CD8EBB900DBF147 /* libs */,
 			);
-			path = GDTMob_SDK_430;
+			name = GDTMob_SDK_430;
+			path = AdNetworkLibs/GDTMob_SDK_430;
 			sourceTree = "<group>";
 		};
 		04DDA61A1CD8EBB900DBF147 /* AdsMoGoAdapter */ = {
@@ -3544,14 +3545,6 @@
 				04FB237A1C16D91C009B57E2 /* MineHomeVC.m */,
 			);
 			name = Home;
-			sourceTree = "<group>";
-		};
-		04F3D3B01BF47FD2007E7AC0 /* AdNetworkLibs */ = {
-			isa = PBXGroup;
-			children = (
-				04DDA6191CD8EBB900DBF147 /* GDTMob_SDK_430 */,
-			);
-			path = AdNetworkLibs;
 			sourceTree = "<group>";
 		};
 		04F410E11C5A0FB700407C10 /* picker */ = {
@@ -5005,6 +4998,7 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				04DDA6191CD8EBB900DBF147 /* GDTMob_SDK_430 */,
 				04DDA97C1CD91BBF00DBF147 /* BaiduMapKit */,
 				04DDA5C41CD8EACE00DBF147 /* AdsMoGoSDK */,
 				04DDA48D1CD8EAC300DBF147 /* AdsMoGoRes */,
@@ -5021,7 +5015,6 @@
 				04F498151C0BEF1300C1E2DA /* ShaLouLoadAni */,
 				04F889541C05ABD8002FBE6D /* CQLoadManger */,
 				04F889441C058FE9002FBE6D /* HZQDatePickerView */,
-				04F3D3B01BF47FD2007E7AC0 /* AdNetworkLibs */,
 				0498AEC81BDE024A001E653C /* DropDownMenu */,
 				246187F01BB9874B00D7DDA8 /* Bugly */,
 				4D1CDE9C1B8CB24700165B9A /* VPImageCropper */,
