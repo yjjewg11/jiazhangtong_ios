@@ -96,24 +96,10 @@
 		04729B961D01DCC90042D24B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90961D002F8E00562DEC /* libcrypto.a */; };
 		04729B971D01DCD50042D24B /* libEZOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90941D002F5D00562DEC /* libEZOpenSDK.a */; };
 		0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */; };
-		0482BECF1CC37BC900ABD6B1 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEC61CC37BC900ABD6B1 /* SecurityGuardSDK.framework */; };
-		0482BED21CC37BC900ABD6B1 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEC91CC37BC900ABD6B1 /* UTMini.framework */; };
-		0482BED31CC37BC900ABD6B1 /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BECA1CC37BC900ABD6B1 /* WXOpenIMSDKFMWK.framework */; };
-		0482BED51CC37BC900ABD6B1 /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BECC1CC37BC900ABD6B1 /* WXOUIModule.framework */; };
-		0482BEDF1CC37D1500ABD6B1 /* YWExtensionForCustomerServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEDC1CC37D1500ABD6B1 /* YWExtensionForCustomerServiceFMWK.framework */; };
-		0482BEE01CC37D1500ABD6B1 /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEDD1CC37D1500ABD6B1 /* YWFeedbackServiceFMWK.framework */; };
-		0482BEE71CC37E8500ABD6B1 /* SPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BEE41CC37E8500ABD6B1 /* SPKitExample.m */; };
-		0482BEE81CC37E8500ABD6B1 /* SPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BEE61CC37E8500ABD6B1 /* SPUtil.m */; };
-		0482BEEE1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BEEB1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.m */; };
-		0482BEEF1CC3838E00ABD6B1 /* UIControl+BlockSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BEED1CC3838E00ABD6B1 /* UIControl+BlockSupport.m */; };
-		0482BEF11CC384C100ABD6B1 /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF01CC384C100ABD6B1 /* SGMain.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		0482BEF31CC389DB00ABD6B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF21CC389DB00ABD6B1 /* CoreData.framework */; };
 		0482BEF51CC389F300ABD6B1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF41CC389F300ABD6B1 /* libstdc++.6.0.9.tbd */; };
 		0482BEF71CC389FB00ABD6B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF61CC389FB00ABD6B1 /* MobileCoreServices.framework */; };
 		0482BEF91CC38A1C00ABD6B1 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF81CC38A1C00ABD6B1 /* AssetsLibrary.framework */; };
-		0482BF2B1CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BF2A1CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.m */; };
-		0482BF2E1CC3B7C700ABD6B1 /* KGAccountService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BF2D1CC3B7C700ABD6B1 /* KGAccountService.m */; };
-		0482BF311CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482BF301CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.m */; };
 		048524CF1BEE324A00DA97BB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 048524CE1BEE324A00DA97BB /* libiconv.tbd */; };
 		048676EC1CA4DBFC00D168D0 /* self.myDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 048676EA1CA4DBFC00D168D0 /* self.myDomain.m */; };
 		048676ED1CA4DBFC00D168D0 /* PickImgDayHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048676EB1CA4DBFC00D168D0 /* PickImgDayHeadView.xib */; };
@@ -155,22 +141,9 @@
 		0497A9AC1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497A9AB1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m */; };
 		0498AED01BDE160F001E653C /* SPDataListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498AECF1BDE160F001E653C /* SPDataListVO.m */; };
 		0498AED31BDE17A3001E653C /* SPCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498AED21BDE17A3001E653C /* SPCourseDomain.m */; };
-		04A50C561CC4AAE000EC9F4B /* ALBBFullSecurityGuard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C451CC4AAE000EC9F4B /* ALBBFullSecurityGuard.framework */; };
-		04A50C571CC4AAE000EC9F4B /* ALBBOpenAccount.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C461CC4AAE000EC9F4B /* ALBBOpenAccount.framework */; };
-		04A50C581CC4AAE000EC9F4B /* ALBBSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C471CC4AAE000EC9F4B /* ALBBSDK.framework */; };
 		04A50C591CC4AAE000EC9F4B /* baichuan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C481CC4AAE000EC9F4B /* baichuan.bundle */; };
 		04A50C5A1CC4AAE000EC9F4B /* feedback_advanced in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C491CC4AAE000EC9F4B /* feedback_advanced */; };
-		04A50C5B1CC4AAE000EC9F4B /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C4A1CC4AAE000EC9F4B /* SecurityGuardSDK.framework */; };
-		04A50C5C1CC4AAE000EC9F4B /* SGMain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C4B1CC4AAE000EC9F4B /* SGMain.framework */; };
-		04A50C5D1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C4C1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework */; };
-		04A50C5F1CC4AAE000EC9F4B /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C4E1CC4AAE000EC9F4B /* UTMini.framework */; };
-		04A50C601CC4AAE000EC9F4B /* WXOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C4F1CC4AAE000EC9F4B /* WXOpenIMSDKFMWK.framework */; };
-		04A50C611CC4AAE000EC9F4B /* WXOpenIMSDKResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C501CC4AAE000EC9F4B /* WXOpenIMSDKResource.bundle */; };
-		04A50C621CC4AAE000EC9F4B /* WXOUIModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C511CC4AAE000EC9F4B /* WXOUIModule.framework */; };
-		04A50C631CC4AAE000EC9F4B /* WXOUIModuleResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C521CC4AAE000EC9F4B /* WXOUIModuleResources.bundle */; };
 		04A50C641CC4AAE000EC9F4B /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */; };
-		04A50C651CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C541CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework */; };
-		04A50C661CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */; };
 		04A50C6B1CC4E00500EC9F4B /* GuidePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */; };
 		04A50C6E1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6D1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m */; };
 		04A50C701CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C6F1CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib */; };
@@ -215,7 +188,6 @@
 		04DDA63B1CD8FCD100DBF147 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA63A1CD8FCD100DBF147 /* CoreFoundation.framework */; };
 		04DDA63D1CD8FCDA00DBF147 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA63C1CD8FCDA00DBF147 /* CoreImage.framework */; };
 		04DDA63F1CD8FCF400DBF147 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA63E1CD8FCF400DBF147 /* CoreVideo.framework */; };
-		04DDA6431CD8FD0D00DBF147 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA6421CD8FD0D00DBF147 /* iAd.framework */; };
 		04DDA6471CD8FD3D00DBF147 /* MediaToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA6461CD8FD3D00DBF147 /* MediaToolbox.framework */; };
 		04DDA6491CD8FD5200DBF147 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA6481CD8FD5200DBF147 /* OpenGLES.framework */; };
 		04DDA64C1CD904A100DBF147 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DDA64B1CD904A100DBF147 /* CoreAudio.framework */; };
@@ -616,7 +588,6 @@
 		4D5CE7891B7E452C002F1088 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5CE7881B7E452C002F1088 /* CoreMotion.framework */; };
 		4D5CE78B1B7E4535002F1088 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5CE78A1B7E4535002F1088 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		4D5CE78D1B7E453B002F1088 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5CE78C1B7E453B002F1088 /* StoreKit.framework */; };
-		4D5CE78F1B7E4540002F1088 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D5CE78E1B7E4540002F1088 /* AdSupport.framework */; };
 		4DC018CF1B88D9390097984E /* PromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC018CE1B88D9390097984E /* PromptView.m */; };
 		4DC018D11B88D9470097984E /* PromptView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4DC018D01B88D9470097984E /* PromptView.xib */; };
 		4DE3844A1B7EF324009F12E4 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DE384491B7EF324009F12E4 /* ImageIO.framework */; };
@@ -903,31 +874,10 @@
 		046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPHotCourseDomain.m; sourceTree = "<group>"; };
 		0477C97D1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnrolStudentMySchoolFullScreenLayout.h; sourceTree = "<group>"; };
 		0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnrolStudentMySchoolFullScreenLayout.m; sourceTree = "<group>"; };
-		0482BEC61CC37BC900ABD6B1 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityGuardSDK.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXFrameworks/SecurityGuardSDK.framework; sourceTree = "<absolute>"; };
-		0482BEC91CC37BC900ABD6B1 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UTMini.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXFrameworks/UTMini.framework; sourceTree = "<absolute>"; };
-		0482BECA1CC37BC900ABD6B1 /* WXOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WXOpenIMSDKFMWK.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXFrameworks/WXOpenIMSDKFMWK.framework; sourceTree = "<absolute>"; };
-		0482BECC1CC37BC900ABD6B1 /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WXOUIModule.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXFrameworks/WXOUIModule.framework; sourceTree = "<absolute>"; };
-		0482BEDC1CC37D1500ABD6B1 /* YWExtensionForCustomerServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWExtensionForCustomerServiceFMWK.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXExtensions/YWExtensionForCustomerServiceFMWK.framework; sourceTree = "<absolute>"; };
-		0482BEDD1CC37D1500ABD6B1 /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWFeedbackServiceFMWK.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXExtensions/YWFeedbackServiceFMWK.framework; sourceTree = "<absolute>"; };
-		0482BEE31CC37E8500ABD6B1 /* SPKitExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPKitExample.h; sourceTree = "<group>"; };
-		0482BEE41CC37E8500ABD6B1 /* SPKitExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPKitExample.m; sourceTree = "<group>"; };
-		0482BEE51CC37E8500ABD6B1 /* SPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUtil.h; sourceTree = "<group>"; };
-		0482BEE61CC37E8500ABD6B1 /* SPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtil.m; sourceTree = "<group>"; };
-		0482BEEA1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+BlockSupport.h"; sourceTree = "<group>"; };
-		0482BEEB1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+BlockSupport.m"; sourceTree = "<group>"; };
-		0482BEEC1CC3838E00ABD6B1 /* UIControl+BlockSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+BlockSupport.h"; sourceTree = "<group>"; };
-		0482BEED1CC3838E00ABD6B1 /* UIControl+BlockSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+BlockSupport.m"; sourceTree = "<group>"; };
-		0482BEF01CC384C100ABD6B1 /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SGMain.framework; path = /Users/wenjiekeji/ios_20151107/jiazhangtong_ios/WXFrameworks/SGMain.framework; sourceTree = "<absolute>"; };
 		0482BEF21CC389DB00ABD6B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0482BEF41CC389F300ABD6B1 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		0482BEF61CC389FB00ABD6B1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		0482BEF81CC38A1C00ABD6B1 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		0482BF291CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaobaoIMAccountDomain.h; sourceTree = "<group>"; };
-		0482BF2A1CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaobaoIMAccountDomain.m; sourceTree = "<group>"; };
-		0482BF2C1CC3B7C700ABD6B1 /* KGAccountService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KGAccountService.h; sourceTree = "<group>"; };
-		0482BF2D1CC3B7C700ABD6B1 /* KGAccountService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KGAccountService.m; sourceTree = "<group>"; };
-		0482BF2F1CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMyLoginUserDomain.h; sourceTree = "<group>"; };
-		0482BF301CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMyLoginUserDomain.m; sourceTree = "<group>"; };
 		048400981BE7C54A009A689B /* SpCourseDetailTableVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpCourseDetailTableVC.h; sourceTree = "<group>"; };
 		048524CE1BEE324A00DA97BB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		048676E91CA4DBFC00D168D0 /* PickImgDayHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickImgDayHeadView.h; sourceTree = "<group>"; };
@@ -1002,23 +952,12 @@
 		0498AECF1BDE160F001E653C /* SPDataListVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDataListVO.m; sourceTree = "<group>"; };
 		0498AED11BDE17A3001E653C /* SPCourseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDomain.h; sourceTree = "<group>"; };
 		0498AED21BDE17A3001E653C /* SPCourseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDomain.m; sourceTree = "<group>"; };
-		04A50C451CC4AAE000EC9F4B /* ALBBFullSecurityGuard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALBBFullSecurityGuard.framework; path = build/OneSDK/ALBBFullSecurityGuard.framework; sourceTree = "<group>"; };
-		04A50C461CC4AAE000EC9F4B /* ALBBOpenAccount.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALBBOpenAccount.framework; path = build/OneSDK/ALBBOpenAccount.framework; sourceTree = "<group>"; };
-		04A50C471CC4AAE000EC9F4B /* ALBBSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ALBBSDK.framework; path = build/OneSDK/ALBBSDK.framework; sourceTree = "<group>"; };
 		04A50C481CC4AAE000EC9F4B /* baichuan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = baichuan.bundle; path = build/OneSDK/baichuan.bundle; sourceTree = "<group>"; };
 		04A50C491CC4AAE000EC9F4B /* feedback_advanced */ = {isa = PBXFileReference; lastKnownFileType = folder; name = feedback_advanced; path = build/OneSDK/feedback_advanced; sourceTree = "<group>"; };
-		04A50C4A1CC4AAE000EC9F4B /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityGuardSDK.framework; path = build/OneSDK/SecurityGuardSDK.framework; sourceTree = "<group>"; };
 		04A50C4B1CC4AAE000EC9F4B /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SGMain.framework; path = build/OneSDK/SGMain.framework; sourceTree = "<group>"; };
 		04A50C4C1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TAEWXAdapterForOpenAccountFMWK.framework; path = build/OneSDK/TAEWXAdapterForOpenAccountFMWK.framework; sourceTree = "<group>"; };
 		04A50C4D1CC4AAE000EC9F4B /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UTDID.framework; path = build/OneSDK/UTDID.framework; sourceTree = "<group>"; };
-		04A50C4E1CC4AAE000EC9F4B /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UTMini.framework; path = build/OneSDK/UTMini.framework; sourceTree = "<group>"; };
-		04A50C4F1CC4AAE000EC9F4B /* WXOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WXOpenIMSDKFMWK.framework; path = build/OneSDK/WXOpenIMSDKFMWK.framework; sourceTree = "<group>"; };
-		04A50C501CC4AAE000EC9F4B /* WXOpenIMSDKResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WXOpenIMSDKResource.bundle; path = build/OneSDK/WXOpenIMSDKResource.bundle; sourceTree = "<group>"; };
-		04A50C511CC4AAE000EC9F4B /* WXOUIModule.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WXOUIModule.framework; path = build/OneSDK/WXOUIModule.framework; sourceTree = "<group>"; };
-		04A50C521CC4AAE000EC9F4B /* WXOUIModuleResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = WXOUIModuleResources.bundle; path = build/OneSDK/WXOUIModuleResources.bundle; sourceTree = "<group>"; };
 		04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = yw_1222.jpg; path = build/OneSDK/yw_1222.jpg; sourceTree = "<group>"; };
-		04A50C541CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWExtensionForCustomerServiceFMWK.framework; path = build/OneSDK/YWExtensionForCustomerServiceFMWK.framework; sourceTree = "<group>"; };
-		04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YWFeedbackServiceFMWK.framework; path = build/OneSDK/YWFeedbackServiceFMWK.framework; sourceTree = "<group>"; };
 		04A50C691CC4E00500EC9F4B /* GuidePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageController.h; sourceTree = "<group>"; };
 		04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageController.m; sourceTree = "<group>"; };
 		04A50C6C1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertSaveFFMoiveTitleView.h; sourceTree = "<group>"; };
@@ -2079,7 +2018,6 @@
 				4D5CE78B1B7E4535002F1088 /* AudioToolbox.framework in Frameworks */,
 				04DDA6491CD8FD5200DBF147 /* OpenGLES.framework in Frameworks */,
 				04DDA6471CD8FD3D00DBF147 /* MediaToolbox.framework in Frameworks */,
-				04DDA6431CD8FD0D00DBF147 /* iAd.framework in Frameworks */,
 				04DDA63F1CD8FCF400DBF147 /* CoreVideo.framework in Frameworks */,
 				04DDA63D1CD8FCDA00DBF147 /* CoreImage.framework in Frameworks */,
 				04DDA63B1CD8FCD100DBF147 /* CoreFoundation.framework in Frameworks */,
@@ -2089,58 +2027,39 @@
 				04DDA6311CD8FAEA00DBF147 /* libsqlite3.0.tbd in Frameworks */,
 				0482BEF91CC38A1C00ABD6B1 /* AssetsLibrary.framework in Frameworks */,
 				4D5CE7851B7E4520002F1088 /* AVFoundation.framework in Frameworks */,
-				04A50C5F1CC4AAE000EC9F4B /* UTMini.framework in Frameworks */,
-				04A50C5B1CC4AAE000EC9F4B /* SecurityGuardSDK.framework in Frameworks */,
 				4DE3844A1B7EF324009F12E4 /* ImageIO.framework in Frameworks */,
 				0482BEF71CC389FB00ABD6B1 /* MobileCoreServices.framework in Frameworks */,
 				0482BEF51CC389F300ABD6B1 /* libstdc++.6.0.9.tbd in Frameworks */,
 				0482BEF31CC389DB00ABD6B1 /* CoreData.framework in Frameworks */,
 				04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */,
-				0482BED21CC37BC900ABD6B1 /* UTMini.framework in Frameworks */,
 				042681C21E081E0E0025A2A5 /* Bugly.framework in Frameworks */,
-				0482BEE01CC37D1500ABD6B1 /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */,
-				04A50C581CC4AAE000EC9F4B /* ALBBSDK.framework in Frameworks */,
 				04663DA51BE71BB00033C436 /* Social.framework in Frameworks */,
 				2487E63B1B61663E0030320A /* QuartzCore.framework in Frameworks */,
 				04663DAB1BE71D2C0033C436 /* EventKitUI.framework in Frameworks */,
 				04663D9F1BE719CA0033C436 /* EventKit.framework in Frameworks */,
-				04A50C651CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework in Frameworks */,
 				4D5CE78D1B7E453B002F1088 /* StoreKit.framework in Frameworks */,
 				24E4D94D1B64EE8A0088745A /* CoreTelephony.framework in Frameworks */,
-				04A50C601CC4AAE000EC9F4B /* WXOpenIMSDKFMWK.framework in Frameworks */,
 				04663DA11BE719DA0033C436 /* PassKit.framework in Frameworks */,
 				04663DA91BE71BD30033C436 /* CoreMedia.framework in Frameworks */,
-				04A50C5C1CC4AAE000EC9F4B /* SGMain.framework in Frameworks */,
-				04A50C621CC4AAE000EC9F4B /* WXOUIModule.framework in Frameworks */,
 				04663D9D1BE719680033C436 /* AddressBook.framework in Frameworks */,
-				04A50C661CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework in Frameworks */,
 				04FE6D251BF5838200181134 /* AddressBookUI.framework in Frameworks */,
-				0482BED31CC37BC900ABD6B1 /* WXOpenIMSDKFMWK.framework in Frameworks */,
-				4D5CE78F1B7E4540002F1088 /* AdSupport.framework in Frameworks */,
 				24E4D9491B64EE690088745A /* SystemConfiguration.framework in Frameworks */,
 				04663DA31BE71A590033C436 /* libsqlite3.tbd in Frameworks */,
 				048524CF1BEE324A00DA97BB /* libiconv.tbd in Frameworks */,
-				04A50C571CC4AAE000EC9F4B /* ALBBOpenAccount.framework in Frameworks */,
 				2487E63F1B6166700030320A /* Foundation.framework in Frameworks */,
-				04A50C561CC4AAE000EC9F4B /* ALBBFullSecurityGuard.framework in Frameworks */,
 				4D5CE7871B7E4527002F1088 /* MediaPlayer.framework in Frameworks */,
 				04F9FBAE1BF1A77E00AEFB88 /* libSocialWechat.a in Frameworks */,
 				042681C61E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
 				04663CCE1BE708E30033C436 /* MapKit.framework in Frameworks */,
 				04F9FBAC1BF1A77E00AEFB88 /* TencentOpenAPI.framework in Frameworks */,
 				04F9FBAB1BF1A77E00AEFB88 /* libSocialQQ.a in Frameworks */,
-				0482BEF11CC384C100ABD6B1 /* SGMain.framework in Frameworks */,
-				0482BED51CC37BC900ABD6B1 /* WXOUIModule.framework in Frameworks */,
 				04F9FBA01BF1A77E00AEFB88 /* libUMSocial_Sdk_4.2.3.a in Frameworks */,
-				0482BEDF1CC37D1500ABD6B1 /* YWExtensionForCustomerServiceFMWK.framework in Frameworks */,
 				F4E61BEE1B734ABA00E5851A /* Security.framework in Frameworks */,
 				4D5CE7891B7E452C002F1088 /* CoreMotion.framework in Frameworks */,
 				24E4D94B1B64EE710088745A /* MessageUI.framework in Frameworks */,
 				04F9FBAA1BF1A77E00AEFB88 /* libSocialSina.a in Frameworks */,
 				24E4D94F1B64EE970088745A /* CoreLocation.framework in Frameworks */,
-				04A50C5D1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework in Frameworks */,
-				0482BECF1CC37BC900ABD6B1 /* SecurityGuardSDK.framework in Frameworks */,
 				2487E6411B6166790030320A /* CoreGraphics.framework in Frameworks */,
 				04F9FBAF1BF1A77E00AEFB88 /* libWeChatSDK.a in Frameworks */,
 				2487E63D1B6166660030320A /* UIKit.framework in Frameworks */,
@@ -2441,51 +2360,6 @@
 				04FA14D01C3E080A008D0BF8 /* SpCourseDetailCommentVC.m */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		0482BEE11CC37DC200ABD6B1 /* TaobaoIM(淘宝即时通讯) */ = {
-			isa = PBXGroup;
-			children = (
-				0482BF281CC3B63600ABD6B1 /* model */,
-				0482BEE91CC3838E00ABD6B1 /* Utils */,
-				0482BEE21CC37E1000ABD6B1 /* controller */,
-				0482BF2C1CC3B7C700ABD6B1 /* KGAccountService.h */,
-				0482BF2D1CC3B7C700ABD6B1 /* KGAccountService.m */,
-			);
-			name = "TaobaoIM(淘宝即时通讯)";
-			sourceTree = "<group>";
-		};
-		0482BEE21CC37E1000ABD6B1 /* controller */ = {
-			isa = PBXGroup;
-			children = (
-				0482BEE31CC37E8500ABD6B1 /* SPKitExample.h */,
-				0482BEE41CC37E8500ABD6B1 /* SPKitExample.m */,
-				0482BEE51CC37E8500ABD6B1 /* SPUtil.h */,
-				0482BEE61CC37E8500ABD6B1 /* SPUtil.m */,
-			);
-			name = controller;
-			sourceTree = "<group>";
-		};
-		0482BEE91CC3838E00ABD6B1 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				0482BEEA1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.h */,
-				0482BEEB1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.m */,
-				0482BEEC1CC3838E00ABD6B1 /* UIControl+BlockSupport.h */,
-				0482BEED1CC3838E00ABD6B1 /* UIControl+BlockSupport.m */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		0482BF281CC3B63600ABD6B1 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				0482BF291CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.h */,
-				0482BF2A1CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.m */,
-				0482BF2F1CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.h */,
-				0482BF301CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.m */,
-			);
-			name = model;
 			sourceTree = "<group>";
 		};
 		0492BA141CBCE6A600ACB096 /* BaseDianzan(公共点赞) */ = {
@@ -4201,7 +4075,6 @@
 			children = (
 				E724B2791CFE99D4004FDB0C /* EZCamera(萤石云监控) */,
 				04A50C671CC4DF8100EC9F4B /* GuidePage(引导页） */,
-				0482BEE11CC37DC200ABD6B1 /* TaobaoIM(淘宝即时通讯) */,
 				0492BA141CBCE6A600ACB096 /* BaseDianzan(公共点赞) */,
 				0405B6EA1CB24DEB0090863C /* FFMovie(精品相册) */,
 				0405B6D31CB0C0990090863C /* BaseReply(公共回复模块） */,
@@ -4749,23 +4622,12 @@
 				04DDA6341CD8FB7D00DBF147 /* CoreText.framework */,
 				04DDA6321CD8FB5500DBF147 /* CFNetwork.framework */,
 				04DDA6301CD8FAEA00DBF147 /* libsqlite3.0.tbd */,
-				04A50C451CC4AAE000EC9F4B /* ALBBFullSecurityGuard.framework */,
-				04A50C461CC4AAE000EC9F4B /* ALBBOpenAccount.framework */,
-				04A50C471CC4AAE000EC9F4B /* ALBBSDK.framework */,
 				04A50C481CC4AAE000EC9F4B /* baichuan.bundle */,
 				04A50C491CC4AAE000EC9F4B /* feedback_advanced */,
-				04A50C4A1CC4AAE000EC9F4B /* SecurityGuardSDK.framework */,
 				04A50C4B1CC4AAE000EC9F4B /* SGMain.framework */,
 				04A50C4C1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework */,
 				04A50C4D1CC4AAE000EC9F4B /* UTDID.framework */,
-				04A50C4E1CC4AAE000EC9F4B /* UTMini.framework */,
-				04A50C4F1CC4AAE000EC9F4B /* WXOpenIMSDKFMWK.framework */,
-				04A50C501CC4AAE000EC9F4B /* WXOpenIMSDKResource.bundle */,
-				04A50C511CC4AAE000EC9F4B /* WXOUIModule.framework */,
-				04A50C521CC4AAE000EC9F4B /* WXOUIModuleResources.bundle */,
 				04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */,
-				04A50C541CC4AAE000EC9F4B /* YWExtensionForCustomerServiceFMWK.framework */,
-				04A50C551CC4AAE000EC9F4B /* YWFeedbackServiceFMWK.framework */,
 				04FA92811C4DDCE800010DAE /* Accelerate.framework */,
 				04663D9C1BE719680033C436 /* AddressBook.framework */,
 				04FE6D241BF5838200181134 /* AddressBookUI.framework */,
@@ -5473,7 +5335,6 @@
 				24DE91A91B67B94500D3FFCE /* MessageTableViewCell.xib in Resources */,
 				04A50C641CC4AAE000EC9F4B /* yw_1222.jpg in Resources */,
 				04F9FBA51BF1A77E00AEFB88 /* UMShareEditViewControlleriPad.xib in Resources */,
-				04A50C611CC4AAE000EC9F4B /* WXOpenIMSDKResource.bundle in Resources */,
 				04F8731B1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib in Resources */,
 				04F89A3C1C1018D800FC0FA6 /* EnrolStudentCommentCell.xib in Resources */,
 				04F724091BD451400008A9A8 /* SPTimetableItemCell.xib in Resources */,
@@ -5524,7 +5385,6 @@
 				04FDB4DF1BFC1C7E00A73E2E /* MySPTeacherCommentCell.xib in Resources */,
 				0449A3511C4F77C40066ABBB /* FPGiftwarePickerImageCell.xib in Resources */,
 				04FB7CC61C0DAA7A00FD3E31 /* SpCourseCell.xib in Resources */,
-				04A50C631CC4AAE000EC9F4B /* WXOUIModuleResources.bundle in Resources */,
 				F4E6B24B1B6B5D440087EAEB /* GiftwareArticlesTableViewCell.xib in Resources */,
 				04FEEC811C76B7670024FEAF /* FPTimeLineEditVC.xib in Resources */,
 				04F9AC601BFC82D3004DA63D /* MySPAllListHeaderView.xib in Resources */,
@@ -5728,7 +5588,6 @@
 				F4CF7A961B79F80C00BFAA1E /* TimetableItemVO.m in Sources */,
 				04FB7CC51C0DAA7A00FD3E31 /* SpCourseCell.m in Sources */,
 				04FA59891C27C68A009689C7 /* EYPopupView.m in Sources */,
-				0482BF311CC3B9AA00ABD6B1 /* GetMyLoginUserDomain.m in Sources */,
 				0494F4801BDF777500F39865 /* UIView+MJExtension.m in Sources */,
 				24C46B281B5A28CF00A58F92 /* BaseKeyboardViewController.m in Sources */,
 				04FA59871C27C68A009689C7 /* EYInputPopupView.m in Sources */,
@@ -5760,7 +5619,6 @@
 				04F95F5B1C4E2E37000909B1 /* FPHomeSonView.m in Sources */,
 				04D288761C9E915F00D12BEF /* SIMenuButton.m in Sources */,
 				24AA0B421B690F4300DAC03B /* UUImageAvatarBrowser.m in Sources */,
-				0482BEE71CC37E8500ABD6B1 /* SPKitExample.m in Sources */,
 				04FB7CBC1C0DA84000FD3E31 /* SpCourseDetailTableVC.m in Sources */,
 				4D5CE7711B7E4333002F1088 /* SettingViewController.m in Sources */,
 				2489B6681B5AB49E00039E70 /* UIView+WebCacheOperation.m in Sources */,
@@ -5812,7 +5670,6 @@
 				248B6A981B19AA7100FCB98F /* KGBaseView.m in Sources */,
 				E7C752B71D01D71500DA0C38 /* UILabel+DDKit.m in Sources */,
 				04D2886D1C9E915F00D12BEF /* HAViewController.m in Sources */,
-				0482BEE81CC37E8500ABD6B1 /* SPUtil.m in Sources */,
 				04F903AB1C56795C0040629F /* AFURLRequestSerialization.m in Sources */,
 				F48783B01B58DA1700CDC1A8 /* MJType.m in Sources */,
 				04F151691C45FF1800E80B3E /* FPHomeVC.m in Sources */,
@@ -5939,7 +5796,6 @@
 				0403DCE41BF5C5980089E463 /* MySPCourseDetailVC.m in Sources */,
 				F471EDF01B70A79B00EEBA1D /* WriteVO.m in Sources */,
 				0405B6E91CB21D480090863C /* SPBottomItemTools.m in Sources */,
-				0482BEEE1CC3838E00ABD6B1 /* UIBarButtonItem+BlockSupport.m in Sources */,
 				4D1CDE9F1B8CB24700165B9A /* VPImageCropperViewController.m in Sources */,
 				04F9C9981C0EFA9D0078A5F5 /* EnrolStudentSchoolDetailVC.m in Sources */,
 				2489B6661B5AB49E00039E70 /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -5991,7 +5847,6 @@
 				04873CCD1CA7D7B200F01CB4 /* FPGiftwareDetialVC.m in Sources */,
 				04D2887B1C9E915F00D12BEF /* UIColor+Extension.m in Sources */,
 				F4EA53921B60EAD20044BE7A /* StudentInfoHeaderView.m in Sources */,
-				0482BF2B1CC3B67A00ABD6B1 /* TaobaoIMAccountDomain.m in Sources */,
 				F4DCD0EC1B1C2932007D61CA /* UIView+Shadow.m in Sources */,
 				2474DFAF1B6CB7D90021506F /* StudentSignRecordViewController.m in Sources */,
 				0494F47D1BDF777500F39865 /* MJRefreshHeaderView.m in Sources */,
@@ -6106,7 +5961,6 @@
 				F4EA538B1B60C6DF0044BE7A /* MeFunTableViewCell.m in Sources */,
 				E7C752B41D01D71500DA0C38 /* UIColor+DDKit.m in Sources */,
 				243918E41B5D1E5800F3727E /* KGNavigationController.m in Sources */,
-				0482BEEF1CC3838E00ABD6B1 /* UIControl+BlockSupport.m in Sources */,
 				045CF51B1BE0A26200FA7EF7 /* SPSchoolDomain.m in Sources */,
 				24A175E81B5541BF00295997 /* KGDBHelperHandle.m in Sources */,
 				0449A3461C4F71D40066ABBB /* FPGifrwarePickerVC.m in Sources */,
@@ -6120,7 +5974,6 @@
 				04F9AC571BFC58C8004DA63D /* MySPAllCourseListCell.m in Sources */,
 				F4E36D601B85B49D009BD909 /* ZeroCameraCell.m in Sources */,
 				2491BB521B6E27F00052532B /* RecipesStudentInfoTableViewCell.m in Sources */,
-				0482BF2E1CC3B7C700ABD6B1 /* KGAccountService.m in Sources */,
 				F4E36D5C1B85B49D009BD909 /* DoImagePickerController.m in Sources */,
 				24AA0B531B69134400DAC03B /* NSDate+Utils.m in Sources */,
 				043BCFE21C9BDC9C0050AD96 /* FPHomeTimeLineSectionHeaderTableViewCell.m in Sources */,

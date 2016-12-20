@@ -62,18 +62,18 @@
         
         //问科技客服
         
-        if([@"group_wjd" isEqualToString:domain.teacher_uuid]){
-            
-            
-            /**
-             *  打开客服会话
-             *  @param aPersonId 客服Id
-             */
-            
-            [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:@"飨受人生" fromNavigationController:self.navigationController];
-            
-            return;
-        }
+//        if([@"group_wjd" isEqualToString:domain.teacher_uuid]){
+//            
+//            
+//            /**
+//             *  打开客服会话
+//             *  @param aPersonId 客服Id
+//             */
+//            
+//            [[SPKitExample sharedInstance] exampleOpenEServiceConversationWithPersonId:@"飨受人生" fromNavigationController:self.navigationController];
+//            
+//            return;
+//        }
         //发消息
         ChatViewController * chatVC = [[ChatViewController alloc] init];
         chatVC.addressbookDomain = domain;

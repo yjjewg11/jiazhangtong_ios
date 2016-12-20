@@ -14,7 +14,7 @@
 #import <BaiduMapAPI_Utils/BMKUtilsComponent.h>//引入计算工具所有的头文件
 #import <BaiduMapAPI_Radar/BMKRadarComponent.h>//引入周边雷达功能所有的头文件
 
-#import "SPKitExample.h"
+//#import "SPKitExample.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {

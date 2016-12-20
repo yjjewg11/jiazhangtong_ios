@@ -91,7 +91,7 @@
 -(void) initDataByUserLoginAfter{
     [UploadPhotoToRemoteService upLoadAllFromLocalDB];
     //淘宝消息登录
-    [KGAccountService login];
+//    [KGAccountService login];
     
      [GuidePageController firstLaunch];
     
