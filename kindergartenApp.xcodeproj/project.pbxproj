@@ -92,9 +92,6 @@
 		046998AB1C8039DD00664359 /* FPImagePickerSelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998AA1C8039DD00664359 /* FPImagePickerSelectVC.m */; };
 		046998C11C80580900664359 /* FPCollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 046998BF1C80580900664359 /* FPCollectionVC.m */; };
 		046DC9631BDA05A300C9452D /* SPHotCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 046DC9621BDA05A300C9452D /* SPHotCourseDomain.m */; };
-		04729B951D01DCC90042D24B /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90971D002F8E00562DEC /* libssl.a */; };
-		04729B961D01DCC90042D24B /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90961D002F8E00562DEC /* libcrypto.a */; };
-		04729B971D01DCD50042D24B /* libEZOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E76D90941D002F5D00562DEC /* libEZOpenSDK.a */; };
 		0477C97F1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0477C97E1C1195510012774B /* EnrolStudentMySchoolFullScreenLayout.m */; };
 		0482BEF31CC389DB00ABD6B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF21CC389DB00ABD6B1 /* CoreData.framework */; };
 		0482BEF51CC389F300ABD6B1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0482BEF41CC389F300ABD6B1 /* libstdc++.6.0.9.tbd */; };
@@ -141,9 +138,6 @@
 		0497A9AC1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497A9AB1CBFDF750029B2E2 /* UploadPhotoToRemoteService.m */; };
 		0498AED01BDE160F001E653C /* SPDataListVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498AECF1BDE160F001E653C /* SPDataListVO.m */; };
 		0498AED31BDE17A3001E653C /* SPCourseDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498AED21BDE17A3001E653C /* SPCourseDomain.m */; };
-		04A50C591CC4AAE000EC9F4B /* baichuan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C481CC4AAE000EC9F4B /* baichuan.bundle */; };
-		04A50C5A1CC4AAE000EC9F4B /* feedback_advanced in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C491CC4AAE000EC9F4B /* feedback_advanced */; };
-		04A50C641CC4AAE000EC9F4B /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */; };
 		04A50C6B1CC4E00500EC9F4B /* GuidePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */; };
 		04A50C6E1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A50C6D1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.m */; };
 		04A50C701CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A50C6F1CC8723B00EC9F4B /* AlertSaveFFMoiveTitleView.xib */; };
@@ -607,6 +601,18 @@
 		E724B2821CFEA0B4004FDB0C /* EZCamrea.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B2811CFEA0B4004FDB0C /* EZCamrea.m */; };
 		E724B2871CFEA237004FDB0C /* EzCameraTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E724B2851CFEA237004FDB0C /* EzCameraTableViewCell.m */; };
 		E724B2881CFEA237004FDB0C /* EzCameraTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */; };
+		E73BA2EE1E3636870057F39C /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E21E3636870057F39C /* BaiduMapAPI_Base.framework */; };
+		E73BA2EF1E3636870057F39C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E31E3636870057F39C /* BaiduMapAPI_Cloud.framework */; };
+		E73BA2F01E3636870057F39C /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E41E3636870057F39C /* BaiduMapAPI_Location.framework */; };
+		E73BA2F11E3636870057F39C /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E51E3636870057F39C /* BaiduMapAPI_Map.framework */; };
+		E73BA2F21E3636870057F39C /* BaiduMapAPI_Radar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E61E3636870057F39C /* BaiduMapAPI_Radar.framework */; };
+		E73BA2F31E3636870057F39C /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E71E3636870057F39C /* BaiduMapAPI_Search.framework */; };
+		E73BA2F41E3636870057F39C /* BaiduMapAPI_Utils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2E81E3636870057F39C /* BaiduMapAPI_Utils.framework */; };
+		E73BA2F51E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Docs.zip in Resources */ = {isa = PBXBuildFile; fileRef = E73BA2E91E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Docs.zip */; };
+		E73BA2F61E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Sample.zip in Resources */ = {isa = PBXBuildFile; fileRef = E73BA2EA1E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Sample.zip */; };
+		E73BA2F71E3636870057F39C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2EC1E3636870057F39C /* libcrypto.a */; };
+		E73BA2F81E3636870057F39C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2ED1E3636870057F39C /* libssl.a */; };
+		E73BA30E1E3657FF0057F39C /* libEZOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA30D1E3657FF0057F39C /* libEZOpenSDK.a */; };
 		E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */; };
 		E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */; };
 		E755FA1C1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */; };
@@ -636,7 +642,6 @@
 		E7C752B91D01D71500DA0C38 /* UIView+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AC1D01D71500DA0C38 /* UIView+DDKit.m */; };
 		E7C752BA1D01D71500DA0C38 /* UIViewController+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752AE1D01D71500DA0C38 /* UIViewController+DDKit.m */; };
 		E7C752BE1D01D83400DA0C38 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C752BD1D01D83400DA0C38 /* Aspects.m */; };
-		E7C752D11D01E7FE00DA0C38 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */; };
 		E7DA2D1C1D03C8F5006F8F8D /* EZMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7DA2D1B1D03C8F5006F8F8D /* EZMain.storyboard */; };
 		F45EABD11B563F9F003C367C /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45EABD01B563F9F003C367C /* BaseViewController.m */; };
 		F463E6451B66106D00AB92B9 /* DianZanDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = F463E6441B66106D00AB92B9 /* DianZanDomain.m */; };
@@ -952,12 +957,6 @@
 		0498AECF1BDE160F001E653C /* SPDataListVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDataListVO.m; sourceTree = "<group>"; };
 		0498AED11BDE17A3001E653C /* SPCourseDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCourseDomain.h; sourceTree = "<group>"; };
 		0498AED21BDE17A3001E653C /* SPCourseDomain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCourseDomain.m; sourceTree = "<group>"; };
-		04A50C481CC4AAE000EC9F4B /* baichuan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = baichuan.bundle; path = build/OneSDK/baichuan.bundle; sourceTree = "<group>"; };
-		04A50C491CC4AAE000EC9F4B /* feedback_advanced */ = {isa = PBXFileReference; lastKnownFileType = folder; name = feedback_advanced; path = build/OneSDK/feedback_advanced; sourceTree = "<group>"; };
-		04A50C4B1CC4AAE000EC9F4B /* SGMain.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SGMain.framework; path = build/OneSDK/SGMain.framework; sourceTree = "<group>"; };
-		04A50C4C1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TAEWXAdapterForOpenAccountFMWK.framework; path = build/OneSDK/TAEWXAdapterForOpenAccountFMWK.framework; sourceTree = "<group>"; };
-		04A50C4D1CC4AAE000EC9F4B /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UTDID.framework; path = build/OneSDK/UTDID.framework; sourceTree = "<group>"; };
-		04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = yw_1222.jpg; path = build/OneSDK/yw_1222.jpg; sourceTree = "<group>"; };
 		04A50C691CC4E00500EC9F4B /* GuidePageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuidePageController.h; sourceTree = "<group>"; };
 		04A50C6A1CC4E00500EC9F4B /* GuidePageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuidePageController.m; sourceTree = "<group>"; };
 		04A50C6C1CC8721E00EC9F4B /* AlertSaveFFMoiveTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertSaveFFMoiveTitleView.h; sourceTree = "<group>"; };
@@ -1770,7 +1769,36 @@
 		E724B2841CFEA237004FDB0C /* EzCameraTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EzCameraTableViewCell.h; sourceTree = "<group>"; };
 		E724B2851CFEA237004FDB0C /* EzCameraTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EzCameraTableViewCell.m; sourceTree = "<group>"; };
 		E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EzCameraTableViewCell.xib; sourceTree = "<group>"; };
-		E724B28C1CFEAEDC004FDB0C /* build */ = {isa = PBXFileReference; lastKnownFileType = folder; path = build; sourceTree = "<group>"; };
+		E73BA2E21E3636870057F39C /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
+		E73BA2E31E3636870057F39C /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Cloud.framework; sourceTree = "<group>"; };
+		E73BA2E41E3636870057F39C /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
+		E73BA2E51E3636870057F39C /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
+		E73BA2E61E3636870057F39C /* BaiduMapAPI_Radar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Radar.framework; sourceTree = "<group>"; };
+		E73BA2E71E3636870057F39C /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
+		E73BA2E81E3636870057F39C /* BaiduMapAPI_Utils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Utils.framework; sourceTree = "<group>"; };
+		E73BA2E91E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Docs.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = BaiduMap_IOSSDK_v3.2.1_Docs.zip; sourceTree = "<group>"; };
+		E73BA2EA1E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Sample.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = BaiduMap_IOSSDK_v3.2.1_Sample.zip; sourceTree = "<group>"; };
+		E73BA2EC1E3636870057F39C /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		E73BA2ED1E3636870057F39C /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		E73BA2FB1E3657FF0057F39C /* EZAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZAccessToken.h; sourceTree = "<group>"; };
+		E73BA2FC1E3657FF0057F39C /* EZAlarmInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZAlarmInfo.h; sourceTree = "<group>"; };
+		E73BA2FD1E3657FF0057F39C /* EZAreaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZAreaInfo.h; sourceTree = "<group>"; };
+		E73BA2FE1E3657FF0057F39C /* EZCameraInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCameraInfo.h; sourceTree = "<group>"; };
+		E73BA2FF1E3657FF0057F39C /* EZCloudRecordFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCloudRecordFile.h; sourceTree = "<group>"; };
+		E73BA3001E3657FF0057F39C /* EZConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZConstants.h; sourceTree = "<group>"; };
+		E73BA3011E3657FF0057F39C /* EZDetectorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZDetectorInfo.h; sourceTree = "<group>"; };
+		E73BA3021E3657FF0057F39C /* EZDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZDeviceInfo.h; sourceTree = "<group>"; };
+		E73BA3031E3657FF0057F39C /* EZDeviceRecordFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZDeviceRecordFile.h; sourceTree = "<group>"; };
+		E73BA3041E3657FF0057F39C /* EZDeviceUpgradeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZDeviceUpgradeStatus.h; sourceTree = "<group>"; };
+		E73BA3051E3657FF0057F39C /* EZDeviceVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZDeviceVersion.h; sourceTree = "<group>"; };
+		E73BA3061E3657FF0057F39C /* EZGlobalSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZGlobalSDK.h; sourceTree = "<group>"; };
+		E73BA3071E3657FF0057F39C /* EZLeaveMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZLeaveMessage.h; sourceTree = "<group>"; };
+		E73BA3081E3657FF0057F39C /* EZOpenSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZOpenSDK.h; sourceTree = "<group>"; };
+		E73BA3091E3657FF0057F39C /* EZPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZPlayer.h; sourceTree = "<group>"; };
+		E73BA30A1E3657FF0057F39C /* EZProbeDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZProbeDeviceInfo.h; sourceTree = "<group>"; };
+		E73BA30B1E3657FF0057F39C /* EZStorageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZStorageInfo.h; sourceTree = "<group>"; };
+		E73BA30C1E3657FF0057F39C /* EZUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZUserInfo.h; sourceTree = "<group>"; };
+		E73BA30D1E3657FF0057F39C /* libEZOpenSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEZOpenSDK.a; sourceTree = "<group>"; };
 		E755FA131CC5DB6200AF32A0 /* MyInfoUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoUpdateController.h; sourceTree = "<group>"; };
 		E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoUpdateController.m; sourceTree = "<group>"; };
 		E755FA171CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentInfoUpdateDomain.h; sourceTree = "<group>"; };
@@ -1801,9 +1829,6 @@
 		E76D90891D0022F800562DEC /* UIImageView+EzvizOpenSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+EzvizOpenSDK.m"; sourceTree = "<group>"; };
 		E76D908A1D0022F800562DEC /* NSDate-Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate-Utilities.h"; sourceTree = "<group>"; };
 		E76D908B1D0022F800562DEC /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
-		E76D90941D002F5D00562DEC /* libEZOpenSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEZOpenSDK.a; path = build/ezviz_sdk_20160530/libEZOpenSDK.a; sourceTree = "<group>"; };
-		E76D90961D002F8E00562DEC /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = build/openssl/lib/libcrypto.a; sourceTree = "<group>"; };
-		E76D90971D002F8E00562DEC /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = build/openssl/lib/libssl.a; sourceTree = "<group>"; };
 		E76D909A1D00326A00562DEC /* HomeMenuBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuBtn.h; sourceTree = "<group>"; };
 		E76D909B1D00326A00562DEC /* HomeMenuBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuBtn.m; sourceTree = "<group>"; };
 		E7C752981D01D71500DA0C38 /* DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDKit.h; sourceTree = "<group>"; };
@@ -1832,7 +1857,6 @@
 		E7C752AF1D01D71500DA0C38 /* DDCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDCategory.h; sourceTree = "<group>"; };
 		E7C752BC1D01D83400DA0C38 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		E7C752BD1D01D83400DA0C38 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
-		E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = build/BaiduMapKit/mapapi.bundle; sourceTree = "<group>"; };
 		E7DA2D1B1D03C8F5006F8F8D /* EZMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EZMain.storyboard; sourceTree = "<group>"; };
 		F45EABCF1B563F9F003C367C /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F45EABD01B563F9F003C367C /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
@@ -2006,10 +2030,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E73BA2EE1E3636870057F39C /* BaiduMapAPI_Base.framework in Frameworks */,
+				E73BA2EF1E3636870057F39C /* BaiduMapAPI_Cloud.framework in Frameworks */,
+				E73BA2F01E3636870057F39C /* BaiduMapAPI_Location.framework in Frameworks */,
+				E73BA2F11E3636870057F39C /* BaiduMapAPI_Map.framework in Frameworks */,
+				E73BA2F21E3636870057F39C /* BaiduMapAPI_Radar.framework in Frameworks */,
+				E73BA2F31E3636870057F39C /* BaiduMapAPI_Search.framework in Frameworks */,
+				E73BA2F41E3636870057F39C /* BaiduMapAPI_Utils.framework in Frameworks */,
 				042681C81E082D160025A2A5 /* UserNotifications.framework in Frameworks */,
-				04729B971D01DCD50042D24B /* libEZOpenSDK.a in Frameworks */,
-				04729B951D01DCC90042D24B /* libssl.a in Frameworks */,
-				04729B961D01DCC90042D24B /* libcrypto.a in Frameworks */,
 				E724B2741CFE9804004FDB0C /* OpenAL.framework in Frameworks */,
 				E724B2721CFE97EE004FDB0C /* GLKit.framework in Frameworks */,
 				E724B2701CFE97DA004FDB0C /* VideoToolbox.framework in Frameworks */,
@@ -2020,6 +2048,7 @@
 				04DDA6471CD8FD3D00DBF147 /* MediaToolbox.framework in Frameworks */,
 				04DDA63F1CD8FCF400DBF147 /* CoreVideo.framework in Frameworks */,
 				04DDA63D1CD8FCDA00DBF147 /* CoreImage.framework in Frameworks */,
+				E73BA2F81E3636870057F39C /* libssl.a in Frameworks */,
 				04DDA63B1CD8FCD100DBF147 /* CoreFoundation.framework in Frameworks */,
 				04DDA6391CD8FCAE00DBF147 /* CoreBluetooth.framework in Frameworks */,
 				04DDA6351CD8FB7D00DBF147 /* CoreText.framework in Frameworks */,
@@ -2033,6 +2062,7 @@
 				0482BEF31CC389DB00ABD6B1 /* CoreData.framework in Frameworks */,
 				04FA92821C4DDCE800010DAE /* Accelerate.framework in Frameworks */,
 				042681C21E081E0E0025A2A5 /* Bugly.framework in Frameworks */,
+				E73BA30E1E3657FF0057F39C /* libEZOpenSDK.a in Frameworks */,
 				04FB88A61BFB04380094AC68 /* SafariServices.framework in Frameworks */,
 				04663DA51BE71BB00033C436 /* Social.framework in Frameworks */,
 				2487E63B1B61663E0030320A /* QuartzCore.framework in Frameworks */,
@@ -2051,6 +2081,7 @@
 				4D5CE7871B7E4527002F1088 /* MediaPlayer.framework in Frameworks */,
 				04F9FBAE1BF1A77E00AEFB88 /* libSocialWechat.a in Frameworks */,
 				042681C61E082C580025A2A5 /* libUMessage_Sdk_1.4.0.a in Frameworks */,
+				E73BA2F71E3636870057F39C /* libcrypto.a in Frameworks */,
 				04663CCE1BE708E30033C436 /* MapKit.framework in Frameworks */,
 				04F9FBAC1BF1A77E00AEFB88 /* TencentOpenAPI.framework in Frameworks */,
 				04F9FBAB1BF1A77E00AEFB88 /* libSocialQQ.a in Frameworks */,
@@ -3967,6 +3998,8 @@
 		248B6A881B19A95000FCB98F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				E73BA2F91E3657FF0057F39C /* SDK */,
+				E73BA2E11E3636870057F39C /* BaiduMap_IOSSDK_v3 */,
 				042681C31E082C580025A2A5 /* UMessage_Sdk_1.4.0 */,
 				042681C11E081E0E0025A2A5 /* Bugly.framework */,
 				04DDA97C1CD91BBF00DBF147 /* BaiduMapKit */,
@@ -4599,11 +4632,6 @@
 			isa = PBXGroup;
 			children = (
 				042681C71E082D160025A2A5 /* UserNotifications.framework */,
-				E7C752D01D01E7FE00DA0C38 /* mapapi.bundle */,
-				E76D90961D002F8E00562DEC /* libcrypto.a */,
-				E76D90971D002F8E00562DEC /* libssl.a */,
-				E76D90941D002F5D00562DEC /* libEZOpenSDK.a */,
-				E724B28C1CFEAEDC004FDB0C /* build */,
 				E724B2731CFE9804004FDB0C /* OpenAL.framework */,
 				E724B2711CFE97EE004FDB0C /* GLKit.framework */,
 				E724B26F1CFE97DA004FDB0C /* VideoToolbox.framework */,
@@ -4622,12 +4650,6 @@
 				04DDA6341CD8FB7D00DBF147 /* CoreText.framework */,
 				04DDA6321CD8FB5500DBF147 /* CFNetwork.framework */,
 				04DDA6301CD8FAEA00DBF147 /* libsqlite3.0.tbd */,
-				04A50C481CC4AAE000EC9F4B /* baichuan.bundle */,
-				04A50C491CC4AAE000EC9F4B /* feedback_advanced */,
-				04A50C4B1CC4AAE000EC9F4B /* SGMain.framework */,
-				04A50C4C1CC4AAE000EC9F4B /* TAEWXAdapterForOpenAccountFMWK.framework */,
-				04A50C4D1CC4AAE000EC9F4B /* UTDID.framework */,
-				04A50C531CC4AAE000EC9F4B /* yw_1222.jpg */,
 				04FA92811C4DDCE800010DAE /* Accelerate.framework */,
 				04663D9C1BE719680033C436 /* AddressBook.framework */,
 				04FE6D241BF5838200181134 /* AddressBookUI.framework */,
@@ -4702,6 +4724,68 @@
 				E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */,
 			);
 			name = view;
+			sourceTree = "<group>";
+		};
+		E73BA2E11E3636870057F39C /* BaiduMap_IOSSDK_v3 */ = {
+			isa = PBXGroup;
+			children = (
+				E73BA2E21E3636870057F39C /* BaiduMapAPI_Base.framework */,
+				E73BA2E31E3636870057F39C /* BaiduMapAPI_Cloud.framework */,
+				E73BA2E41E3636870057F39C /* BaiduMapAPI_Location.framework */,
+				E73BA2E51E3636870057F39C /* BaiduMapAPI_Map.framework */,
+				E73BA2E61E3636870057F39C /* BaiduMapAPI_Radar.framework */,
+				E73BA2E71E3636870057F39C /* BaiduMapAPI_Search.framework */,
+				E73BA2E81E3636870057F39C /* BaiduMapAPI_Utils.framework */,
+				E73BA2E91E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Docs.zip */,
+				E73BA2EA1E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Sample.zip */,
+				E73BA2EB1E3636870057F39C /* thirdlibs */,
+			);
+			name = BaiduMap_IOSSDK_v3;
+			path = ../../BaiduMap_IOSSDK_v3;
+			sourceTree = "<group>";
+		};
+		E73BA2EB1E3636870057F39C /* thirdlibs */ = {
+			isa = PBXGroup;
+			children = (
+				E73BA2EC1E3636870057F39C /* libcrypto.a */,
+				E73BA2ED1E3636870057F39C /* libssl.a */,
+			);
+			path = thirdlibs;
+			sourceTree = "<group>";
+		};
+		E73BA2F91E3657FF0057F39C /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				E73BA2FA1E3657FF0057F39C /* include */,
+				E73BA30D1E3657FF0057F39C /* libEZOpenSDK.a */,
+			);
+			name = SDK;
+			path = "../../iOS_v4.3.0-2.build20161219/SDK";
+			sourceTree = "<group>";
+		};
+		E73BA2FA1E3657FF0057F39C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				E73BA2FB1E3657FF0057F39C /* EZAccessToken.h */,
+				E73BA2FC1E3657FF0057F39C /* EZAlarmInfo.h */,
+				E73BA2FD1E3657FF0057F39C /* EZAreaInfo.h */,
+				E73BA2FE1E3657FF0057F39C /* EZCameraInfo.h */,
+				E73BA2FF1E3657FF0057F39C /* EZCloudRecordFile.h */,
+				E73BA3001E3657FF0057F39C /* EZConstants.h */,
+				E73BA3011E3657FF0057F39C /* EZDetectorInfo.h */,
+				E73BA3021E3657FF0057F39C /* EZDeviceInfo.h */,
+				E73BA3031E3657FF0057F39C /* EZDeviceRecordFile.h */,
+				E73BA3041E3657FF0057F39C /* EZDeviceUpgradeStatus.h */,
+				E73BA3051E3657FF0057F39C /* EZDeviceVersion.h */,
+				E73BA3061E3657FF0057F39C /* EZGlobalSDK.h */,
+				E73BA3071E3657FF0057F39C /* EZLeaveMessage.h */,
+				E73BA3081E3657FF0057F39C /* EZOpenSDK.h */,
+				E73BA3091E3657FF0057F39C /* EZPlayer.h */,
+				E73BA30A1E3657FF0057F39C /* EZProbeDeviceInfo.h */,
+				E73BA30B1E3657FF0057F39C /* EZStorageInfo.h */,
+				E73BA30C1E3657FF0057F39C /* EZUserInfo.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		E755FA121CC5DB2C00AF32A0 /* controller */ = {
@@ -5225,6 +5309,7 @@
 					248B6A581B19A39200FCB98F = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = M5PP646L93;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -5333,7 +5418,6 @@
 				046063481BD8D82600CBC881 /* MBProgressHUD.bundle in Resources */,
 				040021181C3F9A9B005F1D82 /* ShowRouteVC.xib in Resources */,
 				24DE91A91B67B94500D3FFCE /* MessageTableViewCell.xib in Resources */,
-				04A50C641CC4AAE000EC9F4B /* yw_1222.jpg in Resources */,
 				04F9FBA51BF1A77E00AEFB88 /* UMShareEditViewControlleriPad.xib in Resources */,
 				04F8731B1C3CC0CE007FCFD2 /* SpCourseDetailCourseInfo.xib in Resources */,
 				04F89A3C1C1018D800FC0FA6 /* EnrolStudentCommentCell.xib in Resources */,
@@ -5352,12 +5436,13 @@
 				04F9FB9F1BF1A77E00AEFB88 /* UMSocialLocalizable.strings in Resources */,
 				04D288AF1CA3864C00D12BEF /* EditFamilyMemberVC.xib in Resources */,
 				04F95F5D1C4E2E45000909B1 /* FPHomeSonView.xib in Resources */,
+				E73BA2F61E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Sample.zip in Resources */,
 				F4E61B6C1B7335A900E5851A /* ReplyListViewController.xib in Resources */,
+				E73BA2F51E3636870057F39C /* BaiduMap_IOSSDK_v3.2.1_Docs.zip in Resources */,
 				F4E636041B676AD400800924 /* AnnouncementInfoViewController.xib in Resources */,
 				E755FA211CC6384400AF32A0 /* BindTelController.xib in Resources */,
 				2474DFB51B6CBB1C0021506F /* StudentSignRecordTableViewCell.xib in Resources */,
 				04E606361C4897E100AEE9DD /* HomeVC.xib in Resources */,
-				E7C752D11D01E7FE00DA0C38 /* mapapi.bundle in Resources */,
 				04EAA3A91C9B0693005E8A4E /* FPPhotoDateHeaderCollectionReusableView.xib in Resources */,
 				04F8C6FA1C18235100EF5E57 /* DiscorveryJingXuanCell.xib in Resources */,
 				F4E36D611B85B49D009BD909 /* ZeroCameraCell.xib in Resources */,
@@ -5378,7 +5463,6 @@
 				245474DA1B5FDD6C00D49D40 /* StudentInfoViewController.xib in Resources */,
 				04FEC5801BEDDE7200C642A6 /* YouHuiDetailVC.xib in Resources */,
 				F4DF3BA51B78AC75001D9DF7 /* TimetableViewController.xib in Resources */,
-				04A50C5A1CC4AAE000EC9F4B /* feedback_advanced in Resources */,
 				048CF1371C23FAEB001A7CB2 /* AddressBooksViewController.xib in Resources */,
 				4DF056CD1B877E5000ED3840 /* PhotoVC.xib in Resources */,
 				24C46B4A1B5A2B7A00A58F92 /* InteractViewController.xib in Resources */,
@@ -5404,7 +5488,6 @@
 				04FADC561C3CE44B009D71F1 /* SpCourseDetailInfoWeb.xib in Resources */,
 				048CF1391C23FB08001A7CB2 /* ChatViewController.xib in Resources */,
 				2474DFB01B6CB7D90021506F /* StudentSignRecordViewController.xib in Resources */,
-				04A50C591CC4AAE000EC9F4B /* baichuan.bundle in Resources */,
 				04F780161C58ABBD00806A98 /* FPHomeTimeLineCell.xib in Resources */,
 				F48783AC1B58DA1700CDC1A8 /* LICENSE in Resources */,
 				04FEDD4D1C035A0D00921AC1 /* MySPCourseEndedView.xib in Resources */,
@@ -6155,7 +6238,8 @@
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6168,10 +6252,11 @@
 					"$(PROJECT_DIR)/kindergartenApp/libc++",
 					"$(PROJECT_DIR)/build",
 					"$(PROJECT_DIR)/build/OneSDK",
-					"$(PROJECT_DIR)/build/BaiduMapKit",
+					"$(PROJECT_DIR)/../BaiduMap_IOSSDK_v3",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)/**",
@@ -6208,10 +6293,11 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/Baidu_SDK_340",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_430/libs",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
-					"$(PROJECT_DIR)/build/openssl/lib",
+					"$(PROJECT_DIR)/../iOS_v4.3.0-2.build20161219/SDK",
+					"$(PROJECT_DIR)/../openssl/lib",
 					"$(PROJECT_DIR)/build/BaiduMapKit",
 					"$(PROJECT_DIR)/kindergartenApp/UMessage_Sdk_1.4.0",
+					"$(PROJECT_DIR)/../openssl",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -6228,7 +6314,8 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "b5c0feae-54d9-4f6c-913f-45d73cda0644";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 x86_64";
 			};
@@ -6245,7 +6332,8 @@
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = NO;
 				CODE_SIGN_ENTITLEMENTS = kindergartenApp/jiazhangtong.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu WenJie Technology Co., Ltd. (M5PP646L93)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6258,10 +6346,11 @@
 					"$(PROJECT_DIR)/kindergartenApp/libc++",
 					"$(PROJECT_DIR)/build",
 					"$(PROJECT_DIR)/build/OneSDK",
-					"$(PROJECT_DIR)/build/BaiduMapKit",
+					"$(PROJECT_DIR)/../BaiduMap_IOSSDK_v3",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
 					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)/**",
@@ -6298,10 +6387,11 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/Baidu_SDK_340",
 					"$(PROJECT_DIR)/kindergartenApp/AdNetworkLibs/GDTMob_SDK_430/libs",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
-					"$(PROJECT_DIR)/build/openssl/lib",
+					"$(PROJECT_DIR)/../iOS_v4.3.0-2.build20161219/SDK",
+					"$(PROJECT_DIR)/../openssl/lib",
 					"$(PROJECT_DIR)/build/BaiduMapKit",
 					"$(PROJECT_DIR)/kindergartenApp/UMessage_Sdk_1.4.0",
+					"$(PROJECT_DIR)/../openssl",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -6318,7 +6408,8 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wenjie.jiazhangtong;
 				PRODUCT_NAME = jiazhangtong;
-				PROVISIONING_PROFILE = "b5c0feae-54d9-4f6c-913f-45d73cda0644";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 arm64 x86_64";
 			};

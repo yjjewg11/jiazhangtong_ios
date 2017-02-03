@@ -12,7 +12,7 @@
 #import "SPCourseTypeDomain.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 #import "NoNetView.h"
 #import "SpCourseAndSchoolListVC.h"
 #import "SpCourseHomeFuncCell.h"

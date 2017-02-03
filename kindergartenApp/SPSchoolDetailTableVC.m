@@ -9,7 +9,7 @@
 #import "SPSchoolDetailTableVC.h"
 #import "SpCourseCell.h"
 #import "SPTeacherCell.h"
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 #import "KGHttpService.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"

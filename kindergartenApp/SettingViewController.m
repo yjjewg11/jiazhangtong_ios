@@ -27,7 +27,9 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [_tableView registerNib:[UINib nibWithNibName:@"SettingViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SettingViewCell"];
-    _dataArray = @[@[@"修改密码",@"推送通知",@"清除缓存"],@[@"意见反馈",@"关于我们"],@[@"退出"]];
+//    _dataArray = @[@[@"修改密码",@"推送通知",@"清除缓存"],@[@"意见反馈",@"关于我们"],@[@"退出"]];
+    _dataArray = @[@[@"修改密码",@"推送通知",@"清除缓存"],@[@"关于我们"],@[@"退出"]];
+
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -82,10 +84,13 @@
     }else if (indexPath.section == 1){
         switch (indexPath.row) {
             case 0:{
-                vc = [[AdvanceViewController alloc] init];
-//                [[SPKitExample sharedInstance] exampleOpenFeedbackViewController:YES fromViewController:self];
-//                
-                return;
+//                vc = [[AdvanceViewController alloc] init];
+////                [[SPKitExample sharedInstance] exampleOpenFeedbackViewController:YES fromViewController:self];
+////                
+//                return;
+                
+                vc = [[AboutWeViewController alloc] init];
+
             }
                 break;
             case 1:{

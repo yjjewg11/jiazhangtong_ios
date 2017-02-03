@@ -7,7 +7,7 @@
 //
 
 #import "MyCollectionViewController.h"
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 #import "YouHuiDetailVC.h"
 #import "NoDataTableViewCell.h"
 #import "BrowseURLViewController.h"

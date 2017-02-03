@@ -17,7 +17,7 @@
 #import "MJExtension.h"
 #import "SPTeacherDomain.h"
 #import "SPCourseDomain.h"
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 #import "KGDateUtil.h"
 #import "SpTeacherDetailViewController.h"
 #import "PopupView.h"

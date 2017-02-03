@@ -19,7 +19,7 @@
 #import "SpCourseHomeCourseCell.h"
 #import "SpCourseAndSchoolListSchoolCell.h"
 
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 #import "SPSchoolDetailVC.h"
 
 #define FinishReqCount 2

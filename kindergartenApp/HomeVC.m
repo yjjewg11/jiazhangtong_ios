@@ -176,7 +176,9 @@
     [container addSubview:funContainer];
     [funContainer mas_makeConstraints:^(MASConstraintMaker *make)
     {
-        make.edges.equalTo(container).with.insets(UIEdgeInsetsMake(150, 0, 0, 0));
+        make.edges.equalTo(container).with.insets(UIEdgeInsetsMake(0, 0, 0, 0));
+//        make.edges.equalTo(container).with.insets(UIEdgeInsetsMake(150, 0, 0, 0));
+
     }];
     
     //分割线view

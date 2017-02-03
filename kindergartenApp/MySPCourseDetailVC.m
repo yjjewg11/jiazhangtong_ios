@@ -9,7 +9,7 @@
 #import "MySPCourseDetailVC.h"
 #import "ACMacros.h"
 #import "MySPCourseView.h"
-#import "SPCourseDetailVC.h"
+#import "SpCourseDetailVC.h"
 #import "MySPCourseCommentVC.h"
 #import "MySPCourseTimeListVC.h"
 #import "KGHUD.h"

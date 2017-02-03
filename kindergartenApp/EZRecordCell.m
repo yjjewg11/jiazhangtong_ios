@@ -7,7 +7,7 @@
 //
 
 #import "EZRecordCell.h"
-#import "EZDeviceRecordFile.h"
+//#import "EZDeviceRecordFile.h"
 #import "EZCloudRecordFile.h"
 #import "UIImageView+AFNetworking.h"
 #import "DDKit.h"
