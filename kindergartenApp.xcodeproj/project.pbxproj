@@ -613,6 +613,7 @@
 		E73BA2F71E3636870057F39C /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2EC1E3636870057F39C /* libcrypto.a */; };
 		E73BA2F81E3636870057F39C /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA2ED1E3636870057F39C /* libssl.a */; };
 		E73BA30E1E3657FF0057F39C /* libEZOpenSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73BA30D1E3657FF0057F39C /* libEZOpenSDK.a */; };
+		E74424511E4615A900284815 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E74424501E4615A900284815 /* mapapi.bundle */; };
 		E755FA151CC5DB6200AF32A0 /* MyInfoUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */; };
 		E755FA191CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA181CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.m */; };
 		E755FA1C1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = E755FA1B1CC62A9C00AF32A0 /* ThridUserAccessTokenDomain.m */; };
@@ -630,6 +631,10 @@
 		E76D90921D0022F800562DEC /* UIImageView+EzvizOpenSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D90891D0022F800562DEC /* UIImageView+EzvizOpenSDK.m */; };
 		E76D90931D0022F800562DEC /* NSDate-Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D908B1D0022F800562DEC /* NSDate-Utilities.m */; };
 		E76D909C1D00326A00562DEC /* HomeMenuBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = E76D909B1D00326A00562DEC /* HomeMenuBtn.m */; };
+		E7B5A5DF1E44D1E100EE767F /* EZCameraListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B5A5DB1E44D1E100EE767F /* EZCameraListViewController.m */; };
+		E7B5A5E01E44D1E100EE767F /* EZCameraListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B5A5DC1E44D1E100EE767F /* EZCameraListViewController.xib */; };
+		E7B5A5E11E44D1E100EE767F /* EZLivePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B5A5DE1E44D1E100EE767F /* EZLivePlayViewController.m */; };
+		E7B5A5E61E44D92000EE767F /* GlobalKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B5A5E51E44D92000EE767F /* GlobalKit.m */; };
 		E7C752B01D01D71500DA0C38 /* NSArray+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529A1D01D71500DA0C38 /* NSArray+DDKit.m */; };
 		E7C752B11D01D71500DA0C38 /* NSDate+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529C1D01D71500DA0C38 /* NSDate+DDKit.m */; };
 		E7C752B21D01D71500DA0C38 /* NSString+DDKit.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C7529E1D01D71500DA0C38 /* NSString+DDKit.m */; };
@@ -1799,6 +1804,7 @@
 		E73BA30B1E3657FF0057F39C /* EZStorageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZStorageInfo.h; sourceTree = "<group>"; };
 		E73BA30C1E3657FF0057F39C /* EZUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZUserInfo.h; sourceTree = "<group>"; };
 		E73BA30D1E3657FF0057F39C /* libEZOpenSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libEZOpenSDK.a; sourceTree = "<group>"; };
+		E74424501E4615A900284815 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		E755FA131CC5DB6200AF32A0 /* MyInfoUpdateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoUpdateController.h; sourceTree = "<group>"; };
 		E755FA141CC5DB6200AF32A0 /* MyInfoUpdateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoUpdateController.m; sourceTree = "<group>"; };
 		E755FA171CC5E4ED00AF32A0 /* ParentInfoUpdateDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentInfoUpdateDomain.h; sourceTree = "<group>"; };
@@ -1831,6 +1837,14 @@
 		E76D908B1D0022F800562DEC /* NSDate-Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate-Utilities.m"; sourceTree = "<group>"; };
 		E76D909A1D00326A00562DEC /* HomeMenuBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeMenuBtn.h; sourceTree = "<group>"; };
 		E76D909B1D00326A00562DEC /* HomeMenuBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeMenuBtn.m; sourceTree = "<group>"; };
+		E7B5A5DA1E44D1E100EE767F /* EZCameraListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCameraListViewController.h; sourceTree = "<group>"; };
+		E7B5A5DB1E44D1E100EE767F /* EZCameraListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZCameraListViewController.m; sourceTree = "<group>"; };
+		E7B5A5DC1E44D1E100EE767F /* EZCameraListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EZCameraListViewController.xib; sourceTree = "<group>"; };
+		E7B5A5DD1E44D1E100EE767F /* EZLivePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZLivePlayViewController.h; sourceTree = "<group>"; };
+		E7B5A5DE1E44D1E100EE767F /* EZLivePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZLivePlayViewController.m; sourceTree = "<group>"; };
+		E7B5A5E21E44D6B700EE767F /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		E7B5A5E41E44D92000EE767F /* GlobalKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalKit.h; sourceTree = "<group>"; };
+		E7B5A5E51E44D92000EE767F /* GlobalKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalKit.m; sourceTree = "<group>"; };
 		E7C752981D01D71500DA0C38 /* DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDKit.h; sourceTree = "<group>"; };
 		E7C752991D01D71500DA0C38 /* NSArray+DDKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DDKit.h"; sourceTree = "<group>"; };
 		E7C7529A1D01D71500DA0C38 /* NSArray+DDKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DDKit.m"; sourceTree = "<group>"; };
@@ -3891,6 +3905,7 @@
 				4D077B201B8081BC00FFD5CB /* Images.xcassets */,
 				4D077B1F1B8081A600FFD5CB /* pchFile.pch */,
 				248B6A6B1B19A39200FCB98F /* LaunchScreen.xib */,
+				E7B5A5E21E44D6B700EE767F /* PrefixHeader.pch */,
 				248B6A5D1B19A39200FCB98F /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -4693,6 +4708,7 @@
 		E724B2791CFE99D4004FDB0C /* EZCamera(萤石云监控) */ = {
 			isa = PBXGroup;
 			children = (
+				E7B5A5E31E44D92000EE767F /* Global */,
 				E7C752BB1D01D83400DA0C38 /* Aspects */,
 				E7C752961D01D71500DA0C38 /* DDCategory */,
 				E76D907B1D0022E700562DEC /* CustomUI */,
@@ -4719,6 +4735,11 @@
 		E724B2831CFEA20E004FDB0C /* view */ = {
 			isa = PBXGroup;
 			children = (
+				E7B5A5DA1E44D1E100EE767F /* EZCameraListViewController.h */,
+				E7B5A5DB1E44D1E100EE767F /* EZCameraListViewController.m */,
+				E7B5A5DC1E44D1E100EE767F /* EZCameraListViewController.xib */,
+				E7B5A5DD1E44D1E100EE767F /* EZLivePlayViewController.h */,
+				E7B5A5DE1E44D1E100EE767F /* EZLivePlayViewController.m */,
 				E724B2841CFEA237004FDB0C /* EzCameraTableViewCell.h */,
 				E724B2851CFEA237004FDB0C /* EzCameraTableViewCell.m */,
 				E724B2861CFEA237004FDB0C /* EzCameraTableViewCell.xib */,
@@ -4729,6 +4750,7 @@
 		E73BA2E11E3636870057F39C /* BaiduMap_IOSSDK_v3 */ = {
 			isa = PBXGroup;
 			children = (
+				E74424501E4615A900284815 /* mapapi.bundle */,
 				E73BA2E21E3636870057F39C /* BaiduMapAPI_Base.framework */,
 				E73BA2E31E3636870057F39C /* BaiduMapAPI_Cloud.framework */,
 				E73BA2E41E3636870057F39C /* BaiduMapAPI_Location.framework */,
@@ -4837,6 +4859,15 @@
 				E76D908B1D0022F800562DEC /* NSDate-Utilities.m */,
 			);
 			name = CustomUI;
+			sourceTree = "<group>";
+		};
+		E7B5A5E31E44D92000EE767F /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				E7B5A5E41E44D92000EE767F /* GlobalKit.h */,
+				E7B5A5E51E44D92000EE767F /* GlobalKit.m */,
+			);
+			path = Global;
 			sourceTree = "<group>";
 		};
 		E7C752961D01D71500DA0C38 /* DDCategory */ = {
@@ -5391,6 +5422,7 @@
 				244F74931B62A4630078D30D /* PostTopicViewController.xib in Resources */,
 				F4CF7A931B79C5B400BFAA1E /* TimetableItemTableViewCell.xib in Resources */,
 				0400211D1C3FA16D005F1D82 /* RouteCell.xib in Resources */,
+				E74424511E4615A900284815 /* mapapi.bundle in Resources */,
 				04F89A441C1024E000FC0FA6 /* NoDataView.xib in Resources */,
 				04BDD6901C4CD05A00FA0C3A /* SpCourseHomeCourseCell.xib in Resources */,
 				04F9C9951C0ED6F40078A5F5 /* EnrolStudentsSchoolCell.xib in Resources */,
@@ -5454,6 +5486,7 @@
 				040466C71C438FDB00C9EE5C /* RouteDetailInfoCell.xib in Resources */,
 				E71689831D01C46C00E37A3C /* EZMain2.storyboard in Resources */,
 				E7DA2D1C1D03C8F5006F8F8D /* EZMain.storyboard in Resources */,
+				E7B5A5E01E44D1E100EE767F /* EZCameraListViewController.xib in Resources */,
 				2457FD031B711A65006A3AB7 /* AddressbookTableViewCell.xib in Resources */,
 				24E634821B6FB9CC00A23A66 /* RecipesHeadTableViewCell.xib in Resources */,
 				0492BA1A1CBCE74700ACB096 /* DianzanNameShowView.xib in Resources */,
@@ -5662,6 +5695,7 @@
 				24DEC81F1B633AEF00C55828 /* ReplyDomain.m in Sources */,
 				04FB7CB91C0DA49000FD3E31 /* SpTeacherDetailWebViewCell.m in Sources */,
 				F4E2D4811B6B6334001472EC /* GiftwareArticlesInfoViewController.m in Sources */,
+				E7B5A5E11E44D1E100EE767F /* EZLivePlayViewController.m in Sources */,
 				04FEC5701BEDCA3B00C642A6 /* YouHuiTableVC.m in Sources */,
 				F4C0AB901B1C3B29007B0E35 /* SandboxFile.m in Sources */,
 				04FEC8871BEBADCE00D3D8A5 /* SPSchoolCell.m in Sources */,
@@ -5727,6 +5761,7 @@
 				E76D909C1D00326A00562DEC /* HomeMenuBtn.m in Sources */,
 				04D288771C9E915F00D12BEF /* SIMenuCell.m in Sources */,
 				F4885C6F1B7C982B00AF97CF /* CardInfoDomain.m in Sources */,
+				E7B5A5E61E44D92000EE767F /* GlobalKit.m in Sources */,
 				24E1F5671B7279C600057C44 /* MoreMenuView.m in Sources */,
 				04D288781C9E915F00D12BEF /* SIMenuConfiguration.m in Sources */,
 				E76D90931D0022F800562DEC /* NSDate-Utilities.m in Sources */,
@@ -5994,6 +6029,7 @@
 				04F411031C5A1EC200407C10 /* FPImagePickerGroupTableCell.m in Sources */,
 				24759EAD1B5FC48500A3087D /* TopicDomain.m in Sources */,
 				04F8D3641C1167040098FBAB /* EnrolStudentMySchoolWebCell.m in Sources */,
+				E7B5A5DF1E44D1E100EE767F /* EZCameraListViewController.m in Sources */,
 				E755FA201CC6384400AF32A0 /* BindTelController.m in Sources */,
 				4D5CE76D1B7E4333002F1088 /* ModifyPasswordViewController.m in Sources */,
 				04FEEC801C76B7670024FEAF /* FPTimeLineEditVC.m in Sources */,
@@ -6253,15 +6289,14 @@
 					"$(PROJECT_DIR)/build",
 					"$(PROJECT_DIR)/build/OneSDK",
 					"$(PROJECT_DIR)/../BaiduMap_IOSSDK_v3",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
+					"$(PROJECT_DIR)/../iOS_v4.3.0-2.build20161219/SDK",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)/**",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
-					"$(PROJECT_DIR)/build/openssl/include/openssl",
+					"$(PROJECT_DIR)/../iOS_v4.3.0-2.build20161219/SDK",
+					"$(PROJECT_DIR)/../openssl/include/openssl",
 				);
 				INFOPLIST_FILE = kindergartenApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -6347,15 +6382,14 @@
 					"$(PROJECT_DIR)/build",
 					"$(PROJECT_DIR)/build/OneSDK",
 					"$(PROJECT_DIR)/../BaiduMap_IOSSDK_v3",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
+					"$(PROJECT_DIR)/../iOS_v4.3.0-2.build20161219/SDK",
 				);
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = kindergartenApp/pchFile.pch;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)/**",
-					"$(PROJECT_DIR)/build/ezviz_sdk_20160530/EZOpenSDK",
-					"$(PROJECT_DIR)/build/openssl/include/openssl",
+					"$(PROJECT_DIR)/../iOS_v4.3.0-2.build20161219/SDK",
+					"$(PROJECT_DIR)/../openssl/include/openssl",
 				);
 				INFOPLIST_FILE = kindergartenApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

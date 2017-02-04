@@ -17,4 +17,7 @@
 
 @property (copy, nonatomic) NSString * channelNo;
 @property (copy, nonatomic) NSString * deviceSerial;
+
+/// 通道号
+@property (nonatomic) NSInteger cameraNo;
 @end

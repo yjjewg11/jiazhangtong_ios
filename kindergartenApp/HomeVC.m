@@ -458,8 +458,8 @@
             [self umengEvent:@"interactCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
         case 20:
-//              baseVC = [[EZCameraListViewController alloc] init];
-//            [self umengEvent:@"shipingCount" attributes:@{@"name":@"iphone"} number:@(1)];
+              baseVC = [[EZCameraListViewController alloc] init];
+            [self umengEvent:@"shipingCount" attributes:@{@"name":@"iphone"} number:@(1)];
             break;
    
         default:

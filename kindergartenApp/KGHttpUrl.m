@@ -13,6 +13,7 @@
 //#define baseServiceURL       @"http://jz.wenjienet.com/px-mobile/"      //正式
 
 #define baseServiceURL       @"https://www.wenjienet.com/px-mobile/"      //正式
+//#define baseServiceURL       @"http://192.168.1.5:8080/px-mobile/"      //正式
 //#define baseServiceURL       @"http://120.25.212.44/px-mobile/"         //测试
 
 #define dynamicMenuURL       @"rest/userinfo/getDynamicMenu.json"    //首页动态菜单

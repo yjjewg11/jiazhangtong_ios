@@ -9,18 +9,20 @@
 #import <sys/sysctl.h>
 #import <mach/mach.h>
 #import "EZLivePlayViewController.h"
-#import "EZOpenSDK.h"
 #import "UIViewController+EZBackPop.h"
 #import "EZDeviceInfo.h"
-#import "EZPlayer.h"	
+#import "EZPlayer.h"
 #import "DDKit.h"
 #import "Masonry.h"
 #import "HIKLoadView.h"
 #import "MBProgressHUD.h"
+#import "EZCameraInfo.h"
+
 
 @interface EZLivePlayViewController ()<EZPlayerDelegate, UIAlertViewDelegate>
 {
     NSOperation *op;
+    BOOL _isPressed;
 }
 
 @property (nonatomic) BOOL isOpenSound;
@@ -30,6 +32,8 @@
 @property (nonatomic, strong) CALayer *orangeLayer;
 @property (nonatomic, copy) NSString *filePath;
 @property (nonatomic, strong) EZPlayer *player;
+@property (nonatomic, strong) EZPlayer *talkPlayer;
+@property (nonatomic) BOOL isStartingTalk;
 @property (nonatomic, strong) HIKLoadView *loadingView;
 @property (nonatomic, weak) IBOutlet UIButton *playerPlayButton;
 @property (nonatomic, weak) IBOutlet UIView *playerView;
@@ -67,56 +71,120 @@
 @property (nonatomic, weak) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) NSMutableData *fileData;
 @property (nonatomic, weak) MBProgressHUD *voiceHud;
+@property (nonatomic, strong) EZCameraInfo *cameraInfo;
+
 
 
 @end
 
 @implementation EZLivePlayViewController
 
+
+- (void)setDomain:(EZCamrea *)domain
+{
+    EZDeviceInfo *deviceInfo=[[EZDeviceInfo alloc] init];
+    EZCameraInfo *cameraInfo=[[EZCameraInfo alloc] init];
+    cameraInfo.deviceSerial=domain.deviceSerial;
+//     cameraInfo.cameraNo=domain.cameraNo;
+     cameraInfo.cameraNo=domain.cameraNo;
+    deviceInfo.deviceSerial=domain.deviceSerial;
+    
+    _cameraIndex=0;
+    
+    NSMutableArray *cameraInfoArray=[NSMutableArray array];
+    [cameraInfoArray addObject:cameraInfo];
+    
+    deviceInfo.cameraInfo=cameraInfoArray;
+    deviceInfo.deviceName=domain.cameraName;
+    self.deviceInfo=deviceInfo;
+}
+
 - (void)dealloc
 {
     NSLog(@"%@ dealloc", self.class);
-    [EZOpenSDK releasePlayer:_player];
+    [EZOPENSDK releasePlayer:_player];
+    [EZOPENSDK releasePlayer:_talkPlayer];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = _cameraName;
+    self.title = _deviceInfo.deviceName;
     self.largeTitleLabel.text = self.title;
     
     self.isAutorotate = YES;
-    
+    self.isStartingTalk = NO;
     self.ptzView.hidden = YES;
     self.talkView.hidden = YES;
     
-    self.talkButton.enabled = NO;
-    self.controlButton.enabled = NO;
+    self.talkButton.enabled = self.deviceInfo.isSupportTalk;
+    self.controlButton.enabled = self.deviceInfo.isSupportPTZ;
     self.captureButton.enabled = NO;
     self.localRecordButton.enabled = NO;
-//    _url=@"rtmp://hzrtmp02.ys7.com:1935/livestream/553280151_4_2_1_0";
+    
+    //    _url = @"rtsp://183.136.184.33:8554/demo://544542032:1:1:1:0:183.136.184.7:6500";
+    
+    //    _url = @"ysproto://122.225.228.217:8554/live?dev=501694318&chn=1&stream=2&cln=1&isp=0&biz=3";
+    
     if (_url)
     {
-        _player = [EZOpenSDK createPlayerWithUrl:_url];
+        _player = [EZOPENSDK createPlayerWithUrl:_url];
     }
     else
     {
-        [EZOpenSDK getDeviceInfo:_cameraId completion:^(EZDeviceInfo *deviceInfo, NSError *error) {
-            if(deviceInfo.isSupportTalk)
-            {
-                self.talkButton.enabled = YES;
-            }
-            if(deviceInfo.isSupportPTZ)
-            {
-                self.controlButton.enabled = YES;
-            }
-        }];
         
-        _player = [EZOpenSDK createPlayerWithCameraId:_cameraId];
+        
+        
+//        _cameraInfo = [self.deviceInfo.cameraInfo dd_objectAtIndex:_cameraIndex];
+        
+//        _player = [EZOPENSDK createPlayerWithDeviceSerial:self.domain.deviceSerial cameraNo:self.domain.channelNo];
+//        
+//        
+//        _talkPlayer = [EZOPENSDK createPlayerWithDeviceSerial:self.domain.deviceSerial cameraNo:self.domain.channelNo];
+        
+        
+        _cameraInfo = [self.deviceInfo.cameraInfo dd_objectAtIndex:_cameraIndex];
+        
+        _player = [EZOPENSDK createPlayerWithDeviceSerial:_cameraInfo.deviceSerial cameraNo:_cameraInfo.cameraNo];
+        
+        
+        _talkPlayer = [EZOPENSDK createPlayerWithDeviceSerial:_cameraInfo.deviceSerial cameraNo:_cameraInfo.cameraNo];
+//
+//        
+        //        _player = [EZOPENSDK createPlayerWithDeviceSerial:info.deviceSerial cameraNo:info.cameraNo streamType:1];
+        if (_cameraInfo.videoLevel == 2)
+        {
+            [self.qualityButton setTitle:@"高清" forState:UIControlStateNormal];
+        }
+        else if (_cameraInfo.videoLevel == 1)
+        {
+            [self.qualityButton setTitle:@"均衡" forState:UIControlStateNormal];
+        }
+        else
+        {
+            [self.qualityButton setTitle:@"流畅" forState:UIControlStateNormal];
+        }
     }
-
-
+    
+#if DEBUG
+    if (!_url)
+    {
+        //抓图接口演示代码
+        [EZOPENSDK captureCamera:_cameraInfo.deviceSerial cameraNo:_cameraInfo.cameraNo completion:^(NSString *url, NSError *error) {
+            NSLog(@"[%@] capture cameraNo is [%d] url is %@, error is %@", _cameraInfo.deviceSerial, (int)_cameraInfo.cameraNo, url, error);
+        }];
+    }
+#endif
+    
     _player.delegate = self;
+    _talkPlayer.delegate = self;
+    //判断设备是否加密，加密就从demo的内存中获取设备验证码填入到播放器的验证码接口里，本demo只处理内存存储，本地持久化存储用户自行完成
+    if (self.deviceInfo.isEncrypt)
+    {
+        NSString *verifyCode = [[GlobalKit shareKit].deviceVerifyCodeBySerial objectForKey:self.deviceInfo.deviceSerial];
+        [_player setPlayVerifyCode:verifyCode];
+        [_talkPlayer setPlayVerifyCode:verifyCode];
+    }
     [_player setPlayerView:_playerView];
     [_player startRealPlay];
     
@@ -167,6 +235,8 @@
         [self saveRecordToPhotosAlbum:_filePath];
     }
     
+    [_player stopRealPlay];
+    
     NSLog(@"viewWillDisappear");
     [super viewWillDisappear:animated];
 }
@@ -183,14 +253,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
@@ -218,33 +288,83 @@
     }
 }
 
+- (IBAction)pressed:(id)sender {
+    
+}
+
 #pragma mark - UIAlertViewDelegate Methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
+    if (alertView.alertViewStyle == UIAlertViewStyleSecureTextInput)
     {
-        NSString *smsCode = [alertView textFieldAtIndex:0].text;
-        //验证输入的安全短信验证码
-        [EZOpenSDK validateSecureSMSCode:smsCode completion:^(NSError *error) {
-            if (!error)
+        if (buttonIndex == 1)
+        {
+            NSString *checkCode = [alertView textFieldAtIndex:0].text;
+            [[GlobalKit shareKit].deviceVerifyCodeBySerial setValue:checkCode forKey:self.deviceInfo.deviceSerial];
+            if (!self.isStartingTalk)
             {
-                [_player startRealPlay];
+                [self.player setPlayVerifyCode:checkCode];
+                [self.player startRealPlay];
             }
-        }];
+            else
+            {
+                [self.talkPlayer setPlayVerifyCode:checkCode];
+                [self.talkPlayer startVoiceTalk];
+            }
+        }
+    }
+    else
+    {
+        if (buttonIndex == 1)
+        {
+            [self showSetPassword];
+            return;
+        }
     }
 }
 
 #pragma mark - PlayerDelegate Methods
 
+- (void)player:(EZPlayer *)player didReceivedDataLength:(NSInteger)dataLength
+{
+    CGFloat value = dataLength/1024.0;
+    NSString *fromatStr = @"%.1f KB/s";
+    if (value > 1024)
+    {
+        value = value/1024;
+        fromatStr = @"%.1f MB/s";
+    }
+    
+    [_emptyButton setTitle:[NSString stringWithFormat:fromatStr,value] forState:UIControlStateNormal];
+}
+
+
 - (void)player:(EZPlayer *)player didPlayFailed:(NSError *)error
 {
     NSLog(@"player: %@, didPlayFailed: %@", player, error);
+    //如果是需要验证码或者是验证码错误
+    if (error.code == EZ_SDK_NEED_VALIDATECODE) {
+        [self showSetPassword];
+        return;
+    } else if (error.code == EZ_SDK_VALIDATECODE_NOT_MATCH) {
+        [self showRetry];
+        return;
+    } else if (error.code == EZ_SDK_NOT_SUPPORT_TALK) {
+        [UIView dd_showDetailMessage:[NSString stringWithFormat:@"%d", (int)error.code]];
+        [self.voiceHud hide:YES];
+        return;
+    }else if (error.code == 34) {//34错误特殊操作
+        [_player stopRealPlay];
+        [_player startRealPlay];
+        return;
+    }
+    
     [UIView dd_showDetailMessage:[NSString stringWithFormat:@"%d", (int)error.code]];
     [self.voiceHud hide:YES];
     [self.loadingView stopSquareClockwiseAnimation];
     self.messageLabel.text = [NSString stringWithFormat:@"播放失败(%d)", (int)error.code];
-    if (error.code > 370000 || error.code != 400077)
+    if (error.code > 370000)
     {
         self.messageLabel.hidden = NO;
     }
@@ -261,9 +381,9 @@
                      }];
 }
 
-- (void)player:(EZPlayer *)player didReceviedMessage:(NSInteger)messageCode
+- (void)player:(EZPlayer *)player didReceivedMessage:(NSInteger)messageCode
 {
-    NSLog(@"player: %@, didReceviedMessage: %d", player, (int)messageCode);
+    NSLog(@"player: %@, didReceivedMessage: %d", player, (int)messageCode);
     if (messageCode == PLAYER_REALPLAY_START)
     {
         self.captureButton.enabled = YES;
@@ -276,12 +396,14 @@
         
         if (!_isOpenSound)
         {
-            [player closeSound];
+            [_player closeSound];
         }
         self.messageLabel.hidden = YES;
     }
     else if(messageCode == PLAYER_VOICE_TALK_START)
     {
+        [_player closeSound];
+        self.isStartingTalk = NO;
         [self.voiceHud hide:YES];
         [self.bottomView bringSubviewToFront:self.talkView];
         self.talkView.hidden = NO;
@@ -296,6 +418,34 @@
                          completion:^(BOOL finished) {
                          }];
     }
+    else if (messageCode == PLAYER_VOICE_TALK_END)
+    {
+        //对讲结束开启声音
+        [_player openSound];
+    }
+}
+
+#pragma mark - ValidateCode Methods
+
+- (void)showSetPassword
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请输入视频图片加密密码"
+                                                        message:@"您的视频已加密，请输入密码进行查看，初始密码为机身标签上的验证码，如果没有验证码，请输入ABCDEF（密码区分大小写)"
+                                                       delegate:self
+                                              cancelButtonTitle:@"取消"
+                                              otherButtonTitles:@"确定", nil];
+    alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [alertView show];
+}
+
+- (void)showRetry
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示"
+                                                        message:@"设备密码错误"
+                                                       delegate:self
+                                              cancelButtonTitle:@"取消"
+                                              otherButtonTitles:NSLocalizedString(@"重试", nil), nil];
+    [alertView show];
 }
 
 #pragma mark - Action Methods
@@ -312,8 +462,6 @@
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
 
-
-
 - (IBAction)capture:(id)sender
 {
     UIImage *image = [_player capturePicture:100];
@@ -322,11 +470,12 @@
 
 - (IBAction)talkButtonClicked:(id)sender
 {
-    [_player startVoiceTalk];
     if (!_voiceHud) {
         _voiceHud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     }
     self.voiceHud.labelText = @"正在开启对讲，请稍候...";
+    self.isStartingTalk = YES;
+    [_talkPlayer startVoiceTalk];
 }
 
 - (IBAction)voiceButtonClicked:(id)sender
@@ -392,26 +541,47 @@
 - (IBAction)qualitySelectedClicked:(id)sender
 {
     BOOL result = NO;
+    EZVideoLevelType type = EZVideoLevelLow;
     if (sender == self.highButton)
     {
-        result = [_player setVideoLevel:EZVideoQualityHigh];
-        [self.qualityButton setTitle:@"高清" forState:UIControlStateNormal];
+        type = EZVideoLevelHigh;
     }
     else if (sender == self.middleButton)
     {
-        result = [_player setVideoLevel:EZVideoQualityMiddle];
-        [self.qualityButton setTitle:@"均衡" forState:UIControlStateNormal];
+        type = EZVideoLevelMiddle;
     }
     else
     {
-        result = [_player setVideoLevel:EZVideoQualityLow];
-        [self.qualityButton setTitle:@"流畅" forState:UIControlStateNormal];
+        type = EZVideoLevelLow;
     }
-    if (result)
-    {
-        [self.loadingView startSquareClcokwiseAnimation];
-    }
-    self.qualityView.hidden = YES;
+    [EZOPENSDK setVideoLevel:_cameraInfo.deviceSerial
+                    cameraNo:_cameraInfo.cameraNo
+                  videoLevel:type
+                  completion:^(NSError *error) {
+                      if (error)
+                      {
+                          return;
+                      }
+                      [_player stopRealPlay];
+                      if (sender == self.highButton)
+                      {
+                          [self.qualityButton setTitle:@"高清" forState:UIControlStateNormal];
+                      }
+                      else if (sender == self.middleButton)
+                      {
+                          [self.qualityButton setTitle:@"均衡" forState:UIControlStateNormal];
+                      }
+                      else
+                      {
+                          [self.qualityButton setTitle:@"流畅" forState:UIControlStateNormal];
+                      }
+                      if (result)
+                      {
+                          [self.loadingView startSquareClcokwiseAnimation];
+                      }
+                      self.qualityView.hidden = YES;
+                      [_player startRealPlay];
+                  }];
 }
 
 - (IBAction)ptzControlButtonTouchDown:(id)sender
@@ -430,7 +600,7 @@
     }
     else if (sender == self.ptzRightButton)
     {
-        command = EZPtzCommandRight;
+        command = EZPTZCommandRight;
         imageName = @"ptz_right_sel";
     }
     else {
@@ -438,11 +608,14 @@
         imageName = @"ptz_up_sel";
     }
     [self.ptzControlButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateDisabled];
-    [EZOpenSDK controlPTZ:_cameraId
+    EZCameraInfo *cameraInfo = [_deviceInfo.cameraInfo firstObject];
+    [EZOPENSDK controlPTZ:cameraInfo.deviceSerial
+                 cameraNo:cameraInfo.cameraNo
                   command:command
                    action:EZPTZActionStart
-                    speed:3.0
-                   result:^(BOOL result, NSError *error) {
+                    speed:2
+                   result:^(NSError *error) {
+                       NSLog(@"error is %@", error);
                    }];
 }
 
@@ -459,17 +632,19 @@
     }
     else if (sender == self.ptzRightButton)
     {
-        command = EZPtzCommandRight;
+        command = EZPTZCommandRight;
     }
     else {
         command = EZPTZCommandUp;
     }
     [self.ptzControlButton setImage:[UIImage imageNamed:@"ptz_bg"] forState:UIControlStateDisabled];
-    [EZOpenSDK controlPTZ:_cameraId
+    EZCameraInfo *cameraInfo = [_deviceInfo.cameraInfo firstObject];
+    [EZOPENSDK controlPTZ:cameraInfo.deviceSerial
+                 cameraNo:cameraInfo.cameraNo
                   command:command
                    action:EZPTZActionStop
                     speed:3.0
-                   result:^(BOOL result, NSError *error) {
+                   result:^(NSError *error) {
                    }];
 }
 
@@ -506,7 +681,7 @@
 
 - (IBAction)closeTalkView:(id)sender
 {
-    [_player stopVoiceTalk];
+    [_talkPlayer stopVoiceTalk];
     [UIView animateWithDuration:0.3
                      animations:^{
                          self.speakImageView.alpha = 0.0;
@@ -522,6 +697,7 @@
 
 - (IBAction)localButtonClicked:(id)sender
 {
+    
     //结束本地录像
     if(self.localRecordButton.selected)
     {
@@ -554,9 +730,10 @@
         NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
         dateformatter.dateFormat = @"yyyyMMddHHmmssSSS";
         _filePath = [NSString stringWithFormat:@"%@/%@.mov",configFilePath,[dateformatter stringFromDate:[NSDate date]]];
-        if (!_fileData) {
-            _fileData = [NSMutableData new];
-        }
+        _fileData = [NSMutableData new];
+        
+        self.localRecordLabel.text = @"  00:00";
+        
         __weak __typeof(self) weakSelf = self;
         [_player startLocalRecord:^(NSData *data) {
             if (!_recordTimer)
@@ -593,6 +770,19 @@
     {
         [self.localRecordLabel.layer addSublayer:_orangeLayer];
     }
+}
+
+- (IBAction)talkPressed:(id)sender
+{
+    if (!_isPressed)
+    {
+        [self.talkPlayer audioTalkPressed:YES];
+    }
+    else
+    {
+        [self.talkPlayer audioTalkPressed:NO];
+    }
+    _isPressed = !_isPressed;
 }
 
 #pragma mark - Private Methods
@@ -642,34 +832,6 @@
     UIImageView *lineImageView4 = [UIView dd_instanceVerticalLine:20 color:[UIColor grayColor]];
     lineImageView4.frame = CGRectMake(averageWidth * 4, 7, lineImageView4.frame.size.width, lineImageView4.frame.size.height);
     [self.toolBar addSubview:lineImageView4];
-}
-
-// 获取当前设备可用内存(单位：MB）
-- (double)availableMemory
-{
-    vm_statistics_data_t vmStats;
-    mach_msg_type_number_t infoCount = HOST_VM_INFO_COUNT;
-    kern_return_t kernReturn = host_statistics(mach_host_self(), HOST_VM_INFO, (host_info_t)&vmStats, &infoCount);
-    
-    if (kernReturn != KERN_SUCCESS)
-    {
-        return NSNotFound;
-    }
-    return ((vm_page_size *vmStats.free_count) / 1024.0) / 1024.0;
-}
-
-// 获取当前任务所占用的内存（单位：MB）
-- (double)usedMemory
-{
-    task_basic_info_data_t taskInfo;
-    mach_msg_type_number_t infoCount = TASK_BASIC_INFO_COUNT;
-    kern_return_t kernReturn = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&taskInfo, &infoCount);
-    
-    if (kernReturn != KERN_SUCCESS)
-    {
-        return NSNotFound;
-    }
-    return taskInfo.resident_size / 1024.0 / 1024.0;
 }
 
 @end

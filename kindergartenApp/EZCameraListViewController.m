@@ -151,7 +151,7 @@
             }
             
             
-            [self.dataSoure addObjectsFromArray: [EZCamrea objectArrayWithKeyValuesArray:baseDomain.list.data]];
+        [self.dataSoure addObjectsFromArray: [EZCamrea objectArrayWithKeyValuesArray:baseDomain.list.data]];
             
             [self.tableView reloadData];
         }
@@ -286,9 +286,14 @@
     
     
 //    EZLivePlayViewController * infoVC = [[EZLivePlayViewController alloc] init];
-    infoVC.cameraName=domain.cameraName;
-    infoVC.cameraId=domain.cameraId;
-   
+//    infoVC.cameraName=domain.cameraName;
+//    infoVC.cameraId=domain.cameraId;
+//   
+//   
+//    
+//    infoVC.domain=domain;
+    
+    [infoVC setDomain:domain];
     
     [self.navigationController pushViewController:infoVC animated:YES];
 }

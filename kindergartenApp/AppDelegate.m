@@ -22,7 +22,7 @@
 #import "KGHUD.h"
 #import "KGAccountTool.h"
 #import <Bugly/Bugly.h>
-//#import "EZOpenSDK.h"
+#import "EZOpenSDK.h"
 
 
 
@@ -133,7 +133,7 @@
     {
         NSLog(@"百度地图 manager start failed!");
     }
-//    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
+    [EZOpenSDK initLibWithAppKey:@"44b89d0bea824201ad557c48f73635d9"];
     
 
     return YES;

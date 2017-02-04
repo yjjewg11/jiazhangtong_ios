@@ -10,7 +10,7 @@
 #import "UploadPhotoToRemoteService.h"
 //#import "KGAccountService.h"
 #import "HomeMenuBtn.h"
-//#import "EZCameraListViewController.h"
+#import "EZCameraListViewController.h"
 @interface HomeVC : BaseViewController
 
 @end
